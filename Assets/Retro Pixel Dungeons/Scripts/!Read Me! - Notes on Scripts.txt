@@ -1,0 +1,9 @@
+Below are some quick notes on how the included scripts work. Remember to also read the instructions on Layers and Tags in the main folder, as sprite sorting depends on it!
+
+>>DemoStairs notes:
+This is just a simple script to move between stairs. If an object with the Player tag walks over a trigger, it's transported to the Teleport Point.
+
+>>TopDownCharacter notes:
+This is a simple top-down perspective character script, which includes directional/diagonal movement.
+Note that the character should be on the same Sorting Layer as the scenery objects.
+This script requires a rigidbody and collider component, as it uses physics force to move. Refer to the "Wisp" in the demo level for ideal rigidbody values. Gravity scale must be set to 0!

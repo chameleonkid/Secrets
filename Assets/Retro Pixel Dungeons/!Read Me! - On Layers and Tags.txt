@@ -1,0 +1,28 @@
+Thank you for purchasing the Retro Pixel Dungeons!
+Herein are some important usage instructions on how to set up layers and tags for the tileset to work as much 'out of the box' as possible.
+IMPORTANT NOTE: If you already have a layer and tag setup for your project and don't want to overwrite it, see the Manual Setup Tips further below.
+
+---PRE-CONFIGURED TAGS & LAYER SETUP INSTRUCTIONS---
+In this main folder, there's a TagManager and GraphicsSettings file. These contain the suggested settings that ensures correct sorting and compatibility with other Retro Pixel packs.
+
+This TagManager has the sorting layers set up to work with RPD, but remember that using this file will overwrite any tags and layers setup already in place.
+The Sorting Layers should be in the following order:
+- Background
+- Wall
+- Ground
+- Default
+- Foreground
+
+It is highly recommended that you first backup the existing TagManager and GraphicsSettings before proceeding.
+
+---MANUAL SETUP TIPS---
+If you don't want to overwrite your existing tags and layers setup file, here's a couple of tips on how to assign Sorting Layers to objects and tile pieces.
+1. Objects - All Prefabs in the Prefabs\Deco Objects sub-folders should be assigned a Sorting Layer that is rendered on top of the background tiles.
+2. Tiles - Likewise, all Prefabs in the Floors, Stairs and Walls folders should be assigned a Sorting Layer that is rendered below the Objects.
+This applies to the Shadow Tiles as well. Make sure to assign them an Order in Layer above the floor  tiles, for instance, so that they render on top of them.
+3. The Roof prefabs, however, should ideally be assigned a sorting layer above the objects. That way, you won't get objects rendering on top of the roof tiles.
+4. Be sure to assign the Player Character the same Sorting Layer as the Objects. Otherwise, the player might render always on top of or always below the object sprites.
+
+For any further questions, contact me at either;
+E-mail: marcus@perdiv.com
+Twitter: https://twitter.com/caffeinegamer

@@ -1,0 +1,29 @@
+Create Item:
+1. New Script for Scripable Object (like InventoryArmor)
+2. Create new SO InventoryXXX
+3. New InventorySlot (duplicate)
+	bring to right position
+	set new InventoryImage
+4. In PlayerInventory.cs
+	new else if for specific Item
+	new calcDefense if
+5.in InventoryManager.cs
+	new InventorySlot
+	new MakeGearSlots() if
+	new SetupDescriptionAndButton else If
+	new variable for emptySlotSprite
+	new ClearInventorySlots
+6. in GameSaveManager.cs
+	resetInventory() set to null
+7. Give InventoryPanel new Slot (in Unity)
+	EmtpyItemSprite
+	ItemSlot
+8. Override InventoryCanvas
+
+Optional:
+Create Chest with item + bool-Safe-value
+
+
+
+
+
