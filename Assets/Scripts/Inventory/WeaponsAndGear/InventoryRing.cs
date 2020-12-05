@@ -15,7 +15,7 @@ public class InventoryRing : InventoryItem
         if (myInventory.currentRing)
         {
             temp = myInventory.currentRing;
-            myInventory.Add(myInventory.currentShield);
+            myInventory.Add(myInventory.currentRing);
             myInventory.equip(this);
             this.numberHeld--;
         }
