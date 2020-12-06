@@ -24,18 +24,22 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     public FloatValue currentHealth;
-    public Signals playerHealthSignal;
+    
     public VectorValue startingPosition;
     private bool isRunning;
 
-    public Inventory playerInventory; //Old Inventory
+    //####################### Signals ###########################
+    public Signals playerHit;
+    public Signals ArrowUsed;
+    public Signals playerHealthSignal;
+    public Signals decreaseMana;
 
     public PlayerInventory myInventory; // New Inventory
 
     public SpriteRenderer receivedItemSprite;
-    public Signals playerHit;
+    
     public GameObject projectile; //arrows and so on
-    public Signals ArrowUsed;
+    
     // public Item Bow;
     public InventoryItem Bow;
     public InventoryWeapon Sword;
@@ -55,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
+    public ManaManager manaManager;
 
 
 
@@ -114,13 +119,15 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(AttackCO());
             //Debug.Log("Attack");
         }
-        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        //########################################################################### Round Attack if Mana > 0 ##################################################################################
+        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null && myInventory.currentMana > 0 )  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             //Debug.Log("RoundAttack");
+            
             StartCoroutine(RoundAttackCO());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
-        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && currentState != PlayerState.attack)
+        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && currentState != PlayerState.attack )
         {
 
             if (myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")) && myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")).numberHeld > 0 && myInventory.currentBow)
@@ -145,14 +152,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //################################# Trying to drop things ################################################################
-        if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
+   /*     if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
         {
             LiftItem();
             Debug.Log("Item Dropped!");
 
         }
         //################################# Trying to drop things  END ############################################################
-
+*/
     }
 
     private void FixedUpdate()
@@ -178,7 +185,6 @@ public class PlayerMovement : MonoBehaviour
         {
             currentState = PlayerState.walk;
         }
-
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -191,7 +197,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("receiveItem", true);
                 currentState = PlayerState.interact;
-                // receivedItemSprite.sprite = playerInventory.currentItem.itemSprite;   Old Inventory
                 receivedItemSprite.sprite = myInventory.currentItem.itemImage;
             }
             else
@@ -206,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     // #################################### LIFT Item ######################################
-   
+ /* 
     public void LiftItem()
     {
         if (playerInventory.currentItem != null)
@@ -224,15 +229,14 @@ public class PlayerMovement : MonoBehaviour
                 currentState = PlayerState.idle;
                 Debug.Log("Playerstate = idle");
                 thingSprite.sprite = null;
-                //        playerInventory.RemoveItem(playerInventory.currentItem);
+
                 myInventory.currentItem = null;
                 
             }
         }
 
     }
-  
-
+*/
 
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCO()
@@ -241,8 +245,12 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.roundattack;
         yield return null;
         animator.SetBool("RoundAttacking", false);
-       // yield return new WaitForSeconds(.0f); //Frames für stehenbleiben
         currentState = PlayerState.walk;
+
+        // #################### Decrease Mana in Inventory and Slider ####################
+        myInventory.DecreaseCurrentMana(1);
+        manaManager.DecreaseMana(1);
+        
     }
 
     // ########################### Animation for Moving #########################################
@@ -352,8 +360,6 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("DeathMenu");
     }
-
-
 
     //##################### Invulnerability frame ##############################
 

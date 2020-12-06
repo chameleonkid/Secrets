@@ -17,8 +17,6 @@ public class HealthReaction : MonoBehaviour
             playerHealth.RuntimeValue = HeartContainers.RuntimeValue * 2f;
         }
         healthSignal.Raise();
-
-
     }
 
 }

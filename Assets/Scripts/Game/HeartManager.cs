@@ -24,30 +24,30 @@ public class HeartManager : MonoBehaviour
 
     public void InitHearts()
     {
-        if (heartContainers.RuntimeValue > heartContainers.initialValue) 
+        if (heartContainers.RuntimeValue > heartContainers.initialValue)
         {
             for (int i = 0; i < heartContainers.RuntimeValue; i++)
             {
-          //      if (i < hearts.Length)
-          //      {
-                    hearts[i].gameObject.SetActive(true);
-                    hearts[i].sprite = fullHeart;
-          //      }
+                //      if (i < hearts.Length)
+                //      {
+                hearts[i].gameObject.SetActive(true);
+                hearts[i].sprite = fullHeart;
+                //      }
             }
         }
-        else                                                       
+        else
         {
-           foreach (Image heart in hearts)
+            foreach (Image heart in hearts)
             {
                 heart.gameObject.SetActive(false);
             }
-            for ( int i = 0; i < heartContainers.initialValue; i++)
+            for (int i = 0; i < heartContainers.initialValue; i++)
             {
-             //   if (i < hearts.Length)
-             //   {
-                    hearts[i].gameObject.SetActive(true);
-                    hearts[i].sprite = fullHeart;
-             //   }
+                //   if (i < hearts.Length)
+                //   {
+                hearts[i].gameObject.SetActive(true);
+                hearts[i].sprite = fullHeart;
+                //   }
             }
         }
     }
@@ -56,14 +56,14 @@ public class HeartManager : MonoBehaviour
     {
         InitHearts();
         float tempHealth = playerCurrentHealth.RuntimeValue / 2;
-        for (int i = 0; i < heartContainers.RuntimeValue; i ++)
+        for (int i = 0; i < heartContainers.RuntimeValue; i++)
         {
-            if(i <= tempHealth-1)
+            if (i <= tempHealth - 1)
             {
                 //Full Heart
                 hearts[i].sprite = fullHeart;
             }
-            else if( i >= tempHealth)
+            else if (i >= tempHealth)
             {
                 // Empty Heart
                 hearts[i].sprite = emptyHeart;
@@ -73,20 +73,12 @@ public class HeartManager : MonoBehaviour
                 //Halffull Heart;
                 hearts[i].sprite = halfFullHeart;
             }
-        {
-              
+            {
+
             }
         }
     }
-
-
-    //############### Herzen dazu Test #####################
-    /*
-    public void addHearts()
-    {
-        heartContainers.initialValue = heartContainers.initialValue + 1;
-    }
-    */
-    //############### Herzen dazu Test #####################
-
 }
+
+
+

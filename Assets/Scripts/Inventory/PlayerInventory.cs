@@ -17,6 +17,8 @@ public class PlayerInventory : ScriptableObject
     public InventoryBow currentBow;
     public float totalDefense;
     public float totalCritChance;
+    public float maxMana = 100;
+    public float currentMana = 100;
 
     public void Add(InventoryItem item)
     {
@@ -106,6 +108,33 @@ public class PlayerInventory : ScriptableObject
         if (currentRing)
         {
             totalCritChance += currentRing.criticalStrikeChance;
+        }
+    }
+
+
+    // Added to manipulate Mana in Inventory from PlayerMovement
+
+    public void DecreaseCurrentMana(int amountToDecrease)
+    {
+        if(currentMana - amountToDecrease <= 0)
+        {
+            currentMana = 0;
+        }
+        else
+        {
+            currentMana -= amountToDecrease;
+        }
+    }
+
+    public void IncreaseCurrentMana(int amountToIncrease)
+    {
+        if (currentMana + amountToIncrease > maxMana)
+        {
+            currentMana = maxMana;
+        }
+        else
+        {
+            currentMana += amountToIncrease;
         }
     }
 }
