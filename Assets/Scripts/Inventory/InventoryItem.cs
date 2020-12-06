@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items")]
@@ -16,11 +14,11 @@ public class InventoryItem : ScriptableObject
     public int itemLvl;
     public PlayerInventory myInventory;
 
-
     public void Use()
     {
             thisEvent.Invoke();
     }
+    
     public void decreaseAmount(int amountToDecrease)
     {
         numberHeld-=amountToDecrease;

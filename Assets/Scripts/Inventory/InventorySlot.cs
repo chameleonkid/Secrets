@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -19,16 +17,15 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     public GameObject firstButtonInventory;
     public PlayerInventory playerInventory;
 
-
     public void Setup(InventoryItem newItem, InventoryManager newManager)
     {
         thisItem = newItem;
         thisManager = newManager;
 
-        if(thisItem)
+        if (thisItem)
         {
             itemImage.sprite = thisItem.itemImage;
-            itemNumberText.text = "" + thisItem.numberHeld;        
+            itemNumberText.text = "" + thisItem.numberHeld;
         }
     }
 
@@ -40,12 +37,11 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
         }
     }
 
-
     public void UseItem()
     {
         if (thisItem)
         {
-            if (thisItem.usable && thisItem.numberHeld >0)
+            if (thisItem.usable && thisItem.numberHeld > 0)
 
             {
                 thisItem.Use();                         // Use Item
@@ -61,7 +57,6 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
                 myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
                 thisManager.setUp(); // 05_06_2020 Testing
             }
-
         }
     }
 

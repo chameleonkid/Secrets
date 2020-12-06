@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Rings")]
 public class InventoryRing : InventoryItem
@@ -24,6 +21,5 @@ public class InventoryRing : InventoryItem
             myInventory.equip(this);
             this.numberHeld--;
         }
-
     }
 }

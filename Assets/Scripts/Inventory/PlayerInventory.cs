@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
 public class PlayerInventory : ScriptableObject
 {
-
-
     public List<InventoryItem> myInventory = new List<InventoryItem>(); //Why is this not loaded???
     public int coins;
     public InventoryItem currentItem;
@@ -21,22 +17,18 @@ public class PlayerInventory : ScriptableObject
     public InventoryBow currentBow;
     public float totalDefense;
     public float totalCritChance;
-   
-  
-
 
     // ####################################### add new Item / Weapon / Armor to inventory ######################################
     public void Add(InventoryItem item)
     {
-
-                              //Since its nothing else it must be a regular Item
+        //Since its nothing else it must be a regular Item
         {
             if (item.unique)                                                //Is the item Unique?                
             {
                 if (!myInventory.Contains(item) && item is InventoryItem)   // Is item NOT in Inventory? and a regular Item? Add it!
                 {
                     myInventory.Add(item);
-                   // item.numberHeld++; Änderung 05_12_2020
+                    // item.numberHeld++; Änderung 05_12_2020
                     item.numberHeld = 1;
                 }
                 else                                                        // The item is unique and is already in the inventory? set numberheld to 1 since its unique
@@ -46,7 +38,7 @@ public class PlayerInventory : ScriptableObject
             }
             else                                                            // Item is regular and not unique
             {
-                if(myInventory.Contains(item))                              //Item is regular and not unique and IS ALREADY in the inventory
+                if (myInventory.Contains(item))                              //Item is regular and not unique and IS ALREADY in the inventory
                 {
                     item.numberHeld++;
                 }
@@ -54,12 +46,10 @@ public class PlayerInventory : ScriptableObject
                 {
                     myInventory.Add(item);
                     item.numberHeld++;
-                }         
+                }
             }
         }
-
     }
-
 
     public void equip(InventoryItem item)
     {
@@ -120,10 +110,7 @@ public class PlayerInventory : ScriptableObject
             calcDefense();                                                  //calc new defenseValue
             CalcCritChance();
         }
-
-
     }
-
 
     public void calcDefense()
     {
@@ -150,7 +137,6 @@ public class PlayerInventory : ScriptableObject
             totalDefense += currentShield.armorDefense;
         }
     }
-
 
     public void CalcCritChance()
     {
@@ -187,8 +173,4 @@ public class PlayerInventory : ScriptableObject
             totalCritChance += currentRing.criticalStrikeChance;
         }
     }
-
-
 }
-
-
