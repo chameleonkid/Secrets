@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Armors")]
 public class InventoryArmor : InventoryItem
@@ -9,7 +6,6 @@ public class InventoryArmor : InventoryItem
     public int armorDefense;
 
     private InventoryArmor temp;
-
 
     public void swapArmor()
     {
@@ -25,7 +21,5 @@ public class InventoryArmor : InventoryItem
             myInventory.equip(this);
             this.numberHeld--;
         }
-
     }
-
 }

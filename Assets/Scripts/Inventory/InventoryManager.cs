@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
-
     //Inventory Information
     public GameObject blankInventorySlot;
     //InventorySlots when Item exists
@@ -31,9 +28,8 @@ public class InventoryManager : MonoBehaviour
     public DamageValueTextManager dmgDisplay;
     public DefenseValueTextManager defDisplay;
 
-
     public GameObject inventoryPanel;
-   
+
     public TextMeshProUGUI descriptionText;
     public PlayerInventory playerInventory;
     public InventoryItem currentItem;
@@ -43,27 +39,24 @@ public class InventoryManager : MonoBehaviour
         descriptionText.text = Description;
     }
 
-
     public void MakeInventorySlots()
     {
-        if(playerInventory)
+        if (playerInventory)
         {
-             for (int i = 0; i< playerInventory.myInventory.Count; i++)
-           // for (int i = 0; i < 19; i++)
+            for (int i = 0; i < playerInventory.myInventory.Count; i++)
+            // for (int i = 0; i < 19; i++)
             {
-                    if (playerInventory.myInventory[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
+                if (playerInventory.myInventory[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
+                {
+                    GameObject temp = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
+                    temp.transform.SetParent(inventoryPanel.transform, false);
+                    InventorySlot newSlot = temp.GetComponent<InventorySlot>();
+                    if (newSlot)
                     {
-                        GameObject temp = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
-                        temp.transform.SetParent(inventoryPanel.transform,false);
-                        InventorySlot newSlot = temp.GetComponent<InventorySlot>();
-                        if (newSlot)
-                        {
-                            newSlot.Setup(playerInventory.myInventory[i], this);
-                        }
+                        newSlot.Setup(playerInventory.myInventory[i], this);
                     }
-                    
+                }
             }
-
         }
     }
     //######################################### Create for GearSlots #######################################################################
@@ -110,11 +103,9 @@ public class InventoryManager : MonoBehaviour
             bowSlot.thisItem = playerInventory.currentBow;
             bowSlot.itemImage.sprite = playerInventory.currentBow.itemImage;
         }
-
     }
 
     //####################################### Clear Main-Slots ##################################################################################
-
 
     public void clearInventorySlots()
     {
@@ -155,23 +146,21 @@ public class InventoryManager : MonoBehaviour
         {
             bowSlot.itemImage.sprite = bowSlotSprite;
         }
-
     }
-
 
     public void SetupDescriptionAndButton(string newDescriptionString, bool isButtonUsable, InventoryItem NewItem)
     {
-      //  currentItem = NewItem;
-      //  descriptionText.text = newDescriptionString;
+        //  currentItem = NewItem;
+        //  descriptionText.text = newDescriptionString;
 
         //################### TESTING #################################################
 
-        if(NewItem is InventoryArmor)
+        if (NewItem is InventoryArmor)
         {
             InventoryArmor currentItem = NewItem as InventoryArmor;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;         
+            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
         }
-        else if (NewItem is InventoryWeapon) 
+        else if (NewItem is InventoryWeapon)
         {
             InventoryWeapon currentItem = NewItem as InventoryWeapon;
             descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.damage;
@@ -211,7 +200,6 @@ public class InventoryManager : MonoBehaviour
             currentItem = NewItem;
             descriptionText.text = newDescriptionString;
         }
- 
     }
 
     public void setUp()
@@ -225,12 +213,8 @@ public class InventoryManager : MonoBehaviour
         critDisplay.UpdateCritValue();
     }
 
-
     void OnEnable()
     {
         setUp();
     }
-
-
-
 }
