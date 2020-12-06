@@ -53,63 +53,40 @@ public class PlayerInventory : ScriptableObject
 
     public void equip(InventoryItem item)
     {
-        //################################################################### New Version #################################################
-
-        //  if (item is InventoryWeapon && (currentWeapon == null || item.itemLvl >= currentWeapon.itemLvl))           If Level is higher Replace                             
-        if (item is InventoryWeapon)
+        switch (item)
         {
-            currentWeapon = item as InventoryWeapon;                        //declare as Weapon
-            item.numberHeld = 1;                                            //Weapons are always Unique so 1
+            default:
+                // Exit the function early if item is not equippable.
+                return;
+            case InventoryWeapon weapon:
+                currentWeapon = weapon;
+                break;
+            case InventoryArmor armor:
+                currentArmor = armor;
+                break;
+            case InventoryHelmet helmet:
+                currentHelmet = helmet;
+                break;
+            case InventoryGlove glove:
+                currentGloves = glove;
+                break;
+            case InventoryLegs legs:
+                currentLegs = legs;
+                break;
+            case InventoryShield shield:
+                currentShield = shield;
+                break;
+            case InventoryRing ring:
+                currentRing = ring;
+                break;
+            case InventoryBow bow:
+                currentBow = bow;
+                break;
         }
-        else if (item is InventoryArmor)                                    //Is Item an Armor?
-        {
-            currentArmor = item as InventoryArmor;                          //declare as Armor
-            item.numberHeld = 1;                                            //Armors are always Unique so 1
-            calcDefense();                                                  //calc new defenseValue
-            CalcCritChance();
-        }
-        else if (item is InventoryHelmet)                                    //Is Item a Helmet?
-        {
-            currentHelmet = item as InventoryHelmet;                        //declare as Helmet
-            item.numberHeld = 1;                                            //Helmets are always Unique so 1
-            calcDefense();                                                  //calc new defenseValue
-            CalcCritChance();
-        }
-        else if (item is InventoryGlove)                                    //Is Item a Glove?
-        {
-            currentGloves = item as InventoryGlove;                         //declare as Glove
-            item.numberHeld = 1;                                            //Gloves are always Unique so 1
-            calcDefense();                                                  //calc new defenseValue
-            CalcCritChance();
-        }
-        else if (item is InventoryLegs)                                     //Is Item a Leg?
-        {
-            currentLegs = item as InventoryLegs;                            //declare as Leg
-            item.numberHeld = 1;                                            //Legs are always Unique so 1
-            calcDefense();                                                  //calc new defenseValue
-            CalcCritChance();
-        }
-        else if (item is InventoryShield)                                   //Is Item a Shield?
-        {
-            currentShield = item as InventoryShield;                        //declare as Shield
-            item.numberHeld = 1;                                            //Shield are always Unique so 1
-            calcDefense();                                                  //calc new defenseValue
-            CalcCritChance();
-        }
-        else if (item is InventoryRing)                                     //Is Item a Ring?
-        {
-            currentRing = item as InventoryRing;                            //declare as Ring
-            item.numberHeld = 1;                                            //Ring are always Unique so 1
-            calcDefense();                                                  //calc new defenseValue
-            CalcCritChance();
-        }
-        else if (item is InventoryBow)                                     //Is Item a Ring?
-        {
-            currentBow = item as InventoryBow;                              //declare as Ring
-            item.numberHeld = 1;                                            //Ring are always Unique so 1
-            calcDefense();                                                  //calc new defenseValue
-            CalcCritChance();
-        }
+        // Applies to all equippables.
+        item.numberHeld = 1;
+        calcDefense();
+        CalcCritChance();
     }
 
     public void calcDefense()
