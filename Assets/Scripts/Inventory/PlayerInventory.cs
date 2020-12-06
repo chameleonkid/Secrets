@@ -76,11 +76,11 @@ public class PlayerInventory : ScriptableObject
     public void calcDefense()
     {
         totalDefense = 0;
+
         if (currentArmor)
         {
             totalDefense += currentArmor.armorDefense;
         }
-
         if (currentHelmet)
         {
             totalDefense += currentHelmet.armorDefense;
@@ -102,33 +102,7 @@ public class PlayerInventory : ScriptableObject
     public void CalcCritChance()
     {
         totalCritChance = 0;
-        /*
-    if (currentArmor)
-    {
-        totalDefense += currentArmor.armorDefense;
-    }
 
-    if (currentHelmet)
-    {
-        totalDefense += currentHelmet.armorDefense;
-    }
-    if (currentGloves)
-    {
-        totalDefense += currentGloves.armorDefense;
-    }
-    if (currentLegs)
-    {
-        totalDefense += currentLegs.armorDefense;
-    }
-    if (currentShield)
-    {
-        totalDefense += currentShield.armorDefense;
-    }
-            if (currentArmor)
-    {
-        totalDefense += currentArmor.armorDefense;
-    }
-    */
         if (currentRing)
         {
             totalCritChance += currentRing.criticalStrikeChance;
