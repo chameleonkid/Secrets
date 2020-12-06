@@ -18,36 +18,20 @@ public class PlayerInventory : ScriptableObject
     public float totalDefense;
     public float totalCritChance;
 
-    // ####################################### add new Item / Weapon / Armor to inventory ######################################
     public void Add(InventoryItem item)
     {
-        //Since its nothing else it must be a regular Item
+        if (!myInventory.Contains(item))    // Add the item to the list if it is not already in the list.
         {
-            if (item.unique)                                                //Is the item Unique?                
-            {
-                if (!myInventory.Contains(item) && item is InventoryItem)   // Is item NOT in Inventory? and a regular Item? Add it!
-                {
-                    myInventory.Add(item);
-                    // item.numberHeld++; Änderung 05_12_2020
-                    item.numberHeld = 1;
-                }
-                else                                                        // The item is unique and is already in the inventory? set numberheld to 1 since its unique
-                {
-                    item.numberHeld = 1;
-                }
-            }
-            else                                                            // Item is regular and not unique
-            {
-                if (myInventory.Contains(item))                              //Item is regular and not unique and IS ALREADY in the inventory
-                {
-                    item.numberHeld++;
-                }
-                else                                                        //Item is regular and not unique and IS NOT in the inventory
-                {
-                    myInventory.Add(item);
-                    item.numberHeld++;
-                }
-            }
+            myInventory.Add(item);
+        }
+
+        if (item.unique)                    // Force unique items to have `numberHeld = 1`
+        {
+            item.numberHeld = 1;
+        }
+        else                                // Regular items have `numberHeld` incremented by 1
+        {
+            item.numberHeld++;
         }
     }
 
