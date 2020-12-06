@@ -9,24 +9,11 @@ public class PhysicalInventoryItem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("powerup") && other.isTrigger)
         {
-            addItemToInventory();
+            if (playerInventory && thisItem)
+            {
+                playerInventory.Add(thisItem);
+            }
             Destroy(this.gameObject);
-        }
-    }
-
-    void addItemToInventory()
-    {
-        if (playerInventory && thisItem)
-        {
-            if (playerInventory.myInventory.Contains(thisItem))
-            {
-                thisItem.numberHeld++;
-            }
-            else
-            {
-                playerInventory.myInventory.Add(thisItem);
-                thisItem.numberHeld++;
-            }
         }
     }
 }

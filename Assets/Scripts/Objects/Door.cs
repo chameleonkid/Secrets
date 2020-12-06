@@ -47,7 +47,7 @@ public class Door : Interactable
                 //    Debug.Log("Player is in Range and Door = Key");
                 if (PlayerInventory.myInventory.Contains(key)) // Keys left in Inventory?
                 {
-                    key.decreaseAmount(1);
+                    key.numberHeld--;
                     Open();
                 }
             }

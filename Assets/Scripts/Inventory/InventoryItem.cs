@@ -7,7 +7,18 @@ public class InventoryItem : ScriptableObject
     public string itemName;
     public string itemDescription;
     public Sprite itemImage;
-    public int numberHeld;
+
+    [SerializeField] private int _numberHeld = default;
+    public int numberHeld {
+        get => _numberHeld;
+        set {
+            _numberHeld = value;
+            if (value < 0) {
+                _numberHeld = 0;
+            }
+        }
+    }
+
     public bool usable;
     public bool unique;
     public UnityEvent thisEvent;
@@ -16,15 +27,11 @@ public class InventoryItem : ScriptableObject
 
     public void Use()
     {
-            thisEvent.Invoke();
+        thisEvent.Invoke();
     }
-    
+
     public void decreaseAmount(int amountToDecrease)
     {
-        numberHeld-=amountToDecrease;
-        if (numberHeld<0)
-        {
-            numberHeld = 0;
-        }
+        numberHeld -= amountToDecrease;
     }
 }

@@ -56,9 +56,7 @@ public class InventoryManager : MonoBehaviour
                         newSlot.Setup(playerInventory.myInventory[i], this);
                     }
                 }
-
             }
-
         }
     }
     //######################################### Create for GearSlots #######################################################################
@@ -149,7 +147,6 @@ public class InventoryManager : MonoBehaviour
             bowSlot.itemImage.sprite = bowSlotSprite;
         }
     }
-
 
     public void SetupDescriptionAndButton(string newDescriptionString, bool isButtonUsable, InventoryItem NewItem)
     {

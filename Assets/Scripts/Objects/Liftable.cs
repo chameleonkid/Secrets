@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class Liftable : Interactable
 {
-
     public InventoryItem contents;
     public PlayerInventory playerInventory;
     public Signals LiftItem;
@@ -13,19 +9,13 @@ public class Liftable : Interactable
     public GameObject thing;
     bool isCarrying;
 
-
-
-    void Start()
+    private void Start()
     {
         anim = GetComponent<Animator>();
     }
 
-
-    void LateUpdate()
+    private void LateUpdate()
     {
-
-
-
         if (Input.GetButtonDown("Lift") && playerInRange && isCarrying == false)
         {
 
@@ -34,48 +24,30 @@ public class Liftable : Interactable
             Lifting();
             isCarrying = true;
         }
-        else if(Input.GetButtonDown("Lift") && isCarrying == true)
+        else if (Input.GetButtonDown("Lift") && isCarrying == true)
         {
             Debug.Log("ABSTELLEN!");
             Dropping();
         }
-
-        
-
-
-
-     }
+    }
 
     //############### TEST-Lift ###################################
     public void Lifting()
     {
         Debug.Log("LIFT OBJECT");
-        if (playerInventory.myInventory.Contains(contents))
-        {
-            contents.numberHeld++;
-        }
-        if (!playerInventory.myInventory.Contains(contents))
-        { 
-            playerInventory.myInventory.Add(contents);
-            playerInventory.currentItem = contents;
-        }
+        playerInventory.Add(contents);
         contextOff.Raise();
         thing.SetActive(false);
         LiftItem.Raise();
     }
 
-
     // ############################## Test-Drop ###################### WIESO WIRD DAS NIE AUFGERUFEN!?
     public void Dropping()
     {
-        Debug.Log("Drop OBJECT");      
+        Debug.Log("Drop OBJECT");
         thing.SetActive(true);
-       
     }
     // ############################## Test-Drop ######################
-
-
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -96,9 +68,6 @@ public class Liftable : Interactable
 
         }
     }
-
-
-
 }
 
 
