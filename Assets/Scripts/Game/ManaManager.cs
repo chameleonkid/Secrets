@@ -8,8 +8,18 @@ public class ManaManager : MonoBehaviour
     // care is taken to unsubscribe from events.
     [SerializeField] private Slider manaSlider = default;
 
-    private void OnEnable() => mana.OnCurrentChanged += UpdateUI;
-    private void OnDisable() => mana.OnCurrentChanged -= UpdateUI;
+    private void OnEnable()
+    {
+        mana.OnMinChanged += UpdateUI;
+        mana.OnMaxChanged += UpdateUI;
+        mana.OnCurrentChanged += UpdateUI;
+    }
+    private void OnDisable()
+    {
+        mana.OnMinChanged -= UpdateUI;
+        mana.OnMaxChanged -= UpdateUI;
+        mana.OnCurrentChanged -= UpdateUI;
+    }
 
     private void Start() => UpdateUI();
 
