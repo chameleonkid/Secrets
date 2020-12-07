@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public enum PlayerState
 {
@@ -24,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     public FloatValue currentHealth;
-    
+    [SerializeField] private FloatMeter mana;
+
     public VectorValue startingPosition;
     private bool isRunning;
 
@@ -37,9 +36,9 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInventory myInventory; // New Inventory
 
     public SpriteRenderer receivedItemSprite;
-    
+
     public GameObject projectile; //arrows and so on
-    
+
     // public Item Bow;
     public InventoryItem Bow;
     public InventoryWeapon Sword;
@@ -59,13 +58,8 @@ public class PlayerMovement : MonoBehaviour
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
-    public ManaManager manaManager;
 
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         regularPlayerColor = playerSprite.color;
         regularHairColor = hairSprite.color;
@@ -76,21 +70,18 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
         transform.position = startingPosition.initialValue;
-    } 
+    }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-
-        if(currentState != PlayerState.stagger)
+        if (currentState != PlayerState.stagger)
         {
             myRigidbody.velocity = Vector2.zero;
         }
         // Is the player in an interaction?
-        if(currentState == PlayerState.interact)
+        if (currentState == PlayerState.interact)
         {
-        //    Debug.Log("helpmeout");
+            //    Debug.Log("helpmeout");
             return;
         }
 
@@ -100,8 +91,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Run") && !isRunning)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-             speed = (speed * 2);
-             isRunning = true;
+            speed = (speed * 2);
+            isRunning = true;
 
             animator.SetBool("isRunning", true);
 
@@ -110,24 +101,24 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = (speed / 2);
             isRunning = false;
-      
+
             animator.SetBool("isRunning", false);
 
         }
         if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null)
-        { 
+        {
             StartCoroutine(AttackCO());
             //Debug.Log("Attack");
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null && myInventory.currentMana > 0 )  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             //Debug.Log("RoundAttack");
-            
+
             StartCoroutine(RoundAttackCO());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
-        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && currentState != PlayerState.attack )
+        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && currentState != PlayerState.attack)
         {
 
             if (myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")) && myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")).numberHeld > 0 && myInventory.currentBow)
@@ -137,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(SecondAttackCo());
             }
         }
-        if(Input.GetButtonUp("UseItem"))
+        if (Input.GetButtonUp("UseItem"))
         {
             animator.SetBool("isShooting", false);
         }
@@ -152,26 +143,23 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //################################# Trying to drop things ################################################################
-   /*     if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
-        {
-            LiftItem();
-            Debug.Log("Item Dropped!");
+        /*     if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
+             {
+                 LiftItem();
+                 Debug.Log("Item Dropped!");
 
-        }
-        //################################# Trying to drop things  END ############################################################
-*/
+             }
+             //################################# Trying to drop things  END ############################################################
+     */
     }
 
     private void FixedUpdate()
     {
-
         if (currentState == PlayerState.walk || currentState == PlayerState.idle || currentState == PlayerState.lift)
         {
             UpdateAnimationAndMove();
         }
-
     }
-
 
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCO()
@@ -209,34 +197,33 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     // #################################### LIFT Item ######################################
- /* 
-    public void LiftItem()
-    {
-        if (playerInventory.currentItem != null)
-        {
-            if (currentState != PlayerState.lift)
-            {             
-                animator.SetBool("isCarrying", true);
-                currentState = PlayerState.lift;
-                Debug.Log("PlayerState = Lift");
-                thingSprite.sprite = myInventory.currentItem.itemImage;
-            }
-            else
-            {   
-                animator.SetBool("isCarrying", false);
-                currentState = PlayerState.idle;
-                Debug.Log("Playerstate = idle");
-                thingSprite.sprite = null;
+    /* 
+       public void LiftItem()
+       {
+           if (playerInventory.currentItem != null)
+           {
+               if (currentState != PlayerState.lift)
+               {             
+                   animator.SetBool("isCarrying", true);
+                   currentState = PlayerState.lift;
+                   Debug.Log("PlayerState = Lift");
+                   thingSprite.sprite = myInventory.currentItem.itemImage;
+               }
+               else
+               {   
+                   animator.SetBool("isCarrying", false);
+                   currentState = PlayerState.idle;
+                   Debug.Log("Playerstate = idle");
+                   thingSprite.sprite = null;
 
-                myInventory.currentItem = null;
-                
-            }
-        }
+                   myInventory.currentItem = null;
 
-    }
-*/
+               }
+           }
+
+       }
+   */
 
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCO()
@@ -247,10 +234,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("RoundAttacking", false);
         currentState = PlayerState.walk;
 
-        // #################### Decrease Mana in Inventory and Slider ####################
-        myInventory.DecreaseCurrentMana(1);
-        manaManager.DecreaseMana(1);
-        
+        mana.current -= 1;
     }
 
     // ########################### Animation for Moving #########################################
@@ -259,17 +243,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (change != Vector3.zero)
         {
-        MoveCharacter();                    // Move Character
-        change.x = Mathf.Round(change.x);   // Round the movement for deciding where to hit if walking diagonally
-        change.y = Mathf.Round(change.y);   // Round the movement for deciding where to hit if walking diagonally
-        animator.SetFloat("MoveX", change.x);
-        animator.SetFloat("MoveY", change.y);
-        animator.SetBool("Moving", true);
+            MoveCharacter();                    // Move Character
+            change.x = Mathf.Round(change.x);   // Round the movement for deciding where to hit if walking diagonally
+            change.y = Mathf.Round(change.y);   // Round the movement for deciding where to hit if walking diagonally
+            animator.SetFloat("MoveX", change.x);
+            animator.SetFloat("MoveY", change.y);
+            animator.SetBool("Moving", true);
         }
-    else
-         {
-         animator.SetBool("Moving", false);
-         }
+        else
+        {
+            animator.SetBool("Moving", false);
+        }
     }
 
     //############################### Move Character #############################################
@@ -295,7 +279,7 @@ public class PlayerMovement : MonoBehaviour
         playerHealthSignal.Raise();
         if (currentHealth.RuntimeValue > 0)
         {
-            
+
             StartCoroutine(KnockCo(knockTime));
         }
         else
@@ -326,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.attack;
         yield return null;
         MakeArrow();
-       // animator.SetBool("Attacking", false);
+        // animator.SetBool("Attacking", false);
         yield return new WaitForSeconds(0.3f);
         if (currentState != PlayerState.interact)
         {
@@ -340,15 +324,15 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetBool("isShooting", true);
         Vector2 arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
-        Vector2 temp = new Vector2(animator.GetFloat("MoveX"),animator.GetFloat("MoveY"));
+        Vector2 temp = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         arrow arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
         arrow.Setup(temp, ChooseArrowDirection());
     }
 
     Vector3 ChooseArrowDirection()
     {
-        float temp = Mathf.Atan2(animator.GetFloat("MoveY"),animator.GetFloat("MoveX"))* Mathf.Rad2Deg;
-        return new Vector3(0,0,temp);
+        float temp = Mathf.Atan2(animator.GetFloat("MoveY"), animator.GetFloat("MoveX")) * Mathf.Rad2Deg;
+        return new Vector3(0, 0, temp);
     }
 
     //##################### Death animation and screen ##############################
@@ -367,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
     {
         int temp = 0;
         triggerCollider.enabled = false;
-        while(temp < numberOfFlasches)
+        while (temp < numberOfFlasches)
         {
             playerSprite.color = FlashColor;
             armorSprite.color = FlashColor;
@@ -381,5 +365,4 @@ public class PlayerMovement : MonoBehaviour
         }
         triggerCollider.enabled = true;
     }
-
 }

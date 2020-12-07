@@ -1,44 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ManaManager : MonoBehaviour
 {
+    [SerializeField] private FloatMeter mana = default;
+    // ^ Shouldn't reassign during runtime unless
+    // care is taken to unsubscribe from events.
+    [SerializeField] private Slider manaSlider = default;
 
-    public Slider manaSlider;
-    public PlayerInventory playerInventory;
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        manaSlider.maxValue = playerInventory.maxMana;
-        manaSlider.value = playerInventory.maxMana;
+        mana.OnMinChanged += UpdateUI;
+        mana.OnMaxChanged += UpdateUI;
+        mana.OnCurrentChanged += UpdateUI;
+    }
+    private void OnDisable()
+    {
+        mana.OnMinChanged -= UpdateUI;
+        mana.OnMaxChanged -= UpdateUI;
+        mana.OnCurrentChanged -= UpdateUI;
     }
 
-    public void AddMana(int amountToIncrease)
+    private void Start() => UpdateUI();
+
+    private void UpdateUI()
     {
-        
-        if (manaSlider.value + amountToIncrease > manaSlider.maxValue)   
-        {
-            manaSlider.value = manaSlider.maxValue;                   
-        }
-        else
-        {
-            manaSlider.value += amountToIncrease;                         
-        }
-
+        manaSlider.minValue = mana.min;
+        manaSlider.maxValue = mana.max;
+        manaSlider.value = mana.current;
     }
-
-    public void DecreaseMana(int amountToDecrease)
-    {
-        if (manaSlider.value - amountToDecrease <= 0)   
-        {
-            manaSlider.value = 0;
-        }
-        else
-        {
-            manaSlider.value -= amountToDecrease;                         
-        }
-    }
-
 }

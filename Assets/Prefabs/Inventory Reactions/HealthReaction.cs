@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HealthReaction : MonoBehaviour
 {
     public FloatValue playerHealth;
     public Signals healthSignal;
     public FloatValue HeartContainers;
-
 
     public void Use(int amountToIncrease)
     {
@@ -18,5 +15,4 @@ public class HealthReaction : MonoBehaviour
         }
         healthSignal.Raise();
     }
-
 }
