@@ -1,13 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-
-
 
 public class HeartManager : MonoBehaviour
 {
-
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite halfFullHeart;
@@ -16,7 +11,7 @@ public class HeartManager : MonoBehaviour
     public FloatValue playerCurrentHealth;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         InitHearts();
         UpdateHearts();
@@ -73,12 +68,6 @@ public class HeartManager : MonoBehaviour
                 //Halffull Heart;
                 hearts[i].sprite = halfFullHeart;
             }
-            {
-
-            }
         }
     }
 }
-
-
-

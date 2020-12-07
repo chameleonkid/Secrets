@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ManaManager : MonoBehaviour
 {
-
     public Slider manaSlider;
     public PlayerInventory playerInventory;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         manaSlider.maxValue = playerInventory.maxMana;
         manaSlider.value = playerInventory.maxMana;
@@ -17,7 +15,6 @@ public class ManaManager : MonoBehaviour
 
     public void AddMana(int amountToIncrease)
     {
-        
         if (manaSlider.value + amountToIncrease > manaSlider.maxValue)   
         {
             manaSlider.value = manaSlider.maxValue;                   
@@ -26,7 +23,6 @@ public class ManaManager : MonoBehaviour
         {
             manaSlider.value += amountToIncrease;                         
         }
-
     }
 
     public void DecreaseMana(int amountToDecrease)
@@ -40,5 +36,4 @@ public class ManaManager : MonoBehaviour
             manaSlider.value -= amountToDecrease;                         
         }
     }
-
 }
