@@ -82,7 +82,7 @@ public class Enemy : MonoBehaviour
 
         if(thisLoot != null)
         {
-            PowerUps current = thisLoot.LootPowerUp();
+            PhysicalInventoryItem current = thisLoot.LootPowerUp();
             if(current != null)
             {
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
@@ -108,9 +108,4 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
