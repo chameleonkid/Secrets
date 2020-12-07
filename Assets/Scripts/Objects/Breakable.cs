@@ -1,23 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
-    public Loottable thisLoot;
+    public LootTable thisLoot;
 
-    private Animator anim;  
-    // Start is called before the first frame update
+    private Animator anim;
+
     void Start()
     {
         anim = GetComponent<Animator>();
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Smash()
@@ -33,10 +25,8 @@ public class Breakable : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-
     private void MakeLoot()
     {
-
         if (thisLoot != null)
         {
             PowerUps current = thisLoot.LootPowerUp();
@@ -45,14 +35,5 @@ public class Breakable : MonoBehaviour
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
             }
         }
-
     }
-
-
-
 }
-
-
-
-
- 
