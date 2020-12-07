@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     public FloatValue currentHealth;
+    [SerializeField] private FloatMeter mana;
 
     public VectorValue startingPosition;
     private bool isRunning;
@@ -57,9 +58,7 @@ public class PlayerMovement : MonoBehaviour
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
-    public ManaManager manaManager;
 
-    // Start is called before the first frame update
     private void Start()
     {
         regularPlayerColor = playerSprite.color;
@@ -73,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
         transform.position = startingPosition.initialValue;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (currentState != PlayerState.stagger)
@@ -113,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Attack");
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null && myInventory.currentMana > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             //Debug.Log("RoundAttack");
 
@@ -236,9 +234,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("RoundAttacking", false);
         currentState = PlayerState.walk;
 
-        // #################### Decrease Mana in Inventory and Slider ####################
-        myInventory.DecreaseCurrentMana(1);
-        manaManager.DecreaseMana(1);
+        mana.current -= 1;
     }
 
     // ########################### Animation for Moving #########################################
