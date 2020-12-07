@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class GameSaveManager : MonoBehaviour
 {
-    
-
     public static GameSaveManager gameSave;
 
     //################# Things to Reset ############################
@@ -16,7 +12,7 @@ public class GameSaveManager : MonoBehaviour
     public List<InventoryItem> ResetInventoryItems = new List<InventoryItem>();
     public FloatValue HeartContainers;
     public FloatValue playerHealth;
-   // public Inventory Inventory;
+    // public Inventory Inventory;
     public PlayerInventory playerInventory;
 
     //################# Refresh the Screen ############################
@@ -32,17 +28,11 @@ public class GameSaveManager : MonoBehaviour
     public InventoryItem arrows;
     public InventoryItem smallKeys;
 
-
-
     public VectorValue playerPosition;
     public Transform currentPlayerPosition;
 
-
-
-
     public void ResetScriptables()
     {
-
         for (int i = 0; i < chests.Count; i++)
         {
             if (File.Exists("E:\\Secret_Save" + string.Format("/{0}.chests", i)))
@@ -65,21 +55,19 @@ public class GameSaveManager : MonoBehaviour
         Debug.Log("RESET!");
     }
 
-
     //################################################################# RESET EVERYTHING ###################################################################
     public void resetInventory()
     {
-        
         playerInventory.coins = 0;
 
         for (int i = 0; i < playerInventory.myInventory.Count; i++)
         {
 
             if (File.Exists("E:\\Secret_Save" + string.Format("/{0}.inventory", i)))
-            {            
+            {
                 File.Delete("E:\\Secret_Save" + string.Format("/{0}.inventory", i));
             }
-            playerInventory.myInventory[i].numberHeld= 0;
+            playerInventory.myInventory[i].numberHeld = 0;
         }
 
         playerInventory.currentItem = null;
@@ -100,7 +88,6 @@ public class GameSaveManager : MonoBehaviour
         // Look at this https://answers.unity.com/questions/1501743/scriptable-object-resets-randomly-between-scenes.html
         arrowSignal.Raise();
         coinSignal.Raise();
-        
     }
 
     public void resetHealth()
@@ -227,6 +214,4 @@ public class GameSaveManager : MonoBehaviour
         }
 
     */
-
-
 }

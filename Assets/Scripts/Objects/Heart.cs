@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Heart : PowerUps
 {
@@ -8,22 +6,9 @@ public class Heart : PowerUps
     public float amountToIncrease;
     public FloatValue HeartContainers;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("powerup") && other.isTrigger)
+        if (other.CompareTag("powerup") && other.isTrigger)
         {
             playerHealth.RuntimeValue += amountToIncrease;
             if (playerHealth.RuntimeValue > HeartContainers.RuntimeValue * 2f)
@@ -34,7 +19,4 @@ public class Heart : PowerUps
             Destroy(this.gameObject);
         }
     }
-
-
-
 }
