@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
     public Signals playerHit;
     public Signals ArrowUsed;
     public Signals playerHealthSignal;
-    public Signals decreaseMana;
 
     public PlayerInventory myInventory; // New Inventory
 
