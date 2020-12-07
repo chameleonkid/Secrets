@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     public FloatValue currentHealth;
-    [SerializeField] private FloatMeter mana;
+    [SerializeField] private FloatMeter mana = default;
 
     public VectorValue startingPosition;
     private bool isRunning;
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
-        transform.position = startingPosition.initialValue;
+        transform.position = startingPosition.value;
     }
 
     private void Update()
