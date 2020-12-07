@@ -71,7 +71,7 @@ public class SimpleSave : MonoBehaviour
 
 
         //Refresh Screen
-        script.resetHealth();
+        script.resetHealthAndMana();
         script.heartSignal.Raise();
         script.arrowSignal.Raise();
         script.coinSignal.Raise();
