@@ -1,9 +1,5 @@
 ﻿using Leguar.TotalJSON;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditor;
 using UnityEngine;
 
 /*
@@ -26,7 +22,7 @@ public enum SaveSwitch
 
 public class InventorySaver : MonoBehaviour
 {
-    [SerializeField] private PlayerInventory myInventory;
+    [SerializeField] private PlayerInventory myInventory = default;
     public SaveSwitch saveType = SaveSwitch.json;
 
     public ItemDatabase ItemDB;
@@ -34,10 +30,8 @@ public class InventorySaver : MonoBehaviour
     //SL is our serializable class that contains a representation of the items we want to save - this is a COPY
     private SerializableListString SL = new SerializableListString();
 
-
     private void OnEnable()
     {
-
         //clear the inventory
         myInventory.myInventory.Clear();
         Debug.Log("Inventory Count = " + myInventory.myInventory.Count);
@@ -51,15 +45,15 @@ public class InventorySaver : MonoBehaviour
         ImportSaveData();
     }
 
- /*   private void OnDisable()
-    {
-        //clear the SL 
-        SL.serialiableList.Clear();
-        // build our save data from our current game state
-        BuildSaveData();
-        //save out the save data
-        SaveScriptables();
-    }*/
+    /* private void OnDisable()
+       {
+           //clear the SL 
+           SL.serialiableList.Clear();
+           // build our save data from our current game state
+           BuildSaveData();
+           //save out the save data
+           SaveScriptables();
+       }*/
 
     private void ImportSaveData()
     {
@@ -90,39 +84,35 @@ public class InventorySaver : MonoBehaviour
                 //should never hit this!
                 Debug.LogError("ITEM DB Not Found: " + SL.serialiableList[i].name);
             }
-
-
         }
     }
 
- /*   private void BuildSaveData()
-    {
+    /* private void BuildSaveData()
+       {
 
-        //go through the inventory and save out a key value pair of itemName and itemCount
-        //then add to the serializablelist
-        for (int i = 0; i < myInventory.myInventory.Count; i++)
-        {
-            //create a SerialItem and populate it from the inventory
-            //SerializableListString.SerialItem SI = new SerializableListString.SerialItem();
+           //go through the inventory and save out a key value pair of itemName and itemCount
+           //then add to the serializablelist
+           for (int i = 0; i < myInventory.myInventory.Count; i++)
+           {
+               //create a SerialItem and populate it from the inventory
+               //SerializableListString.SerialItem SI = new SerializableListString.SerialItem();
 
-            SerialItem SI = new SerialItem();
+               SerialItem SI = new SerialItem();
 
-            SI.name = myInventory.myInventory[i].itemName;
-            SI.count = myInventory.myInventory[i].numberHeld;
+               SI.name = myInventory.myInventory[i].itemName;
+               SI.count = myInventory.myInventory[i].numberHeld;
 
-            //add to our SL - 
-            SL.serialiableList.Add(SI);
+               //add to our SL - 
+               SL.serialiableList.Add(SI);
 
 
-        }
-    }*/
-
+           }
+       }*/
 
     public void SaveScriptables()
     {
         //ResetScriptables();
         Debug.Log("IS: Saving to: " + Application.persistentDataPath);
-
 
         switch (saveType)
         {
@@ -133,29 +123,25 @@ public class InventorySaver : MonoBehaviour
 
             case SaveSwitch.binary:
                 Debug.Log("Save is via binary");
-//                BinarySave();
-
+                // BinarySave();
                 break;
 
             default:
                 break;
         }
-
-
-
     }
-//################################################ Commented out for testing ####################################
-/*
-    private void BinarySave()
-    {
-        BinarySaver.Save(SL.serializableList, "Inventory");
-    }
+    //################################################ Commented out for testing ####################################
+    /*
+        private void BinarySave()
+        {
+            BinarySaver.Save(SL.serializableList, "Inventory");
+        }
 
-    private void BinaryLoad()
-    {
-        SL.serializableList = BinarySaver.Load<List<SerialItem>>("Inventory");
-    }
-*/
+        private void BinaryLoad()
+        {
+            SL.serializableList = BinarySaver.Load<List<SerialItem>>("Inventory");
+        }
+    */
     private void JSONSave()
     {
         //filepath
@@ -177,11 +163,9 @@ public class InventorySaver : MonoBehaviour
         sw.Close();
     }
 
-
     public void LoadScriptables()
     {
         Debug.Log("IS: Loading From: " + Application.persistentDataPath);
-
 
         switch (saveType)
         {
@@ -189,23 +173,17 @@ public class InventorySaver : MonoBehaviour
                 Debug.Log("Load is via json");
                 JSONLoad();
                 break;
-
             case SaveSwitch.binary:
                 Debug.Log("Load is via binary");
- //               BinaryLoad();
-
+                // BinaryLoad();
                 break;
-
-
             default:
                 break;
         }
     }
 
-
     public void JSONLoad()
     {
-
         //filepath
         string filepath = Application.persistentDataPath + "/newsave.json";
 
@@ -218,10 +196,5 @@ public class InventorySaver : MonoBehaviour
             //deserialize the JSON object back into our Serializable class
             SL = jsonObject.Deserialize<SerializableListString>();
         }
-
     }
-
-
-
-
 }

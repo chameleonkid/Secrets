@@ -1,33 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+﻿using UnityEngine;
 
 public class KnockBack : MonoBehaviour
 {
-
     public float thrust;
     public float knockTime;
     public float damage;
     public PlayerInventory playerInventory;
     private bool isCrit;
-    [SerializeField]
-    private DmgPopUpTextManager normalDmgPopup;
-    [SerializeField]
-    private DmgPopUpTextManager critDmgPopup;
+    [SerializeField] private DmgPopUpTextManager normalDmgPopup = default;
+    [SerializeField] private DmgPopUpTextManager critDmgPopup = default;
     private Transform enemyTransform;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     // Knockback + dmg
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -84,7 +67,7 @@ public class KnockBack : MonoBehaviour
                         DamagePopup(playerInventory.currentBow.damage);
                     }
                 }
-                 //######################################### ARROW TEST ##################################################################
+                //######################################### ARROW TEST ##################################################################
                 //################################## Player is taking Damage ###############################################################
                 if (other.gameObject.CompareTag("Player") && other.isTrigger)
                 {
@@ -96,7 +79,7 @@ public class KnockBack : MonoBehaviour
                         {
                             other.GetComponent<PlayerMovement>().Knock(knockTime, damage - playerInventory.totalDefense);
                             Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
-                            
+
                         }
                         else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
                         {
@@ -109,37 +92,32 @@ public class KnockBack : MonoBehaviour
         }
     }
 
-    
     public void CalcIsCrit()
     {
-            isCrit = false;
-            if (playerInventory.totalCritChance > 0)
+        isCrit = false;
+        if (playerInventory.totalCritChance > 0)
+        {
+            int temp = Random.Range(0, 99);
+            if (temp <= playerInventory.totalCritChance)
             {
-                int temp = Random.Range(0, 99);
-                if(temp <= playerInventory.totalCritChance)
-                {
-                    isCrit= true;
-                }
+                isCrit = true;
             }
+        }
     }
+
     public void DamagePopup(float damage)
     {
         if (normalDmgPopup == null) return;
 
-        if(isCrit)
+        if (isCrit)
         {
             DmgPopUpTextManager tempNumber = Instantiate(critDmgPopup, transform.position, Quaternion.identity, enemyTransform);
             tempNumber.SetText(damage);
         }
         else
-        { 
-            DmgPopUpTextManager tempNumber = Instantiate(normalDmgPopup, transform.position, Quaternion.identity,enemyTransform);
+        {
+            DmgPopUpTextManager tempNumber = Instantiate(normalDmgPopup, transform.position, Quaternion.identity, enemyTransform);
             tempNumber.SetText(damage);
         }
     }
-
 }
-
-
-
-
