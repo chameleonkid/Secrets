@@ -58,7 +58,7 @@ public class SimpleSave : MonoBehaviour
         script.smallKeys.numberHeld = ES3.Load("SmallKeys", script.smallKeys.numberHeld);
 
         //Refresh Screen
-        script.resetHealth();
+        script.resetHealthAndMana();
         script.heartSignal.Raise();
         script.arrowSignal.Raise();
         script.coinSignal.Raise();

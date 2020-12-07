@@ -4,12 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable Objects/Float Meter")]
 public class FloatMeter : ScriptableObject
 {
+    //These are the Events
     public event Action OnMinChanged;
     public event Action OnMaxChanged;
     public event Action OnCurrentChanged;
 
     [SerializeField] private float _min = 0;
-    public float min {
+    public float min {                                                                                      // These Parts just make sure min isnt greater than max
         get => _min;
         set {
             _min = value;
@@ -23,7 +24,8 @@ public class FloatMeter : ScriptableObject
     }
 
     [SerializeField] private float _max = 6;
-    public float max {
+    public float max
+    {                                                                                                   // These Parts just make sure max isnt smaller than min
         get => _max;
         set {
             _max = value;
@@ -36,7 +38,7 @@ public class FloatMeter : ScriptableObject
         }
     }
 
-    [SerializeField] private float _current;
+    [SerializeField] private float _current;                                                        // These Parts just make sure current is between min and max
     public float current {
         get => _current;
         set {
@@ -49,7 +51,7 @@ public class FloatMeter : ScriptableObject
                 _current = _min;
             }
 
-            OnCurrentChanged?.Invoke();
+            OnCurrentChanged?.Invoke();      //When Current is changed, subscribers do something                  
         }
     }
 }

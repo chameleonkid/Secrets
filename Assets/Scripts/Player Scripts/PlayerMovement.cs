@@ -23,12 +23,13 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     public FloatValue currentHealth;
     [SerializeField] private FloatMeter mana = default;
+    [SerializeField] private FloatMeter health = default;
 
     public VectorValue startingPosition;
     private bool isRunning;
 
     //####################### Signals ###########################
-    public Signals playerHit;
+    //public Signals playerHit;
     public Signals ArrowUsed;
     public Signals playerHealthSignal;
 
@@ -38,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject projectile; //arrows and so on
 
-    // public Item Bow;
     public InventoryItem Bow;
     public InventoryWeapon Sword;
 
@@ -259,6 +259,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MoveCharacter()
     {
+
         if (currentState != PlayerState.dead)       // Nur bewegen wenn nicht tot
         {
 
@@ -274,9 +275,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Knock(float knockTime, float damage)
     {
-        currentHealth.RuntimeValue -= damage;
-        playerHealthSignal.Raise();
-        if (currentHealth.RuntimeValue > 0)
+        health.current -= damage;
+        if (health.current > 0)
         {
 
             StartCoroutine(KnockCo(knockTime));
@@ -291,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator KnockCo(float knockTime)
     {
-        playerHit.Raise();
+     //   playerHit.Raise();
         if (myRigidbody != null)
         {
             StartCoroutine(FlashCo());
