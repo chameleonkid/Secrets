@@ -277,7 +277,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Knock(float knockTime, float damage)
     {
-        health.current -= 1;
+        health.current -= damage;
         if (health.current > 0)
         {
 
