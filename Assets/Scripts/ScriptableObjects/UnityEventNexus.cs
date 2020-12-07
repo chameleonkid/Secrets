@@ -10,4 +10,8 @@ public class UnityEventNexus : ScriptableObject
     [SerializeField] private FloatMeter health = default;
 
     public void ModifyCurrentHealth(float deltaHealth) => health.current += deltaHealth;
+
+    [SerializeField] private FloatMeter arrows = default;
+
+    public void ModifyCurrentArrows(float deltaHealth) => health.current += deltaHealth;
 }

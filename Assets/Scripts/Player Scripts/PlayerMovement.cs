@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public FloatValue currentHealth;
     [SerializeField] private FloatMeter mana = default;
     [SerializeField] private FloatMeter health = default;
+    [SerializeField] private FloatMeter arrows = default;
 
     public VectorValue startingPosition;
     private bool isRunning;
@@ -316,6 +317,7 @@ public class PlayerMovement : MonoBehaviour
             currentState = PlayerState.walk;
         }
 
+        arrows.current -= 1;
     }
 
     //################### instantiate arrow when shot ###############################

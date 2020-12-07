@@ -77,8 +77,8 @@ public class Enemy : MonoBehaviour
     {
         if (thisLoot != null)
         {
-            PowerUps current = thisLoot.LootPowerUp();
-            if (current != null)
+            PhysicalInventoryItem current = thisLoot.LootPowerUp();
+            if(current != null)
             {
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
             }

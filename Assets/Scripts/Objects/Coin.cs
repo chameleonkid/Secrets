@@ -13,12 +13,6 @@ public class Coin : PowerUps
         powerupSignal.Raise();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("powerup") && other.isTrigger)
@@ -28,7 +22,5 @@ public class Coin : PowerUps
             Destroy(this.gameObject);
         }
     }
-
-
 
 }
