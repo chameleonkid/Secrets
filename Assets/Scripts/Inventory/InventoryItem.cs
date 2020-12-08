@@ -8,6 +8,7 @@ public class InventoryItem : ScriptableObject
     public string itemDescription;
     public Sprite itemImage;
 
+
     [SerializeField] private int _numberHeld = default;
     public int numberHeld {
         get => _numberHeld;
@@ -34,4 +35,8 @@ public class InventoryItem : ScriptableObject
     {
         numberHeld -= amountToDecrease;
     }
+
+
+
+
 }

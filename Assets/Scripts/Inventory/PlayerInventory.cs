@@ -15,6 +15,7 @@ public class PlayerInventory : ScriptableObject
     public InventoryShield currentShield;
     public InventoryRing currentRing;
     public InventoryBow currentBow;
+    public InventorySpellbook currentSpellbook;
     public float totalDefense;
     public float totalCritChance;
 
@@ -65,6 +66,9 @@ public class PlayerInventory : ScriptableObject
                 break;
             case InventoryBow bow:
                 currentBow = bow;
+                break;
+            case InventorySpellbook spellbook:
+                currentSpellbook = spellbook;
                 break;
         }
         // Applies to all equippables.

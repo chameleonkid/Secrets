@@ -66,6 +66,7 @@ public class GameSaveManager : MonoBehaviour
         playerInventory.currentShield = null;
         playerInventory.currentRing = null;
         playerInventory.currentBow = null;
+        playerInventory.currentSpellbook = null;
 
         playerInventory.totalDefense = 0;
         playerInventory.totalCritChance = 0;

@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot shieldSlot;
     public InventorySlot ringSlot;
     public InventorySlot bowSlot;
+    public InventorySlot spellbookSlot;
     //InventorySlot when Item not exists
     public Sprite weaponSlotSprite;
     public Sprite armorSlotSprite;
@@ -23,6 +24,7 @@ public class InventoryManager : MonoBehaviour
     public Sprite shieldSlotSprite;
     public Sprite ringSlotSprite;
     public Sprite bowSlotSprite;
+    public Sprite spellbookSprite;
     //InventoryStatsRefresh
     public CritValueTextManager critDisplay;
     public DamageValueTextManager dmgDisplay;
@@ -103,6 +105,11 @@ public class InventoryManager : MonoBehaviour
             bowSlot.thisItem = playerInventory.currentBow;
             bowSlot.itemImage.sprite = playerInventory.currentBow.itemImage;
         }
+        if (playerInventory.currentSpellbook)
+        {
+            spellbookSlot.thisItem = playerInventory.currentSpellbook;
+            spellbookSlot.itemImage.sprite = playerInventory.currentSpellbook.itemImage;
+        }
     }
 
     //####################################### Clear Main-Slots ##################################################################################
@@ -145,6 +152,10 @@ public class InventoryManager : MonoBehaviour
         if (!playerInventory.currentBow)
         {
             bowSlot.itemImage.sprite = bowSlotSprite;
+        }
+        if (!playerInventory.currentSpellbook)
+        {
+            spellbookSlot.itemImage.sprite = spellbookSprite;
         }
     }
 
@@ -194,6 +205,11 @@ public class InventoryManager : MonoBehaviour
         {
             InventoryBow currentItem = NewItem as InventoryBow;
             descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.damage;
+        }
+        else if (NewItem is InventorySpellbook)
+        {
+            InventorySpellbook currentItem = NewItem as InventorySpellbook;
+            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.SpellDamage;
         }
         else
         {

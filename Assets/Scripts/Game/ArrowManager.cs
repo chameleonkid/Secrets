@@ -9,25 +9,27 @@ public class ArrowManager : MonoBehaviour
     // care is taken to unsubscribe from events.
     [SerializeField] private TextMeshProUGUI ArrowDisplay = default;
 
+    [SerializeField] private InventoryItem arrowItem = default;
 
     private void OnEnable()
     {
         arrows.OnMinChanged += UpdateUI;
         arrows.OnMaxChanged += UpdateUI;
         arrows.OnCurrentChanged += UpdateUI;
+        arrows.current = arrowItem.numberHeld;
     }
     private void OnDisable()
     {
         arrows.OnMinChanged -= UpdateUI;
         arrows.OnMaxChanged -= UpdateUI;
         arrows.OnCurrentChanged -= UpdateUI;
+        arrows.current = arrowItem.numberHeld;
     }
 
     private void Start() => UpdateUI();
 
     private void UpdateUI()
     {
-
         ArrowDisplay.text = "" + arrows.current;
     }
 }
