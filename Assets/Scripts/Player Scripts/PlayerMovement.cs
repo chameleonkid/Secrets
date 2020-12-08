@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D myRigidbody;
     private Vector3 change;
     private Animator animator;
-    public FloatValue currentHealth;
     [SerializeField] private FloatMeter mana = default;
     [SerializeField] private FloatMeter health = default;
     [SerializeField] private FloatMeter arrows = default;
