@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public PlayerState currentState;
 
-    [SerializeField] private float _speed;
+    [SerializeField] private float _speed = default;
     private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
 
     private Rigidbody2D myRigidbody;
@@ -200,16 +200,11 @@ public class PlayerMovement : MonoBehaviour
     private void MakeArrow()
     {
         animator.SetBool("isShooting", true);
-        Vector2 arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
-        Vector2 temp = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-        arrow arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
-        arrow.Setup(temp, ChooseArrowDirection());
-    }
-
-    Vector3 ChooseArrowDirection()
-    {
-        float temp = Mathf.Atan2(animator.GetFloat("MoveY"), animator.GetFloat("MoveX")) * Mathf.Rad2Deg;
-        return new Vector3(0, 0, temp);
+        var arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
+        var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+        var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
+        var arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
+        arrow.Setup(direction, rotation);
     }
 
     //#################################### Item Found RAISE IT! #######################################
