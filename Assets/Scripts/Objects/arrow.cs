@@ -1,49 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class arrow : MonoBehaviour
 {
-
     public float speed;
     public Rigidbody2D myRigidbody;
     public BoxCollider2D arrowcollider;
     public bool isChild = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        if (isChild == false && myRigidbody.velocity == Vector2.zero )
-        {        
-            destroyArrow(null);        
+        if (isChild == false && myRigidbody.velocity == Vector2.zero)
+        {
+            destroyArrow(null);
         }
-
     }
 
-    public void Setup(Vector2 velocity, Vector3 direction)
+    public void Setup(Vector2 direction, Vector3 rotation)
     {
-        myRigidbody.velocity = velocity.normalized * speed;
-        transform.rotation = Quaternion.Euler(direction);
+        myRigidbody.velocity = direction.normalized * speed;
+        transform.rotation = Quaternion.Euler(rotation);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.CompareTag("enemy"))
-            {
+        {
             destroyArrow(other.transform);
-            }
-
+        }
     }
 
     public void destroyArrow(Transform other)
     {
-        Destroy(this.gameObject,1f); // Destroytime in float hinzufügen
+        Destroy(this.gameObject, 1f); // Destroytime in float hinzufügen
         myRigidbody.velocity = Vector2.zero;
         arrowcollider.enabled = false;
         Destroy(myRigidbody);
@@ -55,10 +43,8 @@ public class arrow : MonoBehaviour
     {
         if (!isChild)
         {
-            Debug.Log("Collision");
-            Debug.Log(other.transform);
+            Debug.Log("Collided with: " + other.transform.name);
             myRigidbody.velocity = Vector2.zero;
         }
     }
-
 }

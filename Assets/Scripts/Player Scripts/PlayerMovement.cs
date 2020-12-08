@@ -17,7 +17,10 @@ public enum PlayerState
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerState currentState;
-    public float speed;
+
+    [SerializeField] private float _speed = default;
+    private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
+
     private Rigidbody2D myRigidbody;
     private Vector3 change;
     private Animator animator;
@@ -27,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private FloatMeter arrows = default;
 
     public VectorValue startingPosition;
-    private bool isRunning;
 
     //####################### Signals ###########################
     //public Signals playerHit;
@@ -67,63 +69,45 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
         animator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
-        animator.SetFloat("MoveX", 0);
-        animator.SetFloat("MoveY", -1);
+        SetAnimatorXY(Vector2.down);
         transform.position = startingPosition.value;
     }
 
     private void Update()
     {
-        if (currentState != PlayerState.stagger)
-        {
-            myRigidbody.velocity = Vector2.zero;
-        }
         // Is the player in an interaction?
         if (currentState == PlayerState.interact)
         {
-            //    Debug.Log("helpmeout");
+            // Debug.Log("helpmeout");
             return;
         }
 
-        change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
+        SetAnimatorXY(change);
 
-        if (Input.GetButtonDown("Run") && !isRunning)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        animator.SetBool("isRunning", Input.GetButton("Run"));
+
+        var notStaggeredOrLifting = (currentState != PlayerState.stagger && currentState != PlayerState.lift);
+
+        if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
         {
-            speed = (speed * 2);
-            isRunning = true;
-
-            animator.SetBool("isRunning", true);
-
-        }
-        if (Input.GetButtonUp("Run") && isRunning)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
-        {
-            speed = (speed / 2);
-            isRunning = false;
-
-            animator.SetBool("isRunning", false);
-
-        }
-        if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null)
-        {
-            StartCoroutine(AttackCO());
-            //Debug.Log("Attack");
+            // Debug.Log("Attack");
+            StartCoroutine(AttackCo());
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            //Debug.Log("RoundAttack");
-
-            StartCoroutine(RoundAttackCO());
+            // Debug.Log("RoundAttack");
+            StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
-        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && currentState != PlayerState.attack)
+        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && notStaggeredOrLifting && currentState != PlayerState.attack)
         {
-
-            if (myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")) && myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")).numberHeld > 0 && myInventory.currentBow)
+            var arrows = myInventory.myInventory.Find(x => x.itemName.Contains("Arrow"));
+            if (arrows.numberHeld > 0 && myInventory.currentBow)
             {
-                myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")).numberHeld--;
+                arrows.numberHeld--;
                 ArrowUsed.Raise();
                 StartCoroutine(SecondAttackCo());
             }
@@ -132,37 +116,48 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isShooting", false);
         }
-        //############################################################# Gets Hurt #################################################
-        if (currentState == PlayerState.stagger)
-        {
-            animator.SetBool("isHurt", true);
-        }
-        else
-        {
-            animator.SetBool("isHurt", false);
-        }
 
-        //################################# Trying to drop things ################################################################
-        /*     if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
-             {
-                 LiftItem();
-                 Debug.Log("Item Dropped!");
+        animator.SetBool("isHurt", (currentState == PlayerState.stagger));
+        animator.SetBool("Moving", (change != Vector3.zero));
 
-             }
-             //################################# Trying to drop things  END ############################################################
-     */
+        // ################################# Trying to drop things ################################################################
+        // if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
+        // {
+        //     LiftItem();
+        //     Debug.Log("Item Dropped!");
+
+        // }
+        // ################################# Trying to drop things END ############################################################
     }
 
     private void FixedUpdate()
     {
         if (currentState == PlayerState.walk || currentState == PlayerState.idle || currentState == PlayerState.lift)
         {
-            UpdateAnimationAndMove();
+            myRigidbody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
+        }
+
+        if (currentState != PlayerState.stagger)
+        {
+            myRigidbody.velocity = Vector2.zero;
+        }
+    }
+
+    private void SetAnimatorXY(Vector2 direction)
+    {
+        direction.Normalize();
+        if (direction != Vector2.zero)
+        {
+            direction.x = Mathf.Round(change.x);
+            direction.y = Mathf.Round(change.y);
+
+            animator.SetFloat("MoveX", direction.x);
+            animator.SetFloat("MoveY", direction.y);
         }
     }
 
     // #################################### Casual Attack ####################################
-    private IEnumerator AttackCO()
+    private IEnumerator AttackCo()
     {
         animator.SetBool("Attacking", true);
         currentState = PlayerState.attack;
@@ -173,6 +168,43 @@ public class PlayerMovement : MonoBehaviour
         {
             currentState = PlayerState.walk;
         }
+    }
+
+    // ############################# Roundattack ################################################
+    private IEnumerator RoundAttackCo()
+    {
+        animator.SetBool("RoundAttacking", true);
+        currentState = PlayerState.roundattack;
+        yield return null;
+        animator.SetBool("RoundAttacking", false);
+        currentState = PlayerState.walk;
+
+        mana.current -= 1;
+    }
+
+    // ############################## Using the Item / Shooting the Bow #########################################
+    private IEnumerator SecondAttackCo()
+    {
+        currentState = PlayerState.attack;
+        MakeArrow();
+        yield return new WaitForSeconds(0.3f);
+        if (currentState != PlayerState.interact)
+        {
+            currentState = PlayerState.walk;
+        }
+
+        arrows.current -= 1;
+    }
+
+    //################### instantiate arrow when shot ###############################
+    private void MakeArrow()
+    {
+        animator.SetBool("isShooting", true);
+        var arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
+        var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+        var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
+        var arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
+        arrow.Setup(direction, rotation);
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -218,59 +250,10 @@ public class PlayerMovement : MonoBehaviour
                    thingSprite.sprite = null;
 
                    myInventory.currentItem = null;
-
                }
            }
-
        }
-   */
-
-    // ############################# Roundattack ################################################
-    private IEnumerator RoundAttackCO()
-    {
-        animator.SetBool("RoundAttacking", true);
-        currentState = PlayerState.roundattack;
-        yield return null;
-        animator.SetBool("RoundAttacking", false);
-        currentState = PlayerState.walk;
-
-        mana.current -= 1;
-    }
-
-    // ########################### Animation for Moving #########################################
-
-    void UpdateAnimationAndMove()
-    {
-        if (change != Vector3.zero)
-        {
-            MoveCharacter();                    // Move Character
-            change.x = Mathf.Round(change.x);   // Round the movement for deciding where to hit if walking diagonally
-            change.y = Mathf.Round(change.y);   // Round the movement for deciding where to hit if walking diagonally
-            animator.SetFloat("MoveX", change.x);
-            animator.SetFloat("MoveY", change.y);
-            animator.SetBool("Moving", true);
-        }
-        else
-        {
-            animator.SetBool("Moving", false);
-        }
-    }
-
-    //############################### Move Character #############################################
-
-    void MoveCharacter()
-    {
-
-        if (currentState != PlayerState.dead)       // Nur bewegen wenn nicht tot
-        {
-
-            change.Normalize();
-            myRigidbody.MovePosition(
-                transform.position + change * speed * Time.deltaTime
-                );
-
-        }
-    }
+    */
 
     // ########################### Getting hit and die ##############################################
 
@@ -292,48 +275,14 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator KnockCo(float knockTime)
     {
-     //   playerHit.Raise();
+        //   playerHit.Raise();
         if (myRigidbody != null)
         {
             StartCoroutine(FlashCo());
             yield return new WaitForSeconds(knockTime);
-            myRigidbody.velocity = Vector2.zero;
             currentState = PlayerState.idle;
             myRigidbody.velocity = Vector2.zero;
         }
-    }
-
-    // ############################## Using the Item / Shooting the Bow #########################################
-    private IEnumerator SecondAttackCo()
-    {
-        //animator.SetBool("Attacking", true);
-        currentState = PlayerState.attack;
-        yield return null;
-        MakeArrow();
-        // animator.SetBool("Attacking", false);
-        yield return new WaitForSeconds(0.3f);
-        if (currentState != PlayerState.interact)
-        {
-            currentState = PlayerState.walk;
-        }
-
-        arrows.current -= 1;
-    }
-
-    //################### instantiate arrow when shot ###############################
-    private void MakeArrow()
-    {
-        animator.SetBool("isShooting", true);
-        Vector2 arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
-        Vector2 temp = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-        arrow arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
-        arrow.Setup(temp, ChooseArrowDirection());
-    }
-
-    Vector3 ChooseArrowDirection()
-    {
-        float temp = Mathf.Atan2(animator.GetFloat("MoveY"), animator.GetFloat("MoveX")) * Mathf.Rad2Deg;
-        return new Vector3(0, 0, temp);
     }
 
     //##################### Death animation and screen ##############################
@@ -350,9 +299,9 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator FlashCo()
     {
-        int temp = 0;
         triggerCollider.enabled = false;
-        while (temp < numberOfFlasches)
+
+        for (int i = 0; i < numberOfFlasches; i++)
         {
             playerSprite.color = FlashColor;
             armorSprite.color = FlashColor;
@@ -362,8 +311,8 @@ public class PlayerMovement : MonoBehaviour
             armorSprite.color = regularArmorColor;
             hairSprite.color = regularHairColor;
             yield return new WaitForSeconds(flashDuration);
-            temp++;
         }
+
         triggerCollider.enabled = true;
     }
 }
