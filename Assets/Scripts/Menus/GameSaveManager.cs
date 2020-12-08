@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class GameSaveManager : MonoBehaviour
@@ -10,13 +9,9 @@ public class GameSaveManager : MonoBehaviour
     public List<BoolValue> chests = new List<BoolValue>();
     public List<BoolValue> doors = new List<BoolValue>();
     public List<InventoryItem> ResetInventoryItems = new List<InventoryItem>();
-    public FloatValue HeartContainers;
-    public FloatValue playerHealth;
-    // public Inventory Inventory;
     public PlayerInventory playerInventory;
 
-    //################# Refresh the Screen ############################
-    public Signals heartSignal;
+    //################# Refresh the Screen ############################;
     public Signals arrowSignal;
     public Signals coinSignal;
 
@@ -39,23 +34,11 @@ public class GameSaveManager : MonoBehaviour
     {
         for (int i = 0; i < chests.Count; i++)
         {
-            /*
-            if (File.Exists("E:\\Secret_Save" + string.Format("/{0}.chests", i)))
-            {
-                File.Delete("E:\\Secret_Save" + string.Format("/{0}.chests", i));
-            }
-            */
             chests[i].RuntimeValue = chests[i].initialValue;
             
         }
         for (int i = 0; i < doors.Count; i++)
         {
-            /*
-            if (File.Exists("E:\\Secret_Save" + string.Format("/{0}.doors", i)))
-            {
-                File.Delete("E:\\Secret_Save" + string.Format("/{0}.doors", i));
-            }
-            */
             doors[i].RuntimeValue = doors[i].initialValue;
         }
 
@@ -71,12 +54,6 @@ public class GameSaveManager : MonoBehaviour
 
         for (int i = 0; i < playerInventory.myInventory.Count; i++)
         {
-        /*
-            if (File.Exists("E:\\Secret_Save" + string.Format("/{0}.inventory", i)))
-            {
-                File.Delete("E:\\Secret_Save" + string.Format("/{0}.inventory", i));
-            }
-        */
             playerInventory.myInventory[i].numberHeld = 0;
         }
 
@@ -105,6 +82,4 @@ public class GameSaveManager : MonoBehaviour
         health.current = health.max;
         mana.current = mana.max;
     }
-
-
 }

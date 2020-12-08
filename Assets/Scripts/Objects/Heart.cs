@@ -2,20 +2,14 @@
 
 public class Heart : PowerUps
 {
-    public FloatValue playerHealth;
-    public float amountToIncrease;
-    public FloatValue HeartContainers;
+    [SerializeField] private float amountToIncrease = default;
 
-    public void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("powerup") && other.isTrigger)
+        var player = other.GetComponent<PlayerMovement>();
+        if (player != null)
         {
-            playerHealth.RuntimeValue += amountToIncrease;
-            if (playerHealth.RuntimeValue > HeartContainers.RuntimeValue * 2f)
-            {
-                playerHealth.RuntimeValue = HeartContainers.RuntimeValue * 2f;
-            }
-            powerupSignal.Raise();
+            player.health.current += amountToIncrease;
             Destroy(this.gameObject);
         }
     }

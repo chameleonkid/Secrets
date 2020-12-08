@@ -1,26 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Coin : PowerUps
 {
-
+    [SerializeField] private Signals coinSignal = default;
     public PlayerInventory PlayerInventory;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        powerupSignal.Raise();
-    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("powerup") && other.isTrigger)
         {
             PlayerInventory.coins += 1;
-            powerupSignal.Raise();
+            coinSignal?.Raise();
             Destroy(this.gameObject);
         }
     }
-
 }

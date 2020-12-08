@@ -24,17 +24,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D myRigidbody;
     private Vector3 change;
     private Animator animator;
-    public FloatValue currentHealth;
+
     [SerializeField] private FloatMeter mana = default;
-    [SerializeField] private FloatMeter health = default;
+    [SerializeField] private FloatMeter _health = default;
+    public FloatMeter health => _health;
     [SerializeField] private FloatMeter arrows = default;
 
     public VectorValue startingPosition;
 
     //####################### Signals ###########################
-    //public Signals playerHit;
     public Signals ArrowUsed;
-    public Signals playerHealthSignal;
 
     public PlayerInventory myInventory; // New Inventory
 
@@ -275,7 +274,6 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator KnockCo(float knockTime)
     {
-        //   playerHit.Raise();
         if (myRigidbody != null)
         {
             StartCoroutine(FlashCo());

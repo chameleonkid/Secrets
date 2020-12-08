@@ -23,8 +23,6 @@ public class SimpleSave : MonoBehaviour
 
         ES3.Save("Chests", script.chests);
         ES3.Save("Inventory", script.playerInventory);
-        ES3.Save("Health", script.playerHealth);
-        ES3.Save("Heartcontainers", script.HeartContainers);
 
         //############ Save ALL SCRIPTABLE OBJECTS NUMBER HELD Cause otherwise they lose the OnClickEvent ######################
         ES3.Save("BluePotions", script.bluePotion.numberHeld);
@@ -46,8 +44,6 @@ public class SimpleSave : MonoBehaviour
         script.playerPosition = ES3.Load("Position", script.playerPosition);
         script.chests = ES3.Load("Chests", script.chests);
         script.playerInventory = ES3.Load("Inventory", script.playerInventory);
-        script.playerHealth = ES3.Load("Health", script.playerHealth);
-        script.HeartContainers = ES3.Load("Heartcontainers", script.HeartContainers);
 
         //################## Load all Scriptable Objects / Numberheld #################################
         script.bluePotion.numberHeld = ES3.Load("BluePotions", script.bluePotion.numberHeld);
@@ -59,7 +55,6 @@ public class SimpleSave : MonoBehaviour
 
         //Refresh Screen
         script.resetHealthAndMana();
-        script.heartSignal.Raise();
         script.arrowSignal.Raise();
         script.coinSignal.Raise();
 
