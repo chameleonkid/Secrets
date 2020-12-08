@@ -84,23 +84,25 @@ public class PlayerMovement : MonoBehaviour
 
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
+        SetAnimatorXY(change);
 
         animator.SetBool("isRunning", Input.GetButton("Run"));
 
-        if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null)
+        var notStaggeredOrLifting = (currentState != PlayerState.stagger && currentState != PlayerState.lift);
+
+        if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
         {
-            StartCoroutine(AttackCO());
-            //Debug.Log("Attack");
+            // Debug.Log("Attack");
+            StartCoroutine(AttackCo());
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            //Debug.Log("RoundAttack");
-
-            StartCoroutine(RoundAttackCO());
+            // Debug.Log("RoundAttack");
+            StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
-        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && currentState != PlayerState.attack)
+        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && notStaggeredOrLifting && currentState != PlayerState.attack)
         {
             var arrows = myInventory.myInventory.Find(x => x.itemName.Contains("Arrow"));
             if (arrows.numberHeld > 0 && myInventory.currentBow)
@@ -117,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isHurt", (currentState == PlayerState.stagger));
         animator.SetBool("Moving", (change != Vector3.zero));
-        SetAnimatorXY(change);
 
         // ################################# Trying to drop things ################################################################
         // if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
@@ -143,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // #################################### Casual Attack ####################################
-    private IEnumerator AttackCO()
+    private IEnumerator AttackCo()
     {
         animator.SetBool("Attacking", true);
         currentState = PlayerState.attack;
@@ -199,15 +200,13 @@ public class PlayerMovement : MonoBehaviour
                    thingSprite.sprite = null;
 
                    myInventory.currentItem = null;
-
                }
            }
-
        }
-   */
+    */
 
     // ############################# Roundattack ################################################
-    private IEnumerator RoundAttackCO()
+    private IEnumerator RoundAttackCo()
     {
         animator.SetBool("RoundAttacking", true);
         currentState = PlayerState.roundattack;
