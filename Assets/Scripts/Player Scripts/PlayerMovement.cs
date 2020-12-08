@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
@@ -95,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
             isRunning = true;
 
             animator.SetBool("isRunning", true);
-
         }
         if (Input.GetButtonUp("Run") && isRunning)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
@@ -120,10 +118,10 @@ public class PlayerMovement : MonoBehaviour
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
         if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && currentState != PlayerState.stagger && currentState != PlayerState.lift && currentState != PlayerState.attack)
         {
-
-            if (myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")) && myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")).numberHeld > 0 && myInventory.currentBow)
+            var arrows = myInventory.myInventory.Find(x => x.itemName.Contains("Arrow"));
+            if (arrows.numberHeld > 0 && myInventory.currentBow)
             {
-                myInventory.myInventory.Find(x => x.itemName.Contains("Arrow")).numberHeld--;
+                arrows.numberHeld--;
                 ArrowUsed.Raise();
                 StartCoroutine(SecondAttackCo());
             }
@@ -132,25 +130,17 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isShooting", false);
         }
-        //############################################################# Gets Hurt #################################################
-        if (currentState == PlayerState.stagger)
-        {
-            animator.SetBool("isHurt", true);
-        }
-        else
-        {
-            animator.SetBool("isHurt", false);
-        }
 
-        //################################# Trying to drop things ################################################################
-        /*     if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
-             {
-                 LiftItem();
-                 Debug.Log("Item Dropped!");
+        animator.SetBool("isHurt", (currentState == PlayerState.stagger));
 
-             }
-             //################################# Trying to drop things  END ############################################################
-     */
+        // ################################# Trying to drop things ################################################################
+        // if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
+        // {
+        //     LiftItem();
+        //     Debug.Log("Item Dropped!");
+
+        // }
+        // ################################# Trying to drop things END ############################################################
     }
 
     private void FixedUpdate()
@@ -260,15 +250,10 @@ public class PlayerMovement : MonoBehaviour
 
     void MoveCharacter()
     {
-
         if (currentState != PlayerState.dead)       // Nur bewegen wenn nicht tot
         {
-
             change.Normalize();
-            myRigidbody.MovePosition(
-                transform.position + change * speed * Time.deltaTime
-                );
-
+            myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);
         }
     }
 
@@ -292,7 +277,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator KnockCo(float knockTime)
     {
-     //   playerHit.Raise();
+        //   playerHit.Raise();
         if (myRigidbody != null)
         {
             StartCoroutine(FlashCo());
