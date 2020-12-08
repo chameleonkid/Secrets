@@ -74,10 +74,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (currentState != PlayerState.stagger)
-        {
-            myRigidbody.velocity = Vector2.zero;
-        }
         // Is the player in an interaction?
         if (currentState == PlayerState.interact)
         {
@@ -132,6 +128,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetBool("isHurt", (currentState == PlayerState.stagger));
+        animator.SetBool("Moving", (change != Vector3.zero));
+        UpdateAnimatorXY(change);
 
         // ################################# Trying to drop things ################################################################
         // if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
@@ -147,7 +145,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentState == PlayerState.walk || currentState == PlayerState.idle || currentState == PlayerState.lift)
         {
-            UpdateAnimationAndMove();
+            myRigidbody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
+        }
+
+        if (currentState != PlayerState.stagger)
+        {
+            myRigidbody.velocity = Vector2.zero;
         }
     }
 
@@ -227,33 +230,16 @@ public class PlayerMovement : MonoBehaviour
         mana.current -= 1;
     }
 
-    // ########################### Animation for Moving #########################################
-
-    void UpdateAnimationAndMove()
+    private void UpdateAnimatorXY(Vector2 direction)
     {
-        if (change != Vector3.zero)
+        direction.Normalize();
+        if (direction != Vector2.zero)
         {
-            MoveCharacter();                    // Move Character
-            change.x = Mathf.Round(change.x);   // Round the movement for deciding where to hit if walking diagonally
-            change.y = Mathf.Round(change.y);   // Round the movement for deciding where to hit if walking diagonally
-            animator.SetFloat("MoveX", change.x);
-            animator.SetFloat("MoveY", change.y);
-            animator.SetBool("Moving", true);
-        }
-        else
-        {
-            animator.SetBool("Moving", false);
-        }
-    }
+            direction.x = Mathf.Round(change.x);
+            direction.y = Mathf.Round(change.y);
 
-    //############################### Move Character #############################################
-
-    void MoveCharacter()
-    {
-        if (currentState != PlayerState.dead)       // Nur bewegen wenn nicht tot
-        {
-            change.Normalize();
-            myRigidbody.MovePosition(transform.position + change * speed * Time.deltaTime);
+            animator.SetFloat("MoveX", direction.x);
+            animator.SetFloat("MoveY", direction.y);
         }
     }
 
