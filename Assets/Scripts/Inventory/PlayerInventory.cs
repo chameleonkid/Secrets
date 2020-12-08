@@ -18,6 +18,7 @@ public class PlayerInventory : ScriptableObject
     public InventorySpellbook currentSpellbook;
     public float totalDefense;
     public float totalCritChance;
+    public float totalSpellDamage;
 
     public void Add(InventoryItem item)
     {
@@ -112,4 +113,15 @@ public class PlayerInventory : ScriptableObject
             totalCritChance += currentRing.criticalStrikeChance;
         }
     }
+
+    public void CalcSpellDamage()
+    {
+        totalSpellDamage = 0;
+
+        if (currentSpellbook)
+        {
+            totalSpellDamage += currentSpellbook.SpellDamage;
+        }
+    }
 }
+

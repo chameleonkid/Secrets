@@ -19,7 +19,7 @@ public class SpellDamageValueTextManager : MonoBehaviour
     {
         if (playerInventory.currentSpellbook)
         {
-            SpellDamageDisplay.text = "" + playerInventory.currentSpellbook.SpellDamage;
+            SpellDamageDisplay.text = "" + playerInventory.totalSpellDamage;
         }
         else
         {
