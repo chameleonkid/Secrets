@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemyState
@@ -32,9 +31,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Death Signal")]
     public Signals roomSignal;
-    public Loottable thisLoot;
-
-
+    public LootTable thisLoot;
 
     private void Awake()
     {
@@ -54,7 +51,7 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
         chaseRadius = originalChaseRadius * 10;
-        if(health <= 0)
+        if (health <= 0)
         {
             Debug.Log("0 Leben");
             DeathEffect();
@@ -66,7 +63,7 @@ public class Enemy : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-     
+
     private void DeathEffect()
     {
         if (deathEffect != null)
@@ -76,11 +73,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
     private void MakeLoot()
     {
-
-        if(thisLoot != null)
+        if (thisLoot != null)
         {
             PhysicalInventoryItem current = thisLoot.LootPowerUp();
             if(current != null)
@@ -88,16 +83,15 @@ public class Enemy : MonoBehaviour
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
             }
         }
-
     }
 
-    public void Knock(Rigidbody2D myRigidbody, float knockTime,float damage )
+    public void Knock(Rigidbody2D myRigidbody, float knockTime, float damage)
     {
         StartCoroutine(KnockCo(myRigidbody, knockTime));
         TakeDamage(damage);
     }
 
-    private IEnumerator KnockCo(Rigidbody2D myRigidbody,float knockTime)
+    private IEnumerator KnockCo(Rigidbody2D myRigidbody, float knockTime)
     {
         if (myRigidbody != null)
         {
@@ -107,5 +101,4 @@ public class Enemy : MonoBehaviour
             myRigidbody.velocity = Vector2.zero;
         }
     }
-
 }

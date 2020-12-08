@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class DmgPopUpTextManager : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshPro textfield;
+    [SerializeField] private TextMeshPro textfield = default;
 
     private void Start()
     {

@@ -1,28 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class Loot
 {
- // public PowerUps thisLoot;
+    // public PowerUps thisLoot;
     public float lootChance;
     public PhysicalInventoryItem thisItem;
 }
 
 [CreateAssetMenu]
-public class Loottable : ScriptableObject
+public class LootTable : ScriptableObject
 {
-
     public Loot[] loots;
-
 
     public PhysicalInventoryItem LootPowerUp()
     {       
         float cumProb = 0;
         float currentProb = Random.Range(0, 100);
-        
-        for(int i = 0; i < loots.Length; i++)
+        for (int i = 0; i < loots.Length; i++)
         {
             cumProb += loots[i].lootChance;
             if (currentProb <= cumProb)
@@ -32,5 +27,4 @@ public class Loottable : ScriptableObject
         }
         return null;
     }
-  
 }

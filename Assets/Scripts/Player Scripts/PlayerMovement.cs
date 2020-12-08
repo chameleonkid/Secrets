@@ -22,9 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
     public FloatValue currentHealth;
-    [SerializeField] private FloatMeter mana;
-    [SerializeField] private FloatMeter health;
-    [SerializeField] private FloatMeter arrows;
+    [SerializeField] private FloatMeter mana = default;
+    [SerializeField] private FloatMeter health = default;
+    [SerializeField] private FloatMeter arrows = default;
 
     public VectorValue startingPosition;
     private bool isRunning;
@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     //public Signals playerHit;
     public Signals ArrowUsed;
     public Signals playerHealthSignal;
-
 
     public PlayerInventory myInventory; // New Inventory
 
@@ -70,8 +69,7 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         animator.SetFloat("MoveX", 0);
         animator.SetFloat("MoveY", -1);
-        transform.position = startingPosition.initialValue;
-
+        transform.position = startingPosition.value;
     }
 
     private void Update()
