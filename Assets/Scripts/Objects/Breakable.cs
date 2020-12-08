@@ -29,7 +29,7 @@ public class Breakable : MonoBehaviour
     {
         if (thisLoot != null)
         {
-            PhysicalInventoryItem current = thisLoot.LootPowerUp();
+            ItemPickUp current = thisLoot.LootPowerUp();
             if (current != null)
             {
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
