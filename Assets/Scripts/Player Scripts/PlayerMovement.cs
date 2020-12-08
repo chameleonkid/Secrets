@@ -40,7 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
     public SpriteRenderer receivedItemSprite;
 
+    //Spells and Projectiles
     public GameObject projectile; //arrows and so on
+    public GameObject fireball;
+    public GameObject iceShard;
 
     public InventoryItem Bow;
     public InventoryWeapon Sword;
@@ -112,6 +115,16 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(SecondAttackCo());
             }
         }
+        //############################################################################### Spell Cast ###############################################################################
+        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0)
+        {
+            StartCoroutine(SpellAttackCo());
+        }
+        //##############################################################################################################################################################
+
+
+
+
         if (Input.GetButtonUp("UseItem"))
         {
             animator.SetBool("isShooting", false);
@@ -205,6 +218,46 @@ public class PlayerMovement : MonoBehaviour
         var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
         var arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
         arrow.Setup(direction, rotation);
+    }
+
+
+    // ############################## Using the SpellBook /Spellcasting #########################################
+    private IEnumerator SpellAttackCo()
+    {
+        currentState = PlayerState.attack;
+        MakeSpell();
+        yield return new WaitForSeconds(0.3f);
+        if (currentState != PlayerState.interact)
+        {
+            currentState = PlayerState.walk;
+        }
+
+    }
+
+    //################### instantiate spell when casted ###############################
+    private void MakeSpell()
+    {
+        if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
+        {
+            animator.SetBool("isShooting", true); // Set to cast Animation
+            var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
+            var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+            var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
+            var spellFireball = Instantiate(fireball, spellHeight, Quaternion.identity).GetComponent<SpellFireball>();
+            spellFireball.Setup(direction, rotation);
+            mana.current -= myInventory.currentSpellbook.manaCosts;
+        }
+        if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
+        {
+            animator.SetBool("isShooting", true); // Set to cast Animation
+            var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
+            var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+            var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
+            var spellIceShard = Instantiate(iceShard, spellHeight, Quaternion.identity).GetComponent<SpellIceShard>();
+            spellIceShard.Setup(direction, rotation);
+            mana.current -= myInventory.currentSpellbook.manaCosts;
+        }
+
     }
 
     //#################################### Item Found RAISE IT! #######################################

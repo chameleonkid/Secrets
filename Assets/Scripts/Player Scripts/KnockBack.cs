@@ -47,7 +47,7 @@ public class KnockBack : MonoBehaviour
                         DamagePopup(playerInventory.currentWeapon.damage);
                     }
                 }
-                //######################################### ARROW TEST ##################################################################
+                //######################################### ARROW ##################################################################
                 if (other.gameObject.CompareTag("enemy") && other.isTrigger && this.gameObject.CompareTag("arrow"))
                 {
                     enemyTransform = other.transform;
@@ -67,7 +67,28 @@ public class KnockBack : MonoBehaviour
                         DamagePopup(playerInventory.currentBow.damage);
                     }
                 }
-                //######################################### ARROW TEST ##################################################################
+                //######################################### Spell ##################################################################
+                if (other.gameObject.CompareTag("enemy") && other.isTrigger && this.gameObject.CompareTag("spell"))
+                {
+                    enemyTransform = other.transform;
+                    CalcIsCrit();
+                    if (isCrit == true)
+                    {
+                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                        other.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage * 2);
+                        Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage * 2);
+                        DamagePopup(playerInventory.currentSpellbook.SpellDamage * 2);
+                    }
+                    else
+                    {
+                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                        other.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage);
+                        Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage);
+                        DamagePopup(playerInventory.currentSpellbook.SpellDamage);
+                    }
+                }
+
+
                 //################################## Player is taking Damage ###############################################################
                 if (other.gameObject.CompareTag("Player") && other.isTrigger)
                 {
@@ -87,6 +108,7 @@ public class KnockBack : MonoBehaviour
                             Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
                         }
                     }
+
                 }
             }
         }

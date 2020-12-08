@@ -5,6 +5,7 @@ public class InventorySpellbook : InventoryItem
 {
     public int SpellDamage;
     private InventorySpellbook temp;
+    public int manaCosts;
 
     public void swapSpellbook()
     {
