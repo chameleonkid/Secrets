@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class arrow_collectable : PowerUps
 {
-
+    [SerializeField] private Signals arrowSignal = default;
     public PlayerInventory PlayerInventory;
     public InventoryItem arrow;
 
@@ -13,11 +11,8 @@ public class arrow_collectable : PowerUps
         if (other.CompareTag("powerup") && other.isTrigger)
         {
             PlayerInventory.Add(arrow);
-            powerupSignal.Raise();
+            arrowSignal?.Raise();
             Destroy(this.gameObject);
         }
     }
-
-
-
 }

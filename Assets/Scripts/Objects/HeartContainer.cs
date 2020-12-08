@@ -2,16 +2,15 @@
 
 public class HeartContainer : PowerUps
 {
-    public FloatValue heartContainers;
-    public FloatValue playerHealth;
+    [SerializeField] private float amountToIncrease = default;
 
-    public void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        var player = other.GetComponent<PlayerMovement>();
+        if (player != null)
         {
-            heartContainers.RuntimeValue += 1;
-            playerHealth.RuntimeValue = heartContainers.RuntimeValue * 2;
-            powerupSignal.Raise();
+            player.health.max += amountToIncrease;
+            player.health.current = player.health.max;
             Destroy(this.gameObject);
         }
     }
