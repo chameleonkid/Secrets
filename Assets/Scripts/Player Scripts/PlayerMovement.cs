@@ -32,9 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public VectorValue startingPosition;
 
     //####################### Signals ###########################
-    //public Signals playerHit;
     public Signals ArrowUsed;
-    public Signals playerHealthSignal;
 
     public PlayerInventory myInventory; // New Inventory
 
@@ -275,7 +273,6 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator KnockCo(float knockTime)
     {
-        //   playerHit.Raise();
         if (myRigidbody != null)
         {
             StartCoroutine(FlashCo());
