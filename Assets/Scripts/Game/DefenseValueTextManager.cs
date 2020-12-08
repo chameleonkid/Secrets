@@ -9,16 +9,6 @@ public class DefenseValueTextManager : MonoBehaviour
     public PlayerInventory playerInventory;
     public TextMeshProUGUI defenseDisplay;
 
-    private void Start()
-    {
-    //    UpdateDefenseValue();
-    }
-
-    private void update()
-    {
-      //  UpdateDefenseValue();
-    }
-
     public void UpdateDefenseValue()
     {
         if (playerInventory.totalDefense > 0)

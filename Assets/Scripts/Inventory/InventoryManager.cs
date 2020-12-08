@@ -29,6 +29,7 @@ public class InventoryManager : MonoBehaviour
     public CritValueTextManager critDisplay;
     public DamageValueTextManager dmgDisplay;
     public DefenseValueTextManager defDisplay;
+    public SpellDamageValueTextManager spellDisplay;
 
     public GameObject inventoryPanel;
 
@@ -46,7 +47,6 @@ public class InventoryManager : MonoBehaviour
         if (playerInventory)
         {
             for (int i = 0; i < playerInventory.myInventory.Count; i++)
-            // for (int i = 0; i < 19; i++)
             {
                 if (playerInventory.myInventory[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
                 {
@@ -227,6 +227,7 @@ public class InventoryManager : MonoBehaviour
         dmgDisplay.UpdateDamageValue();
         defDisplay.UpdateDefenseValue();
         critDisplay.UpdateCritValue();
+        spellDisplay.UpdateSpellDamageValue();
     }
 
     void OnEnable()

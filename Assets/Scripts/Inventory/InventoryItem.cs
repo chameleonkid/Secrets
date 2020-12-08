@@ -36,7 +36,4 @@ public class InventoryItem : ScriptableObject
         numberHeld -= amountToDecrease;
     }
 
-
-
-
 }
