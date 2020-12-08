@@ -185,11 +185,8 @@ public class PlayerMovement : MonoBehaviour
     // ############################## Using the Item / Shooting the Bow #########################################
     private IEnumerator SecondAttackCo()
     {
-        //animator.SetBool("Attacking", true);
         currentState = PlayerState.attack;
-        yield return null;
         MakeArrow();
-        // animator.SetBool("Attacking", false);
         yield return new WaitForSeconds(0.3f);
         if (currentState != PlayerState.interact)
         {
