@@ -76,6 +76,7 @@ public class PlayerInventory : ScriptableObject
         item.numberHeld = 1;
         calcDefense();
         CalcCritChance();
+        CalcSpellDamage();
     }
 
     public void calcDefense()
