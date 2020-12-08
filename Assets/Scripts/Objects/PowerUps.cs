@@ -1,3 +1,3 @@
 ﻿using UnityEngine;
 
-public class PowerUps : MonoBehaviour {}
+public class PickUp : MonoBehaviour {}

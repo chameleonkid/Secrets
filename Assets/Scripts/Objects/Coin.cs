@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 
-public class Coin : PowerUps
+public class Coin : PickUp
 {
     [SerializeField] private Signals coinSignal = default;
     public PlayerInventory PlayerInventory;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("powerup") && other.isTrigger)
+        var player = other.GetComponent<PlayerMovement>();
+        if (player != null)
         {
             PlayerInventory.coins += 1;
             coinSignal?.Raise();

@@ -7,7 +7,8 @@ public class PhysicalInventoryItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("powerup") && other.isTrigger)
+        var player = other.GetComponent<PlayerMovement>();
+        if (player != null)
         {
             if (playerInventory && thisItem)
             {
