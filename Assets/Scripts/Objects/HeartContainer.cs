@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HeartContainer : PowerUps
+public class HeartContainer : PickUp
 {
     [SerializeField] private float amountToIncrease = default;
 

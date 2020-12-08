@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-public class Heart : PickUp
+public class ItemPickUp : PickUp
 {
-    [SerializeField] private float amountToIncrease = default;
+    [SerializeField] private InventoryItem item = default;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         var player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            player.health.current += amountToIncrease;
+            player.myInventory.Add(item);
             Destroy(this.gameObject);
         }
     }

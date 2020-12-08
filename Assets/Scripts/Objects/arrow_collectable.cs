@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class arrow_collectable : PowerUps
+public class arrow_collectable : PickUp
 {
     [SerializeField] private Signals arrowSignal = default;
     public PlayerInventory PlayerInventory;
@@ -8,7 +8,8 @@ public class arrow_collectable : PowerUps
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("powerup") && other.isTrigger)
+        var player = other.GetComponent<PlayerMovement>();
+        if (player != null)
         {
             PlayerInventory.Add(arrow);
             arrowSignal?.Raise();
