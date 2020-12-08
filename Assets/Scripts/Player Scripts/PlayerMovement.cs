@@ -268,7 +268,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(FlashCo());
             yield return new WaitForSeconds(knockTime);
-            myRigidbody.velocity = Vector2.zero;
             currentState = PlayerState.idle;
             myRigidbody.velocity = Vector2.zero;
         }
@@ -321,9 +320,9 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator FlashCo()
     {
-        int temp = 0;
         triggerCollider.enabled = false;
-        while (temp < numberOfFlasches)
+
+        for (int i = 0; i < numberOfFlasches; i++)
         {
             playerSprite.color = FlashColor;
             armorSprite.color = FlashColor;
@@ -333,8 +332,8 @@ public class PlayerMovement : MonoBehaviour
             armorSprite.color = regularArmorColor;
             hairSprite.color = regularHairColor;
             yield return new WaitForSeconds(flashDuration);
-            temp++;
         }
+        
         triggerCollider.enabled = true;
     }
 }
