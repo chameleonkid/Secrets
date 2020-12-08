@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         // Is the player in an interaction?
         if (currentState == PlayerState.interact)
         {
-            //    Debug.Log("helpmeout");
+            // Debug.Log("helpmeout");
             return;
         }
 
@@ -143,6 +143,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void SetAnimatorXY(Vector2 direction)
+    {
+        direction.Normalize();
+        if (direction != Vector2.zero)
+        {
+            direction.x = Mathf.Round(change.x);
+            direction.y = Mathf.Round(change.y);
+
+            animator.SetFloat("MoveX", direction.x);
+            animator.SetFloat("MoveY", direction.y);
+        }
+    }
+
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
@@ -155,6 +168,51 @@ public class PlayerMovement : MonoBehaviour
         {
             currentState = PlayerState.walk;
         }
+    }
+
+    // ############################# Roundattack ################################################
+    private IEnumerator RoundAttackCo()
+    {
+        animator.SetBool("RoundAttacking", true);
+        currentState = PlayerState.roundattack;
+        yield return null;
+        animator.SetBool("RoundAttacking", false);
+        currentState = PlayerState.walk;
+
+        mana.current -= 1;
+    }
+
+    // ############################## Using the Item / Shooting the Bow #########################################
+    private IEnumerator SecondAttackCo()
+    {
+        //animator.SetBool("Attacking", true);
+        currentState = PlayerState.attack;
+        yield return null;
+        MakeArrow();
+        // animator.SetBool("Attacking", false);
+        yield return new WaitForSeconds(0.3f);
+        if (currentState != PlayerState.interact)
+        {
+            currentState = PlayerState.walk;
+        }
+
+        arrows.current -= 1;
+    }
+
+    //################### instantiate arrow when shot ###############################
+    private void MakeArrow()
+    {
+        animator.SetBool("isShooting", true);
+        Vector2 arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
+        Vector2 temp = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+        arrow arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
+        arrow.Setup(temp, ChooseArrowDirection());
+    }
+
+    Vector3 ChooseArrowDirection()
+    {
+        float temp = Mathf.Atan2(animator.GetFloat("MoveY"), animator.GetFloat("MoveX")) * Mathf.Rad2Deg;
+        return new Vector3(0, 0, temp);
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -205,31 +263,6 @@ public class PlayerMovement : MonoBehaviour
        }
     */
 
-    // ############################# Roundattack ################################################
-    private IEnumerator RoundAttackCo()
-    {
-        animator.SetBool("RoundAttacking", true);
-        currentState = PlayerState.roundattack;
-        yield return null;
-        animator.SetBool("RoundAttacking", false);
-        currentState = PlayerState.walk;
-
-        mana.current -= 1;
-    }
-
-    private void SetAnimatorXY(Vector2 direction)
-    {
-        direction.Normalize();
-        if (direction != Vector2.zero)
-        {
-            direction.x = Mathf.Round(change.x);
-            direction.y = Mathf.Round(change.y);
-
-            animator.SetFloat("MoveX", direction.x);
-            animator.SetFloat("MoveY", direction.y);
-        }
-    }
-
     // ########################### Getting hit and die ##############################################
 
     public void Knock(float knockTime, float damage)
@@ -258,39 +291,6 @@ public class PlayerMovement : MonoBehaviour
             currentState = PlayerState.idle;
             myRigidbody.velocity = Vector2.zero;
         }
-    }
-
-    // ############################## Using the Item / Shooting the Bow #########################################
-    private IEnumerator SecondAttackCo()
-    {
-        //animator.SetBool("Attacking", true);
-        currentState = PlayerState.attack;
-        yield return null;
-        MakeArrow();
-        // animator.SetBool("Attacking", false);
-        yield return new WaitForSeconds(0.3f);
-        if (currentState != PlayerState.interact)
-        {
-            currentState = PlayerState.walk;
-        }
-
-        arrows.current -= 1;
-    }
-
-    //################### instantiate arrow when shot ###############################
-    private void MakeArrow()
-    {
-        animator.SetBool("isShooting", true);
-        Vector2 arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
-        Vector2 temp = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-        arrow arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
-        arrow.Setup(temp, ChooseArrowDirection());
-    }
-
-    Vector3 ChooseArrowDirection()
-    {
-        float temp = Mathf.Atan2(animator.GetFloat("MoveY"), animator.GetFloat("MoveX")) * Mathf.Rad2Deg;
-        return new Vector3(0, 0, temp);
     }
 
     //##################### Death animation and screen ##############################
