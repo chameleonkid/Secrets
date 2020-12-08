@@ -17,7 +17,10 @@ public enum PlayerState
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerState currentState;
-    public float speed;
+
+    [SerializeField] private float _speed;
+    private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
+
     private Rigidbody2D myRigidbody;
     private Vector3 change;
     private Animator animator;
@@ -27,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private FloatMeter arrows = default;
 
     public VectorValue startingPosition;
-    private bool isRunning;
 
     //####################### Signals ###########################
     //public Signals playerHit;
@@ -67,8 +69,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
         animator = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
-        animator.SetFloat("MoveX", 0);
-        animator.SetFloat("MoveY", -1);
+        SetAnimatorXY(Vector2.down);
         transform.position = startingPosition.value;
     }
 
@@ -84,21 +85,8 @@ public class PlayerMovement : MonoBehaviour
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Run") && !isRunning)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
-        {
-            speed = (speed * 2);
-            isRunning = true;
+        animator.SetBool("isRunning", Input.GetButton("Run"));
 
-            animator.SetBool("isRunning", true);
-        }
-        if (Input.GetButtonUp("Run") && isRunning)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
-        {
-            speed = (speed / 2);
-            isRunning = false;
-
-            animator.SetBool("isRunning", false);
-
-        }
         if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger && currentState != PlayerState.lift && myInventory.currentWeapon != null)
         {
             StartCoroutine(AttackCO());
@@ -129,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isHurt", (currentState == PlayerState.stagger));
         animator.SetBool("Moving", (change != Vector3.zero));
-        UpdateAnimatorXY(change);
+        SetAnimatorXY(change);
 
         // ################################# Trying to drop things ################################################################
         // if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
@@ -230,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         mana.current -= 1;
     }
 
-    private void UpdateAnimatorXY(Vector2 direction)
+    private void SetAnimatorXY(Vector2 direction)
     {
         direction.Normalize();
         if (direction != Vector2.zero)
@@ -333,7 +321,7 @@ public class PlayerMovement : MonoBehaviour
             hairSprite.color = regularHairColor;
             yield return new WaitForSeconds(flashDuration);
         }
-        
+
         triggerCollider.enabled = true;
     }
 }
