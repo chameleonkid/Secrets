@@ -25,7 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 change;
     private Animator animator;
 
-    [SerializeField] private FloatMeter mana = default;
+    [SerializeField] private FloatMeter _mana = default;
+    public FloatMeter mana => _mana;
     [SerializeField] private FloatMeter _health = default;
     public FloatMeter health => _health;
     [SerializeField] private FloatMeter arrows = default;

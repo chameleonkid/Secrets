@@ -79,7 +79,9 @@ public class GameSaveManager : MonoBehaviour
 
     public void resetHealthAndMana()
     {
+        health.max = 10;
         health.current = health.max;
+        mana.max = 100;
         mana.current = mana.max;
     }
 }
