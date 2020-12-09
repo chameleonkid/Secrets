@@ -20,8 +20,7 @@ public class MovingTurrets : TurretEnemy
         }
         else if (distance > chaseRadius)
         {
-            animator.SetBool("WakeUp", false);
-            // ChangeState(EnemyState.idle);
+            OutsideChaseRadiusUpdate();
         }
     }
 }
