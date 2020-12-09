@@ -9,24 +9,16 @@ public class MovingTurrets : TurretEnemy
         {
             if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
             {
-                //  Debug.Log("In TurretEnemy in Radius");
-                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-                rigidbody.MovePosition(temp);
                 if (canFire)
                 {
-                    //  Debug.Log("FIRE!!!!");
-
-                    Vector3 tempVector = target.transform.position - transform.position; //Distance between us
-                    GameObject current = Instantiate(projectile, transform.position, Quaternion.identity);
-                    current.GetComponent<BaseProjectile>().Launch(tempVector.normalized * projectileSpeed); //Speed of projectile
-
-                    canFire = false;
-                    currentState = EnemyState.walk;
-                    animator.SetBool("WakeUp", true);
+                    FireProjectile();
                 }
+
+                var newPosition = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+                rigidbody.MovePosition(newPosition);
             }
         }
-        if (distance > chaseRadius)
+        else if (distance > chaseRadius)
         {
             animator.SetBool("WakeUp", false);
             // ChangeState(EnemyState.idle);

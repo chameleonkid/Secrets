@@ -22,16 +22,9 @@ public class TurretEnemy : EnemyLog
     {
         if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
         {
-            //  Debug.Log("In TurretEnemy in Radius");
             if (canFire)
             {
-                //  Debug.Log("FIRE!!!!");
-                Vector3 tempVector = target.transform.position - transform.position; //Distance between us
-                GameObject current = Instantiate(projectile, transform.position, Quaternion.identity);
-                current.GetComponent<BaseProjectile>().Launch(tempVector.normalized * projectileSpeed); //Speed of projectile
-                canFire = false;
-                currentState = EnemyState.walk;
-                animator.SetBool("WakeUp", true);
+                FireProjectile();
             }
         }
     }
@@ -40,5 +33,16 @@ public class TurretEnemy : EnemyLog
     {
         animator.SetBool("WakeUp", false);
         // ChangeState(EnemyState.idle);
+    }
+
+    protected virtual void FireProjectile()
+    {
+        // Debug.Log("FIRE!!!!");
+        var difference = target.transform.position - transform.position;
+        var proj = Instantiate(projectile, transform.position, Quaternion.identity);
+        proj.GetComponent<BaseProjectile>().Launch(difference.normalized * projectileSpeed);
+        canFire = false;
+        currentState = EnemyState.walk;
+        animator.SetBool("WakeUp", true);
     }
 }
