@@ -55,7 +55,6 @@ public class SimpleSave : MonoBehaviour
 
         //Refresh Screen
         script.resetHealthAndMana();
-        script.arrowSignal.Raise();
         script.coinSignal.Raise();
 
         // PauseMenü schließen und Zeit weiterlaufen lassen
