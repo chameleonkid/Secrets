@@ -19,7 +19,7 @@ public abstract class ProjectileTemp : Projectile
     {
         if (other.CompareTag("enemy"))
         {
-            Destroy(other.transform);
+            DestroyProjectile(other.transform);
         }
     }
 
