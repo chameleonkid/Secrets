@@ -7,32 +7,18 @@ public class PatrolLog : EnemyLog
     public Transform currentGoal;
     public float roundingDistance;
 
-    protected override void FixedUpdate()
+    protected override void OutsideChaseRadiusUpdate()
     {
-        var distance = Vector3.Distance(target.position, transform.position);
-        if (distance <= chaseRadius && distance > attackRadius)
+        var distance = Vector3.Distance(transform.position, path[currentPoint].position);
+        if (distance > roundingDistance)
         {
-            if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
-            {
-                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-
-                SetAnimatorXYSingleAxis(temp - transform.position);
-                rigidbody.MovePosition(temp);
-                animator.SetBool("WakeUp", true);
-            }
+            var newPosition = Vector3.MoveTowards(transform.position, path[currentPoint].position, moveSpeed * Time.deltaTime);
+            SetAnimatorXYSingleAxis(newPosition - transform.position);
+            rigidbody.MovePosition(newPosition);
         }
-        else if (distance > chaseRadius)
+        else
         {
-            if (Vector3.Distance(transform.position, path[currentPoint].position) > roundingDistance)
-            {
-                Vector3 temp = Vector3.MoveTowards(transform.position, path[currentPoint].position, moveSpeed * Time.deltaTime);
-                SetAnimatorXYSingleAxis(temp - transform.position);
-                rigidbody.MovePosition(temp);
-            }
-            else
-            {
-                ChangeGoal();
-            }
+            ChangeGoal();
         }
     }
 
