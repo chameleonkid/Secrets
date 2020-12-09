@@ -29,12 +29,8 @@ public class PlayerMovement : MonoBehaviour
     public FloatMeter mana => _mana;
     [SerializeField] private FloatMeter _health = default;
     public FloatMeter health => _health;
-    [SerializeField] private FloatMeter arrows = default;
 
     public VectorValue startingPosition;
-
-    //####################### Signals ###########################
-    public Signals ArrowUsed;
 
     public PlayerInventory myInventory; // New Inventory
 
@@ -111,7 +107,6 @@ public class PlayerMovement : MonoBehaviour
             if (arrows.numberHeld > 0 && myInventory.currentBow)
             {
                 arrows.numberHeld--;
-                ArrowUsed.Raise();
                 StartCoroutine(SecondAttackCo());
             }
         }
@@ -205,8 +200,6 @@ public class PlayerMovement : MonoBehaviour
         {
             currentState = PlayerState.walk;
         }
-
-        arrows.current -= 1;
     }
 
     //################### instantiate arrow when shot ###############################

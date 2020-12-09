@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 106128654}
   - component: {fileID: 106128658}
   - component: {fileID: 106128657}
-  - component: {fileID: 106128655}
-  - component: {fileID: 106128656}
-  - component: {fileID: 106128659}
   - component: {fileID: 1162789521}
   m_Layer: 5
   m_Name: ArrowInfo
@@ -79,75 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &106128655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106128653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a18dac104623a748b9e11c6b36418a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  ArrowDisplay: {fileID: 768806004}
-  arrow: {fileID: 11400000, guid: 43a85712a4b7c9c469fce2519effa8c9, type: 2}
---- !u!114 &106128656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106128653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4018a4bba0d46f74abbe977380f14ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 591e2a8a61e22d94a8023ecbcea6a50d, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 106128655}
-        m_MethodName: UpdateArrowCount
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &106128659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106128653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4018a4bba0d46f74abbe977380f14ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 69151b4b25677fc43a3937979c1c498d, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 106128655}
-        m_MethodName: UpdateArrowCount
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1162789521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,8 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441e421913cfc384d81f0e39743276b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrows: {fileID: 11400000, guid: 28526e6d523800f4fbee0c1cb63faa43, type: 2}
   ArrowDisplay: {fileID: 768806004}
+  arrow: {fileID: 11400000, guid: 43a85712a4b7c9c469fce2519effa8c9, type: 2}
 --- !u!1 &223049379
 GameObject:
   m_ObjectHideFlags: 0

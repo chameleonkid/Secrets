@@ -1,35 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class ArrowManager : MonoBehaviour
 {
-    [SerializeField] private FloatMeter arrows = default;
+    [SerializeField] private TextMeshProUGUI ArrowDisplay = default;
+    [SerializeField] private InventoryItem arrow = default;
     // ^ Shouldn't reassign during runtime unless
     // care is taken to unsubscribe from events.
-    [SerializeField] private TextMeshProUGUI ArrowDisplay = default;
 
-    [SerializeField] private InventoryItem arrowItem = default;
-
-    private void OnEnable()
-    {
-        arrows.OnMinChanged += UpdateUI;
-        arrows.OnMaxChanged += UpdateUI;
-        arrows.OnCurrentChanged += UpdateUI;
-        arrows.current = arrowItem.numberHeld;
-    }
-    private void OnDisable()
-    {
-        arrows.OnMinChanged -= UpdateUI;
-        arrows.OnMaxChanged -= UpdateUI;
-        arrows.OnCurrentChanged -= UpdateUI;
-        arrows.current = arrowItem.numberHeld;
-    }
+    private void OnEnable() => arrow.OnNumberHeldChanged += UpdateUI;
+    private void OnDisable() => arrow.OnNumberHeldChanged -= UpdateUI;
 
     private void Start() => UpdateUI();
 
-    private void UpdateUI()
-    {
-        ArrowDisplay.text = "" + arrows.current;
-    }
+    private void UpdateUI() => ArrowDisplay.text = "" + arrow.numberHeld;
 }

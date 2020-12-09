@@ -12,7 +12,6 @@ public class GameSaveManager : MonoBehaviour
     public PlayerInventory playerInventory;
 
     //################# Refresh the Screen ############################;
-    public Signals arrowSignal;
     public Signals coinSignal;
 
     //################# Every Scriptable Object needs to be touched ###############
@@ -73,8 +72,7 @@ public class GameSaveManager : MonoBehaviour
 
         playerInventory.myInventory.Clear();   //  somehow my items reset to different values when this is done...When Watched in Inspector its fine 
 
-        // Look at this https://answers.unity.com/questions/1501743/scriptable-object-resets-randomly-between-scenes.html
-        arrowSignal.Raise();
+        // Look at this https://answers.unity.com/questions/1501743/scriptable-object-resets-randomly-between-scenes.html);
         coinSignal.Raise();
     }
 
