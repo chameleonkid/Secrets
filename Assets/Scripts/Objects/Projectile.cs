@@ -2,7 +2,7 @@
 
 public class Projectile : MonoBehaviour
 {
-    public float moveSpeed; // Was never used, TurretEnemy supplies their own speed
+    public float moveSpeed; // TurretEnemy supplies their own speed, need to modify
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
 

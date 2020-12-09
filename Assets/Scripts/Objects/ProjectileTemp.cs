@@ -2,7 +2,6 @@
 
 public abstract class ProjectileTemp : Projectile
 {
-    public float speed;
     public bool isChild = false;
     
     protected abstract float destroyTime { get; }

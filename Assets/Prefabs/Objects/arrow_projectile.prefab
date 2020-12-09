@@ -145,10 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88093f8d174fd9409f528c3163c07eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  myRigidbody: {fileID: 8877344846437935194}
-  arrowcollider: {fileID: -3089408764058353687}
+  moveSpeed: 8
+  lifetime: 0
   isChild: 0
+  arrowcollider: {fileID: -3089408764058353687}
 --- !u!114 &4151532023440221885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +169,9 @@ MonoBehaviour:
     type: 3}
   critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
     type: 3}
+  dotTime: 0
+  dotTicks: 0
+  dotDamage: 0
 --- !u!82 &5379144640911285020
 AudioSource:
   m_ObjectHideFlags: 0
