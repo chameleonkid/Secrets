@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         //############################################################################### Spell Cast ###############################################################################
-        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0)
+        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != PlayerState.attack)
         {
             StartCoroutine(SpellAttackCo());
         }
