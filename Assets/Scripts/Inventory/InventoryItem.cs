@@ -1,21 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items")]
 public class InventoryItem : ScriptableObject
 {
+    public event Action OnNumberHeldChanged;
+
     public string itemName;
     public string itemDescription;
     public Sprite itemImage;
-
 
     [SerializeField] private int _numberHeld = default;
     public int numberHeld {
         get => _numberHeld;
         set {
-            _numberHeld = value;
             if (value < 0) {
-                _numberHeld = 0;
+                value = 0;
+            }
+
+            if (_numberHeld != value) {
+                _numberHeld = value;
+                OnNumberHeldChanged?.Invoke();
             }
         }
     }
@@ -35,5 +41,4 @@ public class InventoryItem : ScriptableObject
     {
         numberHeld -= amountToDecrease;
     }
-
 }

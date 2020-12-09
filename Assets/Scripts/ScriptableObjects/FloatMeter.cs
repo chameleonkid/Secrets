@@ -13,13 +13,14 @@ public class FloatMeter : ScriptableObject
     public float min {                                                                                      // These Parts just make sure min isnt greater than max
         get => _min;
         set {
-            _min = value;
-
-            if (_min > _max) {
-                Debug.Log("Warning: `min` (" + _min + ") is greater than `max` (" + _max + ")!");
+            if (value > _max) {
+                Debug.Log("Warning: `min` (" + value + ") is greater than `max` (" + _max + ")!");
             }
 
-            OnMinChanged?.Invoke();
+            if (_min != value) {
+                _min = value;
+                OnMinChanged?.Invoke();
+            }
         }
     }
 
@@ -28,13 +29,14 @@ public class FloatMeter : ScriptableObject
     {                                                                                                   // These Parts just make sure max isnt smaller than min
         get => _max;
         set {
-            _max = value;
-
-            if (_max < _min) {
-                Debug.Log("Warning: `max` (" + _max + ") is less than `min` (" + _min + ")!");
+            if (value < _min) {
+                Debug.Log("Warning: `max` (" + value + ") is less than `min` (" + _min + ")!");
             }
 
-            OnMaxChanged?.Invoke();
+            if (_max != value) {
+                _max = value;
+                OnMaxChanged?.Invoke();
+            }
         }
     }
 
@@ -42,16 +44,17 @@ public class FloatMeter : ScriptableObject
     public float current {
         get => _current;
         set {
-            _current = value;
-
-            if (_current > _max) {
-                _current = _max;
+            if (value > _max) {
+                value = _max;
             }
-            else if (_current < _min) {
-                _current = _min;
+            else if (value < _min) {
+                value = _min;
             }
 
-            OnCurrentChanged?.Invoke();      //When Current is changed, subscribers do something                  
+            if (_current != value) {
+                _current = value;
+                OnCurrentChanged?.Invoke();      //When Current is changed, subscribers do something
+            }
         }
     }
 }
