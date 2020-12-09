@@ -202,6 +202,7 @@ public class PlayerMovement : Character
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo()
     {
+        animator.SetBool("isCasting", true); // Set to cast Animation
         currentState = PlayerState.attack;
         MakeSpell();
         yield return new WaitForSeconds(0.3f);
@@ -209,6 +210,7 @@ public class PlayerMovement : Character
         {
             currentState = PlayerState.walk;
         }
+        animator.SetBool("isCasting", false);
 
     }
 
@@ -217,7 +219,7 @@ public class PlayerMovement : Character
     {
         if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
         {
-            animator.SetBool("isShooting", true); // Set to cast Animation
+            
             var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
             var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
             var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
@@ -227,7 +229,7 @@ public class PlayerMovement : Character
         }
         if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
         {
-            animator.SetBool("isShooting", true); // Set to cast Animation
+            
             var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
             var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
             var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
