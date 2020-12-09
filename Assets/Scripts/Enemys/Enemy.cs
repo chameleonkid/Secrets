@@ -9,43 +9,77 @@ public enum EnemyState
     stagger
 }
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [Header("State Machine")]
-    public EnemyState currentState;
+    public EnemyState currentState = default;
 
     [Header("Enemy Stats")]
-    public FloatValue maxHealth;
-    public float health;
-    public string enemyName;
-    public int baseAttack;
-    public float moveSpeed;
-    public Vector2 homePosition;
-    public float chaseRadius;
-    public float attackRadius;
-    public float originalChaseRadius;
+    [SerializeField] protected FloatValue maxHealth = default;
+    public float health = default;
+    [SerializeField] protected string enemyName = default;
+    [SerializeField] protected int baseAttack = default;
+    public float moveSpeed = default;
+    [SerializeField] protected Vector2 homePosition = default;
+    public float chaseRadius = default;
+    [SerializeField] protected float attackRadius = default;
+    public float originalChaseRadius = default;
 
     [Header("Death Effects")]
-    public GameObject deathEffect;
-    private float deathEffectDelay = 1f;
+    [SerializeField] private GameObject deathEffect = default;
+    [SerializeField] private float deathEffectDelay = 1;
 
     [Header("Death Signal")]
-    public Signals roomSignal;
-    public LootTable thisLoot;
+    [SerializeField] private Signals roomSignal = default;
+    [SerializeField] private LootTable thisLoot = default;
 
-    private void Awake()
-    {
-        homePosition = transform.position;
-        health = maxHealth.initialValue;
-        originalChaseRadius = chaseRadius;
-    }
+    protected Transform target = default;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         health = maxHealth.initialValue;
         transform.position = homePosition;
         currentState = EnemyState.idle;
     }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        homePosition = transform.position;
+        health = maxHealth.initialValue;
+        originalChaseRadius = chaseRadius;
+
+        target = GameObject.FindWithTag("Player").transform;
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        var distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius && distance > attackRadius)
+        {
+            InsideChaseRadiusUpdate();
+        }
+        else if (distance > chaseRadius)
+        {
+            OutsideChaseRadiusUpdate();
+        }
+    }
+
+    protected virtual void InsideChaseRadiusUpdate()
+    {
+        if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+        {
+            Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+
+            SetAnimatorXYSingleAxis(temp - transform.position);
+            rigidbody.MovePosition(temp);
+            currentState = EnemyState.walk;
+            animator.SetBool("WakeUp", true);
+        }
+    }
+
+    protected virtual void OutsideChaseRadiusUpdate() {}
 
     private void TakeDamage(float damage)
     {
@@ -78,7 +112,7 @@ public class Enemy : MonoBehaviour
         if (thisLoot != null)
         {
             ItemPickUp current = thisLoot.LootPowerUp();
-            if(current != null)
+            if (current != null)
             {
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
             }

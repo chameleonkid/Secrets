@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TurretEnemy : EnemyLog
 {
@@ -10,51 +8,41 @@ public class TurretEnemy : EnemyLog
     public bool canFire = true;
     public float projectileSpeed;
 
-
-    private void Update()
+    protected virtual void Update()
     {
-        
-
         fireDelaySeconds -= Time.deltaTime;
-        if(fireDelaySeconds <= 0)
+        if (fireDelaySeconds <= 0)
         {
             canFire = true;
             fireDelaySeconds = fireDelay;
         }
     }
 
-
-
-    public override void CheckDistance()
+    protected override void InsideChaseRadiusUpdate()
     {
-
-
-        if (Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) > attackRadius)
+        if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
         {
-            if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+            if (canFire)
             {
-              //  Debug.Log("In TurretEnemy in Radius");
-                if (canFire)
-                {
-                  //  Debug.Log("FIRE!!!!");
-                    Vector3 tempVector = target.transform.position - transform.position; //Distance between us
-                    GameObject current = Instantiate(projectile, transform.position, Quaternion.identity);
-                    current.GetComponent<BaseProjectile>().Launch(tempVector.normalized * projectileSpeed ); //Speed of projectile
-                    canFire = false;
-                    ChangeState(EnemyState.walk);
-                    anim.SetBool("WakeUp", true);
-                }
+                FireProjectile();
             }
-
         }
-        if (Vector3.Distance(target.position, transform.position) > chaseRadius)
-        {
-            anim.SetBool("WakeUp", false);
-            //   ChangeState(EnemyState.idle);
-        }
-
-
-
     }
 
+    protected override void OutsideChaseRadiusUpdate()
+    {
+        animator.SetBool("WakeUp", false);
+        // ChangeState(EnemyState.idle);
+    }
+
+    protected virtual void FireProjectile()
+    {
+        // Debug.Log("FIRE!!!!");
+        var difference = target.transform.position - transform.position;
+        var proj = Instantiate(projectile, transform.position, Quaternion.identity);
+        proj.GetComponent<BaseProjectile>().Launch(difference.normalized * projectileSpeed);
+        canFire = false;
+        currentState = EnemyState.walk;
+        animator.SetBool("WakeUp", true);
+    }
 }

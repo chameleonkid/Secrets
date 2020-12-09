@@ -1,49 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PatrolLog : EnemyLog
 {
-
     public Transform[] path;
     public int currentPoint;
     public Transform currentGoal;
     public float roundingDistance;
 
-    public override void CheckDistance() //overrides the baseclass of EnemyLog.cs
+    protected override void OutsideChaseRadiusUpdate()
     {
-        if (Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) > attackRadius)
+        var distance = Vector3.Distance(transform.position, path[currentPoint].position);
+        if (distance > roundingDistance)
         {
-            if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
-            {
-
-                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-
-                changeAnim(temp - transform.position);
-                myRigidbody.MovePosition(temp);
-                anim.SetBool("WakeUp", true);
-            }
+            var newPosition = Vector3.MoveTowards(transform.position, path[currentPoint].position, moveSpeed * Time.deltaTime);
+            SetAnimatorXYSingleAxis(newPosition - transform.position);
+            rigidbody.MovePosition(newPosition);
         }
-        else if (Vector3.Distance(target.position, transform.position) > chaseRadius)
+        else
         {
-            if (Vector3.Distance(transform.position, path[currentPoint].position) > roundingDistance)
-            {
-                Vector3 temp = Vector3.MoveTowards(transform.position, path[currentPoint].position, moveSpeed * Time.deltaTime);
-                changeAnim(temp - transform.position);
-                myRigidbody.MovePosition(temp);
-            }
-            else
-            {
-                ChangeGoal();
-            }
-
+            ChangeGoal();
         }
-
     }
-    
+
     private void ChangeGoal()
     {
-        if(currentPoint == path.Length -1)
+        if (currentPoint == path.Length - 1)
         {
             currentPoint = 0;
             currentGoal = path[0];
@@ -54,6 +35,4 @@ public class PatrolLog : EnemyLog
             currentGoal = path[currentPoint];
         }
     }
-
-
 }
