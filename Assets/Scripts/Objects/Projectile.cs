@@ -6,20 +6,26 @@ public class Projectile : MonoBehaviour
     public float moveSpeed;
     public Vector2 directionToMove;
     [Header("Lifetime Vars")]
-    public float lifetime;
-    private float lifetimeSeconds;
-    public Rigidbody2D myRigidbody;
+    [SerializeField] protected float lifetime;
+    protected float lifetimeCountdown;
 
-    private void Start()
+    public new Rigidbody2D rigidbody { get; protected set; }
+
+    protected virtual void Awake()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
-        lifetimeSeconds = lifetime;
+        rigidbody = GetComponent<Rigidbody2D>();
+        lifetimeCountdown = lifetime;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        lifetimeSeconds -= Time.deltaTime;
-        if (lifetimeSeconds <= 0)
+        LifetimeCountdown();
+    }
+
+    protected void LifetimeCountdown()
+    {
+        lifetimeCountdown -= Time.deltaTime;
+        if (lifetimeCountdown <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -27,12 +33,12 @@ public class Projectile : MonoBehaviour
 
     public void Launch(Vector2 initialVel)
     {
-        myRigidbody.velocity = initialVel * moveSpeed;
+        rigidbody.velocity = initialVel * moveSpeed;
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Projectile is collided with " + other.gameObject.name); //To see what the projectile collides with
+        Debug.Log("Projectile is collided with " + other.gameObject.name);
         Destroy(this.gameObject);
     }
 }
