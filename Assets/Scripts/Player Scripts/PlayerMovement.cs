@@ -14,16 +14,14 @@ public enum PlayerState
     dead
 }
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Character
 {
     public PlayerState currentState;
 
     [SerializeField] private float _speed = default;
     private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
 
-    private Rigidbody2D myRigidbody;
     private Vector3 change;
-    private Animator animator;
 
     [SerializeField] private FloatMeter _mana = default;
     public FloatMeter mana => _mana;
@@ -62,14 +60,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        GetCharacterComponents();
+        SetAnimatorXY(Vector2.down);
+        currentState = PlayerState.walk;
+
+        transform.position = startingPosition.value;
+
         regularPlayerColor = playerSprite.color;
         regularHairColor = hairSprite.color;
         regularArmorColor = armorSprite.color;
-        currentState = PlayerState.walk;
-        animator = GetComponent<Animator>();
-        myRigidbody = GetComponent<Rigidbody2D>();
-        SetAnimatorXY(Vector2.down);
-        transform.position = startingPosition.value;
     }
 
     private void Update()
@@ -142,25 +141,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (currentState == PlayerState.walk || currentState == PlayerState.idle || currentState == PlayerState.lift)
         {
-            myRigidbody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
+            rigidbody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
         }
 
         if (currentState != PlayerState.stagger)
         {
-            myRigidbody.velocity = Vector2.zero;
-        }
-    }
-
-    private void SetAnimatorXY(Vector2 direction)
-    {
-        direction.Normalize();
-        if (direction != Vector2.zero)
-        {
-            direction.x = Mathf.Round(change.x);
-            direction.y = Mathf.Round(change.y);
-
-            animator.SetFloat("MoveX", direction.x);
-            animator.SetFloat("MoveY", direction.y);
+            rigidbody.velocity = Vector2.zero;
         }
     }
 
@@ -321,13 +307,10 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator KnockCo(float knockTime)
     {
-        if (myRigidbody != null)
-        {
-            StartCoroutine(FlashCo());
-            yield return new WaitForSeconds(knockTime);
-            currentState = PlayerState.idle;
-            myRigidbody.velocity = Vector2.zero;
-        }
+        StartCoroutine(FlashCo());
+        yield return new WaitForSeconds(knockTime);
+        currentState = PlayerState.idle;
+        rigidbody.velocity = Vector2.zero;
     }
 
     //##################### Death animation and screen ##############################

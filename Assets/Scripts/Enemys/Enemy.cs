@@ -9,42 +9,42 @@ public enum EnemyState
     stagger
 }
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [Header("State Machine")]
-    public EnemyState currentState;
+    public EnemyState currentState = default;
 
     [Header("Enemy Stats")]
-    public FloatValue maxHealth;
-    public float health;
-    public string enemyName;
-    public int baseAttack;
-    public float moveSpeed;
-    public Vector2 homePosition;
-    public float chaseRadius;
-    public float attackRadius;
-    public float originalChaseRadius;
+    [SerializeField] protected FloatValue maxHealth = default;
+    [SerializeField] protected float health = default;
+    [SerializeField] protected string enemyName = default;
+    [SerializeField] protected int baseAttack = default;
+    [SerializeField] protected float moveSpeed = default;
+    [SerializeField] protected Vector2 homePosition = default;
+    public float chaseRadius = default;
+    [SerializeField] protected float attackRadius = default;
+    public float originalChaseRadius = default;
 
     [Header("Death Effects")]
-    public GameObject deathEffect;
-    private float deathEffectDelay = 1f;
+    [SerializeField] private GameObject deathEffect = default;
+    [SerializeField] private float deathEffectDelay = 1;
 
     [Header("Death Signal")]
-    public Signals roomSignal;
-    public LootTable thisLoot;
+    [SerializeField] private Signals roomSignal = default;
+    [SerializeField] private LootTable thisLoot = default;
 
-    private void Awake()
-    {
-        homePosition = transform.position;
-        health = maxHealth.initialValue;
-        originalChaseRadius = chaseRadius;
-    }
-
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         health = maxHealth.initialValue;
         transform.position = homePosition;
         currentState = EnemyState.idle;
+    }
+
+    protected virtual void Awake()
+    {
+        homePosition = transform.position;
+        health = maxHealth.initialValue;
+        originalChaseRadius = chaseRadius;
     }
 
     private void TakeDamage(float damage)
@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
         if (thisLoot != null)
         {
             ItemPickUp current = thisLoot.LootPowerUp();
-            if(current != null)
+            if (current != null)
             {
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
             }
