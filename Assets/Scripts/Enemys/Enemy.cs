@@ -16,10 +16,10 @@ public class Enemy : Character
 
     [Header("Enemy Stats")]
     [SerializeField] protected FloatValue maxHealth = default;
-    [SerializeField] protected float health = default;
+    public float health = default;
     [SerializeField] protected string enemyName = default;
     [SerializeField] protected int baseAttack = default;
-    [SerializeField] protected float moveSpeed = default;
+    public float moveSpeed = default;
     [SerializeField] protected Vector2 homePosition = default;
     public float chaseRadius = default;
     [SerializeField] protected float attackRadius = default;
