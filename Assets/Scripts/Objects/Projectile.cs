@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseProjectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [Header("Movement Stuff")]
     public float moveSpeed;
