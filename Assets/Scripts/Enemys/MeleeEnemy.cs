@@ -41,6 +41,5 @@ public class MeleeEnemy : EnemyLog
         animator.SetBool("Attacking", false);
         yield return new WaitForSeconds(0.5f); //Attack CD
         currentState = EnemyState.walk;
-        // anim.SetBool("Attacking", false);
     }
 }
