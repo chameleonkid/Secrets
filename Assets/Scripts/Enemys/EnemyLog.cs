@@ -1,6 +1,6 @@
 ﻿public class EnemyLog : Enemy
 {
-    protected void Start() => animator.SetBool("WakeUp", true);
+    protected virtual void Start() => animator.SetBool("WakeUp", true);
 
     protected override void OutsideChaseRadiusUpdate()
     {

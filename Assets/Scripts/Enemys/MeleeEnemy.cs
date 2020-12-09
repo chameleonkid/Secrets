@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyLog
 {
+    protected override void Start() {}
+    
     protected override void FixedUpdate()
     {
         var distance = Vector3.Distance(target.position, transform.position);
