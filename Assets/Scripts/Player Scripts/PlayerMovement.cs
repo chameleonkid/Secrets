@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && notStaggeredOrLifting && currentState != PlayerState.attack)
         {
             var arrows = myInventory.myInventory.Find(x => x.itemName.Contains("Arrow"));
-            if (arrows.numberHeld > 0 && myInventory.currentBow)
+            if (arrows && arrows.numberHeld > 0 && myInventory.currentBow)
             {
                 arrows.numberHeld--;
                 StartCoroutine(SecondAttackCo());
