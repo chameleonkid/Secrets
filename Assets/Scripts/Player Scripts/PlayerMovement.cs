@@ -102,14 +102,14 @@ public class PlayerMovement : Character
         if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && notStaggeredOrLifting && currentState != PlayerState.attack)
         {
             var arrows = myInventory.myInventory.Find(x => x.itemName.Contains("Arrow"));
-            if (arrows.numberHeld > 0 && myInventory.currentBow)
+            if (arrows && arrows.numberHeld > 0 && myInventory.currentBow)
             {
                 arrows.numberHeld--;
                 StartCoroutine(SecondAttackCo());
             }
         }
         //############################################################################### Spell Cast ###############################################################################
-        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0)
+        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != PlayerState.attack)
         {
             StartCoroutine(SpellAttackCo());
         }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class SpellIceShard : MonoBehaviour
 {
@@ -6,12 +7,14 @@ public class SpellIceShard : MonoBehaviour
     public Rigidbody2D myRigidbody;
     public BoxCollider2D spellCollider;
     public bool isChild = false;
+    public float slowTime;
+  
 
     void Update()
     {
         if (isChild == false && myRigidbody.velocity == Vector2.zero)
         {
-            destroySpellIceshard(null);
+            destroySpellIceShard(null);
         }
     }
 
@@ -25,18 +28,18 @@ public class SpellIceShard : MonoBehaviour
     {
         if (other.CompareTag("enemy"))
         {
-            destroySpellIceshard(other.transform);
-         /*   if(other.GetComponent<EnemyLog> )   Hey Schwer, could u check this? I Think the intention clear :) Slow enemys on hit
+            var enemy = other.GetComponent<EnemyLog>();
+            if (enemy != null)
             {
-                other.GetComponent<EnemyLog>.speed = other.GetComponent<EnemyLog>.speed / 2;
+                StartCoroutine(SlowEnemyForSeconds(enemy));
             }
-        */
+            destroySpellIceShard(other.transform);
         }
     }
 
-    public void destroySpellIceshard(Transform other)
+    public void destroySpellIceShard(Transform other)
     {
-        Destroy(this.gameObject, 1f); // Destroytime in float hinzufügen
+        Destroy(this.gameObject, slowTime + 0.25f); // Destroytime in float hinzufügen
         myRigidbody.velocity = Vector2.zero;
         spellCollider.enabled = false;
         Destroy(myRigidbody);
@@ -48,8 +51,23 @@ public class SpellIceShard : MonoBehaviour
     {
         if (!isChild)
         {
-            Debug.Log("Iceshard collided with: " + other.transform.name);
+            Debug.Log("IceSharr collided with: " + other.transform.name);
             myRigidbody.velocity = Vector2.zero;
         }
     }
+
+    private IEnumerator SlowEnemyForSeconds(EnemyLog enemy)
+    {
+        enemy.moveSpeed /= 2;
+        yield return new WaitForSeconds(slowTime);
+        enemy.moveSpeed *= 2;
+       
+    }
+
 }
+
+
+
+
+
+
