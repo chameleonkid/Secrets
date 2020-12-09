@@ -8,12 +8,6 @@ public abstract class ProjectileTemp : Projectile
     protected abstract float destroyTime { get; }
     protected abstract Collider2D projectileCollider { get; }
 
-    public virtual void Setup(Vector2 direction, Vector3 rotation)
-    {
-        rigidbody.velocity = direction.normalized * speed;
-        transform.rotation = Quaternion.Euler(rotation);
-    }
-
     protected override void Update()
     {
         if (isChild == false && rigidbody.velocity == Vector2.zero)

@@ -3,13 +3,15 @@
 public class Projectile : MonoBehaviour
 {
     [Header("Movement Stuff")]
-    public float moveSpeed;
+    public float moveSpeed; // Was never used, TurretEnemy supplies their own speed
     public Vector2 directionToMove;
     [Header("Lifetime Vars")]
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
 
     public new Rigidbody2D rigidbody { get; protected set; }
+
+    public virtual void SetVelocity(Vector2 direction) => rigidbody.velocity = direction * moveSpeed;
 
     protected virtual void Awake()
     {
@@ -31,14 +33,15 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Launch(Vector2 initialVel)
-    {
-        rigidbody.velocity = initialVel * moveSpeed;
-    }
-
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Projectile is collided with " + other.gameObject.name);
         Destroy(this.gameObject);
+    }
+
+    public static Quaternion CalculateRotation(Vector2 direction)
+    {
+        var rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg * Vector3.forward;
+        return Quaternion.Euler(rotation);
     }
 }

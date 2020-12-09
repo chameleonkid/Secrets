@@ -10,11 +10,11 @@ public class SpellIceShard : ProjectileTemp
     protected override float destroyTime => slowTime + 0.25f;
     protected override Collider2D projectileCollider => spellCollider;
 
-    public override void Setup(Vector2 direction, Vector3 rotation)
+    protected override void Awake()
     {
         anim = transform.GetComponent<Animator>();
         anim.SetBool("isFlying", true);
-        base.Setup(direction, rotation);
+        base.Awake();
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)

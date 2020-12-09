@@ -193,9 +193,8 @@ public class PlayerMovement : Character
         animator.SetBool("isShooting", true);
         var arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-        var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
-        var arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
-        arrow.Setup(direction, rotation);
+        var arrow = Instantiate(projectile, arrowHeight, Projectile.CalculateRotation(direction)).GetComponent<arrow>();
+        arrow.SetVelocity(direction);
     }
 
 
@@ -222,14 +221,12 @@ public class PlayerMovement : Character
             
             var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
             var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-            var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
-            var spellFireball = Instantiate(fireball, spellHeight, Quaternion.identity).GetComponent<SpellFireball>();
-            spellFireball.Setup(direction, rotation);
+            var spellFireball = Instantiate(fireball, spellHeight, Projectile.CalculateRotation(direction)).GetComponent<SpellFireball>();
+            spellFireball.SetVelocity(direction);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
         if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
         {
-            
             var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
             var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
             var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
