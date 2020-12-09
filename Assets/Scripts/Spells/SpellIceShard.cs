@@ -7,13 +7,14 @@ public class SpellIceShard : MonoBehaviour
     public Rigidbody2D myRigidbody;
     public BoxCollider2D spellCollider;
     public bool isChild = false;
+    public float slowTime;
   
 
     void Update()
     {
         if (isChild == false && myRigidbody.velocity == Vector2.zero)
         {
-            destroySpellIceshard(null);
+            destroySpellIceShard(null);
         }
     }
 
@@ -23,49 +24,48 @@ public class SpellIceShard : MonoBehaviour
         transform.rotation = Quaternion.Euler(rotation);
     }
 
-
- 
-    public void OnCollisionEnter2D(Collision2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isChild)
+        if (other.CompareTag("enemy"))
         {
-            Debug.Log("Iceshard collided with: " + other.transform.name);
-            myRigidbody.velocity = Vector2.zero;
+            var enemy = other.GetComponent<EnemyLog>();
+            if (enemy != null)
+            {
+                StartCoroutine(SlowEnemyForSeconds(enemy));
+            }
+            destroySpellIceShard(other.transform);
         }
     }
 
-    // Destroy initial IceShard
-    public void destroySpellIceshard(Transform other)
+    public void destroySpellIceShard(Transform other)
     {
-        Destroy(this.gameObject, 0.5f); // Destroytime in float hinzufügen
+        Destroy(this.gameObject, slowTime + 0.25f); // Destroytime in float hinzufügen
         myRigidbody.velocity = Vector2.zero;
         spellCollider.enabled = false;
-        Destroy(myRigidbody);      
+        Destroy(myRigidbody);
         transform.SetParent(other);
         isChild = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
-            var enemy = other.GetComponent<EnemyLog>();
-            if (enemy != null)
-            {
-                StartCoroutine(SlowEnemyForSeconds(enemy, other.transform));
-            }
-        
+        if (!isChild)
+        {
+            Debug.Log("IceSharr collided with: " + other.transform.name);
+            myRigidbody.velocity = Vector2.zero;
+        }
     }
 
-
-    private IEnumerator SlowEnemyForSeconds(EnemyLog enemy, Transform other)
+    private IEnumerator SlowEnemyForSeconds(EnemyLog enemy)
     {
         enemy.moveSpeed /= 2;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(slowTime);
         enemy.moveSpeed *= 2;
-        destroySpellIceshard(other.transform);
+       
     }
 
-
 }
+
 
 
 
