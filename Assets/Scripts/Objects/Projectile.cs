@@ -2,10 +2,7 @@
 
 public class Projectile : MonoBehaviour
 {
-    [Header("Movement Stuff")]
     public float moveSpeed; // Was never used, TurretEnemy supplies their own speed
-    public Vector2 directionToMove;
-    [Header("Lifetime Vars")]
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
 

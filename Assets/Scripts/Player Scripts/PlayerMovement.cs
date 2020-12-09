@@ -187,16 +187,20 @@ public class PlayerMovement : Character
         }
     }
 
+    private void CreateProjectile(GameObject projectilePrefab)
+    {
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
+        var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+        var proj = Instantiate(projectile, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
+        proj.SetVelocity(direction);
+    }
+
     //################### instantiate arrow when shot ###############################
     private void MakeArrow()
     {
         animator.SetBool("isShooting", true);
-        var arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
-        var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-        var arrow = Instantiate(projectile, arrowHeight, Projectile.CalculateRotation(direction)).GetComponent<arrow>();
-        arrow.SetVelocity(direction);
+        CreateProjectile(projectile);
     }
-
 
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo()
@@ -218,23 +222,14 @@ public class PlayerMovement : Character
     {
         if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
         {
-            
-            var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
-            var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-            var spellFireball = Instantiate(fireball, spellHeight, Projectile.CalculateRotation(direction)).GetComponent<SpellFireball>();
-            spellFireball.SetVelocity(direction);
+            CreateProjectile(fireball);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
-        if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
+        else if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
         {
-            var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
-            var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-            var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
-            var spellIceShard = Instantiate(iceShard, spellHeight, Quaternion.identity).GetComponent<SpellIceShard>();
-            spellIceShard.Setup(direction, rotation);
+            CreateProjectile(iceShard);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
-
     }
 
     //#################################### Item Found RAISE IT! #######################################
