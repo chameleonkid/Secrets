@@ -60,7 +60,6 @@ public class PlayerMovement : Character
 
     private void Start()
     {
-        GetCharacterComponents();
         SetAnimatorXY(Vector2.down);
         currentState = PlayerState.walk;
 

@@ -2,24 +2,12 @@
 
 public class EnemyLog : Enemy
 {
-    [SerializeField] protected Transform target;
+    protected virtual void Start() => animator.SetBool("WakeUp", true);
 
-    protected virtual void Start()
+    protected override void FixedUpdate()
     {
-        currentState = EnemyState.idle;
-        target = GameObject.FindWithTag("Player").transform;
-        animator.SetBool("WakeUp", true);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        CheckDistance();
-    }
-
-    public virtual void CheckDistance() //make sure to make it overrideable
-    {
-        if (Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) > attackRadius)
+        var distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius && distance > attackRadius)
         {
             if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
             {
@@ -32,10 +20,10 @@ public class EnemyLog : Enemy
             }
 
         }
-        if (Vector3.Distance(target.position, transform.position) > chaseRadius)
+        if (distance > chaseRadius)
         {
             animator.SetBool("WakeUp", false);
-            //   ChangeState(EnemyState.idle);
+            // ChangeState(EnemyState.idle);
         }
     }
 }

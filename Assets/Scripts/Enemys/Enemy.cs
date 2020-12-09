@@ -33,6 +33,8 @@ public class Enemy : Character
     [SerializeField] private Signals roomSignal = default;
     [SerializeField] private LootTable thisLoot = default;
 
+    protected Transform target = default;
+
     protected virtual void OnEnable()
     {
         health = maxHealth.initialValue;
@@ -40,12 +42,44 @@ public class Enemy : Character
         currentState = EnemyState.idle;
     }
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         homePosition = transform.position;
         health = maxHealth.initialValue;
         originalChaseRadius = chaseRadius;
+
+        target = GameObject.FindWithTag("Player").transform;
     }
+
+    protected virtual void FixedUpdate()
+    {
+        var distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius && distance > attackRadius)
+        {
+            InsideChaseRadiusUpdate();
+        }
+        else if (distance > chaseRadius)
+        {
+            OutsideChaseRadiusUpdate();
+        }
+    }
+
+    protected virtual void InsideChaseRadiusUpdate()
+    {
+        if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+        {
+            Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+
+            SetAnimatorXYSingleAxis(temp - transform.position);
+            rigidbody.MovePosition(temp);
+            currentState = EnemyState.walk;
+            animator.SetBool("WakeUp", true);
+        }
+    }
+
+    protected virtual void OutsideChaseRadiusUpdate() {}
 
     private void TakeDamage(float damage)
     {

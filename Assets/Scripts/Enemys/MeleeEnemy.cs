@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyLog
 {
-    public override void CheckDistance() //override from EnemyLog 
+    protected override void FixedUpdate()
     {
-        if (Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) > attackRadius)
+        var distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius && distance > attackRadius)
         {
             if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
             {
@@ -18,14 +19,14 @@ public class MeleeEnemy : EnemyLog
             }
 
         }
-        else if (Vector3.Distance(target.position, transform.position) <= chaseRadius && Vector3.Distance(target.position, transform.position) <= attackRadius)
+        else if (distance <= chaseRadius && distance <= attackRadius)
         {
             if ((currentState == EnemyState.idle || currentState == EnemyState.walk) && currentState != EnemyState.stagger)
             {
                 StartCoroutine(AttackCo());
             }
         }
-        else if (Vector3.Distance(target.position, transform.position) >= chaseRadius && Vector3.Distance(target.position, transform.position) >= attackRadius)
+        else if (distance >= chaseRadius && distance >= attackRadius)
         {
             currentState = EnemyState.idle;
             animator.SetBool("Moving", false);

@@ -18,9 +18,10 @@ public class MovingTurrets : EnemyLog
         }
     }
 
-    public override void CheckDistance()
+    protected override void FixedUpdate()
     {
-        if (Vector3.Distance(target.position, transform.position) <= chaseRadius)
+        var distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius)
         {
             if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
             {
@@ -41,7 +42,7 @@ public class MovingTurrets : EnemyLog
                 }
             }
         }
-        if (Vector3.Distance(target.position, transform.position) > chaseRadius)
+        if (distance > chaseRadius)
         {
             animator.SetBool("WakeUp", false);
             //   ChangeState(EnemyState.idle);

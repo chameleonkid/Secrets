@@ -6,6 +6,8 @@ public class Character : MonoBehaviour
     public new Rigidbody2D rigidbody { get; private set; }
     protected Animator animator { get ; private set; }
 
+    protected virtual void Awake() => GetCharacterComponents();
+    
     protected void GetCharacterComponents()
     {
         transform = GetComponent<Transform>();

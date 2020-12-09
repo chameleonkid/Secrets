@@ -4,12 +4,11 @@ public class AreaLog : EnemyLog
 {
     public Collider2D boundary;
 
-    public override void CheckDistance()
+    protected override void FixedUpdate()
     {
-        if (Vector3.Distance(target.position, transform.position) <= chaseRadius
-            && Vector3.Distance(target.position, transform.position) > attackRadius
+        var distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= chaseRadius && distance > attackRadius
             && boundary.bounds.Contains(target.transform.position))
-
         {
             if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
             {
@@ -20,12 +19,11 @@ public class AreaLog : EnemyLog
                 currentState = EnemyState.walk;
                 animator.SetBool("WakeUp", true);
             }
-
         }
-        if (Vector3.Distance(target.position, transform.position) > chaseRadius || !boundary.bounds.Contains(target.transform.position))
+        if (distance > chaseRadius || !boundary.bounds.Contains(target.transform.position))
         {
             animator.SetBool("WakeUp", false);
-            //   ChangeState(EnemyState.idle);
+            // ChangeState(EnemyState.idle);
         }
     }
 }
