@@ -8,6 +8,8 @@ public class SpellIceShard : MonoBehaviour
     public BoxCollider2D spellCollider;
     public bool isChild = false;
     public float slowTime;
+    public Animator anim;
+    
   
 
     void Update()
@@ -20,21 +22,26 @@ public class SpellIceShard : MonoBehaviour
 
     public void Setup(Vector2 direction, Vector3 rotation)
     {
+        anim = transform.GetComponent<Animator>();
+        anim.SetBool("isFlying", true);
         myRigidbody.velocity = direction.normalized * speed;
         transform.rotation = Quaternion.Euler(rotation);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.CompareTag("enemy"))
         {
             var enemy = other.GetComponent<EnemyLog>();
             if (enemy != null)
             {
+                anim.SetBool("isFlying", false);
                 StartCoroutine(SlowEnemyForSeconds(enemy));
             }
             destroySpellIceShard(other.transform);
         }
+
     }
 
     public void destroySpellIceShard(Transform other)

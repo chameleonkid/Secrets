@@ -81,7 +81,7 @@ public class Enemy : Character
 
     protected virtual void OutsideChaseRadiusUpdate() {}
 
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         chaseRadius = originalChaseRadius * 10;

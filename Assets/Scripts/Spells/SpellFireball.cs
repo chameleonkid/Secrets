@@ -8,9 +8,7 @@ public class SpellFireball : MonoBehaviour
     public Rigidbody2D myRigidbody;
     public BoxCollider2D spellCollider;
     public bool isChild = false;
-    public float dotTime;
-    public float tickCount;
-    public float dotDamage;
+
 
     void Update()
     {
@@ -30,18 +28,15 @@ public class SpellFireball : MonoBehaviour
     {
         if (other.CompareTag("enemy"))
         {
-            var enemy = other.GetComponent<EnemyLog>();
-            if (enemy != null)
-            {
-                StartCoroutine(DamageOverTime(enemy));
-            }
+
             destroySpellFireball(other.transform);
         }
     }
 
     public void destroySpellFireball(Transform other)
     {
-        Destroy(this.gameObject, dotTime * tickCount + 0.25f); // Destroytime in float hinzufügen
+        
+        Destroy(this.gameObject, 5f); // I need to get the DotTime somehow... AFTER IT IS SET!
         myRigidbody.velocity = Vector2.zero;
         spellCollider.enabled = false;
         Destroy(myRigidbody);
@@ -58,13 +53,6 @@ public class SpellFireball : MonoBehaviour
         }
     }
 
-    private IEnumerator DamageOverTime(EnemyLog enemy)
-    {
-        for(int i = 0; i <= tickCount; i++)
-        {
-        yield return new WaitForSeconds(dotTime);
-        enemy.health -= dotDamage;
-        }
-    }
+
 
 }

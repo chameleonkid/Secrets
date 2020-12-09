@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class KnockBack : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class KnockBack : MonoBehaviour
     [SerializeField] private DmgPopUpTextManager normalDmgPopup = default;
     [SerializeField] private DmgPopUpTextManager critDmgPopup = default;
     private Transform enemyTransform;
+
+    public float dotTime =0;
+    public float dotTicks =0;
+    public float dotDamage =0;
 
     // Knockback + dmg
     private void OnTriggerEnter2D(Collider2D other)
@@ -86,6 +91,14 @@ public class KnockBack : MonoBehaviour
                         Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage);
                         DamagePopup(playerInventory.currentSpellbook.SpellDamage);
                     }
+                    if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
+                    {
+                        dotTime = 1;
+                        dotDamage = 1;
+                        dotTicks = 3;
+                   
+                        StartCoroutine(DamageOverTime(other.GetComponent<Enemy>()));
+                    }
                 }
 
 
@@ -142,4 +155,25 @@ public class KnockBack : MonoBehaviour
             tempNumber.SetText(damage);
         }
     }
+
+    private IEnumerator DamageOverTime(Enemy enemy)
+    {
+
+        for (int i = 0; i <= dotTicks; i++)
+        {
+            if (enemy.health > 0)
+            {
+                yield return new WaitForSeconds(dotTime);
+                enemy.TakeDamage(dotDamage);
+                DamagePopup(dotDamage);
+                
+            }
+            else
+            {
+                Debug.Log(enemy + "should be dead!");
+            }
+        }
+
+    }
+
 }
