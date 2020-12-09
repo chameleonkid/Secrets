@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 
 public class SpellFireball : MonoBehaviour
 {
@@ -9,8 +7,7 @@ public class SpellFireball : MonoBehaviour
     public BoxCollider2D spellCollider;
     public bool isChild = false;
 
-
-    void Update()
+    private void Update()
     {
         if (isChild == false && myRigidbody.velocity == Vector2.zero)
         {
@@ -35,7 +32,6 @@ public class SpellFireball : MonoBehaviour
 
     public void destroySpellFireball(Transform other)
     {
-        
         Destroy(this.gameObject, 5f); // I need to get the DotTime somehow... AFTER IT IS SET!
         myRigidbody.velocity = Vector2.zero;
         spellCollider.enabled = false;
@@ -52,7 +48,4 @@ public class SpellFireball : MonoBehaviour
             myRigidbody.velocity = Vector2.zero;
         }
     }
-
-
-
 }

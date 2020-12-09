@@ -9,10 +9,8 @@ public class SpellIceShard : MonoBehaviour
     public bool isChild = false;
     public float slowTime;
     public Animator anim;
-    
-  
 
-    void Update()
+    private void Update()
     {
         if (isChild == false && myRigidbody.velocity == Vector2.zero)
         {
@@ -30,7 +28,6 @@ public class SpellIceShard : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (other.CompareTag("enemy"))
         {
             var enemy = other.GetComponent<EnemyLog>();
@@ -41,7 +38,6 @@ public class SpellIceShard : MonoBehaviour
             }
             destroySpellIceShard(other.transform);
         }
-
     }
 
     public void destroySpellIceShard(Transform other)
@@ -68,13 +64,5 @@ public class SpellIceShard : MonoBehaviour
         enemy.moveSpeed /= 2;
         yield return new WaitForSeconds(slowTime);
         enemy.moveSpeed *= 2;
-       
     }
-
 }
-
-
-
-
-
-

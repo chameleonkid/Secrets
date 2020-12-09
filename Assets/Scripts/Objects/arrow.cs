@@ -7,7 +7,7 @@ public class arrow : MonoBehaviour
     public BoxCollider2D arrowcollider;
     public bool isChild = false;
 
-    void Update()
+    private void Update()
     {
         if (isChild == false && myRigidbody.velocity == Vector2.zero)
         {
