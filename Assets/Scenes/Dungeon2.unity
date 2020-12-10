@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 31560521}
   - component: {fileID: 31560522}
   - component: {fileID: 31560524}
-  - component: {fileID: 31560523}
+  - component: {fileID: 31560525}
   m_Layer: 0
   m_Name: DungeonRoom4
   m_TagString: Untagged
@@ -217,26 +217,6 @@ PolygonCollider2D:
       - {x: 8.360252, y: 3.830864}
       - {x: -11.501353, y: 3.7402458}
       - {x: -11.663715, y: -9.565594}
---- !u!114 &31560523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31560520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee002d8dfb7f15740b743bc73a4e282a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 918020053}
-  - {fileID: 1740017271}
-  - {fileID: 1310530745}
-  - {fileID: 900576065}
-  - {fileID: 928275583}
-  breakables: []
-  virtualCamera: {fileID: 1278103045}
 --- !u!114 &31560524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +244,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &31560525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31560520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0737d7f7fa049e4ba28ea9d854e44de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 918020053}
+  - {fileID: 1740017271}
+  - {fileID: 1310530745}
+  - {fileID: 900576065}
+  - {fileID: 928275583}
+  breakables: []
+  virtualCamera: {fileID: 1278103045}
 --- !u!4 &46615478 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5820924282770256109, guid: fe8aa64b60883a64e80bbd2f3c5da891,
@@ -3357,7 +3357,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1270746980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee002d8dfb7f15740b743bc73a4e282a, type: 3}
+  m_Script: {fileID: 11500000, guid: f0737d7f7fa049e4ba28ea9d854e44de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
@@ -4503,6 +4503,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1034802005, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034802005, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648076964, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648076964, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4297181146018350465, guid: 2319d5545d4644a4dae14db35d055092,
         type: 3}
       propertyPath: m_ReferenceResolution.x
@@ -5370,7 +5386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1865738585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee002d8dfb7f15740b743bc73a4e282a, type: 3}
+  m_Script: {fileID: 11500000, guid: f0737d7f7fa049e4ba28ea9d854e44de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
@@ -50115,7 +50131,7 @@ Tilemap:
       - {fileID: 21300472, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300474, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300476, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 12.891133
+      m_AnimationSpeed: 12.109297
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 16, y: 19, z: 0}
@@ -50125,7 +50141,7 @@ Tilemap:
       - {fileID: 21300472, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300474, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300476, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 10.052882
+      m_AnimationSpeed: 12.223894
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 18, y: 19, z: 0}
@@ -50135,7 +50151,7 @@ Tilemap:
       - {fileID: 21300472, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300474, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300476, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 11.175407
+      m_AnimationSpeed: 10.455809
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
