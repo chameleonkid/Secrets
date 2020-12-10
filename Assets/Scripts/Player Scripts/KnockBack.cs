@@ -9,7 +9,6 @@ public class KnockBack : MonoBehaviour
     public PlayerInventory playerInventory;
     [SerializeField] private DmgPopUpTextManager normalDmgPopup = default;
     [SerializeField] private DmgPopUpTextManager critDmgPopup = default;
-    private Transform enemyTransform;
 
     public float dotTime = 0;
     public float dotTicks = 0;
@@ -63,13 +62,6 @@ public class KnockBack : MonoBehaviour
                 }
             }
         }
-        
-        //################################## Enemy is taking Damage ###############################################################
-        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("Player")) {}
-        //######################################### ARROW ##################################################################
-        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("arrow")) {}
-        //######################################### Spell ##################################################################
-        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("spell")) {}
 
         //################################## Player is taking Damage ###############################################################
         if (collider.gameObject.CompareTag("Player") && collider.isTrigger)
@@ -97,7 +89,6 @@ public class KnockBack : MonoBehaviour
 
     private void PlayerHitEnemy(Enemy enemy, float damage)
     {
-        enemyTransform = enemy.transform;
         var isCritical = IsCriticalHit();
         if (isCritical)
         {
@@ -109,24 +100,24 @@ public class KnockBack : MonoBehaviour
             Debug.Log("NORMAL STRIKE FOR " + damage);
         }
         enemy.health -= damage;
-        DamagePopup(damage, isCritical);
+        DamagePopup(damage, isCritical, enemy.transform);
         enemy.currentState = EnemyState.stagger;
         enemy.Knock(knockTime);
     }
 
-    public void DamagePopup(float damage) => DamagePopup(damage, false);
-    public void DamagePopup(float damage, bool isCritical)
+    public void DamagePopup(float damage, Transform parent) => DamagePopup(damage, false, parent);
+    public void DamagePopup(float damage, bool isCritical, Transform parent)
     {
         if (normalDmgPopup == null) return;
 
         if (isCritical)
         {
-            DmgPopUpTextManager tempNumber = Instantiate(critDmgPopup, transform.position, Quaternion.identity, enemyTransform);
+            DmgPopUpTextManager tempNumber = Instantiate(critDmgPopup, transform.position, Quaternion.identity, parent);
             tempNumber.SetText(damage);
         }
         else
         {
-            DmgPopUpTextManager tempNumber = Instantiate(normalDmgPopup, transform.position, Quaternion.identity, enemyTransform);
+            DmgPopUpTextManager tempNumber = Instantiate(normalDmgPopup, transform.position, Quaternion.identity, parent);
             tempNumber.SetText(damage);
         }
     }
