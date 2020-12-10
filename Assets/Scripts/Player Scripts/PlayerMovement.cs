@@ -30,11 +30,13 @@ public class PlayerMovement : Character
 
     public VectorValue startingPosition;
 
-    public PlayerInventory myInventory; // New Inventory
+    public PlayerInventory myInventory;
 
     public SpriteRenderer receivedItemSprite;
 
-    //Spells and Projectiles
+    public Collider2D triggerCollider;
+
+    [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
     [SerializeField] private float fireballSpeed = 1;
@@ -42,19 +44,21 @@ public class PlayerMovement : Character
     [SerializeField] private float iceShardSpeed = 1;
     public GameObject iceShard;
 
-    public InventoryItem Bow;
-    public InventoryWeapon Sword;
-
+    [Header("Invulnerability frames")]
     public Color FlashColor;
     public float flashDuration;
     public int numberOfFlasches;
-    public Collider2D triggerCollider;
+
+    [Header("Sprites")]
     public Color regularPlayerColor;
     public Color regularHairColor;
     public Color regularArmorColor;
     public SpriteRenderer playerSprite;
     public SpriteRenderer armorSprite;
     public SpriteRenderer hairSprite;
+
+    public InventoryItem Bow;
+    public InventoryWeapon Sword;
 
     //############### LIFT-TEST      ##############
     //  public GameObject thing;
