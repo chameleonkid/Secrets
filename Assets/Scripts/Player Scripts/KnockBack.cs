@@ -41,13 +41,26 @@ public class KnockBack : MonoBehaviour
 
         if (hit.gameObject.CompareTag("enemy") && collider.isTrigger)
         {
+            var enemy = hit.GetComponent<Enemy>();
             if (this.gameObject.CompareTag("Player"))
             {
-                PlayerHitEnemy(hit.GetComponent<Enemy>(), playerInventory.currentWeapon.damage);
+                PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
             }
             else if (this.gameObject.CompareTag("arrow"))
             {
-                PlayerHitEnemy(hit.GetComponent<Enemy>(), playerInventory.currentBow.damage);
+                PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
+            }
+            else if (this.gameObject.CompareTag("spell"))
+            {
+                PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
+                if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
+                {
+                    dotTime = 1;
+                    dotDamage = 1;
+                    dotTicks = 3;
+
+                    StartCoroutine(DamageOverTime(enemy));
+                }
             }
         }
         
@@ -56,33 +69,7 @@ public class KnockBack : MonoBehaviour
         //######################################### ARROW ##################################################################
         if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("arrow")) {}
         //######################################### Spell ##################################################################
-        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("spell"))
-        {
-            enemyTransform = collider.transform;
-            CalcIsCrit();
-            if (isCrit == true)
-            {
-                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage * 2);
-                Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage * 2);
-                DamagePopup(playerInventory.currentSpellbook.SpellDamage * 2);
-            }
-            else
-            {
-                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage);
-                Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage);
-                DamagePopup(playerInventory.currentSpellbook.SpellDamage);
-            }
-            if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
-            {
-                dotTime = 1;
-                dotDamage = 1;
-                dotTicks = 3;
-
-                StartCoroutine(DamageOverTime(collider.GetComponent<Enemy>()));
-            }
-        }
+        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("spell")) {}
 
         //################################## Player is taking Damage ###############################################################
         if (collider.gameObject.CompareTag("Player") && collider.isTrigger)
