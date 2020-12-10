@@ -6,9 +6,6 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
 
-    [Tooltip("How long to delay calling `Destroy` after hitting a collider")]
-    [SerializeField] protected float destroyDelay;
-
     public new Rigidbody2D rigidbody { get; protected set; }
     protected new Collider2D collider;
 
@@ -35,24 +32,6 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log("Projectile is collided with " + other.gameObject.name);
         Destroy(this.gameObject);
-    }
-
-    protected void OnHitReceiver(Transform receiver)
-    {
-        rigidbody.velocity = Vector2.zero;
-        collider.enabled = false;
-        Destroy(this.gameObject, destroyDelay);
-
-        AttachToReceiver(receiver);
-    }
-
-    protected void AttachToReceiver(Transform receiver)
-    {
-        if (receiver != null)
-        {
-            Destroy(rigidbody);
-            transform.SetParent(receiver);
-        }
     }
 
     public static Quaternion CalculateRotation(Vector2 direction)
