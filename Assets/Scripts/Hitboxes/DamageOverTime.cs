@@ -23,10 +23,11 @@ public class DamageOverTime : Hitbox
 
     private IEnumerator DamageOverTimeCo(Enemy enemy)
     {
-        for (int i = 0; i < ticks; i++)
+        enemy.health -= tickDamage; // Tick once on hit
+        for (int i = 1; i < ticks; i++)
         {
-            enemy.health -= tickDamage;
             yield return new WaitForSeconds(tickDuration);
+            enemy.health -= tickDamage;
         }
         Destroy(this.gameObject);
     }
