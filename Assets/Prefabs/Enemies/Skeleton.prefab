@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2949552873342874575}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.32, y: -1.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1345728457
-  m_SortingLayer: 3
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: -4259619783818684591, guid: cc450e5cf6512964d8319c19a86fafa5,
     type: 3}
@@ -180,14 +180,14 @@ MonoBehaviour:
   baseAttack: 2
   moveSpeed: 4
   homePosition: {x: 0, y: 0}
-  deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
-    type: 3}
-  roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
-  myRigidbody: {fileID: 0}
-  target: {fileID: 0}
   chaseRadius: 8
   attackRadius: 0.5
-  anim: {fileID: 0}
+  originalChaseRadius: 0
+  deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
+    type: 3}
+  deathEffectDelay: 1
+  roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
+  thisLoot: {fileID: 0}
 --- !u!114 &2949552873342874567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +203,12 @@ MonoBehaviour:
   thrust: 1
   knockTime: 0.2
   damage: 1
+  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  normalDmgPopup: {fileID: 0}
+  critDmgPopup: {fileID: 0}
+  dotTime: 0
+  dotTicks: 0
+  dotDamage: 0
 --- !u!95 &2949552873342874574
 Animator:
   serializedVersion: 3
