@@ -29,11 +29,16 @@ public class Enemy : Character
                 value = 0;
             }
 
+            if (value < _health)
+            {
+                chaseRadius = originalChaseRadius * 10;
+            }
+
             _health = value;
 
             if (_health <= 0)
             {
-                // Dead
+                Die();
             }
         }
     }
@@ -102,21 +107,16 @@ public class Enemy : Character
 
     protected virtual void OutsideChaseRadiusUpdate() {}
 
-    public void TakeDamage(float damage)
+    private void Die()
     {
-        health -= damage;
-        chaseRadius = originalChaseRadius * 10;
-        if (health <= 0)
+        Debug.Log("0 Leben");
+        DeathEffect();
+        MakeLoot();
+        if (roomSignal != null)
         {
-            Debug.Log("0 Leben");
-            DeathEffect();
-            MakeLoot();
-            if (roomSignal != null)
-            {
-                roomSignal.Raise();
-            }
-            this.gameObject.SetActive(false);
+            roomSignal.Raise();
         }
+        this.gameObject.SetActive(false);
     }
 
     private void DeathEffect()
@@ -140,11 +140,7 @@ public class Enemy : Character
         }
     }
 
-    public void Knock(Rigidbody2D myRigidbody, float knockTime, float damage)
-    {
-        StartCoroutine(KnockCo(myRigidbody, knockTime));
-        TakeDamage(damage);
-    }
+    public void Knock(Rigidbody2D myRigidbody, float knockTime) => StartCoroutine(KnockCo(myRigidbody, knockTime));
 
     private IEnumerator KnockCo(Rigidbody2D myRigidbody, float knockTime)
     {
@@ -153,7 +149,6 @@ public class Enemy : Character
             yield return new WaitForSeconds(knockTime);
             myRigidbody.velocity = Vector2.zero;
             currentState = EnemyState.idle;
-            myRigidbody.velocity = Vector2.zero;
         }
     }
 }
