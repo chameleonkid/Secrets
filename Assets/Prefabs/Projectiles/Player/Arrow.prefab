@@ -12,13 +12,12 @@ GameObject:
   - component: {fileID: 5877249715732768611}
   - component: {fileID: 8877344846437935194}
   - component: {fileID: -3089408764058353687}
+  - component: {fileID: 7289757312399887519}
   - component: {fileID: 4151532023440221885}
-  - component: {fileID: 8488362489792843553}
   - component: {fileID: 5379144640911285020}
-  - component: {fileID: -9144808553770054626}
   m_Layer: 13
-  m_Name: SpellIceshard
-  m_TagString: spell
+  m_Name: arrow_projectile
+  m_TagString: arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 46263c995632dbe43b846b365559590a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26001f09794069f489eca54c712b0e7b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,6 +133,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7508464, y: 0.25023317}
   m_EdgeRadius: 0
+--- !u!114 &7289757312399887519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015206087574396294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1fe54ce1fe1d904986d7c22f1c63ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0
+  destroyDelay: 1
 --- !u!114 &4151532023440221885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,24 +170,6 @@ MonoBehaviour:
   dotTime: 0
   dotTicks: 0
   dotDamage: 0
---- !u!114 &8488362489792843553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015206087574396294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5ba0610b8b38534aadf453f077c76ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
-  myRigidbody: {fileID: 8877344846437935194}
-  spellCollider: {fileID: -3089408764058353687}
-  isChild: 0
-  slowTime: 2
-  anim: {fileID: 0}
 --- !u!82 &5379144640911285020
 AudioSource:
   m_ObjectHideFlags: 0
@@ -271,22 +266,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &-9144808553770054626
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015206087574396294}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a34e8160aa4f72049aa21dec264dd588, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

@@ -30,22 +30,26 @@ public class PlayerMovement : Character
 
     public VectorValue startingPosition;
 
-    public PlayerInventory myInventory; // New Inventory
+    public PlayerInventory myInventory;
 
     public SpriteRenderer receivedItemSprite;
 
-    //Spells and Projectiles
+    public Collider2D triggerCollider;
+
+    [Header("Projectiles")]
+    [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
+    [SerializeField] private float fireballSpeed = 1;
     public GameObject fireball;
+    [SerializeField] private float iceShardSpeed = 1;
     public GameObject iceShard;
 
-    public InventoryItem Bow;
-    public InventoryWeapon Sword;
-
+    [Header("Invulnerability frames")]
     public Color FlashColor;
     public float flashDuration;
     public int numberOfFlasches;
-    public Collider2D triggerCollider;
+
+    [Header("Sprites")]
     public Color regularPlayerColor;
     public Color regularHairColor;
     public Color regularArmorColor;
@@ -114,9 +118,6 @@ public class PlayerMovement : Character
             StartCoroutine(SpellAttackCo());
         }
         //##############################################################################################################################################################
-
-
-
 
         if (Input.GetButtonUp("UseItem"))
         {
@@ -187,17 +188,20 @@ public class PlayerMovement : Character
         }
     }
 
+    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed)
+    {
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
+        var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+        var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
+        proj.rigidbody.velocity = direction * projectileSpeed;
+    }
+
     //################### instantiate arrow when shot ###############################
     private void MakeArrow()
     {
         animator.SetBool("isShooting", true);
-        var arrowHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
-        var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-        var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
-        var arrow = Instantiate(projectile, arrowHeight, Quaternion.identity).GetComponent<arrow>();
-        arrow.Setup(direction, rotation);
+        CreateProjectile(projectile, arrowSpeed);
     }
-
 
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo()
@@ -219,25 +223,14 @@ public class PlayerMovement : Character
     {
         if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
         {
-            
-            var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
-            var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-            var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
-            var spellFireball = Instantiate(fireball, spellHeight, Quaternion.identity).GetComponent<SpellFireball>();
-            spellFireball.Setup(direction, rotation);
+            CreateProjectile(fireball, fireballSpeed);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
-        if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
+        else if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
         {
-            
-            var spellHeight = new Vector2(transform.position.x, transform.position.y + 0.5f); // Change Spellheight
-            var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
-            var rotation = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) * Vector3.forward;
-            var spellIceShard = Instantiate(iceShard, spellHeight, Quaternion.identity).GetComponent<SpellIceShard>();
-            spellIceShard.Setup(direction, rotation);
+            CreateProjectile(iceShard, iceShardSpeed);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
-
     }
 
     //#################################### Item Found RAISE IT! #######################################

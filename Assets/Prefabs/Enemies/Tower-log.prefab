@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6941909454593424339
+--- !u!1 &472834060355724302
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6941909454593424350}
-  - component: {fileID: 6941909454593424337}
-  - component: {fileID: 6941909454593424336}
-  - component: {fileID: 6941909454593424348}
-  - component: {fileID: 6941909454593424351}
-  - component: {fileID: 6941909454593424346}
-  - component: {fileID: 6941909454593424347}
-  - component: {fileID: 4840798952189540833}
+  - component: {fileID: 472834060355724291}
+  - component: {fileID: 472834060355724300}
+  - component: {fileID: 472834060355724301}
+  - component: {fileID: 472834060355724289}
+  - component: {fileID: 472834060355724290}
+  - component: {fileID: 472834060355724295}
+  - component: {fileID: 472834060355724294}
+  - component: {fileID: 472834060355724303}
   m_Layer: 8
-  m_Name: FireBoy
+  m_Name: Tower-log
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6941909454593424350
+--- !u!4 &472834060355724291
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8539519, y: -1.7895126, z: 0}
+  m_LocalPosition: {x: 9.22, y: 2.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6941909454593424337
+--- !u!212 &472834060355724300
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,7 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: -1345728457
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e883cca0e8273cb4e8b2c019e0d360ee, type: 3}
+  m_Sprite: {fileID: -5034061168752090764, guid: d7671fa7322185242b1694fa6da1a0c2,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,17 +88,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6941909454593424336
+--- !u!95 &472834060355724301
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d39d99a1ddf3f624991f64e02743e635, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0b35582628cfe5242973ee5776745d65, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,14 +107,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!50 &6941909454593424348
+--- !u!50 &472834060355724289
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -127,65 +128,65 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6941909454593424351
+--- !u!61 &472834060355724290
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0068626404, y: 0.40510774}
+  m_Offset: {x: -0.0068621635, y: -0.3681817}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.501709, y: 0.33694696}
+  m_Size: {x: 0.9157767, y: 0.6413212}
   m_EdgeRadius: 0
---- !u!61 &6941909454593424346
+--- !u!61 &472834060355724295
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.047777176, y: 0.39390564}
+  m_Offset: {x: 0, y: -0.044051647}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5385742, y: 0.46332932}
+  m_Size: {x: 1.0481939, y: 1.3710947}
   m_EdgeRadius: 0
---- !u!114 &6941909454593424347
+--- !u!114 &472834060355724294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
@@ -195,36 +196,42 @@ MonoBehaviour:
   knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
---- !u!114 &4840798952189540833
+  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
+    type: 3}
+  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
+    type: 3}
+  dotTime: 0
+  dotTicks: 0
+  dotDamage: 0
+--- !u!114 &472834060355724303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6941909454593424339}
+  m_GameObject: {fileID: 472834060355724302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
+  m_Script: {fileID: 11500000, guid: b1d815b736438c34fbd2d219e440621e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
   health: 0
-  enemyName: Fireboy
+  enemyName: Towerman
   baseAttack: 0
-  moveSpeed: 1
-  homePosition: {x: 0, y: 0}
-  chaseRadius: 6
-  attackRadius: 3
-  originalChaseRadius: 3
-  deathEffect: {fileID: 4464167541414145869, guid: 8fbaacbaf67dd0840970be29158f71d0,
+  moveSpeed: 0
+  homePosition: {x: -36.62, y: 7.37}
+  chaseRadius: 7
+  attackRadius: 0
+  originalChaseRadius: 0
+  deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
     type: 3}
+  deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
-  thisLoot: {fileID: 11400000, guid: 390b39db646cd71418f2af0cc809ccf2, type: 2}
-  myRigidbody: {fileID: 6941909454593424348}
-  target: {fileID: 0}
-  anim: {fileID: 0}
-  projectile: {fileID: 125730, guid: b9712cbab09e958498003c8a50aa18d7, type: 3}
-  fireDelay: 0.5
+  thisLoot: {fileID: 11400000, guid: 05d3919ae3c5476418135c27aa5bcb68, type: 2}
+  projectile: {fileID: 8755954809695844891, guid: 4cc237e5fdb492f4d931468857161ee7,
+    type: 3}
+  fireDelay: 0.1
   canFire: 1
-  projectileSpeed: 3
+  projectileSpeed: 8

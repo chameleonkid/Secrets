@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5422618619393421168}
   - component: {fileID: 5877249715732768611}
   - component: {fileID: 8877344846437935194}
-  - component: {fileID: -7007970687645538547}
+  - component: {fileID: 7381348463260003002}
   - component: {fileID: -3089408764058353687}
   - component: {fileID: 4151532023440221885}
   - component: {fileID: 5379144640911285020}
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &-7007970687645538547
+--- !u!114 &7381348463260003002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,13 +116,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2015206087574396294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 655ca3213f306d64fa56b3f547c63c82, type: 3}
+  m_Script: {fileID: 11500000, guid: d1fe54ce1fe1d904986d7c22f1c63ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  myRigidbody: {fileID: 8877344846437935194}
-  spellCollider: {fileID: -3089408764058353687}
-  isChild: 0
+  lifetime: 0
+  destroyDelay: 5
 --- !u!61 &-3089408764058353687
 BoxCollider2D:
   m_ObjectHideFlags: 0
