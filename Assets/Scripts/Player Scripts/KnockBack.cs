@@ -10,10 +10,6 @@ public class KnockBack : MonoBehaviour
     [SerializeField] private DmgPopUpTextManager normalDmgPopup = default;
     [SerializeField] private DmgPopUpTextManager critDmgPopup = default;
 
-    public float dotTime = 0;
-    public float dotTicks = 0;
-    public float dotDamage = 0;
-
     // Knockback + dmg
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -63,11 +59,7 @@ public class KnockBack : MonoBehaviour
             PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
             if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
             {
-                dotTime = 1;
-                dotDamage = 1;
-                dotTicks = 3;
-
-                StartCoroutine(DamageOverTime(enemy));
+                StartCoroutine(DamageOverTime(enemy, 3, 1, 1));
             }
         }
     }
@@ -121,15 +113,15 @@ public class KnockBack : MonoBehaviour
         instance.SetText(damage);
     }
 
-    private IEnumerator DamageOverTime(Enemy enemy)
+    private IEnumerator DamageOverTime(Enemy enemy, float ticks, float tickDuration, float tickDamage)
     {
-        for (int i = 0; i <= dotTicks; i++)
+        for (int i = 0; i <= ticks; i++)
         {
             if (enemy.health > 0)
             {
-                yield return new WaitForSeconds(dotTime);
-                enemy.health -= dotDamage;
-                DamagePopup(dotDamage, null);   //! TEMP
+                yield return new WaitForSeconds(tickDuration);
+                enemy.health -= tickDamage;
+                DamagePopup(tickDamage, null);   //! TEMP
             }
             else
             {
