@@ -1,1 +1,1 @@
-﻿public class arrow : ProjectileTemp {}
+﻿public class arrow : PlayerProjectile {}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellIceShard : ProjectileTemp
+public class SpellIceShard : PlayerProjectile
 {
     public float slowTime;
     public Animator anim;

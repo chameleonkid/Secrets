@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class ProjectileTemp : Projectile
+public class PlayerProjectile : Projectile
 {
     [Tooltip("How long to delay calling `Destroy` after hitting a collider")]
     [SerializeField] protected float destroyDelay;
