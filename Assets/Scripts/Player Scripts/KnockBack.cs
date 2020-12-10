@@ -12,9 +12,9 @@ public class KnockBack : MonoBehaviour
     [SerializeField] private DmgPopUpTextManager critDmgPopup = default;
     private Transform enemyTransform;
 
-    public float dotTime =0;
-    public float dotTicks =0;
-    public float dotDamage =0;
+    public float dotTime = 0;
+    public float dotTicks = 0;
+    public float dotDamage = 0;
 
     // Knockback + dmg
     private void OnTriggerEnter2D(Collider2D other)
@@ -96,11 +96,10 @@ public class KnockBack : MonoBehaviour
                         dotTime = 1;
                         dotDamage = 1;
                         dotTicks = 3;
-                   
+
                         StartCoroutine(DamageOverTime(other.GetComponent<Enemy>()));
                     }
                 }
-
 
                 //################################## Player is taking Damage ###############################################################
                 if (other.gameObject.CompareTag("Player") && other.isTrigger)
@@ -121,7 +120,6 @@ public class KnockBack : MonoBehaviour
                             Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
                         }
                     }
-
                 }
             }
         }
@@ -158,7 +156,6 @@ public class KnockBack : MonoBehaviour
 
     private IEnumerator DamageOverTime(Enemy enemy)
     {
-
         for (int i = 0; i <= dotTicks; i++)
         {
             if (enemy.health > 0)
@@ -166,14 +163,11 @@ public class KnockBack : MonoBehaviour
                 yield return new WaitForSeconds(dotTime);
                 enemy.TakeDamage(dotDamage);
                 DamagePopup(dotDamage);
-                
             }
             else
             {
                 Debug.Log(enemy + "should be dead!");
             }
         }
-
     }
-
 }
