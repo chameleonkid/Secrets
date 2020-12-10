@@ -3,12 +3,10 @@ using System.Collections;
 
 public class SpellIceShard : ProjectileTemp
 {
-    public BoxCollider2D spellCollider;
     public float slowTime;
     public Animator anim;
 
     protected override float destroyTime => slowTime + 0.25f;
-    protected override Collider2D projectileCollider => spellCollider;
 
     protected override void Awake()
     {

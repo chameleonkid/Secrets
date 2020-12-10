@@ -3,7 +3,6 @@
 public abstract class ProjectileTemp : Projectile
 {
     protected abstract float destroyTime { get; }
-    protected abstract Collider2D projectileCollider { get; }
 
     protected override void Update() {} // Need empty override to disable base projectile lifetime mechanic
 
@@ -28,7 +27,7 @@ public abstract class ProjectileTemp : Projectile
     public void DestroyProjectile(Transform other)
     {
         rigidbody.velocity = Vector2.zero;
-        projectileCollider.enabled = false;
+        collider.enabled = false;
         Destroy(this.gameObject, destroyTime);
 
         AttachToReceiver(other);
