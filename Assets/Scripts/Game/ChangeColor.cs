@@ -5,12 +5,17 @@ using UnityEngine;
 public class ChangeColor : MonoBehaviour
 {
 
-    [SerializeField] private Color regularColor = default;
-    [SerializeField] private SpriteRenderer regularSprite;
-    [SerializeField] private Color iceColor = default;
-    [SerializeField] private Color fireColor = default;
+    [SerializeField] private Color regularColor;
+    [SerializeField] private SpriteRenderer regularSprite = default;
+    [SerializeField] private Color iceColor = Color.blue;
+    [SerializeField] private Color fireColor = Color.red;
     // Start is called before the first frame update
 
+    private void Start()
+    {
+        regularSprite = this.GetComponent<SpriteRenderer>();
+        regularColor = new Color(255f, 255f, 255f, 1f);
+    }
 
     public void changeColorToBlue(float timer)
     {

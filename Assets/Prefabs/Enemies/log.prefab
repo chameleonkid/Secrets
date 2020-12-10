@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 284330758867340908}
   - component: {fileID: 284330758867340907}
   - component: {fileID: 284330758867340909}
+  - component: {fileID: 1187539961920588526}
   m_Layer: 8
   m_Name: log
   m_TagString: enemy
@@ -194,7 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
-  health: 2
   enemyName: Larry the Log
   baseAttack: 1
   moveSpeed: 3
@@ -204,11 +204,9 @@ MonoBehaviour:
   originalChaseRadius: 0
   deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
     type: 3}
+  deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 9bd2c356e44c69943bcaed4af766e4bf, type: 2}
-  myRigidbody: {fileID: 0}
-  target: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!114 &284330758867340909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,3 +227,19 @@ MonoBehaviour:
     type: 3}
   critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
     type: 3}
+--- !u!114 &1187539961920588526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284330758867340901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularColor: {r: 0, g: 0, b: 0, a: 0}
+  regularSprite: {fileID: 0}
+  iceColor: {r: 0, g: 0, b: 1, a: 1}
+  fireColor: {r: 1, g: 0, b: 0, a: 1}

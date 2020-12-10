@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6941909454593424346}
   - component: {fileID: 6941909454593424347}
   - component: {fileID: 4840798952189540833}
+  - component: {fileID: 1566315858439696939}
   m_Layer: 8
   m_Name: FireBoy
   m_TagString: enemy
@@ -197,9 +198,6 @@ MonoBehaviour:
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   normalDmgPopup: {fileID: 0}
   critDmgPopup: {fileID: 0}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
 --- !u!114 &4840798952189540833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
-  health: 0
   enemyName: Fireboy
   baseAttack: 0
   moveSpeed: 1
@@ -231,3 +228,19 @@ MonoBehaviour:
   fireDelay: 0.5
   canFire: 1
   projectileSpeed: 9
+--- !u!114 &1566315858439696939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941909454593424339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularColor: {r: 0, g: 0, b: 0, a: 0}
+  regularSprite: {fileID: 0}
+  iceColor: {r: 0, g: 0, b: 1, a: 1}
+  fireColor: {r: 1, g: 0, b: 0, a: 1}

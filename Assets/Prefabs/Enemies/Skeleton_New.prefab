@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 5432762753877174126}
   - component: {fileID: 5432762753877174116}
   - component: {fileID: -6065082072085748419}
+  - component: {fileID: -1084270038358372700}
   m_Layer: 8
   m_Name: Skeleton_New
   m_TagString: enemy
@@ -361,7 +362,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   maxHealth: {fileID: 11400000, guid: 5574c8f4f04003545b68b09e2dc70343, type: 2}
-  health: 0
   enemyName: 
   baseAttack: 1
   moveSpeed: 1
@@ -371,11 +371,9 @@ MonoBehaviour:
   originalChaseRadius: 0
   deathEffect: {fileID: 4464167541414145869, guid: ce3134dc6306d2e40a4946c2789f5826,
     type: 3}
+  deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 0}
-  myRigidbody: {fileID: 5432762753877174121}
-  target: {fileID: 0}
-  anim: {fileID: 5432762753877174126}
 --- !u!114 &-6065082072085748419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +394,22 @@ MonoBehaviour:
     type: 3}
   critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
     type: 3}
+--- !u!114 &-1084270038358372700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432762753877174125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularColor: {r: 0, g: 0, b: 0, a: 0}
+  regularSprite: {fileID: 0}
+  iceColor: {r: 0, g: 0, b: 1, a: 1}
+  fireColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &5432762754029595344
 GameObject:
   m_ObjectHideFlags: 0

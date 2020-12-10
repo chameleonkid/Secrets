@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 472834060355724295}
   - component: {fileID: 472834060355724294}
   - component: {fileID: 472834060355724303}
+  - component: {fileID: -9114995563809209465}
   m_Layer: 8
   m_Name: Tower-log
   m_TagString: enemy
@@ -200,9 +201,6 @@ MonoBehaviour:
     type: 3}
   critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
     type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
 --- !u!114 &472834060355724303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +215,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
-  health: 0
   enemyName: Towerman
   baseAttack: 0
   moveSpeed: 0
@@ -235,3 +232,19 @@ MonoBehaviour:
   fireDelay: 0.1
   canFire: 1
   projectileSpeed: 8
+--- !u!114 &-9114995563809209465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472834060355724302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularColor: {r: 0, g: 0, b: 0, a: 0}
+  regularSprite: {fileID: 0}
+  iceColor: {r: 0, g: 0, b: 1, a: 1}
+  fireColor: {r: 1, g: 0, b: 0, a: 1}
