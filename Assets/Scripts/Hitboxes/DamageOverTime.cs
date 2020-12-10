@@ -23,14 +23,15 @@ public class DamageOverTime : Hitbox
 
     private IEnumerator DamageOverTimeCo(Enemy enemy)
     {
+        DamagePopUpManager.RequestDamagePopUp(tickDamage, enemy.transform);
         enemy.health -= tickDamage; // Tick once on hit
         for (int i = 1; i < ticks; i++)
         {
             if (enemy != null)
             {
                 yield return new WaitForSeconds(tickDuration);
-                enemy.health -= tickDamage;
                 DamagePopUpManager.RequestDamagePopUp(tickDamage, enemy.transform);
+                enemy.health -= tickDamage;
             }
         }
         Destroy(this.gameObject);
