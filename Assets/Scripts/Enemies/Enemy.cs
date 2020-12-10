@@ -37,7 +37,7 @@ public class Enemy : Character
 
     protected virtual void OnEnable()
     {
-        health = maxHealth.initialValue;
+        health = maxHealth.value;
         transform.position = homePosition;
         currentState = EnemyState.idle;
     }
@@ -47,7 +47,7 @@ public class Enemy : Character
         base.Awake();
 
         homePosition = transform.position;
-        health = maxHealth.initialValue;
+        health = maxHealth.value;
         originalChaseRadius = chaseRadius;
 
         target = GameObject.FindWithTag("Player").transform;
