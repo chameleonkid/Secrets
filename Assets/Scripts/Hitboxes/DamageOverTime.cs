@@ -26,8 +26,12 @@ public class DamageOverTime : Hitbox
         enemy.health -= tickDamage; // Tick once on hit
         for (int i = 1; i < ticks; i++)
         {
-            yield return new WaitForSeconds(tickDuration);
-            enemy.health -= tickDamage;
+            if (enemy != null)
+            {
+                yield return new WaitForSeconds(tickDuration);
+                enemy.health -= tickDamage;
+                //! Need to implement damage popups at some point
+            }
         }
         Destroy(this.gameObject);
     }

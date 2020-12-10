@@ -57,11 +57,6 @@ public class KnockBack : MonoBehaviour
         else if (this.gameObject.CompareTag("spell"))
         {
             PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
-            if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire" && enemy.gameObject.activeInHierarchy)
-            {
-                StartCoroutine(DamageOverTime(enemy, 3, 1, 1));         //Dot-Time 1 * 3 ticks + tick 0 = 4 but somehow 5 is better...  // What does this mean?
-                enemy.GetComponent<ChangeColor>()?.ChangeSpriteColor(Color.red, 5);
-            }
         }
     }
 
@@ -112,23 +107,5 @@ public class KnockBack : MonoBehaviour
         var popup = isCritical ? critDmgPopup : normalDmgPopup;
         var instance = Instantiate(popup, transform.position, Quaternion.identity, parent);
         instance.SetText(damage);
-    }
-
-    private IEnumerator DamageOverTime(Enemy enemy, float ticks, float tickDuration, float tickDamage)
-    {
-        for (int i = 0; i <= ticks; i++)
-        {
-            if (enemy.health > 0)
-            {
-                yield return new WaitForSeconds(tickDuration);
-                enemy.health -= tickDamage;
-                DamagePopup(tickDamage, enemy.transform);   //! TEMP
-
-            }
-            else
-            {
-                Debug.Log(enemy + "should be dead!");
-            }
-        }
     }
 }
