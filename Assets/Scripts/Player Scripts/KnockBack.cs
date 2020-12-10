@@ -121,7 +121,8 @@ public class KnockBack : MonoBehaviour
             {
                 yield return new WaitForSeconds(tickDuration);
                 enemy.health -= tickDamage;
-                DamagePopup(tickDamage, null);   //! TEMP
+                DamagePopup(tickDamage, enemy.transform);   //! TEMP
+
             }
             else
             {
