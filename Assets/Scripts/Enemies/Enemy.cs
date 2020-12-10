@@ -16,7 +16,28 @@ public class Enemy : Character
 
     [Header("Enemy Stats")]
     [SerializeField] protected FloatValue maxHealth = default;
-    public float health = default;
+    private float _health;
+    public float health {
+        get => _health;
+        set {
+            if (value > maxHealth.value)
+            {
+                value = maxHealth.value;
+            }
+            else if (value < 0)
+            {
+                value = 0;
+            }
+
+            _health = value;
+
+            if (_health <= 0)
+            {
+                // Dead
+            }
+        }
+    }
+
     [SerializeField] protected string enemyName = default;
     [SerializeField] protected int baseAttack = default;
     public float moveSpeed = default;
