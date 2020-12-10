@@ -57,9 +57,6 @@ public class PlayerMovement : Character
     public SpriteRenderer armorSprite;
     public SpriteRenderer hairSprite;
 
-    public InventoryItem Bow;
-    public InventoryWeapon Sword;
-
     //############### LIFT-TEST      ##############
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
