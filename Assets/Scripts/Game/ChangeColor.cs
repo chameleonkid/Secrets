@@ -1,44 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class ChangeColor : MonoBehaviour
 {
+    private new SpriteRenderer renderer;
+    private Color regularColor;
 
-    [SerializeField] private Color regularColor;
-    [SerializeField] private SpriteRenderer regularSprite = default;
-    [SerializeField] private Color iceColor = Color.blue;
-    [SerializeField] private Color fireColor = Color.red;
-
-    private void Start()
+    private void Awake()
     {
-        regularSprite = this.GetComponent<SpriteRenderer>();
-        regularColor = new Color(255f, 255f, 255f, 1f);
+        renderer = GetComponent<SpriteRenderer>();
+        regularColor = renderer.color;
     }
 
-    public void changeColorToBlue(float timer)
+    public void ChangeSpriteColor(Color color, float duration) => StartCoroutine(ChangeSpriteColorCo(color, duration));
+    private IEnumerator ChangeSpriteColorCo(Color color, float duration)
     {
-        //regularEnemyColor = enemySprite.color; this was dumb... doublehits change the color forever :)
-        StartCoroutine(IceCo(timer));
-    }
-
-    public void changeColorToRed(float timer)
-    {
-        //regularEnemyColor = enemySprite.color; this was dumb... doublehits change the color forever :)
-        StartCoroutine(FireCo(timer));
-    }
-
-
-    private IEnumerator IceCo(float timer)
-    {
-        regularSprite.color = iceColor;
-        yield return new WaitForSeconds(timer);
-        regularSprite.color = regularColor;
-    }
-
-    private IEnumerator FireCo(float timer)
-    {
-        regularSprite.color = fireColor;
-        yield return new WaitForSeconds(timer);
-        regularSprite.color = regularColor;
+        renderer.color = color;
+        yield return new WaitForSeconds(duration);
+        renderer.color = regularColor;
     }
 }

@@ -18,24 +18,20 @@ public class IceShardSpell : PlayerProjectile
         if (other.CompareTag("enemy"))
         {
             var enemy = other.GetComponent<EnemyLog>();
-            var enemyColor = other.GetComponent<ChangeColor>();
             if (enemy != null)
             {
                 anim.SetBool("isFlying", false);
-                StartCoroutine(SlowEnemyForSeconds(enemy,enemyColor));
+                StartCoroutine(SlowEnemyForSeconds(enemy));
             }
             OnHitReceiver(other.transform);
         }
     }
 
-    private IEnumerator SlowEnemyForSeconds(EnemyLog enemy, ChangeColor enemyColor)
+    private IEnumerator SlowEnemyForSeconds(EnemyLog enemy)
     {
-
         enemy.moveSpeed /= 2;
-        enemyColor.changeColorToBlue(slowTime);
+        enemy.GetComponent<ChangeColor>()?.ChangeSpriteColor(Color.blue, slowTime);
         yield return new WaitForSeconds(slowTime);
         enemy.moveSpeed *= 2;
-        
-        
     }
 }

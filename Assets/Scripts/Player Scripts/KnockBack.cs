@@ -59,8 +59,8 @@ public class KnockBack : MonoBehaviour
             PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
             if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire" && enemy.gameObject.activeInHierarchy)
             {
-                StartCoroutine(DamageOverTime(enemy, 3, 1, 1));         //Dot-Time 1 * 3 ticks + tick 0 = 4 but somehow 5 is better...
-                enemy.GetComponent<ChangeColor>().changeColorToRed(5);  //Red-Time 4
+                StartCoroutine(DamageOverTime(enemy, 3, 1, 1));         //Dot-Time 1 * 3 ticks + tick 0 = 4 but somehow 5 is better...  // What does this mean?
+                enemy.GetComponent<ChangeColor>()?.ChangeSpriteColor(Color.red, 5);
             }
         }
     }
