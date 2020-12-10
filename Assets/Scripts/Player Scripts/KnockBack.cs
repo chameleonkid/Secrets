@@ -7,7 +7,6 @@ public class KnockBack : MonoBehaviour
     public float knockTime;
     public float damage;
     public PlayerInventory playerInventory;
-    private bool isCrit;
     [SerializeField] private DmgPopUpTextManager normalDmgPopup = default;
     [SerializeField] private DmgPopUpTextManager critDmgPopup = default;
     private Transform enemyTransform;
@@ -145,18 +144,7 @@ public class KnockBack : MonoBehaviour
         }
     }
 
-    public void CalcIsCrit()
-    {
-        isCrit = false;
-        if (playerInventory.totalCritChance > 0)
-        {
-            int temp = Random.Range(0, 99);
-            if (temp <= playerInventory.totalCritChance)
-            {
-                isCrit = true;
-            }
-        }
-    }
+    private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
 
     public void DamagePopup(float damage)
     {
