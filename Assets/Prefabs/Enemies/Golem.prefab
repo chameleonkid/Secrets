@@ -167,7 +167,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012901306, y: -0.081596375}
+  m_Offset: {x: -0.012901306, y: 0.03494668}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -178,7 +178,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8165741, y: 1.4207458}
+  m_Size: {x: 0.8165741, y: 1.8869176}
   m_EdgeRadius: 0
 --- !u!114 &8978087339683796174
 MonoBehaviour:
@@ -194,7 +194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
-  health: 5
   enemyName: GollyTheGolem
   baseAttack: 2
   moveSpeed: 1
@@ -204,11 +203,9 @@ MonoBehaviour:
   originalChaseRadius: 0
   deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
     type: 3}
+  deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
-  thisLoot: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  target: {fileID: 0}
-  anim: {fileID: 0}
+  thisLoot: {fileID: 11400000, guid: 05d3919ae3c5476418135c27aa5bcb68, type: 2}
 --- !u!114 &8978087339683796168
 MonoBehaviour:
   m_ObjectHideFlags: 0

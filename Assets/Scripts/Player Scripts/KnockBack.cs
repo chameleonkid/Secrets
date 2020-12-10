@@ -59,7 +59,8 @@ public class KnockBack : MonoBehaviour
             PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
             if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire" && enemy.gameObject.activeInHierarchy)
             {
-                StartCoroutine(DamageOverTime(enemy, 3, 1, 1));
+                StartCoroutine(DamageOverTime(enemy, 3, 1, 1));         //Dot-Time 1 * 3 ticks = 3
+                enemy.GetComponent<ChangeColor>().changeColorToRed(3);  //Red-Time 3
             }
         }
     }
