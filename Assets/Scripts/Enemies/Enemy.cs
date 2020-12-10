@@ -144,6 +144,7 @@ public class Enemy : Character
 
     private IEnumerator KnockCo(float knockTime)
     {
+        currentState = EnemyState.stagger;
         yield return new WaitForSeconds(knockTime);
         rigidbody.velocity = Vector2.zero;
         currentState = EnemyState.idle;

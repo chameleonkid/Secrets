@@ -108,7 +108,6 @@ public class KnockBack : MonoBehaviour
         }
         enemy.health -= damage;
         DamagePopup(damage, isCritical, enemy.transform);
-        enemy.currentState = EnemyState.stagger;
         enemy.Knock(knockTime);
     }
 
