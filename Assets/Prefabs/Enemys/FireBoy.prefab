@@ -195,6 +195,11 @@ MonoBehaviour:
   knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  normalDmgPopup: {fileID: 0}
+  critDmgPopup: {fileID: 0}
+  dotTime: 0
+  dotTicks: 0
+  dotDamage: 0
 --- !u!114 &4840798952189540833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,12 +224,10 @@ MonoBehaviour:
   originalChaseRadius: 3
   deathEffect: {fileID: 4464167541414145869, guid: 8fbaacbaf67dd0840970be29158f71d0,
     type: 3}
+  deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 390b39db646cd71418f2af0cc809ccf2, type: 2}
-  myRigidbody: {fileID: 6941909454593424348}
-  target: {fileID: 0}
-  anim: {fileID: 0}
   projectile: {fileID: 125730, guid: b9712cbab09e958498003c8a50aa18d7, type: 3}
   fireDelay: 0.5
   canFire: 1
-  projectileSpeed: 3
+  projectileSpeed: 9

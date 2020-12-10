@@ -200,6 +200,9 @@ MonoBehaviour:
     type: 3}
   critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
     type: 3}
+  dotTime: 0
+  dotTicks: 0
+  dotDamage: 0
 --- !u!114 &472834060355724303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,13 +227,11 @@ MonoBehaviour:
   originalChaseRadius: 0
   deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
     type: 3}
+  deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 05d3919ae3c5476418135c27aa5bcb68, type: 2}
-  myRigidbody: {fileID: 0}
-  target: {fileID: 0}
-  anim: {fileID: 0}
   projectile: {fileID: 8755954809695844891, guid: 4cc237e5fdb492f4d931468857161ee7,
     type: 3}
   fireDelay: 0.1
   canFire: 1
-  projectileSpeed: 4
+  projectileSpeed: 8

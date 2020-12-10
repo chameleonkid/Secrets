@@ -40,7 +40,7 @@ public class TurretEnemy : EnemyLog
         // Debug.Log("FIRE!!!!");
         var difference = target.transform.position - transform.position;
         var proj = Instantiate(projectile, transform.position, Quaternion.identity);
-        proj.GetComponent<Projectile>().SetVelocity(difference.normalized * projectileSpeed);
+        proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
         canFire = false;
         currentState = EnemyState.walk;
         animator.SetBool("WakeUp", true);

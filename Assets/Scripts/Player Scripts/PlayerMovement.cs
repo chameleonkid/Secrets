@@ -35,8 +35,11 @@ public class PlayerMovement : Character
     public SpriteRenderer receivedItemSprite;
 
     //Spells and Projectiles
+    [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
+    [SerializeField] private float fireballSpeed = 1;
     public GameObject fireball;
+    [SerializeField] private float iceShardSpeed = 1;
     public GameObject iceShard;
 
     public InventoryItem Bow;
@@ -115,9 +118,6 @@ public class PlayerMovement : Character
         }
         //##############################################################################################################################################################
 
-
-
-
         if (Input.GetButtonUp("UseItem"))
         {
             animator.SetBool("isShooting", false);
@@ -187,19 +187,19 @@ public class PlayerMovement : Character
         }
     }
 
-    private void CreateProjectile(GameObject projectilePrefab)
+    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed)
     {
         var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectile, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
-        proj.SetVelocity(direction);
+        proj.rigidbody.velocity = direction * projectileSpeed;
     }
 
     //################### instantiate arrow when shot ###############################
     private void MakeArrow()
     {
         animator.SetBool("isShooting", true);
-        CreateProjectile(projectile);
+        CreateProjectile(projectile, arrowSpeed);
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
@@ -222,12 +222,12 @@ public class PlayerMovement : Character
     {
         if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
         {
-            CreateProjectile(fireball);
+            CreateProjectile(fireball, fireballSpeed);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
         else if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
         {
-            CreateProjectile(iceShard);
+            CreateProjectile(iceShard, iceShardSpeed);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
     }

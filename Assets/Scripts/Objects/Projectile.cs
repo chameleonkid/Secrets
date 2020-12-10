@@ -2,13 +2,10 @@
 
 public class Projectile : MonoBehaviour
 {
-    public float moveSpeed; // TurretEnemy supplies their own speed, need to modify
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
 
     public new Rigidbody2D rigidbody { get; protected set; }
-
-    public virtual void SetVelocity(Vector2 direction) => rigidbody.velocity = direction * moveSpeed;
 
     protected virtual void Awake()
     {
