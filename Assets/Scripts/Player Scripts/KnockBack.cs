@@ -38,48 +38,51 @@ public class KnockBack : MonoBehaviour
         knockback = knockback.normalized * thrust;
         hit.AddForce(knockback, ForceMode2D.Impulse);
 
-        if (hit.gameObject.CompareTag("enemy") && collider.isTrigger)
+        if (collider.isTrigger)
         {
-            var enemy = hit.GetComponent<Enemy>();
-            if (this.gameObject.CompareTag("Player"))
+            if (hit.gameObject.CompareTag("enemy"))
             {
-                PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
-            }
-            else if (this.gameObject.CompareTag("arrow"))
-            {
-                PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
-            }
-            else if (this.gameObject.CompareTag("spell"))
-            {
-                PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
-                if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
+                var enemy = hit.GetComponent<Enemy>();
+                if (this.gameObject.CompareTag("Player"))
                 {
-                    dotTime = 1;
-                    dotDamage = 1;
-                    dotTicks = 3;
+                    PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
+                }
+                else if (this.gameObject.CompareTag("arrow"))
+                {
+                    PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
+                }
+                else if (this.gameObject.CompareTag("spell"))
+                {
+                    PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
+                    if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
+                    {
+                        dotTime = 1;
+                        dotDamage = 1;
+                        dotTicks = 3;
 
-                    StartCoroutine(DamageOverTime(enemy));
+                        StartCoroutine(DamageOverTime(enemy));
+                    }
                 }
             }
-        }
 
-        //################################## Player is taking Damage ###############################################################
-        if (collider.gameObject.CompareTag("Player") && collider.isTrigger)
-        {
-            if (collider.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
+            //################################## Player is taking Damage ###############################################################
+            if (collider.gameObject.CompareTag("Player"))
             {
-                hit.GetComponent<PlayerMovement>().currentState = PlayerState.stagger;
-                playerInventory.calcDefense();
-                if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
+                if (collider.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
                 {
-                    collider.GetComponent<PlayerMovement>().Knock(knockTime, damage - playerInventory.totalDefense);
-                    Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
+                    hit.GetComponent<PlayerMovement>().currentState = PlayerState.stagger;
+                    playerInventory.calcDefense();
+                    if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
+                    {
+                        collider.GetComponent<PlayerMovement>().Knock(knockTime, damage - playerInventory.totalDefense);
+                        Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
 
-                }
-                else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
-                {
-                    collider.GetComponent<PlayerMovement>().Knock(knockTime, 0);
-                    Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
+                    }
+                    else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
+                    {
+                        collider.GetComponent<PlayerMovement>().Knock(knockTime, 0);
+                        Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
+                    }
                 }
             }
         }
