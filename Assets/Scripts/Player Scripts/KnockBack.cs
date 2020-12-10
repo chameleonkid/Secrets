@@ -43,32 +43,18 @@ public class KnockBack : MonoBehaviour
         {
             if (this.gameObject.CompareTag("Player"))
             {
-                PlayerHitEnemy(hit.GetComponent<Enemy>());
+                PlayerHitEnemy(hit.GetComponent<Enemy>(), playerInventory.currentWeapon.damage);
+            }
+            else if (this.gameObject.CompareTag("arrow"))
+            {
+                PlayerHitEnemy(hit.GetComponent<Enemy>(), playerInventory.currentBow.damage);
             }
         }
         
         //################################## Enemy is taking Damage ###############################################################
         if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("Player")) {}
         //######################################### ARROW ##################################################################
-        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("arrow"))
-        {
-            enemyTransform = collider.transform;
-            CalcIsCrit();
-            if (isCrit == true)
-            {
-                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentBow.damage * 2);
-                Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentBow.damage * 2);
-                DamagePopup(playerInventory.currentBow.damage * 2);
-            }
-            else
-            {
-                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentBow.damage);
-                Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentBow.damage);
-                DamagePopup(playerInventory.currentBow.damage);
-            }
-        }
+        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("arrow")) {}
         //######################################### Spell ##################################################################
         if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("spell"))
         {
@@ -120,10 +106,11 @@ public class KnockBack : MonoBehaviour
         }
     }
 
-    private void PlayerHitEnemy(Enemy enemy)
+    private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
+
+    private void PlayerHitEnemy(Enemy enemy, float damage)
     {
         enemyTransform = enemy.transform;
-        var damage = playerInventory.currentWeapon.damage;
         var isCritical = IsCriticalHit();
         if (isCritical)
         {
@@ -131,7 +118,7 @@ public class KnockBack : MonoBehaviour
             Debug.Log("CRITICAL STRIKE FOR " + damage);
         }
         else
-        { 
+        {
             Debug.Log("NORMAL STRIKE FOR " + damage);
         }
         enemy.health -= damage;
@@ -139,8 +126,6 @@ public class KnockBack : MonoBehaviour
         enemy.currentState = EnemyState.stagger;
         enemy.Knock(knockTime);
     }
-
-    private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
 
     public void DamagePopup(float damage) => DamagePopup(damage, false);
     public void DamagePopup(float damage, bool isCritical)
