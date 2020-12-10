@@ -108,18 +108,11 @@ public class KnockBack : MonoBehaviour
     public void DamagePopup(float damage, Transform parent) => DamagePopup(damage, false, parent);
     public void DamagePopup(float damage, bool isCritical, Transform parent)
     {
-        if (normalDmgPopup == null) return;
+        if (normalDmgPopup == null || critDmgPopup == null) return;
 
-        if (isCritical)
-        {
-            DmgPopUpTextManager tempNumber = Instantiate(critDmgPopup, transform.position, Quaternion.identity, parent);
-            tempNumber.SetText(damage);
-        }
-        else
-        {
-            DmgPopUpTextManager tempNumber = Instantiate(normalDmgPopup, transform.position, Quaternion.identity, parent);
-            tempNumber.SetText(damage);
-        }
+        var popup = isCritical? critDmgPopup : normalDmgPopup;
+        var instance = Instantiate(popup, transform.position, Quaternion.identity, parent);
+        instance.SetText(damage);
     }
 
     private IEnumerator DamageOverTime(Enemy enemy)
