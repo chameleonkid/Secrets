@@ -36,99 +36,99 @@ public class KnockBack : MonoBehaviour
 
     private void OnHit(Rigidbody2D hit, Collider2D collider)
     {
-                var knockback = hit.transform.position - transform.position;
-                knockback = knockback.normalized * thrust;
-                hit.AddForce(knockback, ForceMode2D.Impulse);
-                
-                //################################## Enemy is taking Damage ###############################################################
-                if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("Player"))
-                {
-                    enemyTransform = collider.transform;
-                    CalcIsCrit();
-                    if (isCrit == true)
-                    {
-                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                        collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentWeapon.damage * 2);
-                        Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentWeapon.damage * 2);
-                        DamagePopup(playerInventory.currentWeapon.damage * 2);
-                    }
-                    else
-                    {
-                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                        collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentWeapon.damage);
-                        Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentWeapon.damage);
-                        DamagePopup(playerInventory.currentWeapon.damage);
-                    }
-                }
-                //######################################### ARROW ##################################################################
-                if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("arrow"))
-                {
-                    enemyTransform = collider.transform;
-                    CalcIsCrit();
-                    if (isCrit == true)
-                    {
-                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                        collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentBow.damage * 2);
-                        Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentBow.damage * 2);
-                        DamagePopup(playerInventory.currentBow.damage * 2);
-                    }
-                    else
-                    {
-                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                        collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentBow.damage);
-                        Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentBow.damage);
-                        DamagePopup(playerInventory.currentBow.damage);
-                    }
-                }
-                //######################################### Spell ##################################################################
-                if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("spell"))
-                {
-                    enemyTransform = collider.transform;
-                    CalcIsCrit();
-                    if (isCrit == true)
-                    {
-                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                        collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage * 2);
-                        Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage * 2);
-                        DamagePopup(playerInventory.currentSpellbook.SpellDamage * 2);
-                    }
-                    else
-                    {
-                        hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                        collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage);
-                        Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage);
-                        DamagePopup(playerInventory.currentSpellbook.SpellDamage);
-                    }
-                    if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
-                    {
-                        dotTime = 1;
-                        dotDamage = 1;
-                        dotTicks = 3;
+        var knockback = hit.transform.position - transform.position;
+        knockback = knockback.normalized * thrust;
+        hit.AddForce(knockback, ForceMode2D.Impulse);
+        
+        //################################## Enemy is taking Damage ###############################################################
+        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("Player"))
+        {
+            enemyTransform = collider.transform;
+            CalcIsCrit();
+            if (isCrit == true)
+            {
+                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentWeapon.damage * 2);
+                Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentWeapon.damage * 2);
+                DamagePopup(playerInventory.currentWeapon.damage * 2);
+            }
+            else
+            {
+                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentWeapon.damage);
+                Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentWeapon.damage);
+                DamagePopup(playerInventory.currentWeapon.damage);
+            }
+        }
+        //######################################### ARROW ##################################################################
+        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("arrow"))
+        {
+            enemyTransform = collider.transform;
+            CalcIsCrit();
+            if (isCrit == true)
+            {
+                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentBow.damage * 2);
+                Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentBow.damage * 2);
+                DamagePopup(playerInventory.currentBow.damage * 2);
+            }
+            else
+            {
+                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentBow.damage);
+                Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentBow.damage);
+                DamagePopup(playerInventory.currentBow.damage);
+            }
+        }
+        //######################################### Spell ##################################################################
+        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("spell"))
+        {
+            enemyTransform = collider.transform;
+            CalcIsCrit();
+            if (isCrit == true)
+            {
+                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage * 2);
+                Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage * 2);
+                DamagePopup(playerInventory.currentSpellbook.SpellDamage * 2);
+            }
+            else
+            {
+                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentSpellbook.SpellDamage);
+                Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentSpellbook.SpellDamage);
+                DamagePopup(playerInventory.currentSpellbook.SpellDamage);
+            }
+            if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
+            {
+                dotTime = 1;
+                dotDamage = 1;
+                dotTicks = 3;
 
-                        StartCoroutine(DamageOverTime(collider.GetComponent<Enemy>()));
-                    }
-                }
+                StartCoroutine(DamageOverTime(collider.GetComponent<Enemy>()));
+            }
+        }
 
-                //################################## Player is taking Damage ###############################################################
-                if (collider.gameObject.CompareTag("Player") && collider.isTrigger)
+        //################################## Player is taking Damage ###############################################################
+        if (collider.gameObject.CompareTag("Player") && collider.isTrigger)
+        {
+            if (collider.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
+            {
+                hit.GetComponent<PlayerMovement>().currentState = PlayerState.stagger;
+                playerInventory.calcDefense();
+                if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
                 {
-                    if (collider.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
-                    {
-                        hit.GetComponent<PlayerMovement>().currentState = PlayerState.stagger;
-                        playerInventory.calcDefense();
-                        if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
-                        {
-                            collider.GetComponent<PlayerMovement>().Knock(knockTime, damage - playerInventory.totalDefense);
-                            Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
+                    collider.GetComponent<PlayerMovement>().Knock(knockTime, damage - playerInventory.totalDefense);
+                    Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
 
-                        }
-                        else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
-                        {
-                            collider.GetComponent<PlayerMovement>().Knock(knockTime, 0);
-                            Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
-                        }
-                    }
                 }
+                else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
+                {
+                    collider.GetComponent<PlayerMovement>().Knock(knockTime, 0);
+                    Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
+                }
+            }
+        }
     }
 
     public void CalcIsCrit()
