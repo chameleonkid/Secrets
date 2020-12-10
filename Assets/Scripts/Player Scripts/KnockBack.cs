@@ -40,46 +40,54 @@ public class KnockBack : MonoBehaviour
 
         if (hit.gameObject.CompareTag("enemy"))
         {
-            var enemy = hit.GetComponent<Enemy>();
-            if (this.gameObject.CompareTag("Player"))
-            {
-                PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
-            }
-            else if (this.gameObject.CompareTag("arrow"))
-            {
-                PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
-            }
-            else if (this.gameObject.CompareTag("spell"))
-            {
-                PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
-                if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
-                {
-                    dotTime = 1;
-                    dotDamage = 1;
-                    dotTicks = 3;
-
-                    StartCoroutine(DamageOverTime(enemy));
-                }
-            }
+            OnHitEnemy(hit.GetComponent<Enemy>());
         }
         else if (hit.gameObject.CompareTag("Player"))
         {
-            var player = hit.GetComponent<PlayerMovement>();
-            if (player.currentState != PlayerState.stagger)
-            {
-                player.currentState = PlayerState.stagger;
-                playerInventory.calcDefense();
-                if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
-                {
-                    player.Knock(knockTime, damage - playerInventory.totalDefense);
-                    Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
+            OnHitPlayer(hit.GetComponent<PlayerMovement>());
+        }
+    }
 
-                }
-                else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
-                {
-                    player.Knock(knockTime, 0);
-                    Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
-                }
+    private void OnHitEnemy(Enemy enemy)
+    {
+        if (this.gameObject.CompareTag("Player"))
+        {
+            PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
+        }
+        else if (this.gameObject.CompareTag("arrow"))
+        {
+            PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
+        }
+        else if (this.gameObject.CompareTag("spell"))
+        {
+            PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
+            if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
+            {
+                dotTime = 1;
+                dotDamage = 1;
+                dotTicks = 3;
+
+                StartCoroutine(DamageOverTime(enemy));
+            }
+        }
+    }
+
+    private void OnHitPlayer(PlayerMovement player)
+    {
+        if (player.currentState != PlayerState.stagger)
+        {
+            player.currentState = PlayerState.stagger;
+            playerInventory.calcDefense();
+            if (damage - playerInventory.totalDefense > 0)                                  // if more Dmg than armorvalue was done
+            {
+                player.Knock(knockTime, damage - playerInventory.totalDefense);
+                Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
+
+            }
+            else                                                                            // if more amor than dmg please dont heal me with negative-dmg :)
+            {
+                player.Knock(knockTime, 0);
+                Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
             }
         }
     }
