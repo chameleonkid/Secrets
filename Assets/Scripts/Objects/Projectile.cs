@@ -37,6 +37,24 @@ public class Projectile : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    protected void OnHitReceiver(Transform receiver)
+    {
+        rigidbody.velocity = Vector2.zero;
+        collider.enabled = false;
+        Destroy(this.gameObject, destroyDelay);
+
+        AttachToReceiver(receiver);
+    }
+
+    protected void AttachToReceiver(Transform receiver)
+    {
+        if (receiver != null)
+        {
+            Destroy(rigidbody);
+            transform.SetParent(receiver);
+        }
+    }
+
     public static Quaternion CalculateRotation(Vector2 direction)
     {
         var rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg * Vector3.forward;

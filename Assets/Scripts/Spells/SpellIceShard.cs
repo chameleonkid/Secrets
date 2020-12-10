@@ -25,7 +25,7 @@ public class SpellIceShard : ProjectileTemp
                 anim.SetBool("isFlying", false);
                 StartCoroutine(SlowEnemyForSeconds(enemy));
             }
-            DestroyProjectile(other.transform);
+            OnHitReceiver(other.transform);
         }
     }
 

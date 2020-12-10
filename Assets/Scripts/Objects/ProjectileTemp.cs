@@ -10,7 +10,7 @@ public abstract class ProjectileTemp : Projectile
     {
         if (other.CompareTag("enemy"))
         {
-            DestroyProjectile(other.transform);
+            OnHitReceiver(other.transform);
         }
     }
 
@@ -20,25 +20,7 @@ public abstract class ProjectileTemp : Projectile
         {
             Debug.Log(this.name + " collided with: " + other.transform.name);
             rigidbody.velocity = Vector2.zero;
-            DestroyProjectile(other.transform);
-        }
-    }
-
-    public void DestroyProjectile(Transform other)
-    {
-        rigidbody.velocity = Vector2.zero;
-        collider.enabled = false;
-        Destroy(this.gameObject, destroyTime);
-
-        AttachToReceiver(other);
-    }
-
-    protected void AttachToReceiver(Transform receiver)
-    {
-        if (receiver != null)
-        {
-            Destroy(rigidbody);
-            transform.SetParent(receiver);
+            OnHitReceiver(other.transform);
         }
     }
 }
