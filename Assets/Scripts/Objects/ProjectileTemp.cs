@@ -2,18 +2,10 @@
 
 public abstract class ProjectileTemp : Projectile
 {
-    public bool isChild = false;
-    
     protected abstract float destroyTime { get; }
     protected abstract Collider2D projectileCollider { get; }
 
-    protected override void Update()
-    {
-        if (isChild == false && rigidbody.velocity == Vector2.zero)
-        {
-            DestroyProjectile(null);
-        }
-    }
+    protected override void Update() {} // Need empty override to disable base projectile lifetime mechanic
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,10 +17,11 @@ public abstract class ProjectileTemp : Projectile
 
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
-        if (!isChild)
+        if (rigidbody != null)
         {
             Debug.Log(this.name + " collided with: " + other.transform.name);
             rigidbody.velocity = Vector2.zero;
+            DestroyProjectile(other.transform);
         }
     }
 
@@ -37,10 +30,16 @@ public abstract class ProjectileTemp : Projectile
         rigidbody.velocity = Vector2.zero;
         projectileCollider.enabled = false;
         Destroy(this.gameObject, destroyTime);
-        
-        // Not sure what this code is for
-        Destroy(rigidbody);
-        transform.SetParent(other);
-        isChild = true;
+
+        AttachToReceiver(other);
+    }
+
+    protected void AttachToReceiver(Transform receiver)
+    {
+        if (receiver != null)
+        {
+            Destroy(rigidbody);
+            transform.SetParent(receiver);
+        }
     }
 }
