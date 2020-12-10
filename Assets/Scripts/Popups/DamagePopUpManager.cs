@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamagePopUpManager : MonoBehaviour
 {
     private static event Action<float, bool, Transform> OnDamagePopUpRequested;
+    public static void RequestDamagePopUp(float damage, Transform hit) => OnDamagePopUpRequested?.Invoke(damage, false, hit);
     public static void RequestDamagePopUp(float damage, bool isCritical, Transform hit) => OnDamagePopUpRequested?.Invoke(damage, isCritical, hit);
 
     [SerializeField] private GameObject regularPopUpPrefab = default;
@@ -16,8 +17,8 @@ public class DamagePopUpManager : MonoBehaviour
 
     private void InstantiatePopUp(float damage, bool isCritical, Transform hit) {
         var prefab = isCritical ? criticalPopUpPrefab : regularPopUpPrefab;
-        var popup = Instantiate(prefab, transform.position, Quaternion.identity, hit);
-        var text = popup.GetComponentInChildren<TextMeshPro>();
+        var popup = Instantiate(prefab, hit.position, Quaternion.identity, hit);
+        var text = popup.GetComponent<TextMeshPro>();
         if (text != null)
         {
             text.text = damage.ToString();

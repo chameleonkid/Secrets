@@ -30,7 +30,7 @@ public class DamageOverTime : Hitbox
             {
                 yield return new WaitForSeconds(tickDuration);
                 enemy.health -= tickDamage;
-                //! Need to implement damage popups at some point
+                DamagePopUpManager.RequestDamagePopUp(tickDamage, enemy.transform);
             }
         }
         Destroy(this.gameObject);
