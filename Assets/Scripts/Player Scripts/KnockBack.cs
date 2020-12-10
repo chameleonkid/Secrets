@@ -123,25 +123,20 @@ public class KnockBack : MonoBehaviour
     private void PlayerHitEnemy(Enemy enemy)
     {
         enemyTransform = enemy.transform;
-        CalcIsCrit();
-        if (isCrit == true)
+        var damage = playerInventory.currentWeapon.damage;
+        if (IsCriticalHit())
         {
-            var damage = playerInventory.currentWeapon.damage * 2;
-            enemy.health -= damage;
-            enemy.currentState = EnemyState.stagger;
-            enemy.Knock(knockTime);
+            damage *= 2;
             Debug.Log("CRITICAL STRIKE FOR " + damage);
-            DamagePopup(damage);
         }
         else
-        {
-            var damage = playerInventory.currentWeapon.damage;
-            enemy.health -= damage;
-            enemy.currentState = EnemyState.stagger;
-            enemy.Knock(knockTime);
+        { 
             Debug.Log("NORMAL STRIKE FOR " + damage);
-            DamagePopup(damage);
         }
+        enemy.health -= damage;
+        DamagePopup(damage);
+        enemy.currentState = EnemyState.stagger;
+        enemy.Knock(knockTime);
     }
 
     private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
