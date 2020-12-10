@@ -7,8 +7,6 @@ public class KnockBack : MonoBehaviour
     public float knockTime;
     public float damage;
     public PlayerInventory playerInventory;
-    [SerializeField] private DmgPopUpTextManager normalDmgPopup = default;
-    [SerializeField] private DmgPopUpTextManager critDmgPopup = default;
 
     // Knockback + dmg
     private void OnTriggerEnter2D(Collider2D other)
@@ -95,17 +93,7 @@ public class KnockBack : MonoBehaviour
             Debug.Log("NORMAL STRIKE FOR " + damage);
         }
         enemy.health -= damage;
-        DamagePopup(damage, isCritical, enemy.transform);
+        DamagePopUpManager.RequestDamagePopUp(damage, isCritical, enemy.transform);
         enemy.Knock(knockTime);
-    }
-
-    public void DamagePopup(float damage, Transform parent) => DamagePopup(damage, false, parent);
-    public void DamagePopup(float damage, bool isCritical, Transform parent)
-    {
-        if (normalDmgPopup == null || critDmgPopup == null) return;
-
-        var popup = isCritical ? critDmgPopup : normalDmgPopup;
-        var instance = Instantiate(popup, transform.position, Quaternion.identity, parent);
-        instance.SetText(damage);
     }
 }
