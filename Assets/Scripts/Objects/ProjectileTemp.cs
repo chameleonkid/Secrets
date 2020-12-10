@@ -2,8 +2,6 @@
 
 public abstract class ProjectileTemp : Projectile
 {
-    protected abstract float destroyTime { get; }
-
     [Tooltip("How long to delay calling `Destroy` after hitting a collider")]
     [SerializeField] protected float destroyDelay;
 

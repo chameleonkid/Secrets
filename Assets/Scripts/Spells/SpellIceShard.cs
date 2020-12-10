@@ -6,8 +6,6 @@ public class SpellIceShard : ProjectileTemp
     public float slowTime;
     public Animator anim;
 
-    protected override float destroyTime => slowTime + 0.25f;
-
     protected override void Awake()
     {
         anim = transform.GetComponent<Animator>();
