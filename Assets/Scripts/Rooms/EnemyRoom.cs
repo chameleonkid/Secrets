@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DungeonEnemyRoom : Room
+public class EnemyRoom : Room
 {
     public Door[] doors;
 
