@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DungeonEnemyRoom : DungeonRoom
+public class EnemyRoom : Room
 {
-
     public Door[] doors;
 
-
     //  ######################################### Function to check for enemies alive(active) #########################################
-
     public void CheckEnemies()
     {
-
         for (int i = 0; i < enemies.Length; i++)
         {
             if (enemies[i].gameObject.activeInHierarchy && i < enemies.Length - 1 )
@@ -28,10 +22,8 @@ public class DungeonEnemyRoom : DungeonRoom
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-
             virtualCamera.SetActive(true);
             //Activate all enemies
             for (int i = 0; i < enemies.Length; i++)
@@ -46,14 +38,12 @@ public class DungeonEnemyRoom : DungeonRoom
             }
             CloseDoors();
         }
-  
     }
 
     //  ######################################### Function deacticate the rooms on leaving it #########################################
 
     public override void OnTriggerExit2D(Collider2D other)
     {
-
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             //DEactivate all enemies
@@ -67,13 +57,8 @@ public class DungeonEnemyRoom : DungeonRoom
                 changeActivation(breakables[i], false);
             }
             virtualCamera.SetActive(false);
-
         }
-
     }
-
-
-
 
     //  ######################################### Function to open all doors #########################################
 
@@ -83,7 +68,6 @@ public class DungeonEnemyRoom : DungeonRoom
         {
             doors[i].Close();
         }
-
     }
     //  ######################################### Function to open all doors #########################################
 
@@ -93,7 +77,5 @@ public class DungeonEnemyRoom : DungeonRoom
         {
             doors[i].Open();
         }
-
     }
-
 }

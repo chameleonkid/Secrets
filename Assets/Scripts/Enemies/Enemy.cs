@@ -16,7 +16,33 @@ public class Enemy : Character
 
     [Header("Enemy Stats")]
     [SerializeField] protected FloatValue maxHealth = default;
-    public float health = default;
+    private float _health;
+    public float health {
+        get => _health;
+        set {
+            if (value > maxHealth.value)
+            {
+                value = maxHealth.value;
+            }
+            else if (value < 0)
+            {
+                value = 0;
+            }
+
+            if (value < _health)
+            {
+                chaseRadius = originalChaseRadius * 10;
+            }
+
+            _health = value;
+
+            if (_health <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
     [SerializeField] protected string enemyName = default;
     [SerializeField] protected int baseAttack = default;
     public float moveSpeed = default;
@@ -37,7 +63,7 @@ public class Enemy : Character
 
     protected virtual void OnEnable()
     {
-        health = maxHealth.initialValue;
+        health = maxHealth.value;
         transform.position = homePosition;
         currentState = EnemyState.idle;
     }
@@ -47,7 +73,7 @@ public class Enemy : Character
         base.Awake();
 
         homePosition = transform.position;
-        health = maxHealth.initialValue;
+        health = maxHealth.value;
         originalChaseRadius = chaseRadius;
 
         target = GameObject.FindWithTag("Player").transform;
@@ -81,21 +107,16 @@ public class Enemy : Character
 
     protected virtual void OutsideChaseRadiusUpdate() {}
 
-    public void TakeDamage(float damage)
+    private void Die()
     {
-        health -= damage;
-        chaseRadius = originalChaseRadius * 10;
-        if (health <= 0)
+        Debug.Log("0 Leben");
+        DeathEffect();
+        MakeLoot();
+        if (roomSignal != null)
         {
-            Debug.Log("0 Leben");
-            DeathEffect();
-            MakeLoot();
-            if (roomSignal != null)
-            {
-                roomSignal.Raise();
-            }
-            this.gameObject.SetActive(false);
+            roomSignal.Raise();
         }
+        this.gameObject.SetActive(false);
     }
 
     private void DeathEffect()
@@ -119,20 +140,18 @@ public class Enemy : Character
         }
     }
 
-    public void Knock(Rigidbody2D myRigidbody, float knockTime, float damage)
-    {
-        StartCoroutine(KnockCo(myRigidbody, knockTime));
-        TakeDamage(damage);
+    public void Knock(float knockTime) {
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(KnockCo(knockTime));
+        }
     }
 
-    private IEnumerator KnockCo(Rigidbody2D myRigidbody, float knockTime)
+    private IEnumerator KnockCo(float knockTime)
     {
-        if (myRigidbody != null)
-        {
-            yield return new WaitForSeconds(knockTime);
-            myRigidbody.velocity = Vector2.zero;
-            currentState = EnemyState.idle;
-            myRigidbody.velocity = Vector2.zero;
-        }
+        currentState = EnemyState.stagger;
+        yield return new WaitForSeconds(knockTime);
+        rigidbody.velocity = Vector2.zero;
+        currentState = EnemyState.idle;
     }
 }

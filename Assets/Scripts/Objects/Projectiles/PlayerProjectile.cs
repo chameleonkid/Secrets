@@ -11,6 +11,7 @@ public class PlayerProjectile : Projectile
     {
         if (other.CompareTag("enemy"))
         {
+            Debug.Log(other.name + " entered " + this.name + "'s trigger");
             OnHitReceiver(other.transform);
         }
     }
@@ -20,7 +21,6 @@ public class PlayerProjectile : Projectile
         if (rigidbody != null)
         {
             Debug.Log(this.name + " collided with: " + other.transform.name);
-            rigidbody.velocity = Vector2.zero;
             OnHitReceiver(other.transform);
         }
     }

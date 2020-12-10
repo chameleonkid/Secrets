@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu]
-[System.Serializable]
-public class FloatValue : ScriptableObject
+[System.Serializable]   // Is this attribute still necessary?
+public class FloatValue : ScriptableObject  // Should implement ISerializationCallbackReceiver and make `value = defaultValue;`?
 {
-    public float initialValue;
-
-    public float RuntimeValue;
+    // [SerializeField] private float defaultValue = default;
+    public float value;
 }
