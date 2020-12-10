@@ -25,21 +25,19 @@ public class KnockBack : MonoBehaviour
         if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Player"))
         {
             var hit = other.GetComponent<Rigidbody2D>();
-            if (hit != null)
+            if (hit != null && other.isTrigger)
             {
-                OnHit(hit, other);
+                OnHit(hit);
             }
         }
     }
 
-    private void OnHit(Rigidbody2D hit, Collider2D collider)
+    private void OnHit(Rigidbody2D hit)
     {
         var knockback = hit.transform.position - transform.position;
         knockback = knockback.normalized * thrust;
         hit.AddForce(knockback, ForceMode2D.Impulse);
 
-        if (collider.isTrigger)
-        {
             if (hit.gameObject.CompareTag("enemy"))
             {
                 var enemy = hit.GetComponent<Enemy>();
@@ -84,7 +82,6 @@ public class KnockBack : MonoBehaviour
                     }
                 }
             }
-        }
     }
 
     private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
