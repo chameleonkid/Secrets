@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeColor : MonoBehaviour
@@ -9,7 +8,6 @@ public class ChangeColor : MonoBehaviour
     [SerializeField] private SpriteRenderer regularSprite = default;
     [SerializeField] private Color iceColor = Color.blue;
     [SerializeField] private Color fireColor = Color.red;
-    // Start is called before the first frame update
 
     private void Start()
     {
@@ -21,14 +19,12 @@ public class ChangeColor : MonoBehaviour
     {
         //regularEnemyColor = enemySprite.color; this was dumb... doublehits change the color forever :)
         StartCoroutine(IceCo(timer));
-
     }
 
     public void changeColorToRed(float timer)
     {
         //regularEnemyColor = enemySprite.color; this was dumb... doublehits change the color forever :)
         StartCoroutine(FireCo(timer));
-
     }
 
 
@@ -45,7 +41,4 @@ public class ChangeColor : MonoBehaviour
         yield return new WaitForSeconds(timer);
         regularSprite.color = regularColor;
     }
-
-
 }
-
