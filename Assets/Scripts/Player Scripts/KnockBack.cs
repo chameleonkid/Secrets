@@ -124,7 +124,8 @@ public class KnockBack : MonoBehaviour
     {
         enemyTransform = enemy.transform;
         var damage = playerInventory.currentWeapon.damage;
-        if (IsCriticalHit())
+        var isCritical = IsCriticalHit();
+        if (isCritical)
         {
             damage *= 2;
             Debug.Log("CRITICAL STRIKE FOR " + damage);
@@ -134,18 +135,19 @@ public class KnockBack : MonoBehaviour
             Debug.Log("NORMAL STRIKE FOR " + damage);
         }
         enemy.health -= damage;
-        DamagePopup(damage);
+        DamagePopup(damage, isCritical);
         enemy.currentState = EnemyState.stagger;
         enemy.Knock(knockTime);
     }
 
     private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
 
-    public void DamagePopup(float damage)
+    public void DamagePopup(float damage) => DamagePopup(damage, false);
+    public void DamagePopup(float damage, bool isCritical)
     {
         if (normalDmgPopup == null) return;
 
-        if (isCrit)
+        if (isCritical)
         {
             DmgPopUpTextManager tempNumber = Instantiate(critDmgPopup, transform.position, Quaternion.identity, enemyTransform);
             tempNumber.SetText(damage);
