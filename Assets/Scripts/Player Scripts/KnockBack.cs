@@ -57,7 +57,7 @@ public class KnockBack : MonoBehaviour
         else if (this.gameObject.CompareTag("spell"))
         {
             PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
-            if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
+            if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire" && enemy.gameObject.activeInHierarchy)
             {
                 StartCoroutine(DamageOverTime(enemy, 3, 1, 1));
             }

@@ -140,7 +140,12 @@ public class Enemy : Character
         }
     }
 
-    public void Knock(float knockTime) => StartCoroutine(KnockCo(knockTime));
+    public void Knock(float knockTime) {
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(KnockCo(knockTime));
+        }
+    }
 
     private IEnumerator KnockCo(float knockTime)
     {
