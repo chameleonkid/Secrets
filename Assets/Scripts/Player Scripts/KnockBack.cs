@@ -39,27 +39,17 @@ public class KnockBack : MonoBehaviour
         var knockback = hit.transform.position - transform.position;
         knockback = knockback.normalized * thrust;
         hit.AddForce(knockback, ForceMode2D.Impulse);
-        
-        //################################## Enemy is taking Damage ###############################################################
-        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("Player"))
+
+        if (hit.gameObject.CompareTag("enemy") && collider.isTrigger)
         {
-            enemyTransform = collider.transform;
-            CalcIsCrit();
-            if (isCrit == true)
+            if (this.gameObject.CompareTag("Player"))
             {
-                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentWeapon.damage * 2);
-                Debug.Log("CRITICAL STRIKE FOR " + playerInventory.currentWeapon.damage * 2);
-                DamagePopup(playerInventory.currentWeapon.damage * 2);
-            }
-            else
-            {
-                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                collider.GetComponent<Enemy>().Knock(hit, knockTime, playerInventory.currentWeapon.damage);
-                Debug.Log("NORMAL STRIKE FOR " + playerInventory.currentWeapon.damage);
-                DamagePopup(playerInventory.currentWeapon.damage);
+                PlayerHitEnemy(hit.GetComponent<Enemy>());
             }
         }
+        
+        //################################## Enemy is taking Damage ###############################################################
+        if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("Player")) {}
         //######################################### ARROW ##################################################################
         if (collider.gameObject.CompareTag("enemy") && collider.isTrigger && this.gameObject.CompareTag("arrow"))
         {
@@ -128,6 +118,30 @@ public class KnockBack : MonoBehaviour
                     Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
                 }
             }
+        }
+    }
+
+    private void PlayerHitEnemy(Enemy enemy)
+    {
+        enemyTransform = enemy.transform;
+        CalcIsCrit();
+        if (isCrit == true)
+        {
+            var damage = playerInventory.currentWeapon.damage * 2;
+            enemy.health -= damage;
+            enemy.currentState = EnemyState.stagger;
+            enemy.Knock(knockTime);
+            Debug.Log("CRITICAL STRIKE FOR " + damage);
+            DamagePopup(damage);
+        }
+        else
+        {
+            var damage = playerInventory.currentWeapon.damage;
+            enemy.health -= damage;
+            enemy.currentState = EnemyState.stagger;
+            enemy.Knock(knockTime);
+            Debug.Log("NORMAL STRIKE FOR " + damage);
+            DamagePopup(damage);
         }
     }
 

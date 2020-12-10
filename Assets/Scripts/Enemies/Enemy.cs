@@ -140,15 +140,12 @@ public class Enemy : Character
         }
     }
 
-    public void Knock(Rigidbody2D myRigidbody, float knockTime) => StartCoroutine(KnockCo(myRigidbody, knockTime));
+    public void Knock(float knockTime) => StartCoroutine(KnockCo(knockTime));
 
-    private IEnumerator KnockCo(Rigidbody2D myRigidbody, float knockTime)
+    private IEnumerator KnockCo(float knockTime)
     {
-        if (myRigidbody != null)
-        {
-            yield return new WaitForSeconds(knockTime);
-            myRigidbody.velocity = Vector2.zero;
-            currentState = EnemyState.idle;
-        }
+        yield return new WaitForSeconds(knockTime);
+        rigidbody.velocity = Vector2.zero;
+        currentState = EnemyState.idle;
     }
 }
