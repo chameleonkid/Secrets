@@ -38,50 +38,50 @@ public class KnockBack : MonoBehaviour
         knockback = knockback.normalized * thrust;
         hit.AddForce(knockback, ForceMode2D.Impulse);
 
-            if (hit.gameObject.CompareTag("enemy"))
+        if (hit.gameObject.CompareTag("enemy"))
+        {
+            var enemy = hit.GetComponent<Enemy>();
+            if (this.gameObject.CompareTag("Player"))
             {
-                var enemy = hit.GetComponent<Enemy>();
-                if (this.gameObject.CompareTag("Player"))
+                PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
+            }
+            else if (this.gameObject.CompareTag("arrow"))
+            {
+                PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
+            }
+            else if (this.gameObject.CompareTag("spell"))
+            {
+                PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
+                if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
                 {
-                    PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
-                }
-                else if (this.gameObject.CompareTag("arrow"))
-                {
-                    PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
-                }
-                else if (this.gameObject.CompareTag("spell"))
-                {
-                    PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
-                    if (playerInventory.currentSpellbook.itemName == "Spellbook of Fire")
-                    {
-                        dotTime = 1;
-                        dotDamage = 1;
-                        dotTicks = 3;
+                    dotTime = 1;
+                    dotDamage = 1;
+                    dotTicks = 3;
 
-                        StartCoroutine(DamageOverTime(enemy));
-                    }
+                    StartCoroutine(DamageOverTime(enemy));
                 }
             }
-            else if (hit.gameObject.CompareTag("Player"))
+        }
+        else if (hit.gameObject.CompareTag("Player"))
+        {
+            var player = hit.GetComponent<PlayerMovement>();
+            if (player.currentState != PlayerState.stagger)
             {
-                var player = hit.GetComponent<PlayerMovement>();
-                if (player.currentState != PlayerState.stagger)
+                player.currentState = PlayerState.stagger;
+                playerInventory.calcDefense();
+                if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
                 {
-                    player.currentState = PlayerState.stagger;
-                    playerInventory.calcDefense();
-                    if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
-                    {
-                        player.Knock(knockTime, damage - playerInventory.totalDefense);
-                        Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
+                    player.Knock(knockTime, damage - playerInventory.totalDefense);
+                    Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
 
-                    }
-                    else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
-                    {
-                        player.Knock(knockTime, 0);
-                        Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
-                    }
+                }
+                else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
+                {
+                    player.Knock(knockTime, 0);
+                    Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
                 }
             }
+        }
     }
 
     private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
@@ -109,7 +109,7 @@ public class KnockBack : MonoBehaviour
     {
         if (normalDmgPopup == null || critDmgPopup == null) return;
 
-        var popup = isCritical? critDmgPopup : normalDmgPopup;
+        var popup = isCritical ? critDmgPopup : normalDmgPopup;
         var instance = Instantiate(popup, transform.position, Quaternion.identity, parent);
         instance.SetText(damage);
     }
