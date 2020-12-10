@@ -64,23 +64,22 @@ public class KnockBack : MonoBehaviour
                     }
                 }
             }
-
-            //################################## Player is taking Damage ###############################################################
-            if (collider.gameObject.CompareTag("Player"))
+            else if (hit.gameObject.CompareTag("Player"))
             {
-                if (collider.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
+                var player = hit.GetComponent<PlayerMovement>();
+                if (player.currentState != PlayerState.stagger)
                 {
-                    hit.GetComponent<PlayerMovement>().currentState = PlayerState.stagger;
+                    player.currentState = PlayerState.stagger;
                     playerInventory.calcDefense();
                     if (damage - playerInventory.totalDefense > 0)                                                          //if more Dmg than armorvalue was done
                     {
-                        collider.GetComponent<PlayerMovement>().Knock(knockTime, damage - playerInventory.totalDefense);
+                        player.Knock(knockTime, damage - playerInventory.totalDefense);
                         Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
 
                     }
                     else                                                                                                    //if more amor than dmg please dont heal me with negative-dmg :)
                     {
-                        collider.GetComponent<PlayerMovement>().Knock(knockTime, 0);
+                        player.Knock(knockTime, 0);
                         Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
                     }
                 }
