@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: -3089408764058353687}
   - component: {fileID: 4151532023440221885}
   - component: {fileID: 5379144640911285020}
+  - component: {fileID: -896225427814597267}
   m_Layer: 13
-  m_Name: SpellFireBall
+  m_Name: FireballSpell
   m_TagString: spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300124, guid: e883cca0e8273cb4e8b2c019e0d360ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f899fbbf44576de4e947666e6b1fc3ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,8 +138,8 @@ BoxCollider2D:
   m_Offset: {x: -0.12457681, y: -0.013200998}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -167,9 +168,6 @@ MonoBehaviour:
     type: 3}
   critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
     type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
 --- !u!82 &5379144640911285020
 AudioSource:
   m_ObjectHideFlags: 0
@@ -266,3 +264,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &-896225427814597267
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015206087574396294}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 839b99e03705825409ca9f03c7b9b66d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
