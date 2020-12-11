@@ -3,8 +3,6 @@ using System.Collections;
 
 public class KnockBack : MonoBehaviour
 {
-    public float thrust;    // Should probably rename to `force`
-    public float knockTime;
     public float damage;
     public PlayerInventory playerInventory;
 
@@ -28,10 +26,6 @@ public class KnockBack : MonoBehaviour
 
     private void OnHit(Rigidbody2D hit)
     {
-        var knockback = hit.transform.position - transform.position;
-        knockback = knockback.normalized * thrust;
-        hit.AddForce(knockback, ForceMode2D.Impulse);
-
         if (hit.gameObject.CompareTag("enemy"))
         {
             OnHitEnemy(hit.GetComponent<Enemy>());
