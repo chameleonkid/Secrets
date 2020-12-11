@@ -23,6 +23,6 @@ public class PlayerProjectile : Projectile
         Destroy(rigidbody);
         transform.SetParent(other);
 
-        lifetime = destroyDelay;
+        lifetimeCountdown = destroyDelay;
     }
 }
