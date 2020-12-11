@@ -1,19 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum EnemyState
-{
-    idle,
-    walk,
-    attack,
-    stagger
-}
-
 public class Enemy : Character
 {
-    [Header("State Machine")]
-    public EnemyState currentState = default;
-
     [Header("Enemy Stats")]
     [SerializeField] protected FloatValue maxHealth = default;
     private float _health;
@@ -65,7 +54,7 @@ public class Enemy : Character
     {
         health = maxHealth.value;
         transform.position = homePosition;
-        currentState = EnemyState.idle;
+        currentState = State.idle;
     }
 
     protected override void Awake()
@@ -94,13 +83,13 @@ public class Enemy : Character
 
     protected virtual void InsideChaseRadiusUpdate()
     {
-        if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+        if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
         {
             Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
             SetAnimatorXYSingleAxis(temp - transform.position);
             rigidbody.MovePosition(temp);
-            currentState = EnemyState.walk;
+            currentState = State.walk;
             animator.SetBool("WakeUp", true);
         }
     }
@@ -149,9 +138,9 @@ public class Enemy : Character
 
     private IEnumerator KnockCo(float knockTime)
     {
-        currentState = EnemyState.stagger;
+        currentState = State.stagger;
         yield return new WaitForSeconds(knockTime);
         rigidbody.velocity = Vector2.zero;
-        currentState = EnemyState.idle;
+        currentState = State.idle;
     }
 }

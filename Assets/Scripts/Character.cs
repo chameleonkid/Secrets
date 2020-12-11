@@ -2,6 +2,8 @@
 
 public class Character : MonoBehaviour
 {
+    public State currentState { get; protected set; }
+
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
     protected Animator animator { get ; private set; }
@@ -39,5 +41,16 @@ public class Character : MonoBehaviour
         {
             SetAnimatorXY(direction * Vector2.up);
         }
+    }
+
+    public enum State {
+        idle,
+        walk,
+        stagger,
+        interact,
+        attack,
+        roundattack,
+        lift,
+        dead
     }
 }
