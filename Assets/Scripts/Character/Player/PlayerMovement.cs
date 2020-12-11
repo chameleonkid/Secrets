@@ -186,19 +186,22 @@ public class PlayerMovement : Character
         }
     }
 
-    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed)
+    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed, float projectileDamage)
     {
         var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
         proj.rigidbody.velocity = direction.normalized * projectileSpeed;
+        var hitbox = proj.GetComponent<DamageOnTrigger>();
+        hitbox.damage = projectileDamage;
+        hitbox.isCritical = IsCriticalHit();
     }
 
     //################### instantiate arrow when shot ###############################
     private void MakeArrow()
     {
         animator.SetBool("isShooting", true);
-        CreateProjectile(projectile, arrowSpeed);
+        CreateProjectile(projectile, arrowSpeed, myInventory.currentBow.damage);
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
@@ -221,12 +224,12 @@ public class PlayerMovement : Character
     {
         if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
         {
-            CreateProjectile(fireball, fireballSpeed);
+            CreateProjectile(fireball, fireballSpeed, myInventory.currentSpellbook.SpellDamage);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
         else if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
         {
-            CreateProjectile(iceShard, iceShardSpeed);
+            CreateProjectile(iceShard, iceShardSpeed, myInventory.currentSpellbook.SpellDamage);
             mana.current -= myInventory.currentSpellbook.manaCosts;
         }
     }

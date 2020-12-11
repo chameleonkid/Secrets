@@ -40,14 +40,6 @@ public class OldHitbox : MonoBehaviour
         {
             PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
         }
-        else if (this.gameObject.CompareTag("arrow"))
-        {
-            PlayerHitEnemy(enemy, playerInventory.currentBow.damage);
-        }
-        else if (this.gameObject.CompareTag("spell"))
-        {
-            PlayerHitEnemy(enemy, playerInventory.currentSpellbook.SpellDamage);
-        }
     }
 
     private void OnHitPlayer(PlayerMovement player)
