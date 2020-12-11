@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public abstract class Hitbox : MonoBehaviour
 {
     protected virtual void OnTriggerEnter2D(Collider2D other)

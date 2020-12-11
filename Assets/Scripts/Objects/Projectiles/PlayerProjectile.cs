@@ -12,7 +12,7 @@ public class PlayerProjectile : Projectile
         if (other.CompareTag("enemy"))
         {
             Debug.Log(other.name + " entered " + this.name + "'s trigger");
-            OnHitReceiver(other.transform);
+            OnHitCollider(other.transform);
         }
     }
 
@@ -21,25 +21,16 @@ public class PlayerProjectile : Projectile
         if (rigidbody != null)
         {
             Debug.Log(this.name + " collided with: " + other.transform.name);
-            OnHitReceiver(other.transform);
+            OnHitCollider(other.transform);
         }
     }
 
-    protected void OnHitReceiver(Transform receiver)
+    protected void OnHitCollider(Transform other)
     {
-        rigidbody.velocity = Vector2.zero;
         collider.enabled = false;
+        rigidbody.velocity = Vector2.zero;  // Is this line necessary if we are destroying the rigidbody?
+        Destroy(rigidbody);
+        transform.SetParent(other);
         Destroy(this.gameObject, destroyDelay);
-
-        AttachToReceiver(receiver);
-    }
-
-    protected void AttachToReceiver(Transform receiver)
-    {
-        if (receiver != null)
-        {
-            Destroy(rigidbody);
-            transform.SetParent(receiver);
-        }
     }
 }

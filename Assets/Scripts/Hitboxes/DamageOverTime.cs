@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class DamageOverTime : Hitbox
 {
     [Tooltip("How many times should tick damage be applied?")]

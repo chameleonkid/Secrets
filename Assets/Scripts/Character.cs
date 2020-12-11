@@ -55,8 +55,8 @@ public abstract class Character : MonoBehaviour
 
     protected IEnumerator KnockbackCo(Vector2 knockback, float duration)
     {
-        rigidbody.AddForce(knockback, ForceMode2D.Impulse);
         currentState = State.stagger;
+        rigidbody.AddForce(knockback, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         rigidbody.velocity = Vector2.zero;
         currentState = State.idle;
