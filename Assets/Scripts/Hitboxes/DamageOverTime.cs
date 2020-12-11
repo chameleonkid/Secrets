@@ -33,6 +33,5 @@ public class DamageOverTime : Hitbox
                 hit.health -= tickDamage;
             }
         }
-        Destroy(this.gameObject);
     }
 }

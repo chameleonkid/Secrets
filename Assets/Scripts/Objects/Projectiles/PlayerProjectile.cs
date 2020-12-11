@@ -22,6 +22,7 @@ public class PlayerProjectile : Projectile
         rigidbody.velocity = Vector2.zero;  // Is this line necessary if we are destroying the rigidbody?
         Destroy(rigidbody);
         transform.SetParent(other);
-        Destroy(this.gameObject, destroyDelay);
+
+        lifetime = destroyDelay;
     }
 }
