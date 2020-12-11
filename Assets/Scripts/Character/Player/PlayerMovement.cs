@@ -284,6 +284,23 @@ public class PlayerMovement : Character
        }
     */
 
+    public override void TakeDamage(float damage)
+    {
+        if (currentState != State.stagger) //! Unreliable! Cannot determine execution order between this and knockback (where `FlashCo` disables the player's trigger collider). Consider adding a private float timer to Player/Character to properly implement invincibility frames.
+        {
+            myInventory.calcDefense();
+            if (damage - myInventory.totalDefense > 0)              // if more Dmg than armorvalue was done
+            {
+                health -= damage - myInventory.totalDefense;
+                Debug.Log(damage - myInventory.totalDefense + " taken with armor!");
+            }
+            else                                                        // if more amor than dmg please dont heal me with negative-dmg :)
+            {
+                Debug.Log(damage - myInventory.totalDefense + " not enough DMG to pierce the armor!");
+            }
+        }
+    }
+
     // ########################### Getting hit and die ##############################################
 
     public override void Knockback(Vector2 knockback, float duration)
