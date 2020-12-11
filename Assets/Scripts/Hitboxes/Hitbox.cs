@@ -21,7 +21,7 @@ public abstract class Hitbox : MonoBehaviour
     {
         var hitbox = this.gameObject;
         var isPlayerHitbox = hitbox.CompareTag("Player") || hitbox.CompareTag("arrow") || hitbox.CompareTag("spell");
-        var isEnemyHitbox = hitbox.CompareTag("enemy");
+        var isEnemyHitbox = hitbox.CompareTag("enemy") || hitbox.CompareTag("enemySpell");
 
         var hitPlayer = other.CompareTag("Player");
         var hitEnemy = other.CompareTag("enemy");
