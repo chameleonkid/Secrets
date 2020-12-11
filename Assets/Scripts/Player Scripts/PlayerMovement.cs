@@ -12,7 +12,17 @@ public class PlayerMovement : Character
     [SerializeField] private FloatMeter _mana = default;
     public FloatMeter mana => _mana;
     [SerializeField] private FloatMeter _health = default;
-    public FloatMeter health => _health;
+    public FloatMeter healthMeter => _health;
+    public override float health {
+        get => _health.current;
+        set {
+            _health.current = value;
+            if (_health.current < 0)
+            {
+                StartCoroutine(DeathCo());
+            }
+        }
+    }
 
     public VectorValue startingPosition;
 
@@ -47,9 +57,6 @@ public class PlayerMovement : Character
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
-
-    private void OnEnable() => health.OnCurrentChanged += DeathCheck;
-    private void OnDisable() => health.OnCurrentChanged -= DeathCheck;
 
     private void Start()
     {
@@ -274,22 +281,14 @@ public class PlayerMovement : Character
 
     public override void Knockback(Vector2 knockback, float duration)
     {
-        if (currentState != State.stagger && this.gameObject.activeInHierarchy && health.current > 0)
+        if (currentState != State.stagger && this.gameObject.activeInHierarchy)
         {
             StartCoroutine(KnockbackCo(knockback, duration));
-            StartCoroutine(FlashCo());
+            StartCoroutine(FlashCo());  // Potentially refactor into health property
         }
     }
 
     //##################### Death animation and screen ##############################
-
-    private void DeathCheck()
-    {
-        if (health.current >= 0)
-        {
-            StartCoroutine(DeathCo());
-        }
-    }
 
     private IEnumerator DeathCo()
     {

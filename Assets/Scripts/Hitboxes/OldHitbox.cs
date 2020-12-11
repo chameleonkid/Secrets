@@ -57,7 +57,7 @@ public class OldHitbox : MonoBehaviour
             playerInventory.calcDefense();
             if (damage - playerInventory.totalDefense > 0)              // if more Dmg than armorvalue was done
             {
-                player.health.current -= damage - playerInventory.totalDefense;
+                player.health -= damage - playerInventory.totalDefense;
                 Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
             }
             else                                                        // if more amor than dmg please dont heal me with negative-dmg :)

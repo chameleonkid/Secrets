@@ -9,8 +9,8 @@ public class HeartContainer : PickUp
         var player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            player.health.max += amountToIncrease;
-            player.health.current = player.health.max;
+            player.healthMeter.max += amountToIncrease;
+            player.health = player.healthMeter.max;
             Destroy(this.gameObject);
         }
     }

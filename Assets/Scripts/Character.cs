@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     public State currentState { get; protected set; }
+    public abstract float health { get; set; }
 
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }

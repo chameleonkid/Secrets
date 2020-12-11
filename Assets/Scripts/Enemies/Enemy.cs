@@ -5,7 +5,7 @@ public class Enemy : Character
     [Header("Enemy Stats")]
     [SerializeField] protected FloatValue maxHealth = default;
     private float _health;
-    public float health {
+    public override float health {
         get => _health;
         set {
             if (value > maxHealth.value)
