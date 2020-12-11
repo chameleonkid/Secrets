@@ -13,7 +13,7 @@ public class DamageOverTime : Hitbox
     protected override void OnHit(Collider2D other)
     {
         var hit = other.GetComponent<Character>();
-        if (hit != null)
+        if (hit != null && hit.gameObject.activeInHierarchy)
         {
             hit.StartCoroutine(DamageOverTimeCo(hit));
         }

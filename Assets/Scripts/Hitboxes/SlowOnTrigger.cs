@@ -9,7 +9,7 @@ public class SlowOnTrigger : Hitbox
     protected override void OnHit(Collider2D other)
     {
         var hit = other.GetComponent<Enemy>();
-        if (hit != null)
+        if (hit != null && hit.gameObject.activeInHierarchy)
         {
             hit.StartCoroutine(SlowCo(hit));
         }
