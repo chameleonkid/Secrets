@@ -23,7 +23,7 @@ public class IceShardSpell : PlayerProjectile
                 anim.SetBool("isFlying", false);
                 StartCoroutine(SlowEnemyForSeconds(enemy));
             }
-            OnHitReceiver(other.transform);
+            OnHitCollider(other.transform);
         }
     }
 
