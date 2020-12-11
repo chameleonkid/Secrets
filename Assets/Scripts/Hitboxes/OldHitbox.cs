@@ -69,11 +69,10 @@ public class OldHitbox : MonoBehaviour
         }
     }
 
-    private bool IsCriticalHit() => (playerInventory.totalCritChance > 0 && Random.Range(0, 99) <= playerInventory.totalCritChance);
-
     private void PlayerHitEnemy(Enemy enemy, float damage)
     {
-        var isCritical = IsCriticalHit();
+        // TEMP!
+        var isCritical = false; // IsCriticalHit();
         if (isCritical)
         {
             damage *= 2;

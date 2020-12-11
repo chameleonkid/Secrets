@@ -146,6 +146,8 @@ public class PlayerMovement : Character
         }
     }
 
+    public bool IsCriticalHit() => (myInventory.totalCritChance > 0 && Random.Range(0, 99) <= myInventory.totalCritChance);
+
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
