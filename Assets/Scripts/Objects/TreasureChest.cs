@@ -18,6 +18,8 @@ public class TreasureChest : Interactable
 
     [Header("Animation")]
     private Animator anim;
+
+    public SoundManager soundManager;
     
     
 
@@ -25,7 +27,7 @@ public class TreasureChest : Interactable
     // Start is called before the first frame update
     void Start()
     {
-       isOpen = storeOpen.RuntimeValue;
+        isOpen = storeOpen.RuntimeValue;
         anim = GetComponent<Animator>();
         if(isOpen)
         {
@@ -58,9 +60,11 @@ public class TreasureChest : Interactable
         playerInventory.Add(contents);
 
         // raise the signal to animate
+        
         raiseItem.Raise();
         // set the chest to opened
         isOpen = true;
+        //soundManager.PlayChestSound();
         //raise the context clue to off
         contextOff.Raise();
         anim.SetBool("opened", true);
