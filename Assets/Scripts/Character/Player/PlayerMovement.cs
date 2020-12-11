@@ -92,6 +92,7 @@ public class PlayerMovement : Character
             // Debug.Log("Attack");
             //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(AttackCo());
+            soundManager.PlayAttackSound();
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
         if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
