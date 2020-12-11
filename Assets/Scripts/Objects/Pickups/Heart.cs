@@ -9,7 +9,7 @@ public class Heart : PickUp
         var player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            player.health.current += amountToIncrease;
+            player.health += amountToIncrease;
             Destroy(this.gameObject);
         }
     }

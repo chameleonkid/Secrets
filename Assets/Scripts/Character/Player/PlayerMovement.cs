@@ -2,22 +2,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum PlayerState
-{
-    walk,
-    attack,
-    interact,
-    roundattack,
-    stagger,
-    idle,
-    lift,
-    dead
-}
-
 public class PlayerMovement : Character
 {
-    public PlayerState currentState;
-
     [SerializeField] private float _speed = default;
     private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
 
@@ -26,7 +12,17 @@ public class PlayerMovement : Character
     [SerializeField] private FloatMeter _mana = default;
     public FloatMeter mana => _mana;
     [SerializeField] private FloatMeter _health = default;
-    public FloatMeter health => _health;
+    public FloatMeter healthMeter => _health;
+    public override float health {
+        get => _health.current;
+        set {
+            _health.current = value;
+            if (_health.current < 0)
+            {
+                StartCoroutine(DeathCo());
+            }
+        }
+    }
 
     public VectorValue startingPosition;
 
@@ -65,7 +61,7 @@ public class PlayerMovement : Character
     private void Start()
     {
         SetAnimatorXY(Vector2.down);
-        currentState = PlayerState.walk;
+        currentState = State.walk;
 
         transform.position = startingPosition.value;
 
@@ -77,7 +73,7 @@ public class PlayerMovement : Character
     private void Update()
     {
         // Is the player in an interaction?
-        if (currentState == PlayerState.interact)
+        if (currentState == State.interact)
         {
             // Debug.Log("helpmeout");
             return;
@@ -89,21 +85,21 @@ public class PlayerMovement : Character
 
         animator.SetBool("isRunning", Input.GetButton("Run"));
 
-        var notStaggeredOrLifting = (currentState != PlayerState.stagger && currentState != PlayerState.lift);
+        var notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
 
-        if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
+        if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
         {
             // Debug.Log("Attack");
             StartCoroutine(AttackCo());
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack") && currentState != PlayerState.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             // Debug.Log("RoundAttack");
             StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
-        if (Input.GetButton("UseItem") && currentState != PlayerState.roundattack && notStaggeredOrLifting && currentState != PlayerState.attack)
+        if (Input.GetButton("UseItem") && currentState != State.roundattack && notStaggeredOrLifting && currentState != State.attack)
         {
             var arrows = myInventory.myInventory.Find(x => x.itemName.Contains("Arrow"));
             if (arrows && arrows.numberHeld > 0 && myInventory.currentBow)
@@ -113,7 +109,7 @@ public class PlayerMovement : Character
             }
         }
         //############################################################################### Spell Cast ###############################################################################
-        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != PlayerState.attack)
+        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack)
         {
             StartCoroutine(SpellAttackCo());
         }
@@ -124,11 +120,11 @@ public class PlayerMovement : Character
             animator.SetBool("isShooting", false);
         }
 
-        animator.SetBool("isHurt", (currentState == PlayerState.stagger));
+        animator.SetBool("isHurt", (currentState == State.stagger));
         animator.SetBool("Moving", (change != Vector3.zero));
 
         // ################################# Trying to drop things ################################################################
-        // if (Input.GetButtonDown("Lift") && currentState == PlayerState.lift)
+        // if (Input.GetButtonDown("Lift") && currentState == State.lift)
         // {
         //     LiftItem();
         //     Debug.Log("Item Dropped!");
@@ -139,12 +135,12 @@ public class PlayerMovement : Character
 
     private void FixedUpdate()
     {
-        if (currentState == PlayerState.walk || currentState == PlayerState.idle || currentState == PlayerState.lift)
+        if (currentState == State.walk || currentState == State.idle || currentState == State.lift)
         {
             rigidbody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
         }
 
-        if (currentState != PlayerState.stagger)
+        if (currentState != State.stagger)
         {
             rigidbody.velocity = Vector2.zero;
         }
@@ -154,13 +150,13 @@ public class PlayerMovement : Character
     private IEnumerator AttackCo()
     {
         animator.SetBool("Attacking", true);
-        currentState = PlayerState.attack;
+        currentState = State.attack;
         yield return null;
         animator.SetBool("Attacking", false);
         yield return new WaitForSeconds(0.3f);
-        if (currentState != PlayerState.interact)
+        if (currentState != State.interact)
         {
-            currentState = PlayerState.walk;
+            currentState = State.walk;
         }
     }
 
@@ -168,10 +164,10 @@ public class PlayerMovement : Character
     private IEnumerator RoundAttackCo()
     {
         animator.SetBool("RoundAttacking", true);
-        currentState = PlayerState.roundattack;
+        currentState = State.roundattack;
         yield return null;
         animator.SetBool("RoundAttacking", false);
-        currentState = PlayerState.walk;
+        currentState = State.walk;
 
         mana.current -= 1;
     }
@@ -179,12 +175,12 @@ public class PlayerMovement : Character
     // ############################## Using the Item / Shooting the Bow #########################################
     private IEnumerator SecondAttackCo()
     {
-        currentState = PlayerState.attack;
+        currentState = State.attack;
         MakeArrow();
         yield return new WaitForSeconds(0.3f);
-        if (currentState != PlayerState.interact)
+        if (currentState != State.interact)
         {
-            currentState = PlayerState.walk;
+            currentState = State.walk;
         }
     }
 
@@ -193,7 +189,7 @@ public class PlayerMovement : Character
         var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
-        proj.rigidbody.velocity = direction * projectileSpeed;
+        proj.rigidbody.velocity = direction.normalized * projectileSpeed;
     }
 
     //################### instantiate arrow when shot ###############################
@@ -207,12 +203,12 @@ public class PlayerMovement : Character
     private IEnumerator SpellAttackCo()
     {
         animator.SetBool("isCasting", true); // Set to cast Animation
-        currentState = PlayerState.attack;
+        currentState = State.attack;
         MakeSpell();
         yield return new WaitForSeconds(0.3f);
-        if (currentState != PlayerState.interact)
+        if (currentState != State.interact)
         {
-            currentState = PlayerState.walk;
+            currentState = State.walk;
         }
         animator.SetBool("isCasting", false);
 
@@ -239,16 +235,16 @@ public class PlayerMovement : Character
     {
         if (myInventory.currentItem != null)
         {
-            if (currentState != PlayerState.interact)
+            if (currentState != State.interact)
             {
                 animator.SetBool("receiveItem", true);
-                currentState = PlayerState.interact;
+                currentState = State.interact;
                 receivedItemSprite.sprite = myInventory.currentItem.itemImage;
             }
             else
             {
                 animator.SetBool("receiveItem", false);
-                currentState = PlayerState.idle;
+                currentState = State.idle;
                 receivedItemSprite.sprite = null;
                 myInventory.currentItem = null;
             }
@@ -261,18 +257,18 @@ public class PlayerMovement : Character
        {
            if (playerInventory.currentItem != null)
            {
-               if (currentState != PlayerState.lift)
+               if (currentState != State.lift)
                {             
                    animator.SetBool("isCarrying", true);
-                   currentState = PlayerState.lift;
-                   Debug.Log("PlayerState = Lift");
+                   currentState = State.lift;
+                   Debug.Log("State = Lift");
                    thingSprite.sprite = myInventory.currentItem.itemImage;
                }
                else
                {   
                    animator.SetBool("isCarrying", false);
-                   currentState = PlayerState.idle;
-                   Debug.Log("Playerstate = idle");
+                   currentState = State.idle;
+                   Debug.Log("State = idle");
                    thingSprite.sprite = null;
 
                    myInventory.currentItem = null;
@@ -283,35 +279,20 @@ public class PlayerMovement : Character
 
     // ########################### Getting hit and die ##############################################
 
-    public void Knock(float knockTime, float damage)
+    public override void Knockback(Vector2 knockback, float duration)
     {
-        health.current -= damage;
-        if (health.current > 0)
+        if (currentState != State.stagger && this.gameObject.activeInHierarchy)
         {
-
-            StartCoroutine(KnockCo(knockTime));
+            StartCoroutine(KnockbackCo(knockback, duration));
+            StartCoroutine(FlashCo());  // Potentially refactor into health property
         }
-        else
-        {
-            StartCoroutine(DeathCo());
-        }
-    }
-
-    //############################# Knockback ################################################
-
-    private IEnumerator KnockCo(float knockTime)
-    {
-        StartCoroutine(FlashCo());
-        yield return new WaitForSeconds(knockTime);
-        currentState = PlayerState.idle;
-        rigidbody.velocity = Vector2.zero;
     }
 
     //##################### Death animation and screen ##############################
 
     private IEnumerator DeathCo()
     {
-        currentState = PlayerState.dead;
+        currentState = State.dead;
         animator.SetBool("isDead", true);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("DeathMenu");
@@ -321,7 +302,7 @@ public class PlayerMovement : Character
 
     private IEnumerator FlashCo()
     {
-        triggerCollider.enabled = false;
+        triggerCollider.enabled = false;    //! Refer to comment in `OldHitbox`
 
         for (int i = 0; i < numberOfFlasches; i++)
         {
@@ -335,6 +316,6 @@ public class PlayerMovement : Character
             yield return new WaitForSeconds(flashDuration);
         }
 
-        triggerCollider.enabled = true;
+        triggerCollider.enabled = true; //! Refer to comment in `OldHitbox`
     }
 }

@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
+    public State currentState { get; protected set; }
+    public abstract float health { get; set; }
+
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
     protected Animator animator { get ; private set; }
@@ -39,5 +43,33 @@ public class Character : MonoBehaviour
         {
             SetAnimatorXY(direction * Vector2.up);
         }
+    }
+
+    public virtual void Knockback(Vector2 knockback, float duration)
+    {
+        if (this.gameObject.activeInHierarchy && currentState != State.stagger)
+        {
+            StartCoroutine(KnockbackCo(knockback, duration));
+        }
+    }
+
+    protected IEnumerator KnockbackCo(Vector2 knockback, float duration)
+    {
+        currentState = State.stagger;
+        rigidbody.AddForce(knockback, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(duration);
+        rigidbody.velocity = Vector2.zero;
+        currentState = State.idle;
+    }
+
+    public enum State {
+        idle,
+        walk,
+        stagger,
+        interact,
+        attack,
+        roundattack,
+        lift,
+        dead
     }
 }

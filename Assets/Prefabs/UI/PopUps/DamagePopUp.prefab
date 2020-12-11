@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 848245373403009881}
   - component: {fileID: 7988995582243901853}
   - component: {fileID: 2929488450942400687}
-  - component: {fileID: -6258172241765794015}
-  - component: {fileID: 8336316714318442644}
+  - component: {fileID: 7855379816653498160}
   m_Layer: 8
-  m_Name: CritPopUp
+  m_Name: DamagePopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,8 +124,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4282431743
+  m_fontColor: {r: 1, g: 0.72028226, b: 0.25, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -144,8 +143,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 5
-  m_fontSizeBase: 5
+  m_fontSize: 3
+  m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -190,7 +189,7 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -208,20 +207,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
---- !u!114 &-6258172241765794015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131357049050222751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eb6daddde82b3a4795fe4e564e91c3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textfield: {fileID: 2929488450942400687}
---- !u!95 &8336316714318442644
+--- !u!95 &7855379816653498160
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -231,7 +217,7 @@ Animator:
   m_GameObject: {fileID: 1131357049050222751}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0b2c56ec5ae29ef41a5d6e6ff82b2525, type: 2}
+  m_Controller: {fileID: 9100000, guid: c6e8f96c2105d3d499cb93de2773e7e9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

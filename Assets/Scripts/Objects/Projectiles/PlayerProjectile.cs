@@ -2,44 +2,27 @@
 
 public class PlayerProjectile : Projectile
 {
-    [Tooltip("How long to delay calling `Destroy` after hitting a collider")]
+    [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
     [SerializeField] protected float destroyDelay;
-
-    protected override void Update() {} // Need empty override to disable base projectile lifetime mechanic
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("enemy"))
         {
-            Debug.Log(other.name + " entered " + this.name + "'s trigger");
-            OnHitReceiver(other.transform);
+            OnHitCollider(other.transform);
         }
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D other)
-    {
-        if (rigidbody != null)
-        {
-            Debug.Log(this.name + " collided with: " + other.transform.name);
-            OnHitReceiver(other.transform);
-        }
-    }
+    protected virtual void OnCollisionEnter2D(Collision2D other) => OnHitCollider(other.transform);
 
-    protected void OnHitReceiver(Transform receiver)
+    protected void OnHitCollider(Transform other)
     {
-        rigidbody.velocity = Vector2.zero;
+        Debug.Log(this.name + " hit " + other.name);
         collider.enabled = false;
-        Destroy(this.gameObject, destroyDelay);
+        rigidbody.velocity = Vector2.zero;  // Is this line necessary if we are destroying the rigidbody?
+        Destroy(rigidbody);
+        transform.SetParent(other);
 
-        AttachToReceiver(receiver);
-    }
-
-    protected void AttachToReceiver(Transform receiver)
-    {
-        if (receiver != null)
-        {
-            Destroy(rigidbody);
-            transform.SetParent(receiver);
-        }
+        lifetime = destroyDelay;
     }
 }

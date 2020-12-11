@@ -28,11 +28,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Projectile is collided with " + other.gameObject.name);
-        Destroy(this.gameObject);
-    }
+    protected virtual void OnTriggerEnter2D(Collider2D other) => Destroy(this.gameObject);
 
     public static Quaternion CalculateRotation(Vector2 direction)
     {
