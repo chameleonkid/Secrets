@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class KnockBack : MonoBehaviour
+public class OldHitbox : MonoBehaviour
 {
     public float damage;
     public PlayerInventory playerInventory;
@@ -54,20 +53,17 @@ public class KnockBack : MonoBehaviour
 
     private void OnHitPlayer(PlayerMovement player)
     {
-        if (player.currentState != PlayerState.stagger)
+        if (player.currentState != Character.State.stagger)
         {
-            player.currentState = PlayerState.stagger;
             playerInventory.calcDefense();
-            if (damage - playerInventory.totalDefense > 0)                                  // if more Dmg than armorvalue was done
+            if (damage - playerInventory.totalDefense > 0)              // if more Dmg than armorvalue was done
             {
-                player.Knock(knockTime, damage - playerInventory.totalDefense);
+                player.health.current -= damage - playerInventory.totalDefense;
                 Debug.Log(damage - playerInventory.totalDefense + " taken with armor!");
-
             }
-            else                                                                            // if more amor than dmg please dont heal me with negative-dmg :)
+            else                                                        // if more amor than dmg please dont heal me with negative-dmg :)
             {
-                player.Knock(knockTime, 0);
-                Debug.Log(damage - playerInventory.totalDefense + " not enaugh DMG to pierce the armor");
+                Debug.Log(damage - playerInventory.totalDefense + " not enough DMG to pierce the armor!");
             }
         }
     }
@@ -88,6 +84,5 @@ public class KnockBack : MonoBehaviour
         }
         enemy.health -= damage;
         DamagePopUpManager.RequestDamagePopUp(damage, isCritical, enemy.transform);
-        enemy.Knock(knockTime);
     }
 }
