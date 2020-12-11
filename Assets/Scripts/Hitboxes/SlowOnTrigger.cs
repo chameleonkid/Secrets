@@ -11,7 +11,7 @@ public class SlowOnTrigger : Hitbox
         var hit = other.GetComponent<Enemy>();
         if (hit != null)
         {
-            StartCoroutine(SlowCo(hit));
+            hit.StartCoroutine(SlowCo(hit));
         }
     }
 
