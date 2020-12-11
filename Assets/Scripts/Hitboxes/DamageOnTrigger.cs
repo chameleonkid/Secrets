@@ -46,6 +46,14 @@ public class DamageOnTrigger : Hitbox
                 hit.health -= dmg; //this was hit.health -= (damage);  but i dont think this made sense???
                 DamagePopUpManager.RequestDamagePopUp(dmg, isCritical, hit.transform);
             }
+            if (this.gameObject.CompareTag("arrow"))
+            {
+                damage = this.GetComponentInParent<PlayerMovement>().myInventory.currentBow.damage; //how can i get a reference to the playerInventory...
+                var dmg = isCritical ? damage * 2 : damage;
+                Debug.Log(this + " hit " + other + " for " + dmg + " and it was critical? " + isCritical);
+                hit.health -= dmg; //this was hit.health -= (damage);  but i dont think this made sense???
+                DamagePopUpManager.RequestDamagePopUp(dmg, isCritical, hit.transform);
+            }
 
 
 
