@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class OldHitbox : MonoBehaviour
+public class BreakableSmasher : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
