@@ -2,23 +2,29 @@
 
 public abstract class Hitbox : MonoBehaviour
 {
-    [Tooltip("The tag this hitbox is able to affect")]
-    [SerializeField] private Tag[] targetTag = default;
-
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.isTrigger)
         {
-            for (int i = 0; i < targetTag.Length; i++)
+            if (HitTarget(other.gameObject))
             {
-                if (other.CompareTag(targetTag[i].ToString()))
-                {
-                    OnHit(other);
-                    return;
-                }
+                OnHit(other);
+                return;
             }
         }
     }
 
     protected abstract void OnHit(Collider2D other);
+
+    protected bool HitTarget(GameObject other)
+    {
+        var hitbox = this.gameObject;
+        var isPlayerHitbox = hitbox.CompareTag("Player") || hitbox.CompareTag("arrow") || hitbox.CompareTag("spell");
+        var isEnemyHitbox = hitbox.CompareTag("enemy");
+
+        var hitPlayer = other.CompareTag("Player");
+        var hitEnemy = other.CompareTag("enemy");
+
+        return (isPlayerHitbox && hitEnemy) || (isEnemyHitbox && hitPlayer);
+    }
 }
