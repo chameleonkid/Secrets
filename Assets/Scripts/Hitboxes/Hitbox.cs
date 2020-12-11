@@ -3,14 +3,20 @@
 [RequireComponent(typeof(Collider2D))]
 public abstract class Hitbox : MonoBehaviour
 {
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    [Tooltip("Enable this if the hitbox collider should only affect one hurtbox in its lifetime.")]
+    [SerializeField] private bool disableWhenHit = false;
+    private new Collider2D collider;
+
+    private void Awake() => collider = GetComponent<Collider2D>();
+
+    protected void OnTriggerEnter2D(Collider2D other)
     {
         if (other.isTrigger)
         {
             if (HitTarget(other.gameObject))
             {
                 OnHit(other);
-                return;
+                collider.enabled = !disableWhenHit;
             }
         }
     }

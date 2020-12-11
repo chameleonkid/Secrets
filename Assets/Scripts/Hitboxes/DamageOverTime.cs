@@ -15,7 +15,6 @@ public class DamageOverTime : Hitbox
         var hit = other.GetComponent<Character>();
         if (hit != null)
         {
-            GetComponent<Collider2D>().enabled = false; // Disable this collider to prevent from affecting multiple enemies
             hit.StartCoroutine(DamageOverTimeCo(hit));
         }
     }
