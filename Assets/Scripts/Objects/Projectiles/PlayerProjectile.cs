@@ -5,8 +5,6 @@ public class PlayerProjectile : Projectile
     [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
     [SerializeField] protected float destroyDelay;
 
-    protected override void Update() {} // Need empty override to disable base projectile lifetime mechanic
-
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("enemy"))
