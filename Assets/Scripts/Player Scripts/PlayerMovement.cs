@@ -48,6 +48,9 @@ public class PlayerMovement : Character
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
 
+    private void OnEnable() => health.OnCurrentChanged += DeathCheck;
+    private void OnDisable() => health.OnCurrentChanged -= DeathCheck;
+
     private void Start()
     {
         SetAnimatorXY(Vector2.down);
@@ -269,31 +272,24 @@ public class PlayerMovement : Character
 
     // ########################### Getting hit and die ##############################################
 
-    public void Knock(float knockTime, float damage)
+    public override void Knockback(Vector2 knockback, float duration)
     {
-        health.current -= damage;
-        if (health.current > 0)
+        if (currentState != State.stagger && this.gameObject.activeInHierarchy && health.current > 0)
         {
-
-            StartCoroutine(KnockCo(knockTime));
+            StartCoroutine(KnockbackCo(knockback, duration));
+            StartCoroutine(FlashCo());
         }
-        else
+    }
+
+    //##################### Death animation and screen ##############################
+
+    private void DeathCheck()
+    {
+        if (health.current >= 0)
         {
             StartCoroutine(DeathCo());
         }
     }
-
-    //############################# Knockback ################################################
-
-    private IEnumerator KnockCo(float knockTime)
-    {
-        StartCoroutine(FlashCo());
-        yield return new WaitForSeconds(knockTime);
-        currentState = State.idle;
-        rigidbody.velocity = Vector2.zero;
-    }
-
-    //##################### Death animation and screen ##############################
 
     private IEnumerator DeathCo()
     {
