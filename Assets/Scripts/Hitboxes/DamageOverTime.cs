@@ -13,25 +13,25 @@ public class DamageOverTime : Hitbox
 
     protected override void OnHit(Collider2D other)
     {
-        var enemy = other.GetComponent<Enemy>();
-        if (enemy != null)
+        var hit = other.GetComponent<Character>();
+        if (hit != null)
         {
             GetComponent<Collider2D>().enabled = false; // Disable this collider to prevent from affecting multiple enemies
-            StartCoroutine(DamageOverTimeCo(enemy));
+            StartCoroutine(DamageOverTimeCo(hit));
         }
     }
 
-    private IEnumerator DamageOverTimeCo(Enemy enemy)
+    private IEnumerator DamageOverTimeCo(Character hit)
     {
-        DamagePopUpManager.RequestDamagePopUp(tickDamage, enemy.transform);
-        enemy.health -= tickDamage; // Tick once on hit
+        DamagePopUpManager.RequestDamagePopUp(tickDamage, hit.transform);
+        hit.health -= tickDamage; // Tick once on hit
         for (int i = 1; i < ticks; i++)
         {
-            if (enemy != null)
+            if (hit != null)
             {
                 yield return new WaitForSeconds(tickDuration);
-                DamagePopUpManager.RequestDamagePopUp(tickDamage, enemy.transform);
-                enemy.health -= tickDamage;
+                DamagePopUpManager.RequestDamagePopUp(tickDamage, hit.transform);
+                hit.health -= tickDamage;
             }
         }
         Destroy(this.gameObject);
