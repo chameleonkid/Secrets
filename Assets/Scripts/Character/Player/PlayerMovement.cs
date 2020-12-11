@@ -295,15 +295,12 @@ public class PlayerMovement : Character
         if (currentState != State.stagger) //! Unreliable! Cannot determine execution order between this and knockback (where `FlashCo` disables the player's trigger collider). Consider adding a private float timer to Player/Character to properly implement invincibility frames.
         {
             myInventory.calcDefense();
-            if (damage - myInventory.totalDefense > 0)              // if more Dmg than armorvalue was done
+            var finalDamage = damage - myInventory.totalDefense;
+            if (finalDamage > 0)
             {
-                health -= damage - myInventory.totalDefense;
-                Debug.Log(damage - myInventory.totalDefense + " taken with armor!");
+                health -= finalDamage;
             }
-            else                                                        // if more amor than dmg please dont heal me with negative-dmg :)
-            {
-                Debug.Log(damage - myInventory.totalDefense + " not enough DMG to pierce the armor!");
-            }
+            Debug.Log(finalDamage + " damage after defense calculation.");
         }
     }
 
