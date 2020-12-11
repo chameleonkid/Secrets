@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 5882766546931061717}
   - component: {fileID: 103994057321240014}
   - component: {fileID: 3084345826519001305}
+  - component: {fileID: 343156486531304}
   m_Layer: 11
   m_Name: left hit box
   m_TagString: Player
@@ -235,17 +236,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
+--- !u!114 &343156486531304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785500351677652065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 01000000
+  force: 3
+  duration: 0.2
 --- !u!1 &1008961017305412658
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +264,7 @@ GameObject:
   - component: {fileID: 5552426999376239297}
   - component: {fileID: 3327010518003963128}
   - component: {fileID: 7765557}
+  - component: {fileID: 6149378656150506650}
   m_Layer: 11
   m_Name: round hit box
   m_TagString: Player
@@ -290,17 +298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
 --- !u!58 &7765557
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -317,6 +316,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &6149378656150506650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008961017305412658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 01000000
+  force: 3
+  duration: 0.2
 --- !u!1 &2909321155673498771
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +342,7 @@ GameObject:
   - component: {fileID: 2995446615097044486}
   - component: {fileID: 1397228304391159584}
   - component: {fileID: 9210356173545002712}
+  - component: {fileID: 7432213353813145744}
   m_Layer: 11
   m_Name: up hit box
   m_TagString: Player
@@ -393,17 +408,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
+--- !u!114 &7432213353813145744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909321155673498771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 01000000
+  force: 3
+  duration: 0.2
 --- !u!1 &2941173148762560976
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,6 +436,7 @@ GameObject:
   - component: {fileID: 7386416087526534773}
   - component: {fileID: 9074679617765472610}
   - component: {fileID: 1987021321051761730}
+  - component: {fileID: 2892631000908655613}
   m_Layer: 11
   m_Name: right hit box
   m_TagString: Player
@@ -481,17 +503,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
+--- !u!114 &2892631000908655613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941173148762560976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 01000000
+  force: 3
+  duration: 0.2
 --- !u!1 &4382020920128985596
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +531,7 @@ GameObject:
   - component: {fileID: 1780702652187201745}
   - component: {fileID: 4492131320186280563}
   - component: {fileID: 3068865671220987028}
+  - component: {fileID: 5399861565425347203}
   m_Layer: 11
   m_Name: down hit box
   m_TagString: Player
@@ -568,17 +597,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
+--- !u!114 &5399861565425347203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382020920128985596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 01000000
+  force: 3
+  duration: 0.2
 --- !u!1 &7656288679364536789
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,13 +822,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a779e6a4599f0f14fa8e70df48dab8fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   _speed: 3
   _mana: {fileID: 11400000, guid: fa821302db7f4d4488aa27583b131f47, type: 2}
   _health: {fileID: 11400000, guid: c981e6d0ec5d6664eaffe5b277095520, type: 2}
   startingPosition: {fileID: 11400000, guid: d018f317c8bc1e440b453215b1f06785, type: 2}
   myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   receivedItemSprite: {fileID: 7737533577142277429}
+  triggerCollider: {fileID: 8022496975922957957}
   arrowSpeed: 8
   projectile: {fileID: 2015206087574396294, guid: a1434790cc1829148a1a7fb960f88361,
     type: 3}
@@ -803,12 +838,9 @@ MonoBehaviour:
   iceShardSpeed: 15
   iceShard: {fileID: 2015206087574396294, guid: 8297b86f7f58cba498d03d5c9b76d687,
     type: 3}
-  Bow: {fileID: 0}
-  Sword: {fileID: 11400000, guid: d5d783953bf427840948e4bcc24f00c4, type: 2}
   FlashColor: {r: 1, g: 0.7658209, b: 0.43867922, a: 0.16862746}
   flashDuration: 0.05
   numberOfFlasches: 6
-  triggerCollider: {fileID: 8022496975922957957}
   regularPlayerColor: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0}
   regularHairColor: {r: 0, g: 0, b: 0, a: 0}
   regularArmorColor: {r: 0, g: 0, b: 0, a: 0}
@@ -1437,15 +1469,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a7af7edc7ccd0545ade55b0e3e71f2d, type: 3}
---- !u!212 &7607462306545391926 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212266639543317280, guid: 1a7af7edc7ccd0545ade55b0e3e71f2d,
-    type: 3}
-  m_PrefabInstance: {fileID: 7737533577564973590}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7741206510266321344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4353539261817814, guid: 1a7af7edc7ccd0545ade55b0e3e71f2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7737533577564973590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7607462306545391926 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212266639543317280, guid: 1a7af7edc7ccd0545ade55b0e3e71f2d,
     type: 3}
   m_PrefabInstance: {fileID: 7737533577564973590}
   m_PrefabAsset: {fileID: 0}

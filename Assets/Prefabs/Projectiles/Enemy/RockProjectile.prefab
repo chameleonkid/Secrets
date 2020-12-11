@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8755954809695844886}
   - component: {fileID: 8755954809695844887}
   - component: {fileID: 8755954809695844888}
+  - component: {fileID: 5614634927299821963}
   - component: {fileID: 8755954809695844889}
   - component: {fileID: 6726111899442122093}
   - component: {fileID: 4596141420500315408}
@@ -124,6 +125,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &5614634927299821963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755954809695844891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 1
+  duration: 0.25
 --- !u!114 &8755954809695844889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,15 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1
-  knockTime: 0.25
   damage: 5
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: 0}
-  critDmgPopup: {fileID: 0}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
 --- !u!114 &6726111899442122093
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5877249715732768611}
   - component: {fileID: 8877344846437935194}
   - component: {fileID: -3089408764058353687}
+  - component: {fileID: 1055195562799656782}
   - component: {fileID: 4151532023440221885}
   - component: {fileID: 8488362489792843553}
   - component: {fileID: 5379144640911285020}
@@ -134,6 +135,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7508464, y: 0.25023317}
   m_EdgeRadius: 0
+--- !u!114 &1055195562799656782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015206087574396294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 01000000
+  force: 1.5
+  duration: 0.25
 --- !u!114 &4151532023440221885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,17 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1.5
-  knockTime: 0.25
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
-  dotTime: 0
-  dotTicks: 0
-  dotDamage: 0
 --- !u!114 &8488362489792843553
 MonoBehaviour:
   m_ObjectHideFlags: 0

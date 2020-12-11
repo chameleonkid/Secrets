@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 284330758867340905}
   - component: {fileID: 284330758867340908}
   - component: {fileID: 284330758867340907}
+  - component: {fileID: 2612872237981825419}
   - component: {fileID: 284330758867340909}
   - component: {fileID: 1187539961920588526}
   m_Layer: 8
@@ -193,7 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32f154c8e0fc96458916c6004ec658a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
   enemyName: Larry the Log
   baseAttack: 1
@@ -207,6 +207,21 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 9bd2c356e44c69943bcaed4af766e4bf, type: 2}
+--- !u!114 &2612872237981825419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284330758867340901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 2
+  duration: 0.2
 --- !u!114 &284330758867340909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,14 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
 --- !u!114 &1187539961920588526
 MonoBehaviour:
   m_ObjectHideFlags: 0

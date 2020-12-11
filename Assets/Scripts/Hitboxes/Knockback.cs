@@ -2,8 +2,8 @@
 
 public class Knockback : Hitbox
 {
-    [SerializeField] private float force = 2;
-    [SerializeField] private float duration = 1;
+    [SerializeField] private float force = 3;
+    [SerializeField] private float duration = 0.2f;
 
     protected override void OnHit(Collider2D other)
     {

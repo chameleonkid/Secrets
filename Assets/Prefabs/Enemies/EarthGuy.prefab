@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3474195283260176127}
   - component: {fileID: 3474195283260176124}
   - component: {fileID: 3474195283260176121}
+  - component: {fileID: 7971104413830072761}
   - component: {fileID: 3474195283260176120}
   - component: {fileID: 1390969149251859650}
   - component: {fileID: 5034149262215347976}
@@ -180,6 +181,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.51422834, y: 0.783308}
   m_EdgeRadius: 0
+--- !u!114 &7971104413830072761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474195283260176112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 2
+  duration: 0.2
 --- !u!114 &3474195283260176120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,12 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: 0}
-  critDmgPopup: {fileID: 0}
 --- !u!114 &1390969149251859650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
   enemyName: Fireboy
   baseAttack: 0
@@ -240,7 +251,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regularColor: {r: 0, g: 0, b: 0, a: 0}
-  regularSprite: {fileID: 0}
-  iceColor: {r: 0, g: 0, b: 1, a: 1}
-  fireColor: {r: 1, g: 0, b: 0, a: 1}

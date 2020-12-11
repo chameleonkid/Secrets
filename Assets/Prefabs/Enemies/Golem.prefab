@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8978087339683796172}
   - component: {fileID: 8978087339683796169}
   - component: {fileID: 8978087339683796174}
+  - component: {fileID: 3708462015931930499}
   - component: {fileID: 8978087339683796168}
   m_Layer: 8
   m_Name: Golem
@@ -192,7 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32f154c8e0fc96458916c6004ec658a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
   enemyName: GollyTheGolem
   baseAttack: 2
@@ -206,6 +206,21 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 05d3919ae3c5476418135c27aa5bcb68, type: 2}
+--- !u!114 &3708462015931930499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978087339683796160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 3
+  duration: 0.2
 --- !u!114 &8978087339683796168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,11 +233,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
   damage: 0
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}

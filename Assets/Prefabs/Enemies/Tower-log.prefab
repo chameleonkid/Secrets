@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 472834060355724289}
   - component: {fileID: 472834060355724290}
   - component: {fileID: 472834060355724295}
+  - component: {fileID: 7834754528576722142}
   - component: {fileID: 472834060355724294}
   - component: {fileID: 472834060355724303}
   - component: {fileID: -9114995563809209465}
@@ -181,6 +182,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0481939, y: 1.3710947}
   m_EdgeRadius: 0
+--- !u!114 &7834754528576722142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472834060355724302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 2
+  duration: 0.2
 --- !u!114 &472834060355724294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,14 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2
-  knockTime: 0.2
   damage: 1
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
 --- !u!114 &472834060355724303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d815b736438c34fbd2d219e440621e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
   enemyName: Towerman
   baseAttack: 0

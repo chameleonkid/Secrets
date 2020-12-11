@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5432762753085506740}
+  - component: {fileID: 1721811500014259265}
   - component: {fileID: 5432762753085506742}
   - component: {fileID: 5432762753085506741}
   m_Layer: 8
@@ -32,6 +33,21 @@ Transform:
   m_Father: {fileID: 5432762753877174123}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1721811500014259265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432762753085506747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 1
+  duration: 0.5
 --- !u!60 &5432762753085506742
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -74,14 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1
-  knockTime: 0.5
   damage: 1
   playerInventory: {fileID: 0}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
 --- !u!1 &5432762753635504793
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5432762753635504794}
+  - component: {fileID: 1480658331270092790}
   - component: {fileID: 5432762753635504788}
   - component: {fileID: 5432762753635504795}
   m_Layer: 8
@@ -114,6 +125,21 @@ Transform:
   m_Father: {fileID: 5432762753877174123}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1480658331270092790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432762753635504793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 1
+  duration: 0.5
 --- !u!60 &5432762753635504788
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -156,14 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1
-  knockTime: 0.5
   damage: 1
   playerInventory: {fileID: 0}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
 --- !u!1 &5432762753877174125
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +199,7 @@ GameObject:
   - component: {fileID: 5432762753877174127}
   - component: {fileID: 5432762753877174126}
   - component: {fileID: 5432762753877174116}
+  - component: {fileID: 8690241994839996743}
   - component: {fileID: -6065082072085748419}
   - component: {fileID: -1084270038358372700}
   m_Layer: 8
@@ -360,7 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c76a0b163862b49926041d3632cb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   maxHealth: {fileID: 11400000, guid: 5574c8f4f04003545b68b09e2dc70343, type: 2}
   enemyName: 
   baseAttack: 1
@@ -374,6 +394,21 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 0}
+--- !u!114 &8690241994839996743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432762753877174125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 1
+  duration: 1
 --- !u!114 &-6065082072085748419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,14 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1
-  knockTime: 1
   damage: 2
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
 --- !u!114 &-1084270038358372700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5432762754029595345}
+  - component: {fileID: 5099837531680815494}
   - component: {fileID: 5432762754029595347}
   - component: {fileID: 5432762754029595346}
   m_Layer: 8
@@ -438,6 +468,21 @@ Transform:
   m_Father: {fileID: 5432762753877174123}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5099837531680815494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432762754029595344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 1
+  duration: 0.5
 --- !u!60 &5432762754029595347
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -480,14 +525,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1
-  knockTime: 0.5
   damage: 1
   playerInventory: {fileID: 0}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
 --- !u!1 &5432762754241248470
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5432762754241248471}
+  - component: {fileID: 4552206922784662064}
   - component: {fileID: 5432762754241248465}
   - component: {fileID: 5432762754241248464}
   m_Layer: 8
@@ -520,6 +560,21 @@ Transform:
   m_Father: {fileID: 5432762753877174123}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4552206922784662064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432762754241248470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: 
+  force: 1
+  duration: 0.5
 --- !u!60 &5432762754241248465
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -565,11 +620,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1
-  knockTime: 0.5
   damage: 1
   playerInventory: {fileID: 0}
-  normalDmgPopup: {fileID: -6258172241765794015, guid: cea133832226063448a83baa3f0aa758,
-    type: 3}
-  critDmgPopup: {fileID: -6258172241765794015, guid: be1ca31ad709dd545b575dce7a1d9066,
-    type: 3}
