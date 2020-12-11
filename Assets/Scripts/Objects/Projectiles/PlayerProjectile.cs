@@ -18,11 +18,8 @@ public class PlayerProjectile : Projectile
 
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
-        if (rigidbody != null)
-        {
-            Debug.Log(this.name + " collided with: " + other.transform.name);
-            OnHitCollider(other.transform);
-        }
+        Debug.Log(this.name + " collided with: " + other.transform.name);
+        OnHitCollider(other.transform);
     }
 
     protected void OnHitCollider(Transform other)
