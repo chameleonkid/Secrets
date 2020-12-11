@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : Character
 {
@@ -127,20 +126,5 @@ public class Enemy : Character
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
             }
         }
-    }
-
-    public void Knock(float knockTime) {
-        if (this.gameObject.activeInHierarchy)
-        {
-            StartCoroutine(KnockCo(knockTime));
-        }
-    }
-
-    private IEnumerator KnockCo(float knockTime)
-    {
-        currentState = State.stagger;
-        yield return new WaitForSeconds(knockTime);
-        rigidbody.velocity = Vector2.zero;
-        currentState = State.idle;
     }
 }

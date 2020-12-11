@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Character : MonoBehaviour
 {
@@ -41,6 +42,23 @@ public class Character : MonoBehaviour
         {
             SetAnimatorXY(direction * Vector2.up);
         }
+    }
+
+    public virtual void Knockback(Vector2 knockback, float duration)
+    {
+        if (this.gameObject.activeInHierarchy && currentState != State.stagger)
+        {
+            StartCoroutine(KnockbackCo(knockback, duration));
+        }
+    }
+
+    protected IEnumerator KnockbackCo(Vector2 knockback, float duration)
+    {
+        rigidbody.AddForce(knockback, ForceMode2D.Impulse);
+        currentState = State.stagger;
+        yield return new WaitForSeconds(duration);
+        rigidbody.velocity = Vector2.zero;
+        currentState = State.idle;
     }
 
     public enum State {

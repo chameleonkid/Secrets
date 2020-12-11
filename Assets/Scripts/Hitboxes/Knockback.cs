@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Knockback : Hitbox
 {
@@ -9,13 +7,13 @@ public class Knockback : Hitbox
 
     protected override void OnHit(Collider2D other)
     {
-        var hit = other.GetComponent<Rigidbody2D>();
+        var hit = other.GetComponent<Character>();
         if (hit != null)
         {
             var knockback = hit.transform.position - transform.position;
             knockback.Normalize();
             knockback *= force;
-            hit.AddForce(knockback, ForceMode2D.Impulse);
+            hit.Knockback(knockback, duration);
         }
     }
 }
