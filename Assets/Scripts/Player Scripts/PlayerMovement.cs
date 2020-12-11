@@ -182,7 +182,7 @@ public class PlayerMovement : Character
         var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
-        proj.rigidbody.velocity = direction * projectileSpeed;
+        proj.rigidbody.velocity = direction.normalized * projectileSpeed;
     }
 
     //################### instantiate arrow when shot ###############################
