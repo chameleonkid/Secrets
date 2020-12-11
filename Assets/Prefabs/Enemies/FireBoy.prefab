@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6941909454593424351}
   - component: {fileID: 6941909454593424346}
   - component: {fileID: 6221007044125604844}
-  - component: {fileID: 6941909454593424347}
+  - component: {fileID: 5835977061477657111}
   - component: {fileID: 4840798952189540833}
   - component: {fileID: 1566315858439696939}
   m_Layer: 8
@@ -193,10 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 
+  disableWhenHit: 0
   force: 2
   duration: 0.2
---- !u!114 &6941909454593424347
+--- !u!114 &5835977061477657111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,11 +205,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6941909454593424339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  disableWhenHit: 0
+  _damage: 1
 --- !u!114 &4840798952189540833
 MonoBehaviour:
   m_ObjectHideFlags: 0
