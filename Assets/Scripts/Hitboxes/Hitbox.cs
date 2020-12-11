@@ -3,7 +3,7 @@
 public abstract class Hitbox : MonoBehaviour
 {
     [Tooltip("The tag this hitbox is able to affect")]
-    [SerializeField] private string[] targetTag = default;
+    [SerializeField] private Tag[] targetTag = default;
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
@@ -11,7 +11,7 @@ public abstract class Hitbox : MonoBehaviour
         {
             for (int i = 0; i < targetTag.Length; i++)
             {
-                if (other.CompareTag(targetTag[i]))
+                if (other.CompareTag(targetTag[i].ToString()))
                 {
                     OnHit(other);
                     return;
