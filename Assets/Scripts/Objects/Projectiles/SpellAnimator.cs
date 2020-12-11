@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class IceShardSpellAnimator : MonoBehaviour
+public class SpellAnimator : MonoBehaviour
 {
     private Animator animator;
 
