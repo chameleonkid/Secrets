@@ -15,23 +15,22 @@ public class OldHitbox : MonoBehaviour
 
         if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Player"))
         {
-            var hit = other.GetComponent<Rigidbody2D>();
-            if (hit != null && other.isTrigger)
+            if (other.isTrigger)
             {
-                OnHit(hit);
+                OnHit(other);
             }
         }
     }
 
-    private void OnHit(Rigidbody2D hit)
+    private void OnHit(Collider2D other)
     {
-        if (hit.gameObject.CompareTag("enemy"))
+        if (other.gameObject.CompareTag("enemy"))
         {
-            OnHitEnemy(hit.GetComponent<Enemy>());
+            OnHitEnemy(other.GetComponent<Enemy>());
         }
-        else if (hit.gameObject.CompareTag("Player"))
+        else if (other.gameObject.CompareTag("Player"))
         {
-            OnHitPlayer(hit.GetComponent<PlayerMovement>());
+            OnHitPlayer(other.GetComponent<PlayerMovement>());
         }
     }
 
