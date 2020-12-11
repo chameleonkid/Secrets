@@ -15,6 +15,7 @@ public class IceShardSpellAnimator : MonoBehaviour
         if (other.CompareTag("enemy"))
         {
             animator.SetBool("isFlying", false);
+            animator.SetBool("isHit",true);
         }
     }
 }
