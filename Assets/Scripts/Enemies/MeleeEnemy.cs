@@ -10,38 +10,38 @@ public class MeleeEnemy : EnemyLog
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius)
         {
-            if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+            if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
             {
                 Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
                 SetAnimatorXYSingleAxis(temp - transform.position);
                 rigidbody.MovePosition(temp);
-                currentState = EnemyState.walk;
+                currentState = State.walk;
                 animator.SetBool("Moving", true);
             }
 
         }
         else if (distance <= chaseRadius && distance <= attackRadius)
         {
-            if ((currentState == EnemyState.idle || currentState == EnemyState.walk) && currentState != EnemyState.stagger)
+            if ((currentState == State.idle || currentState == State.walk) && currentState != State.stagger)
             {
                 StartCoroutine(AttackCo());
             }
         }
         else if (distance >= chaseRadius && distance >= attackRadius)
         {
-            currentState = EnemyState.idle;
+            currentState = State.idle;
             animator.SetBool("Moving", false);
         }
     }
 
     public IEnumerator AttackCo()
     {
-        currentState = EnemyState.attack;
+        currentState = State.attack;
         animator.SetBool("Attacking", true);
         yield return null;
         animator.SetBool("Attacking", false);
         yield return new WaitForSeconds(0.5f); //Attack CD
-        currentState = EnemyState.walk;
+        currentState = State.walk;
     }
 }

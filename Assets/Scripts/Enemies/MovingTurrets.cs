@@ -7,7 +7,7 @@ public class MovingTurrets : TurretEnemy
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius)
         {
-            if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+            if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
             {
                 if (canFire)
                 {

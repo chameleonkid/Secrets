@@ -20,7 +20,7 @@ public class TurretEnemy : EnemyLog
 
     protected override void InsideChaseRadiusUpdate()
     {
-        if (currentState == EnemyState.idle || currentState == EnemyState.walk && currentState != EnemyState.stagger)
+        if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
         {
             if (canFire)
             {
@@ -32,7 +32,7 @@ public class TurretEnemy : EnemyLog
     protected override void OutsideChaseRadiusUpdate()
     {
         animator.SetBool("WakeUp", false);
-        // ChangeState(EnemyState.idle);
+        // ChangeState(State.idle);
     }
 
     protected virtual void FireProjectile()
@@ -42,7 +42,7 @@ public class TurretEnemy : EnemyLog
         var proj = Instantiate(projectile, transform.position, Quaternion.identity);
         proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
         canFire = false;
-        currentState = EnemyState.walk;
+        currentState = State.walk;
         animator.SetBool("WakeUp", true);
     }
 }
