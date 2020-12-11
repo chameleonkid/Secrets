@@ -13,9 +13,9 @@ public abstract class Hitbox : MonoBehaviour
     {
         if (other.isTrigger)
         {
-            if (HitTarget(other.gameObject))
+            if (HitTarget(other.gameObject))            //thoughts: is true but doesnt give the Tag as parameter
             {
-                OnHit(other);
+                OnHit(other);                           // Calls OnHit which will trigger DamageOnTrigger in my case with "other" as parameter
                 collider.enabled = !disableWhenHit;
             }
         }
@@ -23,7 +23,7 @@ public abstract class Hitbox : MonoBehaviour
 
     protected abstract void OnHit(Collider2D other);
 
-    protected bool HitTarget(GameObject other)
+    protected bool HitTarget(GameObject other)                      
     {
         var hitbox = this.gameObject;
         var isPlayerHitbox = hitbox.CompareTag("Player") || hitbox.CompareTag("arrow") || hitbox.CompareTag("spell");
