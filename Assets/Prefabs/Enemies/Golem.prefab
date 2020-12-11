@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8978087339683796169}
   - component: {fileID: 8978087339683796174}
   - component: {fileID: 3708462015931930499}
-  - component: {fileID: 8978087339683796168}
+  - component: {fileID: 2790293263364906772}
   m_Layer: 8
   m_Name: Golem
   m_TagString: enemy
@@ -218,10 +218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 
+  disableWhenHit: 0
   force: 3
   duration: 0.2
---- !u!114 &8978087339683796168
+--- !u!114 &2790293263364906772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,8 +230,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8978087339683796160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  disableWhenHit: 0
+  _damage: 0

@@ -90,12 +90,14 @@ public class PlayerMovement : Character
         if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
         {
             // Debug.Log("Attack");
+            //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(AttackCo());
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
         if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             // Debug.Log("RoundAttack");
+            //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
@@ -146,6 +148,8 @@ public class PlayerMovement : Character
         }
     }
 
+    public bool IsCriticalHit() => (myInventory.totalCritChance > 0 && Random.Range(0, 99) <= myInventory.totalCritChance);
+
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
@@ -184,19 +188,22 @@ public class PlayerMovement : Character
         }
     }
 
-    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed)
+    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed, float projectileDamage)
     {
         var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
         proj.rigidbody.velocity = direction.normalized * projectileSpeed;
+        var hitbox = proj.GetComponent<DamageOnTrigger>();
+        hitbox.damage = projectileDamage;
+        hitbox.isCritical = IsCriticalHit();
     }
 
     //################### instantiate arrow when shot ###############################
     private void MakeArrow()
     {
         animator.SetBool("isShooting", true);
-        CreateProjectile(projectile, arrowSpeed);
+        CreateProjectile(projectile, arrowSpeed, myInventory.currentBow.damage);
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
@@ -217,16 +224,22 @@ public class PlayerMovement : Character
     //################### instantiate spell when casted ###############################
     private void MakeSpell()
     {
+        GameObject prefab = null;
+        float speed = 0;
+
         if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
         {
-            CreateProjectile(fireball, fireballSpeed);
-            mana.current -= myInventory.currentSpellbook.manaCosts;
+            prefab = fireball;
+            speed = fireballSpeed;
         }
         else if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
         {
-            CreateProjectile(iceShard, iceShardSpeed);
-            mana.current -= myInventory.currentSpellbook.manaCosts;
+            prefab = iceShard;
+            speed = iceShardSpeed;
         }
+
+        CreateProjectile(prefab, speed, myInventory.currentSpellbook.SpellDamage);
+        mana.current -= myInventory.currentSpellbook.manaCosts;
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -276,6 +289,20 @@ public class PlayerMovement : Character
            }
        }
     */
+
+    public override void TakeDamage(float damage)
+    {
+        if (currentState != State.stagger) //! Unreliable! Cannot determine execution order between this and knockback (where `FlashCo` disables the player's trigger collider). Consider adding a private float timer to Player/Character to properly implement invincibility frames.
+        {
+            myInventory.calcDefense();
+            var finalDamage = damage - myInventory.totalDefense;
+            if (finalDamage > 0)
+            {
+                health -= finalDamage;
+            }
+            Debug.Log(finalDamage + " damage after defense calculation.");
+        }
+    }
 
     // ########################### Getting hit and die ##############################################
 

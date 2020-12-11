@@ -167,6 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5882766546931061717}
+  - component: {fileID: 4080494908198952814}
   - component: {fileID: 103994057321240014}
   - component: {fileID: 3084345826519001305}
   - component: {fileID: 343156486531304}
@@ -191,6 +192,20 @@ Transform:
   m_Father: {fileID: 4819439860390361883}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4080494908198952814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785500351677652065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 1
 --- !u!60 &103994057321240014
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -236,8 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
 --- !u!114 &343156486531304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 01000000
+  disableWhenHit: 0
   force: 3
   duration: 0.2
 --- !u!1 &1008961017305412658
@@ -262,6 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5552426999376239297}
+  - component: {fileID: 8330316709131100593}
   - component: {fileID: 3327010518003963128}
   - component: {fileID: 7765557}
   - component: {fileID: 6149378656150506650}
@@ -286,6 +300,20 @@ Transform:
   m_Father: {fileID: 4819439860390361883}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8330316709131100593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008961017305412658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 1
 --- !u!114 &3327010518003963128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,8 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
 --- !u!58 &7765557
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -328,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 01000000
+  disableWhenHit: 0
   force: 3
   duration: 0.2
 --- !u!1 &2909321155673498771
@@ -340,6 +366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2995446615097044486}
+  - component: {fileID: 2343904287320015185}
   - component: {fileID: 1397228304391159584}
   - component: {fileID: 9210356173545002712}
   - component: {fileID: 7432213353813145744}
@@ -364,6 +391,20 @@ Transform:
   m_Father: {fileID: 4819439860390361883}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2343904287320015185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909321155673498771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 1
 --- !u!60 &1397228304391159584
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -408,8 +449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
 --- !u!114 &7432213353813145744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 01000000
+  disableWhenHit: 0
   force: 3
   duration: 0.2
 --- !u!1 &2941173148762560976
@@ -434,6 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7386416087526534773}
+  - component: {fileID: 3397784029170857262}
   - component: {fileID: 9074679617765472610}
   - component: {fileID: 1987021321051761730}
   - component: {fileID: 2892631000908655613}
@@ -458,6 +498,20 @@ Transform:
   m_Father: {fileID: 4819439860390361883}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3397784029170857262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941173148762560976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 1
 --- !u!60 &9074679617765472610
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -503,8 +557,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
 --- !u!114 &2892631000908655613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 01000000
+  disableWhenHit: 0
   force: 3
   duration: 0.2
 --- !u!1 &4382020920128985596
@@ -529,6 +581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780702652187201745}
+  - component: {fileID: 2536426010962628570}
   - component: {fileID: 4492131320186280563}
   - component: {fileID: 3068865671220987028}
   - component: {fileID: 5399861565425347203}
@@ -553,6 +606,20 @@ Transform:
   m_Father: {fileID: 4819439860390361883}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2536426010962628570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382020920128985596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 1
 --- !u!60 &4492131320186280563
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -597,8 +664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
 --- !u!114 &5399861565425347203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: 01000000
+  disableWhenHit: 0
   force: 3
   duration: 0.2
 --- !u!1 &7656288679364536789

@@ -45,6 +45,9 @@ public abstract class Character : MonoBehaviour
         }
     }
 
+    //! A bit messy to have both a public health property and `TakeDamage`, but unsure how to address
+    public virtual void TakeDamage(float damage) => health -= damage;
+
     public virtual void Knockback(Vector2 knockback, float duration)
     {
         if (this.gameObject.activeInHierarchy && currentState != State.stagger)

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8226493659351810451}
   - component: {fileID: 8199492714421472431}
   - component: {fileID: 6768971471492383634}
-  - component: {fileID: 4151532023440221885}
+  - component: {fileID: -7352489870780604428}
   - component: {fileID: 5379144640911285020}
   - component: {fileID: -896225427814597267}
   m_Layer: 13
@@ -197,7 +197,7 @@ MonoBehaviour:
   disableWhenHit: 1
   force: 1.5
   duration: 0.25
---- !u!114 &4151532023440221885
+--- !u!114 &-7352489870780604428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,11 +206,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2015206087574396294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  disableWhenHit: 0
+  _damage: 1
 --- !u!82 &5379144640911285020
 AudioSource:
   m_ObjectHideFlags: 0
