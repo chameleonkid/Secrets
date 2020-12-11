@@ -302,7 +302,7 @@ public class PlayerMovement : Character
 
     private IEnumerator FlashCo()
     {
-        triggerCollider.enabled = false;
+        triggerCollider.enabled = false;    //! Refer to comment in `OldHitbox`
 
         for (int i = 0; i < numberOfFlasches; i++)
         {
@@ -316,6 +316,6 @@ public class PlayerMovement : Character
             yield return new WaitForSeconds(flashDuration);
         }
 
-        triggerCollider.enabled = true;
+        triggerCollider.enabled = true; //! Refer to comment in `OldHitbox`
     }
 }

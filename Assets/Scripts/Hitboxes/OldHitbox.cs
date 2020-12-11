@@ -52,8 +52,10 @@ public class OldHitbox : MonoBehaviour
 
     private void OnHitPlayer(PlayerMovement player)
     {
-        if (player.currentState != Character.State.stagger) //! Unreliable! Cannot determine execution order between this and knockback (where stagger is applied). Consider adding a private float timer to Player/Character to properly implement invincibility frames.
+        Debug.Log("Pre-stagger check");
+        if (player.currentState != Character.State.stagger) //! Unreliable! Cannot determine execution order between this and knockback (where `FlashCo` disables the player's trigger collider). Consider adding a private float timer to Player/Character to properly implement invincibility frames.
         {
+            Debug.Log("Post-stagger check");
             playerInventory.calcDefense();
             if (damage - playerInventory.totalDefense > 0)              // if more Dmg than armorvalue was done
             {
