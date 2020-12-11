@@ -13,7 +13,13 @@ public class ChangeColor : MonoBehaviour
         regularColor = renderer.color;
     }
 
-    public void ChangeSpriteColor(Color color, float duration) => StartCoroutine(ChangeSpriteColorCo(color, duration));
+    public void ChangeSpriteColor(Color color, float duration) {
+        if (this.gameObject.activeInHierarchy)
+        {
+            StartCoroutine(ChangeSpriteColorCo(color, duration));
+        }
+    }
+
     private IEnumerator ChangeSpriteColorCo(Color color, float duration)
     {
         renderer.color = color;
