@@ -68,21 +68,4 @@ public class OldHitbox : MonoBehaviour
             }
         }
     }
-
-    private void PlayerHitEnemy(Enemy enemy, float damage)
-    {
-        // TEMP!
-        var isCritical = false; // IsCriticalHit();
-        if (isCritical)
-        {
-            damage *= 2;
-            Debug.Log("CRITICAL STRIKE FOR " + damage);
-        }
-        else
-        {
-            Debug.Log("NORMAL STRIKE FOR " + damage);
-        }
-        enemy.health -= damage;
-        DamagePopUpManager.RequestDamagePopUp(damage, isCritical, enemy.transform);
-    }
 }
