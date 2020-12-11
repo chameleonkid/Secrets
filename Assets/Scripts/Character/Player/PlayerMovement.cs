@@ -17,7 +17,7 @@ public class PlayerMovement : Character
         get => _health.current;
         set {
             _health.current = value;
-            if (_health.current < 0)
+            if (_health.current <= 0)
             {
                 StartCoroutine(DeathCo());
             }
