@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9206361163915547932}
   - component: {fileID: 2307221242408650939}
   - component: {fileID: 894691745684358625}
-  - component: {fileID: 1494103903471301855}
+  - component: {fileID: 5164950695082900530}
   m_Layer: 9
   m_Name: EnemyFireball
   m_TagString: enemySpell
@@ -187,7 +187,7 @@ MonoBehaviour:
   disableWhenHit: 1
   force: 1
   duration: 1
---- !u!114 &1494103903471301855
+--- !u!114 &5164950695082900530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,8 +196,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 125730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88ff22ffccb3436489cb5fb9a6d66a8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  disableWhenHit: 0
+  _damage: 5
