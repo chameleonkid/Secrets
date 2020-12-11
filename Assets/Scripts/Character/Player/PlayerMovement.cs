@@ -90,12 +90,14 @@ public class PlayerMovement : Character
         if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
         {
             // Debug.Log("Attack");
+            //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(AttackCo());
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
         if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             // Debug.Log("RoundAttack");
+            //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################

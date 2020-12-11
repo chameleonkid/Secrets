@@ -13,32 +13,9 @@ public class OldHitbox : MonoBehaviour
             other.GetComponent<Breakable>().Smash();
         }
 
-        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Player"))
-        {
-            if (other.isTrigger)
-            {
-                OnHit(other);
-            }
-        }
-    }
-
-    private void OnHit(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("enemy"))
-        {
-            OnHitEnemy(other.GetComponent<Enemy>());
-        }
-        else if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && other.isTrigger)
         {
             OnHitPlayer(other.GetComponent<PlayerMovement>());
-        }
-    }
-
-    private void OnHitEnemy(Enemy enemy)
-    {
-        if (this.gameObject.CompareTag("Player"))
-        {
-            PlayerHitEnemy(enemy, playerInventory.currentWeapon.damage);
         }
     }
 
