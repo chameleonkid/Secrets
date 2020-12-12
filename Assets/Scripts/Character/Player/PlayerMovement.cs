@@ -203,7 +203,7 @@ public class PlayerMovement : Character
     {
         currentState = State.attack;
         animator.SetBool("isShooting", true);
-        CreateProjectile(projectile, arrowSpeed, myInventory.currentBow.damage);
+        CreateProjectile(projectile, arrowSpeed, Random.Range(myInventory.currentBow.minDamage, myInventory.currentBow.maxDamage + 1));
 
         yield return new WaitForSeconds(0.3f);
 

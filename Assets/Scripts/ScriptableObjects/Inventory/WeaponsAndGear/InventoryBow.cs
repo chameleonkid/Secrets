@@ -3,7 +3,8 @@
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Bow")]
 public class InventoryBow : InventoryItem
 {
-    public int damage;
+    public int minDamage;
+    public int maxDamage;
 
     private InventoryBow temp;
 

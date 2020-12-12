@@ -204,7 +204,7 @@ public class InventoryManager : MonoBehaviour
         else if (NewItem is InventoryBow)
         {
             InventoryBow currentItem = NewItem as InventoryBow;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.damage;
+            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
         }
         else if (NewItem is InventorySpellbook)
         {
