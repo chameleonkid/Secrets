@@ -44,6 +44,7 @@ public class PlayerMovement : Character
     public Color FlashColor;
     public float flashDuration;
     public int numberOfFlasches;
+    [SerializeField] private bool isInvulnerable = false;
 
     [Header("Sprites")]
     public Color regularPlayerColor;
@@ -52,6 +53,10 @@ public class PlayerMovement : Character
     public SpriteRenderer playerSprite;
     public SpriteRenderer armorSprite;
     public SpriteRenderer hairSprite;
+
+
+    [SerializeField] private AudioClip[] attackSounds = default;
+
 
     //############### LIFT-TEST      ##############
     //  public GameObject thing;
@@ -68,7 +73,10 @@ public class PlayerMovement : Character
         regularPlayerColor = playerSprite.color;
         regularHairColor = hairSprite.color;
         regularArmorColor = armorSprite.color;
+       
     }
+
+    private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
 
     private void Update()
     {
@@ -79,6 +87,7 @@ public class PlayerMovement : Character
             return;
         }
 
+      
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
         SetAnimatorXY(change);
@@ -92,7 +101,7 @@ public class PlayerMovement : Character
             // Debug.Log("Attack");
             //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(AttackCo());
-            soundManager.PlayAttackSound();
+        
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
         if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
@@ -154,6 +163,7 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
+        SoundManager.RequestSound(GetAttackSound());
         animator.SetBool("Attacking", true);
         currentState = State.attack;
         yield return null;
@@ -194,10 +204,10 @@ public class PlayerMovement : Character
         var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
-        proj.rigidbody.velocity = direction.normalized * projectileSpeed;
-        var hitbox = proj.GetComponent<DamageOnTrigger>();
-        hitbox.damage = projectileDamage;
-        hitbox.isCritical = IsCriticalHit();
+        proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
+        var hitbox = proj.GetComponent<DamageOnTrigger>(); 
+        hitbox.damage = projectileDamage;    //replace defaultvalue with the value given from the makespell()/playervalue
+        hitbox.isCritical = IsCriticalHit();  // gets written into Derived class
     }
 
     //################### instantiate arrow when shot ###############################
@@ -291,15 +301,17 @@ public class PlayerMovement : Character
        }
     */
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, bool isCritical)
     {
-        if (currentState != State.stagger) //! Unreliable! Cannot determine execution order between this and knockback (where `FlashCo` disables the player's trigger collider). Consider adding a private float timer to Player/Character to properly implement invincibility frames.
+       if (!isInvulnerable)
         {
             myInventory.calcDefense();
             var finalDamage = damage - myInventory.totalDefense;
             if (finalDamage > 0)
             {
                 health -= finalDamage;
+                DamagePopUpManager.RequestDamagePopUp(finalDamage, isCritical, transform);
+                StartCoroutine(FlashCo());
             }
             Debug.Log(finalDamage + " damage after defense calculation.");
         }
@@ -311,8 +323,9 @@ public class PlayerMovement : Character
     {
         if (currentState != State.stagger && this.gameObject.activeInHierarchy)
         {
+      
             StartCoroutine(KnockbackCo(knockback, duration));
-            StartCoroutine(FlashCo());  // Potentially refactor into health property
+              // Potentially refactor into health property
         }
     }
 
@@ -330,6 +343,7 @@ public class PlayerMovement : Character
 
     private IEnumerator FlashCo()
     {
+        isInvulnerable = true;
         triggerCollider.enabled = false;    //! Refer to comment in `OldHitbox`
 
         for (int i = 0; i < numberOfFlasches; i++)
@@ -345,5 +359,6 @@ public class PlayerMovement : Character
         }
 
         triggerCollider.enabled = true; //! Refer to comment in `OldHitbox`
+        isInvulnerable = false;
     }
 }
