@@ -11,8 +11,6 @@ public abstract class Character : MonoBehaviour
     protected Animator animator { get ; private set; }
 
     protected virtual void Awake() => GetCharacterComponents();
-
-    public SoundManager soundManager;
     
     protected void GetCharacterComponents()
     {
