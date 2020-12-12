@@ -17,7 +17,7 @@ public class DefenseValueTextManager : MonoBehaviour
         }
         else
         {
-            defenseDisplay.text = "0";
+            defenseDisplay.text = "";
         }
     }
 

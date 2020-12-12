@@ -23,7 +23,7 @@ public class RangeDamageValueTextManager : MonoBehaviour
         }
         else
         {
-            RangeDamageDisplay.text = "0";
+            RangeDamageDisplay.text = "";
         }
     }
 

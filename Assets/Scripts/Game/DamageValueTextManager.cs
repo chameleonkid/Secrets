@@ -23,7 +23,7 @@ public class DamageValueTextManager : MonoBehaviour
         }
         else
         {
-            damageDisplay.text = "0";
+            damageDisplay.text = "";
         }
     }
 

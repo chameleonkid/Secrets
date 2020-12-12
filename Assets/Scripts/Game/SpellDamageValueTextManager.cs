@@ -23,7 +23,7 @@ public class SpellDamageValueTextManager : MonoBehaviour
         }
         else
         {
-            SpellDamageDisplay.text = "0";
+            SpellDamageDisplay.text = "";
         }
     }
 
