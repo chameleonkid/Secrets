@@ -17,8 +17,7 @@ public class PlayerMovement : Character
         get => _health.current;
         set {
             _health.current = value;
-            if (_health.current <= 0)
-            {
+            if (_health.current <= 0) {
                 StartCoroutine(DeathCo());
             }
         }
@@ -30,7 +29,16 @@ public class PlayerMovement : Character
 
     public SpriteRenderer receivedItemSprite;
 
-    public Collider2D triggerCollider;
+    //! Was previously used to stop player from taking damage while flashing.
+    //  This is now done through `isInvulnerable`.
+    //  Should the collider still be disabled when flashing?
+    //  Keeping this will stop other hitbox effects from activating while the player is flashing,
+    //  so things like knockback will have a minimum interval based on `flashDuration` and `numberOfFlasches`
+    [SerializeField] private Collider2D triggerCollider = default;
+
+    [Header("Hitboxes")]
+    [SerializeField] private DamageOnTrigger[] directionalAttacks = default;
+    [SerializeField] private DamageOnTrigger roundAttack = default;
 
     [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
@@ -73,7 +81,7 @@ public class PlayerMovement : Character
         regularPlayerColor = playerSprite.color;
         regularHairColor = hairSprite.color;
         regularArmorColor = armorSprite.color;
-       
+
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
@@ -87,7 +95,6 @@ public class PlayerMovement : Character
             return;
         }
 
-      
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
         SetAnimatorXY(change);
@@ -98,16 +105,11 @@ public class PlayerMovement : Character
 
         if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
         {
-            // Debug.Log("Attack");
-            //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(AttackCo());
-        
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
         if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            // Debug.Log("RoundAttack");
-            //! Need references to attack hitboxes; Use similar code to that added to `CreateProjectile`
             StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
@@ -163,12 +165,21 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
+        var isCritical = IsCriticalHit();
+        for (int i = 0; i < directionalAttacks.Length; i++)
+        {
+            directionalAttacks[i].damage = myInventory.currentWeapon.damage;
+            directionalAttacks[i].isCritical = isCritical;
+        }
+
         SoundManager.RequestSound(GetAttackSound());
         animator.SetBool("Attacking", true);
         currentState = State.attack;
         yield return null;
         animator.SetBool("Attacking", false);
+
         yield return new WaitForSeconds(0.3f);
+
         if (currentState != State.interact)
         {
             currentState = State.walk;
@@ -178,9 +189,12 @@ public class PlayerMovement : Character
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCo()
     {
+        roundAttack.damage = myInventory.currentWeapon.damage;
+        roundAttack.isCritical = IsCriticalHit();
+        //! Is this missing a sound request?
         animator.SetBool("RoundAttacking", true);
         currentState = State.roundattack;
-        yield return null;
+        yield return null;  //! This allows a round attack to be executed every other frame when the input is held, causing mana to drain very quickly
         animator.SetBool("RoundAttacking", false);
         currentState = State.walk;
 
@@ -191,8 +205,11 @@ public class PlayerMovement : Character
     private IEnumerator SecondAttackCo()
     {
         currentState = State.attack;
-        MakeArrow();
+        animator.SetBool("isShooting", true);
+        CreateProjectile(projectile, arrowSpeed, myInventory.currentBow.damage);
+
         yield return new WaitForSeconds(0.3f);
+
         if (currentState != State.interact)
         {
             currentState = State.walk;
@@ -205,16 +222,9 @@ public class PlayerMovement : Character
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
         proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
-        var hitbox = proj.GetComponent<DamageOnTrigger>(); 
+        var hitbox = proj.GetComponent<DamageOnTrigger>();
         hitbox.damage = projectileDamage;    //replace defaultvalue with the value given from the makespell()/playervalue
         hitbox.isCritical = IsCriticalHit();  // gets written into Derived class
-    }
-
-    //################### instantiate arrow when shot ###############################
-    private void MakeArrow()
-    {
-        animator.SetBool("isShooting", true);
-        CreateProjectile(projectile, arrowSpeed, myInventory.currentBow.damage);
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
@@ -303,7 +313,7 @@ public class PlayerMovement : Character
 
     public override void TakeDamage(float damage, bool isCritical)
     {
-       if (!isInvulnerable)
+        if (!isInvulnerable)
         {
             myInventory.calcDefense();
             var finalDamage = damage - myInventory.totalDefense;
@@ -323,9 +333,7 @@ public class PlayerMovement : Character
     {
         if (currentState != State.stagger && this.gameObject.activeInHierarchy)
         {
-      
             StartCoroutine(KnockbackCo(knockback, duration));
-              // Potentially refactor into health property
         }
     }
 
@@ -344,7 +352,7 @@ public class PlayerMovement : Character
     private IEnumerator FlashCo()
     {
         isInvulnerable = true;
-        triggerCollider.enabled = false;    //! Refer to comment in `OldHitbox`
+        triggerCollider.enabled = false;    //! Refer to where `triggerCollider` is declared
 
         for (int i = 0; i < numberOfFlasches; i++)
         {
@@ -358,7 +366,7 @@ public class PlayerMovement : Character
             yield return new WaitForSeconds(flashDuration);
         }
 
-        triggerCollider.enabled = true; //! Refer to comment in `OldHitbox`
+        triggerCollider.enabled = true; //! Refer to where `triggerCollider` is declared
         isInvulnerable = false;
     }
 }

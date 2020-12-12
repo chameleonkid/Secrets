@@ -8,12 +8,10 @@ public abstract class Character : MonoBehaviour
 
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
-    protected Animator animator { get ; private set; }
+    protected Animator animator { get; private set; }
 
     protected virtual void Awake() => GetCharacterComponents();
 
-    public SoundManager soundManager;
-    
     protected void GetCharacterComponents()
     {
         transform = GetComponent<Transform>();
@@ -71,7 +69,8 @@ public abstract class Character : MonoBehaviour
         currentState = State.idle;
     }
 
-    public enum State {
+    public enum State
+    {
         idle,
         walk,
         stagger,

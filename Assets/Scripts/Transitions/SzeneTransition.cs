@@ -13,7 +13,7 @@ public class SzeneTransition : MonoBehaviour
 
     public void Awake()
     {
-        if(fadeInPanel != null)
+        if (fadeInPanel != null)
         {
             GameObject panel = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity) as GameObject;
             Destroy(panel, 1);
@@ -22,7 +22,7 @@ public class SzeneTransition : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && !other.isTrigger)
+        if (other.CompareTag("Player") && !other.isTrigger)
         {
             playerPosMemory.value = playerPosition;
             SceneManager.LoadScene(sceneToLoad);

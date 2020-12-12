@@ -18,11 +18,11 @@ public class FirePlaces : Interactable
     // Update is called once per frame
     void Update()
 
-        //####################### Set firePlace on #################################################
+    //####################### Set firePlace on #################################################
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
         {
-            firePlace.SetActive(!firePlace.activeInHierarchy);   
+            firePlace.SetActive(!firePlace.activeInHierarchy);
         }
 
     }

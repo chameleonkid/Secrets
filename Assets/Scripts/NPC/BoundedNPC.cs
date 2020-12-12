@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BoundedNPC : Interactable
 {
-
     private Vector3 directionVector;
     private Transform myTransform;
     public float speed;
@@ -16,10 +13,6 @@ public class BoundedNPC : Interactable
     public float waitTime;
     private float waitTimeSeconds;
     private bool isMoving;
-       
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +28,10 @@ public class BoundedNPC : Interactable
     // Update is called once per frame
     void Update()
     {
-
-        if(isMoving)
+        if (isMoving)
         {
             moveTimeSeconds -= Time.deltaTime;
-            if(moveTimeSeconds<=0)
+            if (moveTimeSeconds <= 0)
             {
                 moveTimeSeconds = moveTime;
                 isMoving = false;
@@ -53,29 +45,24 @@ public class BoundedNPC : Interactable
             {
                 anim.SetBool("isMoving", false);
             }
-
         }
         else
         {
             anim.SetBool("isMoving", false);
             waitTimeSeconds -= Time.deltaTime;
-            if(waitTimeSeconds <= 0)
+            if (waitTimeSeconds <= 0)
             {
                 isMoving = true;
                 waitTimeSeconds = waitTime;
             }
         }
-
-
-
     }
-
 
     void ChangeDirection()
     {
         int direction = Random.Range(0, 4);
 
-        switch(direction)
+        switch (direction)
         {
             case 0:
                 //Walk right
@@ -94,18 +81,16 @@ public class BoundedNPC : Interactable
                 directionVector = Vector3.down;
                 anim.SetBool("isMoving", true);
                 break;
-
             default:
                 break;
         }
         UpdateAnimation();
-
     }
 
     void Move()
     {
         Vector3 temp = myTransform.position + directionVector * speed * Time.deltaTime;
-        
+
         if (bound.bounds.Contains((Vector2)temp))
         {
             anim.SetBool("isMoving", true);
@@ -120,7 +105,7 @@ public class BoundedNPC : Interactable
     void UpdateAnimation()
     {
         anim.SetFloat("moveX", directionVector.x);
-        anim.SetFloat("moveY", directionVector.y);     
+        anim.SetFloat("moveY", directionVector.y);
     }
 
     private void OnCollisionEnter2D(Collision2D other) //IF NPC hits something else or loop < 100
@@ -129,7 +114,7 @@ public class BoundedNPC : Interactable
         ChangeDirection();
 
         int loop = 0;
-        while(temp == directionVector && loop < 100)
+        while (temp == directionVector && loop < 100)
         {
             loop++;
             ChangeDirection();

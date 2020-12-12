@@ -17,7 +17,7 @@ public class Switch : MonoBehaviour
     {
         mySprite = GetComponent<SpriteRenderer>();
         active = storeValue.RuntimeValue;
-        if(active)
+        if (active)
         {
             ActivateSwitch();
         }
@@ -35,7 +35,7 @@ public class Switch : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         //Is it the player?
-        if(other.CompareTag("powerup"))
+        if (other.CompareTag("powerup"))
         {
             ActivateSwitch();
         }

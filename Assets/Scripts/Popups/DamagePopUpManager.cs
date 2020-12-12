@@ -15,7 +15,8 @@ public class DamagePopUpManager : MonoBehaviour
     private void OnEnable() => OnDamagePopUpRequested += InstantiatePopUp;
     private void OnDisable() => OnDamagePopUpRequested -= InstantiatePopUp;
 
-    private void InstantiatePopUp(float damage, bool isCritical, Transform hit) {
+    private void InstantiatePopUp(float damage, bool isCritical, Transform hit)
+    {
         var prefab = isCritical ? criticalPopUpPrefab : regularPopUpPrefab;
         var popup = Instantiate(prefab, hit.position, Quaternion.identity, hit);
         var text = popup.GetComponent<TextMeshPro>();

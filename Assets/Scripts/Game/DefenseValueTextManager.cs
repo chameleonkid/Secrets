@@ -21,11 +21,11 @@ public class DefenseValueTextManager : MonoBehaviour
         }
     }
 
-    
+
     private void OnEnable()
     {
         UpdateDefenseValue();
     }
-    
+
 }
 

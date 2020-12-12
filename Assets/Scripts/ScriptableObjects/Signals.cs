@@ -9,11 +9,11 @@ public class Signals : ScriptableObject
     public List<SignalsListener> listeners = new List<SignalsListener>();
     public void Raise()
     {
-        for(int i = listeners.Count - 1; i>= 0; i --)
+        for (int i = listeners.Count - 1; i >= 0; i--)
         {
             listeners[i].OnSignalRaised();
         }
-       
+
     }
     public void RegisterListener(SignalsListener listener)
     {

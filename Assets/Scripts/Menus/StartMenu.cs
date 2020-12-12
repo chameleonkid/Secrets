@@ -23,7 +23,7 @@ public class StartMenu : MonoBehaviour
         SceneManager.LoadScene("MavensInn_Cutscene");
     }
 
-public  void ExitGame()
+    public void ExitGame()
     {
         Application.Quit();
     }
