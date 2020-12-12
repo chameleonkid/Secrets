@@ -5,29 +5,19 @@ public class InventoryHelmet : InventoryItem
 {
     public int armorDefense;
 
-    private InventoryHelmet temp;
-
     public void swapHelmet()
     {
         if (myInventory.currentHelmet)
         {
-            temp = myInventory.currentHelmet;
-            myInventory.Add(myInventory.currentShield);
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
+            // Return currently equipped helmet to inventory
+            myInventory.Add(myInventory.currentHelmet);
         }
-        else
+        
+        myInventory.equip(this);
+        this.numberHeld--;
+        if (itemSound)
         {
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
+            SoundManager.RequestSound(itemSound);
         }
     }
 }

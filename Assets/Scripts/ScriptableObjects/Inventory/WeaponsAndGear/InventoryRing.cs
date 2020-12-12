@@ -5,29 +5,19 @@ public class InventoryRing : InventoryItem
 {
     public int criticalStrikeChance;
 
-    private InventoryRing temp;
-
     public void swapRing()
     {
         if (myInventory.currentRing)
         {
-            temp = myInventory.currentRing;
+            // Return currently equipped ring to inventory
             myInventory.Add(myInventory.currentRing);
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
         }
-        else
+
+        myInventory.equip(this);
+        this.numberHeld--;
+        if (itemSound)
         {
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
+            SoundManager.RequestSound(itemSound);
         }
     }
 }

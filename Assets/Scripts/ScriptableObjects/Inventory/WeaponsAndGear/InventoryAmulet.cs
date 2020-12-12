@@ -5,33 +5,20 @@ public class InventoryAmulet : InventoryItem
 {
     public int minSpellDamage;
     public int maxSpellDamage;
-    private InventoryAmulet temp;
-
-
-
 
     public void swapAmulet()
     {
         if (myInventory.currentAmulet)
         {
-            temp = myInventory.currentAmulet;
+            // Return equipped amulet to inventory
             myInventory.Add(myInventory.currentAmulet);
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
         }
-        else
+        
+        myInventory.equip(this);
+        this.numberHeld--;
+        if (itemSound)
         {
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
+            SoundManager.RequestSound(itemSound);
         }
     }
 }
-

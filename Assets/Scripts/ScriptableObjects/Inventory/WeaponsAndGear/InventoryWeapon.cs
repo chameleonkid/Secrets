@@ -5,30 +5,20 @@ public class InventoryWeapon : InventoryItem
 {
     public int minDamage;
     public int maxDamage;
-    private InventoryWeapon temp;
 
     public void swapWeapon()
     {
         if (myInventory.currentWeapon)
         {
-            temp = myInventory.currentWeapon;
+            // Return currently equipped weapon to inventory
             myInventory.Add(myInventory.currentWeapon);
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
         }
-        else
+
+        myInventory.equip(this);
+        this.numberHeld--;
+        if (itemSound)
         {
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
+            SoundManager.RequestSound(itemSound);
         }
     }
 }
-

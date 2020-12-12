@@ -6,29 +6,19 @@ public class InventoryBow : InventoryItem
     public int minDamage;
     public int maxDamage;
 
-    private InventoryBow temp;
-
     public void swapBow()
     {
         if (myInventory.currentBow)
         {
-            temp = myInventory.currentBow;
+            // Return currently equipped bow to inventory
             myInventory.Add(myInventory.currentBow);
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
         }
-        else
+        
+        myInventory.equip(this);
+        this.numberHeld--;
+        if (itemSound)
         {
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
+            SoundManager.RequestSound(itemSound);
         }
     }
 }

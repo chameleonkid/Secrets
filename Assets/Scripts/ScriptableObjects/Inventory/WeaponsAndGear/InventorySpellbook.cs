@@ -5,7 +5,7 @@ public class InventorySpellbook : InventoryItem
 {
     public int minSpellDamage;
     public int maxSpellDamage;
-    private InventorySpellbook temp;
+
     public int manaCosts;
     public GameObject prefab;
     public float speed = 1;
@@ -14,24 +14,15 @@ public class InventorySpellbook : InventoryItem
     {
         if (myInventory.currentSpellbook)
         {
-            temp = myInventory.currentSpellbook;
+            // Return currently equipped spellbook to inventory
             myInventory.Add(myInventory.currentSpellbook);
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
         }
-        else
+
+        myInventory.equip(this);
+        this.numberHeld--;
+        if (itemSound)
         {
-            myInventory.equip(this);
-            this.numberHeld--;
-            if (itemSound)
-            {
-                SoundManager.RequestSound(itemSound);
-            }
+            SoundManager.RequestSound(itemSound);
         }
     }
 }
-
