@@ -15,14 +15,14 @@ public class PauseManager : MonoBehaviour
 
     void Start()
     {
-       isPaused = false;
-       myEventSystem = GameObject.Find("EventSystem");
+        isPaused = false;
+        myEventSystem = GameObject.Find("EventSystem");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Pause") && !InventoryActive.activeInHierarchy)
+        if (Input.GetButtonDown("Pause") && !InventoryActive.activeInHierarchy)
         {
             ChangePause();
             if (firstButtonPause)
@@ -30,9 +30,9 @@ public class PauseManager : MonoBehaviour
                 myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
                 myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonPause);
             }
-           
+
         }
-        
+
     }
 
     public void ChangePause()
@@ -54,9 +54,9 @@ public class PauseManager : MonoBehaviour
 
     public void Quit()
     {
-    
-    SceneManager.LoadScene("StartMenu");
-    Time.timeScale = 1f;
+
+        SceneManager.LoadScene("StartMenu");
+        Time.timeScale = 1f;
     }
 
 

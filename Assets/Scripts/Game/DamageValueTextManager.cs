@@ -25,7 +25,7 @@ public class DamageValueTextManager : MonoBehaviour
         {
             damageDisplay.text = "0";
         }
-    }    
+    }
 
     private void OnEnable()
     {

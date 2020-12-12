@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum  DoorType
+public enum DoorType
 {
     key,
     enemy,
@@ -39,10 +39,10 @@ public class Door : Interactable
 
     private void Update()
     {
-        if(Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact"))
         {
             //Debug.Log("E was pressed");
-            if(playerInRange && thisDoorType == DoorType.key)
+            if (playerInRange && thisDoorType == DoorType.key)
             {
                 //    Debug.Log("Player is in Range and Door = Key");
                 if (PlayerInventory.myInventory.Contains(key)) // Keys left in Inventory?

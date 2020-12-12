@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
-        
+
         lifetimeCountdown = lifetime;
     }
 

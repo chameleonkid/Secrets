@@ -17,8 +17,7 @@ public class PlayerMovement : Character
         get => _health.current;
         set {
             _health.current = value;
-            if (_health.current <= 0)
-            {
+            if (_health.current <= 0) {
                 StartCoroutine(DeathCo());
             }
         }
@@ -82,7 +81,7 @@ public class PlayerMovement : Character
         regularPlayerColor = playerSprite.color;
         regularHairColor = hairSprite.color;
         regularArmorColor = armorSprite.color;
-       
+
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
@@ -95,7 +94,7 @@ public class PlayerMovement : Character
             // Debug.Log("helpmeout");
             return;
         }
-      
+
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
         SetAnimatorXY(change);
@@ -223,7 +222,7 @@ public class PlayerMovement : Character
         var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
         proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
-        var hitbox = proj.GetComponent<DamageOnTrigger>(); 
+        var hitbox = proj.GetComponent<DamageOnTrigger>();
         hitbox.damage = projectileDamage;    //replace defaultvalue with the value given from the makespell()/playervalue
         hitbox.isCritical = IsCriticalHit();  // gets written into Derived class
     }
@@ -314,7 +313,7 @@ public class PlayerMovement : Character
 
     public override void TakeDamage(float damage, bool isCritical)
     {
-       if (!isInvulnerable)
+        if (!isInvulnerable)
         {
             myInventory.calcDefense();
             var finalDamage = damage - myInventory.totalDefense;
@@ -334,9 +333,7 @@ public class PlayerMovement : Character
     {
         if (currentState != State.stagger && this.gameObject.activeInHierarchy)
         {
-      
             StartCoroutine(KnockbackCo(knockback, duration));
-              // Potentially refactor into health property
         }
     }
 

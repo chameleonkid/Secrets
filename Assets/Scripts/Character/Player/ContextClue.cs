@@ -9,7 +9,7 @@ public class ContextClue : MonoBehaviour
 
     public void Enable()
     {
-        contextClue.SetActive(true); 
+        contextClue.SetActive(true);
     }
     public void Disable()
     {

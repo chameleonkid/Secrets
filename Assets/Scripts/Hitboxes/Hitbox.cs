@@ -23,9 +23,9 @@ public abstract class Hitbox : MonoBehaviour
 
     protected abstract void OnHit(Collider2D other);
 
-    protected bool HitTarget(GameObject other)                      
+    protected bool HitTarget(GameObject other)
     {
-        var hitbox = this.gameObject; 
+        var hitbox = this.gameObject;
         var isPlayerHitbox = hitbox.CompareTag("Player") || hitbox.CompareTag("arrow") || hitbox.CompareTag("spell"); // Whatever is true first
         var isEnemyHitbox = hitbox.CompareTag("enemy") || hitbox.CompareTag("enemySpell");
 

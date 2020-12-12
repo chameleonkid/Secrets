@@ -8,7 +8,7 @@ public class BoolValue : ScriptableObject
 {
     public bool initialValue;
 
-   // [HideInInspector]
+    // [HideInInspector]
     public bool RuntimeValue;
 
     /*

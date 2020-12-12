@@ -34,7 +34,7 @@ public class GameSaveManager : MonoBehaviour
         for (int i = 0; i < chests.Count; i++)
         {
             chests[i].RuntimeValue = chests[i].initialValue;
-            
+
         }
         for (int i = 0; i < doors.Count; i++)
         {

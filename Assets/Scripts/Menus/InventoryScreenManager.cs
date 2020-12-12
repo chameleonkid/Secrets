@@ -17,14 +17,14 @@ public class InventoryScreenManager : MonoBehaviour
     {
         isPaused = false;
         myEventSystem = GameObject.Find("EventSystem");
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Inventory") && !pauseActive.activeInHierarchy)
-        {           
+        {
             ChangePause();
             if (firstButtonInventory)
             {
@@ -42,7 +42,7 @@ public class InventoryScreenManager : MonoBehaviour
         {
             inventoryPanel.SetActive(true);
             Time.timeScale = 0f;
-            
+
         }
         else
         {

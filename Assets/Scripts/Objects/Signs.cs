@@ -17,13 +17,13 @@ public class Signs : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange) 
+        if (Input.GetButtonDown("Interact") && playerInRange)
         {
             if (dialogBox.activeInHierarchy)
             {
@@ -34,11 +34,11 @@ public class Signs : Interactable
                 dialogBox.SetActive(true);
                 dialogText.text = dialog;
             }
-         
+
         }
     }
 
-    private  void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
