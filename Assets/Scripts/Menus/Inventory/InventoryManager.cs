@@ -174,7 +174,7 @@ public class InventoryManager : MonoBehaviour
         else if (NewItem is InventoryWeapon)
         {
             InventoryWeapon currentItem = NewItem as InventoryWeapon;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.damage;
+            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
         }
         else if (NewItem is InventoryHelmet)
         {

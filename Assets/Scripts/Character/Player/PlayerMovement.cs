@@ -165,7 +165,7 @@ public class PlayerMovement : Character
         var isCritical = IsCriticalHit();
         for (int i = 0; i < directionalAttacks.Length; i++)
         {
-            directionalAttacks[i].damage = myInventory.currentWeapon.damage;
+            directionalAttacks[i].damage = Random.Range(myInventory.currentWeapon.minDamage, myInventory.currentWeapon.maxDamage +1 );
             directionalAttacks[i].isCritical = isCritical;
         }
 
@@ -186,7 +186,7 @@ public class PlayerMovement : Character
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCo()
     {
-        roundAttack.damage = myInventory.currentWeapon.damage;
+        roundAttack.damage = Random.Range(myInventory.currentWeapon.minDamage, myInventory.currentWeapon.maxDamage + 1);
         roundAttack.isCritical = IsCriticalHit();
         //! Is this missing a sound request?
         animator.SetBool("RoundAttacking", true);
@@ -245,9 +245,9 @@ public class PlayerMovement : Character
 
         var prefab = myInventory.currentSpellbook.prefab;
         var speed = myInventory.currentSpellbook.speed;
-
         CreateProjectile(prefab, speed, myInventory.currentSpellbook.SpellDamage);
         mana.current -= myInventory.currentSpellbook.manaCosts;
+
     }
 
     //#################################### Item Found RAISE IT! #######################################

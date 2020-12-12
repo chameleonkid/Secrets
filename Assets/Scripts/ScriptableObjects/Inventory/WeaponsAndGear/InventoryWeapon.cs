@@ -3,7 +3,8 @@
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Weapons")]
 public class InventoryWeapon : InventoryItem
 {
-    public int damage;
+    public int minDamage;
+    public int maxDamage;
     private InventoryWeapon temp;
 
     public void swapWeapon()
