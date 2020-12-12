@@ -6,6 +6,8 @@ public class InventorySpellbook : InventoryItem
     public int SpellDamage;
     private InventorySpellbook temp;
     public int manaCosts;
+    public GameObject prefab;
+    public float speed = 1;
 
     public void swapSpellbook()
     {

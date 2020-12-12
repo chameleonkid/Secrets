@@ -245,19 +245,9 @@ public class PlayerMovement : Character
     //################### instantiate spell when casted ###############################
     private void MakeSpell()
     {
-        GameObject prefab = null;
-        float speed = 0;
 
-        if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
-        {
-            prefab = fireball;
-            speed = fireballSpeed;
-        }
-        else if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
-        {
-            prefab = iceShard;
-            speed = iceShardSpeed;
-        }
+        var prefab = myInventory.currentSpellbook.prefab;
+        var speed = myInventory.currentSpellbook.speed;
 
         CreateProjectile(prefab, speed, myInventory.currentSpellbook.SpellDamage);
         mana.current -= myInventory.currentSpellbook.manaCosts;
