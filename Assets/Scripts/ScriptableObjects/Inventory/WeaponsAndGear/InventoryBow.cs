@@ -3,7 +3,8 @@
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Bow")]
 public class InventoryBow : InventoryItem
 {
-    public int damage;
+    public int minDamage;
+    public int maxDamage;
 
     private InventoryBow temp;
 
@@ -15,11 +16,19 @@ public class InventoryBow : InventoryItem
             myInventory.Add(myInventory.currentBow);
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
         else
         {
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
     }
 }

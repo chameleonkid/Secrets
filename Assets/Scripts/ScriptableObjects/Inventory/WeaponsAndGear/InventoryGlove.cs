@@ -15,11 +15,19 @@ public class InventoryGlove : InventoryItem
             myInventory.Add(myInventory.currentGloves);
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
         else
         {
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
     }
 }

@@ -15,11 +15,19 @@ public class InventoryArmor : InventoryItem
             myInventory.Add(myInventory.currentArmor);
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
         else
         {
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
     }
 }

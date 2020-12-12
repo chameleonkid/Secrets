@@ -3,9 +3,12 @@
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Spellbook")]
 public class InventorySpellbook : InventoryItem
 {
-    public int SpellDamage;
+    public int minSpellDamage;
+    public int maxSpellDamage;
     private InventorySpellbook temp;
     public int manaCosts;
+    public GameObject prefab;
+    public float speed = 1;
 
     public void swapSpellbook()
     {
@@ -15,11 +18,19 @@ public class InventorySpellbook : InventoryItem
             myInventory.Add(myInventory.currentSpellbook);
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
         else
         {
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
     }
 }

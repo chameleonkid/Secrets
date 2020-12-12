@@ -43,10 +43,7 @@ public class PlayerMovement : Character
     [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
-    [SerializeField] private float fireballSpeed = 1;
-    public GameObject fireball;
-    [SerializeField] private float iceShardSpeed = 1;
-    public GameObject iceShard;
+
 
     [Header("Invulnerability frames")]
     public Color FlashColor;
@@ -168,7 +165,7 @@ public class PlayerMovement : Character
         var isCritical = IsCriticalHit();
         for (int i = 0; i < directionalAttacks.Length; i++)
         {
-            directionalAttacks[i].damage = myInventory.currentWeapon.damage;
+            directionalAttacks[i].damage = Random.Range(myInventory.currentWeapon.minDamage, myInventory.currentWeapon.maxDamage +1 );
             directionalAttacks[i].isCritical = isCritical;
         }
 
@@ -189,7 +186,7 @@ public class PlayerMovement : Character
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCo()
     {
-        roundAttack.damage = myInventory.currentWeapon.damage;
+        roundAttack.damage = Random.Range(myInventory.currentWeapon.minDamage, myInventory.currentWeapon.maxDamage + 1);
         roundAttack.isCritical = IsCriticalHit();
         //! Is this missing a sound request?
         animator.SetBool("RoundAttacking", true);
@@ -206,7 +203,7 @@ public class PlayerMovement : Character
     {
         currentState = State.attack;
         animator.SetBool("isShooting", true);
-        CreateProjectile(projectile, arrowSpeed, myInventory.currentBow.damage);
+        CreateProjectile(projectile, arrowSpeed, Random.Range(myInventory.currentBow.minDamage, myInventory.currentBow.maxDamage + 1));
 
         yield return new WaitForSeconds(0.3f);
 
@@ -245,22 +242,12 @@ public class PlayerMovement : Character
     //################### instantiate spell when casted ###############################
     private void MakeSpell()
     {
-        GameObject prefab = null;
-        float speed = 0;
 
-        if (myInventory.currentSpellbook.itemName == "Spellbook of Fire")
-        {
-            prefab = fireball;
-            speed = fireballSpeed;
-        }
-        else if (myInventory.currentSpellbook.itemName == "Spellbook of Ice")
-        {
-            prefab = iceShard;
-            speed = iceShardSpeed;
-        }
-
-        CreateProjectile(prefab, speed, myInventory.currentSpellbook.SpellDamage);
+        var prefab = myInventory.currentSpellbook.prefab;
+        var speed = myInventory.currentSpellbook.speed;
+        CreateProjectile(prefab, speed,Random.Range(myInventory.totalMinSpellDamage, myInventory.totalMaxSpellDamage + 1));
         mana.current -= myInventory.currentSpellbook.manaCosts;
+
     }
 
     //#################################### Item Found RAISE IT! #######################################

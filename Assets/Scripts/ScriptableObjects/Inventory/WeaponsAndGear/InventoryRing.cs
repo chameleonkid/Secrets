@@ -15,11 +15,19 @@ public class InventoryRing : InventoryItem
             myInventory.Add(myInventory.currentRing);
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
         else
         {
             myInventory.equip(this);
             this.numberHeld--;
+            if (itemSound)
+            {
+                SoundManager.RequestSound(itemSound);
+            }
         }
     }
 }

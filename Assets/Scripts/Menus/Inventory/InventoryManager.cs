@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot ringSlot;
     public InventorySlot bowSlot;
     public InventorySlot spellbookSlot;
+    public InventorySlot amuletSlot;
     //InventorySlot when Item not exists
     public Sprite weaponSlotSprite;
     public Sprite armorSlotSprite;
@@ -25,11 +26,13 @@ public class InventoryManager : MonoBehaviour
     public Sprite ringSlotSprite;
     public Sprite bowSlotSprite;
     public Sprite spellbookSprite;
+    public Sprite amuletSprite;
     //InventoryStatsRefresh
     public CritValueTextManager critDisplay;
     public DamageValueTextManager dmgDisplay;
     public DefenseValueTextManager defDisplay;
     public SpellDamageValueTextManager spellDisplay;
+    public RangeDamageValueTextManager rangeDisplay;
 
     public GameObject inventoryPanel;
 
@@ -110,6 +113,12 @@ public class InventoryManager : MonoBehaviour
             spellbookSlot.thisItem = playerInventory.currentSpellbook;
             spellbookSlot.itemImage.sprite = playerInventory.currentSpellbook.itemImage;
         }
+        if (playerInventory.currentAmulet)
+        {
+            amuletSlot.thisItem = playerInventory.currentAmulet;
+            amuletSlot.itemImage.sprite = playerInventory.currentAmulet.itemImage;
+        }
+
     }
 
     //####################################### Clear Main-Slots ##################################################################################
@@ -157,6 +166,10 @@ public class InventoryManager : MonoBehaviour
         {
             spellbookSlot.itemImage.sprite = spellbookSprite;
         }
+        if (!playerInventory.currentAmulet)
+        {
+            amuletSlot.itemImage.sprite = amuletSprite;
+        }
     }
 
     public void SetupDescriptionAndButton(string newDescriptionString, bool isButtonUsable, InventoryItem NewItem)
@@ -174,7 +187,7 @@ public class InventoryManager : MonoBehaviour
         else if (NewItem is InventoryWeapon)
         {
             InventoryWeapon currentItem = NewItem as InventoryWeapon;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.damage;
+            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
         }
         else if (NewItem is InventoryHelmet)
         {
@@ -204,12 +217,17 @@ public class InventoryManager : MonoBehaviour
         else if (NewItem is InventoryBow)
         {
             InventoryBow currentItem = NewItem as InventoryBow;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.damage;
+            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
         }
         else if (NewItem is InventorySpellbook)
         {
             InventorySpellbook currentItem = NewItem as InventorySpellbook;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.SpellDamage;
+            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
+        }
+        else if (NewItem is InventoryAmulet)
+        {
+            InventoryAmulet currentItem = NewItem as InventoryAmulet;
+            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
         }
         else
         {
@@ -228,6 +246,7 @@ public class InventoryManager : MonoBehaviour
         defDisplay.UpdateDefenseValue();
         critDisplay.UpdateCritValue();
         spellDisplay.UpdateSpellDamageValue();
+        rangeDisplay.UpdateRangeDamageValue();
     }
 
     void OnEnable()

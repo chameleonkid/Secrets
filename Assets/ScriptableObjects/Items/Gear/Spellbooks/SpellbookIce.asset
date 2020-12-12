@@ -16,7 +16,8 @@ MonoBehaviour:
   itemDescription: The Spellbook is used to shoot iceshards that slows enemys (Slightly
     slowed per hit)
   itemImage: {fileID: 21300000, guid: 67d441c6cc535834bb02f18161c28fb3, type: 3}
-  _numberHeld: 0
+  itemSound: {fileID: 8300000, guid: 34687e751469b6c43a115848fefcd0d3, type: 3}
+  _numberHeld: 1
   usable: 1
   unique: 1
   thisEvent:
@@ -35,5 +36,8 @@ MonoBehaviour:
         m_CallState: 2
   itemLvl: 0
   myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  SpellDamage: 5
+  minSpellDamage: 2
+  maxSpellDamage: 4
   manaCosts: 5
+  prefab: {fileID: 2015206087574396294, guid: 8297b86f7f58cba498d03d5c9b76d687, type: 3}
+  speed: 10

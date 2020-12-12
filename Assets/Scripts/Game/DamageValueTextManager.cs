@@ -19,11 +19,11 @@ public class DamageValueTextManager : MonoBehaviour
     {
         if (playerInventory.currentWeapon)
         {
-            damageDisplay.text = "" + playerInventory.currentWeapon.damage;
+            damageDisplay.text = playerInventory.currentWeapon.minDamage + " - " + playerInventory.currentWeapon.maxDamage;
         }
         else
         {
-            damageDisplay.text = "0";
+            damageDisplay.text = "";
         }
     }
 

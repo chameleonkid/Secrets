@@ -17,13 +17,13 @@ public class SpellDamageValueTextManager : MonoBehaviour
 
     public void UpdateSpellDamageValue()
     {
-        if (playerInventory.currentSpellbook)
+        if (playerInventory.currentSpellbook || playerInventory.currentAmulet)
         {
-            SpellDamageDisplay.text = "" + playerInventory.totalSpellDamage;
+            SpellDamageDisplay.text =  playerInventory.totalMinSpellDamage + " - "  + playerInventory.totalMaxSpellDamage;
         }
         else
         {
-            SpellDamageDisplay.text = "0";
+            SpellDamageDisplay.text = "";
         }
     }
 
