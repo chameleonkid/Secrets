@@ -43,10 +43,7 @@ public class PlayerMovement : Character
     [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
-    [SerializeField] private float fireballSpeed = 1;
-    public GameObject fireball;
-    [SerializeField] private float iceShardSpeed = 1;
-    public GameObject iceShard;
+
 
     [Header("Invulnerability frames")]
     public Color FlashColor;

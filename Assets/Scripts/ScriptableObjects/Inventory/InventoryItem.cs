@@ -10,6 +10,7 @@ public class InventoryItem : ScriptableObject
     public string itemName;
     public string itemDescription;
     public Sprite itemImage;
+    public AudioClip itemSound = default;
 
     [SerializeField] private int _numberHeld = default;
     public int numberHeld {
