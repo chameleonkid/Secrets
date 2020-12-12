@@ -31,13 +31,12 @@ public class Enemy : Character
         }
     }
 
-    [SerializeField] protected string enemyName = default;
-    [SerializeField] protected int baseAttack = default;
-    public float moveSpeed = default;
+    [SerializeField] protected string enemyName = default;      // Unused, is it necessary?
+    public float moveSpeed = default;                           // Should make protected
     [SerializeField] protected Vector2 homePosition = default;
-    public float chaseRadius = default;
+    [SerializeField] protected float chaseRadius = default;
     [SerializeField] protected float attackRadius = default;
-    public float originalChaseRadius = default;
+    private float originalChaseRadius = default;
 
     [Header("Death Effects")]
     [SerializeField] private GameObject deathEffect = default;
@@ -53,6 +52,7 @@ public class Enemy : Character
     {
         health = maxHealth.value;
         transform.position = homePosition;
+        chaseRadius = originalChaseRadius;
         currentState = State.idle;
     }
 
