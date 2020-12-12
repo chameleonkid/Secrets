@@ -16,6 +16,7 @@ public class PlayerInventory : ScriptableObject
     public InventoryRing currentRing;
     public InventoryBow currentBow;
     public InventorySpellbook currentSpellbook;
+    public InventoryAmulet currentAmulet;
     public float totalDefense;
     public float totalCritChance;
     public int totalMinSpellDamage;
@@ -72,6 +73,9 @@ public class PlayerInventory : ScriptableObject
             case InventorySpellbook spellbook:
                 currentSpellbook = spellbook;
                 break;
+            case InventoryAmulet amulet:
+                currentAmulet = amulet;
+                break;
         }
         // Applies to all equippables.
         item.numberHeld = 1;
@@ -125,6 +129,11 @@ public class PlayerInventory : ScriptableObject
         {
             totalMinSpellDamage += currentSpellbook.minSpellDamage;
             totalMaxSpellDamage += currentSpellbook.maxSpellDamage;
+        }
+        if (currentAmulet)
+        {
+            totalMinSpellDamage += currentAmulet.minSpellDamage;
+            totalMaxSpellDamage += currentAmulet.maxSpellDamage;
         }
     }
 }

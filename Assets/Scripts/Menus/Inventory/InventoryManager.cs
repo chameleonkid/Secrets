@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot ringSlot;
     public InventorySlot bowSlot;
     public InventorySlot spellbookSlot;
+    public InventorySlot amuletSlot;
     //InventorySlot when Item not exists
     public Sprite weaponSlotSprite;
     public Sprite armorSlotSprite;
@@ -25,6 +26,7 @@ public class InventoryManager : MonoBehaviour
     public Sprite ringSlotSprite;
     public Sprite bowSlotSprite;
     public Sprite spellbookSprite;
+    public Sprite amuletSprite;
     //InventoryStatsRefresh
     public CritValueTextManager critDisplay;
     public DamageValueTextManager dmgDisplay;
@@ -110,6 +112,12 @@ public class InventoryManager : MonoBehaviour
             spellbookSlot.thisItem = playerInventory.currentSpellbook;
             spellbookSlot.itemImage.sprite = playerInventory.currentSpellbook.itemImage;
         }
+        if (playerInventory.currentAmulet)
+        {
+            amuletSlot.thisItem = playerInventory.currentAmulet;
+            amuletSlot.itemImage.sprite = playerInventory.currentAmulet.itemImage;
+        }
+
     }
 
     //####################################### Clear Main-Slots ##################################################################################
@@ -156,6 +164,10 @@ public class InventoryManager : MonoBehaviour
         if (!playerInventory.currentSpellbook)
         {
             spellbookSlot.itemImage.sprite = spellbookSprite;
+        }
+        if (!playerInventory.currentAmulet)
+        {
+            amuletSlot.itemImage.sprite = amuletSprite;
         }
     }
 
@@ -209,7 +221,12 @@ public class InventoryManager : MonoBehaviour
         else if (NewItem is InventorySpellbook)
         {
             InventorySpellbook currentItem = NewItem as InventorySpellbook;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
+            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
+        }
+        else if (NewItem is InventoryAmulet)
+        {
+            InventoryAmulet currentItem = NewItem as InventoryAmulet;
+            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
         }
         else
         {

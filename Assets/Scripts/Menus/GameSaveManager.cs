@@ -66,9 +66,13 @@ public class GameSaveManager : MonoBehaviour
         playerInventory.currentRing = null;
         playerInventory.currentBow = null;
         playerInventory.currentSpellbook = null;
+        playerInventory.currentAmulet = null;
 
         playerInventory.totalDefense = 0;
         playerInventory.totalCritChance = 0;
+        playerInventory.totalMaxSpellDamage = 0;
+        playerInventory.totalMinSpellDamage = 0;
+
 
         playerInventory.myInventory.Clear();   //  somehow my items reset to different values when this is done...When Watched in Inspector its fine 
 

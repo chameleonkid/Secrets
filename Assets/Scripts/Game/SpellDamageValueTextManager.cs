@@ -17,7 +17,7 @@ public class SpellDamageValueTextManager : MonoBehaviour
 
     public void UpdateSpellDamageValue()
     {
-        if (playerInventory.currentSpellbook)
+        if (playerInventory.currentSpellbook || playerInventory.currentAmulet)
         {
             SpellDamageDisplay.text =  playerInventory.totalMinSpellDamage + " - "  + playerInventory.totalMaxSpellDamage;
         }
