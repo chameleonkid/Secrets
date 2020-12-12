@@ -209,7 +209,7 @@ public class InventoryManager : MonoBehaviour
         else if (NewItem is InventorySpellbook)
         {
             InventorySpellbook currentItem = NewItem as InventorySpellbook;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.SpellDamage;
+            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
         }
         else
         {

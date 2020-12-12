@@ -18,7 +18,8 @@ public class PlayerInventory : ScriptableObject
     public InventorySpellbook currentSpellbook;
     public float totalDefense;
     public float totalCritChance;
-    public float totalSpellDamage;
+    public int totalMinSpellDamage;
+    public int totalMaxSpellDamage;
 
     public void Add(InventoryItem item)
     {
@@ -115,13 +116,15 @@ public class PlayerInventory : ScriptableObject
         }
     }
 
-    public void CalcSpellDamage()
+    public void CalcSpellDamage()               //Add other items in the same way to add the min/max amount
     {
-        totalSpellDamage = 0;
+        totalMinSpellDamage = 0;
+        totalMaxSpellDamage = 0;
 
         if (currentSpellbook)
         {
-            totalSpellDamage += currentSpellbook.SpellDamage;
+            totalMinSpellDamage += currentSpellbook.minSpellDamage;
+            totalMaxSpellDamage += currentSpellbook.maxSpellDamage;
         }
     }
 }

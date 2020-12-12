@@ -3,7 +3,8 @@
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Spellbook")]
 public class InventorySpellbook : InventoryItem
 {
-    public int SpellDamage;
+    public int minSpellDamage;
+    public int maxSpellDamage;
     private InventorySpellbook temp;
     public int manaCosts;
     public GameObject prefab;

@@ -245,7 +245,7 @@ public class PlayerMovement : Character
 
         var prefab = myInventory.currentSpellbook.prefab;
         var speed = myInventory.currentSpellbook.speed;
-        CreateProjectile(prefab, speed, myInventory.currentSpellbook.SpellDamage);
+        CreateProjectile(prefab, speed,Random.Range(myInventory.totalMinSpellDamage, myInventory.totalMaxSpellDamage + 1));
         mana.current -= myInventory.currentSpellbook.manaCosts;
 
     }
