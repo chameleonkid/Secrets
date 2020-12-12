@@ -67,23 +67,20 @@ public class BoundedNPC : Interactable
             case 0:
                 //Walk right
                 directionVector = Vector3.right;
-                anim.SetBool("isMoving", true);
                 break;
             case 1:
                 directionVector = Vector3.up;
-                anim.SetBool("isMoving", true);
                 break;
             case 2:
                 directionVector = Vector3.left;
-                anim.SetBool("isMoving", true);
                 break;
             case 3:
                 directionVector = Vector3.down;
-                anim.SetBool("isMoving", true);
                 break;
             default:
                 break;
         }
+        anim.SetBool("isMoving", true);
         UpdateAnimation();
     }
 
@@ -111,12 +108,9 @@ public class BoundedNPC : Interactable
     private void OnCollisionEnter2D(Collision2D other) //IF NPC hits something else or loop < 100
     {
         Vector3 temp = directionVector;
-        ChangeDirection();
 
-        int loop = 0;
-        while (temp == directionVector && loop < 100)
+        for (int i = 100; temp == directionVector && i > 0; i--)
         {
-            loop++;
             ChangeDirection();
         }
     }
