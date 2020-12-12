@@ -95,7 +95,6 @@ public class PlayerMovement : Character
             // Debug.Log("helpmeout");
             return;
         }
-
       
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
@@ -196,7 +195,7 @@ public class PlayerMovement : Character
         //! Is this missing a sound request?
         animator.SetBool("RoundAttacking", true);
         currentState = State.roundattack;
-        yield return null;
+        yield return null;  //! This allows a round attack to be executed every other frame when the input is held, causing mana to drain very quickly
         animator.SetBool("RoundAttacking", false);
         currentState = State.walk;
 
