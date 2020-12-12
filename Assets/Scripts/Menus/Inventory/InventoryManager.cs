@@ -32,6 +32,7 @@ public class InventoryManager : MonoBehaviour
     public DamageValueTextManager dmgDisplay;
     public DefenseValueTextManager defDisplay;
     public SpellDamageValueTextManager spellDisplay;
+    public RangeDamageValueTextManager rangeDisplay;
 
     public GameObject inventoryPanel;
 
@@ -245,6 +246,7 @@ public class InventoryManager : MonoBehaviour
         defDisplay.UpdateDefenseValue();
         critDisplay.UpdateCritValue();
         spellDisplay.UpdateSpellDamageValue();
+        rangeDisplay.UpdateRangeDamageValue();
     }
 
     void OnEnable()
