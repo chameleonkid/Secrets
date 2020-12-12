@@ -19,9 +19,7 @@ public class TreasureChest : Interactable
     [Header("Animation")]
     private Animator anim;
 
-    public SoundManager soundManager;
-    
-    
+    [SerializeField] private AudioClip chestSound = default;
 
 
     // Start is called before the first frame update
@@ -33,6 +31,7 @@ public class TreasureChest : Interactable
         {
             anim.SetBool("opened", true);
         }
+
     }
 
     // Update is called once per frame
@@ -64,7 +63,7 @@ public class TreasureChest : Interactable
         raiseItem.Raise();
         // set the chest to opened
         isOpen = true;
-        //soundManager.PlayChestSound();
+        SoundManager.RequestSound(chestSound);
         //raise the context clue to off
         contextOff.Raise();
         anim.SetBool("opened", true);

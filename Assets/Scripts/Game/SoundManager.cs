@@ -1,32 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager soundManager;
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip[] attackSounds;
-    [SerializeField] private int  rndAttackSound;
-    [SerializeField] private AudioClip[] chestSound;
 
-    private void Start()
-    {
 
-        soundManager = this;
-        audioSource = GetComponent<AudioSource>();
-        attackSounds = Resources.LoadAll<AudioClip>("attackSounds");
-        chestSound = Resources.LoadAll<AudioClip>("chestSound");
-    }
+    private static event Action<AudioClip> OnSoundRequested;
+    public static void RequestSound(AudioClip sound) => OnSoundRequested?.Invoke(sound);
 
-    public void PlayAttackSound()
-    {
-        rndAttackSound = Random.Range(0, 2);
-        audioSource.PlayOneShot(attackSounds[rndAttackSound]);
-    }
-    public void PlayChestSound()
-    {
-        audioSource.PlayOneShot(chestSound[0]);
-    }
+
+    private AudioSource audioSource;
+
+    private void OnEnable() => OnSoundRequested += PlaySound;
+    private void OnDisable() => OnSoundRequested -= PlaySound;
+
+
+
+    private void Awake() => audioSource = GetComponent<AudioSource>();
+
+
+    private void PlaySound(AudioClip sound) => audioSource.PlayOneShot(sound);
+    
+       
+    
 
 }
