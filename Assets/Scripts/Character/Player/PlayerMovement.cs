@@ -302,7 +302,7 @@ public class PlayerMovement : Character
     {
         if (!isInvulnerable)
         {
-            myInventory.calcDefense();
+            myInventory.CalcDefense();
             var finalDamage = damage - myInventory.totalDefense;
             if (finalDamage > 0)
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
@@ -42,7 +41,7 @@ public class PlayerInventory : ScriptableObject
         }
     }
 
-    public void equip(InventoryItem item)
+    public void Equip(InventoryItem item)
     {
         switch (item)
         {
@@ -81,13 +80,12 @@ public class PlayerInventory : ScriptableObject
                 break;
         }
         // Applies to all equippables.
-        item.numberHeld = 1;
-        calcDefense();
+        CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
     }
 
-    private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : InventoryItem
+    private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
     {
         if (currentlyEquipped != null)
         {
@@ -103,7 +101,7 @@ public class PlayerInventory : ScriptableObject
         }
     }
 
-    public void calcDefense()
+    public void CalcDefense()
     {
         totalDefense = 0;
 
