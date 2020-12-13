@@ -92,7 +92,7 @@ public class SimpleSave : MonoBehaviour
         ES3.Load("Inventory", so.playerInventory);
         for (int i = 0; i < so.inventoryItems.Length; i++)
         {
-            ES3.Load(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);
+            so.inventoryItems[i].numberHeld = ES3.Load(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);
         }
     }
 
