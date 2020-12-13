@@ -9,4 +9,7 @@ public class InventorySpellbook : EquippableItem
     public int manaCosts;
     public GameObject prefab;
     public float speed = 1;
+
+    public override string fullDescription
+        => itemDescription + ("\n\n SPELL-DMG: ") + minSpellDamage + " - " + maxSpellDamage;
 }

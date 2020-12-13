@@ -39,7 +39,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     {
         if (thisItem)
         {
-            thisManager.SetupDescriptionAndButton(thisItem);
+            thisManager.SetupDescription(thisItem);
         }
     }
 

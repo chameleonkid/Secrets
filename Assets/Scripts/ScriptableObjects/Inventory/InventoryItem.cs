@@ -9,6 +9,8 @@ public class InventoryItem : ScriptableObject
 
     public string itemName;
     public string itemDescription;
+    public virtual string fullDescription => itemDescription;
+
     public Sprite itemImage;
     public AudioClip itemSound = default;
 

@@ -38,7 +38,7 @@ public class InventoryManager : MonoBehaviour
 
     public TextMeshProUGUI descriptionText;
     public Inventory playerInventory;
-    public InventoryItem currentItem;
+    public InventoryItem currentItem;   //! What is the purpose of this?
 
     private void OnEnable() => setUp();
 
@@ -168,63 +168,10 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void SetupDescriptionAndButton(InventoryItem newItem)
+    public void SetupDescription(InventoryItem newItem)
     {
-        if (newItem is InventoryArmor)
-        {
-            InventoryArmor currentItem = newItem as InventoryArmor;
-            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (newItem is InventoryWeapon)
-        {
-            InventoryWeapon currentItem = newItem as InventoryWeapon;
-            descriptionText.text = newItem.itemDescription + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
-        }
-        else if (newItem is InventoryHelmet)
-        {
-            InventoryHelmet currentItem = newItem as InventoryHelmet;
-            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (newItem is InventoryGlove)
-        {
-            InventoryGlove currentItem = newItem as InventoryGlove;
-            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (newItem is InventoryLegs)
-        {
-            InventoryLegs currentItem = newItem as InventoryLegs;
-            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (newItem is InventoryShield)
-        {
-            InventoryShield currentItem = newItem as InventoryShield;
-            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (newItem is InventoryRing)
-        {
-            InventoryRing currentItem = newItem as InventoryRing;
-            descriptionText.text = newItem.itemDescription + ("\n\n CRITICAL STRIKE CHANCE: ") + currentItem.criticalStrikeChance + ("%");
-        }
-        else if (newItem is InventoryBow)
-        {
-            InventoryBow currentItem = newItem as InventoryBow;
-            descriptionText.text = newItem.itemDescription + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
-        }
-        else if (newItem is InventorySpellbook)
-        {
-            InventorySpellbook currentItem = newItem as InventorySpellbook;
-            descriptionText.text = newItem.itemDescription + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
-        }
-        else if (newItem is InventoryAmulet)
-        {
-            InventoryAmulet currentItem = newItem as InventoryAmulet;
-            descriptionText.text = newItem.itemDescription + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
-        }
-        else
-        {
-            currentItem = newItem;
-            descriptionText.text = newItem.itemDescription;
-        }
+        currentItem = newItem;
+        descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
 
     public void setUp()
