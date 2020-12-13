@@ -1,64 +1,106 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(ScriptableObjectPersistence))]
 public class SimpleSave : MonoBehaviour
 {
-    public GameObject managerScript;
-    public GameObject pausePanel;
+    public static SimpleSave Instance { get; private set; }
 
-    private string levelToLoad;
-    AsyncOperation asyncLoadLevel;
+    // public GameObject pausePanel;   // Refer to note in LoadScene
+
+    private ScriptableObjectPersistence so;
+
+    private void Awake() {
+        if (Instance != null && Instance != this)
+        {
+            transform.parent = null;
+            Destroy(this.gameObject);
+        }
+        else {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            so = GetComponent<ScriptableObjectPersistence>();
+        }
+    }
 
     public void Save()
     {
-        GameSaveManager script = managerScript.GetComponent<GameSaveManager>();
+        SavePlayer();
+        SaveInventory();
+        SaveBools();
 
-        script.playerPosition.value.x = script.currentPlayerPosition.transform.position.x;
-        script.playerPosition.value.y = script.currentPlayerPosition.transform.position.y;
-        ES3.Save("Position", script.playerPosition);
-
-        //################# Save the Current Scene #########################
         ES3.Save("Scene", SceneManager.GetActiveScene().name);
-        ES3.Save("Position", script.playerPosition);
-
-        ES3.Save("Chests", script.chests);
-        ES3.Save("Inventory", script.playerInventory);
-
-        //############ Save ALL SCRIPTABLE OBJECTS NUMBER HELD Cause otherwise they lose the OnClickEvent ######################
-        ES3.Save("BluePotions", script.bluePotion.numberHeld);
-        ES3.Save("RedPotions", script.redPotion.numberHeld);
-        ES3.Save("GreenPotions", script.greenPotion.numberHeld);
-        ES3.Save("YellowPotions", script.yellowPotion.numberHeld);
-        ES3.Save("Arrows", script.arrows.numberHeld);
-        ES3.Save("SmallKeys", script.smallKeys.numberHeld);
     }
 
     public void Load()
     {
-        //################# Load the scene ####################
-        levelToLoad = ES3.Load<string>("Scene");
-        SceneManager.LoadScene(levelToLoad);
+        LoadPlayer();
+        LoadInventory();
+        LoadBools();
 
-        //################# Load all safed objects #################
-        GameSaveManager script = managerScript.GetComponent<GameSaveManager>();
-        script.playerPosition = ES3.Load("Position", script.playerPosition);
-        script.chests = ES3.Load("Chests", script.chests);
-        script.playerInventory = ES3.Load("Inventory", script.playerInventory);
+        LoadScene(ES3.Load<string>("Scene"));
+    }
 
-        //################## Load all Scriptable Objects / Numberheld #################################
-        script.bluePotion.numberHeld = ES3.Load("BluePotions", script.bluePotion.numberHeld);
-        script.redPotion.numberHeld = ES3.Load("RedPotions", script.redPotion.numberHeld);
-        script.greenPotion.numberHeld = ES3.Load("GreenPotions", script.greenPotion.numberHeld);
-        script.yellowPotion.numberHeld = ES3.Load("YellowPotions", script.yellowPotion.numberHeld);
-        script.arrows.numberHeld = ES3.Load("Arrows", script.arrows.numberHeld);
-        script.smallKeys.numberHeld = ES3.Load("SmallKeys", script.smallKeys.numberHeld);
+    public void LoadNew()
+    {
+        so.ResetScriptableObjects();
 
-        //Refresh Screen
-        script.resetHealthAndMana();
-        script.coinSignal.Raise();
+        LoadScene(SceneManager.GetActiveScene().name);  //! For development only, forces a scene reload on resetting.
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+
+        so.coinSignal.Raise();          //! Is this necessary if we are already loading the scene afresh?
 
         // PauseMenü schließen und Zeit weiterlaufen lassen
-        pausePanel.SetActive(false);
+        // pausePanel.SetActive(false);    //! Is this necessary if we are already loading the scene afresh?
         Time.timeScale = 1f;
+    }
+
+    private void SavePlayer()
+    {
+        so.playerPosition.value = FindObjectOfType<PlayerMovement>().transform.position;
+        ES3.Save("Position", so.playerPosition);
+        ES3.Save("Health", so.health);
+        ES3.Save("Mana", so.mana);
+    }
+
+    private void SaveInventory()
+    {
+        ES3.Save("Inventory", so.playerInventory);
+        for (int i = 0; i < so.inventoryItems.Length; i++)
+        {
+            ES3.Save(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);
+        }
+    }
+
+    private void SaveBools()
+    {
+        ES3.Save("Chests", so.chests);
+        ES3.Save("Doors", so.doors);
+    }
+
+    private void LoadPlayer()
+    {
+        ES3.Load("Position", so.playerPosition);
+        ES3.Load("Health", so.health);
+        ES3.Load("Mana", so.mana);
+    }
+
+    private void LoadInventory()
+    {
+        ES3.Load("Inventory", so.playerInventory);
+        for (int i = 0; i < so.inventoryItems.Length; i++)
+        {
+            so.inventoryItems[i].numberHeld = ES3.Load(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);
+        }
+    }
+
+    private void LoadBools()
+    {
+        ES3.Load("Chests", so.chests);
+        ES3.Load("Doors", so.doors);
     }
 }
