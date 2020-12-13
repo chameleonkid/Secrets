@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
-    private bool isPaused;
     public GameObject pausePanel;
-    public GameObject myEventSystem;
     public GameObject firstButtonPause;
     public GameObject InventoryActive;
 
-    private void Start()
-    {
-        isPaused = false;
-        myEventSystem = GameObject.Find("EventSystem");
-    }
+    private EventSystem eventSystem;
+    private bool isPaused = false;
+
+    private void Awake() => eventSystem = GetComponentInChildren<EventSystem>();
 
     private void Update()
     {
@@ -22,8 +20,8 @@ public class PauseManager : MonoBehaviour
             ChangePause();
             if (firstButtonPause)
             {
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonPause);
+                eventSystem.SetSelectedGameObject(null);
+                eventSystem.SetSelectedGameObject(firstButtonPause);
             }
         }
     }
@@ -48,4 +46,8 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
         Time.timeScale = 1f;
     }
+
+    public void Save() => SimpleSave.Instance.Save();
+    public void Load() => SimpleSave.Instance.Load();
+    public void Reset() => SimpleSave.Instance.LoadNew();
 }

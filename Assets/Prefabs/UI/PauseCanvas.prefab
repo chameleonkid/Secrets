@@ -197,8 +197,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: ResetScriptables
+      - m_Target: {fileID: 3795081590268915514}
+        m_MethodName: Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -220,7 +220,6 @@ GameObject:
   - component: {fileID: 1637701101}
   - component: {fileID: 1637701100}
   - component: {fileID: 1637701099}
-  - component: {fileID: 804196626}
   m_Layer: 5
   m_Name: Load_Button
   m_TagString: Untagged
@@ -328,7 +327,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 804196626}
+      - m_Target: {fileID: 3795081590268915514}
         m_MethodName: Load
         m_Mode: 1
         m_Arguments:
@@ -339,20 +338,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &804196626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637701097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb9f00ff9f9a3247969affb75fbc057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  managerScript: {fileID: 0}
-  pausePanel: {fileID: 3795081589024317947}
 --- !u!1 &1782370837
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +428,6 @@ GameObject:
   - component: {fileID: 1840056762}
   - component: {fileID: 1840056761}
   - component: {fileID: 1840056760}
-  - component: {fileID: 639429078}
   m_Layer: 5
   m_Name: Save_Button
   m_TagString: Untagged
@@ -551,7 +535,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 639429078}
+      - m_Target: {fileID: 3795081590268915514}
         m_MethodName: Save
         m_Mode: 1
         m_Arguments:
@@ -562,20 +546,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &639429078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840056758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb9f00ff9f9a3247969affb75fbc057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  managerScript: {fileID: 0}
-  pausePanel: {fileID: 3795081589024317947}
 --- !u!1 &2034482960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,6 +1532,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 3795081589024317947}
-  myEventSystem: {fileID: 0}
   firstButtonPause: {fileID: 3795081589464375864}
   InventoryActive: {fileID: 0}
