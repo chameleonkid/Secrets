@@ -29,13 +29,6 @@ public class PlayerMovement : Character
 
     public SpriteRenderer receivedItemSprite;
 
-    //! Was previously used to stop player from taking damage while flashing.
-    //  This is now done through `isInvulnerable`.
-    //  Should the collider still be disabled when flashing?
-    //  Keeping this will stop other hitbox effects from activating while the player is flashing,
-    //  so things like knockback will have a minimum interval based on `flashDuration` and `numberOfFlasches`
-    [SerializeField] private Collider2D triggerCollider = default;
-
     [Header("Hitboxes")]
     [SerializeField] private DamageOnTrigger[] directionalAttacks = default;
     [SerializeField] private DamageOnTrigger roundAttack = default;
@@ -44,21 +37,9 @@ public class PlayerMovement : Character
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
 
-
-    [Header("Invulnerability frames")]
-    public Color FlashColor;
-    public float flashDuration;
-    public int numberOfFlasches;
-    [SerializeField] private bool isInvulnerable = false;
-
-    [Header("Sprites")]
-    public Color regularPlayerColor;
-    public Color regularHairColor;
-    public Color regularArmorColor;
     public SpriteRenderer playerSprite;
     public SpriteRenderer armorSprite;
     public SpriteRenderer hairSprite;
-
 
     [SerializeField] private AudioClip[] attackSounds = default;
 
@@ -74,11 +55,6 @@ public class PlayerMovement : Character
         currentState = State.walk;
 
         transform.position = startingPosition.value;
-
-        regularPlayerColor = playerSprite.color;
-        regularHairColor = hairSprite.color;
-        regularArmorColor = armorSprite.color;
-
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
@@ -308,7 +284,7 @@ public class PlayerMovement : Character
             {
                 health -= finalDamage;
                 DamagePopUpManager.RequestDamagePopUp(finalDamage, isCritical, transform);
-                StartCoroutine(FlashCo());
+                iframes?.TriggerInvulnerability();
             }
             Debug.Log(finalDamage + " damage after defense calculation.");
         }
@@ -332,28 +308,5 @@ public class PlayerMovement : Character
         animator.SetBool("isDead", true);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("DeathMenu");
-    }
-
-    //##################### Invulnerability frame ##############################
-
-    private IEnumerator FlashCo()
-    {
-        isInvulnerable = true;
-        triggerCollider.enabled = false;    //! Refer to where `triggerCollider` is declared
-
-        for (int i = 0; i < numberOfFlasches; i++)
-        {
-            playerSprite.color = FlashColor;
-            armorSprite.color = FlashColor;
-            hairSprite.color = FlashColor;
-            yield return new WaitForSeconds(flashDuration);
-            playerSprite.color = regularPlayerColor;
-            armorSprite.color = regularArmorColor;
-            hairSprite.color = regularHairColor;
-            yield return new WaitForSeconds(flashDuration);
-        }
-
-        triggerCollider.enabled = true; //! Refer to where `triggerCollider` is declared
-        isInvulnerable = false;
     }
 }
