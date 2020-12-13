@@ -40,10 +40,7 @@ public class InventoryManager : MonoBehaviour
     public Inventory playerInventory;
     public InventoryItem currentItem;
 
-    public void SetTextAndButton(string Description)
-    {
-        descriptionText.text = Description;
-    }
+    private void OnEnable() => setUp();
 
     public void MakeInventorySlots()
     {
@@ -118,7 +115,6 @@ public class InventoryManager : MonoBehaviour
             amuletSlot.thisItem = playerInventory.currentAmulet;
             amuletSlot.itemImage.sprite = playerInventory.currentAmulet.itemImage;
         }
-
     }
 
     //####################################### Clear Main-Slots ##################################################################################
@@ -174,11 +170,6 @@ public class InventoryManager : MonoBehaviour
 
     public void SetupDescriptionAndButton(string newDescriptionString, bool isButtonUsable, InventoryItem NewItem)
     {
-        //  currentItem = NewItem;
-        //  descriptionText.text = newDescriptionString;
-
-        //################### TESTING #################################################
-
         if (NewItem is InventoryArmor)
         {
             InventoryArmor currentItem = NewItem as InventoryArmor;
@@ -239,18 +230,15 @@ public class InventoryManager : MonoBehaviour
     public void setUp()
     {
         clearInventorySlots();
+        descriptionText.text = "";
+
         MakeInventorySlots();
-        SetTextAndButton("");
         MakeGearSlots();
+
         dmgDisplay.UpdateDamageValue();
         defDisplay.UpdateDefenseValue();
         critDisplay.UpdateCritValue();
         spellDisplay.UpdateSpellDamageValue();
         rangeDisplay.UpdateRangeDamageValue();
-    }
-
-    void OnEnable()
-    {
-        setUp();
     }
 }

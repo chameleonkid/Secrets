@@ -17,6 +17,12 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     public GameObject firstButtonInventory;
     public Inventory playerInventory;
 
+    private void Start()
+    {
+        myEventSystem = GameObject.Find("EventSystem");
+        firstButtonInventory = GameObject.Find("CloseButton");
+    }
+
     public void Setup(InventoryItem newItem, InventoryManager newManager)
     {
         thisItem = newItem;
@@ -42,11 +48,10 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
         if (thisItem)
         {
             if (thisItem.usable && thisItem.numberHeld > 0)
-
             {
                 thisItem.Use();                         // Use Item
                 itemNumberText.text = "" + thisItem.numberHeld;
-                thisManager.SetTextAndButton(thisItem.name + " was used");
+                thisManager.descriptionText.text = thisItem.name + " was used";
                 //thisManager.setUp(); // 05_06_2020 Testing
             }
             if (thisItem.numberHeld <= 0)
@@ -58,11 +63,5 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
                 thisManager.setUp(); // 05_06_2020 Testing
             }
         }
-    }
-
-    void Start()
-    {
-        myEventSystem = GameObject.Find("EventSystem");
-        firstButtonInventory = GameObject.Find("CloseButton");
     }
 }
