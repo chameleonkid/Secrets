@@ -44,6 +44,8 @@ public class SimpleSave : MonoBehaviour
     public void LoadNew()
     {
         so.ResetScriptableObjects();
+
+        LoadScene(SceneManager.GetActiveScene().name);  //! For development only, forces a scene reload on resetting.
     }
 
     public void LoadScene(string sceneName)
