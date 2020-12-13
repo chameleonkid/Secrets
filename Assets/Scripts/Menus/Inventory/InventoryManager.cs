@@ -37,28 +37,25 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryPanel;
 
     public TextMeshProUGUI descriptionText;
-    public PlayerInventory playerInventory;
-    public InventoryItem currentItem;
+    public Inventory playerInventory;
+    public InventoryItem currentItem;   //! What is the purpose of this?
 
-    public void SetTextAndButton(string Description)
-    {
-        descriptionText.text = Description;
-    }
+    private void OnEnable() => setUp();
 
     public void MakeInventorySlots()
     {
         if (playerInventory)
         {
-            for (int i = 0; i < playerInventory.myInventory.Count; i++)
+            for (int i = 0; i < playerInventory.contents.Count; i++)
             {
-                if (playerInventory.myInventory[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
+                if (playerInventory.contents[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
                 {
                     GameObject temp = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
                     temp.transform.SetParent(inventoryPanel.transform, false);
                     InventorySlot newSlot = temp.GetComponent<InventorySlot>();
                     if (newSlot)
                     {
-                        newSlot.Setup(playerInventory.myInventory[i], this);
+                        newSlot.Setup(playerInventory.contents[i], this);
                     }
                 }
             }
@@ -118,7 +115,6 @@ public class InventoryManager : MonoBehaviour
             amuletSlot.thisItem = playerInventory.currentAmulet;
             amuletSlot.itemImage.sprite = playerInventory.currentAmulet.itemImage;
         }
-
     }
 
     //####################################### Clear Main-Slots ##################################################################################
@@ -172,85 +168,24 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void SetupDescriptionAndButton(string newDescriptionString, bool isButtonUsable, InventoryItem NewItem)
+    public void SetupDescription(InventoryItem newItem)
     {
-        //  currentItem = NewItem;
-        //  descriptionText.text = newDescriptionString;
-
-        //################### TESTING #################################################
-
-        if (NewItem is InventoryArmor)
-        {
-            InventoryArmor currentItem = NewItem as InventoryArmor;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (NewItem is InventoryWeapon)
-        {
-            InventoryWeapon currentItem = NewItem as InventoryWeapon;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
-        }
-        else if (NewItem is InventoryHelmet)
-        {
-            InventoryHelmet currentItem = NewItem as InventoryHelmet;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (NewItem is InventoryGlove)
-        {
-            InventoryGlove currentItem = NewItem as InventoryGlove;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (NewItem is InventoryLegs)
-        {
-            InventoryLegs currentItem = NewItem as InventoryLegs;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (NewItem is InventoryShield)
-        {
-            InventoryShield currentItem = NewItem as InventoryShield;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
-        }
-        else if (NewItem is InventoryRing)
-        {
-            InventoryRing currentItem = NewItem as InventoryRing;
-            descriptionText.text = newDescriptionString + ("\n\n CRITICAL STRIKE CHANCE: ") + currentItem.criticalStrikeChance + ("%");
-        }
-        else if (NewItem is InventoryBow)
-        {
-            InventoryBow currentItem = NewItem as InventoryBow;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
-        }
-        else if (NewItem is InventorySpellbook)
-        {
-            InventorySpellbook currentItem = NewItem as InventorySpellbook;
-            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
-        }
-        else if (NewItem is InventoryAmulet)
-        {
-            InventoryAmulet currentItem = NewItem as InventoryAmulet;
-            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
-        }
-        else
-        {
-            currentItem = NewItem;
-            descriptionText.text = newDescriptionString;
-        }
+        currentItem = newItem;
+        descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
 
     public void setUp()
     {
         clearInventorySlots();
+        descriptionText.text = "";
+
         MakeInventorySlots();
-        SetTextAndButton("");
         MakeGearSlots();
+
         dmgDisplay.UpdateDamageValue();
         defDisplay.UpdateDefenseValue();
         critDisplay.UpdateCritValue();
         spellDisplay.UpdateSpellDamageValue();
         rangeDisplay.UpdateRangeDamageValue();
-    }
-
-    void OnEnable()
-    {
-        setUp();
     }
 }

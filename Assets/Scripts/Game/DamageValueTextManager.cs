@@ -1,19 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class DamageValueTextManager : MonoBehaviour
 {
-
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
     public TextMeshProUGUI damageDisplay;
 
     private void Start()
     {
         UpdateDamageValue();
     }
-
 
     public void UpdateDamageValue()
     {
@@ -31,6 +27,4 @@ public class DamageValueTextManager : MonoBehaviour
     {
         UpdateDamageValue();
     }
-
 }
-

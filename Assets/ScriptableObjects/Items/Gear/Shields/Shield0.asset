@@ -16,13 +16,14 @@ MonoBehaviour:
   itemDescription: Yes! It's a shield!
   itemImage: {fileID: 21300000, guid: 289e1469caac5b842a4005559ea1c915, type: 3}
   numberHeld: 0
+  itemSound: {fileID: 0}
   usable: 1
   unique: 1
   thisEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000}
-        m_MethodName: swapShield
+        m_MethodName: SwapEquipment
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

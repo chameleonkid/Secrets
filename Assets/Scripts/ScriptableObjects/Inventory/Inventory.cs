@@ -2,10 +2,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
-public class PlayerInventory : ScriptableObject
+public class Inventory : ScriptableObject
 {
-    public List<InventoryItem> myInventory = new List<InventoryItem>(); //Why is this not loaded???
+    public List<InventoryItem> contents = new List<InventoryItem>(); //Why is this not loaded???
     public int coins;
+
     public InventoryItem currentItem;
     public InventoryWeapon currentWeapon;
     public InventoryArmor currentArmor;
@@ -17,6 +18,7 @@ public class PlayerInventory : ScriptableObject
     public InventoryBow currentBow;
     public InventorySpellbook currentSpellbook;
     public InventoryAmulet currentAmulet;
+
     public float totalDefense;
     public float totalCritChance;
     public int totalMinSpellDamage;
@@ -24,9 +26,9 @@ public class PlayerInventory : ScriptableObject
 
     public void Add(InventoryItem item)
     {
-        if (!myInventory.Contains(item))    // Add the item to the list if it is not already in the list.
+        if (!contents.Contains(item))    // Add the item to the list if it is not already in the list.
         {
-            myInventory.Add(item);
+            contents.Add(item);
         }
 
         if (item.unique)                    // Force unique items to have `numberHeld = 1`
@@ -39,7 +41,7 @@ public class PlayerInventory : ScriptableObject
         }
     }
 
-    public void equip(InventoryItem item)
+    public void Equip(InventoryItem item)
     {
         switch (item)
         {
@@ -47,44 +49,59 @@ public class PlayerInventory : ScriptableObject
                 // Exit the function early if item is not equippable.
                 return;
             case InventoryWeapon weapon:
-                currentWeapon = weapon;
+                Swap(ref currentWeapon, weapon);
                 break;
             case InventoryArmor armor:
-                currentArmor = armor;
+                Swap(ref currentArmor, armor);
                 break;
             case InventoryHelmet helmet:
-                currentHelmet = helmet;
+                Swap(ref currentHelmet, helmet);
                 break;
-            case InventoryGlove glove:
-                currentGloves = glove;
+            case InventoryGlove gloves:
+                Swap(ref currentGloves, gloves);
                 break;
             case InventoryLegs legs:
-                currentLegs = legs;
+                Swap(ref currentLegs, legs);
                 break;
             case InventoryShield shield:
-                currentShield = shield;
+                Swap(ref currentShield, shield);
                 break;
             case InventoryRing ring:
-                currentRing = ring;
+                Swap(ref currentRing, ring);
                 break;
             case InventoryBow bow:
-                currentBow = bow;
+                Swap(ref currentBow, bow);
                 break;
             case InventorySpellbook spellbook:
-                currentSpellbook = spellbook;
+                Swap(ref currentSpellbook, spellbook);
                 break;
             case InventoryAmulet amulet:
-                currentAmulet = amulet;
+                Swap(ref currentAmulet, amulet);
                 break;
         }
         // Applies to all equippables.
-        item.numberHeld = 1;
-        calcDefense();
+        CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
     }
 
-    public void calcDefense()
+    private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
+    {
+        if (currentlyEquipped != null)
+        {
+            Add(currentlyEquipped);
+        }
+
+        currentlyEquipped = newEquip;
+        newEquip.numberHeld--;
+
+        if (newEquip.itemSound != null)
+        {
+            SoundManager.RequestSound(newEquip.itemSound);
+        }
+    }
+
+    public void CalcDefense()
     {
         totalDefense = 0;
 

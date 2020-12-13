@@ -1,19 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class SpellDamageValueTextManager : MonoBehaviour
 {
-
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
     public TextMeshProUGUI SpellDamageDisplay;
 
     private void Start()
     {
         UpdateSpellDamageValue();
     }
-
 
     public void UpdateSpellDamageValue()
     {
@@ -31,6 +27,4 @@ public class SpellDamageValueTextManager : MonoBehaviour
     {
         UpdateSpellDamageValue();
     }
-
 }
-

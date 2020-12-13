@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class DefenseValueTextManager : MonoBehaviour
 {
-
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
     public TextMeshProUGUI defenseDisplay;
 
     public void UpdateDefenseValue()
@@ -21,11 +18,8 @@ public class DefenseValueTextManager : MonoBehaviour
         }
     }
 
-
     private void OnEnable()
     {
         UpdateDefenseValue();
     }
-
 }
-

@@ -9,6 +9,8 @@ public class InventoryItem : ScriptableObject
 
     public string itemName;
     public string itemDescription;
+    public virtual string fullDescription => itemDescription;
+
     public Sprite itemImage;
     public AudioClip itemSound = default;
 
@@ -31,7 +33,7 @@ public class InventoryItem : ScriptableObject
     public bool unique;
     public UnityEvent thisEvent;
     public int itemLvl;
-    public PlayerInventory myInventory;
+    public Inventory myInventory;
 
     public void Use()
     {
