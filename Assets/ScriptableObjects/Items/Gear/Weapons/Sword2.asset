@@ -16,14 +16,13 @@ MonoBehaviour:
   itemDescription: The sword of fire!
   itemImage: {fileID: 21300000, guid: bd2cf2b6864e7457f9ff12df8f96a477, type: 3}
   itemSound: {fileID: 8300000, guid: aa31a271484d2a74bb1b2056338a680b, type: 3}
-  _numberHeld: 0
   usable: 1
   unique: 1
   thisEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000}
-        m_MethodName: swapWeapon
+        m_MethodName: SwapEquipment
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
