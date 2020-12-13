@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot bowSlot;
     public InventorySlot spellbookSlot;
     public InventorySlot amuletSlot;
+    public InventorySlot bootsSlot;
     //InventorySlot when Item not exists
     public Sprite weaponSlotSprite;
     public Sprite armorSlotSprite;
@@ -27,6 +28,7 @@ public class InventoryManager : MonoBehaviour
     public Sprite bowSlotSprite;
     public Sprite spellbookSprite;
     public Sprite amuletSprite;
+    public Sprite bootsSprite;
     //InventoryStatsRefresh
     public CritValueTextManager critDisplay;
     public DamageValueTextManager dmgDisplay;
@@ -115,6 +117,11 @@ public class InventoryManager : MonoBehaviour
             amuletSlot.thisItem = playerInventory.currentAmulet;
             amuletSlot.itemImage.sprite = playerInventory.currentAmulet.itemImage;
         }
+        if (playerInventory.currentBoots)
+        {
+            bootsSlot.thisItem = playerInventory.currentBoots;
+            bootsSlot.itemImage.sprite = playerInventory.currentBoots.itemImage;
+        }
     }
 
     //####################################### Clear Main-Slots ##################################################################################
@@ -165,6 +172,10 @@ public class InventoryManager : MonoBehaviour
         if (!playerInventory.currentAmulet)
         {
             amuletSlot.itemImage.sprite = amuletSprite;
+        }
+        if (!playerInventory.currentBoots)
+        {
+            bootsSlot.itemImage.sprite = bootsSprite;
         }
     }
 

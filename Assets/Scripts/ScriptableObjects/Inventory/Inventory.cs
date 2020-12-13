@@ -18,6 +18,7 @@ public class Inventory : ScriptableObject
     public InventoryBow currentBow;
     public InventorySpellbook currentSpellbook;
     public InventoryAmulet currentAmulet;
+    public InventoryBoots currentBoots;
 
     public float totalDefense;
     public float totalCritChance;
@@ -78,6 +79,9 @@ public class Inventory : ScriptableObject
             case InventoryAmulet amulet:
                 Swap(ref currentAmulet, amulet);
                 break;
+            case InventoryBoots boots:
+                Swap(ref currentBoots, boots);
+                break;
         }
         // Applies to all equippables.
         CalcDefense();
@@ -124,6 +128,10 @@ public class Inventory : ScriptableObject
         if (currentShield)
         {
             totalDefense += currentShield.armorDefense;
+        }
+        if (currentBoots)
+        {
+            totalDefense += currentBoots.armorDefense;
         }
     }
 

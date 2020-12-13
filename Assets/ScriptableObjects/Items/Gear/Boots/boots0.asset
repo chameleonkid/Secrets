@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87a5959d4b3958479bfdc9fcff2678d, type: 3}
+  m_Name: boots0
+  m_EditorClassIdentifier: 
+  itemName: boots0
+  itemDescription: simple boots
+  itemImage: {fileID: 21300016, guid: 615195e18d3d39246b7e13cc23b30645, type: 3}
+  itemSound: {fileID: 8300000, guid: f849eb3f9dfb82148a8dc2065c453498, type: 3}
+  _numberHeld: 0
+  usable: 1
+  unique: 1
+  thisEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000}
+        m_MethodName: SwapEquipment
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  itemLvl: 1
+  myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  armorDefense: 1
