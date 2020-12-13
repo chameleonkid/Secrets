@@ -168,62 +168,62 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void SetupDescriptionAndButton(string newDescriptionString, bool isButtonUsable, InventoryItem NewItem)
+    public void SetupDescriptionAndButton(InventoryItem newItem)
     {
-        if (NewItem is InventoryArmor)
+        if (newItem is InventoryArmor)
         {
-            InventoryArmor currentItem = NewItem as InventoryArmor;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
+            InventoryArmor currentItem = newItem as InventoryArmor;
+            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
         }
-        else if (NewItem is InventoryWeapon)
+        else if (newItem is InventoryWeapon)
         {
-            InventoryWeapon currentItem = NewItem as InventoryWeapon;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
+            InventoryWeapon currentItem = newItem as InventoryWeapon;
+            descriptionText.text = newItem.itemDescription + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
         }
-        else if (NewItem is InventoryHelmet)
+        else if (newItem is InventoryHelmet)
         {
-            InventoryHelmet currentItem = NewItem as InventoryHelmet;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
+            InventoryHelmet currentItem = newItem as InventoryHelmet;
+            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
         }
-        else if (NewItem is InventoryGlove)
+        else if (newItem is InventoryGlove)
         {
-            InventoryGlove currentItem = NewItem as InventoryGlove;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
+            InventoryGlove currentItem = newItem as InventoryGlove;
+            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
         }
-        else if (NewItem is InventoryLegs)
+        else if (newItem is InventoryLegs)
         {
-            InventoryLegs currentItem = NewItem as InventoryLegs;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
+            InventoryLegs currentItem = newItem as InventoryLegs;
+            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
         }
-        else if (NewItem is InventoryShield)
+        else if (newItem is InventoryShield)
         {
-            InventoryShield currentItem = NewItem as InventoryShield;
-            descriptionText.text = newDescriptionString + ("\n\n ARMOR: ") + currentItem.armorDefense;
+            InventoryShield currentItem = newItem as InventoryShield;
+            descriptionText.text = newItem.itemDescription + ("\n\n ARMOR: ") + currentItem.armorDefense;
         }
-        else if (NewItem is InventoryRing)
+        else if (newItem is InventoryRing)
         {
-            InventoryRing currentItem = NewItem as InventoryRing;
-            descriptionText.text = newDescriptionString + ("\n\n CRITICAL STRIKE CHANCE: ") + currentItem.criticalStrikeChance + ("%");
+            InventoryRing currentItem = newItem as InventoryRing;
+            descriptionText.text = newItem.itemDescription + ("\n\n CRITICAL STRIKE CHANCE: ") + currentItem.criticalStrikeChance + ("%");
         }
-        else if (NewItem is InventoryBow)
+        else if (newItem is InventoryBow)
         {
-            InventoryBow currentItem = NewItem as InventoryBow;
-            descriptionText.text = newDescriptionString + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
+            InventoryBow currentItem = newItem as InventoryBow;
+            descriptionText.text = newItem.itemDescription + ("\n\n DMG: ") + currentItem.minDamage + " - " + currentItem.maxDamage;
         }
-        else if (NewItem is InventorySpellbook)
+        else if (newItem is InventorySpellbook)
         {
-            InventorySpellbook currentItem = NewItem as InventorySpellbook;
-            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
+            InventorySpellbook currentItem = newItem as InventorySpellbook;
+            descriptionText.text = newItem.itemDescription + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
         }
-        else if (NewItem is InventoryAmulet)
+        else if (newItem is InventoryAmulet)
         {
-            InventoryAmulet currentItem = NewItem as InventoryAmulet;
-            descriptionText.text = newDescriptionString + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
+            InventoryAmulet currentItem = newItem as InventoryAmulet;
+            descriptionText.text = newItem.itemDescription + ("\n\n SPELL-DMG: ") + currentItem.minSpellDamage + " - " + currentItem.maxSpellDamage; ;
         }
         else
         {
-            currentItem = NewItem;
-            descriptionText.text = newDescriptionString;
+            currentItem = newItem;
+            descriptionText.text = newItem.itemDescription;
         }
     }
 
