@@ -37,10 +37,6 @@ public class PlayerMovement : Character
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
 
-    public SpriteRenderer playerSprite;
-    public SpriteRenderer armorSprite;
-    public SpriteRenderer hairSprite;
-
     [SerializeField] private AudioClip[] attackSounds = default;
 
 
