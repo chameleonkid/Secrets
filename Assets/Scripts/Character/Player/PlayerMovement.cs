@@ -25,7 +25,7 @@ public class PlayerMovement : Character
 
     public VectorValue startingPosition;
 
-    public PlayerInventory myInventory;
+    public Inventory myInventory;
 
     public SpriteRenderer receivedItemSprite;
 
@@ -112,7 +112,7 @@ public class PlayerMovement : Character
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
         if (Input.GetButton("UseItem") && currentState != State.roundattack && notStaggeredOrLifting && currentState != State.attack)
         {
-            var arrows = myInventory.myInventory.Find(x => x.itemName.Contains("Arrow"));
+            var arrows = myInventory.contents.Find(x => x.itemName.Contains("Arrow"));
             if (arrows && arrows.numberHeld > 0 && myInventory.currentBow)
             {
                 arrows.numberHeld--;

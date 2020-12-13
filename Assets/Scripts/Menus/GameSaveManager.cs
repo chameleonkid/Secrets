@@ -9,7 +9,7 @@ public class GameSaveManager : MonoBehaviour
     public List<BoolValue> chests = new List<BoolValue>();
     public List<BoolValue> doors = new List<BoolValue>();
     public List<InventoryItem> ResetInventoryItems = new List<InventoryItem>();
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
 
     //################# Refresh the Screen ############################;
     public Signals coinSignal;
@@ -51,9 +51,9 @@ public class GameSaveManager : MonoBehaviour
     {
         playerInventory.coins = 0;
 
-        for (int i = 0; i < playerInventory.myInventory.Count; i++)
+        for (int i = 0; i < playerInventory.contents.Count; i++)
         {
-            playerInventory.myInventory[i].numberHeld = 0;
+            playerInventory.contents[i].numberHeld = 0;
         }
 
         playerInventory.currentItem = null;
@@ -74,7 +74,7 @@ public class GameSaveManager : MonoBehaviour
         playerInventory.totalMinSpellDamage = 0;
 
 
-        playerInventory.myInventory.Clear();   //  somehow my items reset to different values when this is done...When Watched in Inspector its fine 
+        playerInventory.contents.Clear();   //  somehow my items reset to different values when this is done...When Watched in Inspector its fine 
 
         // Look at this https://answers.unity.com/questions/1501743/scriptable-object-resets-randomly-between-scenes.html);
         coinSignal.Raise();

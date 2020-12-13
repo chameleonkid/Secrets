@@ -31,7 +31,7 @@ public class InventoryItem : ScriptableObject
     public bool unique;
     public UnityEvent thisEvent;
     public int itemLvl;
-    public PlayerInventory myInventory;
+    public Inventory myInventory;
 
     public void Use()
     {

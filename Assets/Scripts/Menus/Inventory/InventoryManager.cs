@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryPanel;
 
     public TextMeshProUGUI descriptionText;
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
     public InventoryItem currentItem;
 
     public void SetTextAndButton(string Description)
@@ -49,16 +49,16 @@ public class InventoryManager : MonoBehaviour
     {
         if (playerInventory)
         {
-            for (int i = 0; i < playerInventory.myInventory.Count; i++)
+            for (int i = 0; i < playerInventory.contents.Count; i++)
             {
-                if (playerInventory.myInventory[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
+                if (playerInventory.contents[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
                 {
                     GameObject temp = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
                     temp.transform.SetParent(inventoryPanel.transform, false);
                     InventorySlot newSlot = temp.GetComponent<InventorySlot>();
                     if (newSlot)
                     {
-                        newSlot.Setup(playerInventory.myInventory[i], this);
+                        newSlot.Setup(playerInventory.contents[i], this);
                     }
                 }
             }

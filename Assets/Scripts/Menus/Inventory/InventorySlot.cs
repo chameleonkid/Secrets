@@ -15,7 +15,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
 
     public GameObject myEventSystem;
     public GameObject firstButtonInventory;
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
 
     public void Setup(InventoryItem newItem, InventoryManager newManager)
     {
@@ -53,7 +53,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
             {
                 //Destroy(item); maybe, but not neccessary
                 Destroy(this.gameObject);
-                playerInventory.myInventory.Remove(thisItem);
+                playerInventory.contents.Remove(thisItem);
                 myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
                 thisManager.setUp(); // 05_06_2020 Testing
             }

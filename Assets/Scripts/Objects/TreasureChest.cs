@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TreasureChest : Interactable
 {
     [Header("Contents")]
     public InventoryItem contents;
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
     public bool isOpen;
     public BoolValue storeOpen;
 
@@ -21,9 +19,7 @@ public class TreasureChest : Interactable
 
     [SerializeField] private AudioClip chestSound = default;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         isOpen = storeOpen.RuntimeValue;
         anim = GetComponent<Animator>();
@@ -31,11 +27,9 @@ public class TreasureChest : Interactable
         {
             anim.SetBool("opened", true);
         }
-
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
         {
@@ -49,9 +43,9 @@ public class TreasureChest : Interactable
             }
         }
     }
+
     public void OpenChest()
     {
-
         dialogBox.SetActive(true);
         dialogText.text = contents.itemDescription;
 
@@ -69,15 +63,13 @@ public class TreasureChest : Interactable
         anim.SetBool("opened", true);
         storeOpen.RuntimeValue = isOpen;
     }
+
     public void ChestAlreadyOpen()
     {
         // Dialog off
         dialogBox.SetActive(false);
         raiseItem.Raise();
-
-
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -98,8 +90,5 @@ public class TreasureChest : Interactable
             playerInRange = false;
             contextOff.Raise();
         }
-
     }
-
 }
-

@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class CoinTextManager : MonoBehaviour
 {
-
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
     public TextMeshProUGUI coinDisplay;
-
 
     private void Start()
     {
@@ -24,7 +20,4 @@ public class CoinTextManager : MonoBehaviour
     {
         coinDisplay.text = "" + playerInventory.coins;
     }
-
-
-
 }

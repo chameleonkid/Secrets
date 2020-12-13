@@ -1,19 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class RangeDamageValueTextManager : MonoBehaviour
 {
-
-    public PlayerInventory playerInventory;
+    public Inventory playerInventory;
     public TextMeshProUGUI RangeDamageDisplay;
 
     private void Start()
     {
         UpdateRangeDamageValue();
     }
-
 
     public void UpdateRangeDamageValue()
     {
@@ -31,6 +27,4 @@ public class RangeDamageValueTextManager : MonoBehaviour
     {
         UpdateRangeDamageValue();
     }
-
 }
-

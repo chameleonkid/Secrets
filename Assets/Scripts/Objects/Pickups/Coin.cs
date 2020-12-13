@@ -3,7 +3,7 @@
 public class Coin : PickUp
 {
     [SerializeField] private Signals coinSignal = default;
-    public PlayerInventory PlayerInventory;
+    public Inventory PlayerInventory;
 
     public void OnTriggerEnter2D(Collider2D other)
     {

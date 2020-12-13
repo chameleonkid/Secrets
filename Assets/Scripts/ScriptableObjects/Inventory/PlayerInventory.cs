@@ -2,9 +2,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
-public class PlayerInventory : ScriptableObject
+public class Inventory : ScriptableObject
 {
-    public List<InventoryItem> myInventory = new List<InventoryItem>(); //Why is this not loaded???
+    public List<InventoryItem> contents = new List<InventoryItem>(); //Why is this not loaded???
     public int coins;
 
     public InventoryItem currentItem;
@@ -26,9 +26,9 @@ public class PlayerInventory : ScriptableObject
 
     public void Add(InventoryItem item)
     {
-        if (!myInventory.Contains(item))    // Add the item to the list if it is not already in the list.
+        if (!contents.Contains(item))    // Add the item to the list if it is not already in the list.
         {
-            myInventory.Add(item);
+            contents.Add(item);
         }
 
         if (item.unique)                    // Force unique items to have `numberHeld = 1`

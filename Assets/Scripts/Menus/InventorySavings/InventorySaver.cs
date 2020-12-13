@@ -22,7 +22,7 @@ public enum SaveSwitch
 
 public class InventorySaver : MonoBehaviour
 {
-    [SerializeField] private PlayerInventory myInventory = default;
+    [SerializeField] private Inventory myInventory = default;
     public SaveSwitch saveType = SaveSwitch.json;
 
     public ItemDatabase ItemDB;
@@ -33,8 +33,8 @@ public class InventorySaver : MonoBehaviour
     private void OnEnable()
     {
         //clear the inventory
-        myInventory.myInventory.Clear();
-        Debug.Log("Inventory Count = " + myInventory.myInventory.Count);
+        myInventory.contents.Clear();
+        Debug.Log("Inventory Count = " + myInventory.contents.Count);
 
         //clear the SL - we don't want anything in there
         SL.serialiableList.Clear();
@@ -75,7 +75,7 @@ public class InventorySaver : MonoBehaviour
                 obj.numberHeld = count;
 
                 // add the object to the inventory
-                myInventory.myInventory.Add(obj);
+                myInventory.contents.Add(obj);
                 Debug.Log("Added " + obj.itemName + " count " + count + " to inventory");
 
             }

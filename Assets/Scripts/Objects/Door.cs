@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public enum DoorType
 {
@@ -15,7 +12,7 @@ public class Door : Interactable
     [Header("Door variables")]
     public DoorType thisDoorType;
     public bool open = false;
-    public PlayerInventory PlayerInventory;
+    public Inventory playerInventory;
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
     public BoolValue storeOpen; //###### Door Memory
@@ -45,7 +42,7 @@ public class Door : Interactable
             if (playerInRange && thisDoorType == DoorType.key)
             {
                 //    Debug.Log("Player is in Range and Door = Key");
-                if (PlayerInventory.myInventory.Contains(key)) // Keys left in Inventory?
+                if (playerInventory.contents.Contains(key)) // Keys left in Inventory?
                 {
                     key.numberHeld--;
                     Open();
@@ -53,7 +50,6 @@ public class Door : Interactable
             }
         }
     }
-
 
     public void Open()
     {
@@ -67,10 +63,8 @@ public class Door : Interactable
         storeOpen.RuntimeValue = open; //Changed from Runtime to INITIAL!
     }
 
-
     public void Close()
     {
-
         //Turn off the Door sprite renderer
         doorSprite.enabled = true;
         // set open to true
@@ -78,8 +72,5 @@ public class Door : Interactable
         //turn off the doors box-collider
         physicsCollider.enabled = true;
         storeOpen.RuntimeValue = false;
-
-
     }
-
 }
