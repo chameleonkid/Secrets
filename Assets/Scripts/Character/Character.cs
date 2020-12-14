@@ -5,10 +5,12 @@ public abstract class Character : MonoBehaviour
 {
     public State currentState { get; protected set; }
     public abstract float health { get; set; }
+    public bool isInvulnerable { get; set; }
 
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
     protected Animator animator { get; private set; }
+    protected InvulnerabilityFrames iframes { get; private set; }
 
     protected virtual void Awake() => GetCharacterComponents();
 
@@ -17,6 +19,7 @@ public abstract class Character : MonoBehaviour
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        iframes = GetComponent<InvulnerabilityFrames>();
     }
 
     protected void SetAnimatorXY(Vector2 direction)
@@ -48,8 +51,12 @@ public abstract class Character : MonoBehaviour
     //! A bit messy to have both a public health property and `TakeDamage`, but unsure how to address
     public virtual void TakeDamage(float damage, bool isCritical)
     {
-        health -= damage;
-        DamagePopUpManager.RequestDamagePopUp(damage, isCritical, transform);
+        if (!isInvulnerable)
+        {
+            health -= damage;
+            DamagePopUpManager.RequestDamagePopUp(damage, isCritical, transform);
+            iframes?.TriggerInvulnerability();
+        }
     }
 
     public virtual void Knockback(Vector2 knockback, float duration)

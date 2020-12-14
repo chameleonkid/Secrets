@@ -694,6 +694,7 @@ GameObject:
   - component: {fileID: 7050798517902194487}
   - component: {fileID: 6405983187154860709}
   - component: {fileID: 3547411412465680931}
+  - component: {fileID: 2827189157319961769}
   - component: {fileID: 7737533578558960297}
   - component: {fileID: 7737533578558960296}
   - component: {fileID: 7737533578558960303}
@@ -714,7 +715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7656288679364536789}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.02, y: 0.14, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2995446615097044486}
@@ -893,7 +894,6 @@ MonoBehaviour:
   startingPosition: {fileID: 11400000, guid: d018f317c8bc1e440b453215b1f06785, type: 2}
   myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   receivedItemSprite: {fileID: 7737533577142277429}
-  triggerCollider: {fileID: 8022496975922957957}
   directionalAttacks:
   - {fileID: 2343904287320015185}
   - {fileID: 2536426010962628570}
@@ -903,20 +903,29 @@ MonoBehaviour:
   arrowSpeed: 8
   projectile: {fileID: 2015206087574396294, guid: a1434790cc1829148a1a7fb960f88361,
     type: 3}
-  FlashColor: {r: 1, g: 0.7658209, b: 0.43867922, a: 0.16862746}
-  flashDuration: 0.05
-  numberOfFlasches: 10
-  isInvulnerable: 0
-  regularPlayerColor: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0}
-  regularHairColor: {r: 0, g: 0, b: 0, a: 0}
-  regularArmorColor: {r: 0, g: 0, b: 0, a: 0}
-  playerSprite: {fileID: 4045718978915790569}
-  armorSprite: {fileID: 7607462306545391926}
-  hairSprite: {fileID: 7606598636552271384}
   attackSounds:
   - {fileID: 0}
   - {fileID: 0}
   thingSprite: {fileID: 7737533578274349692}
+--- !u!114 &2827189157319961769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7656288679364536789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d3c83bcddcca643958bdb193ec1a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashColor: {r: 1, g: 0.7658209, b: 0.4386792, a: 0.1686275}
+  invulnerabilityDuration: 0.5
+  numberOfFlashes: 10
+  renderers:
+  - {fileID: 4045718978915790569}
+  - {fileID: 7607462306545391926}
+  - {fileID: 7606598636552271384}
 --- !u!114 &7737533578558960297
 MonoBehaviour:
   m_ObjectHideFlags: 0
