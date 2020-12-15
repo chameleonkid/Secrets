@@ -11,6 +11,7 @@ public class InventoryScreenManager : MonoBehaviour
     public GameObject myEventSystem;
     public GameObject firstButtonInventory;
     public GameObject pauseActive;
+    public GameObject vendorActive;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class InventoryScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Inventory") && !pauseActive.activeInHierarchy)
+        if (Input.GetButtonDown("Inventory") && !pauseActive.activeInHierarchy && !vendorActive.activeInHierarchy)
         {
             ChangePause();
             if (firstButtonInventory)
