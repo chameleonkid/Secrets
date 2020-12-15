@@ -161,5 +161,11 @@ public class Inventory : ScriptableObject
             totalMaxSpellDamage += currentAmulet.maxSpellDamage;
         }
     }
+
+
+    public void RemoveItem(InventoryItem thisItem)
+    {
+        contents.Remove(thisItem);
+    }
 }
 

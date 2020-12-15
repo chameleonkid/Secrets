@@ -10,9 +10,15 @@ public class Vendor : InventoryScreenManager
     public Signals contextOff;
 
     public Inventory vendorInventory;
+    public InventoryAmulet testAmu;
+
+    private void Awake()
+    {
+        vendorInventory.Add(testAmu);
+    }
 
     // Update is called once per frame
-  private void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
         {

@@ -17,6 +17,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     public GameObject myEventSystem;
     public GameObject firstButtonInventory;
     public Inventory playerInventory;
+    public Inventory vendorInventory;
 
     private void Start()
     {
@@ -74,6 +75,20 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
                 playerInventory.contents.Remove(thisItem);
                 myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
                 thisManager.setUp(); // 05_06_2020 Testing
+            }
+        }
+    }
+
+
+    public void SwapVendorItem()
+    {
+        if (thisItem)
+        {
+            if (thisItem && thisItem.numberHeld > 0)
+            {
+                playerInventory.Add(thisItem);
+                vendorInventory.RemoveItem(thisItem);
+                thisVendorManager.MakeInventorySlots();
             }
         }
     }
