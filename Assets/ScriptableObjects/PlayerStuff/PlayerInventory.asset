@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634ddd129e1697c46ba71df277601b62, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  contents:
-  - {fileID: 11400000, guid: 43a85712a4b7c9c469fce2519effa8c9, type: 2}
-  coins: 1000
+  contents: []
+  coins: 200
   currentItem: {fileID: 0}
-  currentWeapon: {fileID: 11400000, guid: d5d783953bf427840948e4bcc24f00c4, type: 2}
-  currentArmor: {fileID: 11400000, guid: 91793cb93c7c5c448bc919132e69ec1d, type: 2}
+  currentWeapon: {fileID: 0}
+  currentArmor: {fileID: 0}
   currentHelmet: {fileID: 0}
   currentGloves: {fileID: 0}
   currentLegs: {fileID: 0}
@@ -25,9 +24,9 @@ MonoBehaviour:
   currentRing: {fileID: 0}
   currentBow: {fileID: 0}
   currentSpellbook: {fileID: 0}
-  currentAmulet: {fileID: 0}
+  currentAmulet: {fileID: 11400000, guid: 37136cab9fd92e54fbddb0c0059084f9, type: 2}
   currentBoots: {fileID: 0}
-  totalDefense: 1
+  totalDefense: 0
   totalCritChance: 0
-  totalMinSpellDamage: 0
-  totalMaxSpellDamage: 0
+  totalMinSpellDamage: 1
+  totalMaxSpellDamage: 2

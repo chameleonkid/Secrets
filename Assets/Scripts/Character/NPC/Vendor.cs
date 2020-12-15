@@ -10,9 +10,7 @@ public class Vendor : InventoryScreenManager
     public Signals contextOff;
 
     public Inventory vendorInventory;
-    public InventoryAmulet testAmu;
-    public InventoryArmor testArmor;
-    public InventoryWeapon testWeapon;
+
 
   
 

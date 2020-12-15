@@ -83,16 +83,22 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     {
         if (thisItem)
         {
-            if (thisItem.unique)
+            if (thisItem.unique && playerInventory.coins >= thisItem.itemBuyPrice)
             {
                 playerInventory.Add(thisItem);
+                playerInventory.coins -= thisItem.itemBuyPrice;
                 vendorInventory.RemoveItem(thisItem);
                 thisVendorManager.clearInventorySlots();
                 thisVendorManager.MakeInventorySlots();
             }
+            else if(playerInventory.coins >= thisItem.itemBuyPrice)
+            {
+                playerInventory.coins -= thisItem.itemBuyPrice;
+                playerInventory.Add(thisItem);
+            }
             else
             {
-                playerInventory.Add(thisItem);
+                Debug.Log("Not enaugh money! to buy " + thisItem);
             }
         }
     }
