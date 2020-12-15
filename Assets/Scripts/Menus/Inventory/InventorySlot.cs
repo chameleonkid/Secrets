@@ -14,14 +14,12 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     public InventoryManager thisManager;
     public VendorInventoryManager thisVendorManager;
 
-    public GameObject myEventSystem;
     public GameObject firstButtonInventory;
     public Inventory playerInventory;
     public Inventory vendorInventory;
 
     private void Start()
     {
-        myEventSystem = GameObject.Find("EventSystem");
         firstButtonInventory = GameObject.Find("CloseButton");
     }
 
@@ -73,7 +71,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
                 //Destroy(item); maybe, but not neccessary
                 Destroy(this.gameObject);
                 playerInventory.contents.Remove(thisItem);
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
+                EventSystem.current.SetSelectedGameObject(firstButtonInventory);
                 thisManager.setUp(); // 05_06_2020 Testing
             }
         }
