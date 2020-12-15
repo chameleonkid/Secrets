@@ -61,21 +61,20 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     {
         if (thisItem)
         {
-            if (thisItem.usable && thisItem.numberHeld > 0)
-            {
-                thisItem.Use();                         // Use Item
-                itemNumberText.text = "" + thisItem.numberHeld;
-                thisManager.descriptionText.text = thisItem.name + " was used";
-                //thisManager.setUp(); // 05_06_2020 Testing
-            }
-            if (thisItem.numberHeld <= 0)
-            {
-                //Destroy(item); maybe, but not neccessary
-                Destroy(this.gameObject);
-                playerInventory.contents.Remove(thisItem);
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
-                thisManager.setUp(); // 05_06_2020 Testing
-            }
+                if (thisItem.usable && thisItem.numberHeld > 0)
+                {
+                    thisItem.Use();                         // Use Item
+                    itemNumberText.text = "" + thisItem.numberHeld;
+                    thisManager.descriptionText.text = thisItem.name + " was used";
+
+                }
+                if (thisItem.numberHeld <= 0)
+                {
+                    Destroy(this.gameObject);
+                    playerInventory.contents.Remove(thisItem);
+                    myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
+                    thisManager.setUp(); 
+                }
         }
     }
 
@@ -84,10 +83,28 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     {
         if (thisItem)
         {
-            if (thisItem && thisItem.numberHeld > 0)
+            if (thisItem.unique)
             {
                 playerInventory.Add(thisItem);
                 vendorInventory.RemoveItem(thisItem);
+                thisVendorManager.clearInventorySlots();
+                thisVendorManager.MakeInventorySlots();
+            }
+            else
+            {
+                playerInventory.Add(thisItem);
+            }
+        }
+    }
+
+    public void SwapItemToVendor()
+    {
+        if (thisItem)
+        {
+            if (thisItem.unique)
+            {
+                vendorInventory.Add(thisItem);
+                playerInventory.RemoveItem(thisItem);
                 thisVendorManager.clearInventorySlots();
                 thisVendorManager.MakeInventorySlots();
             }

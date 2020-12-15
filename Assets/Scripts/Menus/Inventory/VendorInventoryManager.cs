@@ -11,6 +11,7 @@ public class VendorInventoryManager : MonoBehaviour
     public InventoryAmulet testAmu;
     public InventoryArmor testArmor;
     public InventoryWeapon testWeapon;
+    public InventoryItem testPotion;
 
 
     private void OnEnable()
@@ -24,6 +25,7 @@ public class VendorInventoryManager : MonoBehaviour
         vendorInventory.Add(testAmu);
         vendorInventory.Add(testArmor);
         vendorInventory.Add(testWeapon);
+        vendorInventory.Add(testPotion);
     }
 
     public void MakeInventorySlots()
