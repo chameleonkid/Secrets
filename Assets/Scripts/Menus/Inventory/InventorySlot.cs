@@ -12,6 +12,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     // Variables from the item
     public InventoryItem thisItem;
     public InventoryManager thisManager;
+    public VendorInventoryManager thisVendorManager;
 
     public GameObject myEventSystem;
     public GameObject firstButtonInventory;
@@ -27,6 +28,18 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     {
         thisItem = newItem;
         thisManager = newManager;
+
+        if (thisItem)
+        {
+            itemImage.sprite = thisItem.itemImage;
+            itemNumberText.text = "" + thisItem.numberHeld;
+        }
+    }
+
+    public void SetupVendor(InventoryItem newItem, VendorInventoryManager newManager)
+    {
+        thisItem = newItem;
+        thisVendorManager = newManager;
 
         if (thisItem)
         {

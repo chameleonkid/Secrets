@@ -5,6 +5,7 @@ public class InventoryManager : MonoBehaviour
 {
     //Inventory Information
     public GameObject blankInventorySlot;
+    public GameObject inventoryPanel;
     //InventorySlots when Item exists
     public InventorySlot weaponSlot;
     public InventorySlot armorSlot;
@@ -36,7 +37,7 @@ public class InventoryManager : MonoBehaviour
     public SpellDamageValueTextManager spellDisplay;
     public RangeDamageValueTextManager rangeDisplay;
 
-    public GameObject inventoryPanel;
+  
 
     public TextMeshProUGUI descriptionText;
     public Inventory playerInventory;
