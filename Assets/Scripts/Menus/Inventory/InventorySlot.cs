@@ -80,7 +80,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
     }
 
 
-    public void SwapVendorItem()
+    public void SwapItemToPlayer()
     {
         if (thisItem)
         {
