@@ -103,6 +103,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
         }
     }
 
+    
     public void SwapItemToVendor()
     {
         if (thisItem)
@@ -116,4 +117,5 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
             }
         }
     }
+    
 }
