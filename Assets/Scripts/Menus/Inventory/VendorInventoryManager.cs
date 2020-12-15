@@ -8,8 +8,23 @@ public class VendorInventoryManager : MonoBehaviour
     public GameObject blankInventorySlot;
     public GameObject inventoryPanel;
 
+    public InventoryAmulet testAmu;
+    public InventoryArmor testArmor;
+    public InventoryWeapon testWeapon;
 
-    private void OnEnable() => setUp();
+
+    private void OnEnable()
+    {
+        clearInventorySlots();
+        setUp();
+    }
+
+    private void Awake()
+    {
+        vendorInventory.Add(testAmu);
+        vendorInventory.Add(testArmor);
+        vendorInventory.Add(testWeapon);
+    }
 
     public void MakeInventorySlots()
     {

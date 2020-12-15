@@ -8,6 +8,7 @@ public class InventoryScreenManager : MonoBehaviour
 
     private bool isPaused;
     public GameObject inventoryPanel;
+    public GameObject vendorPanel;
     public GameObject myEventSystem;
     public GameObject firstButtonInventory;
     public GameObject pauseActive;
