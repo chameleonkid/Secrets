@@ -32,12 +32,21 @@ public class VendorInventoryManager : MonoBehaviour
 
     }
 
-
-
-
     public void setUp()
     {
         MakeInventorySlots();
     }
+
+
+    public void clearInventorySlots()
+    {
+        for (int i = 0; i < inventoryPanel.transform.childCount; i++)       //Clear MainInventory
+        {
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject);
+        }
+    }
+
+
+
 
 }

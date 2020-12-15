@@ -88,6 +88,7 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
             {
                 playerInventory.Add(thisItem);
                 vendorInventory.RemoveItem(thisItem);
+                thisVendorManager.clearInventorySlots();
                 thisVendorManager.MakeInventorySlots();
             }
         }
