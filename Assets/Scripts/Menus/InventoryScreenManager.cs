@@ -9,7 +9,7 @@ public class InventoryScreenManager : MonoBehaviour
     public GameObject vendorPanel;
     public GameObject firstButtonInventory;
     public GameObject pauseActive;
- // public GameObject vendorActive;
+    public GameObject vendorActive;
 
 
     private void Start() => isPaused = false;
