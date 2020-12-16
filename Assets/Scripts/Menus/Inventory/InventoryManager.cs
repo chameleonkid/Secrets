@@ -104,9 +104,9 @@ public class InventoryManager : MonoBehaviour
         {
             playerInventory.contents.Remove(usedItem);
             EventSystem.current.SetSelectedGameObject(closeButton);
+            Refresh();
         }
 
-        Refresh();
         descriptionText.text = usedItem.name + " was used";
     }
 
