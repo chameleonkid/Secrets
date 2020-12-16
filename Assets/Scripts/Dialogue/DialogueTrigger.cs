@@ -17,6 +17,7 @@ public class DialogueTrigger : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(NextButton);
         }
+        
 
     }
 
@@ -37,8 +38,8 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.isTrigger)
         {
-            playerInRange = false;
             FindObjectOfType<DialogueManager>().EndDialogue();
+            playerInRange = false;
         }
     }
 

@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
     public GameObject dialoguePanel;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +21,11 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+
         nameText.text = dialogue.npcName;
         sentences.Clear();
         dialoguePanel.SetActive(true);
+        animator.SetBool("isActive", true);
 
         foreach (string sentence in dialogue.sentences)
         {
@@ -38,12 +41,23 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         string sentence = sentences.Dequeue();
-        dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
+
     }
 
    public void EndDialogue()
     {
-        dialoguePanel.SetActive(false);
-        Debug.Log("End of conversation.");
+        animator.SetBool("isActive", false);    
+    }
+
+    IEnumerator TypeSentence (string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return null;
+        }
     }
 }
