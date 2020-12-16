@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 public class DialogueManager : MonoBehaviour
@@ -12,6 +13,8 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public GameObject dialoguePanel;
     public Animator animator;
+    public GameObject NextButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +24,15 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-
+        Time.timeScale = 0;
         nameText.text = dialogue.npcName;
         sentences.Clear();
-        dialoguePanel.SetActive(true);
-        animator.SetBool("isActive", true);
+
+        if (NextButton)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(NextButton);
+        }
 
         foreach (string sentence in dialogue.sentences)
         {
@@ -33,6 +40,8 @@ public class DialogueManager : MonoBehaviour
         }
         DisplayNextSentence();
     }
+
+    //Submits the sentences via FIFO if there are sentences available
     public void DisplayNextSentence()
     {
         if(sentences.Count == 0)
@@ -43,21 +52,27 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
-
     }
+
 
    public void EndDialogue()
     {
-        animator.SetBool("isActive", false);    
+        animator.SetBool("isActive", false);
+        Time.timeScale = 1;
     }
+
 
     IEnumerator TypeSentence (string sentence)
     {
+        animator.SetBool("isActive", true);
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
+           // yield return new WaitForSeconds(0.05f);   Looks way better, but doesnt work with timescale = 0;
             yield return null;
         }
     }
+
+
 }

@@ -114027,6 +114027,31 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1932164663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1138153573866147860, guid: 0875fe41e4653d345a589510b5c0b82b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1138153573692034305}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1932164667
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932164663}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e5b9ed9ac16d8a47b92d62d575dcb40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1933711613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7197445271929895023, guid: 479ba7f10a495eb43b91dec080a18267,
@@ -123672,6 +123697,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1138153573837817372, guid: 0875fe41e4653d345a589510b5c0b82b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1138153573837817375, guid: 0875fe41e4653d345a589510b5c0b82b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -123680,17 +123710,22 @@ PrefabInstance:
     - target: {fileID: 1138153573866147860, guid: 0875fe41e4653d345a589510b5c0b82b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1138153573866147863, guid: 0875fe41e4653d345a589510b5c0b82b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -200
+      value: -385
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138153573866147863, guid: 0875fe41e4653d345a589510b5c0b82b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1138153573969708994, guid: 0875fe41e4653d345a589510b5c0b82b,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1138153573969708994, guid: 0875fe41e4653d345a589510b5c0b82b,
         type: 3}
@@ -123702,11 +123737,26 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1138153574514183481, guid: 0875fe41e4653d345a589510b5c0b82b,
+        type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1138153574832647974, guid: 0875fe41e4653d345a589510b5c0b82b,
         type: 3}
       propertyPath: m_Name
       value: DialogueManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1138153574832647976, guid: 0875fe41e4653d345a589510b5c0b82b,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1932164667}
+    - target: {fileID: 1138153574832647976, guid: 0875fe41e4653d345a589510b5c0b82b,
+        type: 3}
+      propertyPath: NextButton
+      value: 
+      objectReference: {fileID: 1996685366}
     - target: {fileID: 1138153574832647977, guid: 0875fe41e4653d345a589510b5c0b82b,
         type: 3}
       propertyPath: m_LocalPosition.x
