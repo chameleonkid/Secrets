@@ -19,7 +19,6 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot spellbookSlot;
     public InventorySlot amuletSlot;
     public InventorySlot bootsSlot;
-
     //InventoryStatsRefresh
     public CritValueTextManager critDisplay;
     public DamageValueTextManager dmgDisplay;
@@ -37,25 +36,21 @@ public class InventoryManager : MonoBehaviour
 
     private void OnEnable() => Refresh();
 
-    public void MakeInventorySlots()
+    private void Refresh()
     {
-        if (playerInventory)
+        descriptionText.text = "";
+        ClearInventorySlots();
+        UpdateEquipmentSlots();
+        MakeInventorySlots();
+        UpdateDisplays();
+    }
+
+    // Destroy all item slots
+    private void ClearInventorySlots()
+    {
+        for (int i = 0; i < inventoryPanel.transform.childCount; i++)
         {
-            for (int i = 0; i < playerInventory.contents.Count; i++)
-            {
-                if (playerInventory.contents[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
-                {
-                    GameObject temp = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
-                    temp.transform.SetParent(inventoryPanel.transform, false);
-                    InventorySlot newSlot = temp.GetComponent<InventorySlot>();
-                    if (newSlot)
-                    {
-                        newSlot.SetItem(playerInventory.contents[i]);
-                        newSlot.OnSlotSelected += SetUpItemDescription; // Does unsubscribing need to be handled if the item slots are destroyed?
-                        newSlot.OnSlotUsed += OnItemUsed;     // Does unsubscribing need to be handled if the item slots are destroyed?
-                    }
-                }
-            }
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject);
         }
     }
 
@@ -74,11 +69,26 @@ public class InventoryManager : MonoBehaviour
         bootsSlot.SetItem(playerInventory.currentBoots);
     }
 
-    private void ClearInventorySlots()
+    // Instantiate inventory slots and set items
+    public void MakeInventorySlots()
     {
-        for (int i = 0; i < inventoryPanel.transform.childCount; i++)
+        if (playerInventory)
         {
-            Destroy(inventoryPanel.transform.GetChild(i).gameObject);
+            for (int i = 0; i < playerInventory.contents.Count; i++)
+            {
+                if (playerInventory.contents[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
+                {
+                    var newSlotGameObj = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
+                    newSlotGameObj.transform.SetParent(inventoryPanel.transform, false);
+                    var newSlot = newSlotGameObj.GetComponent<InventorySlot>();
+                    if (newSlot)
+                    {
+                        newSlot.SetItem(playerInventory.contents[i]);
+                        newSlot.OnSlotSelected += SetUpItemDescription; // Does unsubscribing need to be handled if the item slots are destroyed?
+                        newSlot.OnSlotUsed += OnItemUsed;               // Does unsubscribing need to be handled if the item slots are destroyed?
+                    }
+                }
+            }
         }
     }
 
@@ -98,15 +108,6 @@ public class InventoryManager : MonoBehaviour
 
         Refresh();
         descriptionText.text = usedItem.name + " was used";
-    }
-
-    private void Refresh()
-    {
-        descriptionText.text = "";
-        ClearInventorySlots();
-        UpdateEquipmentSlots();
-        MakeInventorySlots();
-        UpdateDisplays();
     }
 
     private void UpdateDisplays()
