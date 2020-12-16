@@ -20,7 +20,7 @@ public class Vendor : InventoryScreenManager
                 EventSystem.current.SetSelectedGameObject(firstButtonInventory);
             }
         }
-        if (Input.GetButtonDown("Inventory") && vendorActive.activeInHierarchy)
+        if (Input.GetButtonDown("Inventory"))
         {
             stopPause();
         }

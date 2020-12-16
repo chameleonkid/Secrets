@@ -9,14 +9,14 @@ public class InventoryScreenManager : MonoBehaviour
     public GameObject vendorPanel;
     public GameObject firstButtonInventory;
     public GameObject pauseActive;
-    public GameObject vendorActive;
+ // public GameObject vendorActive;
 
 
     private void Start() => isPaused = false;
 
     private void Update()
     {
-        if (Input.GetButtonDown("Inventory") && !pauseActive.activeInHierarchy && !vendorActive.activeInHierarchy)
+        if (Input.GetButtonDown("Inventory") && !pauseActive.activeInHierarchy)
         {
             ChangePause();
             if (firstButtonInventory)
