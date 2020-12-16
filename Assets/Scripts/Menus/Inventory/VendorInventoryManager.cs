@@ -6,7 +6,24 @@ public class VendorInventoryManager : MonoBehaviour
     public GameObject blankInventorySlot;
     public GameObject inventoryPanel;
 
-    private void OnEnable() => setUp();
+    public InventoryAmulet testAmu;
+    public InventoryArmor testArmor;
+    public InventoryWeapon testWeapon;
+    public InventoryItem testPotion;
+
+    private void OnEnable()
+    {
+        clearInventorySlots();
+        setUp();
+    }
+
+    private void Awake()
+    {
+        vendorInventory.Add(testAmu);
+        vendorInventory.Add(testArmor);
+        vendorInventory.Add(testWeapon);
+        vendorInventory.Add(testPotion);
+    }
 
     public void MakeInventorySlots()
     {
@@ -31,5 +48,13 @@ public class VendorInventoryManager : MonoBehaviour
     public void setUp()
     {
         MakeInventorySlots();
+    }
+
+    public void clearInventorySlots()
+    {
+        for (int i = 0; i < inventoryPanel.transform.childCount; i++)       //Clear MainInventory
+        {
+            Destroy(inventoryPanel.transform.GetChild(i).gameObject);
+        }
     }
 }

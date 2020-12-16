@@ -92,16 +92,42 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
         }
     }
 
-    // public void SwapVendorItem()
-    // {
-    //     if (item)
-    //     {
-    //         if (item && item.numberHeld > 0)
-    //         {
-    //             playerInventory.Add(item);
-    //             vendorInventory.RemoveItem(item);
-    //             thisVendorManager.MakeInventorySlots();
-    //         }
-    //     }
-    // }
+    public void SwapItemToPlayer()
+    {
+        // if (item)
+        // {
+        //     if (item.unique && playerInventory.coins >= item.itemBuyPrice)
+        //     {
+        //         playerInventory.Add(item);
+        //         playerInventory.coins -= item.itemBuyPrice;
+        //         vendorInventory.RemoveItem(item);
+        //         thisVendorManager.clearInventorySlots();
+        //         thisVendorManager.MakeInventorySlots();
+        //     }
+        //     else if(playerInventory.coins >= item.itemBuyPrice)
+        //     {
+        //         playerInventory.coins -= item.itemBuyPrice;
+        //         playerInventory.Add(item);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Not enaugh money! to buy " + item);
+        //     }
+        // }
+    }
+
+    
+    public void SwapItemToVendor()
+    {
+        if (item)
+        {
+            if (item.unique)
+            {
+                // vendorInventory.Add(item);
+                // playerInventory.RemoveItem(item);
+                // thisVendorManager.clearInventorySlots();
+                // thisVendorManager.MakeInventorySlots();
+            }
+        }
+    }
 }

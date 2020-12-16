@@ -8658,15 +8658,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29d01e42cf13f94982861a77904ead8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 8819099259204555279}
+  inventoryPanel: {fileID: 7267390133857555599}
+  vendorPanel: {fileID: 8819099259204555279}
   myEventSystem: {fileID: 1597771847}
   firstButtonInventory: {fileID: 8819099258602584882}
-  pauseActive: {fileID: 8819099259204555279}
+  pauseActive: {fileID: 7267390133857555599}
+  vendorActive: {fileID: 8819099259204555279}
   playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   vendorInventory: {fileID: 11400000, guid: 62852320f1a21704da2ad5d5ccaed6a7, type: 2}
-  testAmu: {fileID: 11400000, guid: 37136cab9fd92e54fbddb0c0059084f9, type: 2}
 --- !u!61 &810560138
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9251,6 +9252,10 @@ MonoBehaviour:
   blankInventorySlot: {fileID: 5802362216930783015, guid: 2929f5b46461bad499cdcbf7168978b0,
     type: 3}
   inventoryPanel: {fileID: 8819099257429648845}
+  testAmu: {fileID: 11400000, guid: 37136cab9fd92e54fbddb0c0059084f9, type: 2}
+  testArmor: {fileID: 11400000, guid: 91793cb93c7c5c448bc919132e69ec1d, type: 2}
+  testWeapon: {fileID: 11400000, guid: 5978092d20dcec54389ba7309b2e908d, type: 2}
+  testPotion: {fileID: 11400000, guid: 6c0bed79414ae4e4087c87d7fe21bba1, type: 2}
 --- !u!1 &917941560 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4297181146018350479, guid: 2319d5545d4644a4dae14db35d055092,
@@ -124428,6 +124433,11 @@ PrefabInstance:
       propertyPath: pauseActive
       value: 
       objectReference: {fileID: 1101704501}
+    - target: {fileID: 3169858031378882594, guid: e107199547d94fd4292bbf8e94e4e0b8,
+        type: 3}
+      propertyPath: vendorActive
+      value: 
+      objectReference: {fileID: 8819099259204555279}
     - target: {fileID: 3169858031378882595, guid: e107199547d94fd4292bbf8e94e4e0b8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -124819,6 +124829,11 @@ PrefabInstance:
       propertyPath: InventoryActive
       value: 
       objectReference: {fileID: 7267390133857555599}
+    - target: {fileID: 3795081590268915514, guid: 94b78e44d9febd4458e8fe3c9d9a1c53,
+        type: 3}
+      propertyPath: vendorActive
+      value: 
+      objectReference: {fileID: 8819099259204555279}
     - target: {fileID: 3795081590268915517, guid: 94b78e44d9febd4458e8fe3c9d9a1c53,
         type: 3}
       propertyPath: m_Name

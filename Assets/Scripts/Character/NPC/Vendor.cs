@@ -8,13 +8,10 @@ public class Vendor : InventoryScreenManager
     public Signals contextOff;
 
     public Inventory vendorInventory;
-    public InventoryAmulet testAmu;
-
-    private void Awake() => vendorInventory.Add(testAmu);
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange)
+        if (Input.GetButtonDown("Interact") && playerInRange && !pauseActive.activeInHierarchy)
         {
             setPause();
             if (firstButtonInventory)
@@ -22,6 +19,10 @@ public class Vendor : InventoryScreenManager
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(firstButtonInventory);
             }
+        }
+        if (Input.GetButtonDown("Inventory") && vendorActive.activeInHierarchy)
+        {
+            stopPause();
         }
     }
 
@@ -45,12 +46,13 @@ public class Vendor : InventoryScreenManager
 
     public void setPause()
     {
-        inventoryPanel.SetActive(true);
+        vendorPanel.SetActive(true);
         Time.timeScale = 0f;
     }
     public void stopPause()
     {
         inventoryPanel.SetActive(false);
+        vendorPanel.SetActive(false);
         Time.timeScale = 1f;
     }
 }

@@ -7,12 +7,13 @@ public class PauseManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject firstButtonPause;
     public GameObject InventoryActive;
+    public GameObject vendorActive;
 
     private bool isPaused = false;
 
     private void Update()
     {
-        if (Input.GetButtonDown("Pause") && !InventoryActive.activeInHierarchy)
+        if (Input.GetButtonDown("Pause") && !InventoryActive.activeInHierarchy && !vendorActive.activeInHierarchy)
         {
             ChangePause();
             if (firstButtonPause)
