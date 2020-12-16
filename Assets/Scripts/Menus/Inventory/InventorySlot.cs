@@ -18,23 +18,9 @@ public class InventorySlot : MonoBehaviour, ISelectHandler
 
     private void Awake()
     {
-        itemImage = GetChildImage();
+        itemImage = this.GetComponentInChildrenFirst<Image>();
         defaultSprite = itemImage.sprite;
         itemNumberText = GetComponentInChildren<TextMeshProUGUI>();
-    }
-
-    private Image GetChildImage()
-    {
-        var attachedImage = GetComponent<Image>();
-        var childImages = GetComponentsInChildren<Image>();
-        for (int i = 0; i < childImages.Length; i++)
-        {
-            if (childImages[i] != attachedImage)
-            {
-                return childImages[i];
-            }
-        }
-        return attachedImage;
     }
 
     public void SetItem(InventoryItem newItem)
