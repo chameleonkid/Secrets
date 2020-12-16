@@ -2,120 +2,132 @@
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class InventorySlot : MonoBehaviour, ISelectHandler
 {
-    // UI-Inventory References
-    public TextMeshProUGUI itemNumberText;
-    public Image itemImage;
+    public event Action<InventoryItem> OnSlotSelected;
+    public event Action<InventoryItem> OnSlotUsed;
+
+    private Sprite defaultSprite = default;
+    private Image itemImage;
+    private TextMeshProUGUI itemNumberText;
 
     // Variables from the item
-    public InventoryItem thisItem;
-    public InventoryManager thisManager;
-    public VendorInventoryManager thisVendorManager;
+    public InventoryItem item;
 
-    public GameObject myEventSystem;
-    public GameObject firstButtonInventory;
-    public Inventory playerInventory;
-    public Inventory vendorInventory;
-
-    private void Start()
+    private void Awake()
     {
-        myEventSystem = GameObject.Find("EventSystem");
-        firstButtonInventory = GameObject.Find("CloseButton");
+        itemImage = GetChildImage();
+        defaultSprite = itemImage.sprite;
+        itemNumberText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void Setup(InventoryItem newItem, InventoryManager newManager)
+    private Image GetChildImage()
     {
-        thisItem = newItem;
-        thisManager = newManager;
-
-        if (thisItem)
+        var attachedImage = GetComponent<Image>();
+        var childImages = GetComponentsInChildren<Image>();
+        for (int i = 0; i < childImages.Length; i++)
         {
-            itemImage.sprite = thisItem.itemImage;
-            itemNumberText.text = "" + thisItem.numberHeld;
+            if (childImages[i] != attachedImage)
+            {
+                return childImages[i];
+            }
         }
+        return attachedImage;
     }
 
-    public void SetupVendor(InventoryItem newItem, VendorInventoryManager newManager)
+    public void SetItem(InventoryItem newItem)
     {
-        thisItem = newItem;
-        thisVendorManager = newManager;
+        item = newItem;
 
-        if (thisItem)
+        if (item != null)
         {
-            itemImage.sprite = thisItem.itemImage;
-            itemNumberText.text = "" + thisItem.numberHeld;
+            itemImage.sprite = item.itemImage;
+
+            if (itemNumberText != null)
+            {
+                itemNumberText.text = item.numberHeld.ToString();
+            }
+        }
+        else
+        {
+            itemImage.sprite = defaultSprite;
+
+            if (itemNumberText != null)
+            {
+                itemNumberText.text = "";
+            }
         }
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        if (thisItem)
+        if (item)
         {
-            thisManager.SetupDescription(thisItem);
+            OnSlotSelected?.Invoke(item);
         }
     }
 
     public void UseItem()
     {
-        if (thisItem)
+        if (item)
         {
-                if (thisItem.usable && thisItem.numberHeld > 0)
-                {
-                    thisItem.Use();                         // Use Item
-                    itemNumberText.text = "" + thisItem.numberHeld;
-                    thisManager.descriptionText.text = thisItem.name + " was used";
+            if (item.usable && item.numberHeld > 0)
+            {
+                item.Use();
 
-                }
-                if (thisItem.numberHeld <= 0)
+                if (itemNumberText != null)
                 {
-                    Destroy(this.gameObject);
-                    playerInventory.contents.Remove(thisItem);
-                    myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
-                    thisManager.setUp(); 
+                    itemNumberText.text = item.numberHeld.ToString();
                 }
+
+                OnSlotUsed?.Invoke(item);
+            }
+
+            if (item.numberHeld <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
-
     public void SwapItemToPlayer()
     {
-        if (thisItem)
-        {
-            if (thisItem.unique && playerInventory.coins >= thisItem.itemBuyPrice)
-            {
-                playerInventory.Add(thisItem);
-                playerInventory.coins -= thisItem.itemBuyPrice;
-                vendorInventory.RemoveItem(thisItem);
-                thisVendorManager.clearInventorySlots();
-                thisVendorManager.MakeInventorySlots();
-            }
-            else if(playerInventory.coins >= thisItem.itemBuyPrice)
-            {
-                playerInventory.coins -= thisItem.itemBuyPrice;
-                playerInventory.Add(thisItem);
-            }
-            else
-            {
-                Debug.Log("Not enaugh money! to buy " + thisItem);
-            }
-        }
+        // if (item)
+        // {
+        //     if (item.unique && playerInventory.coins >= item.itemBuyPrice)
+        //     {
+        //         playerInventory.Add(item);
+        //         playerInventory.coins -= item.itemBuyPrice;
+        //         vendorInventory.RemoveItem(item);
+        //         thisVendorManager.clearInventorySlots();
+        //         thisVendorManager.MakeInventorySlots();
+        //     }
+        //     else if(playerInventory.coins >= item.itemBuyPrice)
+        //     {
+        //         playerInventory.coins -= item.itemBuyPrice;
+        //         playerInventory.Add(item);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Not enaugh money! to buy " + item);
+        //     }
+        // }
     }
 
     
     public void SwapItemToVendor()
     {
-        if (thisItem)
+        if (item)
         {
-            if (thisItem.unique)
+            if (item.unique)
             {
-                vendorInventory.Add(thisItem);
-                playerInventory.RemoveItem(thisItem);
-                thisVendorManager.clearInventorySlots();
-                thisVendorManager.MakeInventorySlots();
+                // vendorInventory.Add(item);
+                // playerInventory.RemoveItem(item);
+                // thisVendorManager.clearInventorySlots();
+                // thisVendorManager.MakeInventorySlots();
             }
         }
     }
-    
 }

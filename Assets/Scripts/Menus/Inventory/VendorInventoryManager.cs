@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VendorInventoryManager : MonoBehaviour
 {
@@ -12,7 +10,6 @@ public class VendorInventoryManager : MonoBehaviour
     public InventoryArmor testArmor;
     public InventoryWeapon testWeapon;
     public InventoryItem testPotion;
-
 
     private void OnEnable()
     {
@@ -41,19 +38,17 @@ public class VendorInventoryManager : MonoBehaviour
                     InventorySlot newSlot = temp.GetComponent<InventorySlot>();
                     if (newSlot)
                     {
-                        newSlot.SetupVendor(vendorInventory.contents[i], this);
+                        // newSlot.SetupVendor(vendorInventory.contents[i], this);
                     }
                 }
             }
         }
-
     }
 
     public void setUp()
     {
         MakeInventorySlots();
     }
-
 
     public void clearInventorySlots()
     {
@@ -62,8 +57,4 @@ public class VendorInventoryManager : MonoBehaviour
             Destroy(inventoryPanel.transform.GetChild(i).gameObject);
         }
     }
-
-
-
-
 }
