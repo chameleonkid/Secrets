@@ -113,9 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 5703648155880917274}
-  myEventSystem: {fileID: 0}
+  vendorPanel: {fileID: 0}
   firstButtonInventory: {fileID: 5703648156353208359}
   pauseActive: {fileID: 0}
+  vendorActive: {fileID: 0}
 --- !u!1001 &496071976817672322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +124,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3169858031378882595}
     m_Modifications:
+    - target: {fileID: 88958724, guid: 17a6199837e599645b56439e68b6a4ad, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387680038, guid: 17a6199837e599645b56439e68b6a4ad, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583333522, guid: 17a6199837e599645b56439e68b6a4ad, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240243104788434319, guid: 17a6199837e599645b56439e68b6a4ad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5315667110372892839, guid: 17a6199837e599645b56439e68b6a4ad,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -132,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InventoryPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315667110979324312, guid: 17a6199837e599645b56439e68b6a4ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5315667110979324325, guid: 17a6199837e599645b56439e68b6a4ad,
         type: 3}
@@ -237,6 +260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8277873316455312564, guid: 17a6199837e599645b56439e68b6a4ad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17a6199837e599645b56439e68b6a4ad, type: 3}
