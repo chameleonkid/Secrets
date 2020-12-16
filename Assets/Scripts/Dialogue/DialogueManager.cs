@@ -14,6 +14,8 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialoguePanel;
     public Animator animator;
     public GameObject NextButton;
+    public GameObject inventoryActive;
+    public GameObject pauseActive;
 
     // Start is called before the first frame update
     void Start()
@@ -24,21 +26,30 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        Time.timeScale = 0;
-        nameText.text = dialogue.npcName;
-        sentences.Clear();
-
-        if (NextButton)
+        if (!inventoryActive.activeInHierarchy && !pauseActive.activeInHierarchy)
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(NextButton);
-        }
 
-        foreach (string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
+
+            if (NextButton)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(NextButton);
+            }
+
+            Time.timeScale = 0;
+            nameText.text = dialogue.npcName;
+            sentences.Clear();
+
+            foreach (string sentence in dialogue.sentences)
+            {
+                sentences.Enqueue(sentence);
+            }
+            DisplayNextSentence();
         }
-        DisplayNextSentence();
+        else
+        {
+            return;
+        }
     }
 
     //Submits the sentences via FIFO if there are sentences available

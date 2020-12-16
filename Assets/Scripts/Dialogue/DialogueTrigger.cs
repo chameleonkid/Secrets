@@ -8,6 +8,8 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     public bool playerInRange;
 
+    
+
 
     private void Update()
     {

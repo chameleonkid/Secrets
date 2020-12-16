@@ -11,6 +11,7 @@ public class InventoryScreenManager : MonoBehaviour
     public GameObject pauseActive;
     public GameObject vendorActive;
 
+
     private void Start() => isPaused = false;
 
     private void Update()

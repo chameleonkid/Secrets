@@ -25,12 +25,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126456736}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 183598015624520693}
-  m_RootOrder: 1
+  m_Father: {fileID: 180830705531622558}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &126456739
 MonoBehaviour:
@@ -51,7 +51,6 @@ MonoBehaviour:
     - You look exhausted. Is everything ok?
     - So what are you going to do next?
   playerInRange: 0
-  NextButton: {fileID: 0}
 --- !u!61 &126456738
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -65,7 +64,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0042677224, y: 0.43957305}
+  m_Offset: {x: -0.014016986, y: 0.47857076}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +75,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4694471, y: 1.8791461}
+  m_Size: {x: 0.6992433, y: 1.1869375}
   m_EdgeRadius: 0
 --- !u!1 &183598015624520695
 GameObject:
@@ -107,7 +106,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 180830705531622558}
-  - {fileID: 126456737}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -174,6 +172,7 @@ Transform:
   - {fileID: 183598016318808299}
   - {fileID: 180830704873343964}
   - {fileID: 180830705514183312}
+  - {fileID: 126456737}
   m_Father: {fileID: 183598015624520693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
