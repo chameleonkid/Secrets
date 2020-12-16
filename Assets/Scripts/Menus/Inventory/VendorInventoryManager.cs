@@ -24,7 +24,7 @@ public class VendorInventoryManager : MonoBehaviour
                     InventorySlot newSlot = temp.GetComponent<InventorySlot>();
                     if (newSlot)
                     {
-                        newSlot.SetupVendor(vendorInventory.contents[i], this);
+                        // newSlot.SetupVendor(vendorInventory.contents[i], this);
                     }
                 }
             }
