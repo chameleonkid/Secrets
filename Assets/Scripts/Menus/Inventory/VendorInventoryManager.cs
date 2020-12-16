@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VendorInventoryManager : MonoBehaviour
 {
     public Inventory vendorInventory;
     public GameObject blankInventorySlot;
     public GameObject inventoryPanel;
-
 
     private void OnEnable() => setUp();
 
@@ -29,15 +26,10 @@ public class VendorInventoryManager : MonoBehaviour
                 }
             }
         }
-
     }
-
-
-
 
     public void setUp()
     {
         MakeInventorySlots();
     }
-
 }

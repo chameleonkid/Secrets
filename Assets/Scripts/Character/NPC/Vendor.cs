@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Vendor : InventoryScreenManager
 {
@@ -12,12 +10,8 @@ public class Vendor : InventoryScreenManager
     public Inventory vendorInventory;
     public InventoryAmulet testAmu;
 
-    private void Awake()
-    {
-        vendorInventory.Add(testAmu);
-    }
+    private void Awake() => vendorInventory.Add(testAmu);
 
-    // Update is called once per frame
     private void Update()
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
@@ -25,8 +19,8 @@ public class Vendor : InventoryScreenManager
             setPause();
             if (firstButtonInventory)
             {
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(firstButtonInventory);
             }
         }
     }
@@ -49,19 +43,14 @@ public class Vendor : InventoryScreenManager
         }
     }
 
-
     public void setPause()
     {
-
         inventoryPanel.SetActive(true);
         Time.timeScale = 0f;
     }
     public void stopPause()
     {
-
         inventoryPanel.SetActive(false);
         Time.timeScale = 1f;
     }
-
-
 }

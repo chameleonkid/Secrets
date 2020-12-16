@@ -1,38 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class InventoryScreenManager : MonoBehaviour
 {
-
     private bool isPaused;
     public GameObject inventoryPanel;
-    public GameObject myEventSystem;
     public GameObject firstButtonInventory;
     public GameObject pauseActive;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        isPaused = false;
-        myEventSystem = GameObject.Find("EventSystem");
+    private void Start() => isPaused = false;
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("Inventory") && !pauseActive.activeInHierarchy)
         {
             ChangePause();
             if (firstButtonInventory)
             {
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
-                myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(firstButtonInventory);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(firstButtonInventory);
             }
         }
-
     }
 
     public void ChangePause()
@@ -42,26 +31,17 @@ public class InventoryScreenManager : MonoBehaviour
         {
             inventoryPanel.SetActive(true);
             Time.timeScale = 0f;
-
         }
         else
         {
             inventoryPanel.SetActive(false);
             Time.timeScale = 1f;
         }
-
     }
-
 
     public void Quit()
     {
-
         SceneManager.LoadScene("StartMenu");
         Time.timeScale = 1f;
     }
-
-
-
-
-
 }

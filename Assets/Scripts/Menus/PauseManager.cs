@@ -8,10 +8,7 @@ public class PauseManager : MonoBehaviour
     public GameObject firstButtonPause;
     public GameObject InventoryActive;
 
-    private EventSystem eventSystem;
     private bool isPaused = false;
-
-    private void Awake() => eventSystem = GetComponentInChildren<EventSystem>();
 
     private void Update()
     {
@@ -20,8 +17,8 @@ public class PauseManager : MonoBehaviour
             ChangePause();
             if (firstButtonPause)
             {
-                eventSystem.SetSelectedGameObject(null);
-                eventSystem.SetSelectedGameObject(firstButtonPause);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(firstButtonPause);
             }
         }
     }
