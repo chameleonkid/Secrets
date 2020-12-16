@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake() => closeButton = GameObject.Find("CloseButton");
 
-    private void OnEnable() => SetUp();
+    private void OnEnable() => Refresh();
 
     public void MakeInventorySlots()
     {
@@ -90,16 +90,17 @@ public class InventoryManager : MonoBehaviour
 
     private void OnItemUsed(InventoryItem usedItem)
     {
-        descriptionText.text = usedItem.name + " was used";
-
         if (usedItem.numberHeld <= 0)
         {
             playerInventory.contents.Remove(usedItem);
             EventSystem.current.SetSelectedGameObject(closeButton);
         }
+
+        Refresh();
+        descriptionText.text = usedItem.name + " was used";
     }
 
-    private void SetUp()
+    private void Refresh()
     {
         descriptionText.text = "";
         ClearInventorySlots();
