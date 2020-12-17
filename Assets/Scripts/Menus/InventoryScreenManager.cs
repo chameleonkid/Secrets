@@ -12,7 +12,7 @@ public class InventoryScreenManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Inventory") && CanvasManager.Instance.IsFreeOrActive(this.gameObject))
+        if (Input.GetButtonDown("Inventory") && CanvasManager.Instance.IsFreeOrActive(inventoryPanel.gameObject))
         {
             ChangePause();
             if (firstButtonInventory)

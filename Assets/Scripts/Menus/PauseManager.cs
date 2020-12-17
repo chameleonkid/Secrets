@@ -11,7 +11,7 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Pause") && CanvasManager.Instance.IsFreeOrActive(this.gameObject))
+        if (Input.GetButtonDown("Pause") && CanvasManager.Instance.IsFreeOrActive(pausePanel.gameObject))
         {
             ChangePause();
             if (firstButtonPause)

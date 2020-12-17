@@ -35,7 +35,7 @@ public class DialogueManager : MonoBehaviour
 
     private void StartDialogue(Dialogue dialogue)
     {
-        if (CanvasManager.Instance.IsFreeOrActive(this.gameObject))
+        if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel.gameObject))
         {
             if (nextButton)
             {
