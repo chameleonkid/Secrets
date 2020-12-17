@@ -35,6 +35,7 @@ public class DialogueManager : MonoBehaviour
 
     private void StartDialogue(Dialogue dialogue)
     {
+        dialoguePanel.SetActive(true);
         if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel.gameObject))
         {
             if (nextButton)
@@ -70,8 +71,7 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        animator.SetBool("isActive", false);
-        Time.timeScale = 1;
+        StartCoroutine(EndFinalDialogue());
     }
 
     private IEnumerator TypeSentence(string sentence)
@@ -83,5 +83,13 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSecondsRealtime(0.05f);
         }
+    }
+
+    private IEnumerator EndFinalDialogue()
+    {
+        animator.SetBool("isActive", false);
+        yield return new WaitForSecondsRealtime(0.25f);
+        Time.timeScale = 1;
+        dialoguePanel.SetActive(false);
     }
 }
