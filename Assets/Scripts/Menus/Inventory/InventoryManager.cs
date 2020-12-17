@@ -32,7 +32,10 @@ public class InventoryManager : MonoBehaviour
 
     private GameObject closeButton;
 
-    private void Awake() => closeButton = GameObject.Find("CloseButton");
+    private void Awake() {
+        closeButton = GameObject.Find("CloseButton");
+        SubscribeToEquipmentSlots();
+    }
 
     private void OnEnable() => Refresh();
 
@@ -67,6 +70,21 @@ public class InventoryManager : MonoBehaviour
         spellbookSlot.SetItem(playerInventory.currentSpellbook);
         amuletSlot.SetItem(playerInventory.currentAmulet);
         bootsSlot.SetItem(playerInventory.currentBoots);
+    }
+
+    private void SubscribeToEquipmentSlots()
+    {
+        weaponSlot.OnSlotSelected += SetUpItemDescription;
+        armorSlot.OnSlotSelected += SetUpItemDescription;
+        helmetSlot.OnSlotSelected += SetUpItemDescription;
+        gloveSlot.OnSlotSelected += SetUpItemDescription;
+        legsSlot.OnSlotSelected += SetUpItemDescription;
+        shieldSlot.OnSlotSelected += SetUpItemDescription;
+        ringSlot.OnSlotSelected += SetUpItemDescription;
+        bowSlot.OnSlotSelected += SetUpItemDescription;
+        spellbookSlot.OnSlotSelected += SetUpItemDescription;
+        amuletSlot.OnSlotSelected += SetUpItemDescription;
+        bootsSlot.OnSlotSelected += SetUpItemDescription;
     }
 
     // Instantiate inventory slots and set items
