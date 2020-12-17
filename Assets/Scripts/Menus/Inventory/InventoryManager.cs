@@ -125,7 +125,14 @@ public class InventoryManager : MonoBehaviour
             Refresh();
         }
 
-        descriptionText.text = usedItem.name + " was used";
+        if (usedItem is EquippableItem)
+        {
+            descriptionText.text = usedItem.itemName + " was equipped";
+        }
+        else
+        {
+            descriptionText.text = usedItem.itemName + " was used";
+        }
     }
 
     private void UpdateDisplays()
