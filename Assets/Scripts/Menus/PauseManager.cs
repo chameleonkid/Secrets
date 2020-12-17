@@ -6,14 +6,12 @@ public class PauseManager : MonoBehaviour
 {
     public GameObject pausePanel;
     public GameObject firstButtonPause;
-    public GameObject InventoryActive;
-   // public GameObject vendorActive;
 
     private bool isPaused = false;
 
     private void Update()
     {
-        if (Input.GetButtonDown("Pause") && !InventoryActive.activeInHierarchy)
+        if (Input.GetButtonDown("Pause") && CanvasManager.Instance.IsFreeOrActive(pausePanel.gameObject))
         {
             ChangePause();
             if (firstButtonPause)
@@ -24,19 +22,11 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    public void ChangePause()
+    private void ChangePause()
     {
         isPaused = !isPaused;
-        if (isPaused)
-        {
-            pausePanel.SetActive(true);
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            pausePanel.SetActive(false);
-            Time.timeScale = 1f;
-        }
+        Time.timeScale = isPaused ? 0 : 1;
+        pausePanel.SetActive(isPaused);
     }
 
     public void Quit()

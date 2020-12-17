@@ -1,39 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
-
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
-    private Queue<string> sentences;
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI dialogueText;
-    public GameObject dialoguePanel;
-    public Animator animator;
-    public GameObject NextButton;
-    public GameObject inventoryActive;
-    public GameObject pauseActive;
+    private static event Action<Dialogue> OnDialogueRequested;
+    public static void RequestDialogue(Dialogue dialogue) => OnDialogueRequested?.Invoke(dialogue);
 
-    // Start is called before the first frame update
-    void Start()
+    private static event Action OnEndDialogue;
+    public static void RequestEndDialogue() => OnEndDialogue?.Invoke();
+
+    [SerializeField] private TextMeshProUGUI nameText = default;
+    [SerializeField] private TextMeshProUGUI dialogueText = default;
+    [SerializeField] private GameObject dialoguePanel = default;
+    [SerializeField] private Animator animator = default;
+    [SerializeField] private GameObject nextButton = default;
+
+    private Queue<string> sentences = new Queue<string>();
+
+    private void OnEnable()
     {
-        sentences = new Queue<string>();
+        OnDialogueRequested += StartDialogue;
+        OnEndDialogue += EndDialogue;
     }
 
-
-    public void StartDialogue(Dialogue dialogue)
+    private void OnDisable()
     {
-        if (!inventoryActive.activeInHierarchy && !pauseActive.activeInHierarchy)
+        OnDialogueRequested -= StartDialogue;
+        OnEndDialogue -= EndDialogue;
+    }
+
+    private void StartDialogue(Dialogue dialogue)
+    {
+        if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel.gameObject))
         {
-
-
-            if (NextButton)
+            if (nextButton)
             {
                 EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(NextButton);
+                EventSystem.current.SetSelectedGameObject(nextButton);
             }
 
             Time.timeScale = 0;
@@ -46,16 +53,12 @@ public class DialogueManager : MonoBehaviour
             }
             DisplayNextSentence();
         }
-        else
-        {
-            return;
-        }
     }
 
     //Submits the sentences via FIFO if there are sentences available
-    public void DisplayNextSentence()
+    private void DisplayNextSentence()
     {
-        if(sentences.Count == 0)
+        if (sentences.Count == 0)
         {
             EndDialogue();
             return;
@@ -65,25 +68,20 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
     }
 
-
-   public void EndDialogue()
+    private void EndDialogue()
     {
         animator.SetBool("isActive", false);
         Time.timeScale = 1;
     }
 
-
-    IEnumerator TypeSentence (string sentence)
+    private IEnumerator TypeSentence(string sentence)
     {
         animator.SetBool("isActive", true);
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-           // yield return new WaitForSeconds(0.05f);   Looks way better, but doesnt work with timescale = 0;
-            yield return null;
+            yield return new WaitForSecondsRealtime(0.05f);
         }
     }
-
-
 }

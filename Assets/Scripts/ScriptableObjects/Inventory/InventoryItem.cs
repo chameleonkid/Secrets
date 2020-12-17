@@ -37,13 +37,7 @@ public class InventoryItem : ScriptableObject
     public int itemLvl;
     public Inventory myInventory;
 
-    public void Use()
-    {
-        thisEvent.Invoke();
-    }
+    public void Use() => thisEvent.Invoke();
 
-    public void decreaseAmount(int amountToDecrease)
-    {
-        numberHeld -= amountToDecrease;
-    }
+    public void decreaseAmount(int amountToDecrease) => numberHeld -= amountToDecrease;
 }

@@ -19,12 +19,12 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot spellbookSlot;
     public InventorySlot amuletSlot;
     public InventorySlot bootsSlot;
-    //InventoryStatsRefresh
-    public CritValueTextManager critDisplay;
-    public DamageValueTextManager dmgDisplay;
-    public DefenseValueTextManager defDisplay;
-    public SpellDamageValueTextManager spellDisplay;
-    public RangeDamageValueTextManager rangeDisplay;
+    // Stats display 
+    [SerializeField] private TextMeshProUGUI critDisplay = default;
+    [SerializeField] private TextMeshProUGUI dmgDisplay = default;
+    [SerializeField] private TextMeshProUGUI defDisplay = default;
+    [SerializeField] private TextMeshProUGUI spellDisplay = default;
+    [SerializeField] private TextMeshProUGUI rangeDisplay = default;
 
     public TextMeshProUGUI descriptionText;
     public Inventory playerInventory;
@@ -32,7 +32,10 @@ public class InventoryManager : MonoBehaviour
 
     private GameObject closeButton;
 
-    private void Awake() => closeButton = GameObject.Find("CloseButton");
+    private void Awake() {
+        closeButton = GameObject.Find("CloseButton");
+        SubscribeToEquipmentSlots();
+    }
 
     private void OnEnable() => Refresh();
 
@@ -67,6 +70,21 @@ public class InventoryManager : MonoBehaviour
         spellbookSlot.SetItem(playerInventory.currentSpellbook);
         amuletSlot.SetItem(playerInventory.currentAmulet);
         bootsSlot.SetItem(playerInventory.currentBoots);
+    }
+
+    private void SubscribeToEquipmentSlots()
+    {
+        weaponSlot.OnSlotSelected += SetUpItemDescription;
+        armorSlot.OnSlotSelected += SetUpItemDescription;
+        helmetSlot.OnSlotSelected += SetUpItemDescription;
+        gloveSlot.OnSlotSelected += SetUpItemDescription;
+        legsSlot.OnSlotSelected += SetUpItemDescription;
+        shieldSlot.OnSlotSelected += SetUpItemDescription;
+        ringSlot.OnSlotSelected += SetUpItemDescription;
+        bowSlot.OnSlotSelected += SetUpItemDescription;
+        spellbookSlot.OnSlotSelected += SetUpItemDescription;
+        amuletSlot.OnSlotSelected += SetUpItemDescription;
+        bootsSlot.OnSlotSelected += SetUpItemDescription;
     }
 
     // Instantiate inventory slots and set items
@@ -107,15 +125,30 @@ public class InventoryManager : MonoBehaviour
             Refresh();
         }
 
-        descriptionText.text = usedItem.name + " was used";
+        var context = (usedItem is EquippableItem) ? " was equipped" : " was used";
+        descriptionText.text = usedItem.itemName + context;
     }
 
     private void UpdateDisplays()
     {
-        dmgDisplay.UpdateDamageValue();
-        defDisplay.UpdateDefenseValue();
-        critDisplay.UpdateCritValue();
-        spellDisplay.UpdateSpellDamageValue();
-        rangeDisplay.UpdateRangeDamageValue();
+        dmgDisplay.text = DamageDisplayText();
+        defDisplay.text = DefenseDisplayText();
+        critDisplay.text = CritDisplayText();
+        spellDisplay.text = SpellDamageDisplayText();
+        rangeDisplay.text = RangeDamageDisplayText();
     }
+
+    private string DamageDisplayText() => (playerInventory.currentWeapon) ?
+        playerInventory.currentWeapon.maxDamage + " - " + playerInventory.currentWeapon.maxDamage : "" ;
+
+    private string CritDisplayText() => (playerInventory.totalCritChance > 0) ?
+        playerInventory.totalCritChance + "%" : "";
+
+    private string DefenseDisplayText() => (playerInventory.totalDefense > 0) ? playerInventory.totalDefense.ToString() : "";
+
+    private string RangeDamageDisplayText() => (playerInventory.currentBow) ?
+        playerInventory.currentBow.minDamage + " - " + playerInventory.currentBow.maxDamage : "";
+
+    private string SpellDamageDisplayText() => (playerInventory.currentSpellbook || playerInventory.currentAmulet) ?
+        playerInventory.totalMinSpellDamage + " - "  + playerInventory.totalMaxSpellDamage : "";
 }
