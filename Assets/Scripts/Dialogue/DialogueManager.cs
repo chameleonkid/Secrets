@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     //Submits the sentences via FIFO if there are sentences available
-    private void DisplayNextSentence()
+    public void DisplayNextSentence()
     {
         if (sentences.Count == 0)
         {
