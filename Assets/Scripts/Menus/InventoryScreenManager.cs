@@ -4,19 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class InventoryScreenManager : MonoBehaviour
 {
-    private bool isPaused;
     public GameObject inventoryPanel;
     public GameObject vendorPanel;
     public GameObject firstButtonInventory;
-    public GameObject pauseActive;
-    public GameObject vendorActive;
 
-
-    private void Start() => isPaused = false;
+    private bool isPaused = false;
 
     private void Update()
     {
-        if (Input.GetButtonDown("Inventory") && !pauseActive.activeInHierarchy)
+        if (Input.GetButtonDown("Inventory") && CanvasManager.Instance.IsFreeOrActive(this.gameObject))
         {
             ChangePause();
             if (firstButtonInventory)
@@ -30,16 +26,8 @@ public class InventoryScreenManager : MonoBehaviour
     public void ChangePause()
     {
         isPaused = !isPaused;
-        if (isPaused)
-        {
-            inventoryPanel.SetActive(true);
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            inventoryPanel.SetActive(false);
-            Time.timeScale = 1f;
-        }
+        Time.timeScale = isPaused ? 0 : 1;
+        inventoryPanel.SetActive(isPaused);
     }
 
     public void Quit()

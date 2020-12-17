@@ -18,24 +18,24 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel = default;
     [SerializeField] private Animator animator = default;
     [SerializeField] private GameObject nextButton = default;
-    [SerializeField] private GameObject inventoryActive = default;
-    [SerializeField] private GameObject pauseActive = default;
 
     private Queue<string> sentences = new Queue<string>();
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         OnDialogueRequested += StartDialogue;
         OnEndDialogue += EndDialogue;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         OnDialogueRequested -= StartDialogue;
         OnEndDialogue -= EndDialogue;
     }
 
     private void StartDialogue(Dialogue dialogue)
     {
-        if (!inventoryActive.activeInHierarchy && !pauseActive.activeInHierarchy)
+        if (CanvasManager.Instance.IsFreeOrActive(this.gameObject))
         {
             if (nextButton)
             {
