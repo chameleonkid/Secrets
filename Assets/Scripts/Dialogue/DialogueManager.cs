@@ -12,8 +12,6 @@ public class DialogueManager : MonoBehaviour
 
     private static event Action OnEndDialogue;
     public static void RequestEndDialogue() => OnEndDialogue?.Invoke();
-    
-    private Queue<string> sentences = new Queue<string>();
 
     [SerializeField] private TextMeshProUGUI nameText = default;
     [SerializeField] private TextMeshProUGUI dialogueText = default;
@@ -22,6 +20,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject nextButton = default;
     [SerializeField] private GameObject inventoryActive = default;
     [SerializeField] private GameObject pauseActive = default;
+
+    private Queue<string> sentences = new Queue<string>();
 
     private void OnEnable() {
         OnDialogueRequested += StartDialogue;
@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     //Submits the sentences via FIFO if there are sentences available
-    public void DisplayNextSentence()
+    private void DisplayNextSentence()
     {
         if (sentences.Count == 0)
         {
