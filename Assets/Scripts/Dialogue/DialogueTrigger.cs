@@ -1,19 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
     public bool playerInRange;
 
-    
-
-
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange)
+        if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
         {
             TriggerDialogue();
         }
@@ -40,5 +34,4 @@ public class DialogueTrigger : MonoBehaviour
             playerInRange = false;
         }
     }
-
 }
