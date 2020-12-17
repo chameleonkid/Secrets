@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
+    private static event Action<Dialogue> OnDialogueRequested;
+    public static void RequestDialogue(Dialogue dialogue) => OnDialogueRequested?.Invoke(dialogue);
+
+    private static event Action OnEndDialogue;
+    public static void RequestEndDialogue() => OnEndDialogue?.Invoke();
+    
     private Queue<string> sentences = new Queue<string>();
 
     [SerializeField] private TextMeshProUGUI nameText = default;
@@ -16,7 +23,17 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject inventoryActive = default;
     [SerializeField] private GameObject pauseActive = default;
 
-    public void StartDialogue(Dialogue dialogue)
+    private void OnEnable() {
+        OnDialogueRequested += StartDialogue;
+        OnEndDialogue += EndDialogue;
+    }
+
+    private void OnDisable() {
+        OnDialogueRequested -= StartDialogue;
+        OnEndDialogue -= EndDialogue;
+    }
+
+    private void StartDialogue(Dialogue dialogue)
     {
         if (!inventoryActive.activeInHierarchy && !pauseActive.activeInHierarchy)
         {
@@ -51,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence(sentence));
     }
 
-    public void EndDialogue()
+    private void EndDialogue()
     {
         animator.SetBool("isActive", false);
         Time.timeScale = 1;

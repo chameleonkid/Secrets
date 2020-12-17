@@ -2,8 +2,8 @@
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
-    public bool playerInRange;
+    [SerializeField] private Dialogue dialogue = default;
+    private bool playerInRange;
 
     private void Update()
     {
@@ -13,10 +13,7 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    public void TriggerDialogue()
-    {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
-    }
+    public void TriggerDialogue() => DialogueManager.RequestDialogue(dialogue);
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -30,7 +27,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.isTrigger)
         {
-            FindObjectOfType<DialogueManager>().EndDialogue();
+            DialogueManager.RequestEndDialogue();
             playerInRange = false;
         }
     }
