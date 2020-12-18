@@ -39,6 +39,7 @@ public class PlayerMovement : Character
     public GameObject projectile; //arrows and so on
 
     [SerializeField] private AudioClip[] attackSounds = default;
+    [SerializeField] private AudioClip levelUpSound = default;
 
 
     //############### LIFT-TEST      ##############
@@ -63,7 +64,8 @@ public class PlayerMovement : Character
         _health.current = _health.max;
         _mana.current = _mana.max;
         animator.Play("Nod Down");
-        currentState = State.idle;   
+        currentState = State.idle;
+        SoundManager.RequestSound(levelUpSound);
     }
 
 
@@ -77,6 +79,8 @@ public class PlayerMovement : Character
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
+    private AudioClip GetLevelUpSound() => levelUpSound;
+
 
     private void Update()
     {
