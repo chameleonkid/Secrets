@@ -7,20 +7,32 @@ using UnityEngine.UI;
 public class XPWindow : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI currentLevelText;
-    [SerializeField] private TextMeshProUGUI experienceNeededText;
-    [SerializeField] private Image experienceBar;
-    [SerializeField] private XPSystem levelSystem;
-    [SerializeField] private Button addXPButton;
+    [SerializeField] private TextMeshProUGUI currentLevelText = default;
+    [SerializeField] private TextMeshProUGUI experienceNeededText = default;
+    [SerializeField] private Image experienceBar = default;
+    [SerializeField] private XPSystem levelSystem = default;
+    [SerializeField] private Button addXPButton = default;
     // Start is called before the first frame update
+
+    private void OnEnable()
+    {
+        SetLevelSystem(levelSystem);
+    }
+
+    private void OnDisable()
+    {
+        levelSystem.OnExperienceChanged -= LevelSystem_OnExperienceChanged;
+        levelSystem.OnLevelChanged -= LevelSystem_OnLevelChanged;
+    }
+
     void Awake()
     {
-        currentLevelText = transform.Find("CurrentLevelText").GetComponent<TextMeshProUGUI>();
-        experienceNeededText.text = ("" + levelSystem.GetExperience() + " / " + levelSystem.GetExperienceNeeded());
-        experienceNeededText = transform.Find("XPNeededText").GetComponent<TextMeshProUGUI>();
-        experienceBar = transform.Find("XPBar").GetComponent<Image>();
-        addXPButton = transform.Find("AddXPButton").GetComponent<Button>();
-
+        //SetLevelSystem(levelSystem);
+        //currentLevelText = transform.Find("CurrentLevelText").GetComponent<TextMeshProUGUI>();
+        //experienceNeededText.text = ("" + levelSystem.GetExperience() + " / " + levelSystem.GetExperienceNeeded());
+        //experienceNeededText = transform.Find("XPNeededText").GetComponent<TextMeshProUGUI>();
+        //experienceBar = transform.Find("XPBar").GetComponent<Image>();
+        //addXPButton = transform.Find("AddXPButton").GetComponent<Button>();
     }
 
     private void SetExperienceBarSize(float experienceNormalized)
@@ -48,9 +60,6 @@ public class XPWindow : MonoBehaviour
         levelSystem.OnExperienceChanged += LevelSystem_OnExperienceChanged;
         levelSystem.OnLevelChanged += LevelSystem_OnLevelChanged;
     }
-
-
-
 
     private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e)
     {  

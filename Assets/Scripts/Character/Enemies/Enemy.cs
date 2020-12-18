@@ -2,7 +2,10 @@
 
 public class Enemy : Character
 {
+    
     [Header("Enemy Stats")]
+    [SerializeField] private XPSystem levelSystem = default;
+    [SerializeField] private int enemyXp = default;
     [SerializeField] protected FloatValue maxHealth = default;
     private float _health;
     public override float health {
@@ -97,9 +100,11 @@ public class Enemy : Character
 
     private void Die()
     {
-        Debug.Log("0 Leben");
+        Debug.Log("0 HP");
         DeathEffect();
         MakeLoot();
+        levelSystem.AddExperience(enemyXp);
+        
         if (roomSignal != null)
         {
             roomSignal.Raise();

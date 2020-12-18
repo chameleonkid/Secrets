@@ -29,6 +29,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         ResetPlayer();
         ResetInventory();
         ResetBools();
+        ResetXP();
 
         Debug.Log("Reset scriptable object save data.");
     }
