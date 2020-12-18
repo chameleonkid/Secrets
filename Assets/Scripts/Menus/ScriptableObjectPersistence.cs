@@ -19,6 +19,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public BoolValue[] chests => _chests;
     [SerializeField] private BoolValue[] _doors = default;
     public BoolValue[] doors => _doors;
+    [SerializeField] private XPSystem _xpsystem = default;
 
     [Header("UI Updating")]
     public Signals coinSignal;
@@ -82,5 +83,10 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.totalCritChance = 0;
         playerInventory.totalMaxSpellDamage = 0;
         playerInventory.totalMinSpellDamage = 0;
+    }
+
+    public void ResetXP()
+    {
+        _xpsystem.ResetExperienceSystem();
     }
 }

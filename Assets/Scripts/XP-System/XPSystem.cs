@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class XPSystem : MonoBehaviour
+[CreateAssetMenu(fileName = "New XP-System", menuName = "XP-System")]
+public class XPSystem : ScriptableObject
 {
     public event EventHandler OnExperienceChanged;
     public event EventHandler OnLevelChanged;
@@ -11,13 +12,6 @@ public class XPSystem : MonoBehaviour
     [SerializeField] private int level;
     [SerializeField] private int experience;
     [SerializeField] private int experienceToNextLevel;
-
-    public XPSystem()    //Constructor
-    {
-        level = 1;
-        experience = 0;
-        experienceToNextLevel = 100;
-    }
 
     public void AddExperience( int amount )
     {
@@ -55,6 +49,13 @@ public class XPSystem : MonoBehaviour
     public void SetExperienceToNextLevel()
     {
         experienceToNextLevel = experienceToNextLevel * 2; 
+    }
+
+    public void ResetExperienceSystem()
+    {
+        level = 1;
+        experience = 0;
+        experienceToNextLevel = 100;
     }
 
 
