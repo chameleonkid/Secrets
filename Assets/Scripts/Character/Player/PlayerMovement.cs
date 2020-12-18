@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : Character
 {
+    [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
     private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
 
@@ -44,6 +45,18 @@ public class PlayerMovement : Character
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
+    private void OnEnable()
+    {
+        levelSystem.OnLevelChanged += LevelSystem_OnLevelChanged;
+    }
+
+    private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e)
+    {
+        _health.max = _health.max + 10;
+        _mana.max = _mana.max + 10;
+    }
+
+
 
     private void Start()
     {
