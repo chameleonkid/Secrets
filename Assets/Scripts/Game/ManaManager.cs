@@ -6,7 +6,7 @@ public class ManaManager : MonoBehaviour
     [SerializeField] private FloatMeter mana = default;
     // ^ Shouldn't reassign during runtime unless
     // care is taken to unsubscribe from events.
-    [SerializeField] private Slider manaSlider = default;
+    [SerializeField] private Image manaSlider = default;
 
     private void OnEnable()
     {
@@ -25,8 +25,8 @@ public class ManaManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        manaSlider.minValue = mana.min;
-        manaSlider.maxValue = mana.max;
-        manaSlider.value = mana.current;
+    //    manaSlider.minValue = mana.min;
+    //    manaSlider.maxValue = mana.max;
+        manaSlider.fillAmount = mana.current / mana.max;
     }
 }

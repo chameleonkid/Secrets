@@ -6,7 +6,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private FloatMeter health = default;
     // ^ Shouldn't reassign during runtime unless
     // care is taken to unsubscribe from events.
-    [SerializeField] private Slider healthSlider = default;
+    [SerializeField] private Image healthSlider = default;
 
     private void OnEnable()
     {
@@ -25,8 +25,8 @@ public class HealthManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        healthSlider.minValue = health.min;
-        healthSlider.maxValue = health.max;
-        healthSlider.value = health.current;
+   //     healthSlider.minValue = health.min;
+    //    healthSlider.maxValue = health.max;
+        healthSlider.fillAmount = health.current / health.max;
     }
 }
