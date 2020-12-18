@@ -67,8 +67,7 @@ public class PlayerMovement : Character
         SoundManager.RequestSound(levelUpSound);
         if (effectAnimator)
         {
-            effectAnimator.SetBool("levelUp", true);
-
+            effectAnimator.Play("LevelUp");
         }
     }
 
