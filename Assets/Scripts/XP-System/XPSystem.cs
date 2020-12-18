@@ -16,7 +16,7 @@ public class XPSystem : ScriptableObject
     public void AddExperience( int amount )
     {
         experience += amount;
-        if (experience >= experienceToNextLevel)
+        while (experience >= experienceToNextLevel)
         {
             level++;
             experience -= experienceToNextLevel;
