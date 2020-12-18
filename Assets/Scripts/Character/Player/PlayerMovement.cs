@@ -63,9 +63,13 @@ public class PlayerMovement : Character
         _mana.max = _mana.max + 10;
         _health.current = _health.max;
         _mana.current = _mana.max;
-        animator.Play("Nod Down");
         currentState = State.idle;
         SoundManager.RequestSound(levelUpSound);
+        if (effectAnimator)
+        {
+            effectAnimator.SetBool("levelUp", true);
+
+        }
     }
 
 
@@ -332,4 +336,5 @@ public class PlayerMovement : Character
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("DeathMenu");
     }
+
 }
