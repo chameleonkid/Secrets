@@ -139,7 +139,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     private string DamageDisplayText() => (playerInventory.currentWeapon) ?
-        playerInventory.currentWeapon.maxDamage + " - " + playerInventory.currentWeapon.maxDamage : "" ;
+        playerInventory.currentWeapon.minDamage + " - " + playerInventory.currentWeapon.maxDamage : "" ;
 
     private string CritDisplayText() => (playerInventory.totalCritChance > 0) ?
         playerInventory.totalCritChance + "%" : "";
