@@ -50,10 +50,18 @@ public class PlayerMovement : Character
         levelSystem.OnLevelChanged += LevelSystem_OnLevelChanged;
     }
 
+    private void OnDisable()
+    {
+        levelSystem.OnLevelChanged -= LevelSystem_OnLevelChanged;
+    }
+
+
     private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e)
     {
         _health.max = _health.max + 10;
         _mana.max = _mana.max + 10;
+        animator.Play("Nod Down");
+        currentState = State.idle;   
     }
 
 
