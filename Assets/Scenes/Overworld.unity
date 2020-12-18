@@ -7147,7 +7147,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 917043592}
+      - m_Target: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
         m_MethodName: AddExperience
         m_Mode: 3
         m_Arguments:
@@ -9456,52 +9456,6 @@ MonoBehaviour:
   testArmor: {fileID: 11400000, guid: 91793cb93c7c5c448bc919132e69ec1d, type: 2}
   testWeapon: {fileID: 11400000, guid: 5978092d20dcec54389ba7309b2e908d, type: 2}
   testPotion: {fileID: 11400000, guid: 6c0bed79414ae4e4087c87d7fe21bba1, type: 2}
---- !u!1 &917043591
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 917043593}
-  - component: {fileID: 917043592}
-  m_Layer: 0
-  m_Name: XPSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &917043592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917043591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 757f34b47e6965a44a8026b9e51bbfd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  experience: 0
-  experienceToNextLevel: 100
---- !u!4 &917043593
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917043591}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &917941560 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5645902282520022962, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
@@ -114863,7 +114817,7 @@ MonoBehaviour:
   currentLevelText: {fileID: 809698621}
   experienceNeededText: {fileID: 1129270373}
   experienceBar: {fileID: 1621063470}
-  levelSystem: {fileID: 917043592}
+  levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   addXPButton: {fileID: 618475779}
 --- !u!1001 &1974123585
 PrefabInstance:
@@ -123724,7 +123678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xpWindow: {fileID: 1960151730}
-  levelSystem: {fileID: 917043592}
+  levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
 --- !u!4 &2099650772
 Transform:
   m_ObjectHideFlags: 0
