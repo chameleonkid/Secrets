@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class Enemy : Character
 {
@@ -7,7 +8,10 @@ public class Enemy : Character
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private int enemyXp = default;
     [SerializeField] protected FloatValue maxHealth = default;
-    private float _health;
+    [SerializeField] private float _health;
+    public event Action OnEnemyTakeDamage;
+    public event Action OnEnemyDied;
+
     public override float health {
         get => _health;
         set {
@@ -23,6 +27,7 @@ public class Enemy : Character
             if (value < _health)
             {
                 chaseRadius = originalChaseRadius * 10;
+                OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )
             }
 
             _health = value;
@@ -104,6 +109,8 @@ public class Enemy : Character
         DeathEffect();
         MakeLoot();
         levelSystem.AddExperience(enemyXp);
+        OnEnemyDied?.Invoke();
+
         
         if (roomSignal != null)
         {
@@ -131,5 +138,16 @@ public class Enemy : Character
                 Instantiate(current.gameObject, transform.position, Quaternion.identity);
             }
         }
+    }
+
+    public float GetPercentHealth()
+    {
+        float enemyPercentHealth = (health * 100) / maxHealth.value;
+        return enemyPercentHealth;
+    }
+
+    public void KillEnemy()
+    {
+        health = 0;
     }
 }
