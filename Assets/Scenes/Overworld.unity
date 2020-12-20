@@ -9885,7 +9885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderTrigger: {fileID: 1605847831}
   enemy: {fileID: 8978087339683796174, guid: 11421516125106d47bc0500b650bd56d, type: 3}
-  bossMinion: {fileID: 618257334943937987, guid: 87cc621a22f211646b1620de441fdf71,
+  bossMinion: {fileID: 8978087339683796174, guid: be02b69f55a52074bbdd306229de2f8e,
     type: 3}
   spawnPostionList: []
   boss: {fileID: 705950091702437938}
@@ -11335,6 +11335,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 472834060355724290, guid: 2273ab36007df8146942b99a3cdff2ca,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472834060355724290, guid: 2273ab36007df8146942b99a3cdff2ca,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 472834060355724290, guid: 2273ab36007df8146942b99a3cdff2ca,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 472834060355724291, guid: 2273ab36007df8146942b99a3cdff2ca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11389,6 +11404,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472834060355724295, guid: 2273ab36007df8146942b99a3cdff2ca,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 472834060355724295, guid: 2273ab36007df8146942b99a3cdff2ca,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 472834060355724295, guid: 2273ab36007df8146942b99a3cdff2ca,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 472834060355724300, guid: 2273ab36007df8146942b99a3cdff2ca,
         type: 3}
@@ -116888,6 +116918,7 @@ MonoBehaviour:
   enemyXp: 500
   maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
   _health: 0
+  isMinion: 0
   enemyName: Towerman
   moveSpeed: 0
   homePosition: {x: -36.62, y: 7.37}
