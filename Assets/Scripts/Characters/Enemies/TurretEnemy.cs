@@ -37,12 +37,11 @@ public class TurretEnemy : EnemyLog
 
     protected virtual void FireProjectile()
     {
-        // Debug.Log("FIRE!!!!");
         var difference = target.transform.position - transform.position;
         var proj = Instantiate(projectile, transform.position, Quaternion.identity);
         proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
         canFire = false;
         currentState = State.walk;
-   //     animator.SetBool("WakeUp", true);
+
     }
 }

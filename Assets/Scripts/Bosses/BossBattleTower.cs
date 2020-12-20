@@ -15,11 +15,16 @@ public class BossBattleTower : MonoBehaviour
 
     [SerializeField] private ColliderTrigger colliderTrigger = default;
     [SerializeField] private Enemy enemy = default;
-    [SerializeField] private Enemy enemy2 = default;
+    [SerializeField] private Enemy bossMinion = default;
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [SerializeField] private Enemy boss = default;
     [SerializeField] private Stage stage = default;
     [SerializeField] private List<Enemy> spawnedEnemiesList = default;
+    [SerializeField] private int minionsToSpawn;                //set the minions to spawn in inspector
+    [SerializeField] private int spawnedMinionsCounter = 0;
+    [SerializeField] private GameObject bossShield = default;
+    [SerializeField] private bool minionsSpawned = false;
+
 
 
 
@@ -38,7 +43,8 @@ public class BossBattleTower : MonoBehaviour
     {
         colliderTrigger.OnPlayerEnterTrigger += EnterBossArea;       //Subscribe to not start the Battle multiple Times
         boss.OnEnemyTakeDamage += BossTakesDamage;
-        boss.OnEnemyDied += BossDied;                                               
+        boss.OnEnemyDied += BossDied;    
+        
     }
 
     private void BossDied()
@@ -50,8 +56,8 @@ public class BossBattleTower : MonoBehaviour
 
     private void BossTakesDamage()
     {
-        Debug.Log("Boss Took DMG!Check for new Stage");
-        switch(stage)
+        Debug.Log("Boss took DMG!");
+        switch (stage)
         {
             case Stage.Stage_1:
                    if(boss.GetPercentHealth() <= 70)
@@ -62,7 +68,8 @@ public class BossBattleTower : MonoBehaviour
             case Stage.Stage_2:
                 if (boss.GetPercentHealth() <= 50)
                 {
-                    StartNextStage();                    
+                    StartNextStage();
+
                 }
                 break;
         }
@@ -91,9 +98,35 @@ public class BossBattleTower : MonoBehaviour
         }
         if (stage == Stage.Stage_2)
         {
-            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-            Enemy minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
-            spawnedEnemiesList.Add(minion);
+            if (minionsSpawned == false)                                    //Spawn 4 RED Minions
+            {
+                for (int i = 0; i <= minionsToSpawn; i++)    
+                {
+                    Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
+                    Enemy minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
+                    minion.isMinion = true;
+                    minion.OnMinionDied += MinionKilled;
+                    spawnedMinionsCounter++;
+                }
+                minionsSpawned = true;
+            }
+            else
+            {
+                {
+                    Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
+                    Enemy minion = Instantiate(enemy, spawnPoint, Quaternion.identity);
+                    spawnedEnemiesList.Add(minion);
+                }
+            }
+        }
+    }
+
+    private void MinionKilled()
+    {
+        spawnedMinionsCounter--;
+        if(spawnedMinionsCounter <= 0)
+        {
+            bossShield.SetActive(false);
         }
     }
 
@@ -114,6 +147,8 @@ public class BossBattleTower : MonoBehaviour
                 break;
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
+                bossShield.SetActive(true);
+                Debug.Log("Shield should be active now!");
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;
