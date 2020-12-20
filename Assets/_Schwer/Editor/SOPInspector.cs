@@ -26,7 +26,7 @@ public class SOPInspector : Editor {
         var mana = FindFirstAsset<FloatMeter>("Mana t:FloatMeter");
         SetPrivateField(sop, "_mana", mana);
 
-        var xp = FindFirstAsset<XPSystem>("XP t:XPSystem");
+        var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");
         SetPrivateField(sop, "_xpSystem", xp);
 
         var inv = FindFirstAsset<Inventory>("Player t:Inventory");
