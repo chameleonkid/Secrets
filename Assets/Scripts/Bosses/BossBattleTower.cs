@@ -13,12 +13,13 @@ public class BossBattleTower : MonoBehaviour
         Stage_3,
     }
 
-    [SerializeField] private ColliderTrigger colliderTrigger;
-    [SerializeField] private Enemy enemy;
-    [SerializeField] private List<Vector3> spawnPostionList;
-    [SerializeField] private Enemy boss;
-    [SerializeField] private Stage stage;
-    [SerializeField] private List<Enemy> spawnedEnemiesList;
+    [SerializeField] private ColliderTrigger colliderTrigger = default;
+    [SerializeField] private Enemy enemy = default;
+    [SerializeField] private Enemy enemy2 = default;
+    [SerializeField] private List<Vector3> spawnPostionList = default;
+    [SerializeField] private Enemy boss = default;
+    [SerializeField] private Stage stage = default;
+    [SerializeField] private List<Enemy> spawnedEnemiesList = default;
 
 
 
@@ -61,7 +62,7 @@ public class BossBattleTower : MonoBehaviour
             case Stage.Stage_2:
                 if (boss.GetPercentHealth() <= 50)
                 {
-                    StartNextStage();
+                    StartNextStage();                    
                 }
                 break;
         }
@@ -77,14 +78,23 @@ public class BossBattleTower : MonoBehaviour
     {
         Debug.Log("BossBattle has started!");
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, 1.0f);                                          //Call that function in 1 second every second
+        InvokeRepeating("SpawnEnemy", 1.0f, 5.0f);                                          //Call that function in 1 second every second
     }
 
     private void SpawnEnemy()
     {
-        Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-        Enemy minion = Instantiate(enemy, spawnPoint, Quaternion.identity);
-        spawnedEnemiesList.Add(minion);
+        if (stage == Stage.Stage_1)
+        {
+            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
+            Enemy minion = Instantiate(enemy, spawnPoint, Quaternion.identity);
+            spawnedEnemiesList.Add(minion);
+        }
+        if (stage == Stage.Stage_2)
+        {
+            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
+            Enemy minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
+            spawnedEnemiesList.Add(minion);
+        }
     }
 
     private void DestroyAllEnemies()
