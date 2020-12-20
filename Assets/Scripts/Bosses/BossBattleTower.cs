@@ -22,8 +22,9 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private List<Enemy> spawnedEnemiesList = default;
     [SerializeField] private int minionsToSpawn;                //set the minions to spawn in inspector
     [SerializeField] private int spawnedMinionsCounter = 0;
-    [SerializeField] private GameObject bossShield = default;
+
     [SerializeField] private bool minionsSpawned = false;
+    [SerializeField] private Shield bossshield = default;
 
 
 
@@ -126,7 +127,7 @@ public class BossBattleTower : MonoBehaviour
         spawnedMinionsCounter--;
         if(spawnedMinionsCounter <= 0)
         {
-            bossShield.SetActive(false);
+            bossshield.triggerShield();
         }
     }
 
@@ -147,7 +148,7 @@ public class BossBattleTower : MonoBehaviour
                 break;
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
-                bossShield.SetActive(true);
+                bossshield.triggerShield();
                 Debug.Log("Shield should be active now!");
                 break;
             case Stage.Stage_2:
