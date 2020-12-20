@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(SimpleSave))]
 public class ScriptableObjectPersistence : MonoBehaviour
@@ -6,10 +7,10 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [Header("Scriptable Objects")]
     [SerializeField] private VectorValue _playerPosition = default;
     public VectorValue playerPosition => _playerPosition;
-    [SerializeField] private FloatMeter _health = default;
-    public FloatMeter health => _health;
-    [SerializeField] private FloatMeter _mana = default;
-    public FloatMeter mana => _mana;
+    [SerializeField] private ConstrainedFloat _health = default;
+    public ConstrainedFloat health => _health;
+    [SerializeField] private ConstrainedFloat _mana = default;
+    public ConstrainedFloat mana => _mana;
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
     [SerializeField] private InventoryItem[] _inventoryItems = default;
@@ -19,7 +20,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public BoolValue[] chests => _chests;
     [SerializeField] private BoolValue[] _doors = default;
     public BoolValue[] doors => _doors;
-    [SerializeField] private XPSystem _xpsystem = default;
+    [SerializeField] private XPSystem _xpSystem = default;
+    public XPSystem xpSystem => _xpSystem;
 
     [Header("UI Updating")]
     public Signals coinSignal;
@@ -65,7 +67,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.coins = 0;
         coinSignal.Raise();
 
-        playerInventory.contents = new System.Collections.Generic.List<InventoryItem>();
+        playerInventory.contents = new List<InventoryItem>();
 
         playerInventory.currentItem = null;
         playerInventory.currentWeapon = null;
@@ -88,6 +90,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     public void ResetXP()
     {
-        _xpsystem.ResetExperienceSystem();
+        _xpSystem.ResetExperienceSystem();
     }
 }

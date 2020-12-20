@@ -17,16 +17,19 @@ public class SOPInspector : Editor {
     private static void RefreshReferences(ScriptableObjectPersistence sop) {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
 
-        var pos = FindAsset<VectorValue>("Player t:VectorValue");
+        var pos = FindFirstAsset<VectorValue>("Player t:VectorValue");
         SetPrivateField(sop, "_playerPosition", pos);
 
-        var health = FindAsset<FloatMeter>("Health t:FloatMeter");
+        var health = FindFirstAsset<ConstrainedFloat>("Health t:ConstrainedFloat");
         SetPrivateField(sop, "_health", health);
 
-        var mana = FindAsset<FloatMeter>("Mana t:FloatMeter");
+        var mana = FindFirstAsset<ConstrainedFloat>("Mana t:ConstrainedFloat");
         SetPrivateField(sop, "_mana", mana);
 
-        var inv = FindAsset<Inventory>("Player t:Inventory");
+        var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");
+        SetPrivateField(sop, "_xpSystem", xp);
+
+        var inv = FindFirstAsset<Inventory>("Player t:Inventory");
         SetPrivateField(sop, "_playerInventory", inv);
 
         var items = ScriptableObjectEditorUtility.GetAllInstances<InventoryItem>();
@@ -56,7 +59,7 @@ public class SOPInspector : Editor {
         prop.SetValue(instance, value);
     }
 
-    private static T FindAsset<T>(string filter) where T : Object{
+    private static T FindFirstAsset<T>(string filter) where T : Object {
         var guids = AssetDatabase.FindAssets(filter);
         if (guids.Length <= 0) return default(T);
 
