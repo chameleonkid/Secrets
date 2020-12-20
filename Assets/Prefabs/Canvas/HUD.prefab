@@ -256,7 +256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 223049380}
-  - component: {fileID: 223049382}
+  - component: {fileID: 1650172200723117305}
   - component: {fileID: 1611472649302507742}
   - component: {fileID: 2064478710}
   m_Layer: 5
@@ -285,7 +285,7 @@ RectTransform:
   m_AnchoredPosition: {x: -11.1, y: 9.3}
   m_SizeDelta: {x: 330.76587, y: 241.98688}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &223049382
+--- !u!114 &1650172200723117305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,12 +294,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 223049379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f67ce21c642996a45adcf179f730b807, type: 3}
+  m_Script: {fileID: 11500000, guid: 05aea0735b58e214eb5d8d53722f1b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mana: {fileID: 11400000, guid: fa821302db7f4d4488aa27583b131f47, type: 2}
-  manaText: {fileID: 1485548676}
-  manaSlider: {fileID: 1611472649302507742}
+  constrainedFloat: {fileID: 11400000, guid: fa821302db7f4d4488aa27583b131f47, type: 2}
+  textDisplay: {fileID: 1485548676}
+  slider: {fileID: 1611472649302507742}
 --- !u!114 &1611472649302507742
 MonoBehaviour:
   m_ObjectHideFlags: 0
