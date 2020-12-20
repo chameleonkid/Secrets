@@ -1,62 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(fileName = "New XP-System", menuName = "XP-System")]
 public class XPSystem : ScriptableObject
 {
-    public event EventHandler OnExperienceChanged;
-    public event EventHandler OnLevelChanged;
+    public event Action OnExperienceChanged;
+    public event Action OnLevelChanged;
 
-    [SerializeField] private int level;
-    [SerializeField] private int experience;
-    [SerializeField] private int experienceToNextLevel;
+    [SerializeField] private int _level = default;
+    public int level => _level;
+    [SerializeField] private int _experience = default;
+    public int experience => _experience;
+    [SerializeField] private int _experienceToNextLevel = default;
+    public int experienceToNextLevel => _experienceToNextLevel;
 
-    public void AddExperience( int amount )
+    public float GetExperienceNormalized() => (float)experience / experienceToNextLevel;
+
+    public void AddExperience(int amount)
     {
-        experience += amount;
+        _experience += amount;
         while (experience >= experienceToNextLevel)
         {
-            level++;
-            experience -= experienceToNextLevel;
-            if (OnExperienceChanged != null) OnLevelChanged(this, EventArgs.Empty);
+            _level++;
+            _experience -= experienceToNextLevel;
+            _experienceToNextLevel *= 2;
+            OnLevelChanged?.Invoke();
         }
-        if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
-
-    }
-
-    public int GetLevelNumber()
-    {
-        return level;
-    }
-
-    public int GetExperienceNeeded()
-    {
-        return experienceToNextLevel;
-    }
-
-    public int GetExperience()
-    {
-        return experience;
-    }
-
-    public float GetExperienceNormalized()
-    {
-        return (float)experience / experienceToNextLevel;
-    }
-
-    public void SetExperienceToNextLevel()
-    {
-        experienceToNextLevel = experienceToNextLevel * 2; 
+        OnExperienceChanged?.Invoke();
     }
 
     public void ResetExperienceSystem()
     {
-        level = 1;
-        experience = 0;
-        experienceToNextLevel = 100;
+        _level = 1;
+        _experience = 0;
+        _experienceToNextLevel = 100;
     }
-
-
 }

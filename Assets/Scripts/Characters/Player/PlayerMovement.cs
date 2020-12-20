@@ -46,18 +46,11 @@ public class PlayerMovement : Character
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
-    private void OnEnable()
-    {
-        levelSystem.OnLevelChanged += LevelSystem_OnLevelChanged;
-    }
 
-    private void OnDisable()
-    {
-        levelSystem.OnLevelChanged -= LevelSystem_OnLevelChanged;
-    }
+    private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
+    private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
 
-
-    private void LevelSystem_OnLevelChanged(object sender, System.EventArgs e)
+    private void LevelUpPlayer()
     {
         _health.max = _health.max + 10;
         _mana.max = _mana.max + 10;
