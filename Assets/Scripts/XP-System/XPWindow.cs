@@ -8,7 +8,6 @@ public class XPWindow : MonoBehaviour
     [SerializeField] private TextMeshProUGUI experienceNeededText = default;
     [SerializeField] private Image experienceBar = default;
     [SerializeField] private XPSystem levelSystem = default;
-    [SerializeField] private Button addXPButton = default;
 
     private void OnEnable()
     {
