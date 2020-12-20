@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(SimpleSave))]
 public class ScriptableObjectPersistence : MonoBehaviour
@@ -19,7 +20,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public BoolValue[] chests => _chests;
     [SerializeField] private BoolValue[] _doors = default;
     public BoolValue[] doors => _doors;
-    [SerializeField] private XPSystem _xpsystem = default;
+    [SerializeField] private XPSystem _xpSystem = default;
+    public XPSystem xpSystem => _xpSystem;
 
     [Header("UI Updating")]
     public Signals coinSignal;
@@ -65,7 +67,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.coins = 0;
         coinSignal.Raise();
 
-        playerInventory.contents = new System.Collections.Generic.List<InventoryItem>();
+        playerInventory.contents = new List<InventoryItem>();
 
         playerInventory.currentItem = null;
         playerInventory.currentWeapon = null;
@@ -88,6 +90,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     public void ResetXP()
     {
-        _xpsystem.ResetExperienceSystem();
+        _xpSystem.ResetExperienceSystem();
     }
 }
