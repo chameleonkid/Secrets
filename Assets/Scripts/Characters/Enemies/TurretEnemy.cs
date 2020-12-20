@@ -31,7 +31,7 @@ public class TurretEnemy : EnemyLog
 
     protected override void OutsideChaseRadiusUpdate()
     {
-        animator.SetBool("WakeUp", false);
+      //  animator.SetBool("WakeUp", false);
         // ChangeState(State.idle);
     }
 
@@ -43,6 +43,6 @@ public class TurretEnemy : EnemyLog
         proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
         canFire = false;
         currentState = State.walk;
-        animator.SetBool("WakeUp", true);
+   //     animator.SetBool("WakeUp", true);
     }
 }

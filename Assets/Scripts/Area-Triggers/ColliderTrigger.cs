@@ -5,7 +5,7 @@ using System;
 
 public class ColliderTrigger : MonoBehaviour
 {
-    public event EventHandler OnPlayerEnterTrigger;
+    public event Action OnPlayerEnterTrigger;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,7 +14,7 @@ public class ColliderTrigger : MonoBehaviour
         {
             //Its the player inside the triggerArea
             Debug.Log("Player Enteres BossArea!");
-            OnPlayerEnterTrigger?.Invoke(this, EventArgs.Empty);
+            OnPlayerEnterTrigger?.Invoke();
         }
     }
 }

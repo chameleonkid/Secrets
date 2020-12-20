@@ -36,19 +36,19 @@ public class BossBattleTower : MonoBehaviour
 
     private void Start()
     {
-        colliderTrigger.OnPlayerEnterTrigger += ColliderTrigger_OnPlayerEnterTrigger;       //Subscribe to not start the Battle multiple Times
-        boss.OnEnemyTakeDamage += Boss_OnEnemyTakeDamage;
-        boss.OnEnemyDied += Boss_OnEnemyDied;                                               
+        colliderTrigger.OnPlayerEnterTrigger += EnterBossArea;       //Subscribe to not start the Battle multiple Times
+        boss.OnEnemyTakeDamage += BossTakesDamage;
+        boss.OnEnemyDied += BossDied;                                               
     }
 
-    private void Boss_OnEnemyDied()
+    private void BossDied()
     {
         Debug.Log("The Boss died!");
         DestroyAllEnemies();
         CancelInvoke("SpawnEnemy");                                                          // Stop spawning enemies
     }
 
-    private void Boss_OnEnemyTakeDamage()
+    private void BossTakesDamage()
     {
         Debug.Log("Boss Took DMG!Check for new Stage");
         switch(stage)
@@ -68,17 +68,17 @@ public class BossBattleTower : MonoBehaviour
         }
     }
 
-    private void ColliderTrigger_OnPlayerEnterTrigger(object sender, System.EventArgs e)
+    private void EnterBossArea()
     {
         StartBattle();
-        colliderTrigger.OnPlayerEnterTrigger -= ColliderTrigger_OnPlayerEnterTrigger;       //Unsubscribe to not start the Battle multiple Times
+        colliderTrigger.OnPlayerEnterTrigger -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
     }
 
     private void StartBattle()
     {
         Debug.Log("BossBattle has started!");
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, 5.0f);                                          //Call that function in 1 second every second
+        InvokeRepeating("SpawnEnemy", 1.0f, 1.0f);                                          //Call that function in 1 second every second
     }
 
     private void SpawnEnemy()
