@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Float Meter")]
-public class FloatMeter : ScriptableObject
+[CreateAssetMenu(menuName = "Scriptable Objects/Constrained Float")]
+public class ConstrainedFloat : ScriptableObject
 {
     //These are the Events
     public event Action OnMinChanged;

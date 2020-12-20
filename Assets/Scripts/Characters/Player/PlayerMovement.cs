@@ -10,10 +10,10 @@ public class PlayerMovement : Character
 
     private Vector3 change;
 
-    [SerializeField] private FloatMeter _mana = default;
-    public FloatMeter mana => _mana;
-    [SerializeField] private FloatMeter _health = default;
-    public FloatMeter healthMeter => _health;
+    [SerializeField] private ConstrainedFloat _mana = default;
+    public ConstrainedFloat mana => _mana;
+    [SerializeField] private ConstrainedFloat _health = default;
+    public ConstrainedFloat healthMeter => _health;
     public override float health {
         get => _health.current;
         set {

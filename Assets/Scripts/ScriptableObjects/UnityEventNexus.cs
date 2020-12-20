@@ -3,9 +3,9 @@
 [CreateAssetMenu(menuName = "Scriptable Objects/Single/Unity Event Nexus")]
 public class UnityEventNexus : ScriptableObject
 {
-    [SerializeField] private FloatMeter mana = default;
+    [SerializeField] private ConstrainedFloat mana = default;
     public void ModifyCurrentMana(float deltaMana) => mana.current += deltaMana;
 
-    [SerializeField] private FloatMeter health = default;
+    [SerializeField] private ConstrainedFloat health = default;
     public void ModifyCurrentHealth(float deltaHealth) => health.current += deltaHealth;
 }

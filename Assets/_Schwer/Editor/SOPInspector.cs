@@ -20,10 +20,10 @@ public class SOPInspector : Editor {
         var pos = FindFirstAsset<VectorValue>("Player t:VectorValue");
         SetPrivateField(sop, "_playerPosition", pos);
 
-        var health = FindFirstAsset<FloatMeter>("Health t:FloatMeter");
+        var health = FindFirstAsset<ConstrainedFloat>("Health t:ConstrainedFloat");
         SetPrivateField(sop, "_health", health);
 
-        var mana = FindFirstAsset<FloatMeter>("Mana t:FloatMeter");
+        var mana = FindFirstAsset<ConstrainedFloat>("Mana t:ConstrainedFloat");
         SetPrivateField(sop, "_mana", mana);
 
         var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");

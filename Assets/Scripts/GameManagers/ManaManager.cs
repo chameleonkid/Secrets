@@ -4,7 +4,7 @@ using TMPro;
 
 public class ManaManager : MonoBehaviour
 {
-    [SerializeField] private FloatMeter mana = default;
+    [SerializeField] private ConstrainedFloat mana = default;
     [SerializeField] private TextMeshProUGUI manaText = default;
     // ^ Shouldn't reassign during runtime unless
     // care is taken to unsubscribe from events.

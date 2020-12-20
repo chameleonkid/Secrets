@@ -7,10 +7,10 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [Header("Scriptable Objects")]
     [SerializeField] private VectorValue _playerPosition = default;
     public VectorValue playerPosition => _playerPosition;
-    [SerializeField] private FloatMeter _health = default;
-    public FloatMeter health => _health;
-    [SerializeField] private FloatMeter _mana = default;
-    public FloatMeter mana => _mana;
+    [SerializeField] private ConstrainedFloat _health = default;
+    public ConstrainedFloat health => _health;
+    [SerializeField] private ConstrainedFloat _mana = default;
+    public ConstrainedFloat mana => _mana;
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
     [SerializeField] private InventoryItem[] _inventoryItems = default;

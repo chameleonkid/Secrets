@@ -4,7 +4,7 @@ using TMPro;
 
 public class HealthManager : MonoBehaviour
 {
-    [SerializeField] private FloatMeter health = default;
+    [SerializeField] private ConstrainedFloat health = default;
     [SerializeField] private TextMeshProUGUI healthText = default;
     // ^ Shouldn't reassign during runtime unless
     // care is taken to unsubscribe from events.
