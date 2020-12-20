@@ -1157,7 +1157,6 @@ MonoBehaviour:
   experienceNeededText: {fileID: 1129270373}
   experienceBar: {fileID: 1621063470}
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  addXPButton: {fileID: 618475779}
 --- !u!1 &5645902281776300153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1794,19 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 47945566}
+    - target: {fileID: 588197640, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
+      propertyPath: constrainedFloat
+      value: 
+      objectReference: {fileID: 11400000, guid: c981e6d0ec5d6664eaffe5b277095520,
+        type: 2}
+    - target: {fileID: 588197640, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
+      propertyPath: textDisplay
+      value: 
+      objectReference: {fileID: 47945566}
+    - target: {fileID: 588197640, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 4736449587478328970}
     - target: {fileID: 588197641, guid: 2319d5545d4644a4dae14db35d055092, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -2053,6 +2065,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8500792006447090237}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4736449587478328970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3766098374008421559, guid: 2319d5545d4644a4dae14db35d055092,
+    type: 3}
+  m_PrefabInstance: {fileID: 8500792006447090237}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500792005927724347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8500792005927724347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 588197638, guid: 2319d5545d4644a4dae14db35d055092,
