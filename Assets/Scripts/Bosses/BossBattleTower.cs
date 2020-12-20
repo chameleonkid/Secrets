@@ -14,7 +14,9 @@ public class BossBattleTower : MonoBehaviour
     }
 
     [SerializeField] private ColliderTrigger colliderTrigger = default;
-    [SerializeField] private Enemy enemy = default;
+    [SerializeField] private Enemy enemy1 = default;
+    [SerializeField] private Enemy enemy2 = default;
+    [SerializeField] private Enemy enemy3 = default;
     [SerializeField] private Enemy bossMinion = default;
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [SerializeField] private Enemy boss = default;
@@ -70,7 +72,6 @@ public class BossBattleTower : MonoBehaviour
                 if (boss.GetPercentHealth() <= 50)
                 {
                     StartNextStage();
-
                 }
                 break;
         }
@@ -91,20 +92,36 @@ public class BossBattleTower : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        int rndEnemy = Random.Range(0, 100);
+        Enemy minion;
+
         if (stage == Stage.Stage_1)
         {
+
             Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-            Enemy minion = Instantiate(enemy, spawnPoint, Quaternion.identity);
+
+            if (rndEnemy < 35)
+            {
+               minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
+            }
+            if (rndEnemy >= 35 && rndEnemy <= 75)
+            {
+                minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
+            }
+            else
+            {
+                minion = Instantiate(enemy3, spawnPoint, Quaternion.identity);
+            }
             spawnedEnemiesList.Add(minion);
         }
         if (stage == Stage.Stage_2)
         {
-            if (minionsSpawned == false)                                    //Spawn 4 RED Minions
+            if (minionsSpawned == false)                                    //Spawn X RED SHIELD-MINIONS
             {
                 for (int i = 0; i <= minionsToSpawn; i++)    
                 {
                     Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-                    Enemy minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
+                    minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
                     minion.isMinion = true;
                     minion.OnMinionDied += MinionKilled;
                     spawnedMinionsCounter++;
@@ -115,7 +132,7 @@ public class BossBattleTower : MonoBehaviour
             {
                 {
                     Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-                    Enemy minion = Instantiate(enemy, spawnPoint, Quaternion.identity);
+                    minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
                     spawnedEnemiesList.Add(minion);
                 }
             }
