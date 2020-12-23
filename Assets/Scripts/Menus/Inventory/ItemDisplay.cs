@@ -7,7 +7,7 @@ public abstract class ItemDisplay : MonoBehaviour
     [SerializeField] private GameObject itemSlotParent = default;
 
     protected abstract Inventory inventory { get; set; }
-    protected List<InventorySlot> slots = new List<InventorySlot>();
+    protected List<ItemSlot> slots = new List<ItemSlot>();
 
     protected void UpdateItemSlotContents()
     {
@@ -38,7 +38,7 @@ public abstract class ItemDisplay : MonoBehaviour
     {
         for (int i = slots.Count; i < inventory.contents.Count; i++)
         {
-            var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<InventorySlot>();
+            var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);
             // newSlot.OnSlotSelected += SetUpItemDescription;
             // newSlot.OnSlotUsed += OnItemUsed;

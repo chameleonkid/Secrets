@@ -9,17 +9,17 @@ public class InventoryDisplay : ItemDisplay
     }
 
     [Header("Equipment Slots")]
-    [SerializeField] private InventorySlot weaponSlot = default;
-    [SerializeField] private InventorySlot armorSlot = default;
-    [SerializeField] private InventorySlot helmetSlot = default;
-    [SerializeField] private InventorySlot gloveSlot = default;
-    [SerializeField] private InventorySlot legsSlot = default;
-    [SerializeField] private InventorySlot shieldSlot = default;
-    [SerializeField] private InventorySlot ringSlot = default;
-    [SerializeField] private InventorySlot bowSlot = default;
-    [SerializeField] private InventorySlot spellbookSlot = default;
-    [SerializeField] private InventorySlot amuletSlot = default;
-    [SerializeField] private InventorySlot bootsSlot = default;
+    [SerializeField] private ItemSlot weaponSlot = default;
+    [SerializeField] private ItemSlot armorSlot = default;
+    [SerializeField] private ItemSlot helmetSlot = default;
+    [SerializeField] private ItemSlot gloveSlot = default;
+    [SerializeField] private ItemSlot legsSlot = default;
+    [SerializeField] private ItemSlot shieldSlot = default;
+    [SerializeField] private ItemSlot ringSlot = default;
+    [SerializeField] private ItemSlot bowSlot = default;
+    [SerializeField] private ItemSlot spellbookSlot = default;
+    [SerializeField] private ItemSlot amuletSlot = default;
+    [SerializeField] private ItemSlot bootsSlot = default;
 
     private void OnEnable() => UpdateDisplay();
 

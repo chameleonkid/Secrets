@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class InventorySlot : MonoBehaviour, ISelectHandler
+public class ItemSlot : MonoBehaviour, ISelectHandler
 {
     public event Action<InventoryItem> OnSlotSelected;
     public event Action<InventoryItem> OnSlotUsed;
