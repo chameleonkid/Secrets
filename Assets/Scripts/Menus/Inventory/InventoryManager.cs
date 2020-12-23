@@ -116,17 +116,20 @@ public class InventoryManager : MonoBehaviour
         descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
 
-    private void OnItemUsed(InventoryItem usedItem)
+    private void OnItemUsed(InventoryItem item)
     {
-        if (usedItem.numberHeld <= 0)
+        if (item == null || !item.usable || item.numberHeld <= 0) return;
+
+        item.Use();
+        if (item.numberHeld <= 0)
         {
-            playerInventory.contents.Remove(usedItem);
+            playerInventory.contents.Remove(item);
             EventSystem.current.SetSelectedGameObject(closeButton);
             Refresh();
         }
 
-        var context = (usedItem is EquippableItem) ? " was equipped" : " was used";
-        descriptionText.text = usedItem.itemName + context;
+        var context = (item is EquippableItem) ? " was equipped" : " was used";
+        descriptionText.text = item.itemName + context;
     }
 
     private void UpdateDisplays()

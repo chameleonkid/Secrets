@@ -9,6 +9,9 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     public event Action<InventoryItem> OnSlotSelected;
     public event Action<InventoryItem> OnSlotUsed;
 
+    private InventoryItem item;
+    private Button button;
+    private TextMeshProUGUI itemNumberText;
     private Image _itemImage;
     private Image itemImage {
         get {
@@ -20,13 +23,12 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         }
     }
     private Sprite defaultSprite = default;
-    
-    private TextMeshProUGUI itemNumberText;
 
-    // Variables from the item
-    public InventoryItem item;
-
-    private void Awake() => itemNumberText = GetComponentInChildren<TextMeshProUGUI>();
+    private void Awake()
+    {
+        button = GetComponent<Button>();
+        itemNumberText = GetComponentInChildren<TextMeshProUGUI>();
+    }
 
     public void SetItem(InventoryItem newItem)
     {
@@ -60,27 +62,9 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         }
     }
 
-    public void UseItem()
-    {
-        if (item)
-        {
-            if (item.usable && item.numberHeld > 0)
-            {
-                item.Use();
-
-                if (itemNumberText != null)
-                {
-                    itemNumberText.text = item.numberHeld.ToString();
-                }
-
-                OnSlotUsed?.Invoke(item);
-            }
-
-            if (item.numberHeld <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
+    public void UseItem() {
+        OnSlotUsed?.Invoke(item);   // Let relevant manager handle use behaviour
+        SetItem(item);              // Refresh number held text
     }
 
     public void SwapItemToPlayer()
