@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class InventoryScreenManager : MonoBehaviour
 {
     public GameObject inventoryPanel;
-    public GameObject vendorPanel;
     public GameObject firstButtonInventory;
 
     private bool isPaused = false;
