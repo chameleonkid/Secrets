@@ -8,18 +8,18 @@ public class InventoryManager : MonoBehaviour
     public GameObject blankInventorySlot;
     public GameObject inventoryPanel;
     //InventorySlots when Item exists
-    public InventorySlot weaponSlot;
-    public InventorySlot armorSlot;
-    public InventorySlot helmetSlot;
-    public InventorySlot gloveSlot;
-    public InventorySlot legsSlot;
-    public InventorySlot shieldSlot;
-    public InventorySlot ringSlot;
-    public InventorySlot bowSlot;
-    public InventorySlot spellbookSlot;
-    public InventorySlot amuletSlot;
-    public InventorySlot bootsSlot;
-    // Stats display 
+    public ItemSlot weaponSlot;
+    public ItemSlot armorSlot;
+    public ItemSlot helmetSlot;
+    public ItemSlot gloveSlot;
+    public ItemSlot legsSlot;
+    public ItemSlot shieldSlot;
+    public ItemSlot ringSlot;
+    public ItemSlot bowSlot;
+    public ItemSlot spellbookSlot;
+    public ItemSlot amuletSlot;
+    public ItemSlot bootsSlot;
+    // Stats display
     [SerializeField] private TextMeshProUGUI critDisplay = default;
     [SerializeField] private TextMeshProUGUI dmgDisplay = default;
     [SerializeField] private TextMeshProUGUI defDisplay = default;
@@ -98,7 +98,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     var newSlotGameObj = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
                     newSlotGameObj.transform.SetParent(inventoryPanel.transform, false);
-                    var newSlot = newSlotGameObj.GetComponent<InventorySlot>();
+                    var newSlot = newSlotGameObj.GetComponent<ItemSlot>();
                     if (newSlot)
                     {
                         newSlot.SetItem(playerInventory.contents[i]);
