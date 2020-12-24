@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class InventoryDisplay : ItemDisplay
 {
@@ -21,9 +22,42 @@ public class InventoryDisplay : ItemDisplay
     [SerializeField] private ItemSlot amuletSlot = default;
     [SerializeField] private ItemSlot bootsSlot = default;
 
+    public Action<InventoryItem> OnSlotSelected { get; set; }
+    public Action<InventoryItem> OnSlotUsed { get; set; }
+
     private void OnEnable() => UpdateDisplay();
 
-    private void UpdateDisplay()
+    public void SubscribeToEquipmentSlotSelected(Action<InventoryItem> action)
+    {
+        weaponSlot.OnSlotSelected += action;
+        armorSlot.OnSlotSelected += action;
+        helmetSlot.OnSlotSelected += action;
+        gloveSlot.OnSlotSelected += action;
+        legsSlot.OnSlotSelected += action;
+        shieldSlot.OnSlotSelected += action;
+        ringSlot.OnSlotSelected += action;
+        bowSlot.OnSlotSelected += action;
+        spellbookSlot.OnSlotSelected += action;
+        amuletSlot.OnSlotSelected += action;
+        bootsSlot.OnSlotSelected += action;
+    }
+
+    public void UnsubscribeFromEquipmentSlotSelected(Action<InventoryItem> action)
+    {
+        weaponSlot.OnSlotSelected -= action;
+        armorSlot.OnSlotSelected -= action;
+        helmetSlot.OnSlotSelected -= action;
+        gloveSlot.OnSlotSelected -= action;
+        legsSlot.OnSlotSelected -= action;
+        shieldSlot.OnSlotSelected -= action;
+        ringSlot.OnSlotSelected -= action;
+        bowSlot.OnSlotSelected -= action;
+        spellbookSlot.OnSlotSelected -= action;
+        amuletSlot.OnSlotSelected -= action;
+        bootsSlot.OnSlotSelected -= action;
+    }
+
+    public void UpdateDisplay()
     {
         UpdateItemSlots();
         UpdateEquipmentSlots();
@@ -42,5 +76,24 @@ public class InventoryDisplay : ItemDisplay
         spellbookSlot.SetItem(inventory.currentSpellbook);
         amuletSlot.SetItem(inventory.currentAmulet);
         bootsSlot.SetItem(inventory.currentBoots);
+    }
+
+    protected override void InstantiateSlots()
+    {
+        for (int i = slots.Count; i < inventory.contents.Count; i++)
+        {
+            var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
+            slots.Add(newSlot);
+
+            if (OnSlotSelected != null)
+            {
+                newSlot.OnSlotSelected += OnSlotSelected;
+            }
+            
+            if (OnSlotUsed != null)
+            {
+                newSlot.OnSlotUsed += OnSlotUsed;
+            }
+        }
     }
 }

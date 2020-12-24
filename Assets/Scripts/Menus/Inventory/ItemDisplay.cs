@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class ItemDisplay : MonoBehaviour
 {
-    [SerializeField] private GameObject itemSlotPrefab = default;
-    [SerializeField] private GameObject itemSlotParent = default;
+    [SerializeField] protected GameObject itemSlotPrefab = default;
+    [SerializeField] protected GameObject itemSlotParent = default;
 
     protected abstract Inventory inventory { get; set; }
     protected List<ItemSlot> slots = new List<ItemSlot>();
@@ -34,14 +34,12 @@ public abstract class ItemDisplay : MonoBehaviour
         }
     }
 
-    private void InstantiateSlots()
+    protected virtual void InstantiateSlots()
     {
         for (int i = slots.Count; i < inventory.contents.Count; i++)
         {
             var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);
-            // newSlot.OnSlotSelected += SetUpItemDescription;
-            // newSlot.OnSlotUsed += OnItemUsed;
         }
     }
 

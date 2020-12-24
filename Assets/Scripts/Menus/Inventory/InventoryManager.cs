@@ -4,37 +4,27 @@ using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour
 {
-    //Inventory Information
-    public GameObject blankInventorySlot;
-    public GameObject inventoryPanel;
-    //InventorySlots when Item exists
-    public ItemSlot weaponSlot;
-    public ItemSlot armorSlot;
-    public ItemSlot helmetSlot;
-    public ItemSlot gloveSlot;
-    public ItemSlot legsSlot;
-    public ItemSlot shieldSlot;
-    public ItemSlot ringSlot;
-    public ItemSlot bowSlot;
-    public ItemSlot spellbookSlot;
-    public ItemSlot amuletSlot;
-    public ItemSlot bootsSlot;
-    // Stats display
+    [SerializeField] private Inventory inventory = default;
+    [Header("Components")]
+    [SerializeField] private TextMeshProUGUI descriptionText = default;
+    [SerializeField] private GameObject closeButton = default;
+    [Header("Stat Displays")]
     [SerializeField] private TextMeshProUGUI critDisplay = default;
     [SerializeField] private TextMeshProUGUI dmgDisplay = default;
     [SerializeField] private TextMeshProUGUI defDisplay = default;
     [SerializeField] private TextMeshProUGUI spellDisplay = default;
     [SerializeField] private TextMeshProUGUI rangeDisplay = default;
 
-    public TextMeshProUGUI descriptionText;
-    public Inventory playerInventory;
     public InventoryItem currentItem;   //! What is the purpose of this?
 
-    private GameObject closeButton;
+    private InventoryDisplay itemDisplay;
 
-    private void Awake() {
-        closeButton = GameObject.Find("CloseButton");
-        SubscribeToEquipmentSlots();
+    private void Awake()
+    {
+        itemDisplay = GetComponentInChildren<InventoryDisplay>(true);
+        itemDisplay.OnSlotSelected = SetUpItemDescription;
+        itemDisplay.OnSlotUsed = OnItemUsed;
+        itemDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
     }
 
     private void OnEnable() => Refresh();
@@ -42,72 +32,8 @@ public class InventoryManager : MonoBehaviour
     private void Refresh()
     {
         descriptionText.text = "";
-        ClearInventorySlots();
-        UpdateEquipmentSlots();
-        MakeInventorySlots();
-        UpdateDisplays();
-    }
-
-    // Destroy all item slots
-    private void ClearInventorySlots()
-    {
-        for (int i = 0; i < inventoryPanel.transform.childCount; i++)
-        {
-            Destroy(inventoryPanel.transform.GetChild(i).gameObject);
-        }
-    }
-
-    private void UpdateEquipmentSlots()
-    {
-        weaponSlot.SetItem(playerInventory.currentWeapon);
-        armorSlot.SetItem(playerInventory.currentArmor);
-        helmetSlot.SetItem(playerInventory.currentHelmet);
-        gloveSlot.SetItem(playerInventory.currentGloves);
-        legsSlot.SetItem(playerInventory.currentLegs);
-        shieldSlot.SetItem(playerInventory.currentShield);
-        ringSlot.SetItem(playerInventory.currentRing);
-        bowSlot.SetItem(playerInventory.currentBow);
-        spellbookSlot.SetItem(playerInventory.currentSpellbook);
-        amuletSlot.SetItem(playerInventory.currentAmulet);
-        bootsSlot.SetItem(playerInventory.currentBoots);
-    }
-
-    private void SubscribeToEquipmentSlots()
-    {
-        weaponSlot.OnSlotSelected += SetUpItemDescription;
-        armorSlot.OnSlotSelected += SetUpItemDescription;
-        helmetSlot.OnSlotSelected += SetUpItemDescription;
-        gloveSlot.OnSlotSelected += SetUpItemDescription;
-        legsSlot.OnSlotSelected += SetUpItemDescription;
-        shieldSlot.OnSlotSelected += SetUpItemDescription;
-        ringSlot.OnSlotSelected += SetUpItemDescription;
-        bowSlot.OnSlotSelected += SetUpItemDescription;
-        spellbookSlot.OnSlotSelected += SetUpItemDescription;
-        amuletSlot.OnSlotSelected += SetUpItemDescription;
-        bootsSlot.OnSlotSelected += SetUpItemDescription;
-    }
-
-    // Instantiate inventory slots and set items
-    public void MakeInventorySlots()
-    {
-        if (playerInventory)
-        {
-            for (int i = 0; i < playerInventory.contents.Count; i++)
-            {
-                if (playerInventory.contents[i].numberHeld > 0) //bottle can be replaced with items that can hold 0 charges
-                {
-                    var newSlotGameObj = Instantiate(blankInventorySlot, inventoryPanel.transform.position, Quaternion.identity);
-                    newSlotGameObj.transform.SetParent(inventoryPanel.transform, false);
-                    var newSlot = newSlotGameObj.GetComponent<ItemSlot>();
-                    if (newSlot)
-                    {
-                        newSlot.SetItem(playerInventory.contents[i]);
-                        newSlot.OnSlotSelected += SetUpItemDescription; // Does unsubscribing need to be handled if the item slots are destroyed?
-                        newSlot.OnSlotUsed += OnItemUsed;               // Does unsubscribing need to be handled if the item slots are destroyed?
-                    }
-                }
-            }
-        }
+        itemDisplay.UpdateDisplay();
+        UpdateStatDisplays();
     }
 
     private void SetUpItemDescription(InventoryItem newItem)
@@ -123,7 +49,7 @@ public class InventoryManager : MonoBehaviour
         item.Use();
         if (item.numberHeld <= 0)
         {
-            playerInventory.contents.Remove(item);
+            inventory.contents.Remove(item);
             EventSystem.current.SetSelectedGameObject(closeButton);
             Refresh();
         }
@@ -132,7 +58,7 @@ public class InventoryManager : MonoBehaviour
         descriptionText.text = item.itemName + context;
     }
 
-    private void UpdateDisplays()
+    private void UpdateStatDisplays()
     {
         dmgDisplay.text = DamageDisplayText();
         defDisplay.text = DefenseDisplayText();
@@ -141,17 +67,17 @@ public class InventoryManager : MonoBehaviour
         rangeDisplay.text = RangeDamageDisplayText();
     }
 
-    private string DamageDisplayText() => (playerInventory.currentWeapon) ?
-        playerInventory.currentWeapon.minDamage + " - " + playerInventory.currentWeapon.maxDamage : "" ;
+    private string DamageDisplayText() => (inventory.currentWeapon) ?
+        inventory.currentWeapon.minDamage + " - " + inventory.currentWeapon.maxDamage : "" ;
 
-    private string CritDisplayText() => (playerInventory.totalCritChance > 0) ?
-        playerInventory.totalCritChance + "%" : "";
+    private string CritDisplayText() => (inventory.totalCritChance > 0) ?
+        inventory.totalCritChance + "%" : "";
 
-    private string DefenseDisplayText() => (playerInventory.totalDefense > 0) ? playerInventory.totalDefense.ToString() : "";
+    private string DefenseDisplayText() => (inventory.totalDefense > 0) ? inventory.totalDefense.ToString() : "";
 
-    private string RangeDamageDisplayText() => (playerInventory.currentBow) ?
-        playerInventory.currentBow.minDamage + " - " + playerInventory.currentBow.maxDamage : "";
+    private string RangeDamageDisplayText() => (inventory.currentBow) ?
+        inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
 
-    private string SpellDamageDisplayText() => (playerInventory.currentSpellbook || playerInventory.currentAmulet) ?
-        playerInventory.totalMinSpellDamage + " - "  + playerInventory.totalMaxSpellDamage : "";
+    private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentAmulet) ?
+        inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
 }
