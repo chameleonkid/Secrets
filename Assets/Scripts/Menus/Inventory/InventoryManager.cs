@@ -28,8 +28,6 @@ public class InventoryManager : MonoBehaviour
         itemDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
     }
 
-    private void OnEnable() => Refresh();
-
     private void Refresh()
     {
         descriptionText.text = "";
@@ -45,6 +43,7 @@ public class InventoryManager : MonoBehaviour
 
     private void OpenPanel()
     {
+        Refresh();
         inventoryPanel.SetActive(true);
         Time.timeScale = 0;
 

@@ -9,26 +9,14 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     public event Action<InventoryItem> OnSlotSelected;
     public event Action<InventoryItem> OnSlotUsed;
 
-    private InventoryItem item;
-    private Button button;
-    private TextMeshProUGUI itemNumberText;
-    private Image _itemImage;
-    private Image itemImage {
-        get {
-            if (_itemImage == null) {
-                _itemImage = this.GetComponentInChildrenFirst<Image>();
-                defaultSprite = _itemImage.sprite;
-            }
-            return _itemImage;
-        }
-    }
+    [SerializeField] private Button button = default;
+    [SerializeField] private TextMeshProUGUI numberHeldDisplay = default;
+    [SerializeField] private Image itemImage = default;
     private Sprite defaultSprite = default;
 
-    private void Awake()
-    {
-        button = GetComponent<Button>();
-        itemNumberText = GetComponentInChildren<TextMeshProUGUI>();
-    }
+    private InventoryItem item;
+
+    private void OnValidate() => defaultSprite = itemImage.sprite;
 
     public void SetItem(InventoryItem newItem)
     {
@@ -38,18 +26,18 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         {
             itemImage.sprite = item.itemImage;
 
-            if (itemNumberText != null)
+            if (numberHeldDisplay != null)
             {
-                itemNumberText.text = item.numberHeld.ToString();
+                numberHeldDisplay.text = item.numberHeld.ToString();
             }
         }
         else
         {
             itemImage.sprite = defaultSprite;
 
-            if (itemNumberText != null)
+            if (numberHeldDisplay != null)
             {
-                itemNumberText.text = "";
+                numberHeldDisplay.text = "";
             }
         }
     }
