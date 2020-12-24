@@ -9,7 +9,6 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     public event Action<InventoryItem> OnSlotSelected;
     public event Action<InventoryItem> OnSlotUsed;
 
-    [SerializeField] private Button button = default;
     [SerializeField] private TextMeshProUGUI numberHeldDisplay = default;
     [SerializeField] private Image itemImage = default;
     private Sprite defaultSprite = default;
