@@ -20,9 +20,9 @@ public class VendorManager : ItemDisplay
 
     private void Awake()
     {
-        playerDisplay.OnSlotSelected += UpdateDescription;
+        playerDisplay.OnSlotSelected += UpdateDescriptionPlayer;
         playerDisplay.OnSlotUsed += SwapItemToVendor;
-        playerDisplay.SubscribeToEquipmentSlotSelected(UpdateDescription);
+        playerDisplay.SubscribeToEquipmentSlotSelected(UpdateDescriptionPlayer);
     }
 
     private void Update()
@@ -63,7 +63,10 @@ public class VendorManager : ItemDisplay
         Time.timeScale = 1;
     }
 
-    private void UpdateDescription(Item item) => descriptionText.text = (item != null) ? item.fullDescription : "";
+    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.itemSellPrice, "sell");
+    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.itemBuyPrice, "buy");
+    private void UpdateDescription(Item item, int price, string action)
+        => descriptionText.text = (item != null) ? $"{item.name}\n\n{action}: {price}" : "";
 
     protected override void InstantiateSlots()
     {
@@ -72,7 +75,7 @@ public class VendorManager : ItemDisplay
             var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);
 
-            newSlot.OnSlotSelected += UpdateDescription;
+            newSlot.OnSlotSelected += UpdateDescriptionVendor;
             newSlot.OnSlotUsed += SwapItemToPlayer;
         }
     }
