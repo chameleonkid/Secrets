@@ -14,12 +14,20 @@ public class BossBattleTower : MonoBehaviour
     }
 
     [SerializeField] private ColliderTrigger colliderTrigger = default;
-    [SerializeField] private Enemy enemy = default;
+    [SerializeField] private Enemy enemy1 = default;
     [SerializeField] private Enemy enemy2 = default;
+    [SerializeField] private Enemy enemy3 = default;
+    [SerializeField] private Enemy bossMinion = default;
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [SerializeField] private Enemy boss = default;
     [SerializeField] private Stage stage = default;
     [SerializeField] private List<Enemy> spawnedEnemiesList = default;
+    [SerializeField] private int minionsToSpawn;                //set the minions to spawn in inspector
+    [SerializeField] private int spawnedMinionsCounter = 0;
+
+    [SerializeField] private bool minionsSpawned = false;
+    [SerializeField] private Shield bossshield = default;
+
 
 
 
@@ -38,7 +46,8 @@ public class BossBattleTower : MonoBehaviour
     {
         colliderTrigger.OnPlayerEnterTrigger += EnterBossArea;       //Subscribe to not start the Battle multiple Times
         boss.OnEnemyTakeDamage += BossTakesDamage;
-        boss.OnEnemyDied += BossDied;                                               
+        boss.OnEnemyDied += BossDied;    
+        
     }
 
     private void BossDied()
@@ -50,8 +59,8 @@ public class BossBattleTower : MonoBehaviour
 
     private void BossTakesDamage()
     {
-        Debug.Log("Boss Took DMG!Check for new Stage");
-        switch(stage)
+        Debug.Log("Boss took DMG!");
+        switch (stage)
         {
             case Stage.Stage_1:
                    if(boss.GetPercentHealth() <= 70)
@@ -62,7 +71,7 @@ public class BossBattleTower : MonoBehaviour
             case Stage.Stage_2:
                 if (boss.GetPercentHealth() <= 50)
                 {
-                    StartNextStage();                    
+                    StartNextStage();
                 }
                 break;
         }
@@ -83,17 +92,59 @@ public class BossBattleTower : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        int rndEnemy = Random.Range(0, 100);
+        Enemy minion;
+
         if (stage == Stage.Stage_1)
         {
+
             Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-            Enemy minion = Instantiate(enemy, spawnPoint, Quaternion.identity);
+
+            if (rndEnemy < 35)
+            {
+               minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
+            }
+            if (rndEnemy >= 35 && rndEnemy <= 75)
+            {
+                minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
+            }
+            else
+            {
+                minion = Instantiate(enemy3, spawnPoint, Quaternion.identity);
+            }
             spawnedEnemiesList.Add(minion);
         }
         if (stage == Stage.Stage_2)
         {
-            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-            Enemy minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
-            spawnedEnemiesList.Add(minion);
+            if (minionsSpawned == false)                                    //Spawn X RED SHIELD-MINIONS
+            {
+                for (int i = 0; i <= minionsToSpawn; i++)    
+                {
+                    Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
+                    minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
+                    minion.isMinion = true;
+                    minion.OnMinionDied += MinionKilled;
+                    spawnedMinionsCounter++;
+                }
+                minionsSpawned = true;
+            }
+            else
+            {
+                {
+                    Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
+                    minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
+                    spawnedEnemiesList.Add(minion);
+                }
+            }
+        }
+    }
+
+    private void MinionKilled()
+    {
+        spawnedMinionsCounter--;
+        if(spawnedMinionsCounter <= 0)
+        {
+            bossshield.triggerShield();
         }
     }
 
@@ -114,6 +165,8 @@ public class BossBattleTower : MonoBehaviour
                 break;
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
+                bossshield.triggerShield();
+                Debug.Log("Shield should be active now!");
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;

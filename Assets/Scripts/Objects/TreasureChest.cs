@@ -19,6 +19,7 @@ public class TreasureChest : Interactable
 
     [SerializeField] private AudioClip chestSound = default;
 
+
     private void Start()
     {
         isOpen = storeOpen.RuntimeValue;
@@ -27,6 +28,9 @@ public class TreasureChest : Interactable
         {
             anim.SetBool("opened", true);
         }
+
+        //dialogBox = GameObject.Find("DialogBox");                         Cant find it, since its disabled... is there another way?
+        //dialogText = dialogBox.GetComponentInChildren<Text>();            That would be necessary to "Spawn" Chests
     }
 
     private void Update()

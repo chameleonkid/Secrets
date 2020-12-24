@@ -11,6 +11,8 @@ public class Enemy : Character
     [SerializeField] private float _health;
     public event Action OnEnemyTakeDamage;
     public event Action OnEnemyDied;
+    public event Action OnMinionDied;
+    public bool isMinion = false;
 
     public override float health {
         get => _health;
@@ -105,18 +107,36 @@ public class Enemy : Character
 
     private void Die()
     {
-        Debug.Log("0 HP");
-        DeathEffect();
-        MakeLoot();
-        levelSystem.AddExperience(enemyXp);
-        OnEnemyDied?.Invoke();
-
-        
-        if (roomSignal != null)
+        if (isMinion == false)
         {
-            roomSignal.Raise();
+            Debug.Log("Normal Enemy was killed");
+            DeathEffect();
+            MakeLoot();
+            levelSystem.AddExperience(enemyXp);
+            OnEnemyDied?.Invoke();
+
+            if (roomSignal != null)
+            {
+                roomSignal.Raise();
+            }
+            this.gameObject.SetActive(false);
         }
-        this.gameObject.SetActive(false);
+        else
+        {
+            {
+                Debug.Log("Minion was killed");
+                DeathEffect();
+                MakeLoot();
+                levelSystem.AddExperience(enemyXp);
+                OnMinionDied?.Invoke();
+
+                if (roomSignal != null)
+                {
+                    roomSignal.Raise();
+                }
+                this.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void DeathEffect()

@@ -13,7 +13,7 @@ public class ColliderTrigger : MonoBehaviour
         if (player != null) 
         {
             //Its the player inside the triggerArea
-            Debug.Log("Player Enteres BossArea!");
+            Debug.Log("Player enters BossArea!");
             OnPlayerEnterTrigger?.Invoke();
         }
     }
