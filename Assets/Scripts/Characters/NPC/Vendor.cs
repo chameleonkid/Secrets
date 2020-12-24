@@ -13,7 +13,7 @@ public class Vendor : MonoBehaviour
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
         {
-            VendorInterface.RequestInterface(vendorInventory);
+            VendorManager.RequestInterface(vendorInventory);
         }
     }
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class VendorInterface : ItemDisplay
+public class VendorManager : ItemDisplay
 {
     private static event Action<Inventory> OnInterfaceRequested;
     public static void RequestInterface(Inventory vendorInventory) => OnInterfaceRequested?.Invoke(vendorInventory);
