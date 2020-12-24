@@ -42,6 +42,16 @@ public class Inventory : ScriptableObject
         }
     }
 
+    public bool Subtract(InventoryItem item, int count)
+    {
+        if (contents.Contains(item) && item.numberHeld >= count)
+        {
+            item.numberHeld -= count;
+            return true;
+        }
+        else return false;
+    }
+
     public void Equip(InventoryItem item)
     {
         switch (item)
@@ -160,12 +170,6 @@ public class Inventory : ScriptableObject
             totalMinSpellDamage += currentAmulet.minSpellDamage;
             totalMaxSpellDamage += currentAmulet.maxSpellDamage;
         }
-    }
-
-
-    public void RemoveItem(InventoryItem thisItem)
-    {
-        contents.Remove(thisItem);
     }
 }
 
