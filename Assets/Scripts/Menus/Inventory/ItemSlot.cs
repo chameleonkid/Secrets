@@ -6,18 +6,18 @@ using System;
 
 public class ItemSlot : MonoBehaviour, ISelectHandler
 {
-    public event Action<InventoryItem> OnSlotSelected;
-    public event Action<InventoryItem> OnSlotUsed;
+    public event Action<Item> OnSlotSelected;
+    public event Action<Item> OnSlotUsed;
 
     [SerializeField] private TextMeshProUGUI numberHeldDisplay = default;
     [SerializeField] private Image itemImage = default;
     private Sprite defaultSprite = default;
 
-    private InventoryItem item;
+    private Item item;
 
     private void OnValidate() => defaultSprite = itemImage.sprite;
 
-    public void SetItem(InventoryItem newItem)
+    public void SetItem(Item newItem)
     {
         item = newItem;
 

@@ -63,7 +63,7 @@ public class VendorManager : ItemDisplay
         Time.timeScale = 1;
     }
 
-    private void UpdateDescription(InventoryItem item) => descriptionText.text = (item != null) ? item.fullDescription : "";
+    private void UpdateDescription(Item item) => descriptionText.text = (item != null) ? item.fullDescription : "";
 
     protected override void InstantiateSlots()
     {
@@ -77,7 +77,7 @@ public class VendorManager : ItemDisplay
         }
     }
 
-    private void SwapItemToPlayer(InventoryItem item)
+    private void SwapItemToPlayer(Item item)
     {
         // if (item)
         // {
@@ -102,7 +102,7 @@ public class VendorManager : ItemDisplay
     }
 
     
-    private void SwapItemToVendor(InventoryItem item)
+    private void SwapItemToVendor(Item item)
     {
         // if (item)
         // {
