@@ -63,4 +63,16 @@ public class VendorManager : ItemDisplay
     }
 
     private void UpdateDescription(InventoryItem item) => descriptionText.text = (item != null) ? item.fullDescription : "";
+
+    protected override void InstantiateSlots()
+    {
+        for (int i = slots.Count; i < inventory.contents.Count; i++)
+        {
+            var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
+            slots.Add(newSlot);
+
+            newSlot.OnSlotSelected += UpdateDescription;
+            // newSlot.OnSlotUsed += ;
+        }
+    }
 }
