@@ -21,6 +21,7 @@ public class VendorManager : ItemDisplay
     private void Awake()
     {
         playerDisplay.OnSlotSelected += UpdateDescription;
+        playerDisplay.OnSlotUsed += SwapItemToVendor;
         playerDisplay.SubscribeToEquipmentSlotSelected(UpdateDescription);
     }
 
@@ -72,7 +73,46 @@ public class VendorManager : ItemDisplay
             slots.Add(newSlot);
 
             newSlot.OnSlotSelected += UpdateDescription;
-            // newSlot.OnSlotUsed += ;
+            newSlot.OnSlotUsed += SwapItemToPlayer;
         }
+    }
+
+    private void SwapItemToPlayer(InventoryItem item)
+    {
+        // if (item)
+        // {
+        //     if (item.unique && playerInventory.coins >= item.itemBuyPrice)
+        //     {
+        //         playerInventory.Add(item);
+        //         playerInventory.coins -= item.itemBuyPrice;
+        //         vendorInventory.RemoveItem(item);
+        //         thisVendorManager.clearInventorySlots();
+        //         thisVendorManager.MakeInventorySlots();
+        //     }
+        //     else if(playerInventory.coins >= item.itemBuyPrice)
+        //     {
+        //         playerInventory.coins -= item.itemBuyPrice;
+        //         playerInventory.Add(item);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Not enaugh money! to buy " + item);
+        //     }
+        // }
+    }
+
+    
+    private void SwapItemToVendor(InventoryItem item)
+    {
+        // if (item)
+        // {
+        //     if (item.unique)
+        //     {
+        //         vendorInventory.Add(item);
+        //         playerInventory.RemoveItem(item);
+        //         thisVendorManager.clearInventorySlots();
+        //         thisVendorManager.MakeInventorySlots();
+        //     }
+        // }
     }
 }
