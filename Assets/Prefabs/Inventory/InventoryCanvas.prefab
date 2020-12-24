@@ -1153,7 +1153,7 @@ GameObject:
   - component: {fileID: 3169858031378882592}
   - component: {fileID: 3169858031378882593}
   - component: {fileID: 3169858031378882598}
-  - component: {fileID: 3169858031378882594}
+  - component: {fileID: 8319563767418139534}
   m_Layer: 5
   m_Name: InventoryCanvas
   m_TagString: Untagged
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3169858031378882594
+--- !u!114 &8319563767418139534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1250,11 +1250,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3169858031378882599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d5dbc3e5ef4311438e071671277d1a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c64082fa50436c4da1fb290f8749247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   inventoryPanel: {fileID: 5703648155880917274}
-  firstButtonInventory: {fileID: 5703648156353208359}
+  descriptionText: {fileID: 5703648156331186497}
+  closeButton: {fileID: 5703648156353208359}
+  critDisplay: {fileID: 3612379627803840900}
+  dmgDisplay: {fileID: 496071976444976827}
+  defDisplay: {fileID: 496071976176361838}
+  spellDisplay: {fileID: 496071977688305363}
+  rangeDisplay: {fileID: 3671443599281251476}
+  currentItem: {fileID: 0}
 --- !u!1 &3612807605619284808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,7 +1588,6 @@ GameObject:
   - component: {fileID: 5703648155880917287}
   - component: {fileID: 5703648155880917272}
   - component: {fileID: 5703648155880917273}
-  - component: {fileID: 5703648155880917286}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -1648,27 +1655,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5703648155880917286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5703648155880917274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c64082fa50436c4da1fb290f8749247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  descriptionText: {fileID: 5703648156331186497}
-  closeButton: {fileID: 5703648156353208359}
-  critDisplay: {fileID: 3612379627803840900}
-  dmgDisplay: {fileID: 496071976444976827}
-  defDisplay: {fileID: 496071976176361838}
-  spellDisplay: {fileID: 496071977688305363}
-  rangeDisplay: {fileID: 3671443599281251476}
-  currentItem: {fileID: 0}
 --- !u!1 &5703648156317642000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,8 +2091,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3169858031378882594}
-        m_MethodName: ChangePause
+      - m_Target: {fileID: 8319563767418139534}
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

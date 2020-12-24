@@ -6,6 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private Inventory inventory = default;
     [Header("Components")]
+    [SerializeField] private GameObject inventoryPanel = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
     [SerializeField] private GameObject closeButton = default;
     [Header("Stat Displays")]
@@ -34,6 +35,39 @@ public class InventoryManager : MonoBehaviour
         descriptionText.text = "";
         itemDisplay.UpdateDisplay();
         UpdateStatDisplays();
+    }
+
+    public void ClosePanel()
+    {
+        inventoryPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    private void OpenPanel()
+    {
+        inventoryPanel.SetActive(true);
+        Time.timeScale = 0;
+
+        if (closeButton)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(closeButton);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Inventory") && CanvasManager.Instance.IsFreeOrActive(inventoryPanel.gameObject))
+        {
+            if (inventoryPanel.activeInHierarchy)
+            {
+                ClosePanel();
+            }
+            else
+            {
+                OpenPanel();
+            }
+        }
     }
 
     private void SetUpItemDescription(InventoryItem newItem)
