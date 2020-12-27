@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OneHitAoE : MonoBehaviour
+public class AoE : MonoBehaviour
 {
     [SerializeField] private GameObject warning = default;
     [SerializeField] private GameObject areaOfEffect = default;
@@ -43,5 +43,7 @@ public class OneHitAoE : MonoBehaviour
         areaOfEffect.SetActive(true);
         Destroy(this.gameObject,effectDuration);
     }
+
+
 
 }
