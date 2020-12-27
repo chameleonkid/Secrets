@@ -1,58 +1,37 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Vendor : MonoBehaviour
 {
-    public bool playerInRange;
-    public Signals contextOn;
-    public Signals contextOff;
+    [SerializeField] private Signals contextOn = default;
+    [SerializeField] private Signals contextOff = default;
 
-    public Inventory vendorInventory;
+    [SerializeField] private Inventory vendorInventory = default;
 
-    // private void Update()
-    // {
-    //     if (Input.GetButtonDown("Interact") && playerInRange && CanvasManager.Instance.IsFreeOrActive(this.gameObject))
-    //     {
-    //         setPause();
-    //         if (firstButtonInventory)
-    //         {
-    //             EventSystem.current.SetSelectedGameObject(null);
-    //             EventSystem.current.SetSelectedGameObject(firstButtonInventory);
-    //         }
-    //     }
-    //     if (Input.GetButtonDown("Inventory") && vendorActive.activeInHierarchy)
-    //     {
-    //         stopPause();
-    //     }
-    // }
+    private bool playerInRange;
 
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.CompareTag("Player") && other.isTrigger)
-    //     {
-    //         contextOn.Raise();
-    //         playerInRange = true;
-    //     }
-    // }
+    private void Update()
+    {
+        if (Input.GetButtonDown("Interact") && playerInRange)
+        {
+            VendorManager.RequestInterface(vendorInventory);
+        }
+    }
 
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (other.CompareTag("Player") && other.isTrigger)
-    //     {
-    //         contextOff.Raise();
-    //         playerInRange = false;
-    //     }
-    // }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && other.isTrigger)
+        {
+            contextOn.Raise();
+            playerInRange = true;
+        }
+    }
 
-    // public void setPause()
-    // {
-    //     vendorPanel.SetActive(true);
-    //     Time.timeScale = 0f;
-    // }
-    // public void stopPause()
-    // {
-    //     inventoryPanel.SetActive(false);
-    //     vendorPanel.SetActive(false);
-    //     Time.timeScale = 1f;
-    // }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && other.isTrigger)
+        {
+            contextOff.Raise();
+            playerInRange = false;
+        }
+    }
 }

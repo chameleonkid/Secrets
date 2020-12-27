@@ -32,7 +32,7 @@ public class SOPInspector : Editor {
         var inv = FindFirstAsset<Inventory>("Player t:Inventory");
         SetPrivateField(sop, "_playerInventory", inv);
 
-        var items = ScriptableObjectEditorUtility.GetAllInstances<InventoryItem>();
+        var items = ScriptableObjectEditorUtility.GetAllInstances<Item>();
         SetPrivateField(sop, "_inventoryItems", items);
 
         var bools = ScriptableObjectEditorUtility.GetAllInstances<BoolValue>();
