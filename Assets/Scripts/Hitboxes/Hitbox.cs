@@ -4,12 +4,12 @@
 public abstract class Hitbox : MonoBehaviour
 {
     [Tooltip("Enable this if the hitbox collider should only affect one hurtbox in its lifetime.")]
-    [SerializeField] private bool disableWhenHit = false;
-    private new Collider2D collider;
+    [SerializeField] protected bool disableWhenHit = false;
+    protected new Collider2D collider;
 
     private void Awake() => collider = GetComponent<Collider2D>();
 
-    protected void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.isTrigger)
         {
@@ -19,6 +19,11 @@ public abstract class Hitbox : MonoBehaviour
                 collider.enabled = !disableWhenHit;
             }
         }
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+
     }
 
     protected abstract void OnHit(Collider2D other);
