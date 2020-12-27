@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5124942126929460738}
   m_Layer: 0
   m_Name: AoE
-  m_TagString: enemy
+  m_TagString: enemySpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 5
 --- !u!1 &5124942127476425873
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,9 +140,10 @@ GameObject:
   - component: {fileID: 5124942127476425876}
   - component: {fileID: 5124942127476425875}
   - component: {fileID: 5124942127476425874}
+  - component: {fileID: 956373726}
   m_Layer: 0
   m_Name: AoE-Warning
-  m_TagString: enemy
+  m_TagString: enemySpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,6 +225,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &956373726
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124942127476425873}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5bd69389723b709449687639273dcdde, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5124942127485187734
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +255,8 @@ GameObject:
   - component: {fileID: 5124942127485187752}
   - component: {fileID: 5124942127485187735}
   m_Layer: 0
-  m_Name: OneHitAoE
-  m_TagString: enemy
+  m_Name: AoEOnTrigger
+  m_TagString: enemySpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,4 +292,4 @@ MonoBehaviour:
   warning: {fileID: 5124942127476425873}
   areaOfEffect: {fileID: 5124942126929460748}
   warningDuration: 1
-  effectDuration: 60
+  effectDuration: 1
