@@ -305,7 +305,7 @@ public class PlayerMovement : Character
                 DamagePopUpManager.RequestDamagePopUp(finalDamage, isCritical, transform);
                 iframes?.TriggerInvulnerability();
             }
-            Debug.Log(finalDamage + " damage after defense calculation.");
+        //    Debug.Log(finalDamage + " damage after defense calculation.");
         }
     }
 

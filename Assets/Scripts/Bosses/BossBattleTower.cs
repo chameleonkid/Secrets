@@ -87,7 +87,7 @@ public class BossBattleTower : MonoBehaviour
     {
         Debug.Log("BossBattle has started!");
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, 1.0f);                                          //Call that function in 1 second every second
+        InvokeRepeating("SpawnEnemy", 1.0f, 10.0f);                                          //Call that function in 1 second every second
     }
 
     private void SpawnEnemy()

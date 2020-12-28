@@ -33,8 +33,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.5109978, y: 0.67400026}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1518519612
 MonoBehaviour:
@@ -50,11 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 1
+  m_FalloffIntensity: 0.709
+  m_Color: {r: 0.13105363, g: 0.5754717, b: 0, a: 1}
+  m_Intensity: 5
   m_LightVolumeOpacity: 1
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 55b3c7c3ddcfbda637d0c9af376ef7dfed8ba3e1
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -89,6 +89,8 @@ GameObject:
   - component: {fileID: 2316327626027067421}
   - component: {fileID: 2316327626027067418}
   - component: {fileID: 2316327626027067419}
+  - component: {fileID: 855400863}
+  - component: {fileID: 855400864}
   m_Layer: 0
   m_Name: AoE-Warning
   m_TagString: enemySpell
@@ -136,14 +138,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.990566, g: 0, b: 0, a: 0.3764706}
+  m_Color: {r: 1, g: 0.02352941, b: 0.08751503, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c93fddc69c72fab4aa9da44bf239ab4d, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d56b0d7657b996947b884c6382f7b5be, type: 3}
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
@@ -173,6 +175,66 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &855400863
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316327626027067416}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b0a0fc483b7d454a908b0e2a7760ccc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &855400864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316327626027067416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 1
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 5
+  m_LightVolumeOpacity: 0.229
+  m_ApplyToSortingLayers: 55b3c7c3ddcfbda637d0c9af376ef7dfed8ba3e1
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1.5
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &2316327626037189151
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warning: {fileID: 2316327626027067416}
   areaOfEffect: {fileID: 2316327626559328901}
-  warningDuration: 3
+  warningDuration: 10
   effectDuration: 60
 --- !u!1 &2316327626559328901
 GameObject:
@@ -276,9 +338,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.008271337, y: 0}
   serializedVersion: 2
-  m_Radius: 0.54060745
+  m_Radius: 0.69776285
 --- !u!222 &2316327626559328902
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -300,13 +362,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.15829122, b: 1, a: 1}
+  m_Color: {r: 0.6009035, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c93fddc69c72fab4aa9da44bf239ab4d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d56b0d7657b996947b884c6382f7b5be, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
