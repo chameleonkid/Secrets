@@ -45,7 +45,7 @@ public abstract class ItemDisplay : MonoBehaviour
 
     private void DestroySlots()
     {
-        for (int i = slots.Count - 1; i > 0; i--)
+        for (int i = slots.Count - 1; i > inventory.contents.Count - 1; i--)
         {
             var slot = slots[i];
             slots.Remove(slot);
