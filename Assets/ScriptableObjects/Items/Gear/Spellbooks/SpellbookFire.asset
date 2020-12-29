@@ -12,28 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ba588bc6af9fc4688038deee402799, type: 3}
   m_Name: SpellbookFire
   m_EditorClassIdentifier: 
-  itemName: Spellbook of Fire
-  itemDescription: The Spellbook is used to shoot fireballs
-  itemImage: {fileID: 21300000, guid: 17eed75290e034b6ea00810356d31f45, type: 3}
-  itemSound: {fileID: 8300000, guid: 0f13cc91f4699e74e81cc0076678e9c4, type: 3}
-  _numberHeld: 0
-  usable: 1
-  unique: 1
-  thisEvent:
+  _id: 0
+  _name: Spellbook of Fire
+  _description: The Spellbook is used to shoot fireballs
+  _sprite: {fileID: 21300000, guid: 17eed75290e034b6ea00810356d31f45, type: 3}
+  _sound: {fileID: 8300000, guid: 0f13cc91f4699e74e81cc0076678e9c4, type: 3}
+  _unique: 1
+  _usable: 1
+  _level: 0
+  OnUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_MethodName: SwapEquipment
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  itemLvl: 0
+      m_Calls: []
+  _buyPrice: 0
+  _sellPrice: 0
   myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   minSpellDamage: 1
   maxSpellDamage: 2

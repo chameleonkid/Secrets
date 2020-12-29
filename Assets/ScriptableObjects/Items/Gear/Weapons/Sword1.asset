@@ -12,29 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c161df0a42fe744e8d11b1d8a22190d, type: 3}
   m_Name: Sword1
   m_EditorClassIdentifier: 
-  itemName: Sword1
-  itemDescription: This is a slightly better Sword!
-  itemImage: {fileID: 6123003023063038561, guid: f57f66ed1c5e6f14b88f39a906665e64,
-    type: 3}
-  itemSound: {fileID: 8300000, guid: 5ea4775f4df9826469e2d88fbe281c6b, type: 3}
-  _numberHeld: 0
-  usable: 1
-  unique: 1
-  thisEvent:
+  _id: 0
+  _name: Sword1
+  _description: This is a slightly better Sword!
+  _sprite: {fileID: 6123003023063038561, guid: f57f66ed1c5e6f14b88f39a906665e64, type: 3}
+  _sound: {fileID: 8300000, guid: 5ea4775f4df9826469e2d88fbe281c6b, type: 3}
+  _unique: 1
+  _usable: 1
+  _level: 2
+  OnUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_MethodName: SwapEquipment
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  itemLvl: 2
+      m_Calls: []
+  _buyPrice: 0
+  _sellPrice: 0
   myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   minDamage: 2
   maxDamage: 4

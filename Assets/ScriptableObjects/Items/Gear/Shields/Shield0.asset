@@ -12,27 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6b06d6b50a2144ea12a7e745290646, type: 3}
   m_Name: Shield0
   m_EditorClassIdentifier: 
-  itemName: shield0
-  itemDescription: Yes! It's a shield!
-  itemImage: {fileID: 21300000, guid: 289e1469caac5b842a4005559ea1c915, type: 3}
-  itemSound: {fileID: 8300000, guid: 9036d13e58b8e9a4cb1aa51cdaef2868, type: 3}
-  _numberHeld: 0
-  usable: 1
-  unique: 1
-  thisEvent:
+  _id: 0
+  _name: Shield0
+  _description: Yes! It's a shield!
+  _sprite: {fileID: 21300000, guid: 289e1469caac5b842a4005559ea1c915, type: 3}
+  _sound: {fileID: 8300000, guid: 9036d13e58b8e9a4cb1aa51cdaef2868, type: 3}
+  _unique: 1
+  _usable: 1
+  _level: 0
+  OnUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_MethodName: SwapEquipment
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  itemLvl: 0
+      m_Calls: []
+  _buyPrice: 0
+  _sellPrice: 0
   myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   armorDefense: 1
