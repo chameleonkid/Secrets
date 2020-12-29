@@ -9,17 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7224b9789ae6a514d903c9c7d5028f25, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b6c6480299825c418044d793332bea9, type: 3}
   m_Name: SmallKey
   m_EditorClassIdentifier: 
-  itemName: SmallKey
-  itemDescription: It's a small key that should open regular doors
-  itemImage: {fileID: 21300000, guid: bfc7028c2a33c724f8c053fc2a1cd847, type: 3}
-  _numberHeld: 0
-  usable: 0
-  unique: 0
-  thisEvent:
+  _id: 0
+  _name: Small Key
+  _description: It's a small key that should open regular doors
+  _sprite: {fileID: 21300000, guid: bfc7028c2a33c724f8c053fc2a1cd847, type: 3}
+  _sound: {fileID: 0}
+  _unique: 0
+  _usable: 0
+  _level: 0
+  OnUse:
     m_PersistentCalls:
       m_Calls: []
-  itemLvl: 0
-  myInventory: {fileID: 0}
+  _buyPrice: 0
+  _sellPrice: 0

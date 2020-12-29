@@ -9,26 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7224b9789ae6a514d903c9c7d5028f25, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b6c6480299825c418044d793332bea9, type: 3}
   m_Name: AppleBox
   m_EditorClassIdentifier: 
-  itemName: AppleBox
-  itemDescription: Did you steal this box of apples? Use to drop it...
-  itemImage: {fileID: 21300314, guid: 47c6a039472216d4384b29e942993912, type: 3}
-  numberHeld: 0
-  usable: 1
-  unique: 0
-  thisEvent:
+  _id: 0
+  _name: Apple Box
+  _description: Did you steal this box of apples? Use to drop it...
+  _sprite: {fileID: 21300314, guid: 47c6a039472216d4384b29e942993912, type: 3}
+  _sound: {fileID: 0}
+  _unique: 0
+  _usable: 1
+  _level: 0
+  OnUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_MethodName: decreaseAmount
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  _buyPrice: 0
+  _sellPrice: 0
