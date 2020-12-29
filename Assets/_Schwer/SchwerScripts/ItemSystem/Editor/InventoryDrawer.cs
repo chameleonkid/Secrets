@@ -6,9 +6,10 @@ namespace SchwerEditor.ItemSystem {
     
     [CustomPropertyDrawer(typeof(Schwer.ItemSystem.Inventory))]
     public class InventoryDrawer : PropertyDrawer {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => -4;
-        // ^ Reference: https://forum.unity.com/threads/accumulating-empty-space-at-the-top-of-an-array-containing-custompropertydrawer-items.509133/
-        // Otherwise there would be an excessive gap between the script field and where the drawer began.
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+            // Reference: https://forum.unity.com/threads/property-drawer-overlapping-anything-underneath-it.184521/
+            return base.GetPropertyHeight(property, label) * (property.isExpanded ? property.CountInProperty() : 1);
+        }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             var keys = property.FindPropertyRelative("keys");
@@ -18,19 +19,26 @@ namespace SchwerEditor.ItemSystem {
                 var warning = "The number of keys does not match the number of values!";
                 var details = $"({keys.arraySize} keys; {values.arraySize} values)";
                 EditorGUILayout.HelpBox(warning + "\n" + details, MessageType.Warning);
+                //! ^ Need to convert from `EditorGUILayout` to `EditorGUI`
             }
 
-            property.isExpanded = EditorGUILayout.Foldout(property.isExpanded, "Contents (" + keys.arraySize + ")", true);
+            // var rootPosY = position.y + ((EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 16);
+            var foldoutRect = new Rect(position.x, position.y, position.width, position.height);
+            property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, "Contents (" + keys.arraySize + ")", true);
 
             if (property.isExpanded) {
                 EditorGUI.BeginDisabledGroup(true);
+                var kvpHeight = EditorGUIUtility.singleLineHeight;
+                var kvpSpacing = EditorGUIUtility.standardVerticalSpacing;
+                var halfWidth = position.width / 2;
                 for (int i = 0; i < keys.arraySize; i++) {
-                    EditorGUILayout.BeginHorizontal();
+                    var posY = position.y + ((i * (kvpHeight + kvpSpacing)) + (kvpSpacing * 4));
+                    var keyRect = new Rect(position.x, posY, halfWidth, kvpHeight);
+                    var valueRect = new Rect(position.x + halfWidth, posY, halfWidth, kvpHeight);
                     var key = keys.GetArrayElementAtIndex(i);
                     var value = values.GetArrayElementAtIndex(i);
-                    EditorGUILayout.PropertyField(key, GUIContent.none);
-                    EditorGUILayout.PropertyField(value, GUIContent.none);
-                    EditorGUILayout.EndHorizontal();
+                    EditorGUI.PropertyField(keyRect, key, GUIContent.none);
+                    EditorGUI.PropertyField(valueRect, value, GUIContent.none);
                 }
                 EditorGUI.EndDisabledGroup();
             }
