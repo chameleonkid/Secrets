@@ -1,4 +1,4 @@
-﻿public abstract class EquippableItem : ItemOld
+﻿public abstract class EquippableItem : Item
 {
     public void SwapEquipment() => myInventory.Equip(this);
 }

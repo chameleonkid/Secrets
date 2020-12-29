@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class TreasureChest : Interactable
 {
     [Header("Contents")]
-    public ItemOld contents;
+    public Item contents;
     public Inventory playerInventory;
     public bool isOpen;
     public BoolValue storeOpen;

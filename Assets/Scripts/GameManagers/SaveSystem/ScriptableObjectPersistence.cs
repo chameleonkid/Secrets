@@ -13,8 +13,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public ConstrainedFloat mana => _mana;
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
-    [SerializeField] private ItemOld[] _inventoryItems = default;
-    public ItemOld[] inventoryItems => _inventoryItems;
+    [SerializeField] private Item[] _inventoryItems = default;
+    public Item[] inventoryItems => _inventoryItems;
 
     [SerializeField] private BoolValue[] _chests = default;
     public BoolValue[] chests => _chests;
@@ -67,7 +67,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.coins = 0;
         coinSignal.Raise();
 
-        playerInventory.contents = new List<ItemOld>();
+        playerInventory.contents = new List<Item>();
 
         playerInventory.currentItem = null;
         playerInventory.currentWeapon = null;

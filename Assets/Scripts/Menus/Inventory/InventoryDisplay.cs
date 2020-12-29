@@ -22,12 +22,12 @@ public class InventoryDisplay : ItemDisplay
     [SerializeField] private ItemSlot amuletSlot = default;
     [SerializeField] private ItemSlot bootsSlot = default;
 
-    public Action<ItemOld> OnSlotSelected { get; set; }
-    public Action<ItemOld> OnSlotUsed { get; set; }
+    public Action<Item> OnSlotSelected { get; set; }
+    public Action<Item> OnSlotUsed { get; set; }
 
     private void OnEnable() => UpdateDisplay();
 
-    public void SubscribeToEquipmentSlotSelected(Action<ItemOld> action)
+    public void SubscribeToEquipmentSlotSelected(Action<Item> action)
     {
         weaponSlot.OnSlotSelected += action;
         armorSlot.OnSlotSelected += action;
@@ -42,7 +42,7 @@ public class InventoryDisplay : ItemDisplay
         bootsSlot.OnSlotSelected += action;
     }
 
-    public void UnsubscribeFromEquipmentSlotSelected(Action<ItemOld> action)
+    public void UnsubscribeFromEquipmentSlotSelected(Action<Item> action)
     {
         weaponSlot.OnSlotSelected -= action;
         armorSlot.OnSlotSelected -= action;

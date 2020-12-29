@@ -4,10 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
 public class Inventory : ScriptableObject
 {
-    public List<ItemOld> contents = new List<ItemOld>(); //Why is this not loaded???
+    public List<Item> contents = new List<Item>(); //Why is this not loaded???
+    public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
     public int coins;
 
-    public ItemOld currentItem;
+    public Item currentItem;
     
     public InventoryWeapon currentWeapon;
     public InventoryArmor currentArmor;
@@ -26,7 +27,16 @@ public class Inventory : ScriptableObject
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
 
-    public void Add(ItemOld item)
+#if UNITY_EDITOR
+        // Needed in order to allow changes to the Inventory in the editor to be saved.
+
+        private void OnEnable() => items.OnContentsChanged += MarkDirtyIfChanged;
+        private void OnDisable() => items.OnContentsChanged -= MarkDirtyIfChanged;
+
+        private void MarkDirtyIfChanged(Item item, int count) => UnityEditor.EditorUtility.SetDirty(this);
+#endif
+
+    public void Add(Item item)
     {
         if (!contents.Contains(item))    // Add the item to the list if it is not already in the list.
         {
@@ -43,7 +53,7 @@ public class Inventory : ScriptableObject
         }
     }
 
-    public bool Subtract(ItemOld item, int count)
+    public bool Subtract(Item item, int count)
     {
         if (contents.Contains(item) && item.numberHeld >= count)
         {
@@ -53,7 +63,7 @@ public class Inventory : ScriptableObject
         else return false;
     }
 
-    public void Equip(ItemOld item)
+    public void Equip(Item item)
     {
         switch (item)
         {

@@ -16,7 +16,7 @@ public class Door : Interactable
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
     public BoolValue storeOpen; //###### Door Memory
-    public ItemOld key;
+    public Item key;
 
     //########################## Doormemory ##################################
     private void Start()
