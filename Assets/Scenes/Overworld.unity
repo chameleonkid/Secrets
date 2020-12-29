@@ -10517,12 +10517,15 @@ MonoBehaviour:
     type: 3}
   spawnPostionList: []
   boss: {fileID: 705950091702437938}
+  bossGameObject: {fileID: 705950091702437939}
   stage: 0
   spawnedEnemiesList: []
   minionsToSpawn: 6
   spawnedMinionsCounter: 0
   minionsSpawned: 0
   bossshield: {fileID: 59350201}
+  isDefeated: 0
+  storeDefeated: {fileID: 11400000, guid: b77c244b0323ffe48b269413f01e5246, type: 2}
 --- !u!4 &918188552
 Transform:
   m_ObjectHideFlags: 0
@@ -107064,7 +107067,7 @@ Tilemap:
       - {fileID: 21300446, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300448, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300450, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 11.441572
+      m_AnimationSpeed: 12.20558
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -117620,7 +117623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &705950091702437946
 BoxCollider2D:
   m_ObjectHideFlags: 0

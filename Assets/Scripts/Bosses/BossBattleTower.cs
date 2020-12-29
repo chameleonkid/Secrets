@@ -20,6 +20,7 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private Enemy bossMinion = default;
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [SerializeField] private Enemy boss = default;
+    [SerializeField] private GameObject bossGameObject = default;
     [SerializeField] private Stage stage = default;
     [SerializeField] private List<Enemy> spawnedEnemiesList = default;
     [SerializeField] private int minionsToSpawn;                //set the minions to spawn in inspector
@@ -28,32 +29,44 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private bool minionsSpawned = false;
     [SerializeField] private Shield bossshield = default;
 
+    [SerializeField] private bool isDefeated;
+    [SerializeField] private BoolValue storeDefeated;
+
 
 
 
     private void Awake()
     {
-        spawnPostionList = new List<Vector3>();
-        foreach ( Transform spawnPoint in transform.Find("SpawnPoints"))
+        isDefeated = storeDefeated.RuntimeValue;
+        if (isDefeated)
         {
-            spawnPostionList.Add(spawnPoint.position);
+            bossGameObject.SetActive(false);
         }
+        else
+        {
+            bossGameObject.SetActive(true);
+            spawnPostionList = new List<Vector3>();
+            foreach (Transform spawnPoint in transform.Find("SpawnPoints"))
+            {
+                spawnPostionList.Add(spawnPoint.position);
+            }
 
-        stage = Stage.WaitingToStart;
+            stage = Stage.WaitingToStart;
+        }
     }
 
     private void Start()
     {
         colliderTrigger.OnPlayerEnterTrigger += EnterBossArea;       //Subscribe to not start the Battle multiple Times
         boss.OnEnemyTakeDamage += BossTakesDamage;
-        boss.OnEnemyDied += BossDied;    
-        
+        boss.OnEnemyDied += BossDied;
     }
 
     private void BossDied()
     {
         Debug.Log("The Boss died!");
         DestroyAllEnemies();
+        storeDefeated.RuntimeValue = true;
         CancelInvoke("SpawnEnemy");                                                          // Stop spawning enemies
     }
 
