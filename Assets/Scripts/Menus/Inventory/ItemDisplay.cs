@@ -14,7 +14,8 @@ public abstract class ItemDisplay : MonoBehaviour
     {
         for (int i = 0; i < inventory.items.Count; i++)
         {
-            slots[i].SetItem(inventory.items.ElementAt(i).Key);
+            var item = inventory.items.ElementAt(i);
+            slots[i].SetItem(item.Key, item.Value);
         }
     }
 

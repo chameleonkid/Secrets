@@ -65,17 +65,17 @@ public class InventoryDisplay : ItemDisplay
 
     private void UpdateEquipmentSlots()
     {
-        weaponSlot.SetItem(inventory.currentWeapon);
-        armorSlot.SetItem(inventory.currentArmor);
-        helmetSlot.SetItem(inventory.currentHelmet);
-        gloveSlot.SetItem(inventory.currentGloves);
-        legsSlot.SetItem(inventory.currentLegs);
-        shieldSlot.SetItem(inventory.currentShield);
-        ringSlot.SetItem(inventory.currentRing);
-        bowSlot.SetItem(inventory.currentBow);
-        spellbookSlot.SetItem(inventory.currentSpellbook);
-        amuletSlot.SetItem(inventory.currentAmulet);
-        bootsSlot.SetItem(inventory.currentBoots);
+        weaponSlot.SetItem(inventory.currentWeapon, 0);
+        armorSlot.SetItem(inventory.currentArmor, 0);
+        helmetSlot.SetItem(inventory.currentHelmet, 0);
+        gloveSlot.SetItem(inventory.currentGloves, 0);
+        legsSlot.SetItem(inventory.currentLegs, 0);
+        shieldSlot.SetItem(inventory.currentShield, 0);
+        ringSlot.SetItem(inventory.currentRing, 0);
+        bowSlot.SetItem(inventory.currentBow, 0);
+        spellbookSlot.SetItem(inventory.currentSpellbook, 0);
+        amuletSlot.SetItem(inventory.currentAmulet, 0);
+        bootsSlot.SetItem(inventory.currentBoots, 0);
     }
 
     protected override void InstantiateSlots()
