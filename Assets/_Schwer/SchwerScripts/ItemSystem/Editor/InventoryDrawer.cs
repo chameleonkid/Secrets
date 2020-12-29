@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SchwerEditor.ItemSystem {
     using Schwer.ItemSystem;
     
-    [CustomPropertyDrawer(typeof(Inventory))]
+    [CustomPropertyDrawer(typeof(Schwer.ItemSystem.Inventory))]
     public class InventoryDrawer : PropertyDrawer {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => -4;
         // ^ Reference: https://forum.unity.com/threads/accumulating-empty-space-at-the-top-of-an-array-containing-custompropertydrawer-items.509133/
