@@ -2,7 +2,7 @@
 
 public class ItemPickUp : PickUp
 {
-    [SerializeField] private Item item = default;
+    [SerializeField] private ItemOld item = default;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

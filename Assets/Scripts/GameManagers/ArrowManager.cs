@@ -4,7 +4,7 @@ using TMPro;
 public class ArrowManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI ArrowDisplay = default;
-    [SerializeField] private Item arrow = default;
+    [SerializeField] private ItemOld arrow = default;
     // ^ Shouldn't reassign during runtime unless
     // care is taken to unsubscribe from events.
 

@@ -2,7 +2,7 @@
 
 public class Liftable : Interactable
 {
-    public Item contents;
+    public ItemOld contents;
     public Inventory playerInventory;
     public Signals LiftItem;
     private Animator anim;

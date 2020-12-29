@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI spellDisplay = default;
     [SerializeField] private TextMeshProUGUI rangeDisplay = default;
 
-    public Item currentItem;   //! What is the purpose of this?
+    public ItemOld currentItem;   //! What is the purpose of this?
 
     private InventoryDisplay itemDisplay;
 
@@ -69,13 +69,13 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void SetUpItemDescription(Item newItem)
+    private void SetUpItemDescription(ItemOld newItem)
     {
         currentItem = newItem;
         descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
 
-    private void OnItemUsed(Item item)
+    private void OnItemUsed(ItemOld item)
     {
         if (item == null || !item.usable || item.numberHeld <= 0) return;
 

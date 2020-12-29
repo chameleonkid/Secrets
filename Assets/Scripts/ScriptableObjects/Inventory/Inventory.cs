@@ -4,10 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
 public class Inventory : ScriptableObject
 {
-    public List<Item> contents = new List<Item>(); //Why is this not loaded???
+    public List<ItemOld> contents = new List<ItemOld>(); //Why is this not loaded???
     public int coins;
 
-    public Item currentItem;
+    public ItemOld currentItem;
+    
     public InventoryWeapon currentWeapon;
     public InventoryArmor currentArmor;
     public InventoryHelmet currentHelmet;
@@ -25,7 +26,7 @@ public class Inventory : ScriptableObject
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
 
-    public void Add(Item item)
+    public void Add(ItemOld item)
     {
         if (!contents.Contains(item))    // Add the item to the list if it is not already in the list.
         {
@@ -42,7 +43,7 @@ public class Inventory : ScriptableObject
         }
     }
 
-    public bool Subtract(Item item, int count)
+    public bool Subtract(ItemOld item, int count)
     {
         if (contents.Contains(item) && item.numberHeld >= count)
         {
@@ -52,7 +53,7 @@ public class Inventory : ScriptableObject
         else return false;
     }
 
-    public void Equip(Item item)
+    public void Equip(ItemOld item)
     {
         switch (item)
         {

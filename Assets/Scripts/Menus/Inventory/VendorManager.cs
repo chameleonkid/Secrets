@@ -63,9 +63,9 @@ public class VendorManager : ItemDisplay
         Time.timeScale = 1;
     }
 
-    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.itemSellPrice, "sell");
-    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.itemBuyPrice, "buy");
-    private void UpdateDescription(Item item, int price, string action)
+    private void UpdateDescriptionPlayer(ItemOld item) => UpdateDescription(item, item.itemSellPrice, "sell");
+    private void UpdateDescriptionVendor(ItemOld item) => UpdateDescription(item, item.itemBuyPrice, "buy");
+    private void UpdateDescription(ItemOld item, int price, string action)
         => descriptionText.text = (item != null) ? $"{item.name}\n\n{action}: {price}" : "";
 
     protected override void InstantiateSlots()
@@ -80,7 +80,7 @@ public class VendorManager : ItemDisplay
         }
     }
 
-    private void SwapItemToPlayer(Item item)
+    private void SwapItemToPlayer(ItemOld item)
     {
         // if (item)
         // {
@@ -105,7 +105,7 @@ public class VendorManager : ItemDisplay
     }
 
     
-    private void SwapItemToVendor(Item item)
+    private void SwapItemToVendor(ItemOld item)
     {
         // if (item)
         // {
