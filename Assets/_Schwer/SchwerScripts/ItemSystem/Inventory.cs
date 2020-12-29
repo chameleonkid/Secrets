@@ -34,6 +34,10 @@ namespace Schwer.ItemSystem {
             set {
                 var prevValue = this[key];
 
+                if (key.unique && value > 1) {
+                    value = 1;
+                }
+
                 backingDictionary[key] = value;
                 if (backingDictionary[key] <= 0) {
                     backingDictionary.Remove(key);
