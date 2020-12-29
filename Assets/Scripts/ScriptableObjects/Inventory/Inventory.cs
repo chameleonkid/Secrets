@@ -89,11 +89,11 @@ public class Inventory : ScriptableObject
         }
 
         currentlyEquipped = newEquip;
-        newEquip.numberHeld--;
+        items[newEquip]--;
 
-        if (newEquip.itemSound != null)
+        if (newEquip.sound != null)
         {
-            SoundManager.RequestSound(newEquip.itemSound);
+            SoundManager.RequestSound(newEquip.sound);
         }
     }
 
