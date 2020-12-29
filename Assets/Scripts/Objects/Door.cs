@@ -38,13 +38,11 @@ public class Door : Interactable
     {
         if (Input.GetButtonDown("Interact"))
         {
-            //Debug.Log("E was pressed");
             if (playerInRange && thisDoorType == DoorType.key)
             {
-                //    Debug.Log("Player is in Range and Door = Key");
-                if (playerInventory.contents.Contains(key)) // Keys left in Inventory?
+                if (playerInventory.items[key] >= 1)
                 {
-                    key.numberHeld--;
+                    playerInventory.items[key]--;
                     Open();
                 }
             }

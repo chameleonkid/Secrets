@@ -80,7 +80,7 @@ public class InventoryDisplay : ItemDisplay
 
     protected override void InstantiateSlots()
     {
-        for (int i = slots.Count; i < inventory.contents.Count; i++)
+        for (int i = slots.Count; i < inventory.items.Count; i++)
         {
             var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);

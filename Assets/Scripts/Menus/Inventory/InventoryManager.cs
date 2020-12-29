@@ -77,18 +77,18 @@ public class InventoryManager : MonoBehaviour
 
     private void OnItemUsed(Item item)
     {
-        if (item == null || !item.usable || item.numberHeld <= 0) return;
+        if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
         item.Use();
-        if (item.numberHeld <= 0)
+        if (inventory.items[item] <= 0)
         {
-            inventory.contents.Remove(item);
+            inventory.items.Remove(item);
             EventSystem.current.SetSelectedGameObject(closeButton);
             Refresh();
         }
 
         var context = (item is EquippableItem) ? " was equipped" : " was used";
-        descriptionText.text = item.itemName + context;
+        descriptionText.text = item.name + context;
     }
 
     private void UpdateStatDisplays()

@@ -63,14 +63,14 @@ public class VendorManager : ItemDisplay
         Time.timeScale = 1;
     }
 
-    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.itemSellPrice, "sell");
-    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.itemBuyPrice, "buy");
+    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.sellPrice, "sell");
+    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.buyPrice, "buy");
     private void UpdateDescription(Item item, int price, string action)
         => descriptionText.text = (item != null) ? $"{item.name}\n\n{action}: {price}" : "";
 
     protected override void InstantiateSlots()
     {
-        for (int i = slots.Count; i < inventory.contents.Count; i++)
+        for (int i = slots.Count; i < inventory.items.Count; i++)
         {
             var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);

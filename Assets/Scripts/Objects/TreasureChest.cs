@@ -51,7 +51,7 @@ public class TreasureChest : Interactable
     public void OpenChest()
     {
         dialogBox.SetActive(true);
-        dialogText.text = contents.itemDescription;
+        dialogText.text = contents.description;
 
         playerInventory.currentItem = contents;
         playerInventory.items[contents]++;

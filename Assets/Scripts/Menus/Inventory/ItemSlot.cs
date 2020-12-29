@@ -23,11 +23,11 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 
         if (item != null)
         {
-            itemImage.sprite = item.itemImage;
+            itemImage.sprite = item.sprite;
 
             if (numberHeldDisplay != null)
             {
-                numberHeldDisplay.text = item.numberHeld.ToString();
+                // numberHeldDisplay.text = item.numberHeld.ToString();     //! TODO
             }
         }
         else
