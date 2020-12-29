@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
 public class Inventory : ScriptableObject
 {
-    public List<Item> contents = new List<Item>(); //Why is this not loaded???
     public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
     public int coins;
 
@@ -35,33 +33,6 @@ public class Inventory : ScriptableObject
 
         private void MarkDirtyIfChanged(Item item, int count) => UnityEditor.EditorUtility.SetDirty(this);
 #endif
-
-    public void Add(Item item)
-    {
-        if (!contents.Contains(item))    // Add the item to the list if it is not already in the list.
-        {
-            contents.Add(item);
-        }
-
-        if (item.unique)                    // Force unique items to have `numberHeld = 1`
-        {
-            item.numberHeld = 1;
-        }
-        else                                // Regular items have `numberHeld` incremented by 1
-        {
-            item.numberHeld++;
-        }
-    }
-
-    public bool Subtract(Item item, int count)
-    {
-        if (contents.Contains(item) && item.numberHeld >= count)
-        {
-            item.numberHeld -= count;
-            return true;
-        }
-        else return false;
-    }
 
     public void Equip(Item item)
     {
@@ -114,7 +85,7 @@ public class Inventory : ScriptableObject
     {
         if (currentlyEquipped != null)
         {
-            Add(currentlyEquipped);
+            items[currentlyEquipped]++;
         }
 
         currentlyEquipped = newEquip;

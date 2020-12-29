@@ -9,7 +9,7 @@ public class ItemPickUp : PickUp
         var player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            player.myInventory.Add(item);
+            player.myInventory.items[item]++;
             Destroy(this.gameObject);
         }
     }

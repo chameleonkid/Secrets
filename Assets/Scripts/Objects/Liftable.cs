@@ -35,7 +35,7 @@ public class Liftable : Interactable
     public void Lifting()
     {
         Debug.Log("LIFT OBJECT");
-        playerInventory.Add(contents);
+        playerInventory.items[contents]++;
         contextOff.Raise();
         thing.SetActive(false);
         LiftItem.Raise();

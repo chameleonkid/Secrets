@@ -54,7 +54,7 @@ public class TreasureChest : Interactable
         dialogText.text = contents.itemDescription;
 
         playerInventory.currentItem = contents;
-        playerInventory.Add(contents);
+        playerInventory.items[contents]++;
 
         // raise the signal to animate
 
