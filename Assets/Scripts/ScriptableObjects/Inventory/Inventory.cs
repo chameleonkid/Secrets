@@ -34,7 +34,7 @@ public class Inventory : ScriptableObject
         private void MarkDirtyIfChanged(Item item, int count) => UnityEditor.EditorUtility.SetDirty(this);
 #endif
 
-    public void Equip(Item item)
+    public void Equip(EquippableItem item)
     {
         switch (item)
         {

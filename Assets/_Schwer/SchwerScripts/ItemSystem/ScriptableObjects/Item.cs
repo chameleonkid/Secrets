@@ -38,6 +38,4 @@ public class Item : ScriptableObject {
     public int sellPrice => _sellPrice;
 
     public void Use() => OnUse?.Invoke();
-
-    public Inventory myInventory;   //! Temporary
 }

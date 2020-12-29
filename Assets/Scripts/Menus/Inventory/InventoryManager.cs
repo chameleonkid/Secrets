@@ -80,9 +80,19 @@ public class InventoryManager : MonoBehaviour
         if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
         item.Use();
+
+        if (item is EquippableItem)
+        {
+            inventory.Equip((EquippableItem)item);
+        }
+
+        if (item.usable)
+        {
+            inventory.items[item]--;
+        }
+        
         if (inventory.items[item] <= 0)
         {
-            inventory.items.Remove(item);
             EventSystem.current.SetSelectedGameObject(closeButton);
             Refresh();
         }
