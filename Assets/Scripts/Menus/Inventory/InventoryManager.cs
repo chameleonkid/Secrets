@@ -94,8 +94,9 @@ public class InventoryManager : MonoBehaviour
         if (inventory.items[item] <= 0)
         {
             EventSystem.current.SetSelectedGameObject(closeButton);
-            Refresh();
         }
+
+        Refresh();
 
         var context = (item is EquippableItem) ? " was equipped" : " was used";
         descriptionText.text = item.name + context;
