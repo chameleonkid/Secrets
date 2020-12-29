@@ -34,6 +34,8 @@ namespace SchwerEditor.ItemSystem {
 
     public class ItemEditor : EditorWindow {
         private Item selectedItem;
+        private Vector2 sidebarScroll;
+        private Vector2 selectedItemScroll;
 
         [MenuItem("Item System/Open Item Editor")]
         public static void ShowWindow() => GetWindow<ItemEditor>("Item Editor");
@@ -49,22 +51,8 @@ namespace SchwerEditor.ItemSystem {
             var items = ScriptableObjectUtility.GetAllInstances<Item>().OrderBy(i => i.id).ToArray();
             
             EditorGUILayout.BeginHorizontal();
-
-            EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(150), GUILayout.ExpandHeight(true));
             selectedItem = DrawItemsSidebar(items);
-            EditorGUILayout.EndVertical();
-
-            EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
-            if (selectedItem != null) {
-                if (selectedItem is Item) {
-                    DrawItemProperties((Item)selectedItem);
-                }
-            }
-            else {
-                EditorGUILayout.HelpBox("Select an item from the sidebar to begin editing.", MessageType.Info);
-            }
-            EditorGUILayout.EndVertical();
-
+            DrawSelectedItem();
             EditorGUILayout.EndHorizontal();
 
             if (GUILayout.Button("Generate ItemDatabase")) {
@@ -72,22 +60,13 @@ namespace SchwerEditor.ItemSystem {
             }
         }
 
-        private void DrawItemProperties(Item item) {
-            DrawDisabledItemField(item);
-
-            // Reference: https://forum.unity.com/threads/odd-serialization-behaviour-of-unityevent-inside-an-editor-window.505653/
-            // ^ Not sure if there are any issues/quirks with this method.
-            var editor = Editor.CreateEditor(item);
-            editor.DrawDefaultInspector();
-        }
-
-        private void DrawDisabledItemField(Item item) {
-            EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.ObjectField(item, typeof(Item), false);
-            EditorGUI.EndDisabledGroup();
-        }
-
         private Item DrawItemsSidebar(Item[] items) {
+            var maxWidth = 150;
+            var scrollBarWidth = 30;
+            
+            EditorGUILayout.BeginVertical("box", GUILayout.MaxWidth(maxWidth + scrollBarWidth), GUILayout.ExpandHeight(true));
+            sidebarScroll = EditorGUILayout.BeginScrollView(sidebarScroll, GUILayout.MinWidth(maxWidth + 1), GUILayout.MaxWidth(maxWidth + scrollBarWidth), GUILayout.ExpandWidth(true));   // Need to use maxWidth + 1 to avoid horizontal scroll bar
+
             var button = new GUIStyle(GUI.skin.button);
             button.alignment = TextAnchor.MiddleLeft;
 
@@ -127,7 +106,43 @@ namespace SchwerEditor.ItemSystem {
 
                 EditorGUILayout.EndHorizontal();
             }
+
+            EditorGUILayout.EndScrollView();
+            EditorGUILayout.EndVertical();
+            
             return selectedItem;
+        }
+
+        private void DrawSelectedItem() {
+            EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
+            selectedItemScroll = EditorGUILayout.BeginScrollView(selectedItemScroll);
+
+            if (selectedItem != null) {
+                if (selectedItem is Item) {
+                    DrawItemProperties((Item)selectedItem);
+                }
+            }
+            else {
+                EditorGUILayout.HelpBox("Select an item from the sidebar to begin editing.", MessageType.Info);
+            }
+
+            EditorGUILayout.EndScrollView();
+            EditorGUILayout.EndVertical();
+        }
+
+        private void DrawItemProperties(Item item) {
+            DrawDisabledItemField(item);
+
+            // Reference: https://forum.unity.com/threads/odd-serialization-behaviour-of-unityevent-inside-an-editor-window.505653/
+            // ^ Not sure if there are any issues/quirks with using `DrawDefaultInspector`
+            var editor = Editor.CreateEditor(item);
+            editor.DrawDefaultInspector();
+        }
+
+        private void DrawDisabledItemField(Item item) {
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUILayout.ObjectField(item, typeof(Item), false);
+            EditorGUI.EndDisabledGroup();
         }
     }
 }
