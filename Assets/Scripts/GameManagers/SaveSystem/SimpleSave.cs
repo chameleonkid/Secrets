@@ -70,10 +70,7 @@ public class SimpleSave : MonoBehaviour
     private void SaveInventory()
     {
         ES3.Save("Inventory", so.playerInventory);
-        for (int i = 0; i < so.inventoryItems.Length; i++)
-        {
-            // ES3.Save(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);    //! TODO
-        }
+        ES3.Save("Items", so.playerInventory.items.Serialize());
     }
 
     private void SaveBools()
@@ -92,10 +89,7 @@ public class SimpleSave : MonoBehaviour
     private void LoadInventory()
     {
         ES3.Load("Inventory", so.playerInventory);
-        for (int i = 0; i < so.inventoryItems.Length; i++)
-        {
-            // so.inventoryItems[i].numberHeld = ES3.Load(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);  //! TODO
-        }
+        so.playerInventory.items = (ES3.Load("Items") as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
     }
 
     private void LoadBools()

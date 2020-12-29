@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using Schwer.ItemSystem;
+using UnityEngine;
 
 [RequireComponent(typeof(SimpleSave))]
 public class ScriptableObjectPersistence : MonoBehaviour
 {
     [Header("Scriptable Objects")]
+    [SerializeField] private ItemDatabase _itemDatabase = default;
+    public ItemDatabase itemDatabase => _itemDatabase;
+
     [SerializeField] private VectorValue _playerPosition = default;
     public VectorValue playerPosition => _playerPosition;
     [SerializeField] private ConstrainedFloat _health = default;
@@ -12,8 +16,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public ConstrainedFloat mana => _mana;
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
-    [SerializeField] private Item[] _inventoryItems = default;
-    public Item[] inventoryItems => _inventoryItems;
 
     [SerializeField] private BoolValue[] _chests = default;
     public BoolValue[] chests => _chests;
