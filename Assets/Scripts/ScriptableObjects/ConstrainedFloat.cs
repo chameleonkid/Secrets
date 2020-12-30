@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptable Objects/Constrained Float")]
+[CreateAssetMenu(menuName = "Scriptable Object/Primitives/Constrained Float")]
 public class ConstrainedFloat : ScriptableObject
 {
     //These are the Events

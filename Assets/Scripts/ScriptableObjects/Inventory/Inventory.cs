@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
+[CreateAssetMenu(menuName = "Scriptable Object/Inventory")]
 public class Inventory : ScriptableObject
 {
     public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();

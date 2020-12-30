@@ -8,7 +8,7 @@ public class Loot
     public ItemPickUp thisItem;
 }
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Scriptable Object/Loot Table")]
 public class LootTable : ScriptableObject
 {
     public Loot[] loots;

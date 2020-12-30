@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New XP-System", menuName = "XP-System")]
+[CreateAssetMenu(menuName = "Scriptable Object/XP System")]
 public class XPSystem : ScriptableObject
 {
     public event Action OnExperienceChanged;

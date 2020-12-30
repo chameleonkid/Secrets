@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-
 public class Signals : ScriptableObject
 {
     public List<SignalsListener> listeners = new List<SignalsListener>();
