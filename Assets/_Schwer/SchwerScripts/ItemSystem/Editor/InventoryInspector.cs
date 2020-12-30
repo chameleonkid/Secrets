@@ -38,18 +38,22 @@ namespace SchwerEditor.ItemSystem {
             EditorGUI.BeginDisabledGroup(item == null);
             if (GUILayout.Button("Set " + itemName + " to " + amount + "x")) {
                 inventory.items[item] = amount;
+                SetDirtyIfEditing(inventory);
                 Debug.Log("Set " + invName + " " + itemName + " to " + amount + "x.");
             }
             if (GUILayout.Button("Add " + amount + "x " + itemName)) {
                 inventory.items[item] += amount;
+                SetDirtyIfEditing(inventory);
                 Debug.Log("Added " + amount + "x " + itemName + " to " + invName + ".");
             }
             if (GUILayout.Button("Subtract " + amount + "x " + itemName)) {
                 inventory.items[item] -= amount;
+                SetDirtyIfEditing(inventory);
                 Debug.Log("Removed " + amount + "x " + itemName + " from " + invName + ".");
             }
             if (GUILayout.Button("Remove all of " + itemName)) {
                 if (inventory.items.Remove(item)) {
+                    SetDirtyIfEditing(inventory);
                     Debug.Log("Removed all of " + itemName + " from " + invName + ".");
                 }
                 else {
@@ -59,6 +63,12 @@ namespace SchwerEditor.ItemSystem {
             EditorGUI.EndDisabledGroup();
 
             EditorGUILayout.EndVertical();
+        }
+
+        private void SetDirtyIfEditing(Object obj) {
+            if (!Application.isPlaying) {
+                EditorUtility.SetDirty(obj);
+            }
         }
     }   
 }
