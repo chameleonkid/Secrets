@@ -24,11 +24,21 @@ public class CoinTextManager : MonoBehaviour
 
     private void OnEnable()
     {
-        inventory.OnCoinCountChanged += UpdateDisplay;
+        if (inventory != null)
+        {
+            inventory.OnCoinCountChanged += UpdateDisplay;
+        }
+
         UpdateDisplay();
     }
 
-    private void OnDisable() => inventory.OnCoinCountChanged -= UpdateDisplay;
+    private void OnDisable()
+    {
+        if (inventory != null)
+        {
+            inventory.OnCoinCountChanged -= UpdateDisplay;
+        }
+    }
 
     private void UpdateDisplay() => coinDisplay.text = inventory.coins.ToString();
 }
