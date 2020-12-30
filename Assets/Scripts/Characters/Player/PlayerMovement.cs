@@ -11,8 +11,8 @@ public class PlayerMovement : Character
 
     private Vector3 change;
 
-    [SerializeField] private ConstrainedFloat _lampLight = default;
-    public ConstrainedFloat lampLight => _lampLight;
+    [SerializeField] private ConstrainedFloat _lumen = default;
+    public ConstrainedFloat lumen => _lumen;
     [SerializeField] private ConstrainedFloat _mana = default;
     public ConstrainedFloat mana => _mana;
     [SerializeField] private ConstrainedFloat _health = default;
@@ -75,6 +75,7 @@ public class PlayerMovement : Character
         SetAnimatorXY(Vector2.down);
         currentState = State.walk;
         transform.position = startingPosition.value;
+        playerLamp = GameObject.Find("Lamp").GetComponent<Light2D>();
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
@@ -122,7 +123,7 @@ public class PlayerMovement : Character
             StartCoroutine(SpellAttackCo());
         }
 
-        if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && lampLight.current > 0)
+        if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && lumen.current > 0)
         {
             toggleLamp();
         }
@@ -342,6 +343,8 @@ public class PlayerMovement : Character
         SceneManager.LoadScene("DeathMenu");
     }
 
+
+    //Lamp
     private void toggleLamp()
     {
         var lamp = myInventory.currentLamp;
@@ -351,6 +354,7 @@ public class PlayerMovement : Character
             playerLamp.intensity = 1;
             playerLamp.color = lamp.color;
             playerLamp.pointLightOuterRadius = lamp.outerRadius;
+
 
         }
         else
@@ -366,9 +370,17 @@ public class PlayerMovement : Character
         StartCoroutine(LampCo());
     }
     private IEnumerator LampCo()
-    {
-        lampLight.current -= 1;
-        yield return new WaitForSeconds(1f);
+    {   if(lumen.current > 0)
+        {
+            lumen.current -= 1;
+            yield return new WaitForSeconds(1f);
+        }
+
+        if (lumen.current <= 0)
+        {
+            playerLamp.intensity = 0;
+            CancelInvoke("reduceLampLight");
+        }
     }
 
 }
