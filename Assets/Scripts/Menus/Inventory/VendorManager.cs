@@ -127,16 +127,25 @@ public class VendorManager : ItemDisplay
     
     private void SellItem(Item item)
     {
-        // if (item)
-        // {
-        //     if (item.unique)
-        //     {
-        //         vendorInventory.Add(item);
-        //         playerInventory.RemoveItem(item);
-        //         thisVendorManager.clearInventorySlots();
-        //         thisVendorManager.MakeInventorySlots();
-        //     }
-        // }
+        if (inventory.coins >= item.sellPrice)
+        {
+            playerDisplay.inventory.items[item]--;
+            playerDisplay.inventory.coins += item.sellPrice;
+            
+            inventory.items[item]++;
+            inventory.coins -= item.sellPrice;
+
+            descriptionText.text = $"Sold {item.name} for {item.sellPrice}.";
+
+            if (playerDisplay.inventory.items[item] <= 0)
+            {
+                EventSystemSelectDefault();
+            }
+        }
+        else
+        {
+            descriptionText.text = $"Vendor does not enough money to buy your {item}!";
+        }
     }
 
     private void EventSystemSelectDefault()
