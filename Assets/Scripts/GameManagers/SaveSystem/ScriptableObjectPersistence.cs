@@ -16,8 +16,13 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public ConstrainedFloat mana => _mana;
     [SerializeField] private ConstrainedFloat _lampLight = default;
     public ConstrainedFloat lampLight => _lampLight;
+
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
+
+    [SerializeField] private Inventory _vendorInventory = default;
+    public Inventory vendorInventory => _vendorInventory;
+
 
     [SerializeField] private BoolValue[] _chests = default;
     public BoolValue[] chests => _chests;
@@ -89,6 +94,32 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.totalCritChance = 0;
         playerInventory.totalMaxSpellDamage = 0;
         playerInventory.totalMinSpellDamage = 0;
+
+
+        vendorInventory.coins = 0;
+        vendorInventory.items = new Schwer.ItemSystem.Inventory();
+
+        vendorInventory.currentItem = null;
+        vendorInventory.currentWeapon = null;
+        vendorInventory.currentArmor = null;
+        vendorInventory.currentHelmet = null;
+        vendorInventory.currentGloves = null;
+        vendorInventory.currentLegs = null;
+        vendorInventory.currentShield = null;
+        vendorInventory.currentRing = null;
+        vendorInventory.currentBow = null;
+        vendorInventory.currentSpellbook = null;
+        vendorInventory.currentAmulet = null;
+        vendorInventory.currentBoots = null;
+        vendorInventory.currentLamp = null;
+
+        vendorInventory.totalDefense = 0;
+        vendorInventory.totalCritChance = 0;
+        vendorInventory.totalMaxSpellDamage = 0;
+        vendorInventory.totalMinSpellDamage = 0;
+
+
+
     }
 
     public void ResetXP() => _xpSystem.ResetExperienceSystem();

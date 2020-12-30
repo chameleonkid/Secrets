@@ -64,6 +64,7 @@ public class Enemy : Character
         transform.position = homePosition;
         chaseRadius = originalChaseRadius;
         currentState = State.idle;
+        
     }
 
     protected override void Awake()
