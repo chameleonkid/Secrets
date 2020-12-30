@@ -17,20 +17,18 @@ public class WeatherManager : MonoBehaviour
 
     [SerializeField] private Light2D globalLight; // I could use Light instead of GameObject but how can i "find it"
     [SerializeField] private float globalLightInitialIntensity;
-    [SerializeField] private float intensityMultiplier = 1f;
-    [SerializeField] private float secondsInFullDay = 60;
-    [SerializeField] private float currentTimeOfDay = 0;
-    [SerializeField] private float currentTimeOfDayNotNormalized;
-    [SerializeField] private float timeMultiplier = 1f;
+    [SerializeField] private float normalizedTimeOfDay = 0;
+    [SerializeField] private TimeTextManager time = default;
+
 
     public void Update()
     {
         UpdateSun();
 
-        currentTimeOfDay += (Time.deltaTime / secondsInFullDay) * timeMultiplier;       //Normalizing to get the full-day-night-cycle
-        if (currentTimeOfDay >= 1)                                                      //If it reaches the full day reset to 0
+        normalizedTimeOfDay += (Time.fixedDeltaTime / time.GetMultiplier() * 60);       //Normalizing to get the full-day-night-cycle
+        if (normalizedTimeOfDay >= 1)                                              
         {
-            currentTimeOfDay = 0;
+            normalizedTimeOfDay = 0;
         }
 
         if (isRaining)
@@ -63,6 +61,7 @@ public class WeatherManager : MonoBehaviour
         globalLight = GameObject.Find("Global Light 2D").GetComponent<Light2D>();
         rainMaker = GameObject.Find("RainMaker").GetComponent<ParticleSystem>();
         snowMaker = GameObject.Find("SnowMaker").GetComponent<ParticleSystem>();
+        time = GameObject.Find("TimeInfo").GetComponent<TimeTextManager>();
         snowMakerEmission = snowMaker.emission;
         rainMakerEmission = rainMaker.emission;
         globalLightInitialIntensity = globalLight.intensity;
@@ -127,18 +126,19 @@ public class WeatherManager : MonoBehaviour
 
     void UpdateSun()
     {
+
         float intensityMultiplier = 1;
-        if (currentTimeOfDay <= 0.23f || currentTimeOfDay >= 0.75f)
+        if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.75f)
         {
             intensityMultiplier = 0;
         }
-        else if (currentTimeOfDay <= 0.25f)
+        else if (normalizedTimeOfDay <= 0.25f)
         {
-            intensityMultiplier = Mathf.Clamp01((currentTimeOfDay - 0.23f) * (1 / 0.02f));
+            intensityMultiplier = Mathf.Clamp01((normalizedTimeOfDay - 0.23f) * (1 / 0.02f));
         }
-        else if (currentTimeOfDay >= 0.73f)
+        else if (normalizedTimeOfDay >= 0.73f)
         {
-            intensityMultiplier = Mathf.Clamp01(1 - ((currentTimeOfDay - 0.73f) * (1 / 0.02f)));
+            intensityMultiplier = Mathf.Clamp01(1 - ((normalizedTimeOfDay - 0.73f) * (1 / 0.02f)));
         }
 
         globalLight.intensity = globalLightInitialIntensity * intensityMultiplier;
@@ -147,7 +147,7 @@ public class WeatherManager : MonoBehaviour
 
     public float GetCurrentTimeOfDay()
     {
-        return currentTimeOfDay;
+        return normalizedTimeOfDay;
     }
 
 

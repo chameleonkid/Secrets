@@ -5,35 +5,54 @@ using TMPro;
 
 public class TimeTextManager : MonoBehaviour
 {
-
-    [SerializeField] private WeatherManager weatherManager;
     [SerializeField] private TextMeshProUGUI TimeDisplay = default;
+    [SerializeField] private float seconds = 0;
+    [SerializeField] private float multiplier = 1;
+    [SerializeField] private int minutes = 0;
+    [SerializeField] private int hours = 0;
 
     private void Start() => UpdateUI();
-
-    void Awake()
-    {
-        weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
-    }
 
     private void FixedUpdate()
     {
         UpdateUI();
     }
     
-        private void UpdateUI()
+    private void UpdateUI()
+    {
+    seconds += Time.fixedDeltaTime;
+    if (seconds >= multiplier)
+    {
+        seconds = 0;
+        minutes++;
+        if(minutes > 59)
         {
-            float currentHour = 24 * weatherManager.GetCurrentTimeOfDay();
+            minutes = 0;
+            hours++;
+            if(hours > 23)
+            {
+                hours = 0;
+            }
+        }
+    }
+    string hoursString = hours.ToString("00");
+    string minutesString = minutes.ToString("00");
+    TimeDisplay.text = "" + hoursString + ":" + minutesString;
+    }
 
-            string hours = currentHour.ToString("00.0");
-            string hoursTwoDigits = hours.Substring(0, 2);
+    public int GetHours()
+    {
+        return hours;
+    }
 
-            float currentMinute =  60 * (currentHour - Mathf.Floor(currentHour));
+    public int GetMinutes()
+    {
+        return hours;
+    }
 
-            string minutes = currentMinute.ToString("00");
-            TimeDisplay.text = "" + hoursTwoDigits + ":" + minutes;
-         }
-
-
+    public float GetMultiplier()
+    {
+        return multiplier;
+    }
 }
 
