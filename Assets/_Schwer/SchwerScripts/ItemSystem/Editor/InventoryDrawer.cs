@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SchwerEditor.ItemSystem {
     using Schwer.ItemSystem;
 
-    [CustomPropertyDrawer(typeof(Schwer.ItemSystem.Inventory))]
+    [CustomPropertyDrawer(typeof(Inventory))]
     public class InventoryDrawer : PropertyDrawer {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             var keys = property.FindPropertyRelative("keys");
