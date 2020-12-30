@@ -57,11 +57,7 @@ public class VendorManager : ItemDisplay
             OpenInterface(vendorInventory);
             UpdateItemSlots();
 
-            if (firstSelection)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(firstSelection);
-            }
+            EventSystemSelectDefault();
         }
     }
 
@@ -98,26 +94,31 @@ public class VendorManager : ItemDisplay
 
     private void BuyItem(Item item)
     {
-        // if (item)
-        // {
-        //     if (item.unique && playerInventory.coins >= item.itemBuyPrice)
-        //     {
-        //         playerInventory.Add(item);
-        //         playerInventory.coins -= item.itemBuyPrice;
-        //         vendorInventory.RemoveItem(item);
-        //         thisVendorManager.clearInventorySlots();
-        //         thisVendorManager.MakeInventorySlots();
-        //     }
-        //     else if(playerInventory.coins >= item.itemBuyPrice)
-        //     {
-        //         playerInventory.coins -= item.itemBuyPrice;
-        //         playerInventory.Add(item);
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("Not enaugh money! to buy " + item);
-        //     }
-        // }
+        if (playerDisplay.inventory.coins >= item.buyPrice)
+        {
+            if (item.unique && playerDisplay.inventory.items[item] > 0)
+            {
+                descriptionText.text = $"You already own {item.name}!";
+                return;
+            }
+
+            playerDisplay.inventory.items[item]++;
+            playerDisplay.inventory.coins -= item.buyPrice;
+            
+            inventory.items[item]--;
+            inventory.coins += item.buyPrice;
+
+            descriptionText.text = $"Bought {item.name} for {item.buyPrice}.";
+
+            if (inventory.items[item] <= 0)
+            {
+                EventSystemSelectDefault();
+            }
+        }
+        else
+        {
+            descriptionText.text = $"Not enough money to buy {item}!";
+        }
     }
 
     
@@ -133,5 +134,14 @@ public class VendorManager : ItemDisplay
         //         thisVendorManager.MakeInventorySlots();
         //     }
         // }
+    }
+
+    private void EventSystemSelectDefault()
+    {
+        if (firstSelection)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelection);
+        }
     }
 }
