@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.UI;
 
 
 
@@ -19,6 +20,10 @@ public class WeatherManager : MonoBehaviour
     [SerializeField] private float globalLightInitialIntensity;
     [SerializeField] private float normalizedTimeOfDay = 0;
     [SerializeField] private TimeTextManager time = default;
+
+    [SerializeField] private Sprite dayTimeSprite;
+    [SerializeField] private Sprite nightTimeSprite;
+    [SerializeField] private Image timeImage;
 
 
     public void Update()
@@ -56,6 +61,7 @@ public class WeatherManager : MonoBehaviour
         rainMaker = GameObject.Find("RainMaker").GetComponent<ParticleSystem>();
         snowMaker = GameObject.Find("SnowMaker").GetComponent<ParticleSystem>();
         time = GameObject.Find("TimeInfo").GetComponent<TimeTextManager>();
+        timeImage = GameObject.Find("TimeInfo").GetComponent<Image>();
         
         snowMakerEmission = snowMaker.emission;
         rainMakerEmission = rainMaker.emission;
@@ -126,14 +132,17 @@ public class WeatherManager : MonoBehaviour
         if (normTime <= 0.23f || normTime >= 0.75f)
         {
             intensityMultiplier = 0;
+            timeImage.sprite = nightTimeSprite;
         }
         else if (normTime <= 0.25f)
         {
             intensityMultiplier = Mathf.Clamp01((normTime - 0.23f) * (1 / 0.02f));
+            timeImage.sprite = dayTimeSprite;
         }
         else if (normTime >= 0.73f)
         {
             intensityMultiplier = Mathf.Clamp01(1 - ((normTime - 0.73f) * (1 / 0.02f)));
+            timeImage.sprite = nightTimeSprite;
         }
 
         globalLight.intensity = globalLightInitialIntensity * intensityMultiplier;
