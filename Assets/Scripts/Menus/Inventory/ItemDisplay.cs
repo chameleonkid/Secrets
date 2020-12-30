@@ -10,15 +10,6 @@ public abstract class ItemDisplay : MonoBehaviour
     protected abstract Inventory inventory { get; set; }
     protected List<ItemSlot> slots = new List<ItemSlot>();
 
-    protected void UpdateItemSlotContents()
-    {
-        for (int i = 0; i < inventory.items.Count; i++)
-        {
-            var item = inventory.items.ElementAt(i);
-            slots[i].SetItem(item.Key, item.Value);
-        }
-    }
-
     protected void UpdateItemSlots()
     {
         if (inventory != null)
@@ -52,6 +43,15 @@ public abstract class ItemDisplay : MonoBehaviour
             var slot = slots[i];
             slots.Remove(slot);
             Destroy(slot.gameObject);
+        }
+    }
+
+    private void UpdateItemSlotContents()
+    {
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            var item = inventory.items.ElementAt(i);
+            slots[i].SetItem(item.Key, item.Value);
         }
     }
 }
