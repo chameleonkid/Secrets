@@ -12,27 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87a5959d4b3958479bfdc9fcff2678d, type: 3}
   m_Name: boots0
   m_EditorClassIdentifier: 
-  itemName: boots0
-  itemDescription: simple boots
-  itemImage: {fileID: 21300016, guid: 615195e18d3d39246b7e13cc23b30645, type: 3}
-  itemSound: {fileID: 8300000, guid: 9036d13e58b8e9a4cb1aa51cdaef2868, type: 3}
-  _numberHeld: 0
-  usable: 1
-  unique: 1
-  thisEvent:
+  _id: 400
+  _name: Boots0
+  _description: Simple boots
+  _sprite: {fileID: 21300016, guid: 615195e18d3d39246b7e13cc23b30645, type: 3}
+  _sound: {fileID: 8300000, guid: 9036d13e58b8e9a4cb1aa51cdaef2868, type: 3}
+  _unique: 1
+  _usable: 1
+  _level: 1
+  OnUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_MethodName: SwapEquipment
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  itemLvl: 1
-  myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+      m_Calls: []
+  _buyPrice: 0
+  _sellPrice: 0
   armorDefense: 1

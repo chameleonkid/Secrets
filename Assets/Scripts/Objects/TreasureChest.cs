@@ -51,10 +51,10 @@ public class TreasureChest : Interactable
     public void OpenChest()
     {
         dialogBox.SetActive(true);
-        dialogText.text = contents.itemDescription;
+        dialogText.text = contents.description;
 
         playerInventory.currentItem = contents;
-        playerInventory.Add(contents);
+        playerInventory.items[contents]++;
 
         // raise the signal to animate
 

@@ -11,7 +11,7 @@ namespace SchwerEditor {
         // `0` is the priority for `Create Empty`.
         // Items with the same priority seem to be unpredictably sorted
         // Intended for `Instantiate Prefab` to be below `Create Empty`, but can't use priority `1` since `3D Object` uses that.
-        
+
         [MenuItem("GameObject/Instantiate Prefab/Item Chest", false, 0)]
         public static void InstantiateChestPrefab(MenuCommand command) => InstantiatePrefab(command,
             "Assets/Prefabs/Objects/Chests/ItemChest.prefab");
@@ -25,7 +25,7 @@ namespace SchwerEditor {
                 Selection.activeObject = instance;
             }
             else {
-                Debug.Log("No prefab exists at: " + path);
+                Debug.LogWarning("No prefab exists at: " + path);
             }
         }
     }

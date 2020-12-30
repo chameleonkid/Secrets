@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a4ea1cf6045842a10e1ee98859b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 11400000, guid: 62852320f1a21704da2ad5d5ccaed6a7, type: 2}
   coinDisplay: {fileID: 2003348839136506310}
+  _inventory: {fileID: 0}
 --- !u!1 &2003348839485588803
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +405,7 @@ MonoBehaviour:
   itemSlotParent: {fileID: 2003348839721434040}
   playerDisplay: {fileID: 2003348839181240883}
   vendorPanel: {fileID: 2003348838970058062}
+  vendorCoinText: {fileID: 2003348839136506329}
   descriptionText: {fileID: 2003348840258415246}
   firstSelection: {fileID: 2003348839928134918}
 --- !u!1 &2003348839534441494
@@ -750,7 +751,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2003348839928134917}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2003348839485588801}
+        m_MethodName: CloseInterface
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2003348840258415232
 GameObject:
   m_ObjectHideFlags: 0

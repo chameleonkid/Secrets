@@ -1,13 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Player Inventory")]
+[CreateAssetMenu(menuName = "Scriptable Object/Inventory")]
 public class Inventory : ScriptableObject
 {
-    public List<Item> contents = new List<Item>(); //Why is this not loaded???
-    public int coins;
+    public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
+
+    public event Action OnCoinCountChanged;
+    [SerializeField] private int _coins;
+    public int coins {
+        get => _coins;
+        set {
+            if (value != _coins) {
+                _coins = value;
+                OnCoinCountChanged?.Invoke();
+            }
+        }
+    }
 
     public Item currentItem;
+    
     public InventoryWeapon currentWeapon;
     public InventoryArmor currentArmor;
     public InventoryHelmet currentHelmet;
@@ -25,34 +37,34 @@ public class Inventory : ScriptableObject
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
 
-    public void Add(Item item)
-    {
-        if (!contents.Contains(item))    // Add the item to the list if it is not already in the list.
-        {
-            contents.Add(item);
-        }
+#if UNITY_EDITOR
+    // Needed in order to allow changes to the Inventory in the editor to be saved.
 
-        if (item.unique)                    // Force unique items to have `numberHeld = 1`
-        {
-            item.numberHeld = 1;
+    private bool shouldMarkDirty;
+
+    private void OnEnable() => UnityEditor.EditorApplication.playModeStateChanged += MarkDirty;
+
+    private void OnDisable() => UnityEditor.EditorApplication.playModeStateChanged -= MarkDirty;
+
+    private void MarkDirtyIfChanged(Item item, int count) => shouldMarkDirty = true;
+
+    private void MarkDirty(UnityEditor.PlayModeStateChange stateChange) {
+        // Can't run outside of Play Mode as that seems to throw errors (can't make certain calls on serialization thread)
+        if (stateChange == UnityEditor.PlayModeStateChange.EnteredEditMode) {
+            items.OnContentsChanged -= MarkDirtyIfChanged;
+
+            if (shouldMarkDirty) {
+                UnityEditor.EditorUtility.SetDirty(this);
+                shouldMarkDirty = false;
+            }
         }
-        else                                // Regular items have `numberHeld` incremented by 1
-        {
-            item.numberHeld++;
+        else if (stateChange == UnityEditor.PlayModeStateChange.EnteredPlayMode) {
+            items.OnContentsChanged += MarkDirtyIfChanged;
         }
     }
+#endif
 
-    public bool Subtract(Item item, int count)
-    {
-        if (contents.Contains(item) && item.numberHeld >= count)
-        {
-            item.numberHeld -= count;
-            return true;
-        }
-        else return false;
-    }
-
-    public void Equip(Item item)
+    public void Equip(EquippableItem item)
     {
         switch (item)
         {
@@ -103,15 +115,15 @@ public class Inventory : ScriptableObject
     {
         if (currentlyEquipped != null)
         {
-            Add(currentlyEquipped);
+            items[currentlyEquipped]++;
         }
 
         currentlyEquipped = newEquip;
-        newEquip.numberHeld--;
+        items[newEquip]--;
 
-        if (newEquip.itemSound != null)
+        if (newEquip.sound != null)
         {
-            SoundManager.RequestSound(newEquip.itemSound);
+            SoundManager.RequestSound(newEquip.sound);
         }
     }
 

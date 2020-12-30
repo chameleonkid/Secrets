@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Scriptable Object/Primitives/Vector2")]
 public class VectorValue : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField] private Vector2 defaultValue = default;

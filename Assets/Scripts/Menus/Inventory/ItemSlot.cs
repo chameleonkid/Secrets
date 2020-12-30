@@ -17,17 +17,17 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 
     private void OnValidate() => defaultSprite = itemImage.sprite;
 
-    public void SetItem(Item newItem)
+    public void SetItem(Item item, int count)
     {
-        item = newItem;
+        this.item = item;
 
         if (item != null)
         {
-            itemImage.sprite = item.itemImage;
+            itemImage.sprite = item.sprite;
 
             if (numberHeldDisplay != null)
             {
-                numberHeldDisplay.text = item.numberHeld.ToString();
+                numberHeldDisplay.text = count.ToString();
             }
         }
         else
@@ -49,8 +49,5 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         }
     }
 
-    public void UseItem() {
-        OnSlotUsed?.Invoke(item);   // Let relevant manager handle use behaviour
-        SetItem(item);              // Refresh number held text
-    }
+    public void UseItem() => OnSlotUsed?.Invoke(item);  // Let relevant manager handle use behaviour
 }

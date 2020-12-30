@@ -1,43 +1,41 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
-public class Item : ScriptableObject
-{
-    public event Action OnNumberHeldChanged;
+[CreateAssetMenu(menuName = "Scriptable Object/Items/Item")]
+public class Item : ScriptableObject {
+    [SerializeField] private int _id = default;
+    public int id => _id;
 
-    public string itemName;
-    public string itemDescription;
-    public virtual string fullDescription => itemDescription;
-    public int itemBuyPrice;
-    public int itemSellPrice;
+    [SerializeField] private string _name = default;
+    public new string name => _name;
 
-    public Sprite itemImage;
-    public AudioClip itemSound = default;
+    [SerializeField][TextArea] private string _description = default;
+    public string description => _description;
 
-    [SerializeField] private int _numberHeld = default;
-    public int numberHeld {
-        get => _numberHeld;
-        set {
-            if (value < 0) {
-                value = 0;
-            }
+    public virtual string fullDescription => _description;
 
-            if (_numberHeld != value) {
-                _numberHeld = value;
-                OnNumberHeldChanged?.Invoke();
-            }
-        }
-    }
+    [SerializeField] private Sprite _sprite = default;
+    public Sprite sprite => _sprite;
 
-    public bool usable;
-    public bool unique;
-    public UnityEvent thisEvent;
-    public int itemLvl;
-    public Inventory myInventory;
+    [SerializeField] private AudioClip _sound = default;
+    public AudioClip sound => _sound;
 
-    public void Use() => thisEvent.Invoke();
+    [SerializeField] private bool _unique = default;
+    public bool unique => _unique;
 
-    public void decreaseAmount(int amountToDecrease) => numberHeld -= amountToDecrease;
+    [SerializeField] private bool _usable = default;
+    public bool usable => _usable;
+
+    [SerializeField] private int _level = default;
+    public int level => _level;
+
+    [SerializeField] private UnityEvent OnUse = default;
+
+    [SerializeField] private int _buyPrice = default;
+    public int buyPrice => _buyPrice;
+
+    [SerializeField] private int _sellPrice = default;
+    public int sellPrice => _sellPrice;
+
+    public void Use() => OnUse?.Invoke();
 }

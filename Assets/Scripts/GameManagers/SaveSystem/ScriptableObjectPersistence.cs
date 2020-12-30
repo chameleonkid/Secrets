@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Schwer.ItemSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(SimpleSave))]
 public class ScriptableObjectPersistence : MonoBehaviour
 {
     [Header("Scriptable Objects")]
+    [SerializeField] private ItemDatabase _itemDatabase = default;
+    public ItemDatabase itemDatabase => _itemDatabase;
+
     [SerializeField] private VectorValue _playerPosition = default;
     public VectorValue playerPosition => _playerPosition;
     [SerializeField] private ConstrainedFloat _health = default;
@@ -13,8 +16,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public ConstrainedFloat mana => _mana;
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
-    [SerializeField] private Item[] _inventoryItems = default;
-    public Item[] inventoryItems => _inventoryItems;
 
     [SerializeField] private BoolValue[] _chests = default;
     public BoolValue[] chests => _chests;
@@ -25,9 +26,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     [SerializeField] private XPSystem _xpSystem = default;
     public XPSystem xpSystem => _xpSystem;
-
-    [Header("UI Updating")]
-    public Signals coinSignal;
 
     public void ResetScriptableObjects()
     {
@@ -66,15 +64,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     public void ResetInventory()
     {
-        for (int i = 0; i < inventoryItems.Length; i++)
-        {
-            inventoryItems[i].numberHeld = 0;
-        }
-
         playerInventory.coins = 0;
-        coinSignal.Raise();
-
-        playerInventory.contents = new List<Item>();
+        playerInventory.items = new Schwer.ItemSystem.Inventory();
 
         playerInventory.currentItem = null;
         playerInventory.currentWeapon = null;
@@ -95,8 +86,5 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.totalMinSpellDamage = 0;
     }
 
-    public void ResetXP()
-    {
-        _xpSystem.ResetExperienceSystem();
-    }
+    public void ResetXP() => _xpSystem.ResetExperienceSystem();
 }

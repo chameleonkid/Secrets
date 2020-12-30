@@ -27,6 +27,7 @@ public class PlayerMovement : Character
     public VectorValue startingPosition;
 
     public Inventory myInventory;
+    [SerializeField] private Item arrow = default;
 
     public SpriteRenderer receivedItemSprite;
 
@@ -107,10 +108,9 @@ public class PlayerMovement : Character
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
         if (Input.GetButton("UseItem") && currentState != State.roundattack && notStaggeredOrLifting && currentState != State.attack)
         {
-            var arrows = myInventory.contents.Find(x => x.itemName.Contains("Arrow"));
-            if (arrows && arrows.numberHeld > 0 && myInventory.currentBow)
+            if (arrow != null && myInventory.items[arrow] > 0 && myInventory.currentBow)
             {
-                arrows.numberHeld--;
+                myInventory.items[arrow]--;
                 StartCoroutine(SecondAttackCo());
             }
         }
@@ -255,7 +255,7 @@ public class PlayerMovement : Character
             {
                 animator.SetBool("receiveItem", true);
                 currentState = State.interact;
-                receivedItemSprite.sprite = myInventory.currentItem.itemImage;
+                receivedItemSprite.sprite = myInventory.currentItem.sprite;
             }
             else
             {

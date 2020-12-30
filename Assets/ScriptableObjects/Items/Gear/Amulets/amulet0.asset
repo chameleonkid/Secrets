@@ -12,30 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701787d719357064d8765757c17e1cc0, type: 3}
   m_Name: amulet0
   m_EditorClassIdentifier: 
-  itemName: Amulet0
-  itemDescription: A dirty amulet...I dont think this is worth anything
-  itemBuyPrice: 100
-  itemSellPrice: 0
-  itemImage: {fileID: 21300000, guid: 4afb3724ad0ee4dde90e2b7f7e2816f7, type: 3}
-  itemSound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
-  _numberHeld: 1
-  usable: 1
-  unique: 1
-  thisEvent:
+  _id: 200
+  _name: Amulet0
+  _description: A dirty amulet...I dont think this is worth anything
+  _sprite: {fileID: 21300000, guid: 4afb3724ad0ee4dde90e2b7f7e2816f7, type: 3}
+  _sound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
+  _unique: 1
+  _usable: 1
+  _level: 1
+  OnUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_MethodName: SwapEquipment
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  itemLvl: 1
-  myInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+      m_Calls: []
+  _buyPrice: 100
+  _sellPrice: 0
   minSpellDamage: 1
   maxSpellDamage: 2

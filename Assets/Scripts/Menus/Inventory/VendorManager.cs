@@ -10,10 +10,28 @@ public class VendorManager : ItemDisplay
 
     [SerializeField] private InventoryDisplay playerDisplay = default;
     [SerializeField] private GameObject vendorPanel = default;
+    [SerializeField] private CoinTextManager vendorCoinText = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
     [SerializeField] private GameObject firstSelection = default;
 
-    protected override Inventory inventory { get; set; }
+    private Inventory _inventory;
+    public override Inventory inventory {
+        get => _inventory;
+        protected set {
+            if (_inventory != value) {
+                if (_inventory != null) {
+                    _inventory.items.OnContentsChanged -= UpdateItemSlots;
+                }
+
+                if (value != null) {
+                    value.items.OnContentsChanged += UpdateItemSlots;
+                }
+
+                _inventory = value;
+                vendorCoinText.inventory = value;
+            }
+        }
+    }
 
     private void OnEnable() => OnInterfaceRequested += ActivateInterface;
     private void OnDisable() => OnInterfaceRequested -= ActivateInterface;
@@ -21,7 +39,7 @@ public class VendorManager : ItemDisplay
     private void Awake()
     {
         playerDisplay.OnSlotSelected += UpdateDescriptionPlayer;
-        playerDisplay.OnSlotUsed += SwapItemToVendor;
+        playerDisplay.OnSlotUsed += SellItem;
         playerDisplay.SubscribeToEquipmentSlotSelected(UpdateDescriptionPlayer);
     }
 
@@ -41,81 +59,101 @@ public class VendorManager : ItemDisplay
             OpenInterface(vendorInventory);
             UpdateItemSlots();
 
-            if (firstSelection)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(firstSelection);
-            }
+            EventSystemSelectDefault();
         }
     }
 
     private void OpenInterface(Inventory vendorInventory)
     {
+        descriptionText.text = "";
         inventory = vendorInventory;
         vendorPanel.SetActive(true);
         Time.timeScale = 0;
     }
 
-    private void CloseInterface()
+    public void CloseInterface()
     {
         inventory = null;
         vendorPanel.SetActive(false);
         Time.timeScale = 1;
     }
 
-    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.itemSellPrice, "sell");
-    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.itemBuyPrice, "buy");
+    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.sellPrice, "sell");
+    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.buyPrice, "buy");
     private void UpdateDescription(Item item, int price, string action)
         => descriptionText.text = (item != null) ? $"{item.name}\n\n{action}: {price}" : "";
 
     protected override void InstantiateSlots()
     {
-        for (int i = slots.Count; i < inventory.contents.Count; i++)
+        for (int i = slots.Count; i < inventory.items.Count; i++)
         {
             var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);
 
             newSlot.OnSlotSelected += UpdateDescriptionVendor;
-            newSlot.OnSlotUsed += SwapItemToPlayer;
+            newSlot.OnSlotUsed += BuyItem;
         }
     }
 
-    private void SwapItemToPlayer(Item item)
+    private void BuyItem(Item item)
     {
-        // if (item)
-        // {
-        //     if (item.unique && playerInventory.coins >= item.itemBuyPrice)
-        //     {
-        //         playerInventory.Add(item);
-        //         playerInventory.coins -= item.itemBuyPrice;
-        //         vendorInventory.RemoveItem(item);
-        //         thisVendorManager.clearInventorySlots();
-        //         thisVendorManager.MakeInventorySlots();
-        //     }
-        //     else if(playerInventory.coins >= item.itemBuyPrice)
-        //     {
-        //         playerInventory.coins -= item.itemBuyPrice;
-        //         playerInventory.Add(item);
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("Not enaugh money! to buy " + item);
-        //     }
-        // }
+        if (playerDisplay.inventory.coins >= item.buyPrice)
+        {
+            if (item.unique && playerDisplay.inventory.items[item] > 0)
+            {
+                descriptionText.text = $"You already own {item.name}!";
+                return;
+            }
+
+            playerDisplay.inventory.items[item]++;
+            playerDisplay.inventory.coins -= item.buyPrice;
+            
+            inventory.items[item]--;
+            inventory.coins += item.buyPrice;
+
+            descriptionText.text = $"Bought {item.name} for {item.buyPrice}.";
+
+            if (inventory.items[item] <= 0)
+            {
+                EventSystemSelectDefault();
+            }
+        }
+        else
+        {
+            descriptionText.text = $"Not enough money to buy {item}!";
+        }
     }
 
     
-    private void SwapItemToVendor(Item item)
+    private void SellItem(Item item)
     {
-        // if (item)
-        // {
-        //     if (item.unique)
-        //     {
-        //         vendorInventory.Add(item);
-        //         playerInventory.RemoveItem(item);
-        //         thisVendorManager.clearInventorySlots();
-        //         thisVendorManager.MakeInventorySlots();
-        //     }
-        // }
+        if (inventory.coins >= item.sellPrice)
+        {
+            playerDisplay.inventory.items[item]--;
+            playerDisplay.inventory.coins += item.sellPrice;
+            
+            inventory.items[item]++;
+            inventory.coins -= item.sellPrice;
+
+            descriptionText.text = $"Sold {item.name} for {item.sellPrice}.";
+
+            if (playerDisplay.inventory.items[item] <= 0)
+            {
+                EventSystemSelectDefault();
+            }
+        }
+        else
+        {
+            descriptionText.text = $"Vendor does not enough money to buy your {item}!";
+        }
+    }
+
+    private void EventSystemSelectDefault()
+    {
+        if (firstSelection)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelection);
+        }
     }
 }

@@ -3,21 +3,42 @@ using TMPro;
 
 public class CoinTextManager : MonoBehaviour
 {
-    public Inventory playerInventory;
-    public TextMeshProUGUI coinDisplay;
+    [SerializeField] private TextMeshProUGUI coinDisplay = default;
+    [SerializeField] private Inventory _inventory = default;
+    public Inventory inventory {
+        get => _inventory;
+        set {
+            if (_inventory != value) {
+                if (_inventory != null) {
+                    _inventory.OnCoinCountChanged -= UpdateDisplay;
+                }
 
-    private void Start()
-    {
-        UpdateCoinCount();
+                if (value != null) {
+                    value.OnCoinCountChanged += UpdateDisplay;
+                }
+
+                _inventory = value;
+            }
+        }
     }
 
     private void OnEnable()
     {
-        UpdateCoinCount();
+        if (inventory != null)
+        {
+            inventory.OnCoinCountChanged += UpdateDisplay;
+        }
+
+        UpdateDisplay();
     }
 
-    public void UpdateCoinCount()
+    private void OnDisable()
     {
-        coinDisplay.text = "" + playerInventory.coins;
+        if (inventory != null)
+        {
+            inventory.OnCoinCountChanged -= UpdateDisplay;
+        }
     }
+
+    private void UpdateDisplay() => coinDisplay.text = inventory.coins.ToString();
 }

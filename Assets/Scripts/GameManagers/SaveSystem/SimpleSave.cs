@@ -52,8 +52,6 @@ public class SimpleSave : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
 
-        so.coinSignal.Raise();          //! Is this necessary if we are already loading the scene afresh?
-
         // PauseMenü schließen und Zeit weiterlaufen lassen
         // pausePanel.SetActive(false);    //! Is this necessary if we are already loading the scene afresh?
         Time.timeScale = 1f;
@@ -70,10 +68,7 @@ public class SimpleSave : MonoBehaviour
     private void SaveInventory()
     {
         ES3.Save("Inventory", so.playerInventory);
-        for (int i = 0; i < so.inventoryItems.Length; i++)
-        {
-            ES3.Save(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);
-        }
+        ES3.Save("Items", so.playerInventory.items.Serialize());
     }
 
     private void SaveBools()
@@ -93,10 +88,7 @@ public class SimpleSave : MonoBehaviour
     private void LoadInventory()
     {
         ES3.Load("Inventory", so.playerInventory);
-        for (int i = 0; i < so.inventoryItems.Length; i++)
-        {
-            so.inventoryItems[i].numberHeld = ES3.Load(so.inventoryItems[i].name, so.inventoryItems[i].numberHeld);
-        }
+        so.playerInventory.items = (ES3.Load("Items") as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
     }
 
     private void LoadBools()

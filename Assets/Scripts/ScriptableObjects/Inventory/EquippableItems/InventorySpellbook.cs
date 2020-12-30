@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Spellbook")]
+[CreateAssetMenu(menuName = "Scriptable Object/Items/Spellbook")]
 public class InventorySpellbook : EquippableItem
 {
     public int minSpellDamage;
@@ -11,5 +11,5 @@ public class InventorySpellbook : EquippableItem
     public float speed = 1;
 
     public override string fullDescription
-        => itemDescription + ("\n\n SPELL-DMG: ") + minSpellDamage + " - " + maxSpellDamage;
+        => description + ("\n\n SPELL-DMG: ") + minSpellDamage + " - " + maxSpellDamage;
 }

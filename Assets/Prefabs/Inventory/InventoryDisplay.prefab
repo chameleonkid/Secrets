@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 38957591550173778}
   - component: {fileID: 38957591550173779}
   - component: {fileID: 38957591550173780}
-  - component: {fileID: 38957591550173781}
   m_Layer: 5
   m_Name: CoinCount
   m_TagString: Untagged
@@ -171,35 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24a4ea1cf6045842a10e1ee98859b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   coinDisplay: {fileID: 38957591550173779}
---- !u!114 &38957591550173781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38957591550173783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4018a4bba0d46f74abbe977380f14ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 04c18ee7d1e903c4e97c63e23f146fb2, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: UpdateCoinCount
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _inventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
 --- !u!1 &38957591898982612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1131,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf2dd48c5c56c343b7d915182bc3821, type: 3}
+--- !u!224 &1212364804011378912 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5802362216930783014, guid: baf2dd48c5c56c343b7d915182bc3821,
+    type: 3}
+  m_PrefabInstance: {fileID: 4635627798340724678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8953742653886844681 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4329959722514262223, guid: baf2dd48c5c56c343b7d915182bc3821,
@@ -1171,12 +1149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dab0d697388d44497c23bac3d6c7b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1212364804011378912 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5802362216930783014, guid: baf2dd48c5c56c343b7d915182bc3821,
-    type: 3}
-  m_PrefabInstance: {fileID: 4635627798340724678}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4869050089108247298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1439,12 +1411,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf2dd48c5c56c343b7d915182bc3821, type: 3}
---- !u!224 &2105724399200775593 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5802362216930783014, guid: baf2dd48c5c56c343b7d915182bc3821,
-    type: 3}
-  m_PrefabInstance: {fileID: 5602241123082994319}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8189853043949611584 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4329959722514262223, guid: baf2dd48c5c56c343b7d915182bc3821,
@@ -1457,6 +1423,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dab0d697388d44497c23bac3d6c7b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2105724399200775593 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5802362216930783014, guid: baf2dd48c5c56c343b7d915182bc3821,
+    type: 3}
+  m_PrefabInstance: {fileID: 5602241123082994319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5930319857885442843
 PrefabInstance:
   m_ObjectHideFlags: 0

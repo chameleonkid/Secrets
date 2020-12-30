@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class ItemDisplay : MonoBehaviour
@@ -6,26 +7,20 @@ public abstract class ItemDisplay : MonoBehaviour
     [SerializeField] protected GameObject itemSlotPrefab = default;
     [SerializeField] protected GameObject itemSlotParent = default;
 
-    protected abstract Inventory inventory { get; set; }
+    public abstract Inventory inventory { get; protected set; }
+
     protected List<ItemSlot> slots = new List<ItemSlot>();
 
-    protected void UpdateItemSlotContents()
-    {
-        for (int i = 0; i < inventory.contents.Count; i++)
-        {
-            slots[i].SetItem(inventory.contents[i]);
-        }
-    }
-
+    protected void UpdateItemSlots(Item item, int count) => UpdateItemSlots();
     protected void UpdateItemSlots()
     {
         if (inventory != null)
         {
-            if (slots.Count < inventory.contents.Count)
+            if (slots.Count < inventory.items.Count)
             {
                 InstantiateSlots();
             }
-            else if (slots.Count > inventory.contents.Count)
+            else if (slots.Count > inventory.items.Count)
             {
                 DestroySlots();
             }
@@ -36,7 +31,7 @@ public abstract class ItemDisplay : MonoBehaviour
 
     protected virtual void InstantiateSlots()
     {
-        for (int i = slots.Count; i < inventory.contents.Count; i++)
+        for (int i = slots.Count; i < inventory.items.Count; i++)
         {
             var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);
@@ -45,11 +40,20 @@ public abstract class ItemDisplay : MonoBehaviour
 
     private void DestroySlots()
     {
-        for (int i = slots.Count - 1; i > inventory.contents.Count - 1; i--)
+        for (int i = slots.Count - 1; i > inventory.items.Count - 1; i--)
         {
             var slot = slots[i];
             slots.Remove(slot);
             Destroy(slot.gameObject);
+        }
+    }
+
+    private void UpdateItemSlotContents()
+    {
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            var item = inventory.items.ElementAt(i);
+            slots[i].SetItem(item.Key, item.Value);
         }
     }
 }

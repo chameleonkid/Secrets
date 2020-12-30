@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Armors")]
+[CreateAssetMenu(menuName = "Scriptable Object/Items/Armor")]
 public class InventoryArmor : EquippableItem
 {
     public int armorDefense;
 
     public override string fullDescription
-        => itemDescription + ("\n\n ARMOR: ") + armorDefense;
+        => description + ("\n\n ARMOR: ") + armorDefense;
 }

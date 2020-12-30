@@ -4,9 +4,9 @@ using UnityEngine;
 public class InventoryDisplay : ItemDisplay
 {
     [SerializeField] private Inventory _inventory;
-    protected override Inventory inventory {
+    public override Inventory inventory {
         get => _inventory;
-        set => _inventory = value;
+        protected set => _inventory = value;
     }
 
     [Header("Equipment Slots")]
@@ -25,7 +25,13 @@ public class InventoryDisplay : ItemDisplay
     public Action<Item> OnSlotSelected { get; set; }
     public Action<Item> OnSlotUsed { get; set; }
 
-    private void OnEnable() => UpdateDisplay();
+    private void OnEnable() {
+        inventory.items.OnContentsChanged += UpdateItemSlots;
+        UpdateItemSlots();
+        UpdateEquipmentSlots();
+    }
+
+    private void OnDisable() => inventory.items.OnContentsChanged -= UpdateItemSlots;
 
     public void SubscribeToEquipmentSlotSelected(Action<Item> action)
     {
@@ -57,30 +63,24 @@ public class InventoryDisplay : ItemDisplay
         bootsSlot.OnSlotSelected -= action;
     }
 
-    public void UpdateDisplay()
+    public void UpdateEquipmentSlots()
     {
-        UpdateItemSlots();
-        UpdateEquipmentSlots();
-    }
-
-    private void UpdateEquipmentSlots()
-    {
-        weaponSlot.SetItem(inventory.currentWeapon);
-        armorSlot.SetItem(inventory.currentArmor);
-        helmetSlot.SetItem(inventory.currentHelmet);
-        gloveSlot.SetItem(inventory.currentGloves);
-        legsSlot.SetItem(inventory.currentLegs);
-        shieldSlot.SetItem(inventory.currentShield);
-        ringSlot.SetItem(inventory.currentRing);
-        bowSlot.SetItem(inventory.currentBow);
-        spellbookSlot.SetItem(inventory.currentSpellbook);
-        amuletSlot.SetItem(inventory.currentAmulet);
-        bootsSlot.SetItem(inventory.currentBoots);
+        weaponSlot.SetItem(inventory.currentWeapon, 0);
+        armorSlot.SetItem(inventory.currentArmor, 0);
+        helmetSlot.SetItem(inventory.currentHelmet, 0);
+        gloveSlot.SetItem(inventory.currentGloves, 0);
+        legsSlot.SetItem(inventory.currentLegs, 0);
+        shieldSlot.SetItem(inventory.currentShield, 0);
+        ringSlot.SetItem(inventory.currentRing, 0);
+        bowSlot.SetItem(inventory.currentBow, 0);
+        spellbookSlot.SetItem(inventory.currentSpellbook, 0);
+        amuletSlot.SetItem(inventory.currentAmulet, 0);
+        bootsSlot.SetItem(inventory.currentBoots, 0);
     }
 
     protected override void InstantiateSlots()
     {
-        for (int i = slots.Count; i < inventory.contents.Count; i++)
+        for (int i = slots.Count; i < inventory.items.Count; i++)
         {
             var newSlot = Instantiate(itemSlotPrefab, Vector3.zero, Quaternion.identity, itemSlotParent.transform).GetComponent<ItemSlot>();
             slots.Add(newSlot);

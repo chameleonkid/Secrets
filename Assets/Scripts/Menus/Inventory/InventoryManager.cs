@@ -18,21 +18,14 @@ public class InventoryManager : MonoBehaviour
 
     public Item currentItem;   //! What is the purpose of this?
 
-    private InventoryDisplay itemDisplay;
+    private InventoryDisplay inventoryDisplay;
 
     private void Awake()
     {
-        itemDisplay = GetComponentInChildren<InventoryDisplay>(true);
-        itemDisplay.OnSlotSelected = SetUpItemDescription;
-        itemDisplay.OnSlotUsed = OnItemUsed;
-        itemDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
-    }
-
-    private void Refresh()
-    {
-        descriptionText.text = "";
-        itemDisplay.UpdateDisplay();
-        UpdateStatDisplays();
+        inventoryDisplay = GetComponentInChildren<InventoryDisplay>(true);
+        inventoryDisplay.OnSlotSelected = SetUpItemDescription;
+        inventoryDisplay.OnSlotUsed = OnItemUsed;
+        inventoryDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
     }
 
     public void ClosePanel()
@@ -43,7 +36,9 @@ public class InventoryManager : MonoBehaviour
 
     private void OpenPanel()
     {
-        Refresh();
+        descriptionText.text = "";
+        UpdateStatDisplays();
+
         inventoryPanel.SetActive(true);
         Time.timeScale = 0;
 
@@ -77,18 +72,29 @@ public class InventoryManager : MonoBehaviour
 
     private void OnItemUsed(Item item)
     {
-        if (item == null || !item.usable || item.numberHeld <= 0) return;
+        if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
         item.Use();
-        if (item.numberHeld <= 0)
+
+        if (item is EquippableItem)
         {
-            inventory.contents.Remove(item);
-            EventSystem.current.SetSelectedGameObject(closeButton);
-            Refresh();
+            inventory.Equip((EquippableItem)item);
         }
 
+        if (item.usable)
+        {
+            inventory.items[item]--;
+        }
+        
+        if (inventory.items[item] <= 0)
+        {
+            EventSystem.current.SetSelectedGameObject(closeButton);
+        }
+
+        inventoryDisplay.UpdateEquipmentSlots();
+        UpdateStatDisplays();
         var context = (item is EquippableItem) ? " was equipped" : " was used";
-        descriptionText.text = item.itemName + context;
+        descriptionText.text = item.name + context;
     }
 
     private void UpdateStatDisplays()
