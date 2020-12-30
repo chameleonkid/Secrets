@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerMovement : Character
 {
@@ -41,8 +42,8 @@ public class PlayerMovement : Character
 
     [SerializeField] private AudioClip[] attackSounds = default;
     [SerializeField] private AudioClip levelUpSound = default;
-
-
+    [Header("Lamp")]
+    [SerializeField] private Light2D playerLamp;
     //############### LIFT-TEST      ##############
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
@@ -71,7 +72,6 @@ public class PlayerMovement : Character
     {
         SetAnimatorXY(Vector2.down);
         currentState = State.walk;
-
         transform.position = startingPosition.value;
     }
 
@@ -118,6 +118,11 @@ public class PlayerMovement : Character
         if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack)
         {
             StartCoroutine(SpellAttackCo());
+        }
+
+        if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && mana.current > 0)
+        {
+            toggleLamp();
         }
         //##############################################################################################################################################################
 
@@ -175,6 +180,21 @@ public class PlayerMovement : Character
         if (currentState != State.interact)
         {
             currentState = State.walk;
+        }
+    }
+
+    private void toggleLamp()
+    {
+        var lamp = myInventory.currentLamp;
+        if(playerLamp.intensity == 0)
+        {
+            playerLamp.intensity = 1;
+            playerLamp.color = lamp.color;
+            playerLamp.pointLightOuterRadius = lamp.outerRadius;
+        }
+        else
+        {
+            playerLamp.intensity = 0;
         }
     }
 

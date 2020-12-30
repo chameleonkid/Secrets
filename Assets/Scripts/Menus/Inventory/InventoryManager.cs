@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI defDisplay = default;
     [SerializeField] private TextMeshProUGUI spellDisplay = default;
     [SerializeField] private TextMeshProUGUI rangeDisplay = default;
+    [SerializeField] private TextMeshProUGUI lightRadiusDisplay = default;
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -104,6 +105,7 @@ public class InventoryManager : MonoBehaviour
         critDisplay.text = CritDisplayText();
         spellDisplay.text = SpellDamageDisplayText();
         rangeDisplay.text = RangeDamageDisplayText();
+        lightRadiusDisplay.text = LightRadiusDisplayText();
     }
 
     private string DamageDisplayText() => (inventory.currentWeapon) ?
@@ -119,4 +121,6 @@ public class InventoryManager : MonoBehaviour
 
     private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentAmulet) ?
         inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
+
+    private string LightRadiusDisplayText() => (inventory.currentLamp) ? "" + inventory.currentLamp.outerRadius : "";
 }

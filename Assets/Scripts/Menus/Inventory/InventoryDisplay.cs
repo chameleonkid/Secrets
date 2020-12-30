@@ -21,6 +21,7 @@ public class InventoryDisplay : ItemDisplay
     [SerializeField] private ItemSlot spellbookSlot = default;
     [SerializeField] private ItemSlot amuletSlot = default;
     [SerializeField] private ItemSlot bootsSlot = default;
+    [SerializeField] private ItemSlot lampSlot = default;
 
     public Action<Item> OnSlotSelected { get; set; }
     public Action<Item> OnSlotUsed { get; set; }
@@ -46,6 +47,7 @@ public class InventoryDisplay : ItemDisplay
         spellbookSlot.OnSlotSelected += action;
         amuletSlot.OnSlotSelected += action;
         bootsSlot.OnSlotSelected += action;
+        lampSlot.OnSlotSelected += action;
     }
 
     public void UnsubscribeFromEquipmentSlotSelected(Action<Item> action)
@@ -61,6 +63,7 @@ public class InventoryDisplay : ItemDisplay
         spellbookSlot.OnSlotSelected -= action;
         amuletSlot.OnSlotSelected -= action;
         bootsSlot.OnSlotSelected -= action;
+        lampSlot.OnSlotSelected -= action;
     }
 
     public void UpdateEquipmentSlots()
@@ -76,6 +79,7 @@ public class InventoryDisplay : ItemDisplay
         spellbookSlot.SetItem(inventory.currentSpellbook, 0);
         amuletSlot.SetItem(inventory.currentAmulet, 0);
         bootsSlot.SetItem(inventory.currentBoots, 0);
+        lampSlot.SetItem(inventory.currentLamp, 0);
     }
 
     protected override void InstantiateSlots()

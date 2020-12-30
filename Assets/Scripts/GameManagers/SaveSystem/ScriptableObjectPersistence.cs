@@ -79,6 +79,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.currentSpellbook = null;
         playerInventory.currentAmulet = null;
         playerInventory.currentBoots = null;
+        playerInventory.currentLamp = null;
 
         playerInventory.totalDefense = 0;
         playerInventory.totalCritChance = 0;

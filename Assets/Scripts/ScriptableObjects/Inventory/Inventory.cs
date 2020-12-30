@@ -31,6 +31,7 @@ public class Inventory : ScriptableObject
     public InventorySpellbook currentSpellbook;
     public InventoryAmulet currentAmulet;
     public InventoryBoots currentBoots;
+    public InventoryLamp currentLamp;
 
     public float totalDefense;
     public float totalCritChance;
@@ -103,6 +104,9 @@ public class Inventory : ScriptableObject
                 break;
             case InventoryBoots boots:
                 Swap(ref currentBoots, boots);
+                break;
+            case InventoryLamp lamp:
+                Swap(ref currentLamp, lamp);
                 break;
         }
         // Applies to all equippables.
