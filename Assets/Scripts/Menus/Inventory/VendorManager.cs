@@ -37,7 +37,7 @@ public class VendorManager : ItemDisplay
     private void Awake()
     {
         playerDisplay.OnSlotSelected += UpdateDescriptionPlayer;
-        playerDisplay.OnSlotUsed += SwapItemToVendor;
+        playerDisplay.OnSlotUsed += SellItem;
         playerDisplay.SubscribeToEquipmentSlotSelected(UpdateDescriptionPlayer);
     }
 
@@ -92,11 +92,11 @@ public class VendorManager : ItemDisplay
             slots.Add(newSlot);
 
             newSlot.OnSlotSelected += UpdateDescriptionVendor;
-            newSlot.OnSlotUsed += SwapItemToPlayer;
+            newSlot.OnSlotUsed += BuyItem;
         }
     }
 
-    private void SwapItemToPlayer(Item item)
+    private void BuyItem(Item item)
     {
         // if (item)
         // {
@@ -121,7 +121,7 @@ public class VendorManager : ItemDisplay
     }
 
     
-    private void SwapItemToVendor(Item item)
+    private void SellItem(Item item)
     {
         // if (item)
         // {
