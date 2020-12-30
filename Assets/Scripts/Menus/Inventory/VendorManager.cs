@@ -70,7 +70,7 @@ public class VendorManager : ItemDisplay
         Time.timeScale = 0;
     }
 
-    private void CloseInterface()
+    public void CloseInterface()
     {
         inventory = null;
         vendorPanel.SetActive(false);
