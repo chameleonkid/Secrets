@@ -1,10 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Object/Inventory")]
 public class Inventory : ScriptableObject
 {
     public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
-    public int coins;
+
+    public event Action OnCoinCountChanged;
+    [SerializeField] private int _coins;
+    public int coins {
+        get => _coins;
+        set {
+            if (value != _coins) {
+                _coins = value;
+                OnCoinCountChanged?.Invoke();
+            }
+        }
+    }
 
     public Item currentItem;
     

@@ -10,6 +10,7 @@ public class VendorManager : ItemDisplay
 
     [SerializeField] private InventoryDisplay playerDisplay = default;
     [SerializeField] private GameObject vendorPanel = default;
+    [SerializeField] private CoinTextManager vendorCoinText = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
     [SerializeField] private GameObject firstSelection = default;
 
@@ -27,6 +28,7 @@ public class VendorManager : ItemDisplay
                 }
 
                 _inventory = value;
+                vendorCoinText.inventory = value;
             }
         }
     }
