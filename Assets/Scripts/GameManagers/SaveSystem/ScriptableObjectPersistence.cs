@@ -20,8 +20,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
 
-    [SerializeField] private Inventory _vendorInventory = default;
-    public Inventory vendorInventory => _vendorInventory;
+   // [SerializeField] private Inventory _vendorInventory = default;
+   // public Inventory vendorInventory => _vendorInventory;
 
 
     [SerializeField] private BoolValue[] _chests = default;
@@ -95,7 +95,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.totalMaxSpellDamage = 0;
         playerInventory.totalMinSpellDamage = 0;
 
-
+/*
         vendorInventory.coins = 0;
         vendorInventory.items = new Schwer.ItemSystem.Inventory();
 
@@ -117,7 +117,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         vendorInventory.totalCritChance = 0;
         vendorInventory.totalMaxSpellDamage = 0;
         vendorInventory.totalMinSpellDamage = 0;
-
+*/
 
 
     }
