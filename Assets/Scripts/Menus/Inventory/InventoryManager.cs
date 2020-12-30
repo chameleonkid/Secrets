@@ -91,6 +91,7 @@ public class InventoryManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(closeButton);
         }
 
+        inventoryDisplay.UpdateEquipmentSlots();
         UpdateStatDisplays();
         var context = (item is EquippableItem) ? " was equipped" : " was used";
         descriptionText.text = item.name + context;
