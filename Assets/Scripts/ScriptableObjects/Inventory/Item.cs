@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Scriptable Object/Item System/Item")]
+[CreateAssetMenu(menuName = "Scriptable Object/Items/Item")]
 public class Item : ScriptableObject {
     [SerializeField] private int _id = default;
     public int id => _id;

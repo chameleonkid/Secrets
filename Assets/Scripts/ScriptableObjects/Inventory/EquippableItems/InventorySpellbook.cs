@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Spellbook")]
+[CreateAssetMenu(menuName = "Scriptable Object/Items/Spellbook")]
 public class InventorySpellbook : EquippableItem
 {
     public int minSpellDamage;

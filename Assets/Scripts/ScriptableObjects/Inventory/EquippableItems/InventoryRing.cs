@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Rings")]
+[CreateAssetMenu(menuName = "Scriptable Object/Items/Ring")]
 public class InventoryRing : EquippableItem
 {
     public int criticalStrikeChance;
