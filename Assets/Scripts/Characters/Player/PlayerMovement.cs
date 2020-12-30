@@ -11,6 +11,8 @@ public class PlayerMovement : Character
 
     private Vector3 change;
 
+    [SerializeField] private ConstrainedFloat _lampLight = default;
+    public ConstrainedFloat lampLight => _lampLight;
     [SerializeField] private ConstrainedFloat _mana = default;
     public ConstrainedFloat mana => _mana;
     [SerializeField] private ConstrainedFloat _health = default;
@@ -120,7 +122,7 @@ public class PlayerMovement : Character
             StartCoroutine(SpellAttackCo());
         }
 
-        if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && mana.current > 0)
+        if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && lampLight.current > 0)
         {
             toggleLamp();
         }
@@ -183,20 +185,7 @@ public class PlayerMovement : Character
         }
     }
 
-    private void toggleLamp()
-    {
-        var lamp = myInventory.currentLamp;
-        if(playerLamp.intensity == 0)
-        {
-            playerLamp.intensity = 1;
-            playerLamp.color = lamp.color;
-            playerLamp.pointLightOuterRadius = lamp.outerRadius;
-        }
-        else
-        {
-            playerLamp.intensity = 0;
-        }
-    }
+
 
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCo()
@@ -349,8 +338,37 @@ public class PlayerMovement : Character
     {
         currentState = State.dead;
         animator.SetBool("isDead", true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("DeathMenu");
+    }
+
+    private void toggleLamp()
+    {
+        var lamp = myInventory.currentLamp;
+        if (playerLamp.intensity == 0)
+        {
+            InvokeRepeating("reduceLampLight", 0, 1);
+            playerLamp.intensity = 1;
+            playerLamp.color = lamp.color;
+            playerLamp.pointLightOuterRadius = lamp.outerRadius;
+
+        }
+        else
+        {
+            playerLamp.intensity = 0;
+            StopCoroutine("LampCo");
+            CancelInvoke("reduceLampLight");
+        }
+    }
+
+    private void reduceLampLight()
+    {
+        StartCoroutine(LampCo());
+    }
+    private IEnumerator LampCo()
+    {
+        lampLight.current -= 1;
+        yield return new WaitForSeconds(1f);
     }
 
 }

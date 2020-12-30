@@ -14,6 +14,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public ConstrainedFloat health => _health;
     [SerializeField] private ConstrainedFloat _mana = default;
     public ConstrainedFloat mana => _mana;
+    [SerializeField] private ConstrainedFloat _lampLight = default;
+    public ConstrainedFloat lampLight => _lampLight;
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
 
@@ -43,6 +45,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
         health.current = health.max;
         mana.max = 100;
         mana.current = mana.max;
+        lampLight.max = 10;
+        lampLight.current = 10;
     }
 
     public void ResetBools()

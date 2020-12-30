@@ -26,6 +26,9 @@ public class SOPInspector : Editor {
         var mana = FindFirstAsset<ConstrainedFloat>("Mana t:ConstrainedFloat");
         SetPrivateField(sop, "_mana", mana);
 
+        var lampLight = FindFirstAsset<ConstrainedFloat>("Light t:ConstrainedFloat");
+        SetPrivateField(sop, "_lampLight", lampLight);
+
         var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");
         SetPrivateField(sop, "_xpSystem", xp);
 
