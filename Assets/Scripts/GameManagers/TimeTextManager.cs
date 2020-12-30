@@ -5,54 +5,46 @@ using TMPro;
 
 public class TimeTextManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI TimeDisplay = default;
-    [SerializeField] private float seconds = 0;
-    [SerializeField] private float multiplier = 1;
-    [SerializeField] private int minutes = 0;
-    [SerializeField] private int hours = 0;
+
+    [SerializeField] private TextMeshProUGUI timeDisplay = default;
+
+    [SerializeField] private float fullDayLength = 60;
+    [SerializeField] private float timeMultiplier = 1;
+
+
+    [SerializeField] private float _normalizedTimeOfDay = 0;
+    public float normalizedTimeOfDay => _normalizedTimeOfDay;
 
     private void Start() => UpdateUI();
 
-    private void FixedUpdate()
+    void Awake()
     {
+        timeDisplay = GameObject.Find("TimeText").GetComponent<TextMeshProUGUI>();
+    }
+
+    private void Update()
+    {
+        UpdateTime();  //! New
         UpdateUI();
     }
-    
-    private void UpdateUI()
+
+    private void UpdateTime()
     {
-    seconds += Time.fixedDeltaTime;
-    if (seconds >= multiplier)
-    {
-        seconds = 0;
-        minutes++;
-        if(minutes > 59)
+        _normalizedTimeOfDay += (Time.deltaTime / fullDayLength) * timeMultiplier;
+        if (_normalizedTimeOfDay >= 1)
         {
-            minutes = 0;
-            hours++;
-            if(hours > 23)
-            {
-                hours = 0;
-            }
+            _normalizedTimeOfDay = 0;
         }
     }
-    string hoursString = hours.ToString("00");
-    string minutesString = minutes.ToString("00");
-    TimeDisplay.text = "" + hoursString + ":" + minutesString;
+
+
+    private void UpdateUI()
+    {
+        var hour = Mathf.FloorToInt(24 * normalizedTimeOfDay);
+        var minute = Mathf.FloorToInt((24 * 60 * normalizedTimeOfDay) % 60);
+        timeDisplay.text = hour.ToString("00") + ":" + minute.ToString("00");
     }
 
-    public int GetHours()
-    {
-        return hours;
-    }
 
-    public int GetMinutes()
-    {
-        return hours;
-    }
-
-    public float GetMultiplier()
-    {
-        return multiplier;
-    }
 }
 

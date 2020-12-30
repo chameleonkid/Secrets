@@ -6102,11 +6102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6030744874014479c4672bfd532131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeDisplay: {fileID: 191286481}
-  seconds: 0
-  multiplier: 1
-  minutes: 0
-  hours: 0
+  timeDisplay: {fileID: 0}
+  fullDayLength: 30
+  timeMultiplier: 1
+  _normalizedTimeOfDay: 0
 --- !u!114 &134352589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18949,7 +18948,7 @@ MonoBehaviour:
   isSnowing: 0
   globalLight: {fileID: 0}
   globalLightInitialIntensity: 0
-  currentTimeOfDay: 0
+  normalizedTimeOfDay: 0
   time: {fileID: 0}
 --- !u!1 &1309733964
 GameObject:
@@ -117272,7 +117271,7 @@ Tilemap:
       - {fileID: 21300446, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300448, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300450, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 11.705484
+      m_AnimationSpeed: 11.906271
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 13, y: -1, z: 0}
@@ -117282,7 +117281,7 @@ Tilemap:
       - {fileID: 21300446, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300448, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300450, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 10.58156
+      m_AnimationSpeed: 13.857962
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
