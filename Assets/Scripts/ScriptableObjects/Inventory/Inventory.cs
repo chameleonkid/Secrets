@@ -38,12 +38,30 @@ public class Inventory : ScriptableObject
     public int totalMaxSpellDamage;
 
 #if UNITY_EDITOR
-        // Needed in order to allow changes to the Inventory in the editor to be saved.
+    // Needed in order to allow changes to the Inventory in the editor to be saved.
 
-        private void OnEnable() => items.OnContentsChanged += MarkDirtyIfChanged;
-        private void OnDisable() => items.OnContentsChanged -= MarkDirtyIfChanged;
+    private bool shouldMarkDirty;
 
-        private void MarkDirtyIfChanged(Item item, int count) => UnityEditor.EditorUtility.SetDirty(this);
+    private void OnEnable() => UnityEditor.EditorApplication.playModeStateChanged += MarkDirty;
+
+    private void OnDisable() => UnityEditor.EditorApplication.playModeStateChanged -= MarkDirty;
+
+    private void MarkDirtyIfChanged(Item item, int count) => shouldMarkDirty = true;
+
+    private void MarkDirty(UnityEditor.PlayModeStateChange stateChange) {
+        // Can't run outside of Play Mode as that seems to throw errors (can't make certain calls on serialization thread)
+        if (stateChange == UnityEditor.PlayModeStateChange.EnteredEditMode) {
+            items.OnContentsChanged -= MarkDirtyIfChanged;
+
+            if (shouldMarkDirty) {
+                UnityEditor.EditorUtility.SetDirty(this);
+                shouldMarkDirty = false;
+            }
+        }
+        else if (stateChange == UnityEditor.PlayModeStateChange.EnteredPlayMode) {
+            items.OnContentsChanged += MarkDirtyIfChanged;
+        }
+    }
 #endif
 
     public void Equip(EquippableItem item)
