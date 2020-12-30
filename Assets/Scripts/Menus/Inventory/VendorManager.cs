@@ -13,7 +13,23 @@ public class VendorManager : ItemDisplay
     [SerializeField] private TextMeshProUGUI descriptionText = default;
     [SerializeField] private GameObject firstSelection = default;
 
-    protected override Inventory inventory { get; set; }
+    private Inventory _inventory;
+    protected override Inventory inventory {
+        get => _inventory;
+        set {
+            if (_inventory != value) {
+                if (_inventory != null) {
+                    _inventory.items.OnContentsChanged -= UpdateItemSlots;
+                }
+
+                if (value != null) {
+                    value.items.OnContentsChanged += UpdateItemSlots;
+                }
+
+                _inventory = value;
+            }
+        }
+    }
 
     private void OnEnable() => OnInterfaceRequested += ActivateInterface;
     private void OnDisable() => OnInterfaceRequested -= ActivateInterface;

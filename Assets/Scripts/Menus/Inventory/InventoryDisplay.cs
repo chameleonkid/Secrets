@@ -25,7 +25,13 @@ public class InventoryDisplay : ItemDisplay
     public Action<Item> OnSlotSelected { get; set; }
     public Action<Item> OnSlotUsed { get; set; }
 
-    private void OnEnable() => UpdateDisplay();
+    private void OnEnable() {
+        inventory.items.OnContentsChanged += UpdateItemSlots;
+        UpdateItemSlots();
+        UpdateEquipmentSlots();
+    }
+
+    private void OnDisable() => inventory.items.OnContentsChanged -= UpdateItemSlots;
 
     public void SubscribeToEquipmentSlotSelected(Action<Item> action)
     {
@@ -57,13 +63,7 @@ public class InventoryDisplay : ItemDisplay
         bootsSlot.OnSlotSelected -= action;
     }
 
-    public void UpdateDisplay()
-    {
-        UpdateItemSlots();
-        UpdateEquipmentSlots();
-    }
-
-    private void UpdateEquipmentSlots()
+    public void UpdateEquipmentSlots()
     {
         weaponSlot.SetItem(inventory.currentWeapon, 0);
         armorSlot.SetItem(inventory.currentArmor, 0);

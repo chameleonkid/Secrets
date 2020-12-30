@@ -8,8 +8,10 @@ public abstract class ItemDisplay : MonoBehaviour
     [SerializeField] protected GameObject itemSlotParent = default;
 
     protected abstract Inventory inventory { get; set; }
+
     protected List<ItemSlot> slots = new List<ItemSlot>();
 
+    protected void UpdateItemSlots(Item item, int count) => UpdateItemSlots();
     protected void UpdateItemSlots()
     {
         if (inventory != null)
