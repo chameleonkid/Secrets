@@ -14,9 +14,9 @@ public class VendorManager : ItemDisplay
     [SerializeField] private GameObject firstSelection = default;
 
     private Inventory _inventory;
-    protected override Inventory inventory {
+    public override Inventory inventory {
         get => _inventory;
-        set {
+        protected set {
             if (_inventory != value) {
                 if (_inventory != null) {
                     _inventory.items.OnContentsChanged -= UpdateItemSlots;

@@ -4,9 +4,9 @@ using UnityEngine;
 public class InventoryDisplay : ItemDisplay
 {
     [SerializeField] private Inventory _inventory;
-    protected override Inventory inventory {
+    public override Inventory inventory {
         get => _inventory;
-        set => _inventory = value;
+        protected set => _inventory = value;
     }
 
     [Header("Equipment Slots")]

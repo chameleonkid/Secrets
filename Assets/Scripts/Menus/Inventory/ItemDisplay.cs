@@ -7,7 +7,7 @@ public abstract class ItemDisplay : MonoBehaviour
     [SerializeField] protected GameObject itemSlotPrefab = default;
     [SerializeField] protected GameObject itemSlotParent = default;
 
-    protected abstract Inventory inventory { get; set; }
+    public abstract Inventory inventory { get; protected set; }
 
     protected List<ItemSlot> slots = new List<ItemSlot>();
 
