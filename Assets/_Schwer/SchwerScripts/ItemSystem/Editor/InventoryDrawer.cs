@@ -36,7 +36,7 @@ namespace SchwerEditor.ItemSystem {
                     EditorGUI.PropertyField(valueRect, value, GUIContent.none);
                     GUILayout.Space(kvpHeight + kvpSpacing);
                 }
-                GUILayout.Space(EditorGUIUtility.standardVerticalSpacing);
+                GUILayout.Space(kvpSpacing);
 
                 EditorGUI.EndDisabledGroup();
             }
