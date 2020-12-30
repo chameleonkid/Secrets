@@ -35,6 +35,7 @@ public class SOPInspector : Editor {
         var bools = ScriptableObjectUtility.GetAllInstances<BoolValue>();
         var chests = new List<BoolValue>();
         var doors = new List<BoolValue>();
+        var bosses = new List<BoolValue>();
         for (int i = 0; i < bools.Length; i++) {
             var path = AssetDatabase.GetAssetPath(bools[i]);
             if (path.Contains("Chest")) {
@@ -43,9 +44,14 @@ public class SOPInspector : Editor {
             else if (path.Contains("Door")) {
                 doors.Add(bools[i]);
             }
+            else if (path.Contains("Bosses"))
+            {
+                bosses.Add(bools[i]);
+            }
         }
         SetPrivateField(sop, "_chests", chests.ToArray());
         SetPrivateField(sop, "_doors", doors.ToArray());
+        SetPrivateField(sop, "_bosses", bosses.ToArray());
 
         Debug.Log("SOP: Refreshed references.");
     }

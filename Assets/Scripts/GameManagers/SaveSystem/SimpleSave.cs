@@ -77,6 +77,7 @@ public class SimpleSave : MonoBehaviour
     {
         ES3.Save("Chests", so.chests);
         ES3.Save("Doors", so.doors);
+        ES3.Save("Bosses", so.bosses);
     }
 
     private void LoadPlayer()
@@ -96,5 +97,6 @@ public class SimpleSave : MonoBehaviour
     {
         ES3.Load("Chests", so.chests);
         ES3.Load("Doors", so.doors);
+        ES3.Load("Bosses", so.bosses);
     }
 }
