@@ -52,8 +52,6 @@ public class SimpleSave : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
 
-        so.coinSignal.Raise();          //! Is this necessary if we are already loading the scene afresh?
-
         // PauseMenü schließen und Zeit weiterlaufen lassen
         // pausePanel.SetActive(false);    //! Is this necessary if we are already loading the scene afresh?
         Time.timeScale = 1f;

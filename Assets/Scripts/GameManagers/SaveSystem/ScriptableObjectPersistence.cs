@@ -27,9 +27,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private XPSystem _xpSystem = default;
     public XPSystem xpSystem => _xpSystem;
 
-    [Header("UI Updating")]
-    public Signals coinSignal;
-
     public void ResetScriptableObjects()
     {
         ResetPlayer();
@@ -68,8 +65,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public void ResetInventory()
     {
         playerInventory.coins = 0;
-        coinSignal.Raise();
-
         playerInventory.items = new Schwer.ItemSystem.Inventory();
 
         playerInventory.currentItem = null;
