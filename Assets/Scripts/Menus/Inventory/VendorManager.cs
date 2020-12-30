@@ -65,6 +65,7 @@ public class VendorManager : ItemDisplay
 
     private void OpenInterface(Inventory vendorInventory)
     {
+        descriptionText.text = "";
         inventory = vendorInventory;
         vendorPanel.SetActive(true);
         Time.timeScale = 0;
