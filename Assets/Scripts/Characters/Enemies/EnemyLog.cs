@@ -4,7 +4,7 @@
 
     protected override void OutsideChaseRadiusUpdate()
     {
-        animator.SetBool("WakeUp", false);
+        animator.SetBool("isMoving", false);
         // ChangeState(EnemyState.idle);
     }
 }

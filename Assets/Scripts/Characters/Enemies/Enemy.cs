@@ -99,7 +99,7 @@ public class Enemy : Character
             SetAnimatorXYSingleAxis(temp - transform.position);
             rigidbody.MovePosition(temp);
             currentState = State.walk;
-            animator.SetBool("WakeUp", true);
+            animator.SetBool("isMoving", true);
         }
     }
 
