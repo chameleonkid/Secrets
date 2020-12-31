@@ -63,13 +63,22 @@ public class SimpleSave : MonoBehaviour
         ES3.Save("Position", so.playerPosition);
         ES3.Save("Health", so.health);
         ES3.Save("Mana", so.mana);
-        ES3.Save("LampLight", so.lampLight);
+        ES3.Save("Lumen", so.lumen);
     }
 
     private void SaveInventory()
     {
         ES3.Save("Inventory", so.playerInventory);
+        ES3.Save("VendorInventory", so.vendorInventories);
         ES3.Save("Items", so.playerInventory.items.Serialize());
+
+        //Safe Vendor-Items of ALL Vendors
+        /*
+        foreach (var item in so.vendorInventories)
+        {
+            ES3.Save("Items", so.vendorInventories.items.Serialize());
+        }
+        */
     }
 
     private void SaveBools()
@@ -84,13 +93,24 @@ public class SimpleSave : MonoBehaviour
         ES3.Load("Position", so.playerPosition);
         ES3.Load("Health", so.health);
         ES3.Load("Mana", so.mana);
-        ES3.Load("LampLight", so.lampLight);
+        ES3.Load("Lumen", so.lumen);
     }
 
     private void LoadInventory()
     {
         ES3.Load("Inventory", so.playerInventory);
+        ES3.Load("VendorInventory", so.vendorInventories);
+
+
         so.playerInventory.items = (ES3.Load("Items") as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
+
+        //Load all items from all vendors
+        /*
+        foreach (var item in so.vendorInventories)
+        {
+            so.vendorInventories.items = (ES3.Load("Items") as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
+        }
+        */
     }
 
     private void LoadBools()
