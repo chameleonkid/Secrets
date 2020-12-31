@@ -19,10 +19,9 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
-
-    [SerializeField] private Inventory _vendorInventory = default;
-    public Inventory vendorInventory => _vendorInventory;
-
+    
+    [SerializeField] private Inventory[] _vendorInventories = default;
+    public Inventory[] vendorInventories => _vendorInventories;
 
     [SerializeField] private BoolValue[] _chests = default;
     public BoolValue[] chests => _chests;
@@ -38,6 +37,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
     {
         ResetPlayer();
         ResetInventory();
+        ResetVendorInventories();
         ResetBools();
         ResetXP();
 
@@ -94,32 +94,36 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.totalCritChance = 0;
         playerInventory.totalMaxSpellDamage = 0;
         playerInventory.totalMinSpellDamage = 0;
+    }
 
+    public void ResetVendorInventories()
+    {
+        foreach (var v in vendorInventories)
+        {
+            v.coins = 0;
+            v.items = new Schwer.ItemSystem.Inventory();
 
-        vendorInventory.coins = 0;
-        vendorInventory.items = new Schwer.ItemSystem.Inventory();
+            // Would vendors ever have gear?
+            v.currentItem = null;
+            v.currentWeapon = null;
+            v.currentArmor = null;
+            v.currentHelmet = null;
+            v.currentGloves = null;
+            v.currentLegs = null;
+            v.currentShield = null;
+            v.currentRing = null;
+            v.currentBow = null;
+            v.currentSpellbook = null;
+            v.currentAmulet = null;
+            v.currentBoots = null;
+            v.currentLamp = null;
 
-        vendorInventory.currentItem = null;
-        vendorInventory.currentWeapon = null;
-        vendorInventory.currentArmor = null;
-        vendorInventory.currentHelmet = null;
-        vendorInventory.currentGloves = null;
-        vendorInventory.currentLegs = null;
-        vendorInventory.currentShield = null;
-        vendorInventory.currentRing = null;
-        vendorInventory.currentBow = null;
-        vendorInventory.currentSpellbook = null;
-        vendorInventory.currentAmulet = null;
-        vendorInventory.currentBoots = null;
-        vendorInventory.currentLamp = null;
-
-        vendorInventory.totalDefense = 0;
-        vendorInventory.totalCritChance = 0;
-        vendorInventory.totalMaxSpellDamage = 0;
-        vendorInventory.totalMinSpellDamage = 0;
-
-
-
+            // Would vendors ever need this?
+            v.totalDefense = 0;
+            v.totalCritChance = 0;
+            v.totalMaxSpellDamage = 0;
+            v.totalMinSpellDamage = 0;
+        }
     }
 
     public void ResetXP() => _xpSystem.ResetExperienceSystem();

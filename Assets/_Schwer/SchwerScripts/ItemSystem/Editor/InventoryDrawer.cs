@@ -3,14 +3,9 @@ using UnityEngine;
 
 namespace SchwerEditor.ItemSystem {
     using Schwer.ItemSystem;
-    
-    [CustomPropertyDrawer(typeof(Schwer.ItemSystem.Inventory))]
-    public class InventoryDrawer : PropertyDrawer {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-            // Reference: https://forum.unity.com/threads/property-drawer-overlapping-anything-underneath-it.184521/
-            return base.GetPropertyHeight(property, label) * (property.isExpanded ? property.CountInProperty() : 1);
-        }
 
+    [CustomPropertyDrawer(typeof(Inventory))]
+    public class InventoryDrawer : PropertyDrawer {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             var keys = property.FindPropertyRelative("keys");
             var values = property.FindPropertyRelative("values");
@@ -27,6 +22,7 @@ namespace SchwerEditor.ItemSystem {
 
             if (property.isExpanded) {
                 EditorGUI.BeginDisabledGroup(true);
+
                 var kvpHeight = EditorGUIUtility.singleLineHeight;
                 var kvpSpacing = EditorGUIUtility.standardVerticalSpacing;
                 var halfWidth = position.width / 2;
@@ -38,7 +34,10 @@ namespace SchwerEditor.ItemSystem {
                     var value = values.GetArrayElementAtIndex(i);
                     EditorGUI.PropertyField(keyRect, key, GUIContent.none);
                     EditorGUI.PropertyField(valueRect, value, GUIContent.none);
+                    GUILayout.Space(kvpHeight + kvpSpacing);
                 }
+                GUILayout.Space(kvpSpacing);
+
                 EditorGUI.EndDisabledGroup();
             }
         }
