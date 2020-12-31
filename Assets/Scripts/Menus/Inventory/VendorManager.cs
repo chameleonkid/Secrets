@@ -14,6 +14,10 @@ public class VendorManager : ItemDisplay
     [SerializeField] private TextMeshProUGUI descriptionText = default;
     [SerializeField] private GameObject firstSelection = default;
 
+    [SerializeField] private AudioClip sellSound = default;
+    [SerializeField] private AudioClip buySound = default;
+    [SerializeField] private AudioClip cantSellorBuySound = default;
+
     private Inventory _inventory;
     public override Inventory inventory {
         get => _inventory;
@@ -102,9 +106,10 @@ public class VendorManager : ItemDisplay
             if (item.unique && playerDisplay.inventory.items[item] > 0)
             {
                 descriptionText.text = $"You already own {item.name}!";
+                SoundManager.RequestSound(cantSellorBuySound);
                 return;
             }
-
+            SoundManager.RequestSound(buySound);
             playerDisplay.inventory.items[item]++;
             playerDisplay.inventory.coins -= item.buyPrice;
             
@@ -121,6 +126,7 @@ public class VendorManager : ItemDisplay
         else
         {
             descriptionText.text = $"Not enough money to buy {item}!";
+            SoundManager.RequestSound(cantSellorBuySound);
         }
     }
 
@@ -129,6 +135,7 @@ public class VendorManager : ItemDisplay
     {
         if (inventory.coins >= item.sellPrice)
         {
+            SoundManager.RequestSound(sellSound);
             playerDisplay.inventory.items[item]--;
             playerDisplay.inventory.coins += item.sellPrice;
             
@@ -145,6 +152,7 @@ public class VendorManager : ItemDisplay
         else
         {
             descriptionText.text = $"Vendor does not have enough money to buy your {item}!";
+            SoundManager.RequestSound(cantSellorBuySound);
         }
     }
 
