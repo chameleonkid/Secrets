@@ -8,4 +8,7 @@ public class UnityEventNexus : ScriptableObject
 
     [SerializeField] private ConstrainedFloat health = default;
     public void ModifyCurrentHealth(float deltaHealth) => health.current += deltaHealth;
+
+    [SerializeField] private ConstrainedFloat lumen = default;
+    public void ModifyCurrentLumen(float deltaLumen) => lumen.current += deltaLumen;
 }
