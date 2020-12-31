@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerMovement : Character
 {
@@ -10,6 +11,8 @@ public class PlayerMovement : Character
 
     private Vector3 change;
 
+    [SerializeField] private ConstrainedFloat _lumen = default;
+    public ConstrainedFloat lumen => _lumen;
     [SerializeField] private ConstrainedFloat _mana = default;
     public ConstrainedFloat mana => _mana;
     [SerializeField] private ConstrainedFloat _health = default;
@@ -41,8 +44,8 @@ public class PlayerMovement : Character
 
     [SerializeField] private AudioClip[] attackSounds = default;
     [SerializeField] private AudioClip levelUpSound = default;
-
-
+    [Header("Lamp")]
+    [SerializeField] private Light2D playerLamp;
     //############### LIFT-TEST      ##############
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
@@ -71,8 +74,8 @@ public class PlayerMovement : Character
     {
         SetAnimatorXY(Vector2.down);
         currentState = State.walk;
-
         transform.position = startingPosition.value;
+        playerLamp = GameObject.Find("Lamp").GetComponent<Light2D>();
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
@@ -118,6 +121,11 @@ public class PlayerMovement : Character
         if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack)
         {
             StartCoroutine(SpellAttackCo());
+        }
+
+        if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && lumen.current > 0)
+        {
+            toggleLamp();
         }
         //##############################################################################################################################################################
 
@@ -177,6 +185,8 @@ public class PlayerMovement : Character
             currentState = State.walk;
         }
     }
+
+
 
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCo()
@@ -329,8 +339,48 @@ public class PlayerMovement : Character
     {
         currentState = State.dead;
         animator.SetBool("isDead", true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("DeathMenu");
+    }
+
+
+    //Lamp
+    private void toggleLamp()
+    {
+        var lamp = myInventory.currentLamp;
+        if (playerLamp.intensity == 0)
+        {
+            InvokeRepeating("reduceLampLight", 0, 1);
+            playerLamp.intensity = 1;
+            playerLamp.color = lamp.color;
+            playerLamp.pointLightOuterRadius = lamp.outerRadius;
+
+
+        }
+        else
+        {
+            playerLamp.intensity = 0;
+            StopCoroutine("LampCo");
+            CancelInvoke("reduceLampLight");
+        }
+    }
+
+    private void reduceLampLight()
+    {
+        StartCoroutine(LampCo());
+    }
+    private IEnumerator LampCo()
+    {   if(lumen.current > 0)
+        {
+            lumen.current -= 1;
+            yield return new WaitForSeconds(1f);
+        }
+
+        if (lumen.current <= 0)
+        {
+            playerLamp.intensity = 0;
+            CancelInvoke("reduceLampLight");
+        }
     }
 
 }

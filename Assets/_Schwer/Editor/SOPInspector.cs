@@ -5,6 +5,11 @@ using UnityEngine;
 
 [CustomEditor(typeof(ScriptableObjectPersistence))]
 public class SOPInspector : Editor {
+
+    [SerializeField] private Inventory[] _vendorInventories = default;
+    public Inventory[] vendorInventories => _vendorInventories;
+
+
     public override void OnInspectorGUI() {
         var sop = (ScriptableObjectPersistence)target;
         if (GUILayout.Button("Refresh References")) {
@@ -26,11 +31,32 @@ public class SOPInspector : Editor {
         var mana = FindFirstAsset<ConstrainedFloat>("Mana t:ConstrainedFloat");
         SetPrivateField(sop, "_mana", mana);
 
+        var lumen = FindFirstAsset<ConstrainedFloat>("Lumen t:ConstrainedFloat");
+        SetPrivateField(sop, "_lumen", lumen);
+
+
         var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");
         SetPrivateField(sop, "_xpSystem", xp);
 
         var inv = FindFirstAsset<Inventory>("Player t:Inventory");
         SetPrivateField(sop, "_playerInventory", inv);
+
+
+        var inventories = ScriptableObjectUtility.GetAllInstances<Inventory>();
+        var vendorInventories = new List<Inventory>();
+        for (int i = 0; i < inventories.Length; i++)
+        {
+            var path = AssetDatabase.GetAssetPath(inventories[i]);
+            if (path.Contains("Vendor"))
+            {
+                vendorInventories.Add(inventories[i]);
+            }
+        }
+        SetPrivateField(sop, "_vendorInventories", vendorInventories.ToArray());
+
+
+    
+
 
         var bools = ScriptableObjectUtility.GetAllInstances<BoolValue>();
         var chests = new List<BoolValue>();

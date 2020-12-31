@@ -64,6 +64,7 @@ public class Enemy : Character
         transform.position = homePosition;
         chaseRadius = originalChaseRadius;
         currentState = State.idle;
+        
     }
 
     protected override void Awake()
@@ -99,7 +100,7 @@ public class Enemy : Character
             SetAnimatorXYSingleAxis(temp - transform.position);
             rigidbody.MovePosition(temp);
             currentState = State.walk;
-            animator.SetBool("WakeUp", true);
+            animator.SetBool("isMoving", true);
         }
     }
 

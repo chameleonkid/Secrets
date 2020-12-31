@@ -144,7 +144,7 @@ public class VendorManager : ItemDisplay
         }
         else
         {
-            descriptionText.text = $"Vendor does not enough money to buy your {item}!";
+            descriptionText.text = $"Vendor does not have enough money to buy your {item}!";
         }
     }
 

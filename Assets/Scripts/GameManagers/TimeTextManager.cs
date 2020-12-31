@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+
 
 public class TimeTextManager : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class TimeTextManager : MonoBehaviour
 
     [SerializeField] private float fullDayLength = 60;
     [SerializeField] private float timeMultiplier = 1;
+
 
 
     [SerializeField] private float _normalizedTimeOfDay = 0;

@@ -63,6 +63,7 @@ public class SimpleSave : MonoBehaviour
         ES3.Save("Position", so.playerPosition);
         ES3.Save("Health", so.health);
         ES3.Save("Mana", so.mana);
+        ES3.Save("LampLight", so.lampLight);
     }
 
     private void SaveInventory()
@@ -83,6 +84,7 @@ public class SimpleSave : MonoBehaviour
         ES3.Load("Position", so.playerPosition);
         ES3.Load("Health", so.health);
         ES3.Load("Mana", so.mana);
+        ES3.Load("LampLight", so.lampLight);
     }
 
     private void LoadInventory()
