@@ -150,6 +150,10 @@ public class WeatherManager : MonoBehaviour
 
             globalLight.intensity = globalLightInitialIntensity * intensityMultiplier;
         }
+        else if (SceneManager.GetActiveScene().name.Contains("Dungeon"))
+        {
+            globalLight.intensity = 0;
+        }
         else
         {
             globalLight.intensity = 1;
