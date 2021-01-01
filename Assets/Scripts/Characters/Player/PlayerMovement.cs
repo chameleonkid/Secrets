@@ -134,7 +134,13 @@ public class PlayerMovement : Character
             animator.SetBool("isShooting", false);
         }
 
-        animator.SetBool("isHurt", (currentState == State.stagger));
+       animator.SetBool("isHurt", (currentState == State.stagger));
+      /*
+        if (currentState == State.stagger)
+        {
+            animator.Play("Hurt");
+        }
+      */
         animator.SetBool("Moving", (change != Vector3.zero));
 
         // ################################# Trying to drop things ################################################################
