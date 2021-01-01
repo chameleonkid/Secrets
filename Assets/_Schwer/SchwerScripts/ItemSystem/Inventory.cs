@@ -18,6 +18,8 @@ namespace Schwer.ItemSystem {
         [UnityEngine.SerializeField, UnityEngine.Min(1)] private int _maxCapacity = 21;
         public int maxCapacity => _maxCapacity;
 
+        public bool HasCapacity(Item item) => (this[item] > 0 || this.Count < maxCapacity);
+
         // Reference for custom `Dictionary`-like behaviour:
         // https://stackoverflow.com/questions/6250706/override-dictionary-add
         private IDictionary<Item, int> backingDictionary;
