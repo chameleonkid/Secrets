@@ -18,6 +18,7 @@ public class TreasureChest : Interactable
     private Animator anim;
 
     [SerializeField] private AudioClip chestSound = default;
+    [SerializeField] private AudioClip noInventorySpace = default;
 
 
     private void Start()
@@ -37,10 +38,21 @@ public class TreasureChest : Interactable
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
         {
-            if (!isOpen)
+            if (!isOpen && playerInventory.items.HasCapacity(contents) == true)
             {
                 OpenChest();
             }
+            else if(!isOpen && contents.unique && playerInventory.items.HasCapacity(contents) == false)
+            {
+                NoInventorySpace();
+                SoundManager.RequestSound(noInventorySpace);
+            }
+            /*         
+            else if (!isOpen && !contents.unique && playerInventory.items.HasCapacity(contents) == false && playerInventory.items.Contains(contents))  <--- how to check that??? And why is it working fine without that!?
+            {
+                playerInventory.items[contents]++;
+            }
+            */
             else
             {
                 ChestAlreadyOpen();
@@ -68,6 +80,16 @@ public class TreasureChest : Interactable
         storeOpen.RuntimeValue = isOpen;
     }
 
+
+    public void NoInventorySpace()
+    {
+        dialogBox.SetActive(true);
+        dialogText.text = "There is no space left in your inventory";
+
+    }
+
+
+
     public void ChestAlreadyOpen()
     {
         // Dialog off
@@ -93,6 +115,7 @@ public class TreasureChest : Interactable
         {
             playerInRange = false;
             contextOff.Raise();
+            dialogBox.SetActive(false);
         }
     }
 }

@@ -17,6 +17,7 @@ public class Inventory : ScriptableObject
             }
         }
     }
+    
 
     public Item currentItem;
     
