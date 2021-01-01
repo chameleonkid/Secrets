@@ -378,7 +378,7 @@ public class PlayerMovement : Character
     private IEnumerator LampCo()
     {   if(lumen.current > 0)
         {
-            lumen.current -= 1;
+            lumen.current -= myInventory.currentLamp.lumenPerSecond;
             yield return new WaitForSeconds(1f);
         }
 
