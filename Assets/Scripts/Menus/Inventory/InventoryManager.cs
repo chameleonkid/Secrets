@@ -16,6 +16,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI spellDisplay = default;
     [SerializeField] private TextMeshProUGUI rangeDisplay = default;
     [SerializeField] private TextMeshProUGUI lightRadiusDisplay = default;
+    [SerializeField] private Material swordMaterial = default;
+
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -80,6 +82,7 @@ public class InventoryManager : MonoBehaviour
         if (item is EquippableItem)
         {
             inventory.Equip((EquippableItem)item);
+            setWeaponColor();
         }
 
         if (item.usable)
@@ -123,4 +126,9 @@ public class InventoryManager : MonoBehaviour
         inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
 
     private string LightRadiusDisplayText() => (inventory.currentLamp) ? "" + inventory.currentLamp.outerRadius : "";
+
+    private void setWeaponColor()
+    {
+        swordMaterial.color = inventory.currentWeapon.glowColor;
+    }
 }

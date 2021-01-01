@@ -17,10 +17,10 @@ public class Inventory : ScriptableObject
             }
         }
     }
-    
+
 
     public Item currentItem;
-    
+
     public InventoryWeapon currentWeapon;
     public InventoryArmor currentArmor;
     public InventoryHelmet currentHelmet;
@@ -38,6 +38,8 @@ public class Inventory : ScriptableObject
     public float totalCritChance;
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
+
+
 
 #if UNITY_EDITOR
     // Needed in order to allow changes to the Inventory in the editor to be saved.
@@ -114,6 +116,8 @@ public class Inventory : ScriptableObject
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
+
+
     }
 
     private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
