@@ -1,36 +1,15 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TimeTextManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timeDisplay = default;
+    [SerializeField] private Image timeImage = default;
+    [SerializeField] private Sprite dayTimeSprite = default;
+    [SerializeField] private Sprite nightTimeSprite = default;
 
-    [SerializeField] private float fullDayLength = 60;
-    [SerializeField] private float timeMultiplier = 1;
-
-    [SerializeField] private float _normalizedTimeOfDay = 0;
-    public float normalizedTimeOfDay => _normalizedTimeOfDay;
-
-    private void Start() => UpdateUI();
-
-    void Awake() => timeDisplay = GameObject.Find("TimeText").GetComponent<TextMeshProUGUI>();
-
-    private void Update()
-    {
-        UpdateTime();
-        UpdateUI();
-    }
-
-    private void UpdateTime()
-    {
-        _normalizedTimeOfDay += (Time.deltaTime / fullDayLength) * timeMultiplier;
-        if (_normalizedTimeOfDay >= 1)
-        {
-            _normalizedTimeOfDay = 0;
-        }
-    }
-
-    private void UpdateUI()
+    private void UpdateUI(float normalizedTimeOfDay)
     {
         var hour = Mathf.FloorToInt(24 * normalizedTimeOfDay);
         var minute = Mathf.FloorToInt((24 * 60 * normalizedTimeOfDay) % 60);

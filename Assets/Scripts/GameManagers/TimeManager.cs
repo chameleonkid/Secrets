@@ -1,64 +1,23 @@
-﻿using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using System;
+using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] private Light2D globalLight;
-    [SerializeField] private float globalLightInitialIntensity;
-    [SerializeField] private float normalizedTimeOfDay = 0;
-    [SerializeField] private TimeTextManager time = default;
+    public static event Action<float> OnTimeChanged;
 
-    [SerializeField] private Sprite dayTimeSprite;
-    [SerializeField] private Sprite nightTimeSprite;
-    [SerializeField] private Image timeImage;
+    [SerializeField] private float fullDayLength = 60;
+    [SerializeField] private float timeMultiplier = 1;
+
+    [SerializeField] private float normalizedTimeOfDay = 0;
 
     private void Update()
     {
-        UpdateSun();
-    }
-
-    private void Awake()
-    {
-        globalLight = GameObject.Find("Global Light 2D").GetComponent<Light2D>();
-        time = GameObject.Find("TimeInfo").GetComponent<TimeTextManager>();
-        timeImage = GameObject.Find("TimeInfo").GetComponent<Image>();
-        globalLightInitialIntensity = globalLight.intensity;
-    }
-
-    private void UpdateSun()
-    {
-        if (SceneManager.GetActiveScene().name == "Overworld")
+        normalizedTimeOfDay += (Time.deltaTime / fullDayLength) * timeMultiplier;
+        while (normalizedTimeOfDay >= 1)
         {
-            var normTime = time.normalizedTimeOfDay;
+            normalizedTimeOfDay--;
+        }
 
-            float intensityMultiplier = 1;
-            if (normTime <= 0.23f || normTime >= 0.75f)
-            {
-                intensityMultiplier = 0;
-                timeImage.sprite = nightTimeSprite;
-            }
-            else if (normTime <= 0.25f)
-            {
-                intensityMultiplier = Mathf.Clamp01((normTime - 0.23f) * (1 / 0.02f));
-                timeImage.sprite = dayTimeSprite;
-            }
-            else if (normTime >= 0.73f)
-            {
-                intensityMultiplier = Mathf.Clamp01(1 - ((normTime - 0.73f) * (1 / 0.02f)));
-                timeImage.sprite = nightTimeSprite;
-            }
-
-            globalLight.intensity = globalLightInitialIntensity * intensityMultiplier;
-        }
-        else if (SceneManager.GetActiveScene().name.Contains("Dungeon"))
-        {
-            globalLight.intensity = 0;
-        }
-        else
-        {
-            globalLight.intensity = 1;
-        }
+        OnTimeChanged?.Invoke(normalizedTimeOfDay);
     }
 }
