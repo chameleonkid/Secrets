@@ -21,9 +21,16 @@ public class LampLight : MonoBehaviour
     {
         var lamp = player.inventory.currentLamp;
 
-        lampLight.intensity = 1;
-        lampLight.color = lamp.color;
-        lampLight.pointLightOuterRadius = lamp.outerRadius;
+        if (lamp != null)
+        {
+            lampLight.intensity = 1;
+            lampLight.color = lamp.color;
+            lampLight.pointLightOuterRadius = lamp.outerRadius;
+        }
+        else
+        {
+            this.enabled = false;
+        }
     }
 
     private void OnDisable() => lampLight.intensity = 0;
