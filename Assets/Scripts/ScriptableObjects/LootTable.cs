@@ -5,7 +5,7 @@ public class Loot
 {
     // public PowerUps thisLoot;
     public float lootChance;
-    public ItemPickUp thisItem;
+    public PickUp thisItem;
 }
 
 [CreateAssetMenu(menuName = "Scriptable Object/Loot Table")]
@@ -13,7 +13,7 @@ public class LootTable : ScriptableObject
 {
     public Loot[] loots;
 
-    public ItemPickUp LootPowerUp()
+    public PickUp LootPowerUp()
     {
         float cumProb = 0;
         float currentProb = Random.Range(0, 100);
