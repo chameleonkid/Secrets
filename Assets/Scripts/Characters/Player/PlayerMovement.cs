@@ -53,7 +53,8 @@ public class PlayerMovement : Character
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
-    [SerializeField] private SpriteSkinRPC weaponSkin = default;
+    [SerializeField] private SpriteSkinRPC weaponSkinChanger = default;
+    private Texture2D oldWeaponSkin = default;
 
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
@@ -195,13 +196,21 @@ public class PlayerMovement : Character
         */
         //###################ALTERING HITBOX###############################
 
-
+        
         var currentWeapon = inventory.currentWeapon;
         hitBoxColliders[0].points = currentWeapon.upBox;
         hitBoxColliders[1].points = currentWeapon.downBox;
         hitBoxColliders[2].points = currentWeapon.rightBox;
         hitBoxColliders[3].points = currentWeapon.leftBox;
-        weaponSkin.newSprite = currentWeapon.weaponSkin;
+
+
+        weaponSkinChanger.newSprite = currentWeapon.weaponSkin;
+
+        if (currentWeapon.weaponSkin != oldWeaponSkin)
+        {
+            weaponSkinChanger.ResetRenderer();
+        }
+        oldWeaponSkin = currentWeapon.weaponSkin;
 
 
         var isCritical = IsCriticalHit();

@@ -100,4 +100,21 @@ public class SpriteSkinRPC : MonoBehaviour {
 		}
 	}
 
+
+    public void ResetRenderer()
+    {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInParent<SpriteRenderer>(); //Set spriteRenderer to current sprite's renderer.
+        }
+        if (newSprite != null)
+        {
+            newSpritesheet = Resources.LoadAll<Sprite>(folderPath + newSprite.name); //Load all sprites within newSpritesheet.
+        }
+        if (isChildSprite == true)
+        {
+            parentSkin = transform.parent.GetComponent<SpriteSkinRPC>(); //Get the base sprite's SpriteSkin component if this is a child sprite.
+        }
+    }
+
 }

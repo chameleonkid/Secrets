@@ -424,7 +424,6 @@ PolygonCollider2D:
       - {x: -0.8434615, y: 0.116592094}
       - {x: -0.6287129, y: -0.06769812}
       - {x: -0.39880943, y: -0.10033947}
-      - {x: -0.245579, y: 0.12262462}
 --- !u!114 &3084345826519001305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,7 +729,6 @@ PolygonCollider2D:
       - {x: 0.56448674, y: -0.16291112}
       - {x: 0.80434775, y: 0.046437755}
       - {x: 0.83100605, y: 0.46982062}
-      - {x: 0.6120231, y: 0.7770854}
 --- !u!114 &1987021321051761730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1090,11 @@ MonoBehaviour:
   - {fileID: 3397784029170857262}
   - {fileID: 4080494908198952814}
   roundAttack: {fileID: 8330316709131100593}
+  hitBoxColliders:
+  - {fileID: 1397228304391159584}
+  - {fileID: 4492131320186280563}
+  - {fileID: 9074679617765472610}
+  - {fileID: 103994057321240014}
   arrowSpeed: 8
   projectile: {fileID: 2015206087574396294, guid: a1434790cc1829148a1a7fb960f88361,
     type: 3}
@@ -1102,6 +1105,7 @@ MonoBehaviour:
   levelUpSound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
   lamp: {fileID: 3563088278929260502}
   thingSprite: {fileID: 7737533578274349692}
+  weaponSkinChanger: {fileID: 3263862040294853675}
 --- !u!114 &2827189157319961769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1560,7 +1564,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000011830494322, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_Name
-      value: Female Weapons - Sword
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 1000011830494322, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_IsActive
@@ -1576,7 +1580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1610,6 +1614,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013860518316, guid: 5494c1d4f0f0f0046aea6711aebf5f1e,
+        type: 3}
+      propertyPath: newSprite
+      value: 
+      objectReference: {fileID: 2800000, guid: 4b86f21c5edd3a84b8b145ad5f0fba78, type: 3}
     - target: {fileID: 212000011897336508, guid: 5494c1d4f0f0f0046aea6711aebf5f1e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1617,6 +1626,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5bdeaf8ef3d63ac4aa3e588cb7ff1279, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
+--- !u!114 &3263862040294853675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114000013860518316, guid: 5494c1d4f0f0f0046aea6711aebf5f1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3233183568148804999}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a857ff52570f8c479946076ced790ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3229264199866811941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e,
