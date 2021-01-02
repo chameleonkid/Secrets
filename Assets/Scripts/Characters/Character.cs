@@ -10,7 +10,6 @@ public abstract class Character : MonoBehaviour
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
     protected Animator animator { get; private set; }
-    public Animator effectAnimator = default;
     protected InvulnerabilityFrames iframes { get; private set; }
 
     protected virtual void Awake() => GetCharacterComponents();
@@ -20,7 +19,6 @@ public abstract class Character : MonoBehaviour
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-     //   effectAnimator = GetComponentInChildren<Animator>();
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 

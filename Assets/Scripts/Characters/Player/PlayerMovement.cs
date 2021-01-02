@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : Character
 {
+    [SerializeField] private Animator effectAnimator = default;
+
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
     private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
