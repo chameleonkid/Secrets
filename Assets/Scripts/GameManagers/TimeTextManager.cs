@@ -9,6 +9,9 @@ public class TimeTextManager : MonoBehaviour
     [SerializeField] private Sprite dayTimeSprite = default;
     [SerializeField] private Sprite nightTimeSprite = default;
 
+    private void OnEnable() => TimeManager.OnTimeChanged += UpdateUI;
+    private void OnDisable() => TimeManager.OnTimeChanged -= UpdateUI;
+
     private void UpdateUI(float normalizedTimeOfDay)
     {
         var hour = Mathf.FloorToInt(24 * normalizedTimeOfDay);
