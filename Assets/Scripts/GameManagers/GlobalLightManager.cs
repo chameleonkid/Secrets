@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Light2D))]
 public class GlobalLightManager : MonoBehaviour
 {
-    [SerializeField] private Light2D globalLight = default;
+    private Light2D globalLight = default;
     private float initialIntensity = default;
 
     private void OnEnable() => TimeManager.OnTimeChanged += UpdateSun;
