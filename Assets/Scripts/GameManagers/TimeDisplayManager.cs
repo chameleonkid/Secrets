@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine.UI;
 
-public class TimeTextManager : MonoBehaviour
+public class TimeDisplayManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timeDisplay = default;
     [SerializeField] private Image timeImage = default;
