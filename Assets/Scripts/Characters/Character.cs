@@ -31,8 +31,8 @@ public abstract class Character : MonoBehaviour
             direction.x = Mathf.Round(direction.x);
             direction.y = Mathf.Round(direction.y);
 
-            animator.SetFloat("MoveX", direction.x);
-            animator.SetFloat("MoveY", direction.y);
+            animator.SetFloat("moveX", direction.x);
+            animator.SetFloat("moveY", direction.y);
         }
     }
 
