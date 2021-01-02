@@ -2,7 +2,7 @@
 {
     protected override void PlayerPickUp(PlayerMovement player)
     {
-        player.myInventory.coins++;
+        player.inventory.coins++;
         Destroy(this.gameObject);
     }
 }

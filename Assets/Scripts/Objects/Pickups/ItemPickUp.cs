@@ -6,9 +6,9 @@ public class ItemPickUp : PickUp
 
     protected override void PlayerPickUp(PlayerMovement player)
     {
-        if (player.myInventory.items.HasCapacity(item))
+        if (player.inventory.items.HasCapacity(item))
         {
-            player.myInventory.items[item]++;
+            player.inventory.items[item]++;
             Destroy(this.gameObject);
         }
         else

@@ -19,7 +19,7 @@ public class LampLight : MonoBehaviour
 
     private void OnEnable()
     {
-        var lamp = player.myInventory.currentLamp;
+        var lamp = player.inventory.currentLamp;
 
         lampLight.intensity = 1;
         lampLight.color = lamp.color;
@@ -35,7 +35,7 @@ public class LampLight : MonoBehaviour
         while (timer >= 1)
         {
             timer--;
-            player.lumen.current -= player.myInventory.currentLamp.lumenPerSecond;
+            player.lumen.current -= player.inventory.currentLamp.lumenPerSecond;
 
             LumenCheck();
         }
