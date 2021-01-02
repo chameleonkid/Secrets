@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -16,16 +14,12 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Sprite nightTimeSprite;
     [SerializeField] private Image timeImage;
 
-
-// Update is called once per frame
-void Update()
+    private void Update()
     {
         UpdateSun();
     }
 
     private void Awake()
-
-
     {
         globalLight = GameObject.Find("Global Light 2D").GetComponent<Light2D>();
         time = GameObject.Find("TimeInfo").GetComponent<TimeTextManager>();
@@ -33,7 +27,7 @@ void Update()
         globalLightInitialIntensity = globalLight.intensity;
     }
 
-    void UpdateSun()
+    private void UpdateSun()
     {
         if (SceneManager.GetActiveScene().name == "Overworld")
         {
@@ -67,5 +61,4 @@ void Update()
             globalLight.intensity = 1;
         }
     }
-
 }

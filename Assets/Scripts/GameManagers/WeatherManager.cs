@@ -1,11 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
-
 
 public class WeatherManager : MonoBehaviour
 {
@@ -17,61 +11,41 @@ public class WeatherManager : MonoBehaviour
     [SerializeField] private bool isSunny = false;
     [SerializeField] private bool isSnowing = false;
 
-
-
-    public void Update()
+    private void Update()
     {
-
         if (isRaining)
         {
             StopCoroutine(Snow());
             StopCoroutine(Sunny());
             StartRain();
         }
-        else if(isSnowing)
+        else if (isSnowing)
         {
             StopCoroutine(Rain());
             StopCoroutine(Sunny());
             StartSnow();
         }
-        else if(isSunny)
+        else if (isSunny)
         {
             StopCoroutine(Rain());
             StopCoroutine(Sunny());
             StartSunny();
         }
-        else
-        {
-            return;
-        }
-        
     }
 
-    public void Awake()
+    private void Awake()
     {
-
-
         rainMaker = GameObject.Find("RainMaker").GetComponent<ParticleSystem>();
         snowMaker = GameObject.Find("SnowMaker").GetComponent<ParticleSystem>();
         snowMakerEmission = snowMaker.emission;
         rainMakerEmission = rainMaker.emission;
-
     }
 
-    public void StartSnow()
-    {
-        StartCoroutine(Snow());
-    }
-    public void StartRain()
-    {
-        StartCoroutine(Rain());
+    public void StartSnow() => StartCoroutine(Snow());
 
-    }
-    public void StartSunny()
-    {
-        StartCoroutine(Sunny());
-    }
+    public void StartRain() => StartCoroutine(Rain());
 
+    public void StartSunny() => StartCoroutine(Sunny());
 
     private IEnumerator Snow()
     {
@@ -112,5 +86,4 @@ public class WeatherManager : MonoBehaviour
         rainMakerEmission.rateOverTime = 0f;
         yield return new WaitForSeconds(5f);
     }
-
 }
