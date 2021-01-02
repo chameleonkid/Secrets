@@ -25,17 +25,14 @@ public class GlobalLightManager : MonoBehaviour
             if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.75f)
             {
                 intensityMultiplier = 0;
-                // timeImage.sprite = nightTimeSprite;
             }
             else if (normalizedTimeOfDay <= 0.25f)
             {
                 intensityMultiplier = Mathf.Clamp01((normalizedTimeOfDay - 0.23f) * (1 / 0.02f));
-                // timeImage.sprite = dayTimeSprite;
             }
             else if (normalizedTimeOfDay >= 0.73f)
             {
                 intensityMultiplier = Mathf.Clamp01(1 - ((normalizedTimeOfDay - 0.73f) * (1 / 0.02f)));
-                // timeImage.sprite = nightTimeSprite;
             }
 
             globalLight.intensity = initialIntensity * intensityMultiplier;

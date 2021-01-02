@@ -14,5 +14,19 @@ public class TimeTextManager : MonoBehaviour
         var hour = Mathf.FloorToInt(24 * normalizedTimeOfDay);
         var minute = Mathf.FloorToInt((24 * 60 * normalizedTimeOfDay) % 60);
         timeDisplay.text = hour.ToString("00") + ":" + minute.ToString("00");
+
+        UpdateSprite(normalizedTimeOfDay);
+    }
+
+    private void UpdateSprite(float normalizedTimeOfDay)
+    {
+        if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.73f)
+        {
+            timeImage.sprite = nightTimeSprite;
+        }
+        else if (normalizedTimeOfDay <= 0.25f)
+        {
+            timeImage.sprite = dayTimeSprite;
+        }
     }
 }
