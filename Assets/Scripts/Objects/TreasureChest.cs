@@ -20,7 +20,6 @@ public class TreasureChest : Interactable
     [SerializeField] private AudioClip chestSound = default;
     [SerializeField] private AudioClip noInventorySpace = default;
 
-
     private void Start()
     {
         isOpen = storeOpen.RuntimeValue;
@@ -38,21 +37,17 @@ public class TreasureChest : Interactable
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
         {
-            if (!isOpen && playerInventory.items.HasCapacity(contents) == true)
+            if (!isOpen)
             {
-                OpenChest();
+                if (playerInventory.items.HasCapacity(contents))
+                {
+                    OpenChest();
+                }
+                else
+                {
+                    NoInventorySpace();
+                }
             }
-            else if(!isOpen && contents.unique && playerInventory.items.HasCapacity(contents) == false)
-            {
-                NoInventorySpace();
-                SoundManager.RequestSound(noInventorySpace);
-            }
-            /*         
-            else if (!isOpen && !contents.unique && playerInventory.items.HasCapacity(contents) == false && playerInventory.items.Contains(contents))  <--- how to check that??? And why is it working fine without that!?
-            {
-                playerInventory.items[contents]++;
-            }
-            */
             else
             {
                 ChestAlreadyOpen();
@@ -80,15 +75,12 @@ public class TreasureChest : Interactable
         storeOpen.RuntimeValue = isOpen;
     }
 
-
     public void NoInventorySpace()
     {
+        SoundManager.RequestSound(noInventorySpace);
         dialogBox.SetActive(true);
         dialogText.text = "There is no space left in your inventory";
-
     }
-
-
 
     public void ChestAlreadyOpen()
     {
@@ -102,10 +94,11 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && other.isTrigger)
         {
             playerInRange = true;
-        }
-        if (other.CompareTag("Player") && !isOpen)
-        {
-            contextOn.Raise();
+
+            if (!isOpen)
+            {
+                contextOn.Raise();
+            }
         }
     }
 
