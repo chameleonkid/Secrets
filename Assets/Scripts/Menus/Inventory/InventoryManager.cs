@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rangeDisplay = default;
     [SerializeField] private TextMeshProUGUI lightRadiusDisplay = default;
     [SerializeField] private Material swordMaterial = default;
+    [SerializeField] private Renderer swordRenderer = default;
 
 
     public Item currentItem;   //! What is the purpose of this?
@@ -29,6 +30,8 @@ public class InventoryManager : MonoBehaviour
         inventoryDisplay.OnSlotSelected = SetUpItemDescription;
         inventoryDisplay.OnSlotUsed = OnItemUsed;
         inventoryDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
+     //   swordRenderer = GameObject.Find("Female Weapons - Sword").GetComponent<SpriteRenderer>();
+     //   swordMaterial = swordRenderer.material;
     }
 
     public void ClosePanel()
@@ -129,6 +132,6 @@ public class InventoryManager : MonoBehaviour
 
     private void setWeaponColor()
     {
-        swordMaterial.color = inventory.currentWeapon.glowColor;
+        swordMaterial.SetColor("_GlowColor", inventory.currentWeapon.glowColor);
     }
 }
