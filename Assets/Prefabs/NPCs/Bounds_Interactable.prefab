@@ -50,7 +50,6 @@ MonoBehaviour:
     - Hey! I've never seen someone like you here before.
     - You look exhausted. Is everything ok?
     - So what are you going to do next?
-  playerInRange: 0
 --- !u!61 &126456738
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,6 +149,7 @@ GameObject:
   - component: {fileID: 168025459530825736}
   - component: {fileID: 161540055901114404}
   - component: {fileID: 183598017045549233}
+  - component: {fileID: 1580832166730782992}
   - component: {fileID: 184587034141489667}
   m_Layer: 0
   m_Name: RNDFemale1
@@ -319,13 +319,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cabfe57a4f75d468053ce1a5354f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
-  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   speed: 1
   bound: {fileID: 183598015624520692}
   moveTime: 5
   waitTime: 2
+--- !u!114 &1580832166730782992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184587034141489666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bd143d5d32f0b4d879c711d546dd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInRange: 0
+  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
+  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
 --- !u!61 &184587034141489667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -364,6 +376,10 @@ PrefabInstance:
       value: Female Hairstyle - Bumblebee - Blonde
       objectReference: {fileID: 0}
     - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -376,6 +392,10 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -386,14 +406,6 @@ PrefabInstance:
     - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4000012848157282, guid: ddb2da01caf6387438ec3b743373bfdd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -427,6 +439,10 @@ PrefabInstance:
       value: Female Outfits - Cleric Robes
       objectReference: {fileID: 0}
     - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -439,6 +455,10 @@ PrefabInstance:
       value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -449,14 +469,6 @@ PrefabInstance:
     - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1785316375, guid: ee157707c996b6042839a395412f6e64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -490,6 +502,10 @@ PrefabInstance:
       value: Female Weapons - Sword
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -502,6 +518,10 @@ PrefabInstance:
       value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -512,14 +532,6 @@ PrefabInstance:
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
