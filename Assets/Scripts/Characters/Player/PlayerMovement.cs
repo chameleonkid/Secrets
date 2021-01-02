@@ -42,10 +42,12 @@ public class PlayerMovement : Character
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
 
+    [Header("Sound FX")]
     [SerializeField] private AudioClip[] attackSounds = default;
     [SerializeField] private AudioClip levelUpSound = default;
+
     [Header("Lamp")]
-    [SerializeField] private Light2D playerLamp;
+    [SerializeField] private LampLight lamp = default;
     //############### LIFT-TEST      ##############
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
@@ -68,19 +70,15 @@ public class PlayerMovement : Character
         }
     }
 
-
-
     private void Start()
     {
         SetAnimatorXY(Vector2.down);
         currentState = State.walk;
         transform.position = startingPosition.value;
-        playerLamp = GameObject.Find("Lamp").GetComponent<Light2D>();
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
     private AudioClip GetLevelUpSound() => levelUpSound;
-
 
     private void Update()
     {
@@ -125,7 +123,7 @@ public class PlayerMovement : Character
 
         if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && lumen.current > 0)
         {
-            toggleLamp();
+            lamp.enabled = !lamp.enabled;
         }
         //##############################################################################################################################################################
 
@@ -191,8 +189,6 @@ public class PlayerMovement : Character
             currentState = State.walk;
         }
     }
-
-
 
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCo()
@@ -348,45 +344,4 @@ public class PlayerMovement : Character
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("DeathMenu");
     }
-
-
-    //Lamp
-    private void toggleLamp()
-    {
-        var lamp = myInventory.currentLamp;
-        if (playerLamp.intensity == 0)
-        {
-            InvokeRepeating("reduceLampLight", 0, 1);
-            playerLamp.intensity = 1;
-            playerLamp.color = lamp.color;
-            playerLamp.pointLightOuterRadius = lamp.outerRadius;
-
-
-        }
-        else
-        {
-            playerLamp.intensity = 0;
-            StopCoroutine("LampCo");
-            CancelInvoke("reduceLampLight");
-        }
-    }
-
-    private void reduceLampLight()
-    {
-        StartCoroutine(LampCo());
-    }
-    private IEnumerator LampCo()
-    {   if(lumen.current > 0)
-        {
-            lumen.current -= myInventory.currentLamp.lumenPerSecond;
-            yield return new WaitForSeconds(1f);
-        }
-
-        if (lumen.current <= 0)
-        {
-            playerLamp.intensity = 0;
-            CancelInvoke("reduceLampLight");
-        }
-    }
-
 }
