@@ -4,25 +4,24 @@ using UnityEngine.UI;
 public class TreasureChest : Interactable
 {
     [Header("Contents")]
-    public Item contents;
-    public Inventory playerInventory;
-    public bool isOpen;
-    public BoolValue storeOpen;
+    [SerializeField] private Item contents = default;
+    [SerializeField] private BoolValue storeOpen = default;
+    private bool isOpen { get => storeOpen.RuntimeValue; set => storeOpen.RuntimeValue = value; }
 
-    [Header("Signals + Dialog")]
-    public Signals raiseItem;
-    public GameObject dialogBox;
-    public Text dialogText;
+    [Header("Signals & Dialog")]
+    [SerializeField] private Signals raiseItem = default;
+    [SerializeField] private GameObject dialogBox = default;
+    [SerializeField] private Text dialogText = default;
 
-    [Header("Animation")]
-    private Animator anim;
-
+    [Header("Sound FX")]
     [SerializeField] private AudioClip chestSound = default;
     [SerializeField] private AudioClip noInventorySpace = default;
 
+    private Animator anim;
+    private PlayerMovement player;
+
     private void Start()
     {
-        isOpen = storeOpen.RuntimeValue;
         anim = GetComponent<Animator>();
         if (isOpen)
         {
@@ -39,7 +38,7 @@ public class TreasureChest : Interactable
         {
             if (!isOpen)
             {
-                if (playerInventory.items.HasCapacity(contents))
+                if (player.myInventory.items.HasCapacity(contents))
                 {
                     OpenChest();
                 }
@@ -60,11 +59,10 @@ public class TreasureChest : Interactable
         dialogBox.SetActive(true);
         dialogText.text = contents.description;
 
-        playerInventory.currentItem = contents;
-        playerInventory.items[contents]++;
+        player.myInventory.currentItem = contents;
+        player.myInventory.items[contents]++;
 
         // raise the signal to animate
-
         raiseItem.Raise();
         // set the chest to opened
         isOpen = true;
@@ -72,7 +70,6 @@ public class TreasureChest : Interactable
         //raise the context clue to off
         contextOff.Raise();
         anim.SetBool("opened", true);
-        storeOpen.RuntimeValue = isOpen;
     }
 
     public void NoInventorySpace()
@@ -94,6 +91,7 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && other.isTrigger)
         {
             playerInRange = true;
+            player = other.GetComponent<PlayerMovement>();
 
             if (!isOpen)
             {
@@ -107,6 +105,8 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && other.isTrigger)
         {
             playerInRange = false;
+            player = null;
+
             contextOff.Raise();
             dialogBox.SetActive(false);
         }
