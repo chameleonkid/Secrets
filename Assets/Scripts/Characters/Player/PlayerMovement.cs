@@ -53,7 +53,7 @@ public class PlayerMovement : Character
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
     //############### LIFT-TEST-ENDE ##############
-
+    [SerializeField] private SpriteSkinRPC weaponSkin = default;
 
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
@@ -194,11 +194,14 @@ public class PlayerMovement : Character
         Debug.Log("Stop altering Uphitbox-Points");
         */
         //###################ALTERING HITBOX###############################
+
+
         var currentWeapon = inventory.currentWeapon;
         hitBoxColliders[0].points = currentWeapon.upBox;
         hitBoxColliders[1].points = currentWeapon.downBox;
         hitBoxColliders[2].points = currentWeapon.rightBox;
         hitBoxColliders[3].points = currentWeapon.leftBox;
+        weaponSkin.newSprite = currentWeapon.weaponSkin;
 
 
         var isCritical = IsCriticalHit();
@@ -209,10 +212,11 @@ public class PlayerMovement : Character
         }
 
         SoundManager.RequestSound(GetAttackSound());
-        animator.SetBool("Attacking", true);
-        currentState = State.attack;
-        yield return null;
-        animator.SetBool("Attacking", false);
+
+            animator.SetBool("Attacking", true);
+            currentState = State.attack;
+            yield return null;
+            animator.SetBool("Attacking", false);
 
         yield return new WaitForSeconds(0.3f);
 

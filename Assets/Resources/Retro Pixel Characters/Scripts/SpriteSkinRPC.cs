@@ -16,6 +16,8 @@ public class SpriteSkinRPC : MonoBehaviour {
 	private int frameIndex = 0; //The index of the current frame. Used to set index of new frame.
 	private SpriteSkinRPC parentSkin; //The parent object's SpriteSkin component. Used only by child objects.
 
+    
+
 	//During start, find the SpriteRenderer and load all spritesheet frames into the array.
 	//Again, spritesheets need to be in the Resources folder for the Resources.LoadAll to work.
 	void Start () {
@@ -97,4 +99,5 @@ public class SpriteSkinRPC : MonoBehaviour {
 			return 0;
 		}
 	}
+
 }

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c161df0a42fe744e8d11b1d8a22190d, type: 3}
+  m_Name: Axe0
+  m_EditorClassIdentifier: 
+  _id: 1205
+  _name: Axe0
+  _description: Giant Axe
+  _sprite: {fileID: 21300000, guid: 8ffa59be6f5b048cab42ac44d2501330, type: 3}
+  _sound: {fileID: 8300000, guid: 5ea4775f4df9826469e2d88fbe281c6b, type: 3}
+  _unique: 1
+  _usable: 1
+  _level: 500
+  OnUse:
+    m_PersistentCalls:
+      m_Calls: []
+  _buyPrice: 50
+  _sellPrice: 100
+  minDamage: 15
+  maxDamage: 30
+  glowIntensity: 5
+  weaponSkin: {fileID: 0}
+  weaponType: 1
+  glowColor: {r: 0.3207547, g: 0.31318974, b: 0.31318974, a: 1}
+  leftBox:
+  - {x: 0, y: 0}
+  - {x: 2, y: 2}
+  - {x: 3, y: 3}
+  - {x: 0.1, y: 0.1}
+  - {x: 0.1, y: 0.1}
+  - {x: 0.1, y: 0.1}
+  - {x: 0, y: 0}
+  rightBox:
+  - {x: 1, y: 1}
+  - {x: 2, y: 2}
+  - {x: 3, y: 3}
+  - {x: -0.5, y: 0.8}
+  - {x: -0.25, y: 0.5}
+  - {x: 0.2, y: 0.5}
+  - {x: 0.2, y: 0.5}
+  upBox:
+  - {x: 0, y: 0}
+  - {x: 4, y: 15}
+  - {x: 7, y: 20}
+  - {x: 0, y: 25}
+  - {x: -7, y: 20}
+  - {x: -4, y: 15}
+  - {x: 0, y: 0}
+  downBox:
+  - {x: 0, y: 0}
+  - {x: 1, y: 1}
+  - {x: 0.6, y: 1.1}
+  - {x: -0.5, y: 0.8}
+  - {x: -0.25, y: 0.5}
+  - {x: 0.2, y: 0.5}
+  - {x: 0, y: 0}

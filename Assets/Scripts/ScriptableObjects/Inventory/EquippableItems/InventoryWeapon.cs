@@ -3,7 +3,7 @@
 [CreateAssetMenu(menuName = "Scriptable Object/Items/Weapon")]
 public class InventoryWeapon : EquippableItem
 {
-    private enum WeaponType
+    public enum WeaponType
     {
         Sword,
         Axe,
@@ -13,7 +13,8 @@ public class InventoryWeapon : EquippableItem
     public int minDamage;
     public int maxDamage;
     public float glowIntensity;
-    [SerializeField] private WeaponType weaponType = default;
+    public Texture2D weaponSkin = default;
+    public WeaponType weaponType = default;
     [ColorUsageAttribute(true, true)] public Color glowColor;
 
 
