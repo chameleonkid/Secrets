@@ -173,30 +173,7 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
-        //###################ALTERING HITBOX###############################
-        /*
-        Debug.Log("Start altering Uphitbox-Points");
-        Vector2 point0 = new Vector2(0.5f, 0.7f);
-        Vector2 point1 = new Vector2(0.4f, 0.9f);
-        Vector2 point2 = new Vector2(0.6f, 1.1f);
-        Vector2 point3 = new Vector2(-0.5f, 0.8f);
-        Vector2 point4 = new Vector2(-0.25f, 0.5f);
-        Vector2 point5 = new Vector2(0.2f, 0.5f);
-        Vector2 point6 = new Vector2(0.2f, 0.5f);
-
-        var hitBoxOriginalPoints = hitBoxColliders[0].points;
-        hitBoxColliders[0].points = new[] { point0, point1, point2, point3, point4, point5, point6 };
-
-        for(int i = 0;  i < 6; i++)
-        {
-            Debug.Log("Point " + i + " is " + hitBoxColliders[0].points[i]);
-        }
-   
-        Debug.Log("Stop altering Uphitbox-Points");
-        */
-        //###################ALTERING HITBOX###############################
-
-        
+      
         var currentWeapon = inventory.currentWeapon;
         hitBoxColliders[0].points = currentWeapon.upBox;
         hitBoxColliders[1].points = currentWeapon.downBox;
@@ -227,7 +204,7 @@ public class PlayerMovement : Character
             yield return null;
             animator.SetBool("Attacking", false);
 
-        yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(3f);
 
         if (currentState != State.interact)
         {

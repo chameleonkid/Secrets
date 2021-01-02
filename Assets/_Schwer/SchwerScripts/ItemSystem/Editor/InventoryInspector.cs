@@ -45,6 +45,14 @@ namespace SchwerEditor.ItemSystem {
                 inventory.items[item] += amount;
                 SetDirtyIfEditing(inventory);
                 Debug.Log("Added " + amount + "x " + itemName + " to " + invName + ".");
+
+            }
+            if (GUILayout.Button("Add " + 50 + "x " + itemName))
+            {
+                inventory.items[item] += 50;
+                SetDirtyIfEditing(inventory);
+                Debug.Log("Added " + 50 + "x " + itemName + " to " + invName + ".");
+
             }
             if (GUILayout.Button("Subtract " + amount + "x " + itemName)) {
                 inventory.items[item] -= amount;
