@@ -4,26 +4,24 @@ using UnityEngine.UI;
 public class TreasureChest : Interactable
 {
     [Header("Contents")]
-    public Item contents;
-    public Inventory playerInventory;
-    public bool isOpen;
-    public BoolValue storeOpen;
+    [SerializeField] private Item contents = default;
+    [SerializeField] private BoolValue storeOpen = default;
+    private bool isOpen { get => storeOpen.RuntimeValue; set => storeOpen.RuntimeValue = value; }
 
-    [Header("Signals + Dialog")]
-    public Signals raiseItem;
-    public GameObject dialogBox;
-    public Text dialogText;
+    [Header("Signals & Dialog")]
+    [SerializeField] private Signals raiseItem = default;
+    [SerializeField] private GameObject dialogBox = default;
+    [SerializeField] private Text dialogText = default;
 
-    [Header("Animation")]
-    private Animator anim;
-
+    [Header("Sound FX")]
     [SerializeField] private AudioClip chestSound = default;
     [SerializeField] private AudioClip noInventorySpace = default;
 
+    private Animator anim;
+    private PlayerMovement player;
 
     private void Start()
     {
-        isOpen = storeOpen.RuntimeValue;
         anim = GetComponent<Animator>();
         if (isOpen)
         {
@@ -38,21 +36,17 @@ public class TreasureChest : Interactable
     {
         if (Input.GetButtonDown("Interact") && playerInRange)
         {
-            if (!isOpen && playerInventory.items.HasCapacity(contents) == true)
+            if (!isOpen)
             {
-                OpenChest();
+                if (player.myInventory.items.HasCapacity(contents))
+                {
+                    OpenChest();
+                }
+                else
+                {
+                    NoInventorySpace();
+                }
             }
-            else if(!isOpen && contents.unique && playerInventory.items.HasCapacity(contents) == false)
-            {
-                NoInventorySpace();
-                SoundManager.RequestSound(noInventorySpace);
-            }
-            /*         
-            else if (!isOpen && !contents.unique && playerInventory.items.HasCapacity(contents) == false && playerInventory.items.Contains(contents))  <--- how to check that??? And why is it working fine without that!?
-            {
-                playerInventory.items[contents]++;
-            }
-            */
             else
             {
                 ChestAlreadyOpen();
@@ -65,11 +59,10 @@ public class TreasureChest : Interactable
         dialogBox.SetActive(true);
         dialogText.text = contents.description;
 
-        playerInventory.currentItem = contents;
-        playerInventory.items[contents]++;
+        player.myInventory.currentItem = contents;
+        player.myInventory.items[contents]++;
 
         // raise the signal to animate
-
         raiseItem.Raise();
         // set the chest to opened
         isOpen = true;
@@ -77,18 +70,14 @@ public class TreasureChest : Interactable
         //raise the context clue to off
         contextOff.Raise();
         anim.SetBool("opened", true);
-        storeOpen.RuntimeValue = isOpen;
     }
-
 
     public void NoInventorySpace()
     {
+        SoundManager.RequestSound(noInventorySpace);
         dialogBox.SetActive(true);
         dialogText.text = "There is no space left in your inventory";
-
     }
-
-
 
     public void ChestAlreadyOpen()
     {
@@ -102,10 +91,12 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && other.isTrigger)
         {
             playerInRange = true;
-        }
-        if (other.CompareTag("Player") && !isOpen)
-        {
-            contextOn.Raise();
+            player = other.GetComponent<PlayerMovement>();
+
+            if (!isOpen)
+            {
+                contextOn.Raise();
+            }
         }
     }
 
@@ -114,6 +105,8 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && other.isTrigger)
         {
             playerInRange = false;
+            player = null;
+
             contextOff.Raise();
             dialogBox.SetActive(false);
         }
