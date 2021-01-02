@@ -259,9 +259,8 @@ GameObject:
   - component: {fileID: 134352587}
   - component: {fileID: 134352590}
   - component: {fileID: 134352589}
-  - component: {fileID: 134352588}
   m_Layer: 5
-  m_Name: TimeInfo
+  m_Name: TimeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,22 +322,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &134352588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134352586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6030744874014479c4672bfd532131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeDisplay: {fileID: 0}
-  fullDayLength: 600
-  timeMultiplier: 10
-  _normalizedTimeOfDay: 0
 --- !u!1 &191286479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,6 +1667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1253614709}
+  - component: {fileID: 8900705991424112191}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -1712,6 +1696,25 @@ RectTransform:
   m_AnchoredPosition: {x: -1720.0001, y: 0}
   m_SizeDelta: {x: 200, y: 90}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &8900705991424112191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253614708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6030744874014479c4672bfd532131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeDisplay: {fileID: 191286481}
+  timeImage: {fileID: 134352589}
+  dayTimeSprite: {fileID: 21300000, guid: 131c27a5c641fc043b5fdeef43dd2e98, type: 3}
+  nightTimeSprite: {fileID: 21300000, guid: 602acb6b22ff680419008c7c483dd4f3, type: 3}
+  fullDayLength: 600
+  timeMultiplier: 10
+  _normalizedTimeOfDay: 0
 --- !u!1 &1255496605
 GameObject:
   m_ObjectHideFlags: 0
