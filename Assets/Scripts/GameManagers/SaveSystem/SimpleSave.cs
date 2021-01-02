@@ -2,26 +2,11 @@
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(ScriptableObjectPersistence))]
-public class SimpleSave : MonoBehaviour
+public class SimpleSave : DDOLSingleton<SimpleSave>
 {
-    public static SimpleSave Instance { get; private set; }
-
-    // public GameObject pausePanel;   // Refer to note in LoadScene
-
     private ScriptableObjectPersistence so;
 
-    private void Awake() {
-        if (Instance != null && Instance != this)
-        {
-            transform.parent = null;
-            Destroy(this.gameObject);
-        }
-        else {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-            so = GetComponent<ScriptableObjectPersistence>();
-        }
-    }
+    private void Start() => so = GetComponent<ScriptableObjectPersistence>();
 
     public void Save()
     {
