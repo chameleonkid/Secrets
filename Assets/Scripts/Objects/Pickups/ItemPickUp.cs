@@ -9,18 +9,15 @@ public class ItemPickUp : PickUp
         var player = other.GetComponent<PlayerMovement>();
         if (player != null && player.myInventory.items.HasCapacity(item) == true)
         {
-            player.myInventory.items[item]++;
-            Destroy(this.gameObject);
+            if (player.myInventory.items.HasCapacity(item))
+            {
+                player.myInventory.items[item]++;
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Debug.Log("Couldnt pick " + item + " up, since there was no space left");
+            }
         }
-        else if (player != null && player.myInventory.items.HasCapacity(item) == false)
-        {
-            Debug.Log("Couldnt pick " + item + " up, since there was no space left");
-        }
-        else
-        {
-            return;
-        }
-
-      
     }
 }
