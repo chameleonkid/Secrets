@@ -4,14 +4,10 @@ public class HeartContainer : PickUp
 {
     [SerializeField] private float amountToIncrease = default;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void PlayerPickUp(PlayerMovement player)
     {
-        var player = other.GetComponent<PlayerMovement>();
-        if (player != null)
-        {
-            player.healthMeter.max += amountToIncrease;
-            player.health = player.healthMeter.max;
-            Destroy(this.gameObject);
-        }
+        player.healthMeter.max += amountToIncrease;
+        player.health = player.healthMeter.max;
+        Destroy(this.gameObject);
     }
 }

@@ -1,21 +1,8 @@
 ﻿using UnityEngine;
 
-public class CanvasManager : MonoBehaviour
+public class CanvasManager : MonoBehaviourSingleton<CanvasManager>
 {
-    public static CanvasManager Instance { get; private set; }
-
     private GameObject activeCanvas;
-
-    private void Awake() {
-        if (Instance != null && Instance != this)
-        {
-            transform.parent = null;
-            Destroy(this.gameObject);
-        }
-        else {
-            Instance = this;
-        }
-    }
 
     public bool IsFreeOrActive(GameObject canvasGameObject)
     {

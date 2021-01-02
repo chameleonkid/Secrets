@@ -38,7 +38,7 @@ public class TreasureChest : Interactable
         {
             if (!isOpen)
             {
-                if (player.myInventory.items.HasCapacity(contents))
+                if (player.inventory.items.HasCapacity(contents))
                 {
                     OpenChest();
                 }
@@ -59,8 +59,8 @@ public class TreasureChest : Interactable
         dialogBox.SetActive(true);
         dialogText.text = contents.description;
 
-        player.myInventory.currentItem = contents;
-        player.myInventory.items[contents]++;
+        player.inventory.currentItem = contents;
+        player.inventory.items[contents]++;
 
         // raise the signal to animate
         raiseItem.Raise();

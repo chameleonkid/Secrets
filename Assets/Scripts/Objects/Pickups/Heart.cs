@@ -4,13 +4,9 @@ public class Heart : PickUp
 {
     [SerializeField] private float amountToIncrease = default;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void PlayerPickUp(PlayerMovement player)
     {
-        var player = other.GetComponent<PlayerMovement>();
-        if (player != null)
-        {
-            player.health += amountToIncrease;
-            Destroy(this.gameObject);
-        }
+        player.health += amountToIncrease;
+        Destroy(this.gameObject);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerMovement : Character
 {
@@ -29,7 +28,7 @@ public class PlayerMovement : Character
 
     public VectorValue startingPosition;
 
-    public Inventory myInventory;
+    public Inventory inventory;
     [SerializeField] private Item arrow = default;
 
     public SpriteRenderer receivedItemSprite;
@@ -42,10 +41,12 @@ public class PlayerMovement : Character
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
 
+    [Header("Sound FX")]
     [SerializeField] private AudioClip[] attackSounds = default;
     [SerializeField] private AudioClip levelUpSound = default;
+
     [Header("Lamp")]
-    [SerializeField] private Light2D playerLamp;
+    [SerializeField] private LampLight lamp = default;
     //############### LIFT-TEST      ##############
     //  public GameObject thing;
     public SpriteRenderer thingSprite;
@@ -68,19 +69,15 @@ public class PlayerMovement : Character
         }
     }
 
-
-
     private void Start()
     {
         SetAnimatorXY(Vector2.down);
         currentState = State.walk;
         transform.position = startingPosition.value;
-        playerLamp = GameObject.Find("Lamp").GetComponent<Light2D>();
     }
 
     private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
     private AudioClip GetLevelUpSound() => levelUpSound;
-
 
     private void Update()
     {
@@ -99,33 +96,33 @@ public class PlayerMovement : Character
 
         var notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
 
-        if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && myInventory.currentWeapon != null)
+        if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && inventory.currentWeapon != null)
         {
             StartCoroutine(AttackCo());
         }
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && myInventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && inventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
         if (Input.GetButton("UseItem") && currentState != State.roundattack && notStaggeredOrLifting && currentState != State.attack)
         {
-            if (arrow != null && myInventory.items[arrow] > 0 && myInventory.currentBow)
+            if (arrow != null && inventory.items[arrow] > 0 && inventory.currentBow)
             {
-                myInventory.items[arrow]--;
+                inventory.items[arrow]--;
                 StartCoroutine(SecondAttackCo());
             }
         }
         //############################################################################### Spell Cast ###############################################################################
-        if (Input.GetButton("SpellCast") && myInventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack)
+        if (Input.GetButton("SpellCast") && inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack)
         {
             StartCoroutine(SpellAttackCo());
         }
 
-        if (Input.GetButtonDown("Lamp") && myInventory.currentLamp && lumen.current > 0)
+        if (Input.GetButtonDown("Lamp") && inventory.currentLamp && lumen.current > 0)
         {
-            toggleLamp();
+            lamp.enabled = !lamp.enabled;
         }
         //##############################################################################################################################################################
 
@@ -166,7 +163,7 @@ public class PlayerMovement : Character
         }
     }
 
-    public bool IsCriticalHit() => (myInventory.totalCritChance > 0 && Random.Range(0, 99) <= myInventory.totalCritChance);
+    public bool IsCriticalHit() => (inventory.totalCritChance > 0 && Random.Range(0, 99) <= inventory.totalCritChance);
 
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
@@ -174,7 +171,7 @@ public class PlayerMovement : Character
         var isCritical = IsCriticalHit();
         for (int i = 0; i < directionalAttacks.Length; i++)
         {
-            directionalAttacks[i].damage = Random.Range(myInventory.currentWeapon.minDamage, myInventory.currentWeapon.maxDamage +1 );
+            directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage +1 );
             directionalAttacks[i].isCritical = isCritical;
         }
 
@@ -192,12 +189,10 @@ public class PlayerMovement : Character
         }
     }
 
-
-
     // ############################# Roundattack ################################################
     private IEnumerator RoundAttackCo()
     {
-        roundAttack.damage = Random.Range(myInventory.currentWeapon.minDamage, myInventory.currentWeapon.maxDamage + 1);
+        roundAttack.damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
         roundAttack.isCritical = IsCriticalHit();
         //! Is this missing a sound request?
         animator.SetBool("RoundAttacking", true);
@@ -214,7 +209,7 @@ public class PlayerMovement : Character
     {
         currentState = State.attack;
         animator.SetBool("isShooting", true);
-        CreateProjectile(projectile, arrowSpeed, Random.Range(myInventory.currentBow.minDamage, myInventory.currentBow.maxDamage + 1));
+        CreateProjectile(projectile, arrowSpeed, Random.Range(inventory.currentBow.minDamage, inventory.currentBow.maxDamage + 1));
 
         yield return new WaitForSeconds(0.3f);
 
@@ -254,10 +249,10 @@ public class PlayerMovement : Character
     private void MakeSpell()
     {
 
-        var prefab = myInventory.currentSpellbook.prefab;
-        var speed = myInventory.currentSpellbook.speed;
-        CreateProjectile(prefab, speed,Random.Range(myInventory.totalMinSpellDamage, myInventory.totalMaxSpellDamage + 1));
-        mana.current -= myInventory.currentSpellbook.manaCosts;
+        var prefab = inventory.currentSpellbook.prefab;
+        var speed = inventory.currentSpellbook.speed;
+        CreateProjectile(prefab, speed,Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
+        mana.current -= inventory.currentSpellbook.manaCosts;
 
     }
 
@@ -265,20 +260,20 @@ public class PlayerMovement : Character
 
     public void RaiseItem()
     {
-        if (myInventory.currentItem != null)
+        if (inventory.currentItem != null)
         {
             if (currentState != State.interact)
             {
                 animator.SetBool("receiveItem", true);
                 currentState = State.interact;
-                receivedItemSprite.sprite = myInventory.currentItem.sprite;
+                receivedItemSprite.sprite = inventory.currentItem.sprite;
             }
             else
             {
                 animator.SetBool("receiveItem", false);
                 currentState = State.idle;
                 receivedItemSprite.sprite = null;
-                myInventory.currentItem = null;
+                inventory.currentItem = null;
             }
         }
     }
@@ -313,8 +308,8 @@ public class PlayerMovement : Character
     {
         if (!isInvulnerable)
         {
-            myInventory.CalcDefense();
-            var finalDamage = damage - myInventory.totalDefense;
+            inventory.CalcDefense();
+            var finalDamage = damage - inventory.totalDefense;
             if (finalDamage > 0)
             {
                 health -= finalDamage;
@@ -348,45 +343,4 @@ public class PlayerMovement : Character
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("DeathMenu");
     }
-
-
-    //Lamp
-    private void toggleLamp()
-    {
-        var lamp = myInventory.currentLamp;
-        if (playerLamp.intensity == 0)
-        {
-            InvokeRepeating("reduceLampLight", 0, 1);
-            playerLamp.intensity = 1;
-            playerLamp.color = lamp.color;
-            playerLamp.pointLightOuterRadius = lamp.outerRadius;
-
-
-        }
-        else
-        {
-            playerLamp.intensity = 0;
-            StopCoroutine("LampCo");
-            CancelInvoke("reduceLampLight");
-        }
-    }
-
-    private void reduceLampLight()
-    {
-        StartCoroutine(LampCo());
-    }
-    private IEnumerator LampCo()
-    {   if(lumen.current > 0)
-        {
-            lumen.current -= myInventory.currentLamp.lumenPerSecond;
-            yield return new WaitForSeconds(1f);
-        }
-
-        if (lumen.current <= 0)
-        {
-            playerLamp.intensity = 0;
-            CancelInvoke("reduceLampLight");
-        }
-    }
-
 }
