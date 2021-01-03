@@ -237,8 +237,7 @@ public class PlayerMovement : Character
         animator.SetBool("isShooting", true);
         CreateProjectile(projectile, arrowSpeed, Random.Range(inventory.currentBow.minDamage, inventory.currentBow.maxDamage + 1));
 
-        // TODO: Bewegung zulassen?
-        yield return new WaitForSeconds(currentWeapon.swingTime);
+        yield return new WaitForSeconds(0.3f);
 
         if (currentState != State.interact)
         {
