@@ -208,7 +208,6 @@ public class PlayerMovement : Character
         // TODO: Bewegung zulassen?
         yield return new WaitForSeconds(currentWeapon.swingTime);
         
-
         if (currentState != State.interact)
         {
             currentState = State.walk;
