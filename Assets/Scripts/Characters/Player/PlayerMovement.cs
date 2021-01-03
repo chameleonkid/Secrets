@@ -252,8 +252,11 @@ public class PlayerMovement : Character
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
         proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
         var hitbox = proj.GetComponent<DamageOnTrigger>();
-        hitbox.damage = projectileDamage;    //replace defaultvalue with the value given from the makespell()/playervalue
-        hitbox.isCritical = IsCriticalHit();  // gets written into Derived class
+        if (hitbox)
+        {
+            hitbox.damage = projectileDamage;    //replace defaultvalue with the value given from the makespell()/playervalue
+            hitbox.isCritical = IsCriticalHit();  // gets written into Derived class
+        }
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
