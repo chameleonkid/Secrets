@@ -199,13 +199,15 @@ public class PlayerMovement : Character
 
         SoundManager.RequestSound(GetAttackSound());
 
-            animator.SetBool("Attacking", true);
-            currentState = State.attack;
-            yield return null;
-            animator.SetBool("Attacking", false);
+        animator.SetBool("Attacking", true);
+        currentState = State.attack;
+        yield return null;
+        animator.SetBool("Attacking", false);
 
-            yield return new WaitForSeconds(0.3f);
-
+        
+        // TODO: Bewegung zulassen?
+        yield return new WaitForSeconds(currentWeapon.swingTime);
+        
         if (currentState != State.interact)
         {
             currentState = State.walk;
