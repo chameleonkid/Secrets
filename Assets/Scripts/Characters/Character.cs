@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour
     protected Animator animator { get; private set; }
     public Animator effectAnimator = default;
     protected InvulnerabilityFrames iframes { get; private set; }
+    [SerializeField] protected bool isShrinked;
 
     protected virtual void Awake() => GetCharacterComponents();
 
@@ -89,4 +90,32 @@ public abstract class Character : MonoBehaviour
         lift,
         dead
     }
+
+
+    //############################# StatusEffects instead of fire and forget ############################################################
+    // This might be usefuf if you want to be able to revert effects. Like using an anti-poison.                                        #
+    //                                                                                                                                  #
+    //###################################################################################################################################
+
+    public virtual void Shrink(float shrinkPercentValue, float shrinkDuration)
+    {
+        StartCoroutine(ShrinkCo(shrinkPercentValue, shrinkDuration));
+    }
+
+    protected virtual IEnumerator ShrinkCo(float shrinkValue, float duration)
+    {
+        var hit = this.transform;
+
+        if (!isShrinked && (hit.localScale.x >= 1 || hit.localScale.y >= 1))
+        {
+            hit.localScale = new Vector3(shrinkValue, shrinkValue, 0);
+            isShrinked = true;
+            yield return new WaitForSeconds(duration);
+            {
+                hit.localScale = new Vector3(1, 1, 0);
+                isShrinked = false;
+            }
+        }
+    }
+
 }
