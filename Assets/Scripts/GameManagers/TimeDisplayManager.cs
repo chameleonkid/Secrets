@@ -23,11 +23,12 @@ public class TimeDisplayManager : MonoBehaviour
 
     private void UpdateSprite(float normalizedTimeOfDay)
     {
+        // 0.23f ≈ 05:30; 0.73f ≈ 17:30; ∴ Night: 17:30 — 05:30
         if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.73f)
         {
             timeImage.sprite = nightTimeSprite;
         }
-        else if (normalizedTimeOfDay <= 0.25f)
+        else
         {
             timeImage.sprite = dayTimeSprite;
         }
