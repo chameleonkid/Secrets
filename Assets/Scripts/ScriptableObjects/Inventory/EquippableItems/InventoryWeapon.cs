@@ -77,7 +77,7 @@ public class InventoryWeapon : EquippableItem
         else if (weaponType == WeaponType.Axe)
         {
 
-            swingTime = 0.5f;
+            swingTime = 0.75f;
 
             _leftHitboxPolygon = new[] {
                 new Vector2(0f, 0.5f),
