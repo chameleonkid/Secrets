@@ -108,11 +108,11 @@ public class Enemy : Character
 
     private void Die()
     {
-        if (isMinion == false)
+        if (!isMinion)
         {
             Debug.Log("Normal Enemy was killed");
             DeathEffect();
-            MakeLoot();
+            thisLoot?.GenerateLoot(transform.position);
             levelSystem.AddExperience(enemyXp);
             OnEnemyDied?.Invoke();
 
@@ -127,7 +127,7 @@ public class Enemy : Character
             {
                 Debug.Log("Minion was killed");
                 DeathEffect();
-                MakeLoot();
+                thisLoot?.GenerateLoot(transform.position);
                 levelSystem.AddExperience(enemyXp);
                 OnMinionDied?.Invoke();
 
@@ -146,18 +146,6 @@ public class Enemy : Character
         {
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(effect, deathEffectDelay);
-        }
-    }
-
-    private void MakeLoot()
-    {
-        if (thisLoot != null)
-        {
-            PickUp current = thisLoot.LootPowerUp();
-            if (current != null)
-            {
-                Instantiate(current.gameObject, transform.position, Quaternion.identity);
-            }
         }
     }
 

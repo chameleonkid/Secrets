@@ -13,7 +13,17 @@ public class LootTable : ScriptableObject
 {
     public Loot[] loots;
 
-    public PickUp LootPowerUp()
+    public void GenerateLoot(Vector3 position) => GenerateLoot(position, Quaternion.identity);
+    public void GenerateLoot(Vector3 position, Quaternion rotation)
+    {
+        var loot = RollLootTable();
+        if (loot != null)
+        {
+            Instantiate(loot.gameObject, position, rotation);
+        }
+    }
+
+    private PickUp RollLootTable()
     {
         float cumProb = 0;
         float currentProb = Random.Range(0, 100);

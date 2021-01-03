@@ -16,24 +16,12 @@ public class Breakable : MonoBehaviour
     {
         anim.SetBool("Smash", true);
         StartCoroutine(breakCo());
-        MakeLoot();
+        thisLoot?.GenerateLoot(transform.position);
     }
 
     IEnumerator breakCo()
     {
         yield return new WaitForSeconds(0.3f);
         this.gameObject.SetActive(false);
-    }
-
-    private void MakeLoot()
-    {
-        if (thisLoot != null)
-        {
-            PickUp current = thisLoot.LootPowerUp();
-            if (current != null)
-            {
-                Instantiate(current.gameObject, transform.position, Quaternion.identity);
-            }
-        }
     }
 }
