@@ -38,40 +38,40 @@ public class InventoryWeapon : EquippableItem
         {
 
             _leftHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(5, 2),
-                new Vector2(3, 3),
-                new Vector2(0.1f, 0.1f),
-                new Vector2(0.1f, 0.1f),
-                new Vector2(0.1f, 0.1f)
+                new Vector2(0f, 0.5f),
+                new Vector2(0, 0.6f),
+                new Vector2(-0.5f, 0.6f),
+                new Vector2(-0.5f, 0.6f),
+                new Vector2(-0.5f, 0f),
+                new Vector2(0f, 0f)
                 };
 
 
             _rightHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(2, 2),
-                new Vector2(3, 3),
-                new Vector2(-0.5f, 0.8f),
-                new Vector2(-0.25f, 0.5f),
-                new Vector2(0.2f, 0.5f)
+                new Vector2(0f, 0.5f),
+                new Vector2(0, 0.6f),
+                new Vector2(0.5f, 0.6f),
+                new Vector2(0.5f, 0.6f),
+                new Vector2(0.5f, 0f),
+                new Vector2(0f, 0f)
             };
 
             _upHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(1, 1),
-                new Vector2(1, 1),
-                new Vector2(-0.5f, 0.8f),
-                new Vector2(-0.25f, 0.5f),
-                new Vector2(0.2f, 0.5f)
+                new Vector2(0f, 0.5f),
+                new Vector2(0.4f, 0.75f),
+                new Vector2(0.3f, 1.1f),
+                new Vector2(-0.3f, 1.1f),
+                new Vector2(-0.4f, 0.75f),
+                new Vector2(0f, 0.5f)
             };
 
             _downHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(1, 1),
-                new Vector2(0.6f, 1.1f),
-                new Vector2(-0.5f, 0.8f),
-                new Vector2(-0.25f, 0.5f),
-                new Vector2(0.2f, 0.5f)
+                new Vector2(0f, 0.25f),
+                new Vector2(0.5f,0.15f),
+                new Vector2(0.35f, -0.25f),
+                new Vector2(0f, -0.25f),
+                new Vector2(-0.35f, -0.25f),
+                new Vector2(-0.5f, 0.15f)
             };
         }
         else if (weaponType == WeaponType.Axe)
