@@ -16,7 +16,9 @@ namespace SchwerEditor.Secrets
 
             EditorGUI.BeginDisabledGroup(!Application.isPlaying);
 
+            GUILayout.Label("Time Controls");
             FreezeTimeMiddayButton();
+            FreezeTimeMidnightButton();
             ResumeTimeButton();
 
             EditorGUI.EndDisabledGroup();
@@ -29,6 +31,20 @@ namespace SchwerEditor.Secrets
                     SetPrivateField(time, "normalizedTimeOfDay", 0.5f);
                     SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midday.");
+                }
+                else {
+                    LogWarning("Could not find an active TimeManager!");
+                }
+            }
+        }
+
+        private void FreezeTimeMidnightButton() {
+            if (GUILayout.Button("Freeze Time Midnight")) {
+                var time = FindObjectOfType<TimeManager>();
+                if (time != null) {
+                    SetPrivateField(time, "normalizedTimeOfDay", 0);
+                    SetPrivateField(time, "timeMultiplier", 0);
+                    Log("Time set to and frozen at midnight.");
                 }
                 else {
                     LogWarning("Could not find an active TimeManager!");
