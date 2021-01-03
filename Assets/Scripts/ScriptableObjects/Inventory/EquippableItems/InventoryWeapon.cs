@@ -72,7 +72,7 @@ public class InventoryWeapon : EquippableItem
                 new Vector2(-0.5f, 0.8f),
                 new Vector2(-0.25f, 0.5f),
                 new Vector2(0.2f, 0.5f)
-            }
+            };
         }
         else if (weaponType == WeaponType.Axe)
         {
@@ -114,7 +114,7 @@ public class InventoryWeapon : EquippableItem
                 new Vector2(-0.5f, 0.8f),
                 new Vector2(-0.25f, 0.5f),
                 new Vector2(0.2f, 0.5f)
-            }
+            };
         }
         else if (weaponType == WeaponType.Spear)
         {
@@ -156,7 +156,7 @@ public class InventoryWeapon : EquippableItem
                 new Vector2(-0.5f, 0.8f),
                 new Vector2(-0.25f, 0.5f),
                 new Vector2(0.2f, 0.5f)
-            }
+            };
         }
 
         leftBox = new[] { _leftHitboxPolygon[0], _leftHitboxPolygon[1], _leftHitboxPolygon[2], _leftHitboxPolygon[3], _leftHitboxPolygon[4], _leftHitboxPolygon[5] };
