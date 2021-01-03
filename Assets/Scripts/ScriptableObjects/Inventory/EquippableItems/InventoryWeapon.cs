@@ -7,7 +7,7 @@ public class InventoryWeapon : EquippableItem
     {
         Sword,
         Axe,
-        spear
+        Spear
     }
 
     public int minDamage;
@@ -15,46 +15,18 @@ public class InventoryWeapon : EquippableItem
     public float glowIntensity;
     public Texture2D weaponSkin = default;
     public WeaponType weaponType = default;
+    public float swingTime = 0.3f;
     [ColorUsageAttribute(true, true)] public Color glowColor;
-
-
-
-    Vector2 leftPoint0 = new Vector2(0.5f, 0.7f);
-    Vector2 leftPoint1 = new Vector2(0.4f, 0.9f);
-    Vector2 leftPoint2 = new Vector2(0.6f, 1.1f);
-    Vector2 leftPoint3 = new Vector2(-0.5f, 0.8f);
-    Vector2 leftPoint4 = new Vector2(-0.25f, 0.5f);
-    Vector2 leftPoint5 = new Vector2(0.2f, 0.5f);
-    Vector2 leftPoint6 = new Vector2(0.2f, 0.5f);
-
-    Vector2 rightPoint0 = new Vector2(0.5f, 0.7f);
-    Vector2 rightPoint1 = new Vector2(0.4f, 0.9f);
-    Vector2 rightPoint2 = new Vector2(0.6f, 1.1f);
-    Vector2 rightPoint3 = new Vector2(-0.5f, 0.8f);
-    Vector2 rightPoint4 = new Vector2(-0.25f, 0.5f);
-    Vector2 rightPoint5 = new Vector2(0.2f, 0.5f);
-    Vector2 rightPoint6 = new Vector2(0.2f, 0.5f);
-
-    Vector2 upPoint0 = new Vector2(0.5f, 0.7f);
-    Vector2 upPoint1 = new Vector2(0.4f, 0.9f);
-    Vector2 upPoint2 = new Vector2(0.6f, 1.1f);
-    Vector2 upPoint3 = new Vector2(-0.5f, 0.8f);
-    Vector2 upPoint4 = new Vector2(-0.25f, 0.5f);
-    Vector2 upPoint5 = new Vector2(0.2f, 0.5f);
-    Vector2 upPoint6 = new Vector2(0.2f, 0.5f);
-
-    Vector2 downPoint0 = new Vector2(0.5f, 0.7f);
-    Vector2 downPoint1 = new Vector2(0.4f, 0.9f);
-    Vector2 downPoint2 = new Vector2(0.6f, 1.1f);
-    Vector2 downPoint3 = new Vector2(-0.5f, 0.8f);
-    Vector2 downPoint4 = new Vector2(-0.25f, 0.5f);
-    Vector2 downPoint5 = new Vector2(0.2f, 0.5f);
-    Vector2 downPoint6 = new Vector2(0.2f, 0.5f);
 
     public Vector2[] leftBox;
     public Vector2[] rightBox;
     public Vector2[] upBox;
     public Vector2[] downBox;
+
+    private Vector2[] _leftHitboxPolygon = new Vector2[6];
+    private Vector2[] _rightHitboxPolygon = new Vector2[6];
+    private Vector2[] _upHitboxPolygon = new Vector2[6];
+    private Vector2[] _downHitboxPolygon = new Vector2[6];
 
 
     public override string fullDescription
@@ -64,111 +36,133 @@ public class InventoryWeapon : EquippableItem
     {
         if (weaponType == WeaponType.Sword)
         {
-            leftPoint0 = new Vector2(0,0);
-            leftPoint1 = new Vector2(2, 2);
-            leftPoint2 = new Vector2(3, 3);
-            leftPoint3 = new Vector2(0.1f, 0.1f);
-            leftPoint4 = new Vector2(0.1f, 0.1f);
-            leftPoint5 = new Vector2(0.1f, 0.1f);
-            leftPoint6 = new Vector2(0,0);
 
-             rightPoint0 = new Vector2(0,0);
-             rightPoint1 = new Vector2(2, 2);
-             rightPoint2 = new Vector2(3, 3);
-             rightPoint3 = new Vector2(-0.5f, 0.8f);
-             rightPoint4 = new Vector2(-0.25f, 0.5f);
-             rightPoint5 = new Vector2(0.2f, 0.5f);
-             rightPoint6 = new Vector2(0, 0);
+            _leftHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(5, 2),
+                new Vector2(3, 3),
+                new Vector2(0.1f, 0.1f),
+                new Vector2(0.1f, 0.1f),
+                new Vector2(0.1f, 0.1f)
+                };
 
-            upPoint0 = new Vector2(0,0);
-             upPoint1 = new Vector2(1, 1);
-             upPoint2 = new Vector2(1, 1);
-             upPoint3 = new Vector2(-0.5f, 0.8f);
-             upPoint4 = new Vector2(-0.25f, 0.5f);
-             upPoint5 = new Vector2(0.2f, 0.5f);
-             upPoint6 = new Vector2(0, 0);
 
-            downPoint0 = new Vector2(0,0);
-             downPoint1 = new Vector2(1, 1);
-             downPoint2 = new Vector2(0.6f, 1.1f);
-             downPoint3 = new Vector2(-0.5f, 0.8f);
-             downPoint4 = new Vector2(-0.25f, 0.5f);
-             downPoint5 = new Vector2(0.2f, 0.5f);
-             downPoint6 = new Vector2(0, 0);
+            _rightHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(2, 2),
+                new Vector2(3, 3),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            };
+
+            _upHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(1, 1),
+                new Vector2(1, 1),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            };
+
+            _downHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(1, 1),
+                new Vector2(0.6f, 1.1f),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            }
         }
         else if (weaponType == WeaponType.Axe)
         {
-            leftPoint0 = new Vector2(0, 0);
-            leftPoint1 = new Vector2(2, 2);
-            leftPoint2 = new Vector2(3, 3);
-            leftPoint3 = new Vector2(0.1f, 0.1f);
-            leftPoint4 = new Vector2(0.1f, 0.1f);
-            leftPoint5 = new Vector2(0.1f, 0.1f);
-            leftPoint6 = new Vector2(0, 0);
 
-            rightPoint0 = new Vector2(1, 1);
-            rightPoint1 = new Vector2(2, 2);
-            rightPoint2 = new Vector2(3, 3);
-            rightPoint3 = new Vector2(-0.5f, 0.8f);
-            rightPoint4 = new Vector2(-0.25f, 0.5f);
-            rightPoint5 = new Vector2(0.2f, 0.5f);
-            rightPoint6 = new Vector2(0.2f, 0.5f);
+            swingTime = 0.5f;
 
-            upPoint0 = new Vector2(0, 0);
-            upPoint1 = new Vector2(4f, 15f);
-            upPoint2 = new Vector2(7f, 20f);
-            upPoint3 = new Vector2(0f, 25f);
-            upPoint4 = new Vector2(-7f, 20f);
-            upPoint5 = new Vector2(-4f, 15f);
-            upPoint6 = new Vector2(0, 0);
+            _leftHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(5, 2),
+                new Vector2(3, 3),
+                new Vector2(0.1f, 0.1f),
+                new Vector2(0.1f, 0.1f),
+                new Vector2(0.1f, 0.1f)
+                };
 
-            downPoint0 = new Vector2(0, 0);
-            downPoint1 = new Vector2(1, 1);
-            downPoint2 = new Vector2(0.6f, 1.1f);
-            downPoint3 = new Vector2(-0.5f, 0.8f);
-            downPoint4 = new Vector2(-0.25f, 0.5f);
-            downPoint5 = new Vector2(0.2f, 0.5f);
-            downPoint6 = new Vector2(0, 0);
+
+            _rightHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(2, 2),
+                new Vector2(3, 3),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            };
+
+            _upHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(1, 1),
+                new Vector2(1, 1),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            };
+
+            _downHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(1, 1),
+                new Vector2(0.6f, 1.1f),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            }
         }
-        else if (weaponType == WeaponType.spear)
+        else if (weaponType == WeaponType.Spear)
         {
-            leftPoint0 = new Vector2(0, 0);
-            leftPoint1 = new Vector2(2, 2);
-            leftPoint2 = new Vector2(3, 3);
-            leftPoint3 = new Vector2(0.1f, 0.1f);
-            leftPoint4 = new Vector2(0.1f, 0.1f);
-            leftPoint5 = new Vector2(0.1f, 0.1f);
-            leftPoint6 = new Vector2(0, 0);
 
-            rightPoint0 = new Vector2(1, 1);
-            rightPoint1 = new Vector2(2, 2);
-            rightPoint2 = new Vector2(3, 3);
-            rightPoint3 = new Vector2(-0.5f, 0.8f);
-            rightPoint4 = new Vector2(-0.25f, 0.5f);
-            rightPoint5 = new Vector2(0.2f, 0.5f);
-            rightPoint6 = new Vector2(0.2f, 0.5f);
+            swingTime = 0.6f;
 
-            upPoint0 = new Vector2(0, 0);
-            upPoint1 = new Vector2(4f, 15f);
-            upPoint2 = new Vector2(7f, 20f);
-            upPoint3 = new Vector2(0f, 25f);
-            upPoint4 = new Vector2(-7f, 20f);
-            upPoint5 = new Vector2(-4f, 15f);
-            upPoint6 = new Vector2(0, 0);
+            _leftHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(5, 2),
+                new Vector2(3, 3),
+                new Vector2(0.1f, 0.1f),
+                new Vector2(0.1f, 0.1f),
+                new Vector2(0.1f, 0.1f)
+                };
 
-            downPoint0 = new Vector2(0, 0);
-            downPoint1 = new Vector2(1, 1);
-            downPoint2 = new Vector2(0.6f, 1.1f);
-            downPoint3 = new Vector2(-0.5f, 0.8f);
-            downPoint4 = new Vector2(-0.25f, 0.5f);
-            downPoint5 = new Vector2(0.2f, 0.5f);
-            downPoint6 = new Vector2(0, 0);
+
+            _rightHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(2, 2),
+                new Vector2(3, 3),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            };
+
+            _upHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(1, 1),
+                new Vector2(1, 1),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            };
+
+            _downHitboxPolygon = new[] {
+                new Vector2(0, 0),
+                new Vector2(1, 1),
+                new Vector2(0.6f, 1.1f),
+                new Vector2(-0.5f, 0.8f),
+                new Vector2(-0.25f, 0.5f),
+                new Vector2(0.2f, 0.5f)
+            }
         }
 
-        leftBox = new[] { leftPoint0, leftPoint1, leftPoint2, leftPoint3, leftPoint4, leftPoint5, leftPoint6 };
-        rightBox = new[] { rightPoint0, rightPoint1, rightPoint2, rightPoint3, rightPoint4, rightPoint5, rightPoint6 };
-        upBox = new[] { upPoint0, upPoint1, upPoint2, upPoint3, upPoint4, upPoint5, upPoint6 };
-        downBox = new[] { downPoint0, downPoint1, downPoint2, downPoint3, downPoint4, downPoint5, downPoint6 };
+        leftBox = new[] { _leftHitboxPolygon[0], _leftHitboxPolygon[1], _leftHitboxPolygon[2], _leftHitboxPolygon[3], _leftHitboxPolygon[4], _leftHitboxPolygon[5] };
+        rightBox = new[] { _rightHitboxPolygon[0], _rightHitboxPolygon[1], _rightHitboxPolygon[2], _rightHitboxPolygon[3], _rightHitboxPolygon[4], _rightHitboxPolygon[5] };
+        upBox = new[] { _upHitboxPolygon[0], _upHitboxPolygon[1], _upHitboxPolygon[2], _upHitboxPolygon[3], _upHitboxPolygon[4], _upHitboxPolygon[5] };
+        downBox = new[] { _downHitboxPolygon[0], _downHitboxPolygon[1], _downHitboxPolygon[2], _downHitboxPolygon[3], _downHitboxPolygon[4], _downHitboxPolygon[5] };
     }
 
 }
