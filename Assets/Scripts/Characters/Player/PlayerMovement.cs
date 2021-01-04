@@ -49,6 +49,7 @@ public class PlayerMovement : Character
     [SerializeField] private AudioClip[] attackSounds = default;
     [SerializeField] private AudioClip levelUpSound = default;
     [SerializeField] private AudioClip meleeCooldownSound = default;
+    [SerializeField] private AudioClip Spell0CooldownSound = default;
 
     [Header("Lamp")]
     [SerializeField] private LampLight lamp = default;
@@ -61,6 +62,7 @@ public class PlayerMovement : Character
 
 
     public event Action OnAttackTriggered;
+    public event Action OnSpellTriggered;
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
@@ -125,7 +127,7 @@ public class PlayerMovement : Character
             }
         }
         //############################################################################### Spell Cast ###############################################################################
-        if (Input.GetButton("SpellCast") && inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack)
+        if (Input.GetButton("SpellCast") && inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
         {
             StartCoroutine(SpellAttackCo());
         }
@@ -255,15 +257,22 @@ public class PlayerMovement : Character
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo()
     {
+        
         animator.SetBool("isCasting", true); // Set to cast Animation
         currentState = State.attack;
         MakeSpell();
+        OnSpellTriggered?.Invoke();
+        spellCooldown = true;
         yield return new WaitForSeconds(0.3f);
         if (currentState != State.interact)
         {
             currentState = State.walk;
         }
         animator.SetBool("isCasting", false);
+        yield return new WaitForSeconds(inventory.currentSpellbook.coolDown);
+        SoundManager.RequestSound(Spell0CooldownSound);
+        spellCooldown = false;
+
     }
 
     //################### instantiate spell when casted ###############################

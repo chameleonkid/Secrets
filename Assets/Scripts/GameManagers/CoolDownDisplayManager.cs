@@ -8,6 +8,8 @@ public class CoolDownDisplayManager : MonoBehaviour
 
     [SerializeField] private Image meleeWeaponCooldown = default;
     [SerializeField] private Image meleeWeaponSprite = default;
+    [SerializeField] private Image spell0Cooldown = default;
+    [SerializeField] private Image spell0Sprite = default;
     [SerializeField] private Inventory inventory = default;
     [SerializeField] private PlayerMovement player = default;
     [SerializeField] private Color originalColor= default;
@@ -16,14 +18,16 @@ public class CoolDownDisplayManager : MonoBehaviour
     private void OnEnable()
     {
         player.OnAttackTriggered += SetMeleeCoolDown;
-        // inventoryDisplay.OnSlotUsed = SetCoolDownIcons();
+        player.OnSpellTriggered += SetSpell0CoolDown;
+
         originalColor = meleeWeaponCooldown.color;
     }
 
     private void OnDisable()
     {
         player.OnAttackTriggered -= SetMeleeCoolDown;
-        //   inventoryDisplay.OnSlotUsed = SetCoolDownIcons();
+        player.OnSpellTriggered -= SetSpell0CoolDown;
+
     }
 
     private void SetCoolDownIcons()
@@ -36,6 +40,13 @@ public class CoolDownDisplayManager : MonoBehaviour
         meleeWeaponSprite.sprite = inventory.currentWeapon.sprite;  //This is for Testing only!
         meleeWeaponCooldown.color = new Color(255,0,0);
         StartCoroutine(CooldownCountDownCo(inventory.currentWeapon.swingTime));
+    }
+
+    private void SetSpell0CoolDown()
+    {
+        spell0Sprite.sprite = inventory.currentSpellbook.sprite;  //This is for Testing only!
+        spell0Cooldown.color = new Color(255, 0, 0);
+        StartCoroutine(SpellCooldownCountDownCo(inventory.currentSpellbook.coolDown));
     }
 
     private IEnumerator CooldownCountDownCo(float weaponCooldown)
@@ -53,5 +64,22 @@ public class CoolDownDisplayManager : MonoBehaviour
         meleeWeaponCooldown.color = new Color (255,255,255,255); //Visual Indicator for "The CD is done" in form of an "Flash"
         yield return new WaitForSeconds(0.1f);
         meleeWeaponCooldown.color = originalColor; 
+    }
+
+
+    private IEnumerator SpellCooldownCountDownCo(float spellBookCountDown)
+    {
+        fillingTime = spellBookCountDown;
+        while (fillingTime > 0)
+        {
+            fillingTime -= Time.deltaTime;
+            spell0Cooldown.fillAmount = (fillingTime) / spellBookCountDown;
+            //  meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);   I wanted the Background to become more bright with each iteration, but actually its instantly white...
+            yield return null;
+        }
+        spell0Cooldown.fillAmount = 1;
+        spell0Cooldown.color = new Color(255, 255, 255, 255); //Visual Indicator for "The CD is done" in form of an "Flash"
+        yield return new WaitForSeconds(0.1f);
+        spell0Cooldown.color = originalColor;
     }
 }

@@ -15,6 +15,8 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected bool isShrinked;
     [SerializeField] protected AudioClip[] gotHitSound = default;
     [SerializeField] protected bool meeleCooldown = false;
+    [SerializeField] protected bool spellCooldown = false;
+
 
 
     protected virtual void Awake() => GetCharacterComponents();

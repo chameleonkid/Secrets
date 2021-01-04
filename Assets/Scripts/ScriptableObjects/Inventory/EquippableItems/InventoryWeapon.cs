@@ -15,7 +15,7 @@ public class InventoryWeapon : EquippableItem
     public float glowIntensity;
     public Texture2D weaponSkin = default;
     public WeaponType weaponType = default;
-    public float swingTime = 0.3f;
+    public float swingTime = 0.0f;
     [ColorUsageAttribute(true, true)] public Color glowColor;
 
     public Vector2[] leftHitboxPolygon { get; private set; } = new Vector2[6];

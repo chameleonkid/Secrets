@@ -5,6 +5,7 @@ public class InventorySpellbook : EquippableItem
 {
     public int minSpellDamage;
     public int maxSpellDamage;
+    public float coolDown;
 
     public int manaCosts;
     public GameObject prefab;
