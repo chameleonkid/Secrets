@@ -32,7 +32,7 @@ public class InventoryWeapon : EquippableItem
     public override string fullDescription
         => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage;
 
-    public void OnValidate()
+    private void OnValidate()
     {
         if (weaponType == WeaponType.Sword)
         {
@@ -44,8 +44,7 @@ public class InventoryWeapon : EquippableItem
                 new Vector2(-0.5f, 0.6f),
                 new Vector2(-0.5f, 0f),
                 new Vector2(0f, 0f)
-                };
-
+            };
 
             _rightHitboxPolygon = new[] {
                 new Vector2(0f, 0.5f),
@@ -76,7 +75,6 @@ public class InventoryWeapon : EquippableItem
         }
         else if (weaponType == WeaponType.Axe)
         {
-
             swingTime = 0.75f;
 
             _leftHitboxPolygon = new[] {
@@ -86,7 +84,7 @@ public class InventoryWeapon : EquippableItem
                 new Vector2(-0.7f, 0.6f),
                 new Vector2(-0.7f, 0f),
                 new Vector2(0f, 0f)
-                };
+            };
 
 
             _rightHitboxPolygon = new[] {
@@ -128,7 +126,7 @@ public class InventoryWeapon : EquippableItem
                 new Vector2(0.1f, 0.1f),
                 new Vector2(0.1f, 0.1f),
                 new Vector2(0.1f, 0.1f)
-                };
+            };
 
 
             _rightHitboxPolygon = new[] {
