@@ -46,7 +46,7 @@ public class CoolDownDisplayManager : MonoBehaviour
         {
             fillingTime -= Time.deltaTime;
             meleeWeaponCooldown.fillAmount = (fillingTime) / weaponCooldown;
-          //  meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);
+          //  meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);   I wanted the Background to become more bright with each iteration, but actually its instantly white...
             yield return null;
         }
         meleeWeaponCooldown.fillAmount = 1;
