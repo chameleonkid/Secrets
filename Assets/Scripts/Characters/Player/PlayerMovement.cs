@@ -46,16 +46,16 @@ public class PlayerMovement : Character
     [Header("Sound FX")]
     [SerializeField] private AudioClip[] attackSounds = default;
     [SerializeField] private AudioClip levelUpSound = default;
+    [SerializeField] private AudioClip meleeCooldownSound = default;
 
     [Header("Lamp")]
     [SerializeField] private LampLight lamp = default;
-    //############### LIFT-TEST      ##############
-    //  public GameObject thing;
+
     public SpriteRenderer thingSprite;
-    //############### LIFT-TEST-ENDE ##############
+
+    [Header("WeaponSkins")]
     [SerializeField] private SpriteSkinRPC weaponSkinChanger = default;
     private Texture2D oldWeaponSkin = default;
-
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
@@ -199,6 +199,7 @@ public class PlayerMovement : Character
         }
         yield return new WaitForSeconds(currentWeapon.swingTime);
         meeleCooldown = false;
+        SoundManager.RequestSound(meleeCooldownSound);
     }
 
     // ############################# Roundattack ################################################
