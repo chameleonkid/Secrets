@@ -101,7 +101,7 @@ public class PlayerMovement : Character
 
         var notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
 
-        if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && inventory.currentWeapon != null)
+        if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && inventory.currentWeapon != null && meeleCooldown == false)
         {
             StartCoroutine(AttackCo());
         }
@@ -137,22 +137,9 @@ public class PlayerMovement : Character
         }
 
        animator.SetBool("isHurt", (currentState == State.stagger));
-      /*
-        if (currentState == State.stagger)
-        {
-            animator.Play("Hurt");
-        }
-      */
-        animator.SetBool("Moving", (change != Vector3.zero));
+       animator.SetBool("Moving", (change != Vector3.zero));
 
-        // ################################# Trying to drop things ################################################################
-        // if (Input.GetButtonDown("Lift") && currentState == State.lift)
-        // {
-        //     LiftItem();
-        //     Debug.Log("Item Dropped!");
 
-        // }
-        // ################################# Trying to drop things END ############################################################
     }
 
     private void FixedUpdate()
@@ -173,6 +160,7 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
+        meeleCooldown = true;
         var currentWeapon = inventory.currentWeapon;
         hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
         hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
@@ -202,14 +190,15 @@ public class PlayerMovement : Character
         currentState = State.attack;
         yield return null;
         animator.SetBool("Attacking", false);
-        
-        // TODO: Bewegung zulassen?
-        yield return new WaitForSeconds(currentWeapon.swingTime);
+        yield return new WaitForSeconds(0.3f);
         
         if (currentState != State.interact)
         {
             currentState = State.walk;
+            
         }
+        yield return new WaitForSeconds(currentWeapon.swingTime);
+        meeleCooldown = false;
     }
 
     // ############################# Roundattack ################################################
@@ -233,7 +222,6 @@ public class PlayerMovement : Character
         currentState = State.attack;
         animator.SetBool("isShooting", true);
         CreateProjectile(projectile, arrowSpeed, Random.Range(inventory.currentBow.minDamage, inventory.currentBow.maxDamage + 1));
-
         yield return new WaitForSeconds(0.3f);
 
         if (currentState != State.interact)

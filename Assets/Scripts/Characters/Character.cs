@@ -14,6 +14,7 @@ public abstract class Character : MonoBehaviour
     protected InvulnerabilityFrames iframes { get; private set; }
     [SerializeField] protected bool isShrinked;
     [SerializeField] protected AudioClip[] gotHitSound = default;
+    [SerializeField] protected bool meeleCooldown = false;
 
 
     protected virtual void Awake() => GetCharacterComponents();

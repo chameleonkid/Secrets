@@ -36,7 +36,7 @@ public class InventoryWeapon : EquippableItem
                 SetSwordHitboxes();
                 break;
             case WeaponType.Axe:
-                swingTime = 0.75f;
+                swingTime = 1;
                 SetAxeHitboxes();
                 break;
             case WeaponType.Spear:
