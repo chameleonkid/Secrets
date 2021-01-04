@@ -3827,10 +3827,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8978087339683796174, guid: 11421516125106d47bc0500b650bd56d,
         type: 3}
+      propertyPath: gotHit
+      value: 
+      objectReference: {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
+    - target: {fileID: 8978087339683796174, guid: 11421516125106d47bc0500b650bd56d,
+        type: 3}
       propertyPath: maxHealth
       value: 
       objectReference: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9,
         type: 2}
+    - target: {fileID: 8978087339683796174, guid: 11421516125106d47bc0500b650bd56d,
+        type: 3}
+      propertyPath: gotHitSound.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978087339683796174, guid: 11421516125106d47bc0500b650bd56d,
+        type: 3}
+      propertyPath: gotHitSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11421516125106d47bc0500b650bd56d, type: 3}
 --- !u!4 &362229682 stripped
@@ -13549,7 +13564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fullDayLength: 60
   timeMultiplier: 1
-  normalizedTimeOfDay: 60
+  normalizedTimeOfDay: 0
 --- !u!4 &1107112796
 Transform:
   m_ObjectHideFlags: 0
@@ -34081,6 +34096,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 343156486531304, guid: 102a75eb932804e43a803a9aaa241069, type: 3}
+      propertyPath: force
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 343156486531304, guid: 102a75eb932804e43a803a9aaa241069, type: 3}
+      propertyPath: duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2892631000908655613, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: force
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2892631000908655613, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: duration
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4819439860390361883, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: m_RootOrder
@@ -34135,6 +34168,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399861565425347203, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: force
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399861565425347203, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432213353813145744, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: force
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432213353813145744, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: duration
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7656288679364536789, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
@@ -109711,7 +109764,7 @@ Tilemap:
       - {fileID: 21300446, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300448, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300450, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 11.395197
+      m_AnimationSpeed: 11.559977
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 13, y: -1, z: 0}
@@ -109721,7 +109774,7 @@ Tilemap:
       - {fileID: 21300446, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300448, guid: 47c6a039472216d4384b29e942993912, type: 3}
       - {fileID: 21300450, guid: 47c6a039472216d4384b29e942993912, type: 3}
-      m_AnimationSpeed: 11.172348
+      m_AnimationSpeed: 11.526978
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
