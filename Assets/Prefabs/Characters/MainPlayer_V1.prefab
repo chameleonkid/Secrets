@@ -449,8 +449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 3
-  duration: 0.2
+  force: 2
+  duration: 0.1
 --- !u!1 &1008961017305412658
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,8 +647,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 3
-  duration: 0.2
+  force: 2
+  duration: 0.1
 --- !u!1 &2941173148762560976
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,8 +754,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 3
-  duration: 0.2
+  force: 2
+  duration: 0.1
 --- !u!1 &4382020920128985596
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,8 +861,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 3
-  duration: 0.2
+  force: 2
+  duration: 0.1
 --- !u!1 &7656288679364536789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,6 +1076,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectAnimator: {fileID: 1029923363}
   isShrinked: 0
+  gotHitSound: []
+  meeleCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   _speed: 3
   _lumen: {fileID: 11400000, guid: 4f1b8e485a4d225498a06b8076d463bc, type: 2}
@@ -1104,6 +1106,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cde8c3ed68fa4f3479b2abcbfb119bff, type: 3}
   - {fileID: 8300000, guid: 9d2a082a072c48241b31f7b0dcdacbfd, type: 3}
   levelUpSound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
+  meleeCooldownSound: {fileID: 8300000, guid: bf934a69646f23647b31950510d6dd83, type: 3}
   lamp: {fileID: 3563088278929260502}
   thingSprite: {fileID: 7737533578274349692}
   weaponSkinChanger: {fileID: 3263862040294853675}

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : Character
 {
@@ -56,6 +58,9 @@ public class PlayerMovement : Character
     [Header("WeaponSkins")]
     [SerializeField] private SpriteSkinRPC weaponSkinChanger = default;
     private Texture2D oldWeaponSkin = default;
+
+
+    public event Action OnAttackTriggered;
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
@@ -160,6 +165,7 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
+        OnAttackTriggered?.Invoke();
         meeleCooldown = true;
         var currentWeapon = inventory.currentWeapon;
         hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
@@ -191,12 +197,13 @@ public class PlayerMovement : Character
         yield return null;
         animator.SetBool("Attacking", false);
         yield return new WaitForSeconds(0.3f);
-        
+
         if (currentState != State.interact)
         {
             currentState = State.walk;
             
         }
+
         yield return new WaitForSeconds(currentWeapon.swingTime);
         meeleCooldown = false;
         SoundManager.RequestSound(meleeCooldownSound);
