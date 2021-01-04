@@ -343,6 +343,7 @@ public class PlayerMovement : Character
             {
                 health -= finalDamage;
                 DamagePopUpManager.RequestDamagePopUp(finalDamage, isCritical, transform);
+                SoundManager.RequestSound(GetGotHitSound());
                 iframes?.TriggerInvulnerability();
             }
             else

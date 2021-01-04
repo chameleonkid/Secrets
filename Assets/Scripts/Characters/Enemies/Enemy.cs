@@ -29,7 +29,7 @@ public class Enemy : Character
             if (value < _health)
             {
                 chaseRadius = originalChaseRadius * 10;
-                OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )
+                OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )           
             }
 
             _health = value;

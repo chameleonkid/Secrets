@@ -13,6 +13,8 @@ public abstract class Character : MonoBehaviour
     public Animator effectAnimator = default;
     protected InvulnerabilityFrames iframes { get; private set; }
     [SerializeField] protected bool isShrinked;
+    [SerializeField] protected AudioClip[] gotHitSound = default;
+
 
     protected virtual void Awake() => GetCharacterComponents();
 
@@ -58,6 +60,7 @@ public abstract class Character : MonoBehaviour
         {
             health -= damage;
             DamagePopUpManager.RequestDamagePopUp(damage, isCritical, transform);
+            SoundManager.RequestSound(GetGotHitSound());
             iframes?.TriggerInvulnerability();
         }
     }
@@ -117,5 +120,7 @@ public abstract class Character : MonoBehaviour
             }
         }
     }
+
+    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length)];
 
 }
