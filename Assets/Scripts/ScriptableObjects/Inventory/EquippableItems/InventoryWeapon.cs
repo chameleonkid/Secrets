@@ -34,20 +34,21 @@ public class InventoryWeapon : EquippableItem
 
     private void OnValidate()
     {
-        if (weaponType == WeaponType.Sword)
+        switch (weaponType)
         {
-            swingTime = 0.3f;
-            SetSwordHitboxes();
-        }
-        else if (weaponType == WeaponType.Axe)
-        {
-            swingTime = 0.75f;
-            SetAxeHitboxes();
-        }
-        else if (weaponType == WeaponType.Spear)
-        {
-            swingTime = 0.6f;
-            SetSpearHitboxes();
+            default:
+            case WeaponType.Sword:
+                swingTime = 0.3f;
+                SetSwordHitboxes();
+                break;
+            case WeaponType.Axe:
+                swingTime = 0.75f;
+                SetAxeHitboxes();
+                break;
+            case WeaponType.Spear:
+                swingTime = 0.6f;
+                SetSpearHitboxes();
+                break;
         }
 
         leftBox = new[] { _leftHitboxPolygon[0], _leftHitboxPolygon[1], _leftHitboxPolygon[2], _leftHitboxPolygon[3], _leftHitboxPolygon[4], _leftHitboxPolygon[5] };
