@@ -173,13 +173,13 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
-      
         var currentWeapon = inventory.currentWeapon;
-        hitBoxColliders[0].points = currentWeapon.upBox;
-        hitBoxColliders[1].points = currentWeapon.downBox;
-        hitBoxColliders[2].points = currentWeapon.rightBox;
-        hitBoxColliders[3].points = currentWeapon.leftBox;
-
+        hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
+        hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
+        hitBoxColliders[2].points = currentWeapon.rightHitboxPolygon;
+        hitBoxColliders[3].points = currentWeapon.leftHitboxPolygon;
+        //! ^ The order of the hitboxes colliders cannot be safely determined by index,
+        //    as the order is arbitrarily assigned via Inspector.
 
         weaponSkinChanger.newSprite = currentWeapon.weaponSkin;
 
@@ -188,7 +188,6 @@ public class PlayerMovement : Character
             weaponSkinChanger.ResetRenderer();
         }
         oldWeaponSkin = currentWeapon.weaponSkin;
-
 
         var isCritical = IsCriticalHit();
         for (int i = 0; i < directionalAttacks.Length; i++)
@@ -203,7 +202,6 @@ public class PlayerMovement : Character
         currentState = State.attack;
         yield return null;
         animator.SetBool("Attacking", false);
-
         
         // TODO: Bewegung zulassen?
         yield return new WaitForSeconds(currentWeapon.swingTime);
@@ -212,7 +210,6 @@ public class PlayerMovement : Character
         {
             currentState = State.walk;
         }
-
     }
 
     // ############################# Roundattack ################################################
@@ -271,7 +268,6 @@ public class PlayerMovement : Character
             currentState = State.walk;
         }
         animator.SetBool("isCasting", false);
-
     }
 
     //################### instantiate spell when casted ###############################
@@ -282,7 +278,6 @@ public class PlayerMovement : Character
         var speed = inventory.currentSpellbook.speed;
         CreateProjectile(prefab, speed,Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
         mana.current -= inventory.currentSpellbook.manaCosts;
-
     }
 
     //#################################### Item Found RAISE IT! #######################################

@@ -18,16 +18,10 @@ public class InventoryWeapon : EquippableItem
     public float swingTime = 0.3f;
     [ColorUsageAttribute(true, true)] public Color glowColor;
 
-    public Vector2[] leftBox;
-    public Vector2[] rightBox;
-    public Vector2[] upBox;
-    public Vector2[] downBox;
-
-    private Vector2[] _leftHitboxPolygon = new Vector2[6];
-    private Vector2[] _rightHitboxPolygon = new Vector2[6];
-    private Vector2[] _upHitboxPolygon = new Vector2[6];
-    private Vector2[] _downHitboxPolygon = new Vector2[6];
-
+    public Vector2[] leftHitboxPolygon { get; private set; } = new Vector2[6];
+    public Vector2[] rightHitboxPolygon { get; private set; } = new Vector2[6];
+    public Vector2[] upHitboxPolygon { get; private set; } = new Vector2[6];
+    public Vector2[] downHitboxPolygon { get; private set; } = new Vector2[6];
 
     public override string fullDescription
         => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage;
@@ -50,16 +44,11 @@ public class InventoryWeapon : EquippableItem
                 SetSpearHitboxes();
                 break;
         }
-
-        leftBox = new[] { _leftHitboxPolygon[0], _leftHitboxPolygon[1], _leftHitboxPolygon[2], _leftHitboxPolygon[3], _leftHitboxPolygon[4], _leftHitboxPolygon[5] };
-        rightBox = new[] { _rightHitboxPolygon[0], _rightHitboxPolygon[1], _rightHitboxPolygon[2], _rightHitboxPolygon[3], _rightHitboxPolygon[4], _rightHitboxPolygon[5] };
-        upBox = new[] { _upHitboxPolygon[0], _upHitboxPolygon[1], _upHitboxPolygon[2], _upHitboxPolygon[3], _upHitboxPolygon[4], _upHitboxPolygon[5] };
-        downBox = new[] { _downHitboxPolygon[0], _downHitboxPolygon[1], _downHitboxPolygon[2], _downHitboxPolygon[3], _downHitboxPolygon[4], _downHitboxPolygon[5] };
     }
 
     private void SetSwordHitboxes()
     {
-        _leftHitboxPolygon = new[] {
+        leftHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0, 0.6f),
             new Vector2(-0.5f, 0.6f),
@@ -68,7 +57,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0f, 0f)
         };
 
-        _rightHitboxPolygon = new[] {
+        rightHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0, 0.6f),
             new Vector2(0.5f, 0.6f),
@@ -77,7 +66,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0f, 0f)
         };
 
-        _upHitboxPolygon = new[] {
+        upHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0.4f, 0.75f),
             new Vector2(0.3f, 1.1f),
@@ -86,7 +75,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0f, 0.5f)
         };
 
-        _downHitboxPolygon = new[] {
+        downHitboxPolygon = new[] {
             new Vector2(0f, 0.25f),
             new Vector2(0.5f,0.15f),
             new Vector2(0.35f, -0.25f),
@@ -98,7 +87,7 @@ public class InventoryWeapon : EquippableItem
 
     private void SetAxeHitboxes()
     {
-        _leftHitboxPolygon = new[] {
+        leftHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0, 0.6f),
             new Vector2(-0.7f, 0.6f),
@@ -107,7 +96,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0f, 0f)
         };
 
-        _rightHitboxPolygon = new[] {
+        rightHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0, 0.6f),
             new Vector2(0.7f, 0.6f),
@@ -116,7 +105,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0f, 0f)
         };
 
-        _upHitboxPolygon = new[] {
+        upHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0.4f, 0.9f),
             new Vector2(0.3f, 1.3f),
@@ -125,7 +114,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0f, 0.5f)
         };
 
-        _downHitboxPolygon = new[] {
+        downHitboxPolygon = new[] {
             new Vector2(0f, 0.25f),
             new Vector2(0.5f,0.15f),
             new Vector2(0.35f, -0.5f),
@@ -137,7 +126,7 @@ public class InventoryWeapon : EquippableItem
 
     private void SetSpearHitboxes()
     {
-        _leftHitboxPolygon = new[] {
+        leftHitboxPolygon = new[] {
             new Vector2(0, 0),
             new Vector2(5, 2),
             new Vector2(3, 3),
@@ -147,7 +136,7 @@ public class InventoryWeapon : EquippableItem
         };
 
 
-        _rightHitboxPolygon = new[] {
+        rightHitboxPolygon = new[] {
             new Vector2(0, 0),
             new Vector2(2, 2),
             new Vector2(3, 3),
@@ -156,7 +145,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0.2f, 0.5f)
         };
 
-        _upHitboxPolygon = new[] {
+        upHitboxPolygon = new[] {
             new Vector2(0, 0),
             new Vector2(1, 1),
             new Vector2(1, 1),
@@ -165,7 +154,7 @@ public class InventoryWeapon : EquippableItem
             new Vector2(0.2f, 0.5f)
         };
 
-        _downHitboxPolygon = new[] {
+        downHitboxPolygon = new[] {
             new Vector2(0, 0),
             new Vector2(1, 1),
             new Vector2(0.6f, 1.1f),
