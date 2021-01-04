@@ -37,124 +37,17 @@ public class InventoryWeapon : EquippableItem
         if (weaponType == WeaponType.Sword)
         {
             swingTime = 0.3f;
-            _leftHitboxPolygon = new[] {
-                new Vector2(0f, 0.5f),
-                new Vector2(0, 0.6f),
-                new Vector2(-0.5f, 0.6f),
-                new Vector2(-0.5f, 0.6f),
-                new Vector2(-0.5f, 0f),
-                new Vector2(0f, 0f)
-            };
-
-            _rightHitboxPolygon = new[] {
-                new Vector2(0f, 0.5f),
-                new Vector2(0, 0.6f),
-                new Vector2(0.5f, 0.6f),
-                new Vector2(0.5f, 0.6f),
-                new Vector2(0.5f, 0f),
-                new Vector2(0f, 0f)
-            };
-
-            _upHitboxPolygon = new[] {
-                new Vector2(0f, 0.5f),
-                new Vector2(0.4f, 0.75f),
-                new Vector2(0.3f, 1.1f),
-                new Vector2(-0.3f, 1.1f),
-                new Vector2(-0.4f, 0.75f),
-                new Vector2(0f, 0.5f)
-            };
-
-            _downHitboxPolygon = new[] {
-                new Vector2(0f, 0.25f),
-                new Vector2(0.5f,0.15f),
-                new Vector2(0.35f, -0.25f),
-                new Vector2(0f, -0.25f),
-                new Vector2(-0.35f, -0.25f),
-                new Vector2(-0.5f, 0.15f)
-            };
+            SetSwordHitboxes();
         }
         else if (weaponType == WeaponType.Axe)
         {
             swingTime = 0.75f;
-
-            _leftHitboxPolygon = new[] {
-                new Vector2(0f, 0.5f),
-                new Vector2(0, 0.6f),
-                new Vector2(-0.7f, 0.6f),
-                new Vector2(-0.7f, 0.6f),
-                new Vector2(-0.7f, 0f),
-                new Vector2(0f, 0f)
-            };
-
-
-            _rightHitboxPolygon = new[] {
-                new Vector2(0f, 0.5f),
-                new Vector2(0, 0.6f),
-                new Vector2(0.7f, 0.6f),
-                new Vector2(0.7f, 0.6f),
-                new Vector2(0.7f, 0f),
-                new Vector2(0f, 0f)
-            };
-
-            _upHitboxPolygon = new[] {
-                new Vector2(0f, 0.5f),
-                new Vector2(0.4f, 0.9f),
-                new Vector2(0.3f, 1.3f),
-                new Vector2(-0.3f, 1.3f),
-                new Vector2(-0.4f, 0.9f),
-                new Vector2(0f, 0.5f)
-            };
-
-            _downHitboxPolygon = new[] {
-                new Vector2(0f, 0.25f),
-                new Vector2(0.5f,0.15f),
-                new Vector2(0.35f, -0.5f),
-                new Vector2(0f, -0.5f),
-                new Vector2(-0.35f, -0.5f),
-                new Vector2(-0.5f, 0.15f)
-            };
+            SetAxeHitboxes();
         }
         else if (weaponType == WeaponType.Spear)
         {
-
             swingTime = 0.6f;
-
-            _leftHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(5, 2),
-                new Vector2(3, 3),
-                new Vector2(0.1f, 0.1f),
-                new Vector2(0.1f, 0.1f),
-                new Vector2(0.1f, 0.1f)
-            };
-
-
-            _rightHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(2, 2),
-                new Vector2(3, 3),
-                new Vector2(-0.5f, 0.8f),
-                new Vector2(-0.25f, 0.5f),
-                new Vector2(0.2f, 0.5f)
-            };
-
-            _upHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(1, 1),
-                new Vector2(1, 1),
-                new Vector2(-0.5f, 0.8f),
-                new Vector2(-0.25f, 0.5f),
-                new Vector2(0.2f, 0.5f)
-            };
-
-            _downHitboxPolygon = new[] {
-                new Vector2(0, 0),
-                new Vector2(1, 1),
-                new Vector2(0.6f, 1.1f),
-                new Vector2(-0.5f, 0.8f),
-                new Vector2(-0.25f, 0.5f),
-                new Vector2(0.2f, 0.5f)
-            };
+            SetSpearHitboxes();
         }
 
         leftBox = new[] { _leftHitboxPolygon[0], _leftHitboxPolygon[1], _leftHitboxPolygon[2], _leftHitboxPolygon[3], _leftHitboxPolygon[4], _leftHitboxPolygon[5] };
@@ -163,4 +56,121 @@ public class InventoryWeapon : EquippableItem
         downBox = new[] { _downHitboxPolygon[0], _downHitboxPolygon[1], _downHitboxPolygon[2], _downHitboxPolygon[3], _downHitboxPolygon[4], _downHitboxPolygon[5] };
     }
 
+    private void SetSwordHitboxes()
+    {
+        _leftHitboxPolygon = new[] {
+            new Vector2(0f, 0.5f),
+            new Vector2(0, 0.6f),
+            new Vector2(-0.5f, 0.6f),
+            new Vector2(-0.5f, 0.6f),
+            new Vector2(-0.5f, 0f),
+            new Vector2(0f, 0f)
+        };
+
+        _rightHitboxPolygon = new[] {
+            new Vector2(0f, 0.5f),
+            new Vector2(0, 0.6f),
+            new Vector2(0.5f, 0.6f),
+            new Vector2(0.5f, 0.6f),
+            new Vector2(0.5f, 0f),
+            new Vector2(0f, 0f)
+        };
+
+        _upHitboxPolygon = new[] {
+            new Vector2(0f, 0.5f),
+            new Vector2(0.4f, 0.75f),
+            new Vector2(0.3f, 1.1f),
+            new Vector2(-0.3f, 1.1f),
+            new Vector2(-0.4f, 0.75f),
+            new Vector2(0f, 0.5f)
+        };
+
+        _downHitboxPolygon = new[] {
+            new Vector2(0f, 0.25f),
+            new Vector2(0.5f,0.15f),
+            new Vector2(0.35f, -0.25f),
+            new Vector2(0f, -0.25f),
+            new Vector2(-0.35f, -0.25f),
+            new Vector2(-0.5f, 0.15f)
+        };
+    }
+
+    private void SetAxeHitboxes()
+    {
+        _leftHitboxPolygon = new[] {
+            new Vector2(0f, 0.5f),
+            new Vector2(0, 0.6f),
+            new Vector2(-0.7f, 0.6f),
+            new Vector2(-0.7f, 0.6f),
+            new Vector2(-0.7f, 0f),
+            new Vector2(0f, 0f)
+        };
+
+        _rightHitboxPolygon = new[] {
+            new Vector2(0f, 0.5f),
+            new Vector2(0, 0.6f),
+            new Vector2(0.7f, 0.6f),
+            new Vector2(0.7f, 0.6f),
+            new Vector2(0.7f, 0f),
+            new Vector2(0f, 0f)
+        };
+
+        _upHitboxPolygon = new[] {
+            new Vector2(0f, 0.5f),
+            new Vector2(0.4f, 0.9f),
+            new Vector2(0.3f, 1.3f),
+            new Vector2(-0.3f, 1.3f),
+            new Vector2(-0.4f, 0.9f),
+            new Vector2(0f, 0.5f)
+        };
+
+        _downHitboxPolygon = new[] {
+            new Vector2(0f, 0.25f),
+            new Vector2(0.5f,0.15f),
+            new Vector2(0.35f, -0.5f),
+            new Vector2(0f, -0.5f),
+            new Vector2(-0.35f, -0.5f),
+            new Vector2(-0.5f, 0.15f)
+        };
+    }
+
+    private void SetSpearHitboxes()
+    {
+        _leftHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(5, 2),
+            new Vector2(3, 3),
+            new Vector2(0.1f, 0.1f),
+            new Vector2(0.1f, 0.1f),
+            new Vector2(0.1f, 0.1f)
+        };
+
+
+        _rightHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(2, 2),
+            new Vector2(3, 3),
+            new Vector2(-0.5f, 0.8f),
+            new Vector2(-0.25f, 0.5f),
+            new Vector2(0.2f, 0.5f)
+        };
+
+        _upHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(1, 1),
+            new Vector2(1, 1),
+            new Vector2(-0.5f, 0.8f),
+            new Vector2(-0.25f, 0.5f),
+            new Vector2(0.2f, 0.5f)
+        };
+
+        _downHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(1, 1),
+            new Vector2(0.6f, 1.1f),
+            new Vector2(-0.5f, 0.8f),
+            new Vector2(-0.25f, 0.5f),
+            new Vector2(0.2f, 0.5f)
+        };
+    }
 }
