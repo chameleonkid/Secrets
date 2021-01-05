@@ -20,12 +20,12 @@ public class CoolDownDisplayManager : MonoBehaviour
     {
         player.OnAttackTriggered += SetMeleeCoolDown;
         player.OnSpellTriggered += SetSpell0CoolDown;
-        inventoryManager.OnEquipItem += InventoryManager_OnEquipItem;
-
+        inventoryManager.OnEquipItem += changeCoolDownSprites;
         originalColor = meleeWeaponCooldown.color;
+        changeCoolDownSprites();
     }
 
-    private void InventoryManager_OnEquipItem()
+    private void changeCoolDownSprites()
     {
         if(inventory.currentWeapon)
         {
@@ -41,7 +41,7 @@ public class CoolDownDisplayManager : MonoBehaviour
     {
         player.OnAttackTriggered -= SetMeleeCoolDown;
         player.OnSpellTriggered -= SetSpell0CoolDown;
-        inventoryManager.OnEquipItem -= InventoryManager_OnEquipItem;
+        inventoryManager.OnEquipItem -= changeCoolDownSprites;
 
     }
 
