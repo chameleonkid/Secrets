@@ -52,8 +52,8 @@ public class DamageWhileInArea : Hitbox
             if (hit != null)
             {
                 DamagePopUpManager.RequestDamagePopUp(tickDamage, hit.transform);
-                hit.health -= tickDamage;
-                yield return new WaitForSeconds(tickDuration);
+                hit.health -= tickDamage;                                           // This means DMG WITHOUT ARMOR and No iFrames!
+                yield return new WaitForSeconds(tickDuration);  
                 Debug.Log("Character took dmg from AOE");
             }
         }
