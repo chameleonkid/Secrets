@@ -1076,8 +1076,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectAnimator: {fileID: 1029923363}
   isShrinked: 0
-  gotHitSound: []
+  gotHitSound:
+  - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   meeleCooldown: 0
+  spellCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   _speed: 3
   _lumen: {fileID: 11400000, guid: 4f1b8e485a4d225498a06b8076d463bc, type: 2}
@@ -1107,6 +1109,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9d2a082a072c48241b31f7b0dcdacbfd, type: 3}
   levelUpSound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
   meleeCooldownSound: {fileID: 8300000, guid: bf934a69646f23647b31950510d6dd83, type: 3}
+  Spell0CooldownSound: {fileID: 8300000, guid: d57d7ad8129f1a642ac457e612c5fc64, type: 3}
   lamp: {fileID: 3563088278929260502}
   thingSprite: {fileID: 7737533578274349692}
   weaponSkinChanger: {fileID: 3263862040294853675}
@@ -1256,8 +1259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a857ff52570f8c479946076ced790ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSprite: {fileID: 2800000, guid: 70b0949c07cd61c4d963206776db2f55, type: 3}
-  folderPath: Retro Pixel Characters/Spritesheets/Male/1 - Base/
+  newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
+  folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
 --- !u!1 &7737533577142277424
 GameObject:
