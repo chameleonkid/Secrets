@@ -13,7 +13,7 @@ public class CoolDownDisplayManager : MonoBehaviour
     [SerializeField] private Inventory inventory = default;
     [SerializeField] private PlayerMovement player = default;
     [SerializeField] private Color originalColor= default;
-    [SerializeField] private float fillingTime = default;
+   // [SerializeField] private float fillingTime = default;
 
     private void OnEnable()
     {
@@ -51,7 +51,7 @@ public class CoolDownDisplayManager : MonoBehaviour
 
     private IEnumerator CooldownCountDownCo(float weaponCooldown)
     {
-      
+        float fillingTime = 0;
         fillingTime = weaponCooldown;
         while (fillingTime > 0)
         {
@@ -69,6 +69,7 @@ public class CoolDownDisplayManager : MonoBehaviour
 
     private IEnumerator SpellCooldownCountDownCo(float spellBookCountDown)
     {
+        float fillingTime = 0;
         fillingTime = spellBookCountDown;
         while (fillingTime > 0)
         {
