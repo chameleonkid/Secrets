@@ -12,7 +12,6 @@ public class InventoryWeapon : EquippableItem
 
     public int minDamage;
     public int maxDamage;
-    public float glowIntensity;
     public Texture2D weaponSkin = default;
     public WeaponType weaponType = default;
     public float swingTime = 0.0f;

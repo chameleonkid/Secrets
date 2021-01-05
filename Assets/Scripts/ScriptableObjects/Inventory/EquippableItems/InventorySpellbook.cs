@@ -6,6 +6,7 @@ public class InventorySpellbook : EquippableItem
     public int minSpellDamage;
     public int maxSpellDamage;
     public float coolDown;
+    [ColorUsageAttribute(true, true)] public Color glowColor;
 
     public int manaCosts;
     public GameObject prefab;
