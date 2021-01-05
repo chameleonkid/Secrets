@@ -263,7 +263,7 @@ public class PlayerMovement : Character
         MakeSpell();
         OnSpellTriggered?.Invoke();
         spellCooldown = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.05f);
         if (currentState != State.interact)
         {
             currentState = State.walk;
