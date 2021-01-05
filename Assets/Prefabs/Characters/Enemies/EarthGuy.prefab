@@ -224,6 +224,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectAnimator: {fileID: 0}
+  isShrinked: 0
+  gotHitSound:
+  - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
+  meeleCooldown: 0
+  spellCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 5
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
@@ -264,9 +269,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3474195283260176112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a857ff52570f8c479946076ced790ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d1820b480aa1db4d854263fd5fe0cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSprite: {fileID: 0}
-  folderPath: Retro Pixel Characters/Spritesheets/
-  isChildSprite: 0
+  newSprite: {fileID: 2800000, guid: bd0534df25cf6874ea08e052e9de0eb9, type: 3}
+  folderPath: Retro Pixel Monsters/Spritesheets/
+  useColorOutline: 1
