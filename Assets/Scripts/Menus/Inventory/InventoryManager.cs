@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rangeDisplay = default;
     [SerializeField] private TextMeshProUGUI lightRadiusDisplay = default;
     [SerializeField] private Material swordMaterial = default;
-    [Header("Cooldown Displays")]
+    [SerializeField] private Material laserMaterial = default;
+
+
+    public event Action OnEquipItem;
 
 
 
@@ -85,7 +89,15 @@ public class InventoryManager : MonoBehaviour
         if (item is EquippableItem)
         {
             inventory.Equip((EquippableItem)item);
-            setWeaponColor();
+            if(inventory.currentWeapon)
+            {
+                setWeaponColor();
+            }
+            if(inventory.currentSpellbook)
+            {
+                setLaserColor();
+            }
+            OnEquipItem?.Invoke();
 
         }
 
@@ -134,6 +146,10 @@ public class InventoryManager : MonoBehaviour
     private void setWeaponColor()
     {
         swordMaterial.SetColor("_GlowColor", inventory.currentWeapon.glowColor);
+    }
+    private void setLaserColor()
+    {
+        laserMaterial.SetColor("_GlowColor", inventory.currentSpellbook.glowColor);
     }
 
 }
