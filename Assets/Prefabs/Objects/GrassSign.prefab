@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5769035966367901408}
   - component: {fileID: 130968409431402507}
   - component: {fileID: 4434826427292050132}
-  - component: {fileID: 967494335}
+  - component: {fileID: 793101476}
   m_Layer: 0
   m_Name: GrassSign
   m_TagString: Untagged
@@ -73,13 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: -1345728457
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4479181887894498110, guid: 49f3c4fd8cba56346957cd1ff17923df,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f98b930d6bb32741ae131a18178782c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.3, y: 0.42}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -102,8 +101,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.3, y: 0.42}
+    newSize: {x: 0.3, y: 0.42}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -128,8 +127,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.3, y: 0.42}
+    newSize: {x: 0.3, y: 0.42}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -137,7 +136,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0636604, y: 1.6797743}
   m_EdgeRadius: 0
---- !u!114 &967494335
+--- !u!114 &793101476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,12 +145,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 424923828034975772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd58f46cfedd2d4bae69df540e74f1d, type: 3}
+  m_Script: {fileID: 11500000, guid: cd3d94af9b5e9044ba0b7da254ad3902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
-  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
-  dialogBox: {fileID: 0}
-  dialogText: {fileID: 0}
-  dialog: Castle Wireshore
+  dialogue:
+    npcName: Sign
+    sentences:
+    - "North: \U0001F815\U0001F815\U0001F815\U0001F815The Cave\nEast:  Mavens\nWest:
+      \u2B05\u2B05\U0001F814\U0001F814The Great Lake\U0001F814"
