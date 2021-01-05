@@ -124,6 +124,6 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length)];   // Sound is missing atm, will be inserted soon.
+    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length -1)];   // Sound is missing atm, will be inserted soon.
 
 }

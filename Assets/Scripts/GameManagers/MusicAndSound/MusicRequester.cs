@@ -14,5 +14,5 @@ public class MusicRequester : MonoBehaviour
     }
 
 
-    private AudioClip GetMusic() => areaMusic[Random.Range(0, areaMusic.Length)];
+    private AudioClip GetMusic() => areaMusic[Random.Range(0, areaMusic.Length - 1 )];
 }

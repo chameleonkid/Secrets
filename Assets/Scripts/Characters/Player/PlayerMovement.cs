@@ -88,7 +88,7 @@ public class PlayerMovement : Character
         transform.position = startingPosition.value;
     }
 
-    private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
+    private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length-1)];
     private AudioClip GetLevelUpSound() => levelUpSound;
 
     private void Update()
