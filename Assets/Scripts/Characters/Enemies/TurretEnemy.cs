@@ -45,7 +45,7 @@ public class TurretEnemy : EnemyLog
         currentState = State.walk;
     }
 
-    private IEnumerator fireCo()
+    protected virtual IEnumerator fireCo()
     {
         var originalMovespeed = this.moveSpeed;
         animator.Play("Attacking");
@@ -55,6 +55,5 @@ public class TurretEnemy : EnemyLog
         var difference = target.transform.position - transform.position;
         var proj = Instantiate(projectile, transform.position, Quaternion.identity);
         proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
-
     }
 }

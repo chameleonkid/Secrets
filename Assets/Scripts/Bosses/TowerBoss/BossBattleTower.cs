@@ -12,23 +12,33 @@ public class BossBattleTower : MonoBehaviour
         Stage_2,
         Stage_3,
     }
-
+    [Header("TriggerArea")]
     [SerializeField] private ColliderTrigger colliderTrigger = default;
+    [Header("Potential Enemies")]
     [SerializeField] private Enemy enemy1 = default;
     [SerializeField] private Enemy enemy2 = default;
     [SerializeField] private Enemy enemy3 = default;
-    [SerializeField] private Enemy bossMinion = default;
-    [SerializeField] private List<Vector3> spawnPostionList = default;
-    [SerializeField] private Enemy boss = default;
-    [SerializeField] private GameObject bossGameObject = default;
-    [SerializeField] private Stage stage = default;
+    [Header("Spawnrate in seconds")]
+    [SerializeField] private float spawnRate = 1;
+    [Header("List of spawned Enemies")]
     [SerializeField] private List<Enemy> spawnedEnemiesList = default;
+    [Header("Special Enemies that if killed stop the shield")]
+    [SerializeField] private Enemy bossMinion = default;
     [SerializeField] private int minionsToSpawn;                //set the minions to spawn in inspector
     [SerializeField] private int spawnedMinionsCounter = 0;
-
     [SerializeField] private bool minionsSpawned = false;
+    [Header("Spawn Positions")]
+    [SerializeField] private List<Vector3> spawnPostionList = default;
+    [Header("The Boss")]
+    [SerializeField] private Enemy boss = default;
+    [SerializeField] private GameObject bossGameObject = default;
+    [Header("Stages")]
+    [SerializeField] private Stage stage = default;
+
+    [Header("The Bossshield")]
     [SerializeField] private Shield bossshield = default;
 
+    [Header("Saves")]
     [SerializeField] private bool isDefeated;
     [SerializeField] private BoolValue storeDefeated;
 
@@ -100,7 +110,7 @@ public class BossBattleTower : MonoBehaviour
     {
         Debug.Log("BossBattle has started!");
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, 10.0f);                                          //Call that function in 1 second every second
+        InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);                                          
     }
 
     private void SpawnEnemy()

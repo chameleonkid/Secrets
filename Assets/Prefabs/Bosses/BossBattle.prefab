@@ -225,6 +225,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectAnimator: {fileID: 0}
+  isShrinked: 0
+  gotHitSound: []
+  attackSounds: []
+  meeleCooldown: 0
+  spellCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 500
   maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
@@ -257,6 +262,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3306322925874010873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699053892303726067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 1
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 5
+  m_LightVolumeOpacity: 1
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 1
+  m_PointLightOuterRadius: 5
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &3306322923941976395
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,60 +919,20 @@ MonoBehaviour:
   enemy1: {fileID: 8978087339683796174, guid: 11421516125106d47bc0500b650bd56d, type: 3}
   enemy2: {fileID: 5432762753877174116, guid: af7a969f824834e4b9774df5f71b1de4, type: 3}
   enemy3: {fileID: 4840798952189540833, guid: d62d08b518292aa4691680e90a9f5a07, type: 3}
+  spawnRate: 1
+  spawnedEnemiesList: []
   bossMinion: {fileID: 8978087339683796174, guid: be02b69f55a52074bbdd306229de2f8e,
     type: 3}
+  minionsToSpawn: 6
+  spawnedMinionsCounter: 0
+  minionsSpawned: 0
   spawnPostionList: []
   boss: {fileID: 2607130021515583025}
   bossGameObject: {fileID: 2607130021515583024}
   stage: 0
-  spawnedEnemiesList: []
-  minionsToSpawn: 6
-  spawnedMinionsCounter: 0
-  minionsSpawned: 0
   bossshield: {fileID: 2699053893516789833}
   isDefeated: 0
   storeDefeated: {fileID: 11400000, guid: b77c244b0323ffe48b269413f01e5246, type: 2}
---- !u!114 &3306322925874010873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2699053892303726067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LightType: 3
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 1
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 5
-  m_LightVolumeOpacity: 1
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 0
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
-  m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1
-  m_PointLightOuterRadius: 5
-  m_PointLightDistance: 3
-  m_PointLightQuality: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &3306322925987376109
 GameObject:
   m_ObjectHideFlags: 0
