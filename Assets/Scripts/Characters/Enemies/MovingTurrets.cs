@@ -2,7 +2,8 @@
 
 public class MovingTurrets : TurretEnemy
 {
-    [SerializeField] private float shootingRange;
+    [SerializeField] private float shootingRange = 3;
+    [SerializeField] private float escapeRange = 1;
 
     protected override void FixedUpdate()
     {
@@ -18,7 +19,7 @@ public class MovingTurrets : TurretEnemy
                     animator.SetBool("isMoving", true);
             }
         }
-        else if(distance <= chaseRadius && distance <= shootingRange)
+        else if(distance <= chaseRadius && distance <= shootingRange && distance > escapeRange)
         {
             currentState = State.idle;
             animator.SetBool("isMoving", false);
@@ -32,7 +33,15 @@ public class MovingTurrets : TurretEnemy
         {
             OutsideChaseRadiusUpdate();
         }
-    
+
+        if (distance <= escapeRange)
+        {
+            Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1 * moveSpeed * Time.deltaTime);
+            SetAnimatorXYSingleAxis(temp - transform.position);
+            rigidbody.MovePosition(temp);
+            animator.SetBool("isMoving", true);
+        }
+
     }
 
 }

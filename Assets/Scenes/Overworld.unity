@@ -118389,8 +118389,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5310815632841737160, guid: 8c0aa85f8ca88b040bf9fae766a23333,
         type: 3}
-      propertyPath: shootingRange
-      value: 3
+      propertyPath: chaseRadius
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5310815632841737160, guid: 8c0aa85f8ca88b040bf9fae766a23333,
+        type: 3}
+      propertyPath: escapeRange
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7694588597097185783, guid: 8c0aa85f8ca88b040bf9fae766a23333,
         type: 3}
@@ -121215,6 +121220,7 @@ MonoBehaviour:
   canFire: 1
   projectileSpeed: 5
   shootingRange: 3
+  escapeRange: 2
 --- !u!1 &5516682828237446653
 GameObject:
   m_ObjectHideFlags: 0
@@ -121503,19 +121509,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1390969149251859650, guid: 89c84b57fb0e68b4092b97ae7f868268,
         type: 3}
-      propertyPath: shootingRange
-      value: 3
+      propertyPath: chaseRadius
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390969149251859650, guid: 89c84b57fb0e68b4092b97ae7f868268,
+        type: 3}
+      propertyPath: escapeRange
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3474195283260176112, guid: 89c84b57fb0e68b4092b97ae7f868268,
         type: 3}
       propertyPath: m_Name
       value: EarthGuy
       objectReference: {fileID: 0}
-    - target: {fileID: 3474195283260176115, guid: 89c84b57fb0e68b4092b97ae7f868268,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 3aebacfb64901f44897ece20a4c9bba9, type: 2}
     - target: {fileID: 3474195283260176125, guid: 89c84b57fb0e68b4092b97ae7f868268,
         type: 3}
       propertyPath: m_RootOrder
@@ -121833,8 +121839,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5868022570819834626, guid: be56d039da021e54d91260ea92c2935a,
         type: 3}
-      propertyPath: shootingRange
-      value: 3
+      propertyPath: chaseRadius
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5868022570819834626, guid: be56d039da021e54d91260ea92c2935a,
+        type: 3}
+      propertyPath: escapeRange
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8220197769089945904, guid: be56d039da021e54d91260ea92c2935a,
         type: 3}
