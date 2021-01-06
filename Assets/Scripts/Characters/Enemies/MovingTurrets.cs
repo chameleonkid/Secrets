@@ -14,7 +14,7 @@ public class MovingTurrets : TurretEnemy
 
                 if (canFire)
                 {
-                    animator.Play("SkeletonWarrior_Attacking");
+                    
                     currentState = State.attack;
                     FireProjectile();
                 }

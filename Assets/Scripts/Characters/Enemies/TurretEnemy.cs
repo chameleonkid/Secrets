@@ -39,6 +39,7 @@ public class TurretEnemy : EnemyLog
 
     protected virtual void FireProjectile()
     {
+        animator.Play("Attacking");
         var difference = target.transform.position - transform.position;
         var proj = Instantiate(projectile, transform.position, Quaternion.identity);
         proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;

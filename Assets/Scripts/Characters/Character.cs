@@ -128,7 +128,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length )];
-    protected AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
+    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length ) ];
+    protected AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length) ];
 
 }
