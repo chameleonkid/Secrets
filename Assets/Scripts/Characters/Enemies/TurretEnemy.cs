@@ -39,17 +39,22 @@ public class TurretEnemy : EnemyLog
 
     protected virtual void FireProjectile()
     {
-        animator.Play("Attacking");
-        var difference = target.transform.position - transform.position;
-        var proj = Instantiate(projectile, transform.position, Quaternion.identity);
-        proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
+        
+        StartCoroutine(fireCo());
         canFire = false;
         currentState = State.walk;
     }
 
     private IEnumerator fireCo()
     {
-        currentState = State.attack;
-        yield return new WaitForSeconds(0.3f);
+        var originalMovespeed = this.moveSpeed;
+        animator.Play("Attacking");
+        this.moveSpeed = 0;
+        yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
+        this.moveSpeed = originalMovespeed;
+        var difference = target.transform.position - transform.position;
+        var proj = Instantiate(projectile, transform.position, Quaternion.identity);
+        proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
+
     }
 }

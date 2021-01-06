@@ -44,7 +44,7 @@ public class Enemy : Character
 
     [SerializeField] protected string enemyName = default;      // Unused, is it necessary?
     public float moveSpeed = default;                           // Should make protected
-    [SerializeField] protected Vector2 homePosition = default;
+    [SerializeField] protected Vector3 homePosition = default;
     [SerializeField] protected float chaseRadius = default;
     [SerializeField] protected float attackRadius = default;
     private float originalChaseRadius = default;
@@ -64,8 +64,7 @@ public class Enemy : Character
         health = maxHealth.value;
         transform.position = homePosition;
         chaseRadius = originalChaseRadius;
-        currentState = State.idle;
-        
+        currentState = State.idle; 
     }
 
     protected override void Awake()
@@ -159,6 +158,16 @@ public class Enemy : Character
     public void KillEnemy()
     {
         health = 0;
+    }
+
+    protected Vector3 GetRandomDirection()
+    {
+        return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
+    }
+
+    private Vector3 GetRoamingPostion()
+    {
+       return homePosition + (GetRandomDirection() * UnityEngine.Random.Range(10f, 70f));
     }
 
 

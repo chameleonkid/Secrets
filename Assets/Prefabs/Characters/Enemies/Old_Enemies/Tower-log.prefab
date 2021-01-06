@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,9 +223,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d815b736438c34fbd2d219e440621e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectAnimator: {fileID: 0}
+  isShrinked: 0
+  gotHitSound: []
+  attackSounds: []
+  meeleCooldown: 0
+  spellCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 5
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
+  _health: 0
+  isMinion: 0
   enemyName: Towerman
   moveSpeed: 0
   homePosition: {x: -36.62, y: 7.37}
@@ -236,7 +244,7 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 05d3919ae3c5476418135c27aa5bcb68, type: 2}
-  projectile: {fileID: 8755954809695844891, guid: 4cc237e5fdb492f4d931468857161ee7,
+  projectile: {fileID: 8755954809695844891, guid: c9028f5d007aa5f45a9ff462b665a1b4,
     type: 3}
   fireDelay: 0.1
   canFire: 1
