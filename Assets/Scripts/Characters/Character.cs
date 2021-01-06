@@ -13,9 +13,13 @@ public abstract class Character : MonoBehaviour
     public Animator effectAnimator = default;
     protected InvulnerabilityFrames iframes { get; private set; }
     [SerializeField] protected bool isShrinked;
+    [Header("ParentSounds")]
     [SerializeField] protected AudioClip[] gotHitSound = default;
+    [SerializeField] private AudioClip[] attackSounds = default;
+    [Header("CoolDowns")]
     [SerializeField] protected bool meeleCooldown = false;
     [SerializeField] protected bool spellCooldown = false;
+
 
 
 
@@ -124,6 +128,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length -1)];   // Sound is missing atm, will be inserted soon.
+    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length )];
+    protected AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length)];
 
 }

@@ -17,7 +17,7 @@ public class MeleeEnemy : EnemyLog
                 SetAnimatorXYSingleAxis(temp - transform.position);
                 rigidbody.MovePosition(temp);
                 currentState = State.walk;
-                animator.SetBool("Moving", true);
+                animator.SetBool("isMoving", true);
             }
 
         }
@@ -31,12 +31,14 @@ public class MeleeEnemy : EnemyLog
         else if (distance >= chaseRadius && distance >= attackRadius)
         {
             currentState = State.idle;
-            animator.SetBool("Moving", false);
+            animator.SetBool("isMoving", false);
         }
     }
 
     public IEnumerator AttackCo()
     {
+
+        SoundManager.RequestSound(GetAttackSound());
         currentState = State.attack;
         animator.SetBool("Attacking", true);
         yield return null;

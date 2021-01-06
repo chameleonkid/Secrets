@@ -36,6 +36,7 @@ public class Enemy : Character
 
             if (_health <= 0)
             {
+                animator.Play("Death");
                 Die();
             }
         }

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1705286914783115237}
   - component: {fileID: 6471784951619322287}
   - component: {fileID: 1997546635095118169}
+  - component: {fileID: 8602620582523531255}
   m_Layer: 0
-  m_Name: SkeletonDeath
+  m_Name: Skeleton_Wizard_Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -69,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1345728457
-  m_SortingLayer: 3
+  m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300042, guid: 1ad0d050b36bee04db2ed7c035992ae9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08dae81075e558c40ad84bed99a37370, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,3 +102,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8602620582523531255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4464167541414145869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1820b480aa1db4d854263fd5fe0cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newSprite: {fileID: 2800000, guid: 08dae81075e558c40ad84bed99a37370, type: 3}
+  folderPath: Retro Pixel Monsters/Spritesheets/
+  useColorOutline: 1

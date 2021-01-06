@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class TurretEnemy : EnemyLog
 {
@@ -24,15 +25,16 @@ public class TurretEnemy : EnemyLog
         {
             if (canFire)
             {
+                currentState = State.attack;
                 FireProjectile();
             }
+            currentState = State.idle;
         }
     }
 
     protected override void OutsideChaseRadiusUpdate()
     {
-      //  animator.SetBool("WakeUp", false);
-        // ChangeState(State.idle);
+        currentState = State.idle;
     }
 
     protected virtual void FireProjectile()
@@ -42,6 +44,11 @@ public class TurretEnemy : EnemyLog
         proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
         canFire = false;
         currentState = State.walk;
+    }
 
+    private IEnumerator fireCo()
+    {
+        currentState = State.attack;
+        yield return new WaitForSeconds(0.3f);
     }
 }

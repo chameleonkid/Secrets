@@ -46,7 +46,6 @@ public class PlayerMovement : Character
     public GameObject projectile; //arrows and so on
 
     [Header("Sound FX")]
-    [SerializeField] private AudioClip[] attackSounds = default;
     [SerializeField] private AudioClip levelUpSound = default;
     [SerializeField] private AudioClip meleeCooldownSound = default;
     [SerializeField] private AudioClip Spell0CooldownSound = default;
@@ -88,7 +87,7 @@ public class PlayerMovement : Character
         transform.position = startingPosition.value;
     }
 
-    private AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length-1)];
+    
     private AudioClip GetLevelUpSound() => levelUpSound;
 
     private void Update()
