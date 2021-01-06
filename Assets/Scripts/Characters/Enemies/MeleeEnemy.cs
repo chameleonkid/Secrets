@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MeleeEnemy : EnemyLog
+public class MeleeEnemy : Enemy
 {
-    protected override void Start() {}
-
     protected override void FixedUpdate()
     {
         var distance = Vector3.Distance(target.position, transform.position);

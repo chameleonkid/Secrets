@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
-public class AreaLog : EnemyLog
+public class AreaLog : Enemy
 {
     public Collider2D boundary;
+
+    protected void Start() => animator.SetBool("isMoving", false);
 
     protected override void InsideChaseRadiusUpdate()
     {
@@ -16,9 +18,5 @@ public class AreaLog : EnemyLog
         }
     }
 
-    protected override void OutsideChaseRadiusUpdate()
-    {
-        animator.SetBool("WakeUp", false);
-        // ChangeState(EnemyState.idle);
-    }
+    protected override void OutsideChaseRadiusUpdate() => animator.SetBool("WakeUp", false);
 }
