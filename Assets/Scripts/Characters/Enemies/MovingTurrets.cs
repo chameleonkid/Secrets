@@ -11,10 +11,8 @@ public class MovingTurrets : TurretEnemy
         {
             if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
             {
-
                 if (canFire)
                 {
-                    
                     currentState = State.attack;
                     FireProjectile();
                 }

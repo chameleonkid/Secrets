@@ -1,18 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CoolDownDisplayManager : MonoBehaviour
 {
-
     [SerializeField] private Image meleeWeaponCooldown = default;
     [SerializeField] private Image meleeWeaponSprite = default;
     [SerializeField] private Image spell0Cooldown = default;
     [SerializeField] private Image spell0Sprite = default;
     [SerializeField] private Inventory inventory = default;
     [SerializeField] private PlayerMovement player = default;
-    [SerializeField] private Color originalColor= default;
+    [SerializeField] private Color originalColor = default;
     [SerializeField] private InventoryManager inventoryManager = default;
     // [SerializeField] private float fillingTime = default;
 
@@ -27,7 +25,7 @@ public class CoolDownDisplayManager : MonoBehaviour
 
     private void changeCoolDownSprites()
     {
-        if(inventory.currentWeapon)
+        if (inventory.currentWeapon)
         {
             meleeWeaponSprite.sprite = inventory.currentWeapon.sprite;
         }
@@ -53,7 +51,7 @@ public class CoolDownDisplayManager : MonoBehaviour
     private void SetMeleeCoolDown()
     {
 
-        meleeWeaponCooldown.color = new Color(255,0,0);
+        meleeWeaponCooldown.color = new Color(255, 0, 0);
         StartCoroutine(CooldownCountDownCo(inventory.currentWeapon.swingTime));
     }
 
@@ -72,15 +70,14 @@ public class CoolDownDisplayManager : MonoBehaviour
         {
             fillingTime -= Time.deltaTime;
             meleeWeaponCooldown.fillAmount = (fillingTime) / weaponCooldown;
-          //  meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);   I wanted the Background to become more bright with each iteration, but actually its instantly white...
+            // meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);   I wanted the Background to become more bright with each iteration, but actually its instantly white...
             yield return null;
         }
         meleeWeaponCooldown.fillAmount = 1;
-        meleeWeaponCooldown.color = new Color (255,255,255,255); //Visual Indicator for "The CD is done" in form of an "Flash"
+        meleeWeaponCooldown.color = new Color(255, 255, 255, 255); // Visual Indicator for "The CD is done" in form of an "Flash"
         yield return new WaitForSeconds(0.1f);
-        meleeWeaponCooldown.color = originalColor; 
+        meleeWeaponCooldown.color = originalColor;
     }
-
 
     private IEnumerator SpellCooldownCountDownCo(float spellBookCountDown)
     {
@@ -90,11 +87,11 @@ public class CoolDownDisplayManager : MonoBehaviour
         {
             fillingTime -= Time.deltaTime;
             spell0Cooldown.fillAmount = (fillingTime) / spellBookCountDown;
-            //  meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);   I wanted the Background to become more bright with each iteration, but actually its instantly white...
+            // meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);   I wanted the Background to become more bright with each iteration, but actually its instantly white...
             yield return null;
         }
         spell0Cooldown.fillAmount = 1;
-        spell0Cooldown.color = new Color(255, 255, 255, 255); //Visual Indicator for "The CD is done" in form of an "Flash"
+        spell0Cooldown.color = new Color(255, 255, 255, 255); // Visual Indicator for "The CD is done" in form of an "Flash"
         yield return new WaitForSeconds(0.1f);
         spell0Cooldown.color = originalColor;
     }

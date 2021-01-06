@@ -7,7 +7,7 @@ public class SpellAnimator : MonoBehaviour
     private void Awake()
     {
         animator = transform.GetComponent<Animator>();
-        if(animator)
+        if (animator)
         {
             animator.SetBool("isFlying", true);
         }
@@ -20,16 +20,15 @@ public class SpellAnimator : MonoBehaviour
         // If you hit an enemy (Which might be moving as well) set anim for hit
         if (other.CompareTag("enemy"))
         {
-            if(animator)
+            if (animator)
             {
                 animator.SetBool("isFlying", false);
                 animator.SetBool("isHit", true);
             }
-
         }
         // If IceShard is not moving set isHit Issue: Somehow the Velocity is not set to 0
         //  Debug.Log("Current Velocity is of " + "is" + rigidbody.velocity);
-        if(rigidbody)
+        if (rigidbody)
         {
             if (rigidbody.velocity == Vector2.zero)
             {
@@ -37,7 +36,6 @@ public class SpellAnimator : MonoBehaviour
                 {
                     animator.SetBool("isHit", true);
                 }
-
             }
         }
     }

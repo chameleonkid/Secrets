@@ -20,9 +20,6 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected bool meeleCooldown = false;
     [SerializeField] protected bool spellCooldown = false;
 
-
-
-
     protected virtual void Awake() => GetCharacterComponents();
 
     protected void GetCharacterComponents()
@@ -30,7 +27,7 @@ public abstract class Character : MonoBehaviour
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-     //   effectAnimator = GetComponentInChildren<Animator>();
+        //   effectAnimator = GetComponentInChildren<Animator>();
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 
@@ -100,7 +97,6 @@ public abstract class Character : MonoBehaviour
         lift,
         dead
     }
-
 
     //############################# StatusEffects instead of fire and forget ############################################################
     // This might be usefuf if you want to be able to revert effects. Like using an anti-poison.                                        #
