@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected bool isShrinked;
     [Header("ParentSounds")]
     [SerializeField] protected AudioClip[] gotHitSound = default;
-    [SerializeField] private AudioClip[] attackSounds = default;
+    [SerializeField] protected AudioClip[] attackSounds = default;
     [Header("CoolDowns")]
     [SerializeField] protected bool meeleCooldown = false;
     [SerializeField] protected bool spellCooldown = false;
@@ -67,7 +67,7 @@ public abstract class Character : MonoBehaviour
         {
             health -= damage;
             DamagePopUpManager.RequestDamagePopUp(damage, isCritical, transform);
-            SoundManager.RequestSound(GetGotHitSound());
+            SoundManager.RequestSound(gotHitSound.GetRandomElement());
             iframes?.TriggerInvulnerability();
         }
     }
@@ -127,8 +127,4 @@ public abstract class Character : MonoBehaviour
             }
         }
     }
-
-    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length ) ];
-    protected AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length) ];
-
 }

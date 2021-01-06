@@ -191,7 +191,7 @@ public class PlayerMovement : Character
             directionalAttacks[i].isCritical = isCritical;
         }
 
-        SoundManager.RequestSound(GetAttackSound());
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
 
         animator.SetBool("Attacking", true);
         currentState = State.attack;
@@ -342,7 +342,7 @@ public class PlayerMovement : Character
             {
                 health -= finalDamage;
                 DamagePopUpManager.RequestDamagePopUp(finalDamage, isCritical, transform);
-                SoundManager.RequestSound(GetGotHitSound());
+                SoundManager.RequestSound(gotHitSound.GetRandomElement());
                 iframes?.TriggerInvulnerability();
             }
             else

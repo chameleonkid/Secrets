@@ -37,8 +37,7 @@ public class MeleeEnemy : EnemyLog
 
     public IEnumerator AttackCo()
     {
-
-        SoundManager.RequestSound(GetAttackSound());
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
         currentState = State.attack;
         animator.SetBool("Attacking", true);
         yield return null;
