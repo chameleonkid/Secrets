@@ -3,7 +3,6 @@ using System;
 
 public class Enemy : Character
 {
-    
     [Header("Enemy Stats")]
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private int enemyXp = default;
@@ -65,7 +64,6 @@ public class Enemy : Character
         transform.position = homePosition;
         chaseRadius = originalChaseRadius;
         currentState = State.idle;
-        
     }
 
     protected override void Awake()
@@ -109,36 +107,27 @@ public class Enemy : Character
 
     private void Die()
     {
-        if (!isMinion)
+        if (isMinion)
         {
-            Debug.Log("Normal Enemy was killed");
-            DeathEffect();
-            thisLoot?.GenerateLoot(transform.position);
-            levelSystem.AddExperience(enemyXp);
-            OnEnemyDied?.Invoke();
-
-            if (roomSignal != null)
-            {
-                roomSignal.Raise();
-            }
-            this.gameObject.SetActive(false);
+            Debug.Log("Minion was killed");
+            OnMinionDied?.Invoke();
         }
         else
         {
-            {
-                Debug.Log("Minion was killed");
-                DeathEffect();
-                thisLoot?.GenerateLoot(transform.position);
-                levelSystem.AddExperience(enemyXp);
-                OnMinionDied?.Invoke();
-
-                if (roomSignal != null)
-                {
-                    roomSignal.Raise();
-                }
-                this.gameObject.SetActive(false);
-            }
+            Debug.Log("Normal Enemy was killed");
+            OnEnemyDied?.Invoke();  
         }
+
+        DeathEffect();
+        thisLoot?.GenerateLoot(transform.position);
+        levelSystem.AddExperience(enemyXp);
+
+        if (roomSignal != null)
+        {
+            roomSignal.Raise();
+        }
+
+        this.gameObject.SetActive(false);
     }
 
     private void DeathEffect()
@@ -150,16 +139,7 @@ public class Enemy : Character
         }
     }
 
-    public float GetPercentHealth()
-    {
-        float enemyPercentHealth = (health * 100) / maxHealth.value;
-        return enemyPercentHealth;
-    }
+    public float GetPercentHealth() => (health * 100) / maxHealth.value;
 
-    public void KillEnemy()
-    {
-        health = 0;
-    }
-
-
+    public void KillEnemy() => health = 0;
 }
