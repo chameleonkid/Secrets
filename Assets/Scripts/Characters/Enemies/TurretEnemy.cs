@@ -9,6 +9,7 @@ public class TurretEnemy : EnemyLog
     public bool canFire = true;
     public float projectileSpeed;
 
+
     protected virtual void Update()
     {
         fireDelaySeconds -= Time.deltaTime;
