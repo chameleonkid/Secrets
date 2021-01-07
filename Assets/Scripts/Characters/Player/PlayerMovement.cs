@@ -117,8 +117,8 @@ public class PlayerMovement : Character
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
-       // change.x = joystick.Horizontal;
-       // change.y = joystick.Vertical;
+      //  change.x = joystick.Horizontal;
+      //  change.y = joystick.Vertical;
 
         SetAnimatorXY(change);
 

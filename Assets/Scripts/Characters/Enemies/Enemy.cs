@@ -5,14 +5,16 @@ using System.Collections;
 public class Enemy : Character
 {
     [Header("Enemy Stats")]
-    [SerializeField] private XPSystem levelSystem = default;
-    [SerializeField] private int enemyXp = default;
+    [SerializeField] protected XPSystem levelSystem = default;
+    [SerializeField] protected int enemyXp = default;
     [SerializeField] protected FloatValue maxHealth = default;
     [SerializeField] private float _health;
-    [SerializeField] private bool isWalking;
+    [SerializeField] protected bool isWalking;
+    [SerializeField] protected float walkingTimer = 3f;
     public event Action OnEnemyTakeDamage;
     public event Action OnEnemyDied;
     public event Action OnMinionDied;
+    [Header("BossFight-Values")]
     public bool isMinion = false;
 
     public override float health {
@@ -42,7 +44,7 @@ public class Enemy : Character
             }
         }
     }
-
+    [Header("Enemy Attributes")]
     [SerializeField] protected string enemyName = default;      // Unused, is it necessary?
     public float moveSpeed = default;                           // Should make protected
     [SerializeField] protected Vector2 homePosition = default;
@@ -52,12 +54,12 @@ public class Enemy : Character
     private float originalChaseRadius = default;
 
     [Header("Death Effects")]
-    [SerializeField] private GameObject deathEffect = default;
+    [SerializeField] protected GameObject deathEffect = default;
     [SerializeField] private float deathEffectDelay = 1;
 
     [Header("Death Signal")]
-    [SerializeField] private Signals roomSignal = default;
-    [SerializeField] private LootTable thisLoot = default;
+    [SerializeField] protected Signals roomSignal = default;
+    [SerializeField] protected LootTable thisLoot = default;
 
     protected Transform target = default;
 
@@ -114,7 +116,7 @@ public class Enemy : Character
         randomMovement();
     }
 
-    private void Die()
+    protected virtual void CheckForMinion()
     {
         if (isMinion)
         {
@@ -124,9 +126,15 @@ public class Enemy : Character
         else
         {
             Debug.Log("Normal Enemy was killed");
-            OnEnemyDied?.Invoke();  
+            OnEnemyDied?.Invoke();
         }
+    }
 
+
+    protected virtual void Die()
+    {
+        Debug.Log("Baseclass DIE wurde ausgeführt");
+        CheckForMinion();
         DeathEffect();
         thisLoot?.GenerateLoot(transform.position);
         levelSystem.AddExperience(enemyXp);
@@ -139,7 +147,7 @@ public class Enemy : Character
         this.gameObject.SetActive(false);
     }
 
-    private void DeathEffect()
+    protected void DeathEffect()
     {
         if (deathEffect != null)
         {
@@ -163,7 +171,13 @@ public class Enemy : Character
     {
         Vector3 vec3Home;
         vec3Home = homePosition;
-        return vec3Home + (GetRandomDirection() * UnityEngine.Random.Range(3f, 3f));
+        vec3Home += (GetRandomDirection() * UnityEngine.Random.Range(3f, 3f));
+        while (!Physics2D.OverlapPoint(vec3Home))
+        {
+            vec3Home += (GetRandomDirection() * UnityEngine.Random.Range(3f, 3f));
+            Debug.Log("" + this + " Roamingpoint was in an collider");
+        }
+        return vec3Home;
     }
 
 
@@ -173,11 +187,22 @@ public class Enemy : Character
        
         if (this.transform.position != roamingPosition)
         {
-            Vector3 temp = Vector3.MoveTowards(transform.position, roamingPosition, moveSpeed * Time.deltaTime);
-            SetAnimatorXYSingleAxis(temp - transform.position);
-            rigidbody.MovePosition(temp);
-            currentState = State.walk;
-            animator.SetBool("isMoving", true);
+            
+            if(walkingTimer > 0)
+            {
+                walkingTimer -= Time.deltaTime;
+                Vector3 temp = Vector3.MoveTowards(transform.position, roamingPosition, moveSpeed * Time.deltaTime);
+                SetAnimatorXYSingleAxis(temp - transform.position);
+                rigidbody.MovePosition(temp);
+                currentState = State.walk;
+                animator.SetBool("isMoving", true);
+            }
+            else
+            {
+                StartCoroutine(randomWaiting());
+                walkingTimer = 3f;
+            }
+          
         }
         else
         {
