@@ -118389,13 +118389,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5310815632841737160, guid: 8c0aa85f8ca88b040bf9fae766a23333,
         type: 3}
-      propertyPath: chaseRadius
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5310815632841737160, guid: 8c0aa85f8ca88b040bf9fae766a23333,
-        type: 3}
-      propertyPath: escapeRange
-      value: 2
+      propertyPath: spellCooldown
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7694588597097185783, guid: 8c0aa85f8ca88b040bf9fae766a23333,
         type: 3}
@@ -119619,22 +119614,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 609342224595445775}
     m_Modifications:
-    - target: {fileID: 2508992329486942827, guid: b224b07e891d62443b517d5bda36f2af,
-        type: 3}
-      propertyPath: newSprite
-      value: 
-      objectReference: {fileID: 2800000, guid: 08dae81075e558c40ad84bed99a37370, type: 3}
     - target: {fileID: 7616914949765568049, guid: b224b07e891d62443b517d5bda36f2af,
         type: 3}
       propertyPath: m_Name
       value: Skeleton_Wizard
       objectReference: {fileID: 0}
-    - target: {fileID: 7616914949765568054, guid: b224b07e891d62443b517d5bda36f2af,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 08dae81075e558c40ad84bed99a37370,
-        type: 3}
     - target: {fileID: 7616914949765568055, guid: b224b07e891d62443b517d5bda36f2af,
         type: 3}
       propertyPath: m_RootOrder
@@ -119690,8 +119674,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7616914949765568056, guid: b224b07e891d62443b517d5bda36f2af, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b224b07e891d62443b517d5bda36f2af, type: 3}
 --- !u!4 &2521785701718177796
 Transform:
@@ -121173,54 +121156,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2508992328672586036}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5432762753235697413 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7616914949765568049, guid: b224b07e891d62443b517d5bda36f2af,
+--- !u!114 &5432762753235697416 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5432762753235697416, guid: b224b07e891d62443b517d5bda36f2af,
     type: 3}
   m_PrefabInstance: {fileID: 2508992328672586036}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5432762753235697416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5432762753235697413}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectAnimator: {fileID: 0}
-  isShrinked: 0
-  gotHitSound:
-  - {fileID: 8300000, guid: 6363840ebdde81e4fb33b23a7e8d3be7, type: 3}
-  attackSounds:
-  - {fileID: 8300000, guid: 487f6670089a55447b190751f6728e5c, type: 3}
-  meeleCooldown: 0
-  spellCooldown: 0
-  levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 50
-  maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
-  _health: 0
-  isMinion: 0
-  enemyName: Wizard Skeleton
-  moveSpeed: 2
-  homePosition: {x: 0, y: 0}
-  chaseRadius: 5
-  attackRadius: 1
-  deathEffect: {fileID: 4464167541414145869, guid: c81b33afa26f52445aa9093e9b0562c8,
-    type: 3}
-  deathEffectDelay: 1
-  roomSignal: {fileID: 0}
-  thisLoot: {fileID: 11400000, guid: 390b39db646cd71418f2af0cc809ccf2, type: 2}
-  projectile: {fileID: 8755954809695844891, guid: 908dfa3d79cf8ea4b8e3d60d21bf3c64,
-    type: 3}
-  fireDelay: 5
-  canFire: 1
-  projectileSpeed: 5
-  shootingRange: 3
-  escapeRange: 2
 --- !u!1 &5516682828237446653
 GameObject:
   m_ObjectHideFlags: 0
@@ -121509,13 +121456,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1390969149251859650, guid: 89c84b57fb0e68b4092b97ae7f868268,
         type: 3}
-      propertyPath: chaseRadius
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390969149251859650, guid: 89c84b57fb0e68b4092b97ae7f868268,
-        type: 3}
-      propertyPath: escapeRange
-      value: 2
+      propertyPath: spellCooldown
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3474195283260176112, guid: 89c84b57fb0e68b4092b97ae7f868268,
         type: 3}
@@ -121839,13 +121781,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5868022570819834626, guid: be56d039da021e54d91260ea92c2935a,
         type: 3}
-      propertyPath: chaseRadius
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5868022570819834626, guid: be56d039da021e54d91260ea92c2935a,
-        type: 3}
-      propertyPath: escapeRange
-      value: 2
+      propertyPath: spellCooldown
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8220197769089945904, guid: be56d039da021e54d91260ea92c2935a,
         type: 3}
@@ -122131,6 +122068,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3492503705776306315, guid: 02fc4e9a1e96030418e0b9f90a066bb7,
+        type: 3}
+      propertyPath: gotHitSound.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3492503705776306315, guid: 02fc4e9a1e96030418e0b9f90a066bb7,
+        type: 3}
+      propertyPath: gotHitSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02fc4e9a1e96030418e0b9f90a066bb7, type: 3}
 --- !u!4 &6388225178778538292
