@@ -11,6 +11,7 @@ public class PlayerMovement : Character
     [Header("TestInputs")]
     [SerializeField] private Button uiAttackButton = default;
     [SerializeField] private Button uiSpellButton = default;
+    [SerializeField] private Joystick joystick = default;
 
     [SerializeField] private bool notStaggeredOrLifting = default;
 
@@ -112,8 +113,13 @@ public class PlayerMovement : Character
             return;
         }
 
+        // ################################################# Change Inputtype to Joystick on IOS ################################################
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
+
+       // change.x = joystick.Horizontal;
+       // change.y = joystick.Vertical;
+
         SetAnimatorXY(change);
 
         animator.SetBool("isRunning", Input.GetButton("Run"));
