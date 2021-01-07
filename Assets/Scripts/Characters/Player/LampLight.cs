@@ -6,6 +6,7 @@ public class LampLight : MonoBehaviour
 {
     private Light2D lampLight;
     private PlayerMovement player;
+    [SerializeField] private InventoryManager inventoryManager;
 
     private float timer;
 
@@ -19,21 +20,20 @@ public class LampLight : MonoBehaviour
 
     private void OnEnable()
     {
-        var lamp = player.inventory.currentLamp;
-
-        if (lamp != null)
-        {
-            lampLight.intensity = 1;
-            lampLight.color = lamp.color;
-            lampLight.pointLightOuterRadius = lamp.outerRadius;
-        }
-        else
-        {
-            this.enabled = false;
-        }
+        inventoryManager.OnEquipItem += InventoryManager_OnEquipItem;
+        setLamp();
     }
 
-    private void OnDisable() => lampLight.intensity = 0;
+    private void InventoryManager_OnEquipItem()
+    {
+        setLamp();
+    }
+
+    private void OnDisable()
+    {
+        lampLight.intensity = 0;
+        inventoryManager.OnEquipItem -= InventoryManager_OnEquipItem;
+    }
 
     private void Update()
     {
@@ -54,6 +54,22 @@ public class LampLight : MonoBehaviour
         {
             this.enabled = false;
             timer = 0;
+        }
+    }
+
+    private void setLamp()
+    {
+        var lamp = player.inventory.currentLamp;
+
+        if (lamp != null)
+        {
+            lampLight.intensity = 1;
+            lampLight.color = lamp.color;
+            lampLight.pointLightOuterRadius = lamp.outerRadius;
+        }
+        else
+        {
+            this.enabled = false;
         }
     }
 }
