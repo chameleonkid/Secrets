@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 11464468}
   - component: {fileID: -1101366263706737455}
   - component: {fileID: 9206361163915547932}
-  - component: {fileID: 2307221242408650939}
   - component: {fileID: 2605778485016810401}
   - component: {fileID: 3128601509262177299}
+  - component: {fileID: -570925748809368487}
   m_Layer: 9
-  m_Name: EnemyEarthPile
+  m_Name: EarthPileHomingProjectile
   m_TagString: enemySpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,19 +159,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
---- !u!114 &2307221242408650939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 2
 --- !u!114 &2605778485016810401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,3 +188,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableWhenHit: 0
   _damage: 0.5
+--- !u!114 &-570925748809368487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5dc66ad6369b64897b77aadd8b052d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
+  projectileSpeed: 4

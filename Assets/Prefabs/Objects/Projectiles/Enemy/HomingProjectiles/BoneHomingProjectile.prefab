@@ -14,12 +14,11 @@ GameObject:
   - component: {fileID: 8755954809695844888}
   - component: {fileID: 5614634927299821963}
   - component: {fileID: 5796913756293673793}
-  - component: {fileID: 6726111899442122093}
   - component: {fileID: 4596141420500315408}
-  - component: {fileID: 1243532829327675091}
-  - component: {fileID: 1628679738}
+  - component: {fileID: 2797258304518211204}
+  - component: {fileID: -5315855432877006427}
   m_Layer: 9
-  m_Name: LightProjectile
+  m_Name: BoneHomingProjectile
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ca71ad85acaf8f645a98e077ed55af5f, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: -509375507
   m_SortingLayer: -1
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: e157c77ce6a1c7c4fbc913ab937051c6, type: 3}
+  m_Sprite: {fileID: 21300076, guid: f899fbbf44576de4e947666e6b1fc3ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -155,20 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableWhenHit: 0
   _damage: 5
---- !u!114 &6726111899442122093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8755954809695844891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 10
-  projectileSpeed: 3
 --- !u!82 &4596141420500315408
 AudioSource:
   m_ObjectHideFlags: 0
@@ -265,7 +250,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &1243532829327675091
+--- !u!95 &2797258304518211204
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -275,7 +260,7 @@ Animator:
   m_GameObject: {fileID: 8755954809695844891}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aaae4888a077c164fb82f43939f2eb61, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0b5b0beb719f8ad4e8f62141a3e73aa2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -284,7 +269,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1628679738
+--- !u!114 &-5315855432877006427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,8 +278,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8755954809695844891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2bcacfd3459ab74a9e554c701215cd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d5dc66ad6369b64897b77aadd8b052d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1000
-  clockWise: 1
+  lifetime: 5
+  projectileSpeed: 4
