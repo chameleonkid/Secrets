@@ -142,4 +142,16 @@ public class Enemy : Character
     public float GetPercentHealth() => (health * 100) / maxHealth.value;
 
     public void KillEnemy() => health = 0;
+
+/*
+    protected Vector3 GetRandomDirection()
+    {
+        return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
+    }
+
+   private Vector3 GetRoamingPostion()
+    {
+       return homePosition + (GetRandomDirection() * UnityEngine.Random.Range(10f, 70f));
+    }
+*/
 }
