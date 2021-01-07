@@ -9,17 +9,25 @@ public class SplittingEnemy : Enemy
 
     protected override void Die()
     {
-        Debug.Log("Derived Class wurde ausgeführt DIE wurde ausgeführt");
-        var temp = Random.Range(1f, maxSplit - 1);
-        Debug.Log(temp + " Enemies will be spawned");
-        for(int i = 0; i<= temp; i++)
-        {
-            Debug.Log(i + "st Enemy spawned");
-            Instantiate(enemiesToSpawn, this.transform.position, Quaternion.identity);
-        }
-
-        base.Die();
+        StartCoroutine(SpawnOnKillCo());
 
     }
+
+    IEnumerator SpawnOnKillCo()
+    {
+        yield return new WaitForSeconds(0.25f);
+        Debug.Log("Derived Class wurde ausgeführt DIE wurde ausgeführt");
+        var temp = Random.Range(1f, maxSplit);
+        Debug.Log(temp + " Enemies will be spawned");
+        for (int i = 0; i <= temp; i++)
+        {
+            var tempSpawn = this.transform.position;
+            tempSpawn += (GetRandomDirection() * UnityEngine.Random.Range(1f, 1f));
+            Debug.Log(i + "st Enemy spawned");
+            Instantiate(enemiesToSpawn, tempSpawn, Quaternion.identity);
+        }
+        base.Die();
+    }
+
 
 }

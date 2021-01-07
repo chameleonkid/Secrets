@@ -202,14 +202,17 @@ MonoBehaviour:
   spellCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 1
-  maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
+  maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
   _health: 0
+  isWalking: 0
+  walkingTimer: 0
   isMinion: 0
   enemyName: Billy the Blob
-  moveSpeed: 5
+  moveSpeed: 1
   homePosition: {x: -41.36593, y: 0.3133607}
+  roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
-  attackRadius: 0.5
+  attackRadius: 0
   deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
     type: 3}
   deathEffectDelay: 1
