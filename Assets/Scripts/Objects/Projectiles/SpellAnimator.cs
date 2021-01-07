@@ -16,7 +16,7 @@ public class SpellAnimator : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var rigidbody = this.GetComponent<Rigidbody2D>();
-        Debug.Log(this.gameObject + " collided with " + other);
+  //      Debug.Log(this.gameObject + " collided with " + other);
         // If you hit an enemy (Which might be moving as well) set anim for hit
         if (other.CompareTag("enemy"))
         {

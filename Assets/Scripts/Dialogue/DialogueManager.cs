@@ -87,9 +87,12 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator EndFinalDialogue()
     {
-        animator.SetBool("isActive", false);
-        yield return new WaitForSecondsRealtime(0.25f);
-        Time.timeScale = 1;
-        dialoguePanel.SetActive(false);
+        if(dialoguePanel.activeInHierarchy)
+        {
+            animator.SetBool("isActive", false);
+            yield return new WaitForSecondsRealtime(0.25f);
+            Time.timeScale = 1;
+            dialoguePanel.SetActive(false);
+        }
     }
 }
