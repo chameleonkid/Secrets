@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MovingTurrets : TurretEnemy
+public class RangeEnemy : TurretEnemy
 {
     [SerializeField] private float shootingRange = 3;
     [SerializeField] private float escapeRange = 1;
