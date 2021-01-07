@@ -31,7 +31,7 @@ public class RangeEnemy : TurretEnemy
         }
         else if(distance > chaseRadius)
         {
-            OutsideChaseRadiusUpdate();
+            randomMovement();
         }
 
         if (distance <= escapeRange)

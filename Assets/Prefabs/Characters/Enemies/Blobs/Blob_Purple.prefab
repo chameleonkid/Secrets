@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -509375507
-  m_SortingLayer: -1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9150339976012066440, guid: 716f61cdd60c18842a2d694c39360f58,
     type: 3}
@@ -194,7 +194,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32f154c8e0fc96458916c6004ec658a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectAnimator: {fileID: 0}
+  isShrinked: 0
+  gotHitSound:
+  - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
+  attackSounds: []
+  meeleCooldown: 0
+  spellCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 50
   maxHealth: {fileID: 11400000, guid: 9c0a3f01b9dcb1241aec80bff41cea8d, type: 2}
@@ -255,7 +260,7 @@ MonoBehaviour:
   m_FalloffIntensity: 0.915
   m_Color: {r: 0.42315578, g: 0, b: 1, a: 1}
   m_Intensity: 1
-  m_LightVolumeOpacity: 0.606
+  m_LightVolumeOpacity: 0.721
   m_ApplyToSortingLayers: 55b3c7c3ddcfbda637d0c9af376ef7dfed8ba3e1000000002731f879c9944dd4fb0c2b02
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0

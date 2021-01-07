@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 public class Enemy : Character
 {
@@ -8,6 +9,7 @@ public class Enemy : Character
     [SerializeField] private int enemyXp = default;
     [SerializeField] protected FloatValue maxHealth = default;
     [SerializeField] private float _health;
+    [SerializeField] private bool isWaiting;
     public event Action OnEnemyTakeDamage;
     public event Action OnEnemyDied;
     public event Action OnMinionDied;
@@ -44,6 +46,7 @@ public class Enemy : Character
     [SerializeField] protected string enemyName = default;      // Unused, is it necessary?
     public float moveSpeed = default;                           // Should make protected
     [SerializeField] protected Vector2 homePosition = default;
+    [SerializeField] protected Vector3 roamingPosition = default;
     [SerializeField] protected float chaseRadius = default;
     [SerializeField] protected float attackRadius = default;
     private float originalChaseRadius = default;
@@ -75,6 +78,9 @@ public class Enemy : Character
         originalChaseRadius = chaseRadius;
 
         target = GameObject.FindWithTag("Player").transform;
+
+        roamingPosition = GetRoamingPostion();
+
     }
 
     protected virtual void FixedUpdate()
@@ -103,7 +109,10 @@ public class Enemy : Character
         }
     }
 
-    protected virtual void OutsideChaseRadiusUpdate() {}
+    protected virtual void OutsideChaseRadiusUpdate()
+    {
+        randomMovement();
+    }
 
     private void Die()
     {
@@ -143,15 +152,55 @@ public class Enemy : Character
 
     public void KillEnemy() => health = 0;
 
-/*
+
+
     protected Vector3 GetRandomDirection()
     {
         return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
 
-   private Vector3 GetRoamingPostion()
+    protected Vector3 GetRoamingPostion()
     {
-       return homePosition + (GetRandomDirection() * UnityEngine.Random.Range(10f, 70f));
+        Vector3 vec3Home;
+        vec3Home = homePosition;
+        return vec3Home + (GetRandomDirection() * UnityEngine.Random.Range(3f, 3f));
     }
-*/
+
+
+
+    protected void randomMovement()
+    {
+       
+        if (this.transform.position != roamingPosition)
+        {
+            Vector3 temp = Vector3.MoveTowards(transform.position, roamingPosition, moveSpeed * Time.deltaTime);
+            SetAnimatorXYSingleAxis(temp - transform.position);
+            rigidbody.MovePosition(temp);
+            currentState = State.walk;
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            if(isWaiting == false)
+            {
+                StartCoroutine(randomMovementCo());
+            }
+
+        }
+
+    }
+
+    protected virtual IEnumerator randomMovementCo()
+    {
+        isWaiting = true;
+        currentState = State.idle;
+        animator.SetBool("isMoving", false);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 4f));
+        roamingPosition = GetRoamingPostion();
+        isWaiting = false;
+    }
+
+
+
+
 }

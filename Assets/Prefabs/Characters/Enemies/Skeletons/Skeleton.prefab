@@ -359,8 +359,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -509375507
-  m_SortingLayer: -1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 08dae81075e558c40ad84bed99a37370, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -533,7 +533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectAnimator: {fileID: 0}
   isShrinked: 0
   gotHitSound:
   - {fileID: 8300000, guid: 6363840ebdde81e4fb33b23a7e8d3be7, type: 3}
@@ -547,7 +546,7 @@ MonoBehaviour:
   _health: 0
   isMinion: 0
   enemyName: Wizard Skeleton
-  moveSpeed: 2
+  moveSpeed: 3
   homePosition: {x: 0, y: 0}
   chaseRadius: 5
   attackRadius: 1
@@ -556,11 +555,10 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 0}
   thisLoot: {fileID: 11400000, guid: 390b39db646cd71418f2af0cc809ccf2, type: 2}
-  projectile: {fileID: 8755954809695844891, guid: 908dfa3d79cf8ea4b8e3d60d21bf3c64,
+  projectile: {fileID: 8755954809695844891, guid: 4e1e298acfa62bb48a8172be465b4a50,
     type: 3}
   fireDelay: 5
   canFire: 1
-  projectileSpeed: 5
   shootingRange: 3
   escapeRange: 2
 --- !u!1 &7616914949915925388

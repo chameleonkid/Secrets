@@ -28,8 +28,7 @@ public class MeleeEnemy : Enemy
         }
         else if (distance >= chaseRadius && distance >= attackRadius)
         {
-            currentState = State.idle;
-            animator.SetBool("isMoving", false);
+            randomMovement();
         }
     }
 
