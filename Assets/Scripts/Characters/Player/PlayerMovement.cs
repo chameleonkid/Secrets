@@ -239,7 +239,7 @@ public class PlayerMovement : Character
     private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed, float projectileDamage)
     {
         var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
-        var direction = new Vector2(animator.GetFloat("MoveX"), animator.GetFloat("MoveY"));
+        var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
         proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
         var hitbox = proj.GetComponent<DamageOnTrigger>();
@@ -273,7 +273,8 @@ public class PlayerMovement : Character
     private void MakeSpell()
     {
         var prefab = inventory.currentSpellbook.prefab;
-        var speed = inventory.currentSpellbook.speed;
+        // var speed = inventory.currentSpellbook.speed;
+        var speed = prefab.GetComponent<Projectile>().projectileSpeed;
         CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
         mana.current -= inventory.currentSpellbook.manaCosts;
     }
