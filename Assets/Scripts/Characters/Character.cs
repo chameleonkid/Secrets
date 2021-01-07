@@ -10,7 +10,6 @@ public abstract class Character : MonoBehaviour
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
     protected Animator animator { get; private set; }
-    public Animator effectAnimator = default;
     protected InvulnerabilityFrames iframes { get; private set; }
     [SerializeField] protected bool isShrinked;
     [Header("ParentSounds")]
@@ -27,7 +26,6 @@ public abstract class Character : MonoBehaviour
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        //   effectAnimator = GetComponentInChildren<Animator>();
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 
@@ -40,8 +38,8 @@ public abstract class Character : MonoBehaviour
             direction.x = Mathf.Round(direction.x);
             direction.y = Mathf.Round(direction.y);
 
-            animator.SetFloat("MoveX", direction.x);
-            animator.SetFloat("MoveY", direction.y);
+            animator.SetFloat("moveX", direction.x);
+            animator.SetFloat("moveY", direction.y);
         }
     }
 
