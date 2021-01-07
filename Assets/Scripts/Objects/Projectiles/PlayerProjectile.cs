@@ -17,9 +17,13 @@ public class PlayerProjectile : Projectile
 
     protected void OnHitCollider(Transform other)
     {
-        Debug.Log(this.name + " hit " + other.name);
+      //  Debug.Log(this.name + " hit " + other.name);
         collider.enabled = false;
-        rigidbody.velocity = Vector2.zero;  // Is this line necessary if we are destroying the rigidbody?
+        if(rigidbody)
+        {
+            rigidbody.velocity = Vector2.zero;  // Is this line necessary if we are destroying the rigidbody?
+        }
+
         Destroy(rigidbody);
         transform.SetParent(other);
 

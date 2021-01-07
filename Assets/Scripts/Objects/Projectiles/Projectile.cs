@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
+    [SerializeField] public float projectileSpeed;
 
     public new Rigidbody2D rigidbody { get; protected set; }
     protected new Collider2D collider;

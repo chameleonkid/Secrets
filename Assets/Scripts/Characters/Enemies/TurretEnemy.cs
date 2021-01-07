@@ -7,7 +7,6 @@ public class TurretEnemy : EnemyLog
     public float fireDelay;
     private float fireDelaySeconds;
     public bool canFire = false;
-    public float projectileSpeed;
 
 
     protected virtual void Update()
@@ -54,6 +53,7 @@ public class TurretEnemy : EnemyLog
         this.moveSpeed = originalMovespeed;
         var difference = target.transform.position - transform.position;
         var proj = Instantiate(projectile, transform.position, Quaternion.identity);
-        proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projectileSpeed;
+        var projSpeed = proj.GetComponent<Projectile>().projectileSpeed;
+        proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projSpeed;
     }
 }

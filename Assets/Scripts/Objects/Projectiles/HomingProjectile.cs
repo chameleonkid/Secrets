@@ -5,7 +5,7 @@ using UnityEngine;
 public class HomingProjectile : Projectile
 {
     protected Transform target;
-    [SerializeField] protected float projectileSpeed;
+
 
     // Start is called before the first frame update
     void Start()
@@ -15,18 +15,16 @@ public class HomingProjectile : Projectile
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
        
-         this.transform.position = Vector2.MoveTowards(this.transform.position, target.position, projectileSpeed * Time.deltaTime); // 3 = Speed aktuell noch Hardcoded -> Projectile müssen Ihren Speed kennen...
-    
-  
+         this.transform.position = Vector2.MoveTowards(this.transform.position, target.position, projectileSpeed * Time.deltaTime);
+   
     // Suggested way to move the rigidBody looks strange....
     /*
     Vector3 direction = (target.transform.position - transform.position).normalized;
     rigidbody.MovePosition(transform.position + direction * 5 * Time.deltaTime);
     */
-
         LifetimeCountdown();
     }
 }
