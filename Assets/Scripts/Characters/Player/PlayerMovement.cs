@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class PlayerMovement : Character
 {
+    [SerializeField] private Animator effectAnimator = default;
+
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
     private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
@@ -40,7 +42,6 @@ public class PlayerMovement : Character
     [SerializeField] private DamageOnTrigger roundAttack = default;
     [SerializeField] private PolygonCollider2D[] hitBoxColliders = default;
 
-
     [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
@@ -58,7 +59,6 @@ public class PlayerMovement : Character
     [Header("WeaponSkins")]
     [SerializeField] private SpriteSkinRPC weaponSkinChanger = default;
     private Texture2D oldWeaponSkin = default;
-
 
     public event Action OnAttackTriggered;
     public event Action OnSpellTriggered;
@@ -87,7 +87,6 @@ public class PlayerMovement : Character
         transform.position = startingPosition.value;
     }
 
-    
     private AudioClip GetLevelUpSound() => levelUpSound;
 
     private void Update()
@@ -142,10 +141,8 @@ public class PlayerMovement : Character
             animator.SetBool("isShooting", false);
         }
 
-       animator.SetBool("isHurt", (currentState == State.stagger));
-       animator.SetBool("Moving", (change != Vector3.zero));
-
-
+        animator.SetBool("isHurt", (currentState == State.stagger));
+        animator.SetBool("Moving", (change != Vector3.zero));
     }
 
     private void FixedUpdate()
@@ -187,11 +184,11 @@ public class PlayerMovement : Character
         var isCritical = IsCriticalHit();
         for (int i = 0; i < directionalAttacks.Length; i++)
         {
-            directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage +1 );
+            directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
             directionalAttacks[i].isCritical = isCritical;
         }
 
-        SoundManager.RequestSound(GetAttackSound());
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
 
         animator.SetBool("Attacking", true);
         currentState = State.attack;
@@ -202,7 +199,7 @@ public class PlayerMovement : Character
         if (currentState != State.interact)
         {
             currentState = State.walk;
-            
+
         }
 
         yield return new WaitForSeconds(currentWeapon.swingTime);
@@ -256,7 +253,6 @@ public class PlayerMovement : Character
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo()
     {
-        
         animator.SetBool("isCasting", true); // Set to cast Animation
         currentState = State.attack;
         MakeSpell();
@@ -271,16 +267,14 @@ public class PlayerMovement : Character
         yield return new WaitForSeconds(inventory.currentSpellbook.coolDown);
         SoundManager.RequestSound(Spell0CooldownSound);
         spellCooldown = false;
-
     }
 
     //################### instantiate spell when casted ###############################
     private void MakeSpell()
     {
-
         var prefab = inventory.currentSpellbook.prefab;
         var speed = inventory.currentSpellbook.speed;
-        CreateProjectile(prefab, speed,Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
+        CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
         mana.current -= inventory.currentSpellbook.manaCosts;
     }
 
@@ -342,14 +336,14 @@ public class PlayerMovement : Character
             {
                 health -= finalDamage;
                 DamagePopUpManager.RequestDamagePopUp(finalDamage, isCritical, transform);
-                SoundManager.RequestSound(GetGotHitSound());
+                SoundManager.RequestSound(gotHitSound.GetRandomElement());
                 iframes?.TriggerInvulnerability();
             }
             else
             {
                 DamagePopUpManager.RequestDamagePopUp(0, isCritical, transform);
             }
-        //    Debug.Log(finalDamage + " damage after defense calculation.");
+            //    Debug.Log(finalDamage + " damage after defense calculation.");
         }
     }
 

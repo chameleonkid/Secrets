@@ -118264,9 +118264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cabfe57a4f75d468053ce1a5354f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
-  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   speed: 1
   bound: {fileID: 183598016889572559}
   moveTime: 5
@@ -118388,6 +118385,7 @@ GameObject:
   - component: {fileID: 168025458655489843}
   - component: {fileID: 161540056758419231}
   - component: {fileID: 183598015772639114}
+  - component: {fileID: 184587032877208890}
   - component: {fileID: 184587032877208888}
   m_Layer: 0
   m_Name: RNDFemale1
@@ -118396,6 +118394,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &184587032877208890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184587032877208889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bd143d5d32f0b4d879c711d546dd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInRange: 0
+  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
+  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
 --- !u!114 &223287739774677171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119552,6 +119565,7 @@ GameObject:
   - component: {fileID: 2284041791146522119}
   - component: {fileID: 2295602675608872491}
   - component: {fileID: 2263688591367907006}
+  - component: {fileID: 2263535203039611918}
   m_Layer: 0
   m_Name: RNDFemale1
   m_TagString: Untagged
@@ -119559,6 +119573,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2263535203039611918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263535203039611917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bd143d5d32f0b4d879c711d546dd29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInRange: 0
+  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
+  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
 --- !u!1 &2263688590773310968
 GameObject:
   m_ObjectHideFlags: 0
@@ -119629,9 +119658,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cabfe57a4f75d468053ce1a5354f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
-  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   speed: 1
   bound: {fileID: 2263688590773310971}
   moveTime: 5

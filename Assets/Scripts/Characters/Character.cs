@@ -10,18 +10,14 @@ public abstract class Character : MonoBehaviour
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
     protected Animator animator { get; private set; }
-    public Animator effectAnimator = default;
     protected InvulnerabilityFrames iframes { get; private set; }
     [SerializeField] protected bool isShrinked;
     [Header("ParentSounds")]
     [SerializeField] protected AudioClip[] gotHitSound = default;
-    [SerializeField] private AudioClip[] attackSounds = default;
+    [SerializeField] protected AudioClip[] attackSounds = default;
     [Header("CoolDowns")]
     [SerializeField] protected bool meeleCooldown = false;
     [SerializeField] protected bool spellCooldown = false;
-
-
-
 
     protected virtual void Awake() => GetCharacterComponents();
 
@@ -30,7 +26,6 @@ public abstract class Character : MonoBehaviour
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-     //   effectAnimator = GetComponentInChildren<Animator>();
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 
@@ -43,8 +38,8 @@ public abstract class Character : MonoBehaviour
             direction.x = Mathf.Round(direction.x);
             direction.y = Mathf.Round(direction.y);
 
-            animator.SetFloat("MoveX", direction.x);
-            animator.SetFloat("MoveY", direction.y);
+            animator.SetFloat("moveX", direction.x);
+            animator.SetFloat("moveY", direction.y);
         }
     }
 
@@ -67,7 +62,7 @@ public abstract class Character : MonoBehaviour
         {
             health -= damage;
             DamagePopUpManager.RequestDamagePopUp(damage, isCritical, transform);
-            SoundManager.RequestSound(GetGotHitSound());
+            SoundManager.RequestSound(gotHitSound.GetRandomElement());
             iframes?.TriggerInvulnerability();
         }
     }
@@ -101,7 +96,6 @@ public abstract class Character : MonoBehaviour
         dead
     }
 
-
     //############################# StatusEffects instead of fire and forget ############################################################
     // This might be usefuf if you want to be able to revert effects. Like using an anti-poison.                                        #
     //                                                                                                                                  #
@@ -127,8 +121,4 @@ public abstract class Character : MonoBehaviour
             }
         }
     }
-
-    protected AudioClip GetGotHitSound() => gotHitSound[Random.Range(0, gotHitSound.Length ) ];
-    protected AudioClip GetAttackSound() => attackSounds[Random.Range(0, attackSounds.Length) ];
-
 }

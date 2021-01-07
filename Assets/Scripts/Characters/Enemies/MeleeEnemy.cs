@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MeleeEnemy : EnemyLog
+public class MeleeEnemy : Enemy
 {
-    protected override void Start() {}
-
     protected override void FixedUpdate()
     {
         var distance = Vector3.Distance(target.position, transform.position);
@@ -37,8 +35,7 @@ public class MeleeEnemy : EnemyLog
 
     public IEnumerator AttackCo()
     {
-
-        SoundManager.RequestSound(GetAttackSound());
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
         currentState = State.attack;
         animator.SetBool("Attacking", true);
         yield return null;

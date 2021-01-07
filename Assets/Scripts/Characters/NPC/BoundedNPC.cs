@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class BoundedNPC : Interactable
+[RequireComponent(typeof(Interactable))]
+public class BoundedNPC : Character
 {
+    public override float health { get => 1; set {} }   //! Temp
+
     private Vector3 directionVector;
-    private Transform myTransform;
     public float speed;
-    private Rigidbody2D myRigidbody;
-    private Animator anim;
     public Collider2D bound;
     public float moveTime;
     private float moveTimeSeconds;
@@ -14,19 +14,23 @@ public class BoundedNPC : Interactable
     private float waitTimeSeconds;
     private bool isMoving;
 
-    // Start is called before the first frame update
+    private Interactable interactable;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        interactable = GetComponent<Interactable>();
+    }
+
     void Start()
     {
         moveTimeSeconds = Random.Range(1, moveTime);
         waitTimeSeconds = Random.Range(1, waitTime);
-        anim = GetComponent<Animator>();
-        myTransform = GetComponent<Transform>();
-        myRigidbody = GetComponent<Rigidbody2D>();
         ChangeDirection();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isMoving)
         {
@@ -37,18 +41,18 @@ public class BoundedNPC : Interactable
                 isMoving = false;
                 ChangeDirection();
             }
-            if (!playerInRange)
+            if (!interactable.playerInRange)
             {
                 Move();
             }
             else
             {
-                anim.SetBool("isMoving", false);
+                animator.SetBool("isMoving", false);
             }
         }
         else
         {
-            anim.SetBool("isMoving", false);
+            animator.SetBool("isMoving", false);
             waitTimeSeconds -= Time.deltaTime;
             if (waitTimeSeconds <= 0)
             {
@@ -58,7 +62,7 @@ public class BoundedNPC : Interactable
         }
     }
 
-    void ChangeDirection()
+    private void ChangeDirection()
     {
         int direction = Random.Range(0, 4);
 
@@ -80,29 +84,23 @@ public class BoundedNPC : Interactable
             default:
                 break;
         }
-        anim.SetBool("isMoving", true);
-        UpdateAnimation();
+        animator.SetBool("isMoving", true);
+        SetAnimatorXY(directionVector);
     }
 
-    void Move()
+    private void Move()
     {
-        Vector3 temp = myTransform.position + directionVector * speed * Time.deltaTime;
+        Vector3 temp = transform.position + directionVector * speed * Time.deltaTime;
 
         if (bound.bounds.Contains((Vector2)temp))
         {
-            anim.SetBool("isMoving", true);
-            myRigidbody.MovePosition(temp);
+            animator.SetBool("isMoving", true);
+            rigidbody.MovePosition(temp);
         }
         else
         {
             ChangeDirection();
         }
-    }
-
-    void UpdateAnimation()
-    {
-        anim.SetFloat("moveX", directionVector.x);
-        anim.SetFloat("moveY", directionVector.y);
     }
 
     private void OnCollisionEnter2D(Collision2D other) //IF NPC hits something else or loop < 100

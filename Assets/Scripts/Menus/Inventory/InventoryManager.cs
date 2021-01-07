@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using System;
 
 public class InventoryManager : MonoBehaviour
@@ -21,10 +20,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Material swordMaterial = default;
     [SerializeField] private Material laserMaterial = default;
 
-
     public event Action OnEquipItem;
-
-
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -151,5 +147,4 @@ public class InventoryManager : MonoBehaviour
     {
         laserMaterial.SetColor("_GlowColor", inventory.currentSpellbook.glowColor);
     }
-
 }
