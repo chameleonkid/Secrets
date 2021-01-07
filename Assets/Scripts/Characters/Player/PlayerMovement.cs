@@ -97,8 +97,8 @@ public class PlayerMovement : Character
 
 
         // This is for Using UI-Buttons
-        uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
-        uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
+       uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
+       uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
 
     }
 
@@ -122,7 +122,7 @@ public class PlayerMovement : Character
 
         SetAnimatorXY(change);
 
-        animator.SetBool("isRunning", Input.GetButton("Run"));
+        animator.SetBool("isRunning", Input.GetButton("Run") && change != Vector3.zero);
 
         notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
 
@@ -388,8 +388,10 @@ public class PlayerMovement : Character
         SceneManager.LoadScene("DeathMenu");
     }
 
-
-//################################### Functions for UI Input #########################################################
+    //############################################################################################################################################
+    //################################### Functions for UI Input #################################################################################
+    //############################################################################################################################################
+    //############################################################################################################################################
 
     public void MeleeAttack()
     {
@@ -407,3 +409,5 @@ public class PlayerMovement : Character
         }
     }
 }
+    //############################################################################################################################################
+    //############################################################################################################################################

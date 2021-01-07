@@ -9,7 +9,7 @@ public class Enemy : Character
     [SerializeField] private int enemyXp = default;
     [SerializeField] protected FloatValue maxHealth = default;
     [SerializeField] private float _health;
-    [SerializeField] private bool isWaiting;
+    [SerializeField] private bool isWalking;
     public event Action OnEnemyTakeDamage;
     public event Action OnEnemyDied;
     public event Action OnMinionDied;
@@ -181,23 +181,23 @@ public class Enemy : Character
         }
         else
         {
-            if(isWaiting == false)
+            if(isWalking == false)
             {
-                StartCoroutine(randomMovementCo());
+                StartCoroutine(randomWaiting());
             }
 
         }
 
     }
 
-    protected virtual IEnumerator randomMovementCo()
+    protected virtual IEnumerator randomWaiting()
     {
-        isWaiting = true;
+        isWalking = true;
         currentState = State.idle;
         animator.SetBool("isMoving", false);
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 4f));
         roamingPosition = GetRoamingPostion();
-        isWaiting = false;
+        isWalking = false;
     }
 
 
