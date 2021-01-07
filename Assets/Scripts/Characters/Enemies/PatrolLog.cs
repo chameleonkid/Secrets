@@ -9,6 +9,7 @@ public class PatrolLog : EnemyLog
 
     protected override void OutsideChaseRadiusUpdate()
     {
+        animator.SetBool("isMoving", true);
         var distance = Vector3.Distance(transform.position, path[currentPoint].position);
         if (distance > roundingDistance)
         {
