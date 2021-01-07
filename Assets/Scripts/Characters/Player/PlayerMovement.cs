@@ -3,9 +3,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class PlayerMovement : Character
 {
+
+    [Header("TestInputs")]
+    [SerializeField] private Button uiAttackButton = default;
+    [SerializeField] private Button uiSpellButton = default;
+
+    [SerializeField] private bool notStaggeredOrLifting = default;
+
     [SerializeField] private Animator effectAnimator = default;
 
     [SerializeField] private XPSystem levelSystem = default;
@@ -85,6 +93,12 @@ public class PlayerMovement : Character
         SetAnimatorXY(Vector2.down);
         currentState = State.walk;
         transform.position = startingPosition.value;
+
+
+        // This is for Using UI-Buttons
+        uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
+        uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
+
     }
 
     private AudioClip GetLevelUpSound() => levelUpSound;
@@ -104,7 +118,7 @@ public class PlayerMovement : Character
 
         animator.SetBool("isRunning", Input.GetButton("Run"));
 
-        var notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
+        notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
 
         if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && inventory.currentWeapon != null && meeleCooldown == false)
         {
@@ -366,5 +380,24 @@ public class PlayerMovement : Character
         animator.SetBool("isDead", true);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("DeathMenu");
+    }
+
+
+//################################### Functions for UI Input #########################################################
+
+    public void MeleeAttack()
+    {
+        if (currentState != State.attack  && inventory.currentWeapon != null && meeleCooldown == false)
+        {
+            StartCoroutine(AttackCo());
+        }
+    }
+
+    public void SpellAttack()
+    {
+        if (inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
+        {
+            StartCoroutine(SpellAttackCo());
+        }
     }
 }
