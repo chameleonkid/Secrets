@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class DamageWhileInArea : Hitbox
 {
-    [SerializeField] private List<Character> charactersInAreaList = default;
+    [SerializeField] protected List<Character> charactersInAreaList = default;
 
     [Tooltip("How long is the duration between ticks?")]
-    [SerializeField] private float tickDuration = 1;
+    [SerializeField] protected float tickDuration = 1;
     [Tooltip("How much tick damage to apply on each tick?")]
-    [SerializeField] private float tickDamage = 1;
+    [SerializeField] protected float tickDamage = 1;
+    public bool isCritical { get; set; } = false;
 
     protected override void OnHit(Collider2D other)
     {
         var hit = other.GetComponent<Character>();
         if (hit != null && hit.gameObject.activeInHierarchy)
         {
-            StartCoroutine(TakeAoeDamage(hit));
+            if(this)
+            {
+                StartCoroutine(TakeAoeDamage(hit));
+            }
         }
     }
 
@@ -44,14 +48,14 @@ public class DamageWhileInArea : Hitbox
         }
     }
 
-    private IEnumerator TakeAoeDamage(Character hit)
+    protected virtual IEnumerator TakeAoeDamage(Character hit)
     {
         while (charactersInAreaList.Contains(hit))
         {
             if (hit != null)
             {
                 DamagePopUpManager.RequestDamagePopUp(tickDamage, hit.transform);
-                hit.health -= tickDamage;                                           // This means DMG WITHOUT ARMOR and No iFrames!
+                hit.TakeDamage(tickDamage, isCritical);                                           // This means DMG WITHOUT ARMOR and No iFrames!
                 yield return new WaitForSeconds(tickDuration);
                 Debug.Log("Character took dmg from AOE");
             }
