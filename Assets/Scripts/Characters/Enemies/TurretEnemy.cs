@@ -6,7 +6,7 @@ public class TurretEnemy : EnemyLog
     public GameObject projectile;
     public float fireDelay;
     private float fireDelaySeconds;
-    public bool canFire = true;
+    public bool canFire = false;
     public float projectileSpeed;
 
 
@@ -40,7 +40,6 @@ public class TurretEnemy : EnemyLog
 
     protected virtual void FireProjectile()
     {
-        
         StartCoroutine(fireCo());
         canFire = false;
         currentState = State.walk;
