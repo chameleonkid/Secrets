@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PatrolLog : EnemyLog
+public class PatrolEnemy : SimpleEnemy
 {
     public Transform[] path;
     public int currentPoint;

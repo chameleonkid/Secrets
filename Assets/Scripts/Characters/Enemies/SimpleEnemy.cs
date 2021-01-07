@@ -1,4 +1,4 @@
-﻿public class EnemyLog : Enemy
+﻿public class SimpleEnemy : Enemy
 {
     protected void Start() => animator.SetBool("isMoving", false);
 

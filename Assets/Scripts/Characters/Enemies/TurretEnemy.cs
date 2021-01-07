@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TurretEnemy : EnemyLog
+public class TurretEnemy : SimpleEnemy
 {
     public GameObject projectile;
     public float fireDelay;
