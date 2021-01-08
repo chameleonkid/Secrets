@@ -11,6 +11,7 @@ public class PlayerMovement : Character
     [Header("TestInputs")]
     [SerializeField] private Button uiAttackButton = default;
     [SerializeField] private Button uiSpellButton = default;
+    [SerializeField] private Button uiLampButton = default;
     [SerializeField] private Joystick joystick = default;
 
     [SerializeField] private bool notStaggeredOrLifting = default;
@@ -71,6 +72,7 @@ public class PlayerMovement : Character
 
     public event Action OnAttackTriggered;
     public event Action OnSpellTriggered;
+    public event Action OnLampTriggered;
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
@@ -97,8 +99,9 @@ public class PlayerMovement : Character
 
 
         // This is for Using UI-Buttons
-       uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
-       uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
+        uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
+        uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
+        uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
 
     }
 
@@ -126,10 +129,22 @@ public class PlayerMovement : Character
 
         notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
 
-        if (Input.GetButtonDown("Attack") && currentState != State.attack && notStaggeredOrLifting && inventory.currentWeapon != null && meeleCooldown == false)
+        if (Input.GetButtonDown("Attack"))
         {
-            StartCoroutine(AttackCo());
+            MeleeAttack();
         }
+
+        if (Input.GetButton("SpellCast"))
+        {
+            SpellAttack();
+        }
+
+        if (Input.GetButtonDown("Lamp"))
+        {
+            ToggleLamp();
+        }
+
+
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
         if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && inventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
@@ -144,16 +159,9 @@ public class PlayerMovement : Character
                 StartCoroutine(SecondAttackCo());
             }
         }
-        //############################################################################### Spell Cast ###############################################################################
-        if (Input.GetButton("SpellCast") && inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
-        {
-            StartCoroutine(SpellAttackCo());
-        }
 
-        if (Input.GetButtonDown("Lamp") && inventory.currentLamp && lumen.current > 0)
-        {
-            lamp.enabled = !lamp.enabled;
-        }
+
+
         //##############################################################################################################################################################
 
         if (Input.GetButtonUp("UseItem"))
@@ -388,8 +396,8 @@ public class PlayerMovement : Character
         SceneManager.LoadScene("DeathMenu");
     }
 
-    //############################################################################################################################################
-    //################################### Functions for UI Input #################################################################################
+    //############################################# Refcator #####################################################################################
+    //################################### Functions for UI Input or Controller ###################################################################
     //############################################################################################################################################
     //############################################################################################################################################
 
@@ -406,6 +414,15 @@ public class PlayerMovement : Character
         if (inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
         {
             StartCoroutine(SpellAttackCo());
+        }
+    }
+
+    public void ToggleLamp()
+    {
+        if(inventory.currentLamp && lumen.current > 0)
+        {
+            lamp.enabled = !lamp.enabled;
+            OnLampTriggered?.Invoke();
         }
     }
 }

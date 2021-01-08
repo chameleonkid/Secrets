@@ -14,14 +14,16 @@ public class LampLight : MonoBehaviour
     {
         lampLight = GetComponent<Light2D>();
         player = GetComponentInParent<PlayerMovement>();
-
+        this.enabled = false;
         LumenCheck();
+
     }
 
     private void OnEnable()
     {
         inventoryManager.OnEquipItem += InventoryManager_OnEquipItem;
         setLamp();
+
     }
 
     private void InventoryManager_OnEquipItem()

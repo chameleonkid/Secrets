@@ -8,6 +8,8 @@ public class CoolDownDisplayManager : MonoBehaviour
     [SerializeField] private Image meleeWeaponSprite = default;
     [SerializeField] private Image spell0Cooldown = default;
     [SerializeField] private Image spell0Sprite = default;
+    [SerializeField] private Image lampCooldown = default;
+    [SerializeField] private Image lampSprite = default;
     [SerializeField] private Inventory inventory = default;
     [SerializeField] private PlayerMovement player = default;
     [SerializeField] private Color originalColor = default;
@@ -18,9 +20,18 @@ public class CoolDownDisplayManager : MonoBehaviour
     {
         player.OnAttackTriggered += SetMeleeCoolDown;
         player.OnSpellTriggered += SetSpell0CoolDown;
+        player.OnLampTriggered += SetLampCoolDown;
         inventoryManager.OnEquipItem += changeCoolDownSprites;
         originalColor = meleeWeaponCooldown.color;
         changeCoolDownSprites();
+    }
+
+    private void OnDisable()
+    {
+        player.OnAttackTriggered -= SetMeleeCoolDown;
+        player.OnSpellTriggered -= SetSpell0CoolDown;
+        player.OnLampTriggered += SetLampCoolDown;
+        inventoryManager.OnEquipItem -= changeCoolDownSprites;
     }
 
     private void changeCoolDownSprites()
@@ -33,33 +44,40 @@ public class CoolDownDisplayManager : MonoBehaviour
         {
             spell0Sprite.sprite = inventory.currentSpellbook.sprite;
         }
+        if (inventory.currentLamp)
+        {
+            lampSprite.sprite = inventory.currentLamp.sprite;
+        }
     }
-
-    private void OnDisable()
-    {
-        player.OnAttackTriggered -= SetMeleeCoolDown;
-        player.OnSpellTriggered -= SetSpell0CoolDown;
-        inventoryManager.OnEquipItem -= changeCoolDownSprites;
-
-    }
-
+       
     private void SetCoolDownIcons()
     {
-        meleeWeaponSprite.sprite = inventory.currentWeapon.sprite;  // This needs an event when an Item is equippid (where can i find those?)
+        meleeWeaponSprite.sprite = inventory.currentWeapon.sprite;
     }
 
     private void SetMeleeCoolDown()
     {
-
         meleeWeaponCooldown.color = new Color(255, 0, 0);
         StartCoroutine(CooldownCountDownCo(inventory.currentWeapon.swingTime));
     }
 
     private void SetSpell0CoolDown()
     {
-
         spell0Cooldown.color = new Color(255, 0, 0);
         StartCoroutine(SpellCooldownCountDownCo(inventory.currentSpellbook.coolDown));
+    }
+
+    private void SetLampCoolDown()
+    {
+        if(lampCooldown.color == new Color(255,0,0))
+        {
+            lampCooldown.color = originalColor;
+        }
+        else
+        {
+            lampCooldown.color = new Color(255, 0, 0);
+        }
+
     }
 
     private IEnumerator CooldownCountDownCo(float weaponCooldown)
