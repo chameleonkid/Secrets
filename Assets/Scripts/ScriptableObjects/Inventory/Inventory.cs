@@ -29,6 +29,7 @@ public class Inventory : ScriptableObject
     public InventoryShield currentShield;
     public InventoryRing currentRing;
     public InventorySpellbook currentSpellbook;
+    public InventorySpellbook currentSpellbookTwo;
     public InventoryAmulet currentAmulet;
     public InventoryBoots currentBoots;
     public InventoryLamp currentLamp;
@@ -96,7 +97,14 @@ public class Inventory : ScriptableObject
                 Swap(ref currentRing, ring);
                  break;
             case InventorySpellbook spellbook:
-                Swap(ref currentSpellbook, spellbook);
+                if(!currentSpellbook)
+                {
+                    Swap(ref currentSpellbook, spellbook);
+                }
+                else
+                {
+                    Swap(ref currentSpellbookTwo, spellbook);
+                }
                 break;
             case InventoryAmulet amulet:
                 Swap(ref currentAmulet, amulet);
@@ -177,10 +185,19 @@ public class Inventory : ScriptableObject
         totalMinSpellDamage = 0;
         totalMaxSpellDamage = 0;
 
-        if (currentSpellbook)
+        if (currentSpellbook || currentSpellbookTwo)
         {
-            totalMinSpellDamage += currentSpellbook.minSpellDamage;
-            totalMaxSpellDamage += currentSpellbook.maxSpellDamage;
+            if(currentSpellbook)
+            {
+                totalMinSpellDamage += currentSpellbook.minSpellDamage;
+                totalMaxSpellDamage += currentSpellbook.maxSpellDamage;
+            }
+            if (currentSpellbookTwo)
+            {
+                totalMinSpellDamage += currentSpellbookTwo.minSpellDamage;
+                totalMaxSpellDamage += currentSpellbookTwo.maxSpellDamage;
+            }
+
         }
         if (currentAmulet)
         {

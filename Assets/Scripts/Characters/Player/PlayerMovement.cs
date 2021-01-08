@@ -11,6 +11,7 @@ public class PlayerMovement : Character
     [Header("TestInputs")]
     [SerializeField] private Button uiAttackButton = default;
     [SerializeField] private Button uiSpellButton = default;
+    [SerializeField] private Button uiSpellTwoButton = default;
     [SerializeField] private Button uiLampButton = default;
     [SerializeField] private Joystick joystick = default;
 
@@ -72,6 +73,7 @@ public class PlayerMovement : Character
 
     public event Action OnAttackTriggered;
     public event Action OnSpellTriggered;
+    public event Action OnSpellTwoTriggered;
     public event Action OnLampTriggered;
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
@@ -101,6 +103,7 @@ public class PlayerMovement : Character
         // This is for Using UI-Buttons
         uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
         uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
+        uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(SpellAttackTwo);
         uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
 
     }
@@ -144,11 +147,10 @@ public class PlayerMovement : Character
             ToggleLamp();
         }
 
-
         //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack") && currentState != State.roundattack && notStaggeredOrLifting && inventory.currentWeapon != null && mana.current > 0)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("RoundAttack"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            StartCoroutine(RoundAttackCo());
+            SpellAttackTwo();
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
 
@@ -183,14 +185,17 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
-        meeleCooldown = true;
-        OnAttackTriggered?.Invoke();
+
+
         var currentWeapon = inventory.currentWeapon;
+        
 
         if (inventory.currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
         {
             if (arrow != null && inventory.items[arrow] > 0)
             {
+                OnAttackTriggered?.Invoke();
+                meeleCooldown = true;
                 inventory.items[arrow]--;
                 currentState = State.attack;
                 animator.SetBool("isShooting", true);
@@ -203,10 +208,14 @@ public class PlayerMovement : Character
                 }
                 animator.SetBool("isShooting", false);
                 yield return new WaitForSeconds(currentWeapon.swingTime);
+                meeleCooldown = false;
+                SoundManager.RequestSound(meleeCooldownSound);
             }
         }
         else
         {
+            OnAttackTriggered?.Invoke();
+            meeleCooldown = true;
             hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
             hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
             hitBoxColliders[2].points = currentWeapon.rightHitboxPolygon;
@@ -243,10 +252,10 @@ public class PlayerMovement : Character
             }
 
             yield return new WaitForSeconds(currentWeapon.swingTime);
-    
+            meeleCooldown = false;
+            SoundManager.RequestSound(meleeCooldownSound);
         }
-        meeleCooldown = false;
-        SoundManager.RequestSound(meleeCooldownSound);
+
     }
 
     // ############################# Roundattack ################################################
@@ -297,6 +306,24 @@ public class PlayerMovement : Character
         spellCooldown = false;
     }
 
+    private IEnumerator SpellAttackTwoCo()
+    {
+        animator.SetBool("isCasting", true); // Set to cast Animation
+        currentState = State.attack;
+        MakeSpellTwo();
+        OnSpellTwoTriggered?.Invoke();
+        spellCooldown = true;
+        yield return new WaitForSeconds(0.05f);
+        if (currentState != State.interact)
+        {
+            currentState = State.walk;
+        }
+        animator.SetBool("isCasting", false);
+        yield return new WaitForSeconds(inventory.currentSpellbookTwo.coolDown);
+        SoundManager.RequestSound(Spell0CooldownSound);
+        spellCooldown = false;
+    }
+
     //################### instantiate spell when casted ###############################
     private void MakeSpell()
     {
@@ -305,6 +332,15 @@ public class PlayerMovement : Character
         var speed = prefab.GetComponent<Projectile>().projectileSpeed;
         CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
         mana.current -= inventory.currentSpellbook.manaCosts;
+    }
+
+    private void MakeSpellTwo()
+    {
+        var prefab = inventory.currentSpellbookTwo.prefab;
+        // var speed = inventory.currentSpellbook.speed;
+        var speed = prefab.GetComponent<Projectile>().projectileSpeed;
+        CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
+        mana.current -= inventory.currentSpellbookTwo.manaCosts;
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -414,6 +450,14 @@ public class PlayerMovement : Character
         if (inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
         {
             StartCoroutine(SpellAttackCo());
+        }
+    }
+
+    public void SpellAttackTwo()
+    {
+        if (inventory.currentSpellbookTwo && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
+        {
+            StartCoroutine(SpellAttackTwoCo());
         }
     }
 

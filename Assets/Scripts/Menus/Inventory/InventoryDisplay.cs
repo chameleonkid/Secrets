@@ -19,6 +19,7 @@ public class InventoryDisplay : ItemDisplay
     [SerializeField] private ItemSlot ringSlot = default;
     [SerializeField] private ItemSlot bowSlot = default;
     [SerializeField] private ItemSlot spellbookSlot = default;
+    [SerializeField] private ItemSlot spellbookTwoSlot = default;
     [SerializeField] private ItemSlot amuletSlot = default;
     [SerializeField] private ItemSlot bootsSlot = default;
     [SerializeField] private ItemSlot lampSlot = default;
@@ -45,6 +46,7 @@ public class InventoryDisplay : ItemDisplay
         ringSlot.OnSlotSelected += action;
         bowSlot.OnSlotSelected += action;
         spellbookSlot.OnSlotSelected += action;
+        spellbookTwoSlot.OnSlotSelected += action;
         amuletSlot.OnSlotSelected += action;
         bootsSlot.OnSlotSelected += action;
         lampSlot.OnSlotSelected += action;
@@ -61,6 +63,7 @@ public class InventoryDisplay : ItemDisplay
         ringSlot.OnSlotSelected -= action;
         bowSlot.OnSlotSelected -= action;
         spellbookSlot.OnSlotSelected -= action;
+        spellbookTwoSlot.OnSlotSelected -= action;
         amuletSlot.OnSlotSelected -= action;
         bootsSlot.OnSlotSelected -= action;
         lampSlot.OnSlotSelected -= action;
@@ -76,6 +79,7 @@ public class InventoryDisplay : ItemDisplay
         shieldSlot.SetItem(inventory.currentShield, 0);
         ringSlot.SetItem(inventory.currentRing, 0);
         spellbookSlot.SetItem(inventory.currentSpellbook, 0);
+        spellbookTwoSlot.SetItem(inventory.currentSpellbookTwo, 0);
         amuletSlot.SetItem(inventory.currentAmulet, 0);
         bootsSlot.SetItem(inventory.currentBoots, 0);
         lampSlot.SetItem(inventory.currentLamp, 0);

@@ -44,7 +44,7 @@ public class InventoryWeapon : EquippableItem
                 SetSpearHitboxes();
                 break;
             case WeaponType.Bow:
-                swingTime = 2f;     //Maybe make a field for swingTime so every weapon can have a specific CD
+                swingTime = 1.25f;     //Maybe make a field for swingTime so every weapon can have a specific CD
                 SetSpearHitboxes();
                 break;
         }

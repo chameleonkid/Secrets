@@ -89,7 +89,7 @@ public class InventoryManager : MonoBehaviour
             {
                 setWeaponColor();
             }
-            if(inventory.currentSpellbook)
+            if(inventory.currentSpellbook || inventory.currentSpellbookTwo)
             {
                 setLaserColor();
             }
@@ -134,7 +134,7 @@ public class InventoryManager : MonoBehaviour
     //private string RangeDamageDisplayText() => (inventory.currentBow) ?
     //    inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
 
-    private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentAmulet) ?
+    private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentSpellbookTwo || inventory.currentAmulet) ?
         inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
 
     private string LightRadiusDisplayText() => (inventory.currentLamp) ? "" + inventory.currentLamp.outerRadius : "";
