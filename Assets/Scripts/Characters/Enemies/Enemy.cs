@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class Enemy : Character
 {
@@ -87,10 +88,15 @@ public class Enemy : Character
 
     protected virtual void FixedUpdate()
     {
+        var percentHealh = maxHealth.value / 100f;
         var distance = Vector3.Distance(target.position, transform.position);
-        if (distance <= chaseRadius && distance > attackRadius)
+        if (distance <= chaseRadius && distance > attackRadius && this.health > (percentHealh * 10))
         {
             InsideChaseRadiusUpdate();
+        }
+        else if (distance <= chaseRadius && distance > attackRadius && this.health <= (percentHealh * 10))
+        {
+            Flee();
         }
         else if (distance > chaseRadius)
         {
@@ -223,6 +229,23 @@ public class Enemy : Character
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 4f));
         roamingPosition = GetRoamingPostion();
         isWalking = false;
+    }
+
+    protected void Flee()
+    {
+     //   var randomFleeDirection = transform.position += GetRandomDirection();
+        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * Time.deltaTime);
+        SetAnimatorXYSingleAxis(temp - transform.position);
+        rigidbody.MovePosition(temp);
+        animator.SetBool("isMoving", true);
+    }
+
+    protected void AvoidPlayer()
+    {
+        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * Time.deltaTime);
+        SetAnimatorXYSingleAxis(temp - transform.position);
+        rigidbody.MovePosition(temp);
+        animator.SetBool("isMoving", true);
     }
 
 

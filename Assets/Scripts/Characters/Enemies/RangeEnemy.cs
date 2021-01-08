@@ -36,10 +36,7 @@ public class RangeEnemy : TurretEnemy
 
         if (distance <= escapeRange)
         {
-            Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1 * moveSpeed * Time.deltaTime);
-            SetAnimatorXYSingleAxis(temp - transform.position);
-            rigidbody.MovePosition(temp);
-            animator.SetBool("isMoving", true);
+            AvoidPlayer();
         }
 
     }
