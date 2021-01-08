@@ -84,7 +84,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.currentLegs = null;
         playerInventory.currentShield = null;
         playerInventory.currentRing = null;
-        playerInventory.currentBow = null;
         playerInventory.currentSpellbook = null;
         playerInventory.currentAmulet = null;
         playerInventory.currentBoots = null;
@@ -112,7 +111,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
             v.currentLegs = null;
             v.currentShield = null;
             v.currentRing = null;
-            v.currentBow = null;
             v.currentSpellbook = null;
             v.currentAmulet = null;
             v.currentBoots = null;

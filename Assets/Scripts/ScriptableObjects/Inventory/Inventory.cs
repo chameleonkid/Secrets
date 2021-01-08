@@ -28,7 +28,6 @@ public class Inventory : ScriptableObject
     public InventoryLegs currentLegs;
     public InventoryShield currentShield;
     public InventoryRing currentRing;
-    public InventoryBow currentBow;
     public InventorySpellbook currentSpellbook;
     public InventoryAmulet currentAmulet;
     public InventoryBoots currentBoots;
@@ -95,10 +94,7 @@ public class Inventory : ScriptableObject
                 break;
             case InventoryRing ring:
                 Swap(ref currentRing, ring);
-                break;
-            case InventoryBow bow:
-                Swap(ref currentBow, bow);
-                break;
+                 break;
             case InventorySpellbook spellbook:
                 Swap(ref currentSpellbook, spellbook);
                 break;

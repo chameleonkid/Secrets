@@ -75,7 +75,6 @@ public class InventoryDisplay : ItemDisplay
         legsSlot.SetItem(inventory.currentLegs, 0);
         shieldSlot.SetItem(inventory.currentShield, 0);
         ringSlot.SetItem(inventory.currentRing, 0);
-        bowSlot.SetItem(inventory.currentBow, 0);
         spellbookSlot.SetItem(inventory.currentSpellbook, 0);
         amuletSlot.SetItem(inventory.currentAmulet, 0);
         bootsSlot.SetItem(inventory.currentBoots, 0);

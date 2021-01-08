@@ -119,7 +119,7 @@ public class InventoryManager : MonoBehaviour
         defDisplay.text = DefenseDisplayText();
         critDisplay.text = CritDisplayText();
         spellDisplay.text = SpellDamageDisplayText();
-        rangeDisplay.text = RangeDamageDisplayText();
+      //  rangeDisplay.text = RangeDamageDisplayText();
         lightRadiusDisplay.text = LightRadiusDisplayText();
     }
 
@@ -131,8 +131,8 @@ public class InventoryManager : MonoBehaviour
 
     private string DefenseDisplayText() => (inventory.totalDefense > 0) ? inventory.totalDefense.ToString() : "";
 
-    private string RangeDamageDisplayText() => (inventory.currentBow) ?
-        inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
+    //private string RangeDamageDisplayText() => (inventory.currentBow) ?
+    //    inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
 
     private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentAmulet) ?
         inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
