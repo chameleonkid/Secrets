@@ -5711,6 +5711,18 @@ Transform:
   m_Father: {fileID: 505980527}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &390446947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2311297493767853769, guid: a44a2c3fe6ca6de4fb912ca3afc5c189,
+    type: 3}
+  m_PrefabInstance: {fileID: 1147762985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c76a0b163862b49926041d3632cb16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &390446953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2311297493767853766, guid: a44a2c3fe6ca6de4fb912ca3afc5c189,
@@ -6637,6 +6649,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &506522717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5868022570819834626, guid: be56d039da021e54d91260ea92c2935a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6014847756685108466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &513237210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1314109721205213777, guid: 9fa2a68cd7d87d34e828f8249966848d,
@@ -8066,6 +8090,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 137455740367087127, guid: 75c88211dd6f248429623f600593314c,
+        type: 3}
+      propertyPath: maxHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 57dd4fd73ca91334dabc8dbe11dfef40,
+        type: 2}
     - target: {fileID: 137455740367087129, guid: 75c88211dd6f248429623f600593314c,
         type: 3}
       propertyPath: m_Name
@@ -12301,6 +12331,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3306322925021648387}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1089247959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5310815632841737160, guid: 8c0aa85f8ca88b040bf9fae766a23333,
+    type: 3}
+  m_PrefabInstance: {fileID: 423571284379285789}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1089441608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3306322923941976395, guid: 23497ca391cf1b645bcef24d0c78e4c9,
@@ -25194,6 +25236,16 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 553177255}
+    - target: {fileID: 4045718978915790569, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045718978915790569, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4819439860390361883, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: m_RootOrder
@@ -118480,12 +118532,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blob_Purple_Splitter
       objectReference: {fileID: 0}
-    - target: {fileID: 4821109577977272686, guid: 2611c63cab14da04c9c2768b440d1637,
-        type: 3}
-      propertyPath: enemiesToSpawn
-      value: 
-      objectReference: {fileID: 3850764193548615579, guid: 437ac163632026948a14af397e13e9b1,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2611c63cab14da04c9c2768b440d1637, type: 3}
 --- !u!1001 &423571284379285789
@@ -118912,9 +118958,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 609342224508487743}
   enemies:
+  - {fileID: 390446947}
+  - {fileID: 1147777569}
+  - {fileID: 1856706147}
+  - {fileID: 7472666680080340240}
   - {fileID: 5432762753235697416}
   - {fileID: 898907288}
   - {fileID: 1188123163}
+  - {fileID: 506522717}
+  - {fileID: 1089247959}
+  - {fileID: 5131981457265330652}
+  - {fileID: 2588254399771046874}
   breakables:
   - {fileID: 755536444}
   - {fileID: 1933711614}
@@ -119967,6 +120021,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1209877813765348528}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2588254399771046874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3850764193548615579, guid: 437ac163632026948a14af397e13e9b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1209877813765348528}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8e2cd0690f0cc43bac6c558729e604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2728290692044262353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120034,6 +120100,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2728290692212629437, guid: e085a7c43a784334483fc769f004cca4,
+        type: 3}
+      propertyPath: contents
+      value: 
+      objectReference: {fileID: 11400000, guid: 25d64f5e8266f794491efa4cc7ebd575,
+        type: 2}
     - target: {fileID: 2728290692212629437, guid: e085a7c43a784334483fc769f004cca4,
         type: 3}
       propertyPath: dialogBox
@@ -121319,6 +121391,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 418958390620885170}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5131981457265330652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4821109577977272686, guid: 2611c63cab14da04c9c2768b440d1637,
+    type: 3}
+  m_PrefabInstance: {fileID: 418958390620885170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8e2cd0690f0cc43bac6c558729e604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &5241023551019699690
 BoxCollider2D:
   m_ObjectHideFlags: 0
