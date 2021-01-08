@@ -7,7 +7,8 @@ public class InventoryWeapon : EquippableItem
     {
         Sword,
         Axe,
-        Spear
+        Spear,
+        Bow
     }
 
     public int minDamage;
@@ -40,6 +41,10 @@ public class InventoryWeapon : EquippableItem
                 break;
             case WeaponType.Spear:
                 swingTime = 0.6f;
+                SetSpearHitboxes();
+                break;
+            case WeaponType.Bow:
+                swingTime = 2f;     //Maybe make a field for swingTime so every weapon can have a specific CD
                 SetSpearHitboxes();
                 break;
         }
@@ -160,6 +165,46 @@ public class InventoryWeapon : EquippableItem
             new Vector2(-0.5f, 0.8f),
             new Vector2(-0.25f, 0.5f),
             new Vector2(0.2f, 0.5f)
+        };
+    }
+
+    private void SetBowHitboxes()
+    {
+        leftHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+        };
+
+
+        rightHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+        };
+
+        upHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+        };
+
+        downHitboxPolygon = new[] {
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
+            new Vector2(0, 0),
         };
     }
 }

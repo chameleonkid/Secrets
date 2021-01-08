@@ -151,14 +151,6 @@ public class PlayerMovement : Character
             StartCoroutine(RoundAttackCo());
         }
         //########################################################################### Bow Shooting with new Inventory ##################################################################################
-        if (Input.GetButton("UseItem") && currentState != State.roundattack && notStaggeredOrLifting && currentState != State.attack)
-        {
-            if (arrow != null && inventory.items[arrow] > 0 && inventory.currentBow)
-            {
-                inventory.items[arrow]--;
-                StartCoroutine(SecondAttackCo());
-            }
-        }
 
 
 
@@ -191,46 +183,68 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
-        OnAttackTriggered?.Invoke();
         meeleCooldown = true;
+        OnAttackTriggered?.Invoke();
         var currentWeapon = inventory.currentWeapon;
-        hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
-        hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
-        hitBoxColliders[2].points = currentWeapon.rightHitboxPolygon;
-        hitBoxColliders[3].points = currentWeapon.leftHitboxPolygon;
-        //! ^ The order of the hitboxes colliders cannot be safely determined by index,
-        //    as the order is arbitrarily assigned via Inspector.
 
-        weaponSkinChanger.newSprite = currentWeapon.weaponSkin;
-
-        if (currentWeapon.weaponSkin != oldWeaponSkin)
+        if (inventory.currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
         {
-            weaponSkinChanger.ResetRenderer();
-        }
-        oldWeaponSkin = currentWeapon.weaponSkin;
+            if (arrow != null && inventory.items[arrow] > 0)
+            {
+                inventory.items[arrow]--;
+                currentState = State.attack;
+                animator.SetBool("isShooting", true);
+                CreateProjectile(projectile, arrowSpeed, Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1));
+                yield return new WaitForSeconds(0.3f);
 
-        var isCritical = IsCriticalHit();
-        for (int i = 0; i < directionalAttacks.Length; i++)
+                if (currentState != State.interact)
+                {
+                    currentState = State.walk;
+                }
+                animator.SetBool("isShooting", false);
+                yield return new WaitForSeconds(currentWeapon.swingTime);
+            }
+        }
+        else
         {
-            directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-            directionalAttacks[i].isCritical = isCritical;
+            hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
+            hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
+            hitBoxColliders[2].points = currentWeapon.rightHitboxPolygon;
+            hitBoxColliders[3].points = currentWeapon.leftHitboxPolygon;
+            //! ^ The order of the hitboxes colliders cannot be safely determined by index,
+            //    as the order is arbitrarily assigned via Inspector.
+
+            weaponSkinChanger.newSprite = currentWeapon.weaponSkin;
+
+            if (currentWeapon.weaponSkin != oldWeaponSkin)
+            {
+                weaponSkinChanger.ResetRenderer();
+            }
+            oldWeaponSkin = currentWeapon.weaponSkin;
+
+            var isCritical = IsCriticalHit();
+            for (int i = 0; i < directionalAttacks.Length; i++)
+            {
+                directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+                directionalAttacks[i].isCritical = isCritical;
+            }
+
+            SoundManager.RequestSound(attackSounds.GetRandomElement());
+
+            animator.SetBool("Attacking", true);
+            currentState = State.attack;
+            yield return null;
+            animator.SetBool("Attacking", false);
+            yield return new WaitForSeconds(0.3f);
+
+            if (currentState != State.interact)
+            {
+                currentState = State.walk;
+            }
+
+            yield return new WaitForSeconds(currentWeapon.swingTime);
+    
         }
-
-        SoundManager.RequestSound(attackSounds.GetRandomElement());
-
-        animator.SetBool("Attacking", true);
-        currentState = State.attack;
-        yield return null;
-        animator.SetBool("Attacking", false);
-        yield return new WaitForSeconds(0.3f);
-
-        if (currentState != State.interact)
-        {
-            currentState = State.walk;
-
-        }
-
-        yield return new WaitForSeconds(currentWeapon.swingTime);
         meeleCooldown = false;
         SoundManager.RequestSound(meleeCooldownSound);
     }
@@ -248,20 +262,6 @@ public class PlayerMovement : Character
         currentState = State.walk;
 
         mana.current -= 1;
-    }
-
-    // ############################## Using the Item / Shooting the Bow #########################################
-    private IEnumerator SecondAttackCo()
-    {
-        currentState = State.attack;
-        animator.SetBool("isShooting", true);
-        CreateProjectile(projectile, arrowSpeed, Random.Range(inventory.currentBow.minDamage, inventory.currentBow.maxDamage + 1));
-        yield return new WaitForSeconds(0.3f);
-
-        if (currentState != State.interact)
-        {
-            currentState = State.walk;
-        }
     }
 
     private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed, float projectileDamage)
