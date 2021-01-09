@@ -52,6 +52,7 @@ public class BossPumpkin : TurretEnemy
     {
         var originalMovespeed = this.moveSpeed;
         animator.Play("Attacking 2");
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
         yield return new WaitForSeconds(1f);
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"

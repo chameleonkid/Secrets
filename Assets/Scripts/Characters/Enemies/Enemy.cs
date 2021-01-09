@@ -34,6 +34,7 @@ public class Enemy : Character
             {
                 chaseRadius = originalChaseRadius * 10;
                 OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )
+                animator.Play("Hurt");
             }
 
             _health = value;
