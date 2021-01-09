@@ -16,15 +16,15 @@ GameObject:
   - component: {fileID: 2607130021515583033}
   - component: {fileID: 5628120032068693728}
   - component: {fileID: 332230753533627376}
-  - component: {fileID: 2607130021515583025}
   - component: {fileID: 2531231011340040633}
+  - component: {fileID: 705950091702437940}
   m_Layer: 8
   m_Name: Tower-Boss
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2607130021515583037
 Transform:
   m_ObjectHideFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2607130021515583024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.03, y: 1.2, z: 58.76758}
+  m_LocalPosition: {x: 5.56, y: 0.12, z: 58.76758}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2699053893516789846}
@@ -79,8 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: -1345728457
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5034061168752090764, guid: d7671fa7322185242b1694fa6da1a0c2,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5dc98536725fbeb448fc6a7c8ad6b2c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 2607130021515583024}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0b35582628cfe5242973ee5776745d65, type: 2}
+  m_Controller: {fileID: 9100000, guid: ba88e3227c103644599d1d53477140de, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -144,18 +143,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0068621635, y: -0.3681817}
+  m_Offset: {x: -0.0068621635, y: 1.339247}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9157767, y: 0.6413212}
+  m_Size: {x: 0.9157767, y: 0.61136675}
   m_EdgeRadius: 0
 --- !u!61 &2607130021515583033
 BoxCollider2D:
@@ -170,18 +169,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.044051647}
+  m_Offset: {x: 0.022464752, y: 1.9329708}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0481939, y: 1.3710947}
+  m_Size: {x: 1.7820892, y: 1.8803296}
   m_EdgeRadius: 0
 --- !u!114 &5628120032068693728
 MonoBehaviour:
@@ -212,44 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableWhenHit: 0
   _damage: 1
---- !u!114 &2607130021515583025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607130021515583024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d815b736438c34fbd2d219e440621e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectAnimator: {fileID: 0}
-  isShrinked: 0
-  gotHitSound: []
-  attackSounds: []
-  meeleCooldown: 0
-  spellCooldown: 0
-  levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 500
-  maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
-  _health: 0
-  isMinion: 0
-  enemyName: Towerman
-  moveSpeed: 0
-  homePosition: {x: -36.62, y: 7.37}
-  chaseRadius: 7
-  attackRadius: 0
-  deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
-    type: 3}
-  deathEffectDelay: 1
-  roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
-  thisLoot: {fileID: 11400000, guid: 05d3919ae3c5476418135c27aa5bcb68, type: 2}
-  projectile: {fileID: 8755954809695844891, guid: 4cc237e5fdb492f4d931468857161ee7,
-    type: 3}
-  fireDelay: 1
-  canFire: 1
-  projectileSpeed: 8
 --- !u!114 &2531231011340040633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +223,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &705950091702437940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2607130021515583024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aeb99c1ffa6fdc4abd4fe69d290e326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShrinked: 0
+  gotHitSound:
+  - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
+  attackSounds: []
+  meeleCooldown: 0
+  spellCooldown: 0
+  spellTwoCooldown: 0
+  levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
+  enemyXp: 1
+  maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
+  _health: 0
+  isWalking: 0
+  walkingTimer: 3
+  isMinion: 0
+  enemyName: 
+  moveSpeed: 0
+  homePosition: {x: 0, y: 0}
+  roamingPosition: {x: 0, y: 0, z: 0}
+  chaseRadius: 8
+  attackRadius: 0
+  deathEffect: {fileID: 0}
+  deathEffectDelay: 1
+  roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
+  thisLoot: {fileID: 11400000, guid: 8b1d6c0f42e36644697f9be64bdebb5e, type: 2}
+  projectile: {fileID: 8755954809695844891, guid: 9e2d42e6fb50e434ca74eb7446d7eaf9,
+    type: 3}
+  canFire: 0
+  fireDelay: 3
+  fireDelaySeconds: 0
+  projectileTwo: {fileID: 2316327626037189151, guid: 6378c04bd144c97479c63f237e431782,
+    type: 3}
+  canFireTwo: 0
+  fireDelayTwo: 5
+  fireDelaySecondsTwo: 0
+--- !u!111 &936774907
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699053892303726067}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 63513169b779c634ba91bf2aeb06eb7a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &3306322925874010873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,8 +300,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 5
+  m_Color: {r: 0.9339623, g: 0.7728143, b: 0.3480331, a: 1}
+  m_Intensity: 1
   m_LightVolumeOpacity: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -916,10 +939,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderTrigger: {fileID: 3306322924391243028}
-  enemy1: {fileID: 8978087339683796174, guid: 11421516125106d47bc0500b650bd56d, type: 3}
-  enemy2: {fileID: 5432762753877174116, guid: af7a969f824834e4b9774df5f71b1de4, type: 3}
-  enemy3: {fileID: 4840798952189540833, guid: d62d08b518292aa4691680e90a9f5a07, type: 3}
-  spawnRate: 1
+  enemy1: {fileID: 7290780269828354134, guid: cdad374a17ee3d142a6a4a43791a3bd8, type: 3}
+  enemy2: {fileID: 2311297493767853769, guid: a44a2c3fe6ca6de4fb912ca3afc5c189, type: 3}
+  enemy3: {fileID: 1788014214475949675, guid: 9d75866fd66dc1c48ac551b293ab3aab, type: 3}
+  spawnRate: 15
   spawnedEnemiesList: []
   bossMinion: {fileID: 8978087339683796174, guid: be02b69f55a52074bbdd306229de2f8e,
     type: 3}
@@ -927,7 +950,7 @@ MonoBehaviour:
   spawnedMinionsCounter: 0
   minionsSpawned: 0
   spawnPostionList: []
-  boss: {fileID: 2607130021515583025}
+  boss: {fileID: 705950091702437940}
   bossGameObject: {fileID: 2607130021515583024}
   stage: 0
   bossshield: {fileID: 2699053893516789833}
@@ -970,6 +993,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2607130021515583037}
     m_Modifications:
+    - target: {fileID: 618853632539079840, guid: 2cce71ebade86db42bd47a3524a82caa,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 618853632539079853, guid: 2cce71ebade86db42bd47a3524a82caa,
         type: 3}
       propertyPath: m_Color.a

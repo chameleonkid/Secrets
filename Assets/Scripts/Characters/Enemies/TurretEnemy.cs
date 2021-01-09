@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class TurretEnemy : SimpleEnemy
 {
+    [Header("AbilityValues")]
     public GameObject projectile;
-    public float fireDelay;
-    private float fireDelaySeconds;
     public bool canFire = false;
+    public float fireDelay;
+    public float fireDelayReduce = 1;
+    [SerializeField] private float fireDelaySeconds;
 
 
     protected virtual void Update()
@@ -15,7 +17,7 @@ public class TurretEnemy : SimpleEnemy
         if (fireDelaySeconds <= 0)
         {
             canFire = true;
-            fireDelaySeconds = fireDelay;
+            fireDelaySeconds = fireDelay / fireDelayReduce;
         }
     }
 
@@ -39,12 +41,12 @@ public class TurretEnemy : SimpleEnemy
 
     protected virtual void FireProjectile()
     {
-        StartCoroutine(fireCo());
+        StartCoroutine(FireCo());
         canFire = false;
         currentState = State.walk;
     }
 
-    protected virtual IEnumerator fireCo()
+    protected virtual IEnumerator FireCo()
     {
         var originalMovespeed = this.moveSpeed;
         animator.Play("Attacking");

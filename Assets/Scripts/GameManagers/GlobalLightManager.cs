@@ -40,7 +40,7 @@ public class GlobalLightManager : MonoBehaviour
         else if (SceneManager.GetActiveScene().name.Contains("Dungeon"))
         {
             globalLight.intensity = 0;
-        }
+        }                                                                   //This is the case for Houses / Taverns and so on
         else
         {
             globalLight.intensity = 1;

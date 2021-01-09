@@ -45,6 +45,9 @@ public class BossBattleTower : MonoBehaviour
 
 
 
+
+
+
     private void Awake()
     {
         isDefeated = storeDefeated.RuntimeValue;
@@ -189,6 +192,7 @@ public class BossBattleTower : MonoBehaviour
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
                 bossshield.triggerShield();
+                EnhanceAttacks();
                 Debug.Log("Shield should be active now!");
                 break;
             case Stage.Stage_2:
@@ -199,7 +203,12 @@ public class BossBattleTower : MonoBehaviour
     }
 
 
-
+    private void EnhanceAttacks()
+    {
+        var boss = this.GetComponent<BossPumpkin>();
+        boss.fireDelayReduce += 1;
+        boss.fireDelayTwoReduce += 1;
+    }
     
 
 }
