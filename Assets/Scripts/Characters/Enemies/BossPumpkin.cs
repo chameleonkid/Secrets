@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossPumpkin : TurretEnemy
 {
     [Header("AbilityValues Boss")]
-    public GameObject projectileTwo;
+    public GameObject[] projectileTwo;
     public bool canFireTwo = false;
     public float fireDelayTwo;
     [SerializeField] private float fireDelaySecondsTwo;
@@ -57,7 +57,8 @@ public class BossPumpkin : TurretEnemy
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;
-        var proj = Instantiate(projectileTwo, target.transform.position, Quaternion.identity);
+        var randomProjectile = Random.Range(0, projectileTwo.Length);
+        var proj = Instantiate(projectileTwo[randomProjectile], target.transform.position, Quaternion.identity);
 
     }
 
