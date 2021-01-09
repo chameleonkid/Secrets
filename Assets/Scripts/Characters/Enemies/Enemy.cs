@@ -34,7 +34,7 @@ public class Enemy : Character
             {
                 chaseRadius = originalChaseRadius * 10;
                 OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )
-                animator.Play("Hurt"); // Need to prevent the enemy from moving and set idle/moving Anim
+                                            // Need to prevent the enemy from moving and set idle/moving Anim
 
             }
 
@@ -90,6 +90,7 @@ public class Enemy : Character
 
     protected virtual void FixedUpdate()
     {
+
         var percentHealh = maxHealth.value / 100f;
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius && this.health > (percentHealh * 10))
@@ -104,6 +105,7 @@ public class Enemy : Character
         {
             OutsideChaseRadiusUpdate();
         }
+
     }
 
     protected virtual void InsideChaseRadiusUpdate()
@@ -267,5 +269,8 @@ public class Enemy : Character
     {
         return this.maxHealth.value;
     }
+
+
+
 
 }
