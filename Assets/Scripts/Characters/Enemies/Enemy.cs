@@ -248,7 +248,17 @@ public class Enemy : Character
         animator.SetBool("isMoving", true);
     }
 
-
-
+    protected void GetHealed(float healAmount)
+    {
+        if(this.health < this.maxHealth.value)
+        {
+            if(this.health + healAmount > this.maxHealth.value)
+            {
+                this.health = this.maxHealth.value;
+            }
+            this.health += healAmount;
+            DamagePopUpManager.RequestDamagePopUp(healAmount, this.transform);
+        }
+    }
 
 }

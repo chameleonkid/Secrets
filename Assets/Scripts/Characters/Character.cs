@@ -18,6 +18,7 @@ public abstract class Character : MonoBehaviour
     [Header("CoolDowns")]
     [SerializeField] protected bool meeleCooldown = false;
     [SerializeField] protected bool spellCooldown = false;
+    [SerializeField] protected bool spellTwoCooldown = false;
 
     protected virtual void Awake() => GetCharacterComponents();
 

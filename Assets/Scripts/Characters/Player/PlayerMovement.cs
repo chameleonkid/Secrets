@@ -312,7 +312,7 @@ public class PlayerMovement : Character
         currentState = State.attack;
         MakeSpellTwo();
         OnSpellTwoTriggered?.Invoke();
-        spellCooldown = true;
+        spellTwoCooldown = true;
         yield return new WaitForSeconds(0.05f);
         if (currentState != State.interact)
         {
@@ -321,7 +321,7 @@ public class PlayerMovement : Character
         animator.SetBool("isCasting", false);
         yield return new WaitForSeconds(inventory.currentSpellbookTwo.coolDown);
         SoundManager.RequestSound(Spell0CooldownSound);
-        spellCooldown = false;
+        spellTwoCooldown = false;
     }
 
     //################### instantiate spell when casted ###############################
@@ -455,7 +455,7 @@ public class PlayerMovement : Character
 
     public void SpellAttackTwo()
     {
-        if (inventory.currentSpellbookTwo && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
+        if (inventory.currentSpellbookTwo && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellTwoCooldown == false)
         {
             StartCoroutine(SpellAttackTwoCo());
         }
