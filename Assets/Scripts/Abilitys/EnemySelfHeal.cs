@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class EnemySelfHeal : MonoBehaviour
 {
+    [Header("Enemy Values")]
     [SerializeField] private float currentHealth;
     [SerializeField] private float maxHealth;
+    [Header("Healing Values")]
     [SerializeField] private float selfHealAmount;
-    [SerializeField] private float healDelay = 1;
+    [SerializeField] private float currentHealDelay = 1;
     [SerializeField] private float originalHealDelay = 1;
-    [SerializeField] private float healDelaySeconds;
+    [SerializeField] private float timeTillNextHeal;
     [SerializeField] private bool canHeal = false;
+    [SerializeField] private float startHealPercent = 75;
+    [SerializeField] private float fastHealPercent = 50;
+    [SerializeField] private int xTimesFasterHealingValue = 4;
 
 
     void Awake()
     {
-        originalHealDelay = healDelay;
+        originalHealDelay = currentHealDelay;
         
         maxHealth = GetComponent<Enemy>().GetMaxHealth();
     }
@@ -25,23 +30,23 @@ public class EnemySelfHeal : MonoBehaviour
     {
         currentHealth = GetComponent<Enemy>().health;
         var percentHeal = maxHealth / 100f;
-        healDelaySeconds -= Time.deltaTime;
-        if (healDelaySeconds <= 0)
+        timeTillNextHeal -= Time.deltaTime;
+        if (timeTillNextHeal <= 0)
         {
             canHeal = true;
-            healDelaySeconds = healDelay;
+            timeTillNextHeal = currentHealDelay;
         }
 
 
-        if (currentHealth <= (percentHeal * 75))
+        if (currentHealth <= (percentHeal * startHealPercent))
         {
-            if (this.currentHealth <= (percentHeal * 50))
+            if (this.currentHealth <= (percentHeal * fastHealPercent))
             {
-                healDelay = (originalHealDelay / 4);
+                currentHealDelay = (originalHealDelay / xTimesFasterHealingValue);
             }
             else
             {
-                healDelay = originalHealDelay;
+                currentHealDelay = originalHealDelay;
             }
             StartSelfHeal();
         }
