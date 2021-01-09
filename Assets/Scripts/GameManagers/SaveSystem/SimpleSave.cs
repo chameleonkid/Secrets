@@ -15,6 +15,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         SaveBools();
 
         ES3.Save("Scene", SceneManager.GetActiveScene().name);
+        Debug.Log("Save completed");
     }
 
     public void Load()
@@ -24,6 +25,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         LoadBools();
 
         LoadScene(ES3.Load<string>("Scene"));
+        Debug.Log("Loading completed");
     }
 
     public void LoadNew()

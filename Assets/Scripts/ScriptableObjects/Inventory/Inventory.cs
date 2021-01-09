@@ -105,11 +105,14 @@ public class Inventory : ScriptableObject
                 {
                     Swap(ref currentSpellbookTwo, spellbook);
                 }
-             /*   else
-                {   
+           /*     else
+                {
+                    var tempItem = currentSpellbookTwo;
+                    Swap(ref currentSpellbookTwo, currentSpellbook);
                     Swap(ref currentSpellbook, spellbook);
-                    currentSpellbookTwo = currentSpellbook;
-                }*/
+                    Swap(ref tempItem, spellbook);
+                }
+            */
                 break;
             case InventoryAmulet amulet:
                 Swap(ref currentAmulet, amulet);
