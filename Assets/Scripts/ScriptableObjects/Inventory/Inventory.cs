@@ -101,10 +101,15 @@ public class Inventory : ScriptableObject
                 {
                     Swap(ref currentSpellbook, spellbook);
                 }
-                else
+                else// if(!currentSpellbookTwo)
                 {
                     Swap(ref currentSpellbookTwo, spellbook);
                 }
+             /*   else
+                {   
+                    Swap(ref currentSpellbook, spellbook);
+                    currentSpellbookTwo = currentSpellbook;
+                }*/
                 break;
             case InventoryAmulet amulet:
                 Swap(ref currentAmulet, amulet);
