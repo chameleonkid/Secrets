@@ -30,7 +30,7 @@ public class BossBattleTower : MonoBehaviour
     [Header("Spawn Positions")]
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [Header("The Boss")]
-    [SerializeField] private Enemy boss = default;
+    [SerializeField] private BossPumpkin boss = default;
     [SerializeField] private GameObject bossGameObject = default;
     [Header("Stages")]
     [SerializeField] private Stage stage = default;
@@ -142,7 +142,7 @@ public class BossBattleTower : MonoBehaviour
         }
         if (stage == Stage.Stage_2)
         {
-            if (minionsSpawned == false)                                    //Spawn X RED SHIELD-MINIONS
+            if (minionsSpawned == false)                                    //Spawn X " SHIELD-MINIONS "
             {
                 for (int i = 0; i <= minionsToSpawn; i++)    
                 {
@@ -205,9 +205,9 @@ public class BossBattleTower : MonoBehaviour
 
     private void EnhanceAttacks()
     {
-        var boss = this.GetComponent<BossPumpkin>();
-        boss.fireDelayReduce += 1;
-        boss.fireDelayTwoReduce += 1;
+      //  var boss = this.GetComponent<BossPumpkin>();
+        boss.HalfCooldown();
+        boss.HalfCooldownSpellTwo();
     }
     
 

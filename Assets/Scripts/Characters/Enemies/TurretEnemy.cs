@@ -7,7 +7,6 @@ public class TurretEnemy : SimpleEnemy
     public GameObject projectile;
     public bool canFire = false;
     public float fireDelay;
-    public float fireDelayReduce = 1;
     [SerializeField] private float fireDelaySeconds;
 
 
@@ -17,7 +16,7 @@ public class TurretEnemy : SimpleEnemy
         if (fireDelaySeconds <= 0)
         {
             canFire = true;
-            fireDelaySeconds = fireDelay / fireDelayReduce;
+            fireDelaySeconds = fireDelay;
         }
     }
 
@@ -57,5 +56,10 @@ public class TurretEnemy : SimpleEnemy
         var proj = Instantiate(projectile, transform.position, Quaternion.identity);
         var projSpeed = proj.GetComponent<Projectile>().projectileSpeed;
         proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projSpeed;
+    }
+
+    public void HalfCooldown()
+    {
+        fireDelay = fireDelay / 2;
     }
 }

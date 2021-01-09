@@ -8,7 +8,6 @@ public class BossPumpkin : TurretEnemy
     public GameObject projectileTwo;
     public bool canFireTwo = false;
     public float fireDelayTwo;
-    public float fireDelayTwoReduce = 1;
     [SerializeField] private float fireDelaySecondsTwo;
 
 
@@ -20,7 +19,7 @@ public class BossPumpkin : TurretEnemy
         if (fireDelaySecondsTwo <= 0)
         {
             canFireTwo = true;
-            fireDelaySecondsTwo = fireDelayTwo / fireDelayTwoReduce;
+            fireDelaySecondsTwo = fireDelayTwo;
         }
     }
 
@@ -53,10 +52,16 @@ public class BossPumpkin : TurretEnemy
     {
         var originalMovespeed = this.moveSpeed;
         animator.Play("Attacking 2");
+        yield return new WaitForSeconds(1f);
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;
         var proj = Instantiate(projectileTwo, target.transform.position, Quaternion.identity);
 
+    }
+
+    public void HalfCooldownSpellTwo()
+    {
+        fireDelayTwo = fireDelayTwo / 2;
     }
 }
