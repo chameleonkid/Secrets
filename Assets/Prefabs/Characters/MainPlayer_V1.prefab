@@ -966,7 +966,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1011,7 +1011,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1037,7 +1037,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1085,8 +1085,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9d2a082a072c48241b31f7b0dcdacbfd, type: 3}
   meeleCooldown: 0
   spellCooldown: 0
+  spellTwoCooldown: 0
   uiAttackButton: {fileID: 0}
   uiSpellButton: {fileID: 0}
+  uiSpellTwoButton: {fileID: 0}
   uiLampButton: {fileID: 0}
   joystick: {fileID: 0}
   notStaggeredOrLifting: 0
