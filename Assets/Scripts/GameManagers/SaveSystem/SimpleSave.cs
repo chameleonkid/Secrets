@@ -21,7 +21,6 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     public void Load()
     {
 
-
         LoadPlayer();
         LoadInventory();
         LoadBools();
