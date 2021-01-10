@@ -5,19 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     public void NewGame()
     {
         SceneManager.LoadScene("MavensInn_Cutscene");
@@ -28,4 +15,5 @@ public class StartMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Load() => SimpleSave.Instance.Load();
 }

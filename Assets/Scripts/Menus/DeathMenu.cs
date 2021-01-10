@@ -10,4 +10,6 @@ public class DeathMenu : MonoBehaviour
     }
 
     public void ExitGame() => Application.Quit();
+
+    public void Load() => SimpleSave.Instance.Load();
 }
