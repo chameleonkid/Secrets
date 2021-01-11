@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class HealthCrystal : PickUp
+public class ManaCrystal: PickUp
 {
+
     [SerializeField] private float amountToIncrease = default;
     [SerializeField] private BoolValue storePickedUp = default;
     [SerializeField] private bool isPickedUp { get => storePickedUp.RuntimeValue; set => storePickedUp.RuntimeValue = value; }
-
 
     private void Start()
     {
@@ -16,11 +16,10 @@ public class HealthCrystal : PickUp
         }
     }
 
-
     protected override void PlayerPickUp(PlayerMovement player)
     {
-        player.healthMeter.max += amountToIncrease;
-        player.health = player.healthMeter.max;
+        player.mana.max += amountToIncrease;
+        player.mana.current = player.mana.max;
         isPickedUp = true;
         Destroy(this.gameObject);
     }

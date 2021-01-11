@@ -40,6 +40,8 @@ public class SOPInspector : Editor {
         var doors = new List<BoolValue>();
         var bosses = new List<BoolValue>();
         var healthCrystals = new List<BoolValue>();
+        var manaCrystals = new List<BoolValue>();
+
         for (int i = 0; i < bools.Length; i++) {
             var path = AssetDatabase.GetAssetPath(bools[i]);
             if (path.Contains("Chest")) {
@@ -56,11 +58,16 @@ public class SOPInspector : Editor {
             {
                 healthCrystals.Add(bools[i]);
             }
+            else if (path.Contains("ManaCrystals"))
+            {
+                manaCrystals.Add(bools[i]);
+            }
         }
         SetPrivateField(sop, "_chests", chests.ToArray());
         SetPrivateField(sop, "_doors", doors.ToArray());
         SetPrivateField(sop, "_bosses", bosses.ToArray());
         SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
+        SetPrivateField(sop, "_manaCrystals", healthCrystals.ToArray());
 
         var inventories = ScriptableObjectUtility.GetAllInstances<Inventory>();
         var vendorInventories = new List<Inventory>();

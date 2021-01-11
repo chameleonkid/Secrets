@@ -75,6 +75,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Save("Doors", so.doors);
         ES3.Save("Bosses", so.bosses);
         ES3.Save("HealthCrystals", so.healthCrystals);
+        ES3.Save("ManaCrystals", so.manaCrystals);
     }
 
     private void LoadPlayer()
@@ -108,5 +109,6 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Load("Doors", so.doors);
         ES3.Load("Bosses", so.bosses);
         ES3.Load("HealthCrystals", so.healthCrystals);
+        ES3.Load("ManaCrystals", so.manaCrystals);
     }
 }
