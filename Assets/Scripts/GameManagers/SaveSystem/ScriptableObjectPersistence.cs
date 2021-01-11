@@ -29,6 +29,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
     public BoolValue[] doors => _doors;
     [SerializeField] private BoolValue[] _bosses = default;
     public BoolValue[] bosses => _bosses;
+    [SerializeField] private BoolValue[] _healthCrystals = default;
+    public BoolValue[] healthCrystals => _healthCrystals;
 
     [SerializeField] private XPSystem _xpSystem = default;
     public XPSystem xpSystem => _xpSystem;
@@ -68,6 +70,10 @@ public class ScriptableObjectPersistence : MonoBehaviour
         for (int i = 0; i < bosses.Length; i++)
         {
             bosses[i].RuntimeValue = bosses[i].initialValue;
+        }
+        for (int i = 0; i < healthCrystals.Length; i++)
+        {
+            healthCrystals[i].RuntimeValue = healthCrystals[i].initialValue;
         }
     }
 
