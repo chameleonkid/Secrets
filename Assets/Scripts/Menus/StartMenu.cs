@@ -7,7 +7,7 @@ public class StartMenu : MonoBehaviour
 {
     public void NewGame()
     {
-        SceneManager.LoadScene("MavensInn_Cutscene");
+        SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }
 
     public void ExitGame()

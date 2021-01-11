@@ -22,6 +22,7 @@ public class PlayerMovement : Character
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
     private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
+    [SerializeField] private float originalSpeed;
 
     private Vector3 change;
 
@@ -31,11 +32,14 @@ public class PlayerMovement : Character
     public ConstrainedFloat mana => _mana;
     [SerializeField] private ConstrainedFloat _health = default;
     public ConstrainedFloat healthMeter => _health;
-    public override float health {
+    public override float health
+    {
         get => _health.current;
-        set {
+        set
+        {
             _health.current = value;
-            if (_health.current <= 0) {
+            if (_health.current <= 0)
+            {
                 StartCoroutine(DeathCo());
             }
         }
@@ -98,6 +102,7 @@ public class PlayerMovement : Character
         SetAnimatorXY(Vector2.down);
         currentState = State.walk;
         transform.position = startingPosition.value;
+        originalSpeed = speed;
 
 
         // This is for Using UI-Buttons
@@ -123,8 +128,8 @@ public class PlayerMovement : Character
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
-      //  change.x = joystick.Horizontal;
-      //  change.y = joystick.Vertical;
+        //  change.x = joystick.Horizontal;
+        //  change.y = joystick.Vertical;
 
         SetAnimatorXY(change);
 
@@ -188,7 +193,7 @@ public class PlayerMovement : Character
 
 
         var currentWeapon = inventory.currentWeapon;
-        
+
 
         if (inventory.currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
         {
@@ -439,7 +444,7 @@ public class PlayerMovement : Character
 
     public void MeleeAttack()
     {
-        if (currentState != State.attack  && inventory.currentWeapon != null && meeleCooldown == false)
+        if (currentState != State.attack && inventory.currentWeapon != null && meeleCooldown == false)
         {
             StartCoroutine(AttackCo());
         }
@@ -463,12 +468,28 @@ public class PlayerMovement : Character
 
     public void ToggleLamp()
     {
-        if(inventory.currentLamp && lumen.current > 0)
+        if (inventory.currentLamp && lumen.current > 0)
         {
             lamp.enabled = !lamp.enabled;
             OnLampTriggered?.Invoke();
         }
     }
+
+
+    public void LockMovement(float seconds)
+    {
+        StartCoroutine(LockCo(seconds));
+    }
+
+    private IEnumerator LockCo(float seconds)
+    {
+        this._speed = 0;
+        yield return new WaitForSeconds(seconds);
+        this._speed = this.originalSpeed;
+    }
 }
-    //############################################################################################################################################
-    //############################################################################################################################################
+
+
+
+//############################################################################################################################################
+//############################################################################################################################################

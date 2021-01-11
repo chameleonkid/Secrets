@@ -16,28 +16,14 @@ public class RoomMove : MonoBehaviour
     public GameObject IGAreaText;
     public Text AreaText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // cam = Camera.main.GetComponent<CameraMovement>();
-        //    cam = Camera.main.GetComponent<CameraMovement>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     //Teleport der Kamera und des Spielers bei Areawechsel
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            //     cam.minPosition += cameraMinChange;
-            //     cam.maxPosition += cameraMaxChange;
+            other.GetComponent<PlayerMovement>().LockMovement(2);
             other.transform.position += playerChange;
-            if (needText)
+            if (needText) 
             {
                 StartCoroutine(placeNameCo());
             }
