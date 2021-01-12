@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterCreation : MonoBehaviour
 {
@@ -172,6 +173,8 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.hairStyle = hairStyles[hairCounter];
         characterAppearance.hairColor = hairColor[hairColorCounter];
         characterAppearance.bodyStyle = bodySkins[bodyCounter];
+
+        SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }
 
 
