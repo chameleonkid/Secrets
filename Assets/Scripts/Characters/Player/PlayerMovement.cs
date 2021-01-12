@@ -7,6 +7,15 @@ using UnityEngine.UI;
 
 public class PlayerMovement : Character
 {
+    [Header("Appearance")]
+    [SerializeField] private SpriteSkinRPC bodySkin = default;
+    [SerializeField] private SpriteSkinRPC armorSkin = default;
+    [SerializeField] private SpriteSkinRPC hairStyle = default;
+    [SerializeField] private SpriteRenderer hairRenderer = default;
+    [SerializeField] private SpriteSkinRPC eyesSkin = default;
+    private Color hairColor;
+    [SerializeField] private CharacterAppearance characterAppearance = default;
+
 
     [Header("TestInputs")]
     [SerializeField] private Button uiAttackButton = default;
@@ -72,6 +81,7 @@ public class PlayerMovement : Character
     public SpriteRenderer thingSprite;
 
     [Header("WeaponSkins")]
+
     [SerializeField] private SpriteSkinRPC weaponSkinChanger = default;
     private Texture2D oldWeaponSkin = default;
 
@@ -82,6 +92,13 @@ public class PlayerMovement : Character
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
+
+    protected override void Awake()
+    {
+    GetCharacterComponents();
+        SetAppearance();
+    }
+
 
     private void LevelUpPlayer()
     {
@@ -487,6 +504,32 @@ public class PlayerMovement : Character
         yield return new WaitForSeconds(seconds);
         this._speed = this.originalSpeed;
     }
+
+    private void SetAppearance()
+    {
+        if (characterAppearance.bodyStyle)
+        {
+            bodySkin.newSprite = characterAppearance.bodyStyle;
+            bodySkin.ResetRenderer();
+        }
+        if (characterAppearance.armorStyle)
+        {
+            armorSkin.newSprite = characterAppearance.armorStyle;
+            armorSkin.ResetRenderer();
+        }
+        if (characterAppearance.hairStyle)
+        {
+            hairStyle.newSprite = characterAppearance.hairStyle;
+            hairRenderer.color = characterAppearance.hairColor;
+            hairStyle.ResetRenderer();
+        }
+        if (characterAppearance.eyeColor)
+        {
+            eyesSkin.newSprite = characterAppearance.eyeColor;
+            eyesSkin.ResetRenderer();
+        }
+    }
+
 }
 
 
