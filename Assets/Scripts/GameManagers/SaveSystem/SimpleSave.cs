@@ -13,6 +13,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         SavePlayer();
         SaveInventory();
         SaveBools();
+        SaveAppearance();
 
         ES3.Save("Scene", SceneManager.GetActiveScene().name);
         Debug.Log("Save completed");
@@ -67,6 +68,16 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
             ES3.Save("Items", so.vendorInventories.items.Serialize());
         }
         */
+    }
+
+    private void SaveAppearance()
+    {
+        ES3.Save("Appearance", so.characterAppearance);
+    }
+
+    private void LoadAppearance()
+    {
+        ES3.Load("Appearance", so.characterAppearance);
     }
 
     private void SaveBools()

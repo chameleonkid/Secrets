@@ -34,6 +34,9 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private BoolValue[] _manaCrystals = default;
     public BoolValue[] manaCrystals => _manaCrystals;
 
+    [SerializeField] private CharacterAppearance _characterAppearance = default;
+    public CharacterAppearance characterAppearance => _characterAppearance;
+
     [SerializeField] private XPSystem _xpSystem = default;
     public XPSystem xpSystem => _xpSystem;
 

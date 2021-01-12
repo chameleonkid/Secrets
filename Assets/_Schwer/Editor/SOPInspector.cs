@@ -32,6 +32,9 @@ public class SOPInspector : Editor {
         var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");
         SetPrivateField(sop, "_xpSystem", xp);
 
+        var appearance = FindFirstAsset<CharacterAppearance>("Player t:characterAppearance");
+        SetPrivateField(sop, "_characterAppearance", appearance);
+
         var inv = FindFirstAsset<Inventory>("Player t:Inventory");
         SetPrivateField(sop, "_playerInventory", inv);
 
