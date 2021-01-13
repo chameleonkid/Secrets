@@ -9,7 +9,7 @@ public abstract class Character : MonoBehaviour
 
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
-    protected Animator animator { get; private set; }
+    public Animator animator { get; private set; }
     protected InvulnerabilityFrames iframes { get; private set; }
     [SerializeField] protected bool isShrinked;
     [Header("ParentSounds")]
@@ -94,7 +94,8 @@ public abstract class Character : MonoBehaviour
         attack,
         roundattack,
         lift,
-        dead
+        dead,
+        waiting
     }
 
     //############################# StatusEffects instead of fire and forget ############################################################

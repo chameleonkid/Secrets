@@ -23,6 +23,11 @@ public class BossPumpkin : TurretEnemy
         }
     }
 
+    protected override void OutsideChaseRadiusUpdate()
+    {
+        currentState = State.waiting;
+    }
+
     protected override void InsideChaseRadiusUpdate()
     {
         base.InsideChaseRadiusUpdate();
@@ -36,6 +41,7 @@ public class BossPumpkin : TurretEnemy
             }
             currentState = State.idle;
         }
+
 
     }
 

@@ -50,6 +50,7 @@ public class BossBattleTower : MonoBehaviour
 
     private void Awake()
     {
+
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {
@@ -66,6 +67,7 @@ public class BossBattleTower : MonoBehaviour
 
             stage = Stage.WaitingToStart;
         }
+        
     }
 
     private void Start()
@@ -105,6 +107,7 @@ public class BossBattleTower : MonoBehaviour
 
     private void EnterBossArea()
     {
+        boss.animator.SetBool("isWaiting", false);
         StartBattle();
         colliderTrigger.OnPlayerEnterTrigger -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
     }

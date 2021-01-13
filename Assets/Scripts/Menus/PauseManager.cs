@@ -71,7 +71,7 @@ public class PauseManager : MonoBehaviour
     }
 
 
-    public void Save() => SimpleSave.Instance.Save("SecretsSave_DEV");
+    public void Save() => SimpleSave.Instance.Save("saveSlot1");
 
     public void Reset() => SimpleSave.Instance.LoadNew();
 }
