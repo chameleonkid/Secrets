@@ -15,7 +15,7 @@ public class CharacterCreation : MonoBehaviour
     public Texture2D[] hairStyles = default;
     private int hairCounter = 0;
     public SpriteRenderer hairColorRenderer;
-    Color[] hairColor = { new Color(0, 1, 0, 1), new Color(1, 0, 0, 1), new Color(1, 1, 1, 1), new Color(0, 0, 1, 1), new Color(1, 1, 0, 1) };
+    Color[] hairColor = { new Color(0.3f, 0.3f, 0.3f, 1), new Color(0, 1, 0, 1), new Color(1, 0, 0, 1), new Color(1, 1, 1, 1), new Color(0, 0, 1, 1), new Color(1, 1, 0, 1), new Color(1, 0, 1, 1) };
     private int hairColorCounter = 0;
 
     [Header("Armor")]
@@ -28,10 +28,17 @@ public class CharacterCreation : MonoBehaviour
     public Texture2D[] eyeSkins = default;
     private int eyeCounter = 0;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip creatorSound = default;
+    [SerializeField] private AudioClip buttonClick = default;
+
+    [Header("Persistence")]
     [SerializeField] private CharacterAppearance characterAppearance = default;
 
     private void Awake()
     {
+        MusicManager.RequestMusic(creatorSound);
+
         bodyChanger.newSprite = bodySkins[0];
         bodyChanger.ResetRenderer();
 
@@ -53,6 +60,7 @@ public class CharacterCreation : MonoBehaviour
             bodyCounter = 0;
         }
 
+        SoundManager.RequestSound(buttonClick);
         bodyChanger.newSprite = bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
     }
@@ -60,11 +68,11 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousBody()
     {
         bodyCounter--;
-        if (bodyCounter <= 0)
+        if (bodyCounter < 0)
         {
             bodyCounter = bodySkins.Length - 1;
         }
-
+        SoundManager.RequestSound(buttonClick);
         bodyChanger.newSprite = bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
     }
@@ -76,7 +84,7 @@ public class CharacterCreation : MonoBehaviour
         {
             hairCounter = 0;
         }
-
+        SoundManager.RequestSound(buttonClick);
         hairChanger.newSprite = hairStyles[hairCounter];
         hairChanger.ResetRenderer();
     }
@@ -84,11 +92,11 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousHair()
     {
         hairCounter--;
-        if (hairCounter <= 0)
+        if (hairCounter < 0)
         {
             hairCounter = hairStyles.Length -1;
         }
-
+        SoundManager.RequestSound(buttonClick);
         hairChanger.newSprite = hairStyles[hairCounter];
         hairChanger.ResetRenderer();
     }
@@ -100,7 +108,7 @@ public class CharacterCreation : MonoBehaviour
         {
             armorCounter = 0;
         }
-
+        SoundManager.RequestSound(buttonClick);
         armorChanger.newSprite = armorSkins[armorCounter];
         armorChanger.ResetRenderer();
     }
@@ -108,11 +116,11 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousArmor()
     {
         armorCounter--;
-        if (armorCounter <= 0)
+        if (armorCounter < 0)
         {
             armorCounter = armorSkins.Length -1;
         }
-
+        SoundManager.RequestSound(buttonClick);
         armorChanger.newSprite = armorSkins[armorCounter];
         armorChanger.ResetRenderer();
     }
@@ -125,7 +133,7 @@ public class CharacterCreation : MonoBehaviour
         {
             eyeCounter = 0;
         }
-
+        SoundManager.RequestSound(buttonClick);
         eyeChanger.newSprite = eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
@@ -133,11 +141,11 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousEyes()
     {
         eyeCounter--;
-        if (eyeCounter <= 0)
+        if (eyeCounter < 0)
         {
             eyeCounter = eyeSkins.Length -1;
         }
-
+        SoundManager.RequestSound(buttonClick);
         eyeChanger.newSprite = eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
@@ -149,7 +157,7 @@ public class CharacterCreation : MonoBehaviour
         {
             hairColorCounter = 0;
         }
-
+        SoundManager.RequestSound(buttonClick);
         hairColorRenderer.color = hairColor[hairColorCounter];
         hairChanger.ResetRenderer();
     }
@@ -157,11 +165,11 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousHairColor()
     {
         hairColorCounter--;
-        if (hairColorCounter <= 0)
+        if (hairColorCounter < 0)
         {
             hairColorCounter = hairColor.Length -1;
         }
-
+        SoundManager.RequestSound(buttonClick);
         hairColorRenderer.color = hairColor[hairColorCounter];
         hairChanger.ResetRenderer();
     }
@@ -173,10 +181,9 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.hairStyle = hairStyles[hairCounter];
         characterAppearance.hairColor = hairColor[hairColorCounter];
         characterAppearance.bodyStyle = bodySkins[bodyCounter];
-
+        SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }
-
 
 
 }
