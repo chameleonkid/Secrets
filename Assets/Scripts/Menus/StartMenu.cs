@@ -15,5 +15,5 @@ public class StartMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void Load() => SimpleSave.Instance.Load();
+    public void Load() => SimpleSave.Instance.Load("saveSlot1");
 }

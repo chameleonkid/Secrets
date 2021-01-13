@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pausePanel;
+    public GameObject loadPanel;
     public GameObject firstButtonPause;
 
     private bool isPaused = false;
@@ -22,6 +23,11 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    public void ClickLoadButton()
+    {
+        loadPanel.SetActive(true);
+    }
+
     private void ChangePause()
     {
         isPaused = !isPaused;
@@ -35,7 +41,30 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void Save() => SimpleSave.Instance.Save();
-    public void Load() => SimpleSave.Instance.Load();
+
+    public void LoadSlot1()
+    {
+        Load("saveSlot1");
+    }
+
+    public void LoadSlot2()
+    {
+        Load("saveSlot2");
+    }
+
+    public void LoadSlot3()
+    {
+        Load("saveSlot3");
+    }
+
+    public void Save() => SimpleSave.Instance.Save("SecretsSave_DEV");
+
+    public void Load(string loadSlot)
+    {
+        SimpleSave.Instance.Load(loadSlot);
+        loadPanel.SetActive(false);
+    }
+
+
     public void Reset() => SimpleSave.Instance.LoadNew();
 }

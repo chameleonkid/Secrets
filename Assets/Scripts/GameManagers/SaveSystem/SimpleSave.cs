@@ -8,25 +8,25 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     private void Start() => so = GetComponent<ScriptableObjectPersistence>();
 
-    public void Save()
+    public void Save(string saveSlot)
     {
-        SavePlayer();
-        SaveInventory();
-        SaveBools();
-        SaveAppearance();
+        SavePlayer(saveSlot);
+        SaveInventory(saveSlot);
+        SaveBools(saveSlot);
+        SaveAppearance(saveSlot);
 
-        ES3.Save("Scene", SceneManager.GetActiveScene().name);
+        ES3.Save("Scene", SceneManager.GetActiveScene().name, saveSlot);
         Debug.Log("Save completed");
     }
 
-    public void Load()
+    public void Load(string loadSlot)
     {
+        Debug.Log("Trying to load " + loadSlot);
+        LoadPlayer(loadSlot);
+        LoadInventory(loadSlot);
+        LoadBools(loadSlot);
 
-        LoadPlayer();
-        LoadInventory();
-        LoadBools();
-
-        LoadScene(ES3.Load<string>("Scene"));
+        LoadScene(ES3.Load<string>("Scene"));            // This needs to be asked... I NEED SCHWER!
         Debug.Log("Loading completed");
     }
 
@@ -46,20 +46,20 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         Time.timeScale = 1f;
     }
 
-    private void SavePlayer()
+    private void SavePlayer(string saveSlot)
     {
         so.playerPosition.value = FindObjectOfType<PlayerMovement>().transform.position;
-        ES3.Save("Position", so.playerPosition);
-        ES3.Save("Health", so.health);
-        ES3.Save("Mana", so.mana);
-        ES3.Save("Lumen", so.lumen);
+        ES3.Save("Position", so.playerPosition, saveSlot);
+        ES3.Save("Health", so.health, saveSlot);
+        ES3.Save("Mana", so.mana, saveSlot);
+        ES3.Save("Lumen", so.lumen, saveSlot);
     }
 
-    private void SaveInventory()
+    private void SaveInventory(string saveSlot)
     {
-        ES3.Save("Inventory", so.playerInventory);
-        ES3.Save("VendorInventory", so.vendorInventories);
-        ES3.Save("Items", so.playerInventory.items.Serialize());
+        ES3.Save("Inventory", so.playerInventory, saveSlot);
+        ES3.Save("VendorInventory", so.vendorInventories, saveSlot);
+        ES3.Save("Items", so.playerInventory.items.Serialize(), saveSlot);
 
         //Safe Vendor-Items of ALL Vendors
         /*
@@ -70,37 +70,37 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         */
     }
 
-    private void SaveAppearance()
+    private void SaveAppearance(string saveSlot)
     {
-        ES3.Save("Appearance", so.characterAppearance);
+        ES3.Save("Appearance", so.characterAppearance, saveSlot);
     }
 
-    private void LoadAppearance()
+    private void LoadAppearance(string loadSlot)
     {
-        ES3.Load("Appearance", so.characterAppearance);
+        ES3.Load("Appearance", loadSlot, so.characterAppearance);
     }
 
-    private void SaveBools()
+    private void SaveBools(string saveSlot)
     {
-        ES3.Save("Chests", so.chests);
-        ES3.Save("Doors", so.doors);
-        ES3.Save("Bosses", so.bosses);
-        ES3.Save("HealthCrystals", so.healthCrystals);
-        ES3.Save("ManaCrystals", so.manaCrystals);
+        ES3.Save("Chests", so.chests, saveSlot);
+        ES3.Save("Doors", so.doors, saveSlot);
+        ES3.Save("Bosses", so.bosses, saveSlot);
+        ES3.Save("HealthCrystals", so.healthCrystals, saveSlot);
+        ES3.Save("ManaCrystals", so.manaCrystals, saveSlot);
     }
 
-    private void LoadPlayer()
+    private void LoadPlayer(string loadSlot)
     {
-        ES3.Load("Position", so.playerPosition);
-        ES3.Load("Health", so.health);
-        ES3.Load("Mana", so.mana);
-        ES3.Load("Lumen", so.lumen);
+        ES3.Load("Position", loadSlot, so.playerPosition);
+        ES3.Load("Health", loadSlot, so.health);
+        ES3.Load("Mana", loadSlot, so.mana);
+        ES3.Load("Lumen", loadSlot, so.lumen);
     }
 
-    private void LoadInventory()
+    private void LoadInventory(string loadSlot)
     {
-        ES3.Load("Inventory", so.playerInventory);
-        ES3.Load("VendorInventory", so.vendorInventories);
+        ES3.Load("Inventory", loadSlot, so.playerInventory);
+        ES3.Load("VendorInventory", loadSlot, so.vendorInventories);
 
 
         so.playerInventory.items = (ES3.Load("Items") as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
@@ -114,12 +114,12 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         */
     }
 
-    private void LoadBools()
+    private void LoadBools(string loadSlot)
     {
-        ES3.Load("Chests", so.chests);
-        ES3.Load("Doors", so.doors);
-        ES3.Load("Bosses", so.bosses);
-        ES3.Load("HealthCrystals", so.healthCrystals);
-        ES3.Load("ManaCrystals", so.manaCrystals);
+        ES3.Load("Chests", loadSlot, so.chests);
+        ES3.Load("Doors", loadSlot, so.doors);
+        ES3.Load("Bosses", loadSlot, so.bosses);
+        ES3.Load("HealthCrystals", loadSlot, so.healthCrystals);
+        ES3.Load("ManaCrystals", loadSlot, so.manaCrystals);
     }
 }
