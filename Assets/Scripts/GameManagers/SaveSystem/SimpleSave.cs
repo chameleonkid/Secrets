@@ -26,7 +26,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         LoadInventory(loadSlot);
         LoadBools(loadSlot);
 
-        LoadScene(ES3.Load<string>("Scene"));            // This needs to be asked... I NEED SCHWER!
+        LoadScene(ES3.Load<string>("Scene",loadSlot));            // This needs to be asked... I NEED SCHWER!
         Debug.Log("Loading completed");
     }
 
@@ -103,7 +103,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Load("VendorInventory", loadSlot, so.vendorInventories);
 
 
-        so.playerInventory.items = (ES3.Load("Items") as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
+        so.playerInventory.items = (ES3.Load("Items", loadSlot) as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
 
         //Load all items from all vendors
         /*
