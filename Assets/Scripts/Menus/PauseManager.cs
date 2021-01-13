@@ -57,14 +57,21 @@ public class PauseManager : MonoBehaviour
         Load("saveSlot3");
     }
 
-    public void Save() => SimpleSave.Instance.Save("SecretsSave_DEV");
-
     public void Load(string loadSlot)
     {
         SimpleSave.Instance.Load(loadSlot);
         loadPanel.SetActive(false);
     }
 
+    public void CancelLoad()
+    {
+        loadPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstButtonPause);
+    }
+
+
+    public void Save() => SimpleSave.Instance.Save("SecretsSave_DEV");
 
     public void Reset() => SimpleSave.Instance.LoadNew();
 }
