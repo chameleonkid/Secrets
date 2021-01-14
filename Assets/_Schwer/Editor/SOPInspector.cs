@@ -32,6 +32,9 @@ public class SOPInspector : Editor {
         var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");
         SetPrivateField(sop, "_xpSystem", xp);
 
+        var time = FindFirstAsset<FloatValue>("TimeOfDay t:FloatValue");
+        SetPrivateField(sop, "_timeOfDay", time);
+
         var appearance = FindFirstAsset<CharacterAppearance>("Player t:characterAppearance");
         SetPrivateField(sop, "_characterAppearance", appearance);
 

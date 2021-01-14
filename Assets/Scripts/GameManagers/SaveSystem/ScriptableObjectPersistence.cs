@@ -44,6 +44,9 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private XPSystem _xpSystem = default;
     public XPSystem xpSystem => _xpSystem;
 
+    [SerializeField] private FloatValue _timeOfDay = default;
+    public FloatValue timeOfDay => _timeOfDay;
+
     public void ResetScriptableObjects()
     {
         ResetPlayer();
@@ -51,7 +54,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
         ResetVendorInventories();
         ResetBools();
         ResetXP();
-
+        timeOfDay.value = 0;
+  
         Debug.Log("Reset scriptable object save data.");
     }
 
@@ -150,4 +154,5 @@ public class ScriptableObjectPersistence : MonoBehaviour
     }
 
     public void ResetXP() => _xpSystem.ResetExperienceSystem();
+
 }

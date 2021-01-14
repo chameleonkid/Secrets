@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 [RequireComponent(typeof(ScriptableObjectPersistence))]
 public class SimpleSave : DDOLSingleton<SimpleSave>
 {
+
+
     private ScriptableObjectPersistence so;
 
+    public static event Action OnDataLoaded;
     private void Start() => so = GetComponent<ScriptableObjectPersistence>();
 
     public void Save(string saveSlot)
@@ -14,6 +18,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         SaveInventory(saveSlot);
         SaveBools(saveSlot);
         SaveAppearance(saveSlot);
+        SafeTime(saveSlot);
 
         ES3.Save("Scene", SceneManager.GetActiveScene().name, saveSlot);
         Debug.Log("Save completed");
@@ -26,9 +31,12 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         LoadInventory(loadSlot);
         LoadBools(loadSlot);
         LoadAppearance(loadSlot);
+        LoadTime(loadSlot);
+        OnDataLoaded?.Invoke();
 
         LoadScene(ES3.Load<string>("Scene",loadSlot));            // This needs to be asked... I NEED SCHWER!
         Debug.Log("Loading completed");
+
     }
 
     public void LoadNew()
@@ -111,4 +119,15 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Load("ManaCrystals", loadSlot, so.manaCrystals);
         ES3.Load("SaveSlotNames", loadSlot, so.saveSlotNames);
     }
+
+    private void SafeTime(string saveSlot)
+    {
+        ES3.Save("Time", so.timeOfDay, saveSlot);
+    }
+
+    private void LoadTime(string loadSlot)
+    {
+        ES3.Load("Time", loadSlot, so.timeOfDay);
+    }
+
 }

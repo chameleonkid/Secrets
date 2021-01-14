@@ -7,8 +7,19 @@ public class TimeManager : DDOLSingleton<TimeManager>
 
     [SerializeField] private float fullDayLength = 60;
     [SerializeField] private float timeMultiplier = 1;
-
+    [SerializeField] private FloatValue timeSaver = default;
     [SerializeField] private float normalizedTimeOfDay = 0;
+
+
+    void OnEnable()
+    {
+        SimpleSave.OnDataLoaded += SetTime;
+    }
+
+    void OnDisable()
+    {
+        SimpleSave.OnDataLoaded -= SetTime;
+    }
 
     private void Update()
     {
@@ -19,5 +30,11 @@ public class TimeManager : DDOLSingleton<TimeManager>
         }
 
         OnTimeChanged?.Invoke(normalizedTimeOfDay);
+        timeSaver.value = normalizedTimeOfDay;
+    }
+
+    private void SetTime()
+    {
+        normalizedTimeOfDay = timeSaver.value;
     }
 }
