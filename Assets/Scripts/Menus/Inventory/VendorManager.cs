@@ -58,7 +58,7 @@ public class VendorManager : ItemDisplay
     }
 
     private void ActivateInterface(Inventory vendorInventory) {
-        if (CanvasManager.Instance.IsFreeOrActive(vendorPanel))
+        if (CanvasManager.Instance.IsFreeOrActive(vendorPanel) && !vendorPanel.activeInHierarchy)
         {
             OpenInterface(vendorInventory);
             UpdateItemSlots();
