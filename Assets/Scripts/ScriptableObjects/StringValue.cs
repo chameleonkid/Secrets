@@ -5,4 +5,5 @@
 public class StringValue : ScriptableObject
 {
     public string initialValue;
+    public string RuntimeValue;
 }

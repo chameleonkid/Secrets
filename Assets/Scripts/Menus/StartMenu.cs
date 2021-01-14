@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
 {
     public GameObject pausePanel;
     public GameObject loadPanel;
     public GameObject firstButtonPause;
+
+    [SerializeField] private Button saveSlot1;
+    [SerializeField] private Button saveSlot2;
+    [SerializeField] private Button saveSlot3;
+    [SerializeField] private StringValue saveSlot1Text;
+    [SerializeField] private StringValue saveSlot2Text;
+    [SerializeField] private StringValue saveSlot3Text;
 
 
     public void NewGame()
@@ -19,6 +27,9 @@ public class StartMenu : MonoBehaviour
     public void ClickLoadButton()
     {
         loadPanel.SetActive(true);
+        saveSlot1.GetComponentInChildren<Text>().text = saveSlot1Text.RuntimeValue;
+        saveSlot2.GetComponentInChildren<Text>().text = saveSlot2Text.RuntimeValue;
+        saveSlot3.GetComponentInChildren<Text>().text = saveSlot3Text.RuntimeValue;
     }
 
     public void ExitGame()

@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
     public GameObject pausePanel;
     public GameObject loadPanel;
     public GameObject firstButtonPause;
+    [SerializeField] private Button saveSlot1;
+    [SerializeField] private Button saveSlot2;
+    [SerializeField] private Button saveSlot3;
+    [SerializeField] private StringValue saveSlot1Text;
+    [SerializeField] private StringValue saveSlot2Text;
+    [SerializeField] private StringValue saveSlot3Text;
 
     private bool isPaused = false;
 
@@ -14,6 +21,7 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause") && CanvasManager.Instance.IsFreeOrActive(pausePanel.gameObject))
         {
+            loadPanel.SetActive(false);
             ChangePause();
             if (firstButtonPause)
             {
@@ -26,6 +34,9 @@ public class PauseManager : MonoBehaviour
     public void ClickLoadButton()
     {
         loadPanel.SetActive(true);
+        saveSlot1.GetComponentInChildren<Text>().text = saveSlot1Text.RuntimeValue;
+        saveSlot2.GetComponentInChildren<Text>().text = saveSlot2Text.RuntimeValue;
+        saveSlot3.GetComponentInChildren<Text>().text = saveSlot3Text.RuntimeValue;
     }
 
     private void ChangePause()
@@ -61,6 +72,7 @@ public class PauseManager : MonoBehaviour
     {
         SimpleSave.Instance.Load(loadSlot);
         loadPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void CancelLoad()

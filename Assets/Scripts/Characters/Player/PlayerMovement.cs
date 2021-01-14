@@ -98,7 +98,7 @@ public class PlayerMovement : Character
     protected override void Awake()
     {
     GetCharacterComponents();
-        SetAppearance();
+    SetAppearance();
     }
 
 

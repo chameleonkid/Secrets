@@ -39,11 +39,14 @@ public class SOPInspector : Editor {
         SetPrivateField(sop, "_playerInventory", inv);
 
         var bools = ScriptableObjectUtility.GetAllInstances<BoolValue>();
+        var strings = ScriptableObjectUtility.GetAllInstances<StringValue>();
         var chests = new List<BoolValue>();
         var doors = new List<BoolValue>();
         var bosses = new List<BoolValue>();
         var healthCrystals = new List<BoolValue>();
         var manaCrystals = new List<BoolValue>();
+
+        var saveSlotNames = new List<StringValue>();
 
         for (int i = 0; i < bools.Length; i++) {
             var path = AssetDatabase.GetAssetPath(bools[i]);
@@ -64,13 +67,25 @@ public class SOPInspector : Editor {
             else if (path.Contains("ManaCrystals"))
             {
                 manaCrystals.Add(bools[i]);
+            }    
+            
+        }
+
+        for (int i = 0; i < strings.Length; i++)
+        {
+            var path = AssetDatabase.GetAssetPath(strings[i]);
+            if (path.Contains("SaveSlotNames"))
+            {
+                saveSlotNames.Add(strings[i]);
             }
         }
+
         SetPrivateField(sop, "_chests", chests.ToArray());
         SetPrivateField(sop, "_doors", doors.ToArray());
         SetPrivateField(sop, "_bosses", bosses.ToArray());
         SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
-        SetPrivateField(sop, "_manaCrystals", healthCrystals.ToArray());
+        SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
+        SetPrivateField(sop, "_saveSlotNames", saveSlotNames.ToArray());
 
         var inventories = ScriptableObjectUtility.GetAllInstances<Inventory>();
         var vendorInventories = new List<Inventory>();
