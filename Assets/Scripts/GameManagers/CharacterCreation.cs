@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CharacterCreation : MonoBehaviour
 {
@@ -32,8 +33,13 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private AudioClip creatorSound = default;
     [SerializeField] private AudioClip buttonClick = default;
 
+    [Header("Name")]
+    [SerializeField] private TextMeshProUGUI characterName = default;
+
     [Header("Persistence")]
     [SerializeField] private CharacterAppearance characterAppearance = default;
+
+
 
     private void Awake()
     {
@@ -181,6 +187,7 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.hairStyle = hairStyles[hairCounter];
         characterAppearance.hairColor = hairColor[hairColorCounter];
         characterAppearance.bodyStyle = bodySkins[bodyCounter];
+        characterAppearance.playerName = characterName.text;
         SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }

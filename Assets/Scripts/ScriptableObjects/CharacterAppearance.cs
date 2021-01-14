@@ -12,6 +12,5 @@ public class CharacterAppearance : ScriptableObject
     public Color hairColor;
     public Texture2D armorStyle;
     public Texture2D eyeColor;
-
-
+    public string playerName;
 }
