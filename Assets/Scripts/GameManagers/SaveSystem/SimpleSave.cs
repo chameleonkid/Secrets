@@ -35,7 +35,11 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     {
         so.ResetScriptableObjects();
 
-        LoadScene(SceneManager.GetActiveScene().name);  //! For development only, forces a scene reload on resetting.
+        if (!(SceneManager.GetActiveScene().name == "StartMenu"))
+        {
+            LoadScene(SceneManager.GetActiveScene().name);  //! For development only, forces a scene reload on resetting.
+        }
+        
     }
 
     public void LoadScene(string sceneName)
