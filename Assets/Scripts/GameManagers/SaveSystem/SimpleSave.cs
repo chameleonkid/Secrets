@@ -25,6 +25,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         LoadPlayer(loadSlot);
         LoadInventory(loadSlot);
         LoadBools(loadSlot);
+        LoadAppearance(loadSlot);
 
         LoadScene(ES3.Load<string>("Scene",loadSlot));            // This needs to be asked... I NEED SCHWER!
         Debug.Log("Loading completed");
