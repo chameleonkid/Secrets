@@ -61,6 +61,12 @@ public class SavePoint : MonoBehaviour
         Save("saveSlot3");
     }
 
+    public void CancelSave()
+    {
+        saveMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void Save(string saveSlot)
     {
         SimpleSave.Instance.Save(saveSlot);           //<---- This is how i save (use your own method)
