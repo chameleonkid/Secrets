@@ -5,8 +5,6 @@ using System;
 [RequireComponent(typeof(ScriptableObjectPersistence))]
 public class SimpleSave : DDOLSingleton<SimpleSave>
 {
-
-
     private ScriptableObjectPersistence so;
 
     public static event Action OnDataLoaded;
@@ -34,9 +32,8 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         LoadTime(loadSlot);
         OnDataLoaded?.Invoke();
 
-        LoadScene(ES3.Load<string>("Scene",loadSlot));            // This needs to be asked... I NEED SCHWER!
+        LoadScene(ES3.Load<string>("Scene", loadSlot));
         Debug.Log("Loading completed");
-
     }
 
     public void LoadNew()
@@ -47,7 +44,6 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         {
             LoadScene(SceneManager.GetActiveScene().name);  //! For development only, forces a scene reload on resetting.
         }
-        
     }
 
     public void LoadScene(string sceneName)
@@ -58,6 +54,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         // pausePanel.SetActive(false);    //! Is this necessary if we are already loading the scene afresh?
         Time.timeScale = 1f;
     }
+
     private void SaveAppearance(string saveSlot)
     {
         ES3.Save("Appearance", so.characterAppearance, saveSlot);
@@ -129,5 +126,4 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     {
         ES3.Load("Time", loadSlot, so.timeOfDay);
     }
-
 }
