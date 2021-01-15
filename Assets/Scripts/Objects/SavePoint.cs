@@ -59,21 +59,21 @@ public class SavePoint : MonoBehaviour
 
     public void SaveSlot1()
     {
-        saveName.RuntimeValue = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
+        saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
         Save(SaveUtility.SaveSlots[0]);
         saveSlot1.text = saveName.RuntimeValue;
     }
 
     public void SaveSlot2()
     {
-        saveName.RuntimeValue = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
+        saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
         Save(SaveUtility.SaveSlots[1]);
         saveSlot2.text = saveName.RuntimeValue;
     }
 
     public void SaveSlot3()
     {
-        saveName.RuntimeValue = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
+        saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
         Save(SaveUtility.SaveSlots[2]);
         saveSlot3.text = saveName.RuntimeValue;
     }

@@ -1,6 +1,6 @@
 ﻿public static class SaveUtility
 {
-    public static readonly string[] SaveSlots = {"saveSlot1", "saveSlot2", "SaveSlot3"};
+    public static readonly string[] SaveSlots = {"saveSlot 1", "saveSlot 2", "SaveSlot 3"};
 
     public static string[] GetSaveNames()
     {
