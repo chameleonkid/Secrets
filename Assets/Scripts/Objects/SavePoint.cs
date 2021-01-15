@@ -9,9 +9,9 @@ public class SavePoint : MonoBehaviour
     [SerializeField] private GameObject saveMenu;
     public GameObject firstButtonSave;
     [Header("Slot Values")]
-    [SerializeField] private Button saveSlot1;
-    [SerializeField] private Button saveSlot2;
-    [SerializeField] private Button saveSlot3;
+    [SerializeField] private Text saveSlot1;
+    [SerializeField] private Text saveSlot2;
+    [SerializeField] private Text saveSlot3;
     [SerializeField] private StringValue saveSlot1Text;
     [SerializeField] private StringValue saveSlot2Text;
     [SerializeField] private StringValue saveSlot3Text;
@@ -23,9 +23,9 @@ public class SavePoint : MonoBehaviour
     private void Awake()
     {
         saveMenu.SetActive(false);
-        saveSlot1.GetComponentInChildren<Text>().text = saveSlot1Text.RuntimeValue;
-        saveSlot2.GetComponentInChildren<Text>().text = saveSlot2Text.RuntimeValue;
-        saveSlot3.GetComponentInChildren<Text>().text = saveSlot3Text.RuntimeValue;
+        saveSlot1.text = saveSlot1Text.RuntimeValue;
+        saveSlot2.text = saveSlot2Text.RuntimeValue;
+        saveSlot3.text = saveSlot3Text.RuntimeValue;
     }
 
     private void Update()
@@ -61,22 +61,22 @@ public class SavePoint : MonoBehaviour
     public void SaveSlot1()
     {
         Save("saveSlot1");
-        saveSlot1.GetComponentInChildren<Text>().text = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
-        saveSlot1Text.RuntimeValue = saveSlot1.GetComponentInChildren<Text>().text;
+        saveSlot1.text = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
+        saveSlot1Text.RuntimeValue = saveSlot1.text;
     }
 
     public void SaveSlot2()
     {
         Save("saveSlot2");
-        saveSlot2.GetComponentInChildren<Text>().text = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
-        saveSlot2Text.RuntimeValue = saveSlot2.GetComponentInChildren<Text>().text;
+        saveSlot2.text = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
+        saveSlot2Text.RuntimeValue = saveSlot2.text;
     }
 
     public void SaveSlot3()
     {
         Save("saveSlot3");
-        saveSlot3.GetComponentInChildren<Text>().text = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
-        saveSlot3Text.RuntimeValue = saveSlot3.GetComponentInChildren<Text>().text;
+        saveSlot3.text = playerAppearance.playerName + " Level: " + playerXP.level + " " + SceneManager.GetActiveScene().name;
+        saveSlot3Text.RuntimeValue = saveSlot3.text;
     }
 
     public void CancelSave()
