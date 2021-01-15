@@ -8,7 +8,7 @@
 
         for (int i = 0; i < SaveSlots.Length; i++)
         {
-            ES3.Load("Name", SaveSlots[i], names[i]);
+            names[i] = ES3.Load("Name", SaveSlots[i], $"Slot {i + 1}: Empty");
         }
 
         return names;
