@@ -13,10 +13,10 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     public void Save(string saveSlot)
     {
         SavePlayer(saveSlot);
-        SaveInventory(saveSlot);
+        SaveVendorInventories(saveSlot);
         SaveBools(saveSlot);
         SaveAppearance(saveSlot);
-        SafeTime(saveSlot);
+        SaveTime(saveSlot);
 
         ES3.Save("Scene", SceneManager.GetActiveScene().name, saveSlot);
         Debug.Log("Save completed");
@@ -26,7 +26,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     {
         Debug.Log("Trying to load " + loadSlot);
         LoadPlayer(loadSlot);
-        LoadInventory(loadSlot);
+        LoadVendorInventories(loadSlot);
         LoadBools(loadSlot);
         LoadAppearance(loadSlot);
         LoadTime(loadSlot);
@@ -72,6 +72,9 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Save("Health", so.health, saveSlot);
         ES3.Save("Mana", so.mana, saveSlot);
         ES3.Save("Lumen", so.lumen, saveSlot);
+
+        ES3.Save("Inventory", so.playerInventory, saveSlot);
+        ES3.Save("Items", so.playerInventory.items.Serialize(), saveSlot);
     }
 
     private void LoadPlayer(string loadSlot)
@@ -80,21 +83,19 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Load("Health", loadSlot, so.health);
         ES3.Load("Mana", loadSlot, so.mana);
         ES3.Load("Lumen", loadSlot, so.lumen);
-    }
 
-    private void SaveInventory(string saveSlot)
-    {
-        ES3.Save("Inventory", so.playerInventory, saveSlot);
-        ES3.Save("VendorInventory", so.vendorInventories, saveSlot);
-        ES3.Save("Items", so.playerInventory.items.Serialize(), saveSlot);
-    }
-
-    private void LoadInventory(string loadSlot)
-    {
         ES3.Load("Inventory", loadSlot, so.playerInventory);
-        ES3.Load("VendorInventory", loadSlot, so.vendorInventories);
-
         so.playerInventory.items = (ES3.Load("Items", loadSlot) as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
+    }
+
+    private void SaveVendorInventories(string saveSlot)
+    {
+        ES3.Save("VendorInventory", so.vendorInventories, saveSlot);
+    }
+
+    private void LoadVendorInventories(string loadSlot)
+    {
+        ES3.Load("VendorInventory", loadSlot, so.vendorInventories);
     }
 
     private void SaveBools(string saveSlot)
@@ -104,7 +105,6 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Save("Bosses", so.bosses, saveSlot);
         ES3.Save("HealthCrystals", so.healthCrystals, saveSlot);
         ES3.Save("ManaCrystals", so.manaCrystals, saveSlot);
-        ES3.Save("SaveSlotNames", so.saveSlotNames, saveSlot);
     }
 
     private void LoadBools(string loadSlot)
@@ -114,10 +114,9 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Load("Bosses", loadSlot, so.bosses);
         ES3.Load("HealthCrystals", loadSlot, so.healthCrystals);
         ES3.Load("ManaCrystals", loadSlot, so.manaCrystals);
-        ES3.Load("SaveSlotNames", loadSlot, so.saveSlotNames);
     }
 
-    private void SafeTime(string saveSlot)
+    private void SaveTime(string saveSlot)
     {
         ES3.Save("Time", so.timeOfDay, saveSlot);
     }
@@ -126,4 +125,9 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     {
         ES3.Load("Time", loadSlot, so.timeOfDay);
     }
+
+    // private static void GetSlotNames()
+    // {
+    //     ES3.Load("SaveSlotNames", loadSlot, so.saveSlotNames);
+    // }
 }
