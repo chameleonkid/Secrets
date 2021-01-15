@@ -17,6 +17,9 @@ public class SOPInspector : Editor {
     private static void RefreshReferences(ScriptableObjectPersistence sop) {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
 
+        var name = FindFirstAsset<StringValue>("Save t:StringValue");
+        SetPrivateField(sop, "_saveName", name);
+
         var pos = FindFirstAsset<VectorValue>("Player t:VectorValue");
         SetPrivateField(sop, "_playerPosition", pos);
 
@@ -49,8 +52,6 @@ public class SOPInspector : Editor {
         var healthCrystals = new List<BoolValue>();
         var manaCrystals = new List<BoolValue>();
 
-        var saveSlotNames = new List<StringValue>();
-
         for (int i = 0; i < bools.Length; i++) {
             var path = AssetDatabase.GetAssetPath(bools[i]);
             if (path.Contains("Chest")) {
@@ -71,16 +72,6 @@ public class SOPInspector : Editor {
             {
                 manaCrystals.Add(bools[i]);
             }    
-            
-        }
-
-        for (int i = 0; i < strings.Length; i++)
-        {
-            var path = AssetDatabase.GetAssetPath(strings[i]);
-            if (path.Contains("SaveSlotNames"))
-            {
-                saveSlotNames.Add(strings[i]);
-            }
         }
 
         SetPrivateField(sop, "_chests", chests.ToArray());
@@ -88,7 +79,6 @@ public class SOPInspector : Editor {
         SetPrivateField(sop, "_bosses", bosses.ToArray());
         SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
         SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
-        SetPrivateField(sop, "_saveSlotNames", saveSlotNames.ToArray());
 
         var inventories = ScriptableObjectUtility.GetAllInstances<Inventory>();
         var vendorInventories = new List<Inventory>();
