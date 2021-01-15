@@ -3,9 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathMenu : MonoBehaviour
 {
-
     [SerializeField] private GameObject loadPanel;
-
 
     public void NewGame()
     {
@@ -13,33 +11,19 @@ public class DeathMenu : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
     }
 
-    public void ClickLoadButton()
-    {
-        loadPanel.SetActive(true);
-    }
+    public void ClickLoadButton() => loadPanel.SetActive(true);
 
+    public void LoadSlot1() => Load(SaveUtility.SaveSlots[0]);
 
-    public void LoadSlot1()
-    {
-        Load("saveSlot1");
-    }
+    public void LoadSlot2() => Load(SaveUtility.SaveSlots[1]);
 
-    public void LoadSlot2()
-    {
-        Load("saveSlot2");
-    }
-
-    public void LoadSlot3()
-    {
-        Load("saveSlot3");
-    }
+    public void LoadSlot3() => Load(SaveUtility.SaveSlots[2]);
 
     public void Load(string loadSlot)
     {
         SimpleSave.Instance.Load(loadSlot);
         loadPanel.SetActive(false);
     }
-    
-    public void ExitGame() => Application.Quit();
 
-  }
+    public void ExitGame() => Application.Quit();
+}
