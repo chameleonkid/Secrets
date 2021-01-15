@@ -28,7 +28,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     {
         Debug.Log("Trying to load " + loadSlot);
 
-        ES3.Load("Name", so.saveName.RuntimeValue, loadSlot);
+        so.saveName.RuntimeValue = ES3.Load("Name", loadSlot, so.saveName.initialValue);
 
         LoadPlayer(loadSlot);
         LoadVendorInventories(loadSlot);
