@@ -10,7 +10,6 @@
         {
             ES3.Load("Name", SaveSlots[i], names[i]);
         }
-        // ES3.Load("SaveSlotNames", loadSlot, so.saveSlotNames);
 
         return names;
     }

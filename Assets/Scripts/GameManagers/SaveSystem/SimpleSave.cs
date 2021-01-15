@@ -12,7 +12,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     public void Save(string saveSlot)
     {
-        ES3.Save("Name", so.saveName, saveSlot);
+        ES3.Save("Name", so.saveName.RuntimeValue, saveSlot);
 
         SavePlayer(saveSlot);
         SaveVendorInventories(saveSlot);
@@ -27,6 +27,9 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     public void Load(string loadSlot)
     {
         Debug.Log("Trying to load " + loadSlot);
+
+        ES3.Load("Name", so.saveName.RuntimeValue, loadSlot);
+
         LoadPlayer(loadSlot);
         LoadVendorInventories(loadSlot);
         LoadBools(loadSlot);
