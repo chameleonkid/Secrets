@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SchwerEditor.Secrets
 {
@@ -16,12 +17,24 @@ namespace SchwerEditor.Secrets
 
             EditorGUI.BeginDisabledGroup(!Application.isPlaying);
 
+            GUILayout.Label("General");
+            ReloadCurrentSceneButton();
+
             GUILayout.Label("Time Controls");
             FreezeTimeMiddayButton();
             FreezeTimeMidnightButton();
             ResumeTimeButton();
 
             EditorGUI.EndDisabledGroup();
+        }
+
+        private void ReloadCurrentSceneButton() {
+            if (GUILayout.Button("Reload Current Scene")) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Time.timeScale = 1;
+                Log("Reloaded the current scene (and time scale set to 1).");
+            }
+            EditorGUILayout.HelpBox("Reloading a scene may take some time, depending on scene complexity.", MessageType.Info);
         }
 
         private void FreezeTimeMiddayButton() {
