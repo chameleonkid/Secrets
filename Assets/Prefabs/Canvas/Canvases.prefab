@@ -427,7 +427,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5645902282239372264}
+      - m_Target: {fileID: 239131985}
         m_MethodName: LoadSlot2
         m_Mode: 1
         m_Arguments:
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5645902282239372264}
+      - m_Target: {fileID: 239131985}
         m_MethodName: LoadSlot3
         m_Mode: 1
         m_Arguments:
@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5645902282239372264}
+      - m_Target: {fileID: 239131985}
         m_MethodName: CancelLoad
         m_Mode: 1
         m_Arguments:
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5645902282239372264}
+      - m_Target: {fileID: 239131985}
         m_MethodName: LoadSlot1
         m_Mode: 1
         m_Arguments:
@@ -1808,6 +1808,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &239131985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645902282239372271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c196dada9346acb428fba086e1f993a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveSlot1: {fileID: 2073743979}
+  saveSlot2: {fileID: 883483966}
+  saveSlot3: {fileID: 1757842293}
+  saveSlot1Text: {fileID: 11400000, guid: aa1a1c5cc085b8a47a781d976faa8138, type: 2}
+  saveSlot2Text: {fileID: 11400000, guid: 09c949c112ef4474b8d2b33899aef4b6, type: 2}
+  saveSlot3Text: {fileID: 11400000, guid: 76e4b49b67478cf47b2d24d66cda448e, type: 2}
+  loadPanel: {fileID: 1204041734}
+  firstButtonPause: {fileID: 5645902281431688938}
 --- !u!1001 &5289967757482938331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2582,6 +2602,10 @@ PrefabInstance:
       value: 0.6933962
       objectReference: {fileID: 0}
     - target: {fileID: 1637701099, guid: 94b78e44d9febd4458e8fe3c9d9a1c53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 239131985}
+    - target: {fileID: 1637701099, guid: 94b78e44d9febd4458e8fe3c9d9a1c53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ClickLoadButton
       objectReference: {fileID: 0}
@@ -2930,24 +2954,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94b78e44d9febd4458e8fe3c9d9a1c53, type: 3}
+--- !u!1 &5645902281431688938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3795081589464375864, guid: 94b78e44d9febd4458e8fe3c9d9a1c53,
+    type: 3}
+  m_PrefabInstance: {fileID: 8858739548346877138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5645902282239372271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3795081590268915517, guid: 94b78e44d9febd4458e8fe3c9d9a1c53,
+    type: 3}
+  m_PrefabInstance: {fileID: 8858739548346877138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5645902282239372276 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3795081590268915494, guid: 94b78e44d9febd4458e8fe3c9d9a1c53,
     type: 3}
   m_PrefabInstance: {fileID: 8858739548346877138}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5645902282239372264 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3795081590268915514, guid: 94b78e44d9febd4458e8fe3c9d9a1c53,
-    type: 3}
-  m_PrefabInstance: {fileID: 8858739548346877138}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f0761ba987d7348aad8519ae57649b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &5645902280998839604 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3795081589024317926, guid: 94b78e44d9febd4458e8fe3c9d9a1c53,
