@@ -17,6 +17,9 @@ public class SOPInspector : Editor {
     private static void RefreshReferences(ScriptableObjectPersistence sop) {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
 
+        var name = FindFirstAsset<StringValue>("Save t:StringValue");
+        SetPrivateField(sop, "_saveName", name);
+
         var pos = FindFirstAsset<VectorValue>("Player t:VectorValue");
         SetPrivateField(sop, "_playerPosition", pos);
 
@@ -74,21 +77,11 @@ public class SOPInspector : Editor {
             
         }
 
-        for (int i = 0; i < strings.Length; i++)
-        {
-            var path = AssetDatabase.GetAssetPath(strings[i]);
-            if (path.Contains("SaveSlotNames"))
-            {
-                saveSlotNames.Add(strings[i]);
-            }
-        }
-
         SetPrivateField(sop, "_chests", chests.ToArray());
         SetPrivateField(sop, "_doors", doors.ToArray());
         SetPrivateField(sop, "_bosses", bosses.ToArray());
         SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
         SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
-        SetPrivateField(sop, "_saveSlotNames", saveSlotNames.ToArray());
 
         var inventories = ScriptableObjectUtility.GetAllInstances<Inventory>();
         var vendorInventories = new List<Inventory>();

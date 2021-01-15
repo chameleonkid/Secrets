@@ -12,6 +12,8 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     public void Save(string saveSlot)
     {
+        ES3.Save("Name", so.saveName, saveSlot);
+
         SavePlayer(saveSlot);
         SaveVendorInventories(saveSlot);
         SaveBools(saveSlot);
@@ -125,9 +127,4 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     {
         ES3.Load("Time", loadSlot, so.timeOfDay);
     }
-
-    // private static void GetSlotNames()
-    // {
-    //     ES3.Load("SaveSlotNames", loadSlot, so.saveSlotNames);
-    // }
 }
