@@ -8,6 +8,9 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private ItemDatabase _itemDatabase = default;
     public ItemDatabase itemDatabase => _itemDatabase;
 
+    [SerializeField] private StringValue _saveName = default;
+    public StringValue saveName => _saveName;
+
     [SerializeField] private VectorValue _playerPosition = default;
     public VectorValue playerPosition => _playerPosition;
     [SerializeField] private ConstrainedFloat _health = default;
@@ -30,9 +33,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private BoolValue[] _bosses = default;
     public BoolValue[] bosses => _bosses;
 
-    [SerializeField] private StringValue[] _saveSlotNames = default;
-    public StringValue[] saveSlotNames => _saveSlotNames;
-
     [SerializeField] private BoolValue[] _healthCrystals = default;
     public BoolValue[] healthCrystals => _healthCrystals;
     [SerializeField] private BoolValue[] _manaCrystals = default;
@@ -49,6 +49,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     public void ResetScriptableObjects()
     {
+        ResetSaveName();
         ResetPlayer();
         ResetInventory();
         ResetVendorInventories();
@@ -58,6 +59,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
   
         Debug.Log("Reset scriptable object save data.");
     }
+
+    private void ResetSaveName() => saveName.RuntimeValue = saveName.initialValue;
 
     public void ResetPlayer()
     {
@@ -91,10 +94,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
         for (int i = 0; i < manaCrystals.Length; i++)
         {
             manaCrystals[i].RuntimeValue = manaCrystals[i].initialValue;
-        }
-        for (int i = 0; i < saveSlotNames.Length; i++)
-        {
-            saveSlotNames[i].RuntimeValue = _saveSlotNames[i].initialValue;
         }
     }
 
@@ -154,5 +153,4 @@ public class ScriptableObjectPersistence : MonoBehaviour
     }
 
     public void ResetXP() => _xpSystem.ResetExperienceSystem();
-
 }
