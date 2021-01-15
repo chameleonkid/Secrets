@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -18,11 +16,9 @@ public class SavePoint : MonoBehaviour
     [SerializeField] private StringValue saveSlot2Text;
     [SerializeField] private StringValue saveSlot3Text;
 
-    [Header("PlayerData")]
+    [Header("Player Data")]
     [SerializeField] CharacterAppearance playerAppearance;
     [SerializeField] XPSystem playerXP;
-
-
 
     private void Awake()
     {
@@ -32,9 +28,9 @@ public class SavePoint : MonoBehaviour
         saveSlot3.GetComponentInChildren<Text>().text = saveSlot3Text.RuntimeValue;
     }
 
-    void Update()
+    private void Update()
     {
-        if(playerInRange == true && Input.GetButtonDown("Interact"))     // Create new button Interact instead of run
+        if (playerInRange == true && Input.GetButtonDown("Interact"))     // Create new button Interact instead of run
         {
             saveMenu.SetActive(true);
             Time.timeScale = 0;
@@ -91,11 +87,9 @@ public class SavePoint : MonoBehaviour
 
     public void Save(string saveSlot)
     {
-        SimpleSave.Instance.Save(saveSlot);           //<---- This is how i save (use your own method)
+        SimpleSave.Instance.Save(saveSlot);
         Time.timeScale = 1;
         saveMenu.SetActive(false);
         Debug.Log("Game was saved!");
     }
-
-
 }
