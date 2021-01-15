@@ -52,8 +52,6 @@ public class SOPInspector : Editor {
         var healthCrystals = new List<BoolValue>();
         var manaCrystals = new List<BoolValue>();
 
-        var saveSlotNames = new List<StringValue>();
-
         for (int i = 0; i < bools.Length; i++) {
             var path = AssetDatabase.GetAssetPath(bools[i]);
             if (path.Contains("Chest")) {
@@ -74,7 +72,6 @@ public class SOPInspector : Editor {
             {
                 manaCrystals.Add(bools[i]);
             }    
-            
         }
 
         SetPrivateField(sop, "_chests", chests.ToArray());
