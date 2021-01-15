@@ -52,6 +52,7 @@ public class BoundedNPC : Character
         }
         else
         {
+            rigidbody.velocity = Vector3.zero;
             animator.SetBool("isMoving", false);
             waitTimeSeconds -= Time.deltaTime;
             if (waitTimeSeconds <= 0)
