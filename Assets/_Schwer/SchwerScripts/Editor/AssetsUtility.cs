@@ -16,7 +16,7 @@ namespace SchwerEditor {
         /// <summary>
         /// Returns all assets of a specified type from the Assets folder.
         /// </summary>
-        public static T[] GetAllInstances<T>() where T : Object {
+        public static T[] FindAllInstances<T>() where T : Object {
             // From: https://answers.unity.com/questions/1425758/how-can-i-find-all-instances-of-a-scriptable-objec.html
             string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
 
