@@ -13,6 +13,7 @@ public class DamageOnTrigger : Hitbox
         {
             var dmg = isCritical ? damage * 2 : damage;
             hit.TakeDamage(dmg, isCritical);
+            Debug.Log(this + " has hit " + other);
         }
     }
 }

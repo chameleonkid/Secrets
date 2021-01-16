@@ -6582,7 +6582,7 @@ GameObject:
   - component: {fileID: 489874694}
   m_Layer: 8
   m_Name: TentacleLeft
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6625,7 +6625,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10355,7 +10355,7 @@ GameObject:
   - component: {fileID: 798877263}
   m_Layer: 8
   m_Name: TentacleDown
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10398,7 +10398,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11678,7 +11678,7 @@ GameObject:
   - component: {fileID: 927168652}
   m_Layer: 8
   m_Name: TentacleRight
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11721,7 +11721,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -104876,7 +104876,7 @@ GameObject:
   - component: {fileID: 1880378217}
   m_Layer: 8
   m_Name: TentacleUp
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104919,7 +104919,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -122076,6 +122076,7 @@ GameObject:
   - component: {fileID: 6456052910380491079}
   - component: {fileID: 6815738628917577415}
   - component: {fileID: 6456052910380491087}
+  - component: {fileID: 6456052910380491088}
   m_Layer: 8
   m_Name: Melee-Tower-Plant
   m_TagString: enemy
@@ -122122,6 +122123,22 @@ MonoBehaviour:
   canAttack: 0
   fireDelay: 5
   fireDelaySeconds: 0
+--- !u!114 &6456052910380491088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456052910380491086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748e89f8c16353045a34383cdf7b9a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  charactersInAreaList: []
+  tickDuration: 1
+  tickDamage: 2
 --- !u!1001 &6467592910682273974
 PrefabInstance:
   m_ObjectHideFlags: 0
