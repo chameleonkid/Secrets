@@ -5,7 +5,7 @@ public class TurretEnemy : SimpleEnemy
 {
     [Header("AbilityValues")]
     public GameObject projectile;
-    public bool canFire = false;
+    public bool canAttack = false;
     public float fireDelay;
     [SerializeField] private float fireDelaySeconds;
 
@@ -15,7 +15,7 @@ public class TurretEnemy : SimpleEnemy
         fireDelaySeconds -= Time.deltaTime;
         if (fireDelaySeconds <= 0)
         {
-            canFire = true;
+            canAttack = true;
             fireDelaySeconds = fireDelay;
         }
     }
@@ -24,24 +24,26 @@ public class TurretEnemy : SimpleEnemy
     {
         if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
         {
-            if (canFire)
+            if (canAttack)
             {
                 currentState = State.attack;
                 FireProjectile();
             }
-            currentState = State.idle;
+            currentState = State.walk;
+            animator.SetBool("isMoving", true);
         }
     }
 
     protected override void OutsideChaseRadiusUpdate()
     {
         currentState = State.idle;
+        animator.SetBool("isMoving", false);
     }
 
     protected virtual void FireProjectile()
     {
         StartCoroutine(FireCo());
-        canFire = false;
+        canAttack = false;
         currentState = State.walk;
     }
 

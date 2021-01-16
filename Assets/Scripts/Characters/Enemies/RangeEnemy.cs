@@ -23,7 +23,7 @@ public class RangeEnemy : TurretEnemy
         {
             currentState = State.idle;
             animator.SetBool("isMoving", false);
-            if (canFire)
+            if (canAttack)
             {
                 currentState = State.attack;
                 FireProjectile();
