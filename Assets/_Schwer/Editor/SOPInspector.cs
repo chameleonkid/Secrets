@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Schwer.ItemSystem;
+using Schwer.Reflection;
 using SchwerEditor;
 using UnityEditor;
 using UnityEngine;
@@ -18,38 +19,38 @@ public class SOPInspector : Editor {
     private static void RefreshReferences(ScriptableObjectPersistence sop) {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
 
-        var itemDB = FindFirstAsset<ItemDatabase>("");
-        SetPrivateField(sop, "_itemDatabase", itemDB);
+        var itemDB = AssetsUtility.FindFirstAsset<ItemDatabase>("");
+        ReflectionUtility.SetPrivateField(sop, "_itemDatabase", itemDB);
 
-        var name = FindFirstAsset<StringValue>("Save");
-        SetPrivateField(sop, "_saveName", name);
+        var name = AssetsUtility.FindFirstAsset<StringValue>("Save");
+        ReflectionUtility.SetPrivateField(sop, "_saveName", name);
 
-        var pos = FindFirstAsset<VectorValue>("Player");
-        SetPrivateField(sop, "_playerPosition", pos);
+        var pos = AssetsUtility.FindFirstAsset<VectorValue>("Player");
+        ReflectionUtility.SetPrivateField(sop, "_playerPosition", pos);
 
-        var health = FindFirstAsset<ConstrainedFloat>("Health");
-        SetPrivateField(sop, "_health", health);
+        var health = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Health");
+        ReflectionUtility.SetPrivateField(sop, "_health", health);
 
-        var mana = FindFirstAsset<ConstrainedFloat>("Mana");
-        SetPrivateField(sop, "_mana", mana);
+        var mana = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Mana");
+        ReflectionUtility.SetPrivateField(sop, "_mana", mana);
 
-        var lumen = FindFirstAsset<ConstrainedFloat>("Lumen");
-        SetPrivateField(sop, "_lumen", lumen);
+        var lumen = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Lumen");
+        ReflectionUtility.SetPrivateField(sop, "_lumen", lumen);
 
-        var xp = FindFirstAsset<XPSystem>("Player");
-        SetPrivateField(sop, "_xpSystem", xp);
+        var xp = AssetsUtility.FindFirstAsset<XPSystem>("Player");
+        ReflectionUtility.SetPrivateField(sop, "_xpSystem", xp);
 
-        var time = FindFirstAsset<FloatValue>("TimeOfDay");
-        SetPrivateField(sop, "_timeOfDay", time);
+        var time = AssetsUtility.FindFirstAsset<FloatValue>("TimeOfDay");
+        ReflectionUtility.SetPrivateField(sop, "_timeOfDay", time);
 
-        var appearance = FindFirstAsset<CharacterAppearance>("Player");
-        SetPrivateField(sop, "_characterAppearance", appearance);
+        var appearance = AssetsUtility.FindFirstAsset<CharacterAppearance>("Player");
+        ReflectionUtility.SetPrivateField(sop, "_characterAppearance", appearance);
 
-        var inv = FindFirstAsset<Inventory>("Player");
-        SetPrivateField(sop, "_playerInventory", inv);
+        var inv = AssetsUtility.FindFirstAsset<Inventory>("Player");
+        ReflectionUtility.SetPrivateField(sop, "_playerInventory", inv);
 
-        var bools = ScriptableObjectUtility.GetAllInstances<BoolValue>();
-        var strings = ScriptableObjectUtility.GetAllInstances<StringValue>();
+        var bools = AssetsUtility.FindAllAssets<BoolValue>();
+        var strings = AssetsUtility.FindAllAssets<StringValue>();
         var chests = new List<BoolValue>();
         var doors = new List<BoolValue>();
         var bosses = new List<BoolValue>();
@@ -78,13 +79,13 @@ public class SOPInspector : Editor {
             }    
         }
 
-        SetPrivateField(sop, "_chests", chests.ToArray());
-        SetPrivateField(sop, "_doors", doors.ToArray());
-        SetPrivateField(sop, "_bosses", bosses.ToArray());
-        SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
-        SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_chests", chests.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_doors", doors.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_bosses", bosses.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
 
-        var inventories = ScriptableObjectUtility.GetAllInstances<Inventory>();
+        var inventories = AssetsUtility.FindAllAssets<Inventory>();
         var vendorInventories = new List<Inventory>();
         for (int i = 0; i < inventories.Length; i++) {
             var path = AssetDatabase.GetAssetPath(inventories[i]);
@@ -92,26 +93,8 @@ public class SOPInspector : Editor {
                 vendorInventories.Add(inventories[i]);
             }
         }
-        SetPrivateField(sop, "_vendorInventories", vendorInventories.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_vendorInventories", vendorInventories.ToArray());
 
         Debug.Log("SOP: Refreshed references.");
-    }
-
-    // Reference: https://stackoverflow.com/questions/12993962/set-value-of-private-field
-    private static void SetPrivateField(object instance, string fieldName, object value) {
-        var prop = instance.GetType().GetField(fieldName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        prop.SetValue(instance, value);
-    }
-
-    private static T FindFirstAsset<T>(string filter) where T : Object {
-        if (!filter.Contains("t:")) {
-            filter = $"{filter} t:{typeof(T)}";
-        }
-
-        var guids = AssetDatabase.FindAssets(filter);
-        if (guids.Length <= 0) return default(T);
-
-        var path = AssetDatabase.GUIDToAssetPath(guids[0]);
-        return AssetDatabase.LoadAssetAtPath(path, typeof(T)) as T;
     }
 }

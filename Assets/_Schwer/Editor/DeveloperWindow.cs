@@ -1,10 +1,9 @@
-﻿using System.Reflection;
+﻿using Schwer.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SchwerEditor.Secrets
-{
+namespace SchwerEditor.Secrets {
     public class DeveloperWindow : EditorWindow {
         private const string _name = "Developer Controls";
 
@@ -42,8 +41,8 @@ namespace SchwerEditor.Secrets
             if (GUILayout.Button("Freeze Time Midday")) {
                 var time = FindObjectOfType<TimeManager>();
                 if (time != null) {
-                    SetPrivateProperty(time, "normalizedTimeOfDay", 0.5f);
-                    SetPrivateField(time, "timeMultiplier", 0);
+                    ReflectionUtility.SetPrivateProperty(time, "normalizedTimeOfDay", 0.5f);
+                    ReflectionUtility.SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midday.");
                 }
                 else {
@@ -56,8 +55,8 @@ namespace SchwerEditor.Secrets
             if (GUILayout.Button("Freeze Time Midnight")) {
                 var time = FindObjectOfType<TimeManager>();
                 if (time != null) {
-                    SetPrivateProperty(time, "normalizedTimeOfDay", 0);
-                    SetPrivateField(time, "timeMultiplier", 0);
+                    ReflectionUtility.SetPrivateProperty(time, "normalizedTimeOfDay", 0);
+                    ReflectionUtility.SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midnight.");
                 }
                 else {
@@ -70,7 +69,7 @@ namespace SchwerEditor.Secrets
             if (GUILayout.Button("Resume Time")) {
                 var time = FindObjectOfType<TimeManager>();
                 if (time != null) {
-                    SetPrivateField(time, "timeMultiplier", 1);
+                    ReflectionUtility.SetPrivateField(time, "timeMultiplier", 1);
                     Log("Time multiplier set to 1.");
                 }
                 else {
@@ -82,16 +81,5 @@ namespace SchwerEditor.Secrets
         private static void Log(object message, Object context = null) => Debug.Log($"{_name}: {message}", context);
         private static void LogWarning(object message, Object context = null) => Debug.LogWarning($"{_name}: {message}", context);
         private static void LogError(object message, Object context = null) => Debug.LogError($"{_name}: {message}", context);
-
-        // Reference: https://stackoverflow.com/questions/12993962/set-value-of-private-field
-        private static void SetPrivateField(object instance, string fieldName, object value) {
-            var field = instance.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
-            field.SetValue(instance, value);
-        }
-
-        private static void SetPrivateProperty(object instance, string propertyName, object value) {
-            var prop = instance.GetType().GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance);
-            prop.SetValue(instance, value);
-        }
     }
 }

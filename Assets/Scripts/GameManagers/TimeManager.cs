@@ -1,4 +1,5 @@
 ﻿using System;
+using Schwer;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviourSingleton<TimeManager>
