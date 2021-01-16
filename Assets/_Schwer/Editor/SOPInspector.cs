@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Schwer.ItemSystem;
+using Schwer.Reflection;
 using SchwerEditor;
 using UnityEditor;
 using UnityEngine;
@@ -19,34 +20,34 @@ public class SOPInspector : Editor {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
 
         var itemDB = AssetsUtility.FindFirstAsset<ItemDatabase>("");
-        SetPrivateField(sop, "_itemDatabase", itemDB);
+        ReflectionUtility.SetPrivateField(sop, "_itemDatabase", itemDB);
 
         var name = AssetsUtility.FindFirstAsset<StringValue>("Save");
-        SetPrivateField(sop, "_saveName", name);
+        ReflectionUtility.SetPrivateField(sop, "_saveName", name);
 
         var pos = AssetsUtility.FindFirstAsset<VectorValue>("Player");
-        SetPrivateField(sop, "_playerPosition", pos);
+        ReflectionUtility.SetPrivateField(sop, "_playerPosition", pos);
 
         var health = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Health");
-        SetPrivateField(sop, "_health", health);
+        ReflectionUtility.SetPrivateField(sop, "_health", health);
 
         var mana = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Mana");
-        SetPrivateField(sop, "_mana", mana);
+        ReflectionUtility.SetPrivateField(sop, "_mana", mana);
 
         var lumen = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Lumen");
-        SetPrivateField(sop, "_lumen", lumen);
+        ReflectionUtility.SetPrivateField(sop, "_lumen", lumen);
 
         var xp = AssetsUtility.FindFirstAsset<XPSystem>("Player");
-        SetPrivateField(sop, "_xpSystem", xp);
+        ReflectionUtility.SetPrivateField(sop, "_xpSystem", xp);
 
         var time = AssetsUtility.FindFirstAsset<FloatValue>("TimeOfDay");
-        SetPrivateField(sop, "_timeOfDay", time);
+        ReflectionUtility.SetPrivateField(sop, "_timeOfDay", time);
 
         var appearance = AssetsUtility.FindFirstAsset<CharacterAppearance>("Player");
-        SetPrivateField(sop, "_characterAppearance", appearance);
+        ReflectionUtility.SetPrivateField(sop, "_characterAppearance", appearance);
 
         var inv = AssetsUtility.FindFirstAsset<Inventory>("Player");
-        SetPrivateField(sop, "_playerInventory", inv);
+        ReflectionUtility.SetPrivateField(sop, "_playerInventory", inv);
 
         var bools = AssetsUtility.FindAllInstances<BoolValue>();
         var strings = AssetsUtility.FindAllInstances<StringValue>();
@@ -78,11 +79,11 @@ public class SOPInspector : Editor {
             }    
         }
 
-        SetPrivateField(sop, "_chests", chests.ToArray());
-        SetPrivateField(sop, "_doors", doors.ToArray());
-        SetPrivateField(sop, "_bosses", bosses.ToArray());
-        SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
-        SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_chests", chests.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_doors", doors.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_bosses", bosses.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
 
         var inventories = AssetsUtility.FindAllInstances<Inventory>();
         var vendorInventories = new List<Inventory>();
@@ -92,14 +93,8 @@ public class SOPInspector : Editor {
                 vendorInventories.Add(inventories[i]);
             }
         }
-        SetPrivateField(sop, "_vendorInventories", vendorInventories.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_vendorInventories", vendorInventories.ToArray());
 
         Debug.Log("SOP: Refreshed references.");
-    }
-
-    // Reference: https://stackoverflow.com/questions/12993962/set-value-of-private-field
-    private static void SetPrivateField(object instance, string fieldName, object value) {
-        var prop = instance.GetType().GetField(fieldName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        prop.SetValue(instance, value);
     }
 }
