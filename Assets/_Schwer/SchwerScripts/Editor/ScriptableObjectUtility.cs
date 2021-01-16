@@ -34,21 +34,5 @@ namespace SchwerEditor {
             SaveRefreshAndFocus();
             return asset;
         }
-
-        /// <summary>
-        /// Get all instances of a specified Scriptable Object from the Assets folder.
-        /// </summary>
-        public static T[] GetAllInstances<T>() where T: ScriptableObject {
-            // From: https://answers.unity.com/questions/1425758/how-can-i-find-all-instances-of-a-scriptable-objec.html
-            string[] guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
-
-            T[] instances = new T[guids.Length];
-            for (int i = 0; i < guids.Length; i++) {
-                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-                instances[i] = AssetDatabase.LoadAssetAtPath<T>(path);
-            }
-
-            return instances;
-        }
     }
 }
