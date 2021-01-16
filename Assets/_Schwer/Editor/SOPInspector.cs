@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Schwer.ItemSystem;
 using SchwerEditor;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class SOPInspector : Editor {
 
     private static void RefreshReferences(ScriptableObjectPersistence sop) {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
+
+        var itemDB = FindFirstAsset<ItemDatabase>("");
+        SetPrivateField(sop, "_itemDatabase", itemDB);
 
         var name = FindFirstAsset<StringValue>("Save");
         SetPrivateField(sop, "_saveName", name);
