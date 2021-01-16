@@ -18,34 +18,34 @@ public class SOPInspector : Editor {
     private static void RefreshReferences(ScriptableObjectPersistence sop) {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
 
-        var itemDB = FindFirstAsset<ItemDatabase>("");
+        var itemDB = AssetsUtility.FindFirstAsset<ItemDatabase>("");
         SetPrivateField(sop, "_itemDatabase", itemDB);
 
-        var name = FindFirstAsset<StringValue>("Save");
+        var name = AssetsUtility.FindFirstAsset<StringValue>("Save");
         SetPrivateField(sop, "_saveName", name);
 
-        var pos = FindFirstAsset<VectorValue>("Player");
+        var pos = AssetsUtility.FindFirstAsset<VectorValue>("Player");
         SetPrivateField(sop, "_playerPosition", pos);
 
-        var health = FindFirstAsset<ConstrainedFloat>("Health");
+        var health = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Health");
         SetPrivateField(sop, "_health", health);
 
-        var mana = FindFirstAsset<ConstrainedFloat>("Mana");
+        var mana = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Mana");
         SetPrivateField(sop, "_mana", mana);
 
-        var lumen = FindFirstAsset<ConstrainedFloat>("Lumen");
+        var lumen = AssetsUtility.FindFirstAsset<ConstrainedFloat>("Lumen");
         SetPrivateField(sop, "_lumen", lumen);
 
-        var xp = FindFirstAsset<XPSystem>("Player");
+        var xp = AssetsUtility.FindFirstAsset<XPSystem>("Player");
         SetPrivateField(sop, "_xpSystem", xp);
 
-        var time = FindFirstAsset<FloatValue>("TimeOfDay");
+        var time = AssetsUtility.FindFirstAsset<FloatValue>("TimeOfDay");
         SetPrivateField(sop, "_timeOfDay", time);
 
-        var appearance = FindFirstAsset<CharacterAppearance>("Player");
+        var appearance = AssetsUtility.FindFirstAsset<CharacterAppearance>("Player");
         SetPrivateField(sop, "_characterAppearance", appearance);
 
-        var inv = FindFirstAsset<Inventory>("Player");
+        var inv = AssetsUtility.FindFirstAsset<Inventory>("Player");
         SetPrivateField(sop, "_playerInventory", inv);
 
         var bools = AssetsUtility.GetAllInstances<BoolValue>();
@@ -101,17 +101,5 @@ public class SOPInspector : Editor {
     private static void SetPrivateField(object instance, string fieldName, object value) {
         var prop = instance.GetType().GetField(fieldName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         prop.SetValue(instance, value);
-    }
-
-    private static T FindFirstAsset<T>(string filter) where T : Object {
-        if (!filter.Contains("t:")) {
-            filter = $"{filter} t:{typeof(T)}";
-        }
-
-        var guids = AssetDatabase.FindAssets(filter);
-        if (guids.Length <= 0) return default(T);
-
-        var path = AssetDatabase.GUIDToAssetPath(guids[0]);
-        return AssetDatabase.LoadAssetAtPath(path, typeof(T)) as T;
     }
 }

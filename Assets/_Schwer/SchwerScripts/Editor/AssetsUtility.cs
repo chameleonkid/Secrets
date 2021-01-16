@@ -28,5 +28,20 @@ namespace SchwerEditor {
 
             return instances;
         }
+
+        /// <summary>
+        /// Returns the first asset of a specified type from the Assets folder.
+        /// </summary>
+        public static T FindFirstAsset<T>(string filter) where T : Object {
+            if (!filter.Contains("t:")) {
+                filter = $"{filter} t:{typeof(T)}";
+            }
+
+            var guids = AssetDatabase.FindAssets(filter);
+            if (guids.Length <= 0) return default(T);
+
+            var path = AssetDatabase.GUIDToAssetPath(guids[0]);
+            return AssetDatabase.LoadAssetAtPath(path, typeof(T)) as T;
+        }
     }
 }
