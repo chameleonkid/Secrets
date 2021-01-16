@@ -1,25 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-public class TimeManager : DDOLSingleton<TimeManager>
+public class TimeManager : MonoBehaviourSingleton<TimeManager>
 {
     public static event Action<float> OnTimeChanged;
 
     [SerializeField] private float fullDayLength = 60;
     [SerializeField] private float timeMultiplier = 1;
-    [SerializeField] private FloatValue timeSaver = default;
-    [SerializeField] private float normalizedTimeOfDay = 0;
-
-
-    void OnEnable()
-    {
-        SimpleSave.OnDataLoaded += SetTime;
-    }
-
-    void OnDisable()
-    {
-        SimpleSave.OnDataLoaded -= SetTime;
-    }
+    [SerializeField] private FloatValue _normalizedTimeOfDay = default;
+    private float normalizedTimeOfDay { get => _normalizedTimeOfDay.value; set => _normalizedTimeOfDay.value = value; }
 
     private void Update()
     {
@@ -30,11 +19,5 @@ public class TimeManager : DDOLSingleton<TimeManager>
         }
 
         OnTimeChanged?.Invoke(normalizedTimeOfDay);
-        timeSaver.value = normalizedTimeOfDay;
-    }
-
-    private void SetTime()
-    {
-        normalizedTimeOfDay = timeSaver.value;
     }
 }

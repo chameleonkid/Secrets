@@ -57,26 +57,11 @@ public class SavePoint : MonoBehaviour
         }
     }
 
-    public void SaveSlot1()
-    {
-        saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
-        Save(SaveUtility.SaveSlots[0]);
-        saveSlot1.text = saveName.RuntimeValue;
-    }
+    public void SaveSlot1() => Save(SaveUtility.SaveSlots[0], saveSlot1);
 
-    public void SaveSlot2()
-    {
-        saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
-        Save(SaveUtility.SaveSlots[1]);
-        saveSlot2.text = saveName.RuntimeValue;
-    }
+    public void SaveSlot2() => Save(SaveUtility.SaveSlots[1], saveSlot2);
 
-    public void SaveSlot3()
-    {
-        saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
-        Save(SaveUtility.SaveSlots[2]);
-        saveSlot3.text = saveName.RuntimeValue;
-    }
+    public void SaveSlot3() => Save(SaveUtility.SaveSlots[2], saveSlot3);
 
     public void CancelSave()
     {
@@ -84,9 +69,14 @@ public class SavePoint : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void Save(string saveSlot)
+    public void Save(string saveSlot, Text saveSlotDisplay)
     {
+        saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
+
         SimpleSave.Instance.Save(saveSlot);
+
+        saveSlotDisplay.text = saveName.RuntimeValue;
+
         Time.timeScale = 1;
         saveMenu.SetActive(false);
         Debug.Log("Game was saved!");

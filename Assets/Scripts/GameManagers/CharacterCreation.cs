@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -38,8 +36,6 @@ public class CharacterCreation : MonoBehaviour
 
     [Header("Persistence")]
     [SerializeField] private CharacterAppearance characterAppearance = default;
-
-
 
     private void Awake()
     {
@@ -131,7 +127,6 @@ public class CharacterCreation : MonoBehaviour
         armorChanger.ResetRenderer();
     }
 
-
     public void NextEyes()
     {
         eyeCounter++;
@@ -191,6 +186,4 @@ public class CharacterCreation : MonoBehaviour
         SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }
-
-
 }
