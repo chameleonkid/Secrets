@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 [RequireComponent(typeof(ScriptableObjectPersistence))]
 public class SimpleSave : DDOLSingleton<SimpleSave>
@@ -58,15 +57,9 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         Time.timeScale = 1f;
     }
 
-    private void SaveAppearance(string saveSlot)
-    {
-        ES3.Save("Appearance", so.characterAppearance, saveSlot);
-    }
+    private void SaveAppearance(string saveSlot) => ES3.Save("Appearance", so.characterAppearance, saveSlot);
 
-    private void LoadAppearance(string loadSlot)
-    {
-        ES3.Load("Appearance", loadSlot, so.characterAppearance);
-    }
+    private void LoadAppearance(string loadSlot) => ES3.Load("Appearance", loadSlot, so.characterAppearance);
 
     private void SavePlayer(string saveSlot)
     {
@@ -93,11 +86,13 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     private void SaveVendorInventories(string saveSlot)
     {
+        //! TODO
         ES3.Save("VendorInventory", so.vendorInventories, saveSlot);
     }
 
     private void LoadVendorInventories(string loadSlot)
     {
+        //! TODO
         ES3.Load("VendorInventory", loadSlot, so.vendorInventories);
     }
 
