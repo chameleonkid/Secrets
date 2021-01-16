@@ -8,7 +8,7 @@ public class TimeManager : DDOLSingleton<TimeManager>
     [SerializeField] private float fullDayLength = 60;
     [SerializeField] private float timeMultiplier = 1;
     [SerializeField] private FloatValue _normalizedTimeOfDay = default;
-    [SerializeField] private float normalizedTimeOfDay { get => _normalizedTimeOfDay.value; set => _normalizedTimeOfDay.value = value; }
+    private float normalizedTimeOfDay { get => _normalizedTimeOfDay.value; set => _normalizedTimeOfDay.value = value; }
 
     private void Update()
     {
