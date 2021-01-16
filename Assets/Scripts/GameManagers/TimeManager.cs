@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class TimeManager : DDOLSingleton<TimeManager>
+public class TimeManager : MonoBehaviourSingleton<TimeManager>
 {
     public static event Action<float> OnTimeChanged;
 
