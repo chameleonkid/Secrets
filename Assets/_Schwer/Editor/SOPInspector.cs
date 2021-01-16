@@ -17,31 +17,31 @@ public class SOPInspector : Editor {
     private static void RefreshReferences(ScriptableObjectPersistence sop) {
         Undo.RecordObject(sop, "Refresh Scriptable Object References");
 
-        var name = FindFirstAsset<StringValue>("Save t:StringValue");
+        var name = FindFirstAsset<StringValue>("Save");
         SetPrivateField(sop, "_saveName", name);
 
-        var pos = FindFirstAsset<VectorValue>("Player t:VectorValue");
+        var pos = FindFirstAsset<VectorValue>("Player");
         SetPrivateField(sop, "_playerPosition", pos);
 
-        var health = FindFirstAsset<ConstrainedFloat>("Health t:ConstrainedFloat");
+        var health = FindFirstAsset<ConstrainedFloat>("Health");
         SetPrivateField(sop, "_health", health);
 
-        var mana = FindFirstAsset<ConstrainedFloat>("Mana t:ConstrainedFloat");
+        var mana = FindFirstAsset<ConstrainedFloat>("Mana");
         SetPrivateField(sop, "_mana", mana);
 
-        var lumen = FindFirstAsset<ConstrainedFloat>("Lumen t:ConstrainedFloat");
+        var lumen = FindFirstAsset<ConstrainedFloat>("Lumen");
         SetPrivateField(sop, "_lumen", lumen);
 
-        var xp = FindFirstAsset<XPSystem>("Player t:XPSystem");
+        var xp = FindFirstAsset<XPSystem>("Player");
         SetPrivateField(sop, "_xpSystem", xp);
 
-        var time = FindFirstAsset<FloatValue>("TimeOfDay t:FloatValue");
+        var time = FindFirstAsset<FloatValue>("TimeOfDay");
         SetPrivateField(sop, "_timeOfDay", time);
 
-        var appearance = FindFirstAsset<CharacterAppearance>("Player t:characterAppearance");
+        var appearance = FindFirstAsset<CharacterAppearance>("Player");
         SetPrivateField(sop, "_characterAppearance", appearance);
 
-        var inv = FindFirstAsset<Inventory>("Player t:Inventory");
+        var inv = FindFirstAsset<Inventory>("Player");
         SetPrivateField(sop, "_playerInventory", inv);
 
         var bools = ScriptableObjectUtility.GetAllInstances<BoolValue>();
@@ -100,6 +100,10 @@ public class SOPInspector : Editor {
     }
 
     private static T FindFirstAsset<T>(string filter) where T : Object {
+        if (!filter.Contains("t:")) {
+            filter = $"{filter} t:{typeof(T)}";
+        }
+
         var guids = AssetDatabase.FindAssets(filter);
         if (guids.Length <= 0) return default(T);
 
