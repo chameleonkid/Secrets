@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Schwer;
+using UnityEngine;
 
 public class CanvasManager : MonoBehaviourSingleton<CanvasManager>
 {
