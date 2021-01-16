@@ -21,5 +21,5 @@ public static class UnityExtensions {
         return attached;
     }
 
-    public static T GetRandomElement<T>(this T[] array) => array[Random.Range(0, array.Length)];
+    public static T GetRandomElement<T>(this T[] array) => (array.Length > 0) ? array[Random.Range(0, array.Length)] : default(T);
 }

@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 [RequireComponent(typeof(ScriptableObjectPersistence))]
 public class SimpleSave : DDOLSingleton<SimpleSave>
 {
     private ScriptableObjectPersistence so;
 
-    public static event Action OnDataLoaded;
     private void Start() => so = GetComponent<ScriptableObjectPersistence>();
 
     public void Save(string saveSlot)
@@ -35,7 +33,6 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         LoadBools(loadSlot);
         LoadAppearance(loadSlot);
         LoadTime(loadSlot);
-        OnDataLoaded?.Invoke();
 
         LoadScene(ES3.Load<string>("Scene", loadSlot));
         Debug.Log("Loading completed");
@@ -60,15 +57,9 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         Time.timeScale = 1f;
     }
 
-    private void SaveAppearance(string saveSlot)
-    {
-        ES3.Save("Appearance", so.characterAppearance, saveSlot);
-    }
+    private void SaveAppearance(string saveSlot) => ES3.Save("Appearance", so.characterAppearance, saveSlot);
 
-    private void LoadAppearance(string loadSlot)
-    {
-        ES3.Load("Appearance", loadSlot, so.characterAppearance);
-    }
+    private void LoadAppearance(string loadSlot) => ES3.Load("Appearance", loadSlot, so.characterAppearance);
 
     private void SavePlayer(string saveSlot)
     {
@@ -95,11 +86,13 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     private void SaveVendorInventories(string saveSlot)
     {
+        //! TODO
         ES3.Save("VendorInventory", so.vendorInventories, saveSlot);
     }
 
     private void LoadVendorInventories(string loadSlot)
     {
+        //! TODO
         ES3.Load("VendorInventory", loadSlot, so.vendorInventories);
     }
 
@@ -121,13 +114,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Load("ManaCrystals", loadSlot, so.manaCrystals);
     }
 
-    private void SaveTime(string saveSlot)
-    {
-        ES3.Save("Time", so.timeOfDay, saveSlot);
-    }
+    private void SaveTime(string saveSlot) => ES3.Save("Time", so.timeOfDay, saveSlot);
 
-    private void LoadTime(string loadSlot)
-    {
-        ES3.Load("Time", loadSlot, so.timeOfDay);
-    }
+    private void LoadTime(string loadSlot) => ES3.Load("Time", loadSlot, so.timeOfDay);
 }
