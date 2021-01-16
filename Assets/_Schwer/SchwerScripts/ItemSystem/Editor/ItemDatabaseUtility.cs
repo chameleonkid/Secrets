@@ -40,7 +40,7 @@ namespace SchwerEditor.ItemSystem {
             itemDB.Initialise(GetAllItemAssets());
             EditorUtility.SetDirty(itemDB);
 
-            ScriptableObjectUtility.SaveRefreshAndFocus();
+            AssetsUtility.SaveRefreshAndFocus();
             Selection.activeObject = itemDB;
         }
 

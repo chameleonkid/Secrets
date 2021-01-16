@@ -5,16 +5,6 @@ using UnityEngine;
 namespace SchwerEditor {
     public static class ScriptableObjectUtility {
         /// <summary>
-        /// Wrapper for `AssetDatabase.SaveAssets`, `AssetDatabase.Refresh`, and `EditorUtility.FocusProjectWindow`.
-        /// </summary>
-        public static void SaveRefreshAndFocus() {
-            //! Need clarification on what each line does.
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            EditorUtility.FocusProjectWindow();
-        }
-
-        /// <summary>
         /// Creates a new Scriptable Object asset in a manner that mimics Unity's asset creation process.
         /// </summary>
         public static T CreateAsset<T>() where T : ScriptableObject {
@@ -31,7 +21,7 @@ namespace SchwerEditor {
             path = AssetDatabase.GenerateUniqueAssetPath(path + "/" + typeof(T).Name + ".asset");
             
             AssetDatabase.CreateAsset(asset, path);
-            SaveRefreshAndFocus();
+            AssetsUtility.SaveRefreshAndFocus();
             return asset;
         }
     }
