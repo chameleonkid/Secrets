@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,7 +42,7 @@ namespace SchwerEditor.Secrets
             if (GUILayout.Button("Freeze Time Midday")) {
                 var time = FindObjectOfType<TimeManager>();
                 if (time != null) {
-                    SetPrivateField(time, "normalizedTimeOfDay", 0.5f);
+                    SetPrivateProperty(time, "normalizedTimeOfDay", 0.5f);
                     SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midday.");
                 }
@@ -55,7 +56,7 @@ namespace SchwerEditor.Secrets
             if (GUILayout.Button("Freeze Time Midnight")) {
                 var time = FindObjectOfType<TimeManager>();
                 if (time != null) {
-                    SetPrivateField(time, "normalizedTimeOfDay", 0);
+                    SetPrivateProperty(time, "normalizedTimeOfDay", 0);
                     SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midnight.");
                 }
@@ -84,7 +85,12 @@ namespace SchwerEditor.Secrets
 
         // Reference: https://stackoverflow.com/questions/12993962/set-value-of-private-field
         private static void SetPrivateField(object instance, string fieldName, object value) {
-            var prop = instance.GetType().GetField(fieldName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var field = instance.GetType().GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
+            field.SetValue(instance, value);
+        }
+
+        private static void SetPrivateProperty(object instance, string propertyName, object value) {
+            var prop = instance.GetType().GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance);
             prop.SetValue(instance, value);
         }
     }
