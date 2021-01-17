@@ -10,8 +10,8 @@ public class DamageWhileInAreaNoArmor : DamageWhileInArea
         {
             if (hit != null)
             {
-                DamagePopUpManager.RequestDamagePopUp(tickDamage, hit.transform);
                 hit.health -= tickDamage;                                           // This means DMG WITHOUT ARMOR and No iFrames!
+                DamagePopUpManager.RequestDamagePopUp(tickDamage, hit.transform);
                 yield return new WaitForSeconds(tickDuration);
                 Debug.Log("Character took dmg from AOE");
             }

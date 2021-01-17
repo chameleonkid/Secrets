@@ -12,7 +12,8 @@ public class DamageOnTriggerNoArmor : Hitbox
         if (hit != null)
         {
             var dmg = isCritical ? damage * 2 : damage;
-            hit.health -= damage; 
+            hit.health -= damage;
+            DamagePopUpManager.RequestDamagePopUp(damage, hit.transform);
         }
     }
 }
