@@ -12,6 +12,8 @@ public class SpawnTrap : MonoBehaviour
     [SerializeField] private float spawnDelay;
     [Header("In which radius of the trap will be spawned?:")]
     [SerializeField] private float spawnRadius;
+    [Header("How long will the player be stuck?:")]
+    [SerializeField] private float lockTime;
     [Header("This sound will be played when the trap will be activated:")]
     [SerializeField] private AudioClip trapSound;
 
@@ -21,6 +23,7 @@ public class SpawnTrap : MonoBehaviour
         if(other.GetComponent<PlayerMovement>() && other.isTrigger)
         {
             StartSpawning();
+            other.GetComponent<PlayerMovement>().LockMovement(lockTime);
         }
     }
 
