@@ -39,7 +39,7 @@ public class CharacterCreation : MonoBehaviour
 
     private void Awake()
     {
-        MusicManager.RequestMusic(creatorSound);
+        SoundManager.RequestSound(creatorSound);
 
         bodyChanger.newSprite = bodySkins[0];
         bodyChanger.ResetRenderer();

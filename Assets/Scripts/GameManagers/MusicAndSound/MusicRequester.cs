@@ -9,7 +9,8 @@ public class MusicRequester : MonoBehaviour
         var player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            MusicManager.RequestMusic(areaMusic.GetRandomElement());
+            // MusicManager.RequestMusic(areaMusic.GetRandomElement());
+            MusicManager.RequestMusic(areaMusic);           // Return Array
         }
     }
 }

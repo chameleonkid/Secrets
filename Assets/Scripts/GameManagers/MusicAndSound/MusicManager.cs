@@ -3,9 +3,11 @@ using System;
 
 public class MusicManager : MonoBehaviour
 {
-    private static event Action<AudioClip> OnMusicRequested;
+    private int clipCounter = 0; // Newly added
+    private static event Action<AudioClip[]> OnMusicRequested; //<---- Made to array
+    [SerializeField] private AudioClip[] currentClips;
 
-    public static void RequestMusic(AudioClip music) => OnMusicRequested?.Invoke(music);
+    public static void RequestMusic(AudioClip[] music) => OnMusicRequested?.Invoke(music); //<---- Made to array
 
     private AudioSource audioSource;
 
@@ -14,9 +16,35 @@ public class MusicManager : MonoBehaviour
 
     private void Awake() => audioSource = GetComponent<AudioSource>();
 
-    private void PlayMusic(AudioClip music)
+
+    // New Stuff
+    private void Update()
     {
-        audioSource.clip = music;
+        if(!audioSource.isPlaying)
+        {
+            PlayMusic(currentClips);
+        }
+    }
+    //*******************************
+
+
+    private void PlayMusic(AudioClip[] music) //<---- Made to array
+    {
+        currentClips = music;
+        audioSource.clip = music.GetRandomElement(); //<---- Made to Get RandomElement of Array
         audioSource.Play();
+
+
+        /*
+        PSEUDOCODE:
+        This needs to be checked over and over again.... In Update?
+        IF(AudioClip is over)   <--- Research tells to use audioSource.clip.lenght
+        {
+        audioSource.clip = music.GetRandomElement();
+        }
+
+
+
+        */
     }
 }
