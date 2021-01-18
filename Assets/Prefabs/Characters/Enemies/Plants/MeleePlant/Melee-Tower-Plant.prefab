@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 2230807509142788756}
   - component: {fileID: 1872288383178095892}
   - component: {fileID: 2230807509142788764}
-  - component: {fileID: 2230807509142788739}
+  - component: {fileID: 6456052910380491088}
+  - component: {fileID: 6456052910380491089}
   m_Layer: 8
   m_Name: Melee-Tower-Plant
   m_TagString: enemy
@@ -236,7 +237,7 @@ MonoBehaviour:
   canAttack: 0
   fireDelay: 5
   fireDelaySeconds: 0
---- !u!114 &2230807509142788739
+--- !u!114 &6456052910380491088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,13 +246,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2230807509142788765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 748e89f8c16353045a34383cdf7b9a79, type: 3}
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  charactersInAreaList: []
-  tickDuration: 1
-  tickDamage: 2
+  force: 3
+  duration: 0.2
+--- !u!114 &6456052910380491089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230807509142788765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3f3e2752af2104e800fbf9139a2ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 1
 --- !u!1 &5147027743853780376
 GameObject:
   m_ObjectHideFlags: 0

@@ -238,7 +238,8 @@ MonoBehaviour:
   isShrinked: 0
   gotHitSound:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
-  attackSounds: []
+  attackSounds:
+  - {fileID: 8300000, guid: 7dda8499f6183bb4299fceeebe54fd56, type: 3}
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -262,11 +263,12 @@ MonoBehaviour:
   thisLoot: {fileID: 11400000, guid: 8b1d6c0f42e36644697f9be64bdebb5e, type: 2}
   projectile: {fileID: 8755954809695844891, guid: 9e2d42e6fb50e434ca74eb7446d7eaf9,
     type: 3}
-  canFire: 0
+  canAttack: 0
   fireDelay: 4
   fireDelaySeconds: 0
-  projectileTwo: {fileID: 2316327626037189151, guid: 6378c04bd144c97479c63f237e431782,
-    type: 3}
+  projectileTwo:
+  - {fileID: 5748689181704222012, guid: 1ae4f91345f65164fae274a3d2f78848, type: 3}
+  - {fileID: 2316327626037189151, guid: 6378c04bd144c97479c63f237e431782, type: 3}
   canFireTwo: 0
   fireDelayTwo: 11
   fireDelaySecondsTwo: 0
@@ -612,7 +614,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10724449, y: 2.6748095}
+  m_Offset: {x: 0.41571426, y: 0.47216463}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -623,7 +625,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24.14143, y: 31.008707}
+  m_Size: {x: 7.5292435, y: 7.2145405}
   m_EdgeRadius: 0
 --- !u!114 &3306322924391243028
 MonoBehaviour:
