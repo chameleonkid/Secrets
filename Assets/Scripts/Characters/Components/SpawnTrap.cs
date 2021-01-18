@@ -16,11 +16,13 @@ public class SpawnTrap : MonoBehaviour
     [SerializeField] private float lockTime;
     [Header("This sound will be played when the trap will be activated:")]
     [SerializeField] private AudioClip trapSound;
+    [Header("This sound will be played when the trap will be activated:")]
+    [SerializeField] private bool isActive = true;
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.GetComponent<PlayerMovement>() && other.isTrigger)
+        if(other.GetComponent<PlayerMovement>() && other.isTrigger && isActive == true)
         {
             StartSpawning();
             other.GetComponent<PlayerMovement>().LockMovement(lockTime);
@@ -35,6 +37,8 @@ public class SpawnTrap : MonoBehaviour
 
     protected virtual IEnumerator StartSpawningCo()
     {
+        this.GetComponent<SpriteRenderer>().sprite = null;
+        isActive = false;
         SoundManager.RequestSound(trapSound);
         for(int i = 0; i < spawnCounter; i++)
         {
@@ -44,7 +48,7 @@ public class SpawnTrap : MonoBehaviour
             var spawn = Instantiate(thingToSpawn[randomSpawn], randomPosition, Quaternion.identity);  //this.transform.position needs to vary slightly for iteration
             yield return new WaitForSeconds(spawnDelay);
         }
-
+        isActive = false;        
     }
 
 
