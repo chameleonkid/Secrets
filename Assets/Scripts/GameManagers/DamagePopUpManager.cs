@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DamagePopUpManager : MonoBehaviour
 {
@@ -31,8 +32,10 @@ public class DamagePopUpManager : MonoBehaviour
 
     private void InstantiatePopUp(float damage, bool isCritical, Transform hit)
     {
+        Vector2 hitVec2 = hit.position;
+        var numberPos = hitVec2 + Random.insideUnitCircle * 0.25f;
         var prefab = isCritical ? criticalPopUpPrefab : regularPopUpPrefab;
-        var popup = Instantiate(prefab, hit.position, Quaternion.identity, hit);
+        var popup = Instantiate(prefab, numberPos, Quaternion.identity, hit);
         var text = popup.GetComponent<TextMeshPro>();
         if (text != null)
         {
@@ -43,8 +46,10 @@ public class DamagePopUpManager : MonoBehaviour
 
     private void InstantiateHealPopUp(float heal, Transform toBeHealed)
     {
+        Vector2 toBeHealVec2 = toBeHealed.position;
+        var numberPos = toBeHealVec2 + Random.insideUnitCircle * 0.25f;
         var prefab = healPopUpPrefab;
-        var popup = Instantiate(prefab, toBeHealed.position, Quaternion.identity, toBeHealed);
+        var popup = Instantiate(prefab, numberPos, Quaternion.identity, toBeHealed);
         var text = popup.GetComponent<TextMeshPro>();
         if (text != null)
         {
