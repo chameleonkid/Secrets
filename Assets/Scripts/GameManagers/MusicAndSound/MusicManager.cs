@@ -17,7 +17,7 @@ public class MusicManager : MonoBehaviour
     private void Awake() => audioSource = GetComponent<AudioSource>();
 
 
-    // New Stuff
+
     private void Update()
     {
         if(!audioSource.isPlaying)
@@ -28,23 +28,10 @@ public class MusicManager : MonoBehaviour
     //*******************************
 
 
-    private void PlayMusic(AudioClip[] music) //<---- Made to array
+    private void PlayMusic(AudioClip[] music)
     {
         currentClips = music;
-        audioSource.clip = music.GetRandomElement(); //<---- Made to Get RandomElement of Array
-        audioSource.Play();
-
-
-        /*
-        PSEUDOCODE:
-        This needs to be checked over and over again.... In Update?
-        IF(AudioClip is over)   <--- Research tells to use audioSource.clip.lenght
-        {
         audioSource.clip = music.GetRandomElement();
-        }
-
-
-
-        */
+        audioSource.Play();
     }
 }
