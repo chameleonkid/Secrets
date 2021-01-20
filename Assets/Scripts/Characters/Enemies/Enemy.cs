@@ -128,12 +128,12 @@ public class Enemy : Character
     {
         if (isMinion)
         {
-            Debug.Log("Minion was killed");
+         //   Debug.Log("Minion was killed");
             OnMinionDied?.Invoke();
         }
         else
         {
-            Debug.Log("Normal Enemy was killed");
+        //    Debug.Log("Normal Enemy was killed");
             OnEnemyDied?.Invoke();
         }
     }
@@ -141,7 +141,7 @@ public class Enemy : Character
 
     protected virtual void Die()
     {
-        Debug.Log("Baseclass DIE wurde ausgeführt");
+     //   Debug.Log("Baseclass DIE wurde ausgeführt");
 
         DeathEffect();
         thisLoot?.GenerateLoot(transform.position);

@@ -72,6 +72,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
         ES3.Save("Inventory", so.playerInventory, saveSlot);
         ES3.Save("Items", so.playerInventory.items.Serialize(), saveSlot);
+        ES3.Save("XP", so.xpSystem, saveSlot);
     }
 
     private void LoadPlayer(string loadSlot)
@@ -83,6 +84,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
         ES3.Load("Inventory", loadSlot, so.playerInventory);
         so.playerInventory.items = (ES3.Load("Items", loadSlot) as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
+        ES3.Load("XP", loadSlot, so.xpSystem);
     }
 
     private void SaveVendorInventories(string saveSlot)

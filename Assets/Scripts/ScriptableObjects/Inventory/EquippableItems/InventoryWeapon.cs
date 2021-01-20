@@ -55,18 +55,18 @@ public class InventoryWeapon : EquippableItem
         leftHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0, 0.6f),
-            new Vector2(-0.5f, 0.6f),
-            new Vector2(-0.5f, 0.6f),
-            new Vector2(-0.5f, 0f),
+            new Vector2(-0.55f, 0.7f),
+            new Vector2(-0.55f, 0.7f),
+            new Vector2(-0.55f, 0f),
             new Vector2(0f, 0f)
         };
 
         rightHitboxPolygon = new[] {
             new Vector2(0f, 0.5f),
             new Vector2(0, 0.6f),
-            new Vector2(0.5f, 0.6f),
-            new Vector2(0.5f, 0.6f),
-            new Vector2(0.5f, 0f),
+            new Vector2(0.55f, 0.7f),
+            new Vector2(0.55f, 0.7f),
+            new Vector2(0.55f, 0f),
             new Vector2(0f, 0f)
         };
 
