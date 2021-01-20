@@ -16,7 +16,7 @@ public class Liftable : Interactable
 
     private void LateUpdate()
     {
-        if (Input.GetButtonDown("Lift") && playerInRange && isCarrying == false)
+        if (Input.GetButtonDown("Lift") && playerInRange && isCarrying == false) // Add an Unique Item which makes you able to lift things!
         {
 
 
