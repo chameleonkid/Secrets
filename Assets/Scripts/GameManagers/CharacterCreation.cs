@@ -28,7 +28,7 @@ public class CharacterCreation : MonoBehaviour
     private int eyeCounter = 0;
 
     [Header("Audio")]
-    [SerializeField] private AudioClip creatorSound = default;
+    [SerializeField] private AudioClip[] creatorMusic = default;
     [SerializeField] private AudioClip buttonClick = default;
 
     [Header("Name")]
@@ -39,7 +39,7 @@ public class CharacterCreation : MonoBehaviour
 
     private void Awake()
     {
-        SoundManager.RequestSound(creatorSound);
+        MusicManager.RequestMusic(creatorMusic);
 
         bodyChanger.newSprite = bodySkins[0];
         bodyChanger.ResetRenderer();

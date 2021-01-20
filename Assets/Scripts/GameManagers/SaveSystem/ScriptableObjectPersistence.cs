@@ -64,6 +64,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     public void ResetPlayer()
     {
+        playerPosition.ResetValue();
         health.max = 10;
         health.current = health.max;
         mana.max = 100;
