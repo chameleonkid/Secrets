@@ -6,10 +6,10 @@ public class EnemyDoor : MonoBehaviour
 {
     [Header("Door Attributes")]
     [SerializeField] private bool isOpen = false;
-    [SerializeField] private SpriteRenderer doorSpriteRenderer;
-    [SerializeField] private Sprite closedSprite;
-    [SerializeField] private Sprite openedSprite;
-    [SerializeField] private BoxCollider2D doorCollider;
+    [SerializeField] private SpriteRenderer doorSpriteRenderer = default;
+    [SerializeField] private Sprite closedSprite = default;
+    [SerializeField] private Sprite openedSprite = default;
+    [SerializeField] private BoxCollider2D doorCollider = default;
     [SerializeField] private Enemy[] enemies = default;
 
 
@@ -34,7 +34,7 @@ public class EnemyDoor : MonoBehaviour
     {
         for (int i = 0; i < enemies.Length; i++)
         {
-            if (enemies[i].gameObject.activeInHierarchy && i < enemies.Length - 1)
+            if (enemies[i].gameObject.activeInHierarchy)
             {
                 return;
             }

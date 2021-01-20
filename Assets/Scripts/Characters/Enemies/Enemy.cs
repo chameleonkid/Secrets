@@ -35,14 +35,12 @@ public class Enemy : Character
                 chaseRadius = originalChaseRadius * 10;
                 OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )
                                             // Need to prevent the enemy from moving and set idle/moving Anim
-
             }
 
             _health = value;
 
             if (_health <= 0)
             {
-           //     animator.Play("Death");
                 Die();
             }
         }
@@ -144,7 +142,7 @@ public class Enemy : Character
     protected virtual void Die()
     {
         Debug.Log("Baseclass DIE wurde ausgeführt");
-        CheckForMinion();
+
         DeathEffect();
         thisLoot?.GenerateLoot(transform.position);
         levelSystem.AddExperience(enemyXp);
@@ -155,6 +153,7 @@ public class Enemy : Character
         }
 
         this.gameObject.SetActive(false);
+        CheckForMinion();
     }
 
     protected void DeathEffect()
@@ -269,8 +268,5 @@ public class Enemy : Character
     {
         return this.maxHealth.value;
     }
-
-
-
 
 }
