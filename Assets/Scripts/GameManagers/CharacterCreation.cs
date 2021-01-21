@@ -37,10 +37,13 @@ public class CharacterCreation : MonoBehaviour
     [Header("Persistence")]
     [SerializeField] private CharacterAppearance characterAppearance = default;
 
-    private void Awake()
+
+    private void Start()
     {
         MusicManager.RequestMusic(creatorMusic);
-
+    }
+    private void Awake()
+    {
         bodyChanger.newSprite = bodySkins[0];
         bodyChanger.ResetRenderer();
 
