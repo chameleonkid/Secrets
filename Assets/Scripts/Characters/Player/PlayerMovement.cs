@@ -240,6 +240,7 @@ public class PlayerMovement : Character
         {
             OnAttackTriggered?.Invoke();
             meeleCooldown = true;
+            // This part is not working properly in BUILD
             hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
             hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
             hitBoxColliders[2].points = currentWeapon.rightHitboxPolygon;

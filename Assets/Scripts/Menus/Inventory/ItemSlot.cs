@@ -11,11 +11,11 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 
     [SerializeField] private TextMeshProUGUI numberHeldDisplay = default;
     [SerializeField] private Image itemImage = default;
-    private Sprite defaultSprite = default;
+    [SerializeField] private Sprite defaultSprite = default;
 
     private Item item;
 
-    private void OnValidate() => defaultSprite = itemImage.sprite;
+   // private void OnValidate() => defaultSprite = itemImage.sprite;
 
     public void SetItem(Item item, int count)
     {
@@ -32,7 +32,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         }
         else
         {
-            itemImage.sprite = defaultSprite;
+         //   itemImage.sprite = defaultSprite;
 
             if (numberHeldDisplay != null)
             {
