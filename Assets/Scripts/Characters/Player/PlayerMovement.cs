@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class PlayerMovement : Character
 {
 
-
     [Header("Appearance")]
     [SerializeField] private SpriteSkinRPC bodySkin = default;
     [SerializeField] private SpriteSkinRPC armorSkin = default;
@@ -536,7 +535,3 @@ public class PlayerMovement : Character
 
 }
 
-
-
-//############################################################################################################################################
-//############################################################################################################################################
