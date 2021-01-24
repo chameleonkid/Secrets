@@ -60,7 +60,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     private void SaveAppearance(string saveSlot) => ES3.Save("Appearance", so.characterAppearance, saveSlot);
 
-    private void LoadAppearance(string loadSlot) => ES3.Load("Appearance", loadSlot, so.characterAppearance);
+    private void LoadAppearance(string loadSlot) => ES3.LoadInto("Appearance", loadSlot, so.characterAppearance);
 
     private void SavePlayer(string saveSlot)
     {
@@ -77,14 +77,14 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     private void LoadPlayer(string loadSlot)
     {
-        ES3.Load("Position", loadSlot, so.playerPosition);
-        ES3.Load("Health", loadSlot, so.health);
-        ES3.Load("Mana", loadSlot, so.mana);
-        ES3.Load("Lumen", loadSlot, so.lumen);
+        ES3.LoadInto("Position", loadSlot, so.playerPosition);
+        ES3.LoadInto("Health", loadSlot, so.health);
+        ES3.LoadInto("Mana", loadSlot, so.mana);
+        ES3.LoadInto("Lumen", loadSlot, so.lumen);
 
-        ES3.Load("Inventory", loadSlot, so.playerInventory);
+        ES3.LoadInto("Inventory", loadSlot, so.playerInventory);
         so.playerInventory.items = (ES3.Load("Items", loadSlot) as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
-        ES3.Load("XP", loadSlot, so.xpSystem);
+        ES3.LoadInto("XP", loadSlot, so.xpSystem);
     }
 
     private void SaveVendorInventories(string saveSlot)
@@ -96,7 +96,7 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     private void LoadVendorInventories(string loadSlot)
     {
         //! TODO
-        ES3.Load("VendorInventory", loadSlot, so.vendorInventories);
+        ES3.LoadInto("VendorInventory", loadSlot, so.vendorInventories);
     }
 
     private void SaveBools(string saveSlot)
@@ -110,14 +110,14 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
 
     private void LoadBools(string loadSlot)
     {
-        ES3.Load("Chests", loadSlot, so.chests);
-        ES3.Load("Doors", loadSlot, so.doors);
-        ES3.Load("Bosses", loadSlot, so.bosses);
-        ES3.Load("HealthCrystals", loadSlot, so.healthCrystals);
-        ES3.Load("ManaCrystals", loadSlot, so.manaCrystals);
+        ES3.LoadInto("Chests", loadSlot, so.chests);
+        ES3.LoadInto("Doors", loadSlot, so.doors);
+        ES3.LoadInto("Bosses", loadSlot, so.bosses);
+        ES3.LoadInto("HealthCrystals", loadSlot, so.healthCrystals);
+        ES3.LoadInto("ManaCrystals", loadSlot, so.manaCrystals);
     }
 
     private void SaveTime(string saveSlot) => ES3.Save("Time", so.timeOfDay, saveSlot);
 
-    private void LoadTime(string loadSlot) => ES3.Load("Time", loadSlot, so.timeOfDay);
+    private void LoadTime(string loadSlot) => ES3.LoadInto("Time", loadSlot, so.timeOfDay);
 }
