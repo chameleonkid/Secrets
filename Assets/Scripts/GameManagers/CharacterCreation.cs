@@ -185,6 +185,12 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.hairColor = hairColor[hairColorCounter];
         characterAppearance.bodyStyle = skinTextures.bodySkins[bodyCounter];
         characterAppearance.playerName = characterName.text;
+
+        characterAppearance.bodyIndex = bodyCounter;
+        characterAppearance.hairIndex = hairCounter;
+        characterAppearance.armorIndex = armorCounter;
+        characterAppearance.eyeIndex = eyeCounter;
+
         SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }
