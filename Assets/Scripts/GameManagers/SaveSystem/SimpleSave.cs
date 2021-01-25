@@ -58,9 +58,13 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         Time.timeScale = 1f;
     }
 
-    private void SaveAppearance(string saveSlot) => ES3.Save("Appearance", so.characterAppearance, saveSlot);
+    private void SaveAppearance(string saveSlot) => ES3.Save("Appearance", so.characterAppearance.GetSerializable(), saveSlot);
 
-    private void LoadAppearance(string loadSlot) => ES3.LoadInto("Appearance", loadSlot, so.characterAppearance);
+    private void LoadAppearance(string loadSlot)
+    {
+        var cas = (CharacterAppearance.CharacterAppearanceSerializable)ES3.Load("Appearance", loadSlot);
+        so.characterAppearance.Deserialize(cas, so.skinTexturesDatabase);
+    }
 
     private void SavePlayer(string saveSlot)
     {
