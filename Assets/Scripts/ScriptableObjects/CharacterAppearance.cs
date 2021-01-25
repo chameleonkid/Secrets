@@ -36,13 +36,13 @@ public class CharacterAppearance : ScriptableObject
     [System.Serializable]
     public struct CharacterAppearanceSerializable
     {
-        public Color hairColor { get; private set; }
-        public string playerName { get; private set; }
+        [ES3Serializable] public Color hairColor { get; private set; }
+        [ES3Serializable] public string playerName { get; private set; }
 
-        public int bodyIndex { get; private set; }
-        public int hairIndex { get; private set; }
-        public int armorIndex { get; private set; }
-        public int eyeIndex { get; private set; }
+        [ES3Serializable] public int bodyIndex { get; private set; }
+        [ES3Serializable] public int hairIndex { get; private set; }
+        [ES3Serializable] public int armorIndex { get; private set; }
+        [ES3Serializable] public int eyeIndex { get; private set; }
 
         public CharacterAppearanceSerializable(CharacterAppearance ca)
         {
