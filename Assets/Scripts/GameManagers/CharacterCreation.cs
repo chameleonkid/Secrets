@@ -4,14 +4,15 @@ using TMPro;
 
 public class CharacterCreation : MonoBehaviour
 {
+    [Header("Skins")]
+    [SerializeField] private SkinTexturesDatabase skinTextures = default;
+
     [Header("Body")]
     [SerializeField] private SpriteSkinRPC bodyChanger = default;
-    public Texture2D[] bodySkins = default;
     private int bodyCounter = 0;
 
     [Header("Hair")]
     [SerializeField] private SpriteSkinRPC hairChanger = default;
-    public Texture2D[] hairStyles = default;
     private int hairCounter = 0;
     public SpriteRenderer hairColorRenderer;
     Color[] hairColor = { new Color(0.3f, 0.3f, 0.3f, 1), new Color(0, 1, 0, 1), new Color(1, 0, 0, 1), new Color(1, 1, 1, 1), new Color(0, 0, 1, 1), new Color(1, 1, 0, 1), new Color(1, 0, 1, 1) };
@@ -19,12 +20,10 @@ public class CharacterCreation : MonoBehaviour
 
     [Header("Armor")]
     [SerializeField] private SpriteSkinRPC armorChanger = default;
-    public Texture2D[] armorSkins = default;
     private int armorCounter = 0;
 
     [Header("Eyes")]
     [SerializeField] private SpriteSkinRPC eyeChanger = default;
-    public Texture2D[] eyeSkins = default;
     private int eyeCounter = 0;
 
     [Header("Audio")]
@@ -44,29 +43,29 @@ public class CharacterCreation : MonoBehaviour
     }
     private void Awake()
     {
-        bodyChanger.newSprite = bodySkins[0];
+        bodyChanger.newSprite = skinTextures.bodySkins[0];
         bodyChanger.ResetRenderer();
 
-        hairChanger.newSprite = hairStyles[0];
+        hairChanger.newSprite = skinTextures.hairStyles[0];
         hairChanger.ResetRenderer();
 
-        armorChanger.newSprite = armorSkins[0];
+        armorChanger.newSprite = skinTextures.armorSkins[0];
         armorChanger.ResetRenderer();
 
-        eyeChanger.newSprite = eyeSkins[0];
+        eyeChanger.newSprite = skinTextures.eyeSkins[0];
         eyeChanger.ResetRenderer();
     }
 
     public void NextBody()
     {
         bodyCounter++;
-        if (bodyCounter >= bodySkins.Length)
+        if (bodyCounter >= skinTextures.bodySkins.Length)
         {
             bodyCounter = 0;
         }
 
         SoundManager.RequestSound(buttonClick);
-        bodyChanger.newSprite = bodySkins[bodyCounter];
+        bodyChanger.newSprite = skinTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
     }
 
@@ -75,22 +74,22 @@ public class CharacterCreation : MonoBehaviour
         bodyCounter--;
         if (bodyCounter < 0)
         {
-            bodyCounter = bodySkins.Length - 1;
+            bodyCounter = skinTextures.bodySkins.Length - 1;
         }
         SoundManager.RequestSound(buttonClick);
-        bodyChanger.newSprite = bodySkins[bodyCounter];
+        bodyChanger.newSprite = skinTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
     }
 
     public void NextHair()
     {
         hairCounter++;
-        if (hairCounter >= hairStyles.Length )
+        if (hairCounter >= skinTextures.hairStyles.Length )
         {
             hairCounter = 0;
         }
         SoundManager.RequestSound(buttonClick);
-        hairChanger.newSprite = hairStyles[hairCounter];
+        hairChanger.newSprite = skinTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
     }
 
@@ -99,22 +98,22 @@ public class CharacterCreation : MonoBehaviour
         hairCounter--;
         if (hairCounter < 0)
         {
-            hairCounter = hairStyles.Length -1;
+            hairCounter = skinTextures.hairStyles.Length -1;
         }
         SoundManager.RequestSound(buttonClick);
-        hairChanger.newSprite = hairStyles[hairCounter];
+        hairChanger.newSprite = skinTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
     }
 
     public void NextArmor()
     {
         armorCounter++;
-        if (armorCounter >= armorSkins.Length)
+        if (armorCounter >= skinTextures.armorSkins.Length)
         {
             armorCounter = 0;
         }
         SoundManager.RequestSound(buttonClick);
-        armorChanger.newSprite = armorSkins[armorCounter];
+        armorChanger.newSprite = skinTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
     }
 
@@ -123,22 +122,22 @@ public class CharacterCreation : MonoBehaviour
         armorCounter--;
         if (armorCounter < 0)
         {
-            armorCounter = armorSkins.Length -1;
+            armorCounter = skinTextures.armorSkins.Length -1;
         }
         SoundManager.RequestSound(buttonClick);
-        armorChanger.newSprite = armorSkins[armorCounter];
+        armorChanger.newSprite = skinTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
     }
 
     public void NextEyes()
     {
         eyeCounter++;
-        if (eyeCounter >= eyeSkins.Length)
+        if (eyeCounter >= skinTextures.eyeSkins.Length)
         {
             eyeCounter = 0;
         }
         SoundManager.RequestSound(buttonClick);
-        eyeChanger.newSprite = eyeSkins[eyeCounter];
+        eyeChanger.newSprite = skinTextures.eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
 
@@ -147,10 +146,10 @@ public class CharacterCreation : MonoBehaviour
         eyeCounter--;
         if (eyeCounter < 0)
         {
-            eyeCounter = eyeSkins.Length -1;
+            eyeCounter = skinTextures.eyeSkins.Length -1;
         }
         SoundManager.RequestSound(buttonClick);
-        eyeChanger.newSprite = eyeSkins[eyeCounter];
+        eyeChanger.newSprite = skinTextures.eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
 
@@ -180,11 +179,11 @@ public class CharacterCreation : MonoBehaviour
 
     public void SaveAppearance()
     {
-        characterAppearance.armorStyle = armorSkins[armorCounter];
-        characterAppearance.eyeColor = eyeSkins[eyeCounter];
-        characterAppearance.hairStyle = hairStyles[hairCounter];
+        characterAppearance.armorStyle = skinTextures.armorSkins[armorCounter];
+        characterAppearance.eyeColor = skinTextures.eyeSkins[eyeCounter];
+        characterAppearance.hairStyle = skinTextures.hairStyles[hairCounter];
         characterAppearance.hairColor = hairColor[hairColorCounter];
-        characterAppearance.bodyStyle = bodySkins[bodyCounter];
+        characterAppearance.bodyStyle = skinTextures.bodySkins[bodyCounter];
         characterAppearance.playerName = characterName.text;
         SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
