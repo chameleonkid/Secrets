@@ -4,10 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(SimpleSave))]
 public class ScriptableObjectPersistence : MonoBehaviour
 {
-    [Header("Scriptable Objects")]
+    [Header("Databases")]
     [SerializeField] private ItemDatabase _itemDatabase = default;
     public ItemDatabase itemDatabase => _itemDatabase;
 
+    [SerializeField] private SkinTexturesDatabase _skinTexturesDatabase = default;
+    public SkinTexturesDatabase skinTexturesDatabase => _skinTexturesDatabase;
+
+    [Header("Save Data")]
     [SerializeField] private StringValue _saveName = default;
     public StringValue saveName => _saveName;
 
