@@ -23,6 +23,20 @@ public class InventoryDisplay : ItemDisplay
     [SerializeField] private ItemSlot amuletSlot = default;
     [SerializeField] private ItemSlot bootsSlot = default;
     [SerializeField] private ItemSlot lampSlot = default;
+    [SerializeField] private ItemSlot cloakSlot = default;
+    [SerializeField] private ItemSlot beltSlot = default;
+    [SerializeField] private ItemSlot shoulderSlot = default;
+    [SerializeField] private ItemSlot sealSlot = default;
+
+    [Header("Quest Slots")]
+    [SerializeField] private ItemSlot seedSlot = default;
+    [SerializeField] private ItemSlot runeSlot = default;
+    [SerializeField] private ItemSlot gemSlot = default;
+    [SerializeField] private ItemSlot pearlSlot = default;
+    [SerializeField] private ItemSlot dragonEggSlot = default;
+    [SerializeField] private ItemSlot artifactSlot = default;
+    [SerializeField] private ItemSlot crownSlot = default;
+    [SerializeField] private ItemSlot scepterSlot = default;
 
     public Action<Item> OnSlotSelected { get; set; }
     public Action<Item> OnSlotUsed { get; set; }
@@ -50,6 +64,19 @@ public class InventoryDisplay : ItemDisplay
         amuletSlot.OnSlotSelected += action;
         bootsSlot.OnSlotSelected += action;
         lampSlot.OnSlotSelected += action;
+        cloakSlot.OnSlotSelected += action;
+        beltSlot.OnSlotSelected += action;
+        shoulderSlot.OnSlotSelected += action;
+        sealSlot.OnSlotSelected += action;
+        seedSlot.OnSlotSelected += action;
+        runeSlot.OnSlotSelected += action;
+        gemSlot.OnSlotSelected += action;
+        pearlSlot.OnSlotSelected += action;
+
+        dragonEggSlot.OnSlotSelected += action;
+        artifactSlot.OnSlotSelected += action;
+        crownSlot.OnSlotSelected += action;
+        scepterSlot.OnSlotSelected += action;
     }
 
     public void UnsubscribeFromEquipmentSlotSelected(Action<Item> action)
@@ -67,6 +94,19 @@ public class InventoryDisplay : ItemDisplay
         amuletSlot.OnSlotSelected -= action;
         bootsSlot.OnSlotSelected -= action;
         lampSlot.OnSlotSelected -= action;
+        cloakSlot.OnSlotSelected -= action;
+        beltSlot.OnSlotSelected -= action;
+        shoulderSlot.OnSlotSelected -= action;
+        sealSlot.OnSlotSelected -= action;
+        seedSlot.OnSlotSelected -= action;
+        runeSlot.OnSlotSelected -= action;
+        gemSlot.OnSlotSelected -= action;
+        pearlSlot.OnSlotSelected -= action;
+
+        dragonEggSlot.OnSlotSelected -= action;
+        artifactSlot.OnSlotSelected -= action;
+        crownSlot.OnSlotSelected -= action;
+        scepterSlot.OnSlotSelected -= action;
     }
 
     public void UpdateEquipmentSlots()
@@ -83,6 +123,19 @@ public class InventoryDisplay : ItemDisplay
         amuletSlot.SetItem(inventory.currentAmulet, 0);
         bootsSlot.SetItem(inventory.currentBoots, 0);
         lampSlot.SetItem(inventory.currentLamp, 0);
+        cloakSlot.SetItem(inventory.currentCloak, 0);
+        beltSlot.SetItem(inventory.currentBelt, 0);
+        shoulderSlot.SetItem(inventory.currentShoulder, 0);
+        sealSlot.SetItem(inventory.currentSeal, 0);
+        seedSlot.SetItem(inventory.currentSeed, 0);
+        runeSlot.SetItem(inventory.currentRune, 0);
+        gemSlot.SetItem(inventory.currentGem, 0);
+        pearlSlot.SetItem(inventory.currentPearl, 0);
+
+        dragonEggSlot.SetItem(inventory.currentDragonEgg, 0);
+        artifactSlot.SetItem(inventory.currentArtifact, 0);
+        crownSlot.SetItem(inventory.currentCrown, 0);
+        scepterSlot.SetItem(inventory.currentScepter, 0);
     }
 
     protected override void InstantiateSlots()

@@ -20,7 +20,7 @@ public class Inventory : ScriptableObject
 
 
     public Item currentItem;
-
+    [Header("Currently worn Items")]
     public InventoryWeapon currentWeapon;
     public InventoryArmor currentArmor;
     public InventoryHelmet currentHelmet;
@@ -33,11 +33,28 @@ public class Inventory : ScriptableObject
     public InventoryAmulet currentAmulet;
     public InventoryBoots currentBoots;
     public InventoryLamp currentLamp;
+    public InventoryCloak currentCloak;
+    public InventoryBelt currentBelt;
+    public InventoryShoulder currentShoulder;
+    public InventorySeal currentSeal;
 
+    [Header("Quest Items")]
+    public QuestSeed currentSeed;
+    public QuestRune currentRune;
+    public QuestGem currentGem;
+    public QuestPearl currentPearl;
+    public QuestDragonEgg currentDragonEgg;
+    public QuestArtifact currentArtifact;
+    public QuestCrown currentCrown;
+    public QuestScepter currentScepter;
+
+    [Header("Calculated Stats")]
     public float totalDefense;
     public float totalCritChance;
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
+
+
 
 
 
@@ -123,6 +140,42 @@ public class Inventory : ScriptableObject
             case InventoryLamp lamp:
                 Swap(ref currentLamp, lamp);
                 break;
+            case InventoryCloak cloak:
+                Swap(ref currentCloak, cloak);
+                break;
+            case InventoryBelt belt:
+                Swap(ref currentBelt, belt);
+                break;
+            case InventoryShoulder shoulder:
+                Swap(ref currentShoulder, shoulder);
+                break;
+            case InventorySeal seal:
+                Swap(ref currentSeal, seal);
+                break;
+            case QuestSeed seed:
+                Swap(ref currentSeed, seed);
+                break;
+            case QuestRune rune:
+                Swap(ref currentRune, rune);
+                break;
+            case QuestGem gem:
+                Swap(ref currentGem, gem);
+                break;
+            case QuestPearl pearl:
+                Swap(ref currentPearl, pearl);
+                break;
+            case QuestArtifact artifact:
+                Swap(ref currentArtifact, artifact);
+                break;
+            case QuestCrown crown:
+                Swap(ref currentCrown, crown);
+                break;
+            case QuestScepter scepter:
+                Swap(ref currentScepter, scepter);
+                break;
+            case QuestDragonEgg dragonEgg:
+                Swap(ref currentDragonEgg, dragonEgg);
+                break;
         }
         // Applies to all equippables.
         CalcDefense();
@@ -176,6 +229,22 @@ public class Inventory : ScriptableObject
         {
             totalDefense += currentBoots.armorDefense;
         }
+        if (currentCloak)
+        {
+            totalDefense += currentCloak.armorDefense;
+        }
+        if (currentBelt)
+        {
+            totalDefense += currentBelt.armorDefense;
+        }
+        if (currentShoulder)
+        {
+            totalDefense += currentShoulder.armorDefense;
+        }
+        if (currentSeal)
+        {
+            totalDefense += currentSeal.armorDefense;
+        }
     }
 
     public void CalcCritChance()
@@ -185,6 +254,22 @@ public class Inventory : ScriptableObject
         if (currentRing)
         {
             totalCritChance += currentRing.criticalStrikeChance;
+        }
+        if (currentCloak)
+        {
+            totalCritChance += currentCloak.criticalStrikeChance;
+        }
+        if (currentBelt)
+        {
+            totalCritChance += currentBelt.criticalStrikeChance;
+        }
+        if (currentShoulder)
+        {
+            totalCritChance += currentShoulder.criticalStrikeChance;
+        }
+        if (currentSeal)
+        {
+            totalCritChance += currentSeal.criticalStrikeChance;
         }
     }
 
@@ -205,12 +290,16 @@ public class Inventory : ScriptableObject
                 totalMinSpellDamage += currentSpellbookTwo.minSpellDamage;
                 totalMaxSpellDamage += currentSpellbookTwo.maxSpellDamage;
             }
-
         }
         if (currentAmulet)
         {
             totalMinSpellDamage += currentAmulet.minSpellDamage;
             totalMaxSpellDamage += currentAmulet.maxSpellDamage;
+        }
+        if (currentCloak)
+        {
+            totalMinSpellDamage += currentCloak.minSpellDamage;
+            totalMaxSpellDamage += currentCloak.maxSpellDamage;
         }
     }
 }

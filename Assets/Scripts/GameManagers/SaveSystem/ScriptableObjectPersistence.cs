@@ -120,6 +120,18 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.currentAmulet = null;
         playerInventory.currentBoots = null;
         playerInventory.currentLamp = null;
+        playerInventory.currentCloak = null;
+        playerInventory.currentBelt = null;
+        playerInventory.currentShoulder = null;
+        playerInventory.currentSeal = null;
+        playerInventory.currentSeed = null;
+        playerInventory.currentRune = null;
+        playerInventory.currentGem = null;
+        playerInventory.currentPearl = null;
+        playerInventory.currentArtifact = null;
+        playerInventory.currentDragonEgg = null;
+        playerInventory.currentCrown = null;
+        playerInventory.currentScepter = null;
 
         playerInventory.totalDefense = 0;
         playerInventory.totalCritChance = 0;
@@ -148,6 +160,11 @@ public class ScriptableObjectPersistence : MonoBehaviour
             v.currentAmulet = null;
             v.currentBoots = null;
             v.currentLamp = null;
+            v.currentCloak = null;
+            v.currentBelt = null;
+            v.currentShoulder = null;
+            v.currentSeal = null;
+
 
             // Would vendors ever need this?
             v.totalDefense = 0;
