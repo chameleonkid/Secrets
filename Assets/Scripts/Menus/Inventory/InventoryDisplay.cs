@@ -17,9 +17,11 @@ public class InventoryDisplay : ItemDisplay
     [SerializeField] private ItemSlot legsSlot = default;
     [SerializeField] private ItemSlot shieldSlot = default;
     [SerializeField] private ItemSlot ringSlot = default;
-    [SerializeField] private ItemSlot bowSlot = default;
+
     [SerializeField] private ItemSlot spellbookSlot = default;
     [SerializeField] private ItemSlot spellbookTwoSlot = default;
+    [SerializeField] private ItemSlot spellbookThreeSlot = default;
+
     [SerializeField] private ItemSlot amuletSlot = default;
     [SerializeField] private ItemSlot bootsSlot = default;
     [SerializeField] private ItemSlot lampSlot = default;
@@ -58,7 +60,7 @@ public class InventoryDisplay : ItemDisplay
         legsSlot.OnSlotSelected += action;
         shieldSlot.OnSlotSelected += action;
         ringSlot.OnSlotSelected += action;
-        bowSlot.OnSlotSelected += action;
+        spellbookThreeSlot.OnSlotSelected += action;
         spellbookSlot.OnSlotSelected += action;
         spellbookTwoSlot.OnSlotSelected += action;
         amuletSlot.OnSlotSelected += action;
@@ -88,7 +90,7 @@ public class InventoryDisplay : ItemDisplay
         legsSlot.OnSlotSelected -= action;
         shieldSlot.OnSlotSelected -= action;
         ringSlot.OnSlotSelected -= action;
-        bowSlot.OnSlotSelected -= action;
+        spellbookThreeSlot.OnSlotSelected -= action;
         spellbookSlot.OnSlotSelected -= action;
         spellbookTwoSlot.OnSlotSelected -= action;
         amuletSlot.OnSlotSelected -= action;
@@ -120,6 +122,7 @@ public class InventoryDisplay : ItemDisplay
         ringSlot.SetItem(inventory.currentRing, 0);
         spellbookSlot.SetItem(inventory.currentSpellbook, 0);
         spellbookTwoSlot.SetItem(inventory.currentSpellbookTwo, 0);
+        spellbookThreeSlot.SetItem(inventory.currentSpellbookThree, 0);
         amuletSlot.SetItem(inventory.currentAmulet, 0);
         bootsSlot.SetItem(inventory.currentBoots, 0);
         lampSlot.SetItem(inventory.currentLamp, 0);

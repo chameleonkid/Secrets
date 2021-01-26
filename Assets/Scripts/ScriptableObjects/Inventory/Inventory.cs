@@ -30,6 +30,7 @@ public class Inventory : ScriptableObject
     public InventoryRing currentRing;
     public InventorySpellbook currentSpellbook;
     public InventorySpellbook currentSpellbookTwo;
+    public InventorySpellbook currentSpellbookThree;
     public InventoryAmulet currentAmulet;
     public InventoryBoots currentBoots;
     public InventoryLamp currentLamp;
@@ -113,24 +114,25 @@ public class Inventory : ScriptableObject
             case InventoryRing ring:
                 Swap(ref currentRing, ring);
                  break;
+
+
             case InventorySpellbook spellbook:
                 if(!currentSpellbook)
                 {
                     Swap(ref currentSpellbook, spellbook);
                 }
-                else// if(!currentSpellbookTwo)
+                else if(!currentSpellbookTwo)
                 {
                     Swap(ref currentSpellbookTwo, spellbook);
                 }
-           /*     else
+                else
                 {
-                    var tempItem = currentSpellbookTwo;
-                    Swap(ref currentSpellbookTwo, currentSpellbook);
-                    Swap(ref currentSpellbook, spellbook);
-                    Swap(ref tempItem, spellbook);
+                    Swap(ref currentSpellbookThree, spellbook);
                 }
-            */
                 break;
+
+
+
             case InventoryAmulet amulet:
                 Swap(ref currentAmulet, amulet);
                 break;
@@ -278,7 +280,7 @@ public class Inventory : ScriptableObject
         totalMinSpellDamage = 0;
         totalMaxSpellDamage = 0;
 
-        if (currentSpellbook || currentSpellbookTwo)
+        if (currentSpellbook || currentSpellbookTwo || currentSpellbookThree)
         {
             if(currentSpellbook)
             {
@@ -286,6 +288,11 @@ public class Inventory : ScriptableObject
                 totalMaxSpellDamage += currentSpellbook.maxSpellDamage;
             }
             if (currentSpellbookTwo)
+            {
+                totalMinSpellDamage += currentSpellbookTwo.minSpellDamage;
+                totalMaxSpellDamage += currentSpellbookTwo.maxSpellDamage;
+            }
+            if (currentSpellbookThree)
             {
                 totalMinSpellDamage += currentSpellbookTwo.minSpellDamage;
                 totalMaxSpellDamage += currentSpellbookTwo.maxSpellDamage;
