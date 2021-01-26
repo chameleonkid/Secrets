@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class VendorManager : ItemDisplay
 {
@@ -17,6 +18,8 @@ public class VendorManager : ItemDisplay
     [SerializeField] private AudioClip sellSound = default;
     [SerializeField] private AudioClip buySound = default;
     [SerializeField] private AudioClip cantSellorBuySound = default;
+
+    [SerializeField] private bool canOpen = true;
 
     private Inventory _inventory;
     public override Inventory inventory {
@@ -58,7 +61,7 @@ public class VendorManager : ItemDisplay
     }
 
     private void ActivateInterface(Inventory vendorInventory) {
-        if (CanvasManager.Instance.IsFreeOrActive(vendorPanel) && !vendorPanel.activeInHierarchy)
+        if (CanvasManager.Instance.IsFreeOrActive(vendorPanel) && !vendorPanel.activeInHierarchy && canOpen)
         {
             OpenInterface(vendorInventory);
             UpdateItemSlots();
@@ -77,9 +80,11 @@ public class VendorManager : ItemDisplay
 
     public void CloseInterface()
     {
+        canOpen = false;
         inventory = null;
         vendorPanel.SetActive(false);
         Time.timeScale = 1;
+        StartCoroutine(CallCloseCo());
     }
 
     private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.sellPrice, "sell");
@@ -164,4 +169,11 @@ public class VendorManager : ItemDisplay
             EventSystem.current.SetSelectedGameObject(firstSelection);
         }
     }
+
+    IEnumerator CallCloseCo()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canOpen = true;
+    }
+
 }

@@ -2,10 +2,12 @@
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class SavePoint : MonoBehaviour
 {
     private bool playerInRange;
+    [SerializeField] private bool canOpen = true;
     [SerializeField] private GameObject saveMenu;
     public GameObject firstButtonSave;
     [SerializeField] private StringValue saveName = default;
@@ -31,7 +33,7 @@ public class SavePoint : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange == true && Input.GetButtonDown("Interact"))
+        if (playerInRange == true && Input.GetButtonDown("Interact") && canOpen)
         {
             saveMenu.SetActive(true);
             Time.timeScale = 0;
@@ -65,12 +67,15 @@ public class SavePoint : MonoBehaviour
 
     public void CancelSave()
     {
+        canOpen = false;
         saveMenu.SetActive(false);
         Time.timeScale = 1;
+        StartCoroutine(CallCloseCo());
     }
 
     public void Save(string saveSlot, Text saveSlotDisplay)
     {
+        canOpen = false;
         saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
 
         SimpleSave.Instance.Save(saveSlot);
@@ -80,5 +85,12 @@ public class SavePoint : MonoBehaviour
         Time.timeScale = 1;
         saveMenu.SetActive(false);
         Debug.Log("Game was saved!");
+        StartCoroutine(CallCloseCo());
+    }
+
+    IEnumerator CallCloseCo()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canOpen = true;
     }
 }
