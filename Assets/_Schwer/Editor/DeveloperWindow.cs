@@ -37,6 +37,7 @@ namespace SchwerEditor.Secrets {
             EditorGUILayout.HelpBox("Reloading a scene may take some time, depending on scene complexity.", MessageType.Info);
         }
 
+        #region Time Controls
         private void FreezeTimeMiddayButton() {
             if (GUILayout.Button("Freeze Time Midday")) {
                 var time = FindObjectOfType<TimeManager>();
@@ -45,9 +46,7 @@ namespace SchwerEditor.Secrets {
                     ReflectionUtility.SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midday.");
                 }
-                else {
-                    LogWarning("Could not find an active TimeManager!");
-                }
+                else Log("No active TimeManager found.");
             }
         }
 
@@ -59,9 +58,7 @@ namespace SchwerEditor.Secrets {
                     ReflectionUtility.SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midnight.");
                 }
-                else {
-                    LogWarning("Could not find an active TimeManager!");
-                }
+                else Log("No active TimeManager found.");
             }
         }
 
@@ -72,11 +69,10 @@ namespace SchwerEditor.Secrets {
                     ReflectionUtility.SetPrivateField(time, "timeMultiplier", 1);
                     Log("Time multiplier set to 1.");
                 }
-                else {
-                    LogWarning("Could not find an active TimeManager!");
-                }
+                else Log("No active TimeManager found.");
             }
         }
+        #endregion
 
         private static void Log(object message, Object context = null) => Debug.Log($"{_name}: {message}", context);
         private static void LogWarning(object message, Object context = null) => Debug.LogWarning($"{_name}: {message}", context);
