@@ -91,6 +91,18 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.LoadInto("XP", loadSlot, so.xpSystem);
     }
 
+    private void SaveInventory(string key, Inventory inventory, string filePath)
+    {
+        var serializableInventory = new Inventory.SerializableInventory(inventory);
+        ES3.Save(key, serializableInventory, filePath);
+    }
+
+    private void LoadInventory(string key, string filePath, Inventory inventory, Schwer.ItemSystem.ItemDatabase itemDatabase)
+    {
+        var serializableInventory = ES3.Load(key, filePath) as Inventory.SerializableInventory;
+        serializableInventory.DeserializeInto(inventory, itemDatabase);
+    }
+
     private void SaveVendorInventories(string saveSlot)
     {
         //! TODO
