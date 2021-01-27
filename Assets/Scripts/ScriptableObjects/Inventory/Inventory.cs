@@ -332,6 +332,7 @@ public class Inventory : ScriptableObject
         private int? crownID = null;
         private int? scepterID = null;
 
+        public SerializableInventory() {}  // Parameterless constructor necessary to be compatible with ES3
         public SerializableInventory(Inventory inventory)
         {
             items = inventory.items.Serialize();
