@@ -73,10 +73,9 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.Save("Health", so.health, saveSlot);
         ES3.Save("Mana", so.mana, saveSlot);
         ES3.Save("Lumen", so.lumen, saveSlot);
-
-        ES3.Save("Inventory", so.playerInventory, saveSlot);
-        ES3.Save("Items", so.playerInventory.items.Serialize(), saveSlot);
         ES3.Save("XP", so.xpSystem, saveSlot);
+
+        SaveInventory("Inventory", so.playerInventory, saveSlot);
     }
 
     private void LoadPlayer(string loadSlot)
@@ -85,10 +84,21 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
         ES3.LoadInto("Health", loadSlot, so.health);
         ES3.LoadInto("Mana", loadSlot, so.mana);
         ES3.LoadInto("Lumen", loadSlot, so.lumen);
-
-        ES3.LoadInto("Inventory", loadSlot, so.playerInventory);
-        so.playerInventory.items = (ES3.Load("Items", loadSlot) as Schwer.ItemSystem.SerializableInventory).Deserialize(so.itemDatabase);
         ES3.LoadInto("XP", loadSlot, so.xpSystem);
+
+        LoadInventory("Inventory", loadSlot, so.playerInventory, so.itemDatabase);
+    }
+
+    private void SaveInventory(string key, Inventory inventory, string filePath)
+    {
+        var serializableInventory = new Inventory.SerializableInventory(inventory);
+        ES3.Save(key, serializableInventory, filePath);
+    }
+
+    private void LoadInventory(string key, string filePath, Inventory inventory, Schwer.ItemSystem.ItemDatabase itemDatabase)
+    {
+        var serializableInventory = ES3.Load(key, filePath) as Inventory.SerializableInventory;
+        serializableInventory?.DeserializeInto(inventory, itemDatabase);
     }
 
     private void SaveVendorInventories(string saveSlot)
