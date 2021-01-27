@@ -306,6 +306,8 @@ public class Inventory : ScriptableObject
     {
         [ES3Serializable] private Schwer.ItemSystem.SerializableInventory items;
 
+        [ES3Serializable] private int coins;
+
         [ES3Serializable] private int weaponID = int.MinValue;
         [ES3Serializable] private int armorID = int.MinValue;
         [ES3Serializable] private int helmetID = int.MinValue;
@@ -336,6 +338,7 @@ public class Inventory : ScriptableObject
         public SerializableInventory(Inventory inventory)
         {
             items = inventory.items.Serialize();
+            coins = inventory.coins;
 
             weaponID = GetIDOrMinValue(inventory.currentWeapon);
             armorID = GetIDOrMinValue(inventory.currentArmor);
@@ -367,6 +370,7 @@ public class Inventory : ScriptableObject
         public void DeserializeInto(Inventory target, Schwer.ItemSystem.ItemDatabase itemDatabase)
         {
             target.items = items.Deserialize(itemDatabase);
+            target.coins = coins;
 
             target.currentWeapon = (weaponID != int.MinValue ? itemDatabase.GetItem(weaponID) as InventoryWeapon : null);
             target.currentArmor = (armorID != int.MinValue ? itemDatabase.GetItem(armorID) as InventoryArmor : null);
