@@ -25,6 +25,11 @@ namespace SchwerEditor.Secrets {
             FreezeTimeMidnightButton();
             ResumeTimeButton();
 
+            GUILayout.Label("Player Controls");
+            SetHealthToMax();
+            SetManaToMax();
+            SetLumenToMax();
+
             EditorGUI.EndDisabledGroup();
         }
 
@@ -70,6 +75,41 @@ namespace SchwerEditor.Secrets {
                     Log("Time multiplier set to 1.");
                 }
                 else Log("No active TimeManager found.");
+            }
+        }
+        #endregion
+
+        #region Player Controls
+        private void SetHealthToMax() {
+            if (GUILayout.Button("Set Health To Max")) {
+                var player = FindObjectOfType<PlayerMovement>();
+                if (player != null) {
+                    player.healthMeter.current = player.healthMeter.max;
+                    Log($"Player health set to max ({player.healthMeter.max}).");
+                }
+                else Log("No active Player found.");
+            }
+        }
+
+        private void SetManaToMax() {
+            if (GUILayout.Button("Set Mana To Max")) {
+                var player = FindObjectOfType<PlayerMovement>();
+                if (player != null) {
+                    player.mana.current = player.mana.max;
+                    Log($"Player mana set to max ({player.mana.max}).");
+                }
+                else Log("No active Player found.");
+            }
+        }
+
+        private void SetLumenToMax() {
+            if (GUILayout.Button("Set Lumen To Max")) {
+                var player = FindObjectOfType<PlayerMovement>();
+                if (player != null) {
+                    player.lumen.current = player.lumen.max;
+                    Log($"Player lumen set to max ({player.lumen.max}).");
+                }
+                else Log("No active Player found.");
             }
         }
         #endregion
