@@ -306,92 +306,92 @@ public class Inventory : ScriptableObject
     {
         private Schwer.ItemSystem.SerializableInventory items;
 
-        private int weaponID;
-        private int armorID;
-        private int helmetID;
-        private int glovesID;
-        private int legsID;
-        private int shieldID;
-        private int ringID;
-        private int spellbook1ID;
-        private int spellbook2ID;
-        private int spellbook3ID;
-        private int amuletID;
-        private int bootsID;
-        private int lampID;
-        private int cloakID;
-        private int shoulderID;
-        private int sealID;
+        private int? weaponID = null;
+        private int? armorID = null;
+        private int? helmetID = null;
+        private int? glovesID = null;
+        private int? legsID = null;
+        private int? shieldID = null;
+        private int? ringID = null;
+        private int? spellbook1ID = null;
+        private int? spellbook2ID = null;
+        private int? spellbook3ID = null;
+        private int? amuletID = null;
+        private int? bootsID = null;
+        private int? lampID = null;
+        private int? cloakID = null;
+        private int? shoulderID = null;
+        private int? sealID = null;
 
-        private int seedID;
-        private int runeID;
-        private int gemID;
-        private int pearlID;
-        private int eggID;
-        private int artifactID;
-        private int crownID;
-        private int scepterID;
+        private int? seedID = null;
+        private int? runeID = null;
+        private int? gemID = null;
+        private int? pearlID = null;
+        private int? eggID = null;
+        private int? artifactID = null;
+        private int? crownID = null;
+        private int? scepterID = null;
 
         public SerializableInventory(Inventory inventory)
         {
             items = inventory.items.Serialize();
 
-            weaponID = inventory.currentWeapon.id;
-            armorID = inventory.currentArmor.id;
-            helmetID = inventory.currentHelmet.id;
-            glovesID = inventory.currentGloves.id;
-            legsID = inventory.currentLegs.id;
-            shieldID = inventory.currentShield.id;
-            ringID = inventory.currentRing.id;
-            spellbook1ID = inventory.currentSpellbook.id;
-            spellbook2ID = inventory.currentSpellbookTwo.id;
-            spellbook3ID = inventory.currentSpellbookThree.id;
-            amuletID = inventory.currentAmulet.id;
-            bootsID = inventory.currentBoots.id;
-            lampID = inventory.currentLamp.id;
-            cloakID = inventory.currentCloak.id;
-            shoulderID = inventory.currentShoulder.id;
-            sealID = inventory.currentSeal.id;
+            weaponID = inventory.currentWeapon?.id;
+            armorID = inventory.currentArmor?.id;
+            helmetID = inventory.currentHelmet?.id;
+            glovesID = inventory.currentGloves?.id;
+            legsID = inventory.currentLegs?.id;
+            shieldID = inventory.currentShield?.id;
+            ringID = inventory.currentRing?.id;
+            spellbook1ID = inventory.currentSpellbook?.id;
+            spellbook2ID = inventory.currentSpellbookTwo?.id;
+            spellbook3ID = inventory.currentSpellbookThree?.id;
+            amuletID = inventory.currentAmulet?.id;
+            bootsID = inventory.currentBoots?.id;
+            lampID = inventory.currentLamp?.id;
+            cloakID = inventory.currentCloak?.id;
+            shoulderID = inventory.currentShoulder?.id;
+            sealID = inventory.currentSeal?.id;
 
-            seedID = inventory.currentSeed.id;
-            runeID = inventory.currentRune.id;
-            gemID = inventory.currentGem.id;
-            pearlID = inventory.currentPearl.id;
-            eggID = inventory.currentDragonEgg.id;
-            artifactID = inventory.currentArtifact.id;
-            crownID = inventory.currentCrown.id;
-            scepterID = inventory.currentScepter.id;
+            seedID = inventory.currentSeed?.id;
+            runeID = inventory.currentRune?.id;
+            gemID = inventory.currentGem?.id;
+            pearlID = inventory.currentPearl?.id;
+            eggID = inventory.currentDragonEgg?.id;
+            artifactID = inventory.currentArtifact?.id;
+            crownID = inventory.currentCrown?.id;
+            scepterID = inventory.currentScepter?.id;
         }
 
         public void DeserializeInto(Inventory target, Schwer.ItemSystem.ItemDatabase itemDatabase)
         {
             target.items = items.Deserialize(itemDatabase);
 
-            target.currentWeapon = (itemDatabase.GetItem(weaponID) as InventoryWeapon);
-            target.currentArmor = (itemDatabase.GetItem(armorID) as InventoryArmor);
-            target.currentHelmet = (itemDatabase.GetItem(helmetID) as InventoryHelmet);
-            target.currentGloves = (itemDatabase.GetItem(glovesID) as InventoryGlove);
-            target.currentLegs = (itemDatabase.GetItem(legsID) as InventoryLegs);
-            target.currentShield = (itemDatabase.GetItem(shieldID) as InventoryShield);
-            target.currentRing = (itemDatabase.GetItem(ringID) as InventoryRing);
-            target.currentSpellbook = (itemDatabase.GetItem(spellbook1ID) as InventorySpellbook);
-            target.currentSpellbookTwo = (itemDatabase.GetItem(spellbook2ID) as InventorySpellbook);
-            target.currentSpellbookThree = (itemDatabase.GetItem(spellbook3ID) as InventorySpellbook);
-            target.currentAmulet = (itemDatabase.GetItem(amuletID) as InventoryAmulet);
-            target.currentBoots = (itemDatabase.GetItem(bootsID) as InventoryBoots);
-            target.currentLamp = (itemDatabase.GetItem(lampID) as InventoryLamp);
-            target.currentCloak = (itemDatabase.GetItem(cloakID) as InventoryCloak);
-            target.currentShoulder = (itemDatabase.GetItem(shoulderID) as InventoryShoulder);
-            target.currentSeal = (itemDatabase.GetItem(sealID) as InventorySeal);
+            target.currentWeapon = (weaponID.HasValue ? itemDatabase.GetItem(weaponID.Value) as InventoryWeapon : null);
+            target.currentArmor = (armorID.HasValue ? itemDatabase.GetItem(armorID.Value) as InventoryArmor : null);
+            target.currentHelmet = (helmetID.HasValue ? itemDatabase.GetItem(helmetID.Value) as InventoryHelmet : null);
+            target.currentGloves = (glovesID.HasValue ? itemDatabase.GetItem(glovesID.Value) as InventoryGlove : null);
+            target.currentLegs = (legsID.HasValue ? itemDatabase.GetItem(legsID.Value) as InventoryLegs : null);
+            target.currentShield = (shieldID.HasValue ? itemDatabase.GetItem(shieldID.Value) as InventoryShield : null);
+            target.currentRing = (ringID.HasValue ? itemDatabase.GetItem(ringID.Value) as InventoryRing : null);
+            target.currentSpellbook = (spellbook1ID.HasValue ? itemDatabase.GetItem(spellbook1ID.Value) as InventorySpellbook : null);
+            target.currentSpellbookTwo = (spellbook2ID.HasValue ? itemDatabase.GetItem(spellbook2ID.Value) as InventorySpellbook : null);
+            target.currentSpellbookThree = (spellbook3ID.HasValue ? itemDatabase.GetItem(spellbook3ID.Value) as InventorySpellbook : null);
+            target.currentAmulet = (amuletID.HasValue ? itemDatabase.GetItem(amuletID.Value) as InventoryAmulet : null);
+            target.currentBoots = (bootsID.HasValue ? itemDatabase.GetItem(bootsID.Value) as InventoryBoots : null);
+            target.currentLamp = (lampID.HasValue ? itemDatabase.GetItem(lampID.Value) as InventoryLamp : null);
+            target.currentCloak = (cloakID.HasValue ? itemDatabase.GetItem(cloakID.Value) as InventoryCloak : null);
+            target.currentShoulder = (shoulderID.HasValue ? itemDatabase.GetItem(shoulderID.Value) as InventoryShoulder : null);
+            target.currentSeal = (sealID.HasValue ? itemDatabase.GetItem(sealID.Value) as InventorySeal : null);
 
-            target.currentSeed = (itemDatabase.GetItem(seedID) as QuestSeed);
-            target.currentRune = (itemDatabase.GetItem(runeID) as QuestRune);
-            target.currentGem = (itemDatabase.GetItem(gemID) as QuestGem);
-            target.currentPearl = (itemDatabase.GetItem(pearlID) as QuestPearl);
-            target.currentDragonEgg = (itemDatabase.GetItem(eggID) as QuestDragonEgg);
-            target.currentArtifact = (itemDatabase.GetItem(artifactID) as QuestArtifact);
-            target.currentCrown = (itemDatabase.GetItem(crownID) as QuestCrown);
-            target.currentScepter = (itemDatabase.GetItem(scepterID) as QuestScepter);
+            target.currentSeed = (seedID.HasValue ? itemDatabase.GetItem(seedID.Value) as QuestSeed : null);
+            target.currentRune = (runeID.HasValue ? itemDatabase.GetItem(runeID.Value) as QuestRune : null);
+            target.currentGem = (gemID.HasValue ? itemDatabase.GetItem(gemID.Value) as QuestGem : null);
+            target.currentPearl = (pearlID.HasValue ? itemDatabase.GetItem(pearlID.Value) as QuestPearl : null);
+            target.currentDragonEgg = (eggID.HasValue ? itemDatabase.GetItem(eggID.Value) as QuestDragonEgg : null);
+            target.currentArtifact = (artifactID.HasValue ? itemDatabase.GetItem(artifactID.Value) as QuestArtifact : null);
+            target.currentCrown = (crownID.HasValue ? itemDatabase.GetItem(crownID.Value) as QuestCrown : null);
+            target.currentScepter = (scepterID.HasValue ? itemDatabase.GetItem(scepterID.Value) as QuestScepter : null);
         }
     }
     #endregion
