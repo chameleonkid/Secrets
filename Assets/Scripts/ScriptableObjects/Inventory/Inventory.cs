@@ -304,33 +304,33 @@ public class Inventory : ScriptableObject
     [Serializable]
     public class SerializableInventory
     {
-        private Schwer.ItemSystem.SerializableInventory items;
+        [ES3Serializable] private Schwer.ItemSystem.SerializableInventory items;
 
-        private int? weaponID = null;
-        private int? armorID = null;
-        private int? helmetID = null;
-        private int? glovesID = null;
-        private int? legsID = null;
-        private int? shieldID = null;
-        private int? ringID = null;
-        private int? spellbook1ID = null;
-        private int? spellbook2ID = null;
-        private int? spellbook3ID = null;
-        private int? amuletID = null;
-        private int? bootsID = null;
-        private int? lampID = null;
-        private int? cloakID = null;
-        private int? shoulderID = null;
-        private int? sealID = null;
+        [ES3Serializable] private int? weaponID = null;
+        [ES3Serializable] private int? armorID = null;
+        [ES3Serializable] private int? helmetID = null;
+        [ES3Serializable] private int? glovesID = null;
+        [ES3Serializable] private int? legsID = null;
+        [ES3Serializable] private int? shieldID = null;
+        [ES3Serializable] private int? ringID = null;
+        [ES3Serializable] private int? spellbook1ID = null;
+        [ES3Serializable] private int? spellbook2ID = null;
+        [ES3Serializable] private int? spellbook3ID = null;
+        [ES3Serializable] private int? amuletID = null;
+        [ES3Serializable] private int? bootsID = null;
+        [ES3Serializable] private int? lampID = null;
+        [ES3Serializable] private int? cloakID = null;
+        [ES3Serializable] private int? shoulderID = null;
+        [ES3Serializable] private int? sealID = null;
 
-        private int? seedID = null;
-        private int? runeID = null;
-        private int? gemID = null;
-        private int? pearlID = null;
-        private int? eggID = null;
-        private int? artifactID = null;
-        private int? crownID = null;
-        private int? scepterID = null;
+        [ES3Serializable] private int? seedID = null;
+        [ES3Serializable] private int? runeID = null;
+        [ES3Serializable] private int? gemID = null;
+        [ES3Serializable] private int? pearlID = null;
+        [ES3Serializable] private int? eggID = null;
+        [ES3Serializable] private int? artifactID = null;
+        [ES3Serializable] private int? crownID = null;
+        [ES3Serializable] private int? scepterID = null;
 
         public SerializableInventory() {}  // Parameterless constructor necessary to be compatible with ES3
         public SerializableInventory(Inventory inventory)
