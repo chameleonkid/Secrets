@@ -25,6 +25,11 @@ namespace SchwerEditor.Secrets {
             FreezeTimeMidnightButton();
             ResumeTimeButton();
 
+            GUILayout.Label("Player Controls");
+            SetHealthToMax();
+            SetManaToMax();
+            SetLumenToMax();
+
             EditorGUI.EndDisabledGroup();
         }
 
@@ -37,6 +42,7 @@ namespace SchwerEditor.Secrets {
             EditorGUILayout.HelpBox("Reloading a scene may take some time, depending on scene complexity.", MessageType.Info);
         }
 
+        #region Time Controls
         private void FreezeTimeMiddayButton() {
             if (GUILayout.Button("Freeze Time Midday")) {
                 var time = FindObjectOfType<TimeManager>();
@@ -45,9 +51,7 @@ namespace SchwerEditor.Secrets {
                     ReflectionUtility.SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midday.");
                 }
-                else {
-                    LogWarning("Could not find an active TimeManager!");
-                }
+                else Log("No active TimeManager found.");
             }
         }
 
@@ -59,9 +63,7 @@ namespace SchwerEditor.Secrets {
                     ReflectionUtility.SetPrivateField(time, "timeMultiplier", 0);
                     Log("Time set to and frozen at midnight.");
                 }
-                else {
-                    LogWarning("Could not find an active TimeManager!");
-                }
+                else Log("No active TimeManager found.");
             }
         }
 
@@ -72,11 +74,45 @@ namespace SchwerEditor.Secrets {
                     ReflectionUtility.SetPrivateField(time, "timeMultiplier", 1);
                     Log("Time multiplier set to 1.");
                 }
-                else {
-                    LogWarning("Could not find an active TimeManager!");
-                }
+                else Log("No active TimeManager found.");
             }
         }
+        #endregion
+
+        #region Player Controls
+        private void SetHealthToMax() {
+            if (GUILayout.Button("Set Health To Max")) {
+                var player = FindObjectOfType<PlayerMovement>();
+                if (player != null) {
+                    player.healthMeter.current = player.healthMeter.max;
+                    Log($"Player health set to max ({player.healthMeter.max}).");
+                }
+                else Log("No active Player found.");
+            }
+        }
+
+        private void SetManaToMax() {
+            if (GUILayout.Button("Set Mana To Max")) {
+                var player = FindObjectOfType<PlayerMovement>();
+                if (player != null) {
+                    player.mana.current = player.mana.max;
+                    Log($"Player mana set to max ({player.mana.max}).");
+                }
+                else Log("No active Player found.");
+            }
+        }
+
+        private void SetLumenToMax() {
+            if (GUILayout.Button("Set Lumen To Max")) {
+                var player = FindObjectOfType<PlayerMovement>();
+                if (player != null) {
+                    player.lumen.current = player.lumen.max;
+                    Log($"Player lumen set to max ({player.lumen.max}).");
+                }
+                else Log("No active Player found.");
+            }
+        }
+        #endregion
 
         private static void Log(object message, Object context = null) => Debug.Log($"{_name}: {message}", context);
         private static void LogWarning(object message, Object context = null) => Debug.LogWarning($"{_name}: {message}", context);
