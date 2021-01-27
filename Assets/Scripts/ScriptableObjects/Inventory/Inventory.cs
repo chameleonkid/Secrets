@@ -18,7 +18,6 @@ public class Inventory : ScriptableObject
         }
     }
 
-
     public Item currentItem;
     [Header("Currently worn Items")]
     public InventoryWeapon currentWeapon;
@@ -54,10 +53,6 @@ public class Inventory : ScriptableObject
     public float totalCritChance;
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
-
-
-
-
 
 #if UNITY_EDITOR
     // Needed in order to allow changes to the Inventory in the editor to be saved.
@@ -115,7 +110,6 @@ public class Inventory : ScriptableObject
                 Swap(ref currentRing, ring);
                  break;
 
-
             case InventorySpellbook spellbook:
                 if(!currentSpellbook)
                 {
@@ -130,8 +124,6 @@ public class Inventory : ScriptableObject
                     Swap(ref currentSpellbookThree, spellbook);
                 }
                 break;
-
-
 
             case InventoryAmulet amulet:
                 Swap(ref currentAmulet, amulet);
@@ -183,8 +175,6 @@ public class Inventory : ScriptableObject
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
-
-
     }
 
     private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
@@ -310,4 +300,3 @@ public class Inventory : ScriptableObject
         }
     }
 }
-
