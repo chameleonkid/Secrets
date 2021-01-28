@@ -32,7 +32,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         }
         else
         {
-         //   itemImage.sprite = defaultSprite;
+            itemImage.sprite = defaultSprite;
 
             if (numberHeldDisplay != null)
             {

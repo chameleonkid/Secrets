@@ -186,114 +186,88 @@ public class Inventory : ScriptableObject
                 // Exit the function early if item is not equippable.
                 return;
             case InventoryWeapon weapon:
-                items[currentWeapon]++;
-                currentWeapon = null;
+                Swap(ref currentWeapon, null);
                 break;
             case InventoryArmor armor:
-                items[currentArmor]++;
-                currentArmor = null;
+                Swap(ref currentArmor, null);
                 break;
             case InventoryHelmet helmet:
-                items[currentHelmet]++;
-                currentHelmet = null;
+                Swap(ref currentHelmet, null);
                 break;
             case InventoryGlove gloves:
-                items[currentGloves]++;
-                currentGloves = null;
+                Swap(ref currentGloves, null);
                 break;
             case InventoryLegs legs:
-                items[currentLegs]++;
-                currentLegs = null;
+                Swap(ref currentLegs, null);
                 break;
             case InventoryShield shield:
-                items[currentShield]++;
-                currentShield = null;
+                Swap(ref currentShield, null);
                 break;
             case InventoryRing ring:
-                items[currentRing]++;
-                currentRing = null;
+                Swap(ref currentRing, null);
                 break;
-                // SpellbookCase needs to be looked at seperatly
+
             case InventorySpellbook spellbook:
                 if (!currentSpellbook)
                 {
-                    items[currentSpellbook]++;
-                    currentSpellbook = null;
+                    Swap(ref currentSpellbook, null);
                 }
                 else if (!currentSpellbookTwo)
                 {
-                    items[currentSpellbookTwo]++;
-                    currentSpellbookTwo = null; ;
+                    Swap(ref currentSpellbookTwo, null);
                 }
                 else
                 {
-                    items[currentSpellbookThree]++;
-                    currentSpellbookThree = null;
+                    Swap(ref currentSpellbookThree, null);
                 }
                 break;
 
             case InventoryAmulet amulet:
-                items[currentAmulet]++;
-                currentAmulet = null;
+                Swap(ref currentAmulet, null);
                 break;
             case InventoryBoots boots:
-                items[currentBoots]++;
-                currentBoots = null;
+                Swap(ref currentBoots, null);
                 break;
             case InventoryLamp lamp:
-                items[currentLamp]++;
-                currentLamp = null;
+                Swap(ref currentLamp, null);
                 break;
             case InventoryCloak cloak:
-                items[currentCloak]++;
-                currentCloak = null;
+                Swap(ref currentCloak, null);
                 break;
             case InventoryBelt belt:
-                items[currentBelt]++;
-                currentBelt = null; ;
+                Swap(ref currentBelt, null);
                 break;
             case InventoryShoulder shoulder:
-                items[currentShoulder]++;
-                currentShoulder = null;
+                Swap(ref currentShoulder, null);
                 break;
             case InventorySeal seal:
-                items[currentSeal]++;
-                currentSeal = null;
+                Swap(ref currentSeal, null);
                 break;
             case QuestSeed seed:
-                items[currentSeed]++;
-                currentSeed = null;
+                Swap(ref currentSeed, null);
                 break;
             case QuestRune rune:
-                items[currentRune]++;
-                currentRune = null;
+                Swap(ref currentRune, null);
                 break;
             case QuestGem gem:
-                items[currentGem]++;
-                currentGem = null;
+                Swap(ref currentGem, null);
                 break;
             case QuestPearl pearl:
-                items[currentPearl]++;
-                currentPearl = null; ;
+                Swap(ref currentPearl, null);
                 break;
             case QuestArtifact artifact:
-                items[currentArtifact]++;
-                currentArtifact = null;
+                Swap(ref currentArtifact, null);
                 break;
             case QuestCrown crown:
-                items[currentCrown]++;
-                currentCrown = null;
+                Swap(ref currentCrown, null);
                 break;
             case QuestScepter scepter:
-                items[currentScepter]++;
-                currentScepter = null;
+                Swap(ref currentScepter, null);
                 break;
             case QuestDragonEgg dragonEgg:
-                items[currentDragonEgg]++;
-                currentDragonEgg = null;
+                Swap(ref currentDragonEgg, null);
                 break;
         }
-        // Applies to all equippables.
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
@@ -304,6 +278,10 @@ public class Inventory : ScriptableObject
         if (currentlyEquipped != null)
         {
             items[currentlyEquipped]++;
+        }
+        else
+        {
+            return;
         }
 
         currentlyEquipped = newEquip;
