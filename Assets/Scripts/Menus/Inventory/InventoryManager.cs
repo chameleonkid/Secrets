@@ -33,6 +33,7 @@ public class InventoryManager : MonoBehaviour
         inventoryDisplay.OnSlotSelected = SetUpItemDescription;
         inventoryDisplay.OnSlotUsed = OnItemUsed;
         inventoryDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
+        inventoryDisplay.SubscribeToEquipmentSlotUsed(Unequip);
     }
 
     public void ClosePanel()
@@ -118,6 +119,11 @@ public class InventoryManager : MonoBehaviour
             var context = (item is EquippableItem) ? " was equipped" : " was used";
             descriptionText.text = item.name + context;
         }
+    }
+
+    private void Unequip(Item newItem)
+    {
+        inventory.UnEquip(newItem as EquippableItem);  
     }
 
         
