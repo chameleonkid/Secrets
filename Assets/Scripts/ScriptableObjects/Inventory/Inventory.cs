@@ -177,6 +177,128 @@ public class Inventory : ScriptableObject
         CalcSpellDamage();
     }
 
+
+    public void UnEquip(EquippableItem item)
+    {
+        switch (item)
+        {
+            default:
+                // Exit the function early if item is not equippable.
+                return;
+            case InventoryWeapon weapon:
+                items[currentWeapon]++;
+                currentWeapon = null;
+                break;
+            case InventoryArmor armor:
+                items[currentArmor]++;
+                currentArmor = null;
+                break;
+            case InventoryHelmet helmet:
+                items[currentHelmet]++;
+                currentHelmet = null;
+                break;
+            case InventoryGlove gloves:
+                items[currentGloves]++;
+                currentGloves = null;
+                break;
+            case InventoryLegs legs:
+                items[currentLegs]++;
+                currentLegs = null;
+                break;
+            case InventoryShield shield:
+                items[currentShield]++;
+                currentShield = null;
+                break;
+            case InventoryRing ring:
+                items[currentRing]++;
+                currentRing = null;
+                break;
+                // SpellbookCase needs to be looked at seperatly
+            case InventorySpellbook spellbook:
+                if (!currentSpellbook)
+                {
+                    items[currentSpellbook]++;
+                    currentSpellbook = null;
+                }
+                else if (!currentSpellbookTwo)
+                {
+                    items[currentSpellbookTwo]++;
+                    currentSpellbookTwo = null; ;
+                }
+                else
+                {
+                    items[currentSpellbookThree]++;
+                    currentSpellbookThree = null;
+                }
+                break;
+
+            case InventoryAmulet amulet:
+                items[currentAmulet]++;
+                currentAmulet = null;
+                break;
+            case InventoryBoots boots:
+                items[currentBoots]++;
+                currentBoots = null;
+                break;
+            case InventoryLamp lamp:
+                items[currentLamp]++;
+                currentLamp = null;
+                break;
+            case InventoryCloak cloak:
+                items[currentCloak]++;
+                currentCloak = null;
+                break;
+            case InventoryBelt belt:
+                items[currentBelt]++;
+                currentBelt = null; ;
+                break;
+            case InventoryShoulder shoulder:
+                items[currentShoulder]++;
+                currentShoulder = null;
+                break;
+            case InventorySeal seal:
+                items[currentSeal]++;
+                currentSeal = null;
+                break;
+            case QuestSeed seed:
+                items[currentSeed]++;
+                currentSeed = null;
+                break;
+            case QuestRune rune:
+                items[currentRune]++;
+                currentRune = null;
+                break;
+            case QuestGem gem:
+                items[currentGem]++;
+                currentGem = null;
+                break;
+            case QuestPearl pearl:
+                items[currentPearl]++;
+                currentPearl = null; ;
+                break;
+            case QuestArtifact artifact:
+                items[currentArtifact]++;
+                currentArtifact = null;
+                break;
+            case QuestCrown crown:
+                items[currentCrown]++;
+                currentCrown = null;
+                break;
+            case QuestScepter scepter:
+                items[currentScepter]++;
+                currentScepter = null;
+                break;
+            case QuestDragonEgg dragonEgg:
+                items[currentDragonEgg]++;
+                currentDragonEgg = null;
+                break;
+        }
+        // Applies to all equippables.
+        CalcDefense();
+        CalcCritChance();
+        CalcSpellDamage();
+    }
+
     private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
     {
         if (currentlyEquipped != null)

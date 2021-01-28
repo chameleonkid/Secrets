@@ -21,6 +21,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Material laserMaterial = default;
 
     public event Action OnEquipItem;
+    public event Action OnUnEquipItem;
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -76,42 +77,51 @@ public class InventoryManager : MonoBehaviour
         descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
 
+
+
+
+
     private void OnItemUsed(Item item)
     {
         if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
         item.Use();
-
-        if (item is EquippableItem)
         {
-            inventory.Equip((EquippableItem)item);
-            if(inventory.currentWeapon)
+
+            if (item is EquippableItem)
             {
-                setWeaponColor();
+                inventory.Equip((EquippableItem)item);
+                if (inventory.currentWeapon)
+                {
+                    setWeaponColor();
+                }
+                if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
+                {
+                    setLaserColor();
+                }
+                OnEquipItem?.Invoke();
+
             }
-            if(inventory.currentSpellbook || inventory.currentSpellbookTwo)
+
+            if (item.usable)
             {
-                setLaserColor();
+                inventory.items[item]--;
             }
-            OnEquipItem?.Invoke();
 
-        }
+            if (inventory.items[item] <= 0)
+            {
+                EventSystem.current.SetSelectedGameObject(closeButton);
+            }
 
-        if (item.usable)
-        {
-            inventory.items[item]--;
+            inventoryDisplay.UpdateEquipmentSlots();
+            UpdateStatDisplays();
+            var context = (item is EquippableItem) ? " was equipped" : " was used";
+            descriptionText.text = item.name + context;
         }
-        
-        if (inventory.items[item] <= 0)
-        {
-            EventSystem.current.SetSelectedGameObject(closeButton);
-        }
-
-        inventoryDisplay.UpdateEquipmentSlots();
-        UpdateStatDisplays();
-        var context = (item is EquippableItem) ? " was equipped" : " was used";
-        descriptionText.text = item.name + context;
     }
+
+        
+
 
     private void UpdateStatDisplays()
     {

@@ -52,8 +52,6 @@ public class SimpleSave : DDOLSingleton<SimpleSave>
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
-
-        // PauseMenü schließen und Zeit weiterlaufen lassen
         // pausePanel.SetActive(false);    //! Is this necessary if we are already loading the scene afresh?
         Time.timeScale = 1f;
     }
