@@ -33,7 +33,7 @@ public class CoolDownDisplayManager : MonoBehaviour
         player.OnAttackTriggered -= SetMeleeCoolDown;
         player.OnSpellTriggered -= SetSpell0CoolDown;
         player.OnSpellTwoTriggered -= SetSpell0CoolDown;
-        player.OnLampTriggered += SetLampCoolDown;
+        player.OnLampTriggered -= SetLampCoolDown;
         inventory.OnEquipmentChanged -= ChangeCoolDownSprites;
     }
 
