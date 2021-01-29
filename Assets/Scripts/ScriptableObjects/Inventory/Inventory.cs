@@ -7,6 +7,7 @@ public class Inventory : ScriptableObject
     public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
 
     public event Action OnEquipmentChanged;
+    public event Action<Item> OnNoSpaceOrNothing;
 
     public event Action OnCoinCountChanged;
     [SerializeField] private int _coins;
@@ -55,6 +56,9 @@ public class Inventory : ScriptableObject
     public float totalCritChance;
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip noInventorySpace = default;
 
 #if UNITY_EDITOR
     // Needed in order to allow changes to the Inventory in the editor to be saved.
@@ -182,6 +186,8 @@ public class Inventory : ScriptableObject
 
     public void Unequip(EquippableItem item)
     {
+        if(item != null && items.HasCapacity(item))
+        { 
         switch (item)
         {
             default:
@@ -274,6 +280,12 @@ public class Inventory : ScriptableObject
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
+        }
+        else
+        {
+            OnNoSpaceOrNothing?.Invoke(item);
+            SoundManager.RequestSound(noInventorySpace);
+        }
     }
 
     //! Currently doesn't account for `items.maxCapacity`!

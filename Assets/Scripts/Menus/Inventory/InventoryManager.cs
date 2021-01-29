@@ -32,6 +32,28 @@ public class InventoryManager : MonoBehaviour
         inventoryDisplay.SubscribeToEquipmentSlotUsed(Unequip);
     }
 
+    private void OnEnable()
+    {
+        inventory.OnNoSpaceOrNothing += SetDescriptionToFullOrNothing;
+    }
+
+    private void OnDisable()
+    {
+        inventory.OnNoSpaceOrNothing -= SetDescriptionToFullOrNothing;
+    }
+
+    private void SetDescriptionToFullOrNothing(Item item)
+    {
+        if(item == null)
+        {
+            descriptionText.text = "Can't take of nothing...";
+        }
+        else
+        {
+            descriptionText.text = "Not enaugh space to take " + item + " off...";
+        }
+    }
+
     public void ClosePanel()
     {
         inventoryPanel.SetActive(false);
