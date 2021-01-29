@@ -15,7 +15,6 @@ public class CoolDownDisplayManager : MonoBehaviour
     [SerializeField] private Inventory inventory = default;
     [SerializeField] private PlayerMovement player = default;
     [SerializeField] private Color originalColor = default;
-    [SerializeField] private InventoryManager inventoryManager = default;
     // [SerializeField] private float fillingTime = default;
 
     private void OnEnable()
@@ -24,7 +23,7 @@ public class CoolDownDisplayManager : MonoBehaviour
         player.OnSpellTriggered += SetSpell0CoolDown;
         player.OnSpellTwoTriggered += SetSpell1CoolDown;
         player.OnLampTriggered += SetLampCoolDown;
-        inventoryManager.OnEquipItem += changeCoolDownSprites;
+        inventory.OnEquipmentChanged += changeCoolDownSprites;
         originalColor = meleeWeaponCooldown.color;
         changeCoolDownSprites();
     }
@@ -35,7 +34,7 @@ public class CoolDownDisplayManager : MonoBehaviour
         player.OnSpellTriggered -= SetSpell0CoolDown;
         player.OnSpellTwoTriggered -= SetSpell0CoolDown;
         player.OnLampTriggered += SetLampCoolDown;
-        inventoryManager.OnEquipItem -= changeCoolDownSprites;
+        inventory.OnEquipmentChanged -= changeCoolDownSprites;
     }
 
     private void changeCoolDownSprites()

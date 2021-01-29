@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
-using System;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -19,9 +18,6 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lightRadiusDisplay = default;
     [SerializeField] private Material swordMaterial = default;
     [SerializeField] private Material laserMaterial = default;
-
-    public event Action OnEquipItem;
-    public event Action OnUnEquipItem;
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -95,7 +91,6 @@ public class InventoryManager : MonoBehaviour
                 {
                     SetLaserColor();
                 }
-                OnEquipItem?.Invoke();
             }
 
             if (item.usable)
