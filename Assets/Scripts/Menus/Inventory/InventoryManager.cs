@@ -23,6 +23,9 @@ public class InventoryManager : MonoBehaviour
 
     private InventoryDisplay inventoryDisplay;
 
+    private void OnEnable() => inventory.OnNoSpaceOrNothing += SetDescriptionToFullOrNothing;
+    private void OnDisable() => inventory.OnNoSpaceOrNothing -= SetDescriptionToFullOrNothing;
+
     private void Awake()
     {
         inventoryDisplay = GetComponentInChildren<InventoryDisplay>(true);
@@ -32,25 +35,15 @@ public class InventoryManager : MonoBehaviour
         inventoryDisplay.SubscribeToEquipmentSlotUsed(Unequip);
     }
 
-    private void OnEnable()
-    {
-        inventory.OnNoSpaceOrNothing += SetDescriptionToFullOrNothing;
-    }
-
-    private void OnDisable()
-    {
-        inventory.OnNoSpaceOrNothing -= SetDescriptionToFullOrNothing;
-    }
-
     private void SetDescriptionToFullOrNothing(Item item)
     {
-        if(item == null)
+        if (item == null)
         {
-            descriptionText.text = "Can't take of nothing...";
+            descriptionText.text = "Can't take off nothing...";
         }
         else
         {
-            descriptionText.text = "Not enaugh space to take " + item + " off...";
+            descriptionText.text = $"Not enough space to unequip {item}...";
         }
     }
 
