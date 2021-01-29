@@ -276,6 +276,7 @@ public class Inventory : ScriptableObject
         CalcSpellDamage();
     }
 
+    //! Currently doesn't account for `items.maxCapacity`!
     private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
     {
         // Don't do anything if trying to equip the same item.
