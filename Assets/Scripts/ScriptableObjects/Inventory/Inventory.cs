@@ -407,6 +407,35 @@ public class Inventory : ScriptableObject
         }
     }
 
+    public void ResetEquipment()
+    {
+        currentWeapon = null;
+        currentArmor = null;
+        currentHelmet = null;
+        currentGloves = null;
+        currentLegs = null;
+        currentShield = null;
+        currentRing = null;
+        currentSpellbook = null;
+        currentSpellbookTwo = null;
+        currentSpellbookThree = null;
+        currentAmulet = null;
+        currentBoots = null;
+        currentLamp = null;
+        currentCloak = null;
+        currentBelt = null;
+        currentShoulder = null;
+        currentSeal = null;
+        currentSeed = null;
+        currentRune = null;
+        currentGem = null;
+        currentPearl = null;
+        currentArtifact = null;
+        currentDragonEgg = null;
+        currentCrown = null;
+        currentScepter = null;
+    }
+
     #region Serialisation
     [Serializable]
     public class SerializableInventory
