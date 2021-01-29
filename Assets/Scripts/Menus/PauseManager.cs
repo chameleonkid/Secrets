@@ -13,7 +13,7 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Pause") && CanvasManager.Instance.IsFreeOrActive(pausePanel.gameObject))
+        if (Input.GetButtonDown("Pause") && CanvasManager.Instance.IsFreeOrActive(pausePanel))
         {
             loadPanel.SetActive(false);
             ChangePause();
@@ -30,6 +30,10 @@ public class PauseManager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0 : 1;
         pausePanel.SetActive(isPaused);
+        if (!isPaused)
+        {
+            CanvasManager.Instance.RegisterClosedCanvas(pausePanel);
+        }
     }
 
     public void Quit()
