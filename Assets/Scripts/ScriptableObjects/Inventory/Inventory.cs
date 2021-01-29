@@ -437,7 +437,6 @@ public class Inventory : ScriptableObject
         currentScepter = null;
     }
 
-    #region Serialisation
     [Serializable]
     public class SerializableInventory
     {
@@ -542,5 +541,4 @@ public class Inventory : ScriptableObject
             else return int.MinValue;
         }
     }
-    #endregion
 }
