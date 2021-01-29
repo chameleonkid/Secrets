@@ -23,8 +23,8 @@ public class InventoryManager : MonoBehaviour
 
     private InventoryDisplay inventoryDisplay;
 
-    private void OnEnable() => inventory.OnNoSpaceOrNothing += SetDescriptionToFullOrNothing;
-    private void OnDisable() => inventory.OnNoSpaceOrNothing -= SetDescriptionToFullOrNothing;
+    private void OnEnable() => inventory.OnFailToUnequip += SetDescriptionFailedUnequip;
+    private void OnDisable() => inventory.OnFailToUnequip -= SetDescriptionFailedUnequip;
 
     private void Awake()
     {
@@ -33,18 +33,6 @@ public class InventoryManager : MonoBehaviour
         inventoryDisplay.OnSlotUsed = OnItemUsed;
         inventoryDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
         inventoryDisplay.SubscribeToEquipmentSlotUsed(Unequip);
-    }
-
-    private void SetDescriptionToFullOrNothing(Item item)
-    {
-        if (item == null)
-        {
-            descriptionText.text = "Can't take off nothing...";
-        }
-        else
-        {
-            descriptionText.text = $"Not enough space to unequip {item}...";
-        }
     }
 
     public void ClosePanel()
@@ -125,6 +113,18 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);
+
+    private void SetDescriptionFailedUnequip(Item triedItem)
+    {
+        if (triedItem == null)
+        {
+            descriptionText.text = "Can't take off nothing...";
+        }
+        else
+        {
+            descriptionText.text = $"Not enough space to unequip {triedItem}...";
+        }
+    }
 
     private void UpdateStatDisplays()
     {

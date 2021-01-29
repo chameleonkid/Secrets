@@ -7,7 +7,7 @@ public class Inventory : ScriptableObject
     public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
 
     public event Action OnEquipmentChanged;
-    public event Action<Item> OnNoSpaceOrNothing;
+    public event Action<Item> OnFailToUnequip;
 
     public event Action OnCoinCountChanged;
     [SerializeField] private int _coins;
@@ -283,7 +283,7 @@ public class Inventory : ScriptableObject
         }
         else
         {
-            OnNoSpaceOrNothing?.Invoke(item);
+            OnFailToUnequip?.Invoke(item);
             SoundManager.RequestSound(noInventorySpace);
         }
     }
