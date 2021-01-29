@@ -79,6 +79,7 @@ public class VendorManager : ItemDisplay
     {
         inventory = null;
         vendorPanel.SetActive(false);
+        CanvasManager.Instance.RegisterClosedCanvas(vendorPanel);
         Time.timeScale = 1;
     }
 

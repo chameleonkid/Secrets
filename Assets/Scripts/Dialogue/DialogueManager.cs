@@ -36,7 +36,7 @@ public class DialogueManager : MonoBehaviour
     private void StartDialogue(Dialogue dialogue)
     {
         dialoguePanel.SetActive(true);
-        if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel.gameObject))
+        if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel))
         {
             if (nextButton)
             {
@@ -93,6 +93,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.25f);
             Time.timeScale = 1;
             dialoguePanel.SetActive(false);
+            CanvasManager.Instance.RegisterClosedCanvas(dialoguePanel);
         }
     }
 }

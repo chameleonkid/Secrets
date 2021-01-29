@@ -40,6 +40,7 @@ public class InventoryManager : MonoBehaviour
     {
         inventoryPanel.SetActive(false);
         Time.timeScale = 1;
+        CanvasManager.Instance.RegisterClosedCanvas(inventoryPanel);
     }
 
     private void OpenPanel()

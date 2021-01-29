@@ -63,11 +63,7 @@ public class SavePoint : MonoBehaviour
 
     public void SaveSlot3() => Save(SaveUtility.SaveSlots[2], saveSlot3);
 
-    public void CancelSave()
-    {
-        saveMenu.SetActive(false);
-        Time.timeScale = 1;
-    }
+    public void CancelSave() => CloseMenu();
 
     public void Save(string saveSlot, Text saveSlotDisplay)
     {
@@ -77,8 +73,15 @@ public class SavePoint : MonoBehaviour
 
         saveSlotDisplay.text = saveName.RuntimeValue;
 
-        Time.timeScale = 1;
-        saveMenu.SetActive(false);
         Debug.Log("Game was saved!");
+        
+        CloseMenu();
+    }
+
+    private void CloseMenu()
+    {
+        saveMenu.SetActive(false);
+        Time.timeScale = 1;
+        CanvasManager.Instance.RegisterClosedCanvas(saveMenu);
     }
 }
