@@ -110,7 +110,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void Unequip(Item newItem) => inventory.UnEquip(newItem as EquippableItem);
+    private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);
 
     private void UpdateStatDisplays()
     {

@@ -180,7 +180,7 @@ public class Inventory : ScriptableObject
     }
 
 
-    public void UnEquip(EquippableItem item)
+    public void Unequip(EquippableItem item)
     {
         switch (item)
         {
