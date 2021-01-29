@@ -22,6 +22,7 @@ public class PlayerMovement : Character
     [SerializeField] private Button uiAttackButton = default;
     [SerializeField] private Button uiSpellButton = default;
     [SerializeField] private Button uiSpellTwoButton = default;
+    [SerializeField] private Button uiSpellThreeButton = default;
     [SerializeField] private Button uiLampButton = default;
     [SerializeField] private Joystick joystick = default;
 
@@ -89,6 +90,7 @@ public class PlayerMovement : Character
     public event Action OnAttackTriggered;
     public event Action OnSpellTriggered;
     public event Action OnSpellTwoTriggered;
+    public event Action OnSpellThreeTriggered;
     public event Action OnLampTriggered;
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
@@ -127,6 +129,7 @@ public class PlayerMovement : Character
         uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
         uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
         uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(SpellAttackTwo);
+        uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(SpellAttackThree);
         uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
 
     }
@@ -164,26 +167,17 @@ public class PlayerMovement : Character
         {
             SpellAttack();
         }
-
-        if (Input.GetButtonDown("Lamp"))
-        {
-            ToggleLamp();
-        }
-
-        //########################################################################### Round Attack if Mana > 0 ##################################################################################
-        if (Input.GetButton("RoundAttack"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (Input.GetButton("SpellCast2"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             SpellAttackTwo();
         }
-        //########################################################################### Bow Shooting with new Inventory ##################################################################################
-
-
-
-        //##############################################################################################################################################################
-
-        if (Input.GetButtonUp("UseItem"))
+        if (Input.GetButton("SpellCast3"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            animator.SetBool("isShooting", false);
+            SpellAttackThree();
+        }
+        if (Input.GetButtonDown("Lamp"))
+        {
+            ToggleLamp();
         }
 
         animator.SetBool("isHurt", (currentState == State.stagger));
@@ -348,6 +342,24 @@ public class PlayerMovement : Character
         spellTwoCooldown = false;
     }
 
+    private IEnumerator SpellAttackThreeCo()
+    {
+        animator.SetBool("isCasting", true); // Set to cast Animation
+        currentState = State.attack;
+        MakeSpellThree();
+        OnSpellThreeTriggered?.Invoke();
+        spellThreeCooldown = true;
+        yield return new WaitForSeconds(0.05f);
+        if (currentState != State.interact)
+        {
+            currentState = State.walk;
+        }
+        animator.SetBool("isCasting", false);
+        yield return new WaitForSeconds(inventory.currentSpellbookThree.coolDown);
+        SoundManager.RequestSound(Spell0CooldownSound);
+        spellThreeCooldown = false;
+    }
+
     //################### instantiate spell when casted ###############################
     private void MakeSpell()
     {
@@ -365,6 +377,15 @@ public class PlayerMovement : Character
         var speed = prefab.GetComponent<Projectile>().projectileSpeed;
         CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
         mana.current -= inventory.currentSpellbookTwo.manaCosts;
+    }
+
+    private void MakeSpellThree()
+    {
+        var prefab = inventory.currentSpellbookThree.prefab;
+        // var speed = inventory.currentSpellbook.speed;
+        var speed = prefab.GetComponent<Projectile>().projectileSpeed;
+        CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
+        mana.current -= inventory.currentSpellbookThree.manaCosts;
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -471,7 +492,7 @@ public class PlayerMovement : Character
 
     public void SpellAttack()
     {
-        if (inventory.currentSpellbook && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
+        if (inventory.currentSpellbook && mana.current >= inventory.currentSpellbook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
         {
             StartCoroutine(SpellAttackCo());
         }
@@ -479,9 +500,17 @@ public class PlayerMovement : Character
 
     public void SpellAttackTwo()
     {
-        if (inventory.currentSpellbookTwo && mana.current > 0 && notStaggeredOrLifting && currentState != State.attack && spellTwoCooldown == false)
+        if (inventory.currentSpellbookTwo && mana.current >= inventory.currentSpellbookTwo.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellTwoCooldown == false)
         {
             StartCoroutine(SpellAttackTwoCo());
+        }
+    }
+
+    public void SpellAttackThree()
+    {
+        if (inventory.currentSpellbookThree && mana.current >= inventory.currentSpellbookThree.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellThreeCooldown == false)
+        {
+            StartCoroutine(SpellAttackThreeCo());
         }
     }
 

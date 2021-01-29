@@ -10,6 +10,8 @@ public class CoolDownDisplayManager : MonoBehaviour
     [SerializeField] private Image spell0Sprite = default;
     [SerializeField] private Image spell1Cooldown = default;
     [SerializeField] private Image spell1Sprite = default;
+    [SerializeField] private Image spell2Cooldown = default;
+    [SerializeField] private Image spell2Sprite = default;
     [SerializeField] private Image lampCooldown = default;
     [SerializeField] private Image lampSprite = default;
     [SerializeField] private Inventory inventory = default;
@@ -22,6 +24,7 @@ public class CoolDownDisplayManager : MonoBehaviour
         player.OnAttackTriggered += SetMeleeCoolDown;
         player.OnSpellTriggered += SetSpell0CoolDown;
         player.OnSpellTwoTriggered += SetSpell1CoolDown;
+        player.OnSpellThreeTriggered += SetSpell2CoolDown;
         player.OnLampTriggered += SetLampCoolDown;
         inventory.OnEquipmentChanged += ChangeCoolDownSprites;
         originalColor = meleeWeaponCooldown.color;
@@ -32,7 +35,8 @@ public class CoolDownDisplayManager : MonoBehaviour
     {
         player.OnAttackTriggered -= SetMeleeCoolDown;
         player.OnSpellTriggered -= SetSpell0CoolDown;
-        player.OnSpellTwoTriggered -= SetSpell0CoolDown;
+        player.OnSpellTwoTriggered -= SetSpell1CoolDown;
+        player.OnSpellThreeTriggered -= SetSpell2CoolDown;
         player.OnLampTriggered -= SetLampCoolDown;
         inventory.OnEquipmentChanged -= ChangeCoolDownSprites;
     }
@@ -50,6 +54,10 @@ public class CoolDownDisplayManager : MonoBehaviour
         if (inventory.currentSpellbookTwo)
         {
             spell1Sprite.sprite = inventory.currentSpellbookTwo.sprite;
+        }
+        if (inventory.currentSpellbookThree)
+        {
+            spell2Sprite.sprite = inventory.currentSpellbookThree.sprite;
         }
         if (inventory.currentLamp)
         {
@@ -76,6 +84,13 @@ public class CoolDownDisplayManager : MonoBehaviour
         spell1Cooldown.color = new Color(255, 0, 0);
         StartCoroutine(SpellTwoCooldownCountDownCo(inventory.currentSpellbookTwo.coolDown));
     }
+
+    private void SetSpell2CoolDown()
+    {
+        spell2Cooldown.color = new Color(255, 0, 0);
+        StartCoroutine(SpellThreeCooldownCountDownCo(inventory.currentSpellbookThree.coolDown));
+    }
+
 
     private void SetLampCoolDown()
     {
@@ -138,5 +153,22 @@ public class CoolDownDisplayManager : MonoBehaviour
         spell1Cooldown.color = new Color(255, 255, 255, 255); // Visual Indicator for "The CD is done" in form of an "Flash"
         yield return new WaitForSeconds(0.1f);
         spell1Cooldown.color = originalColor;
+    }
+
+    private IEnumerator SpellThreeCooldownCountDownCo(float spellBookCountDown)
+    {
+        float fillingTime = 0;
+        fillingTime = spellBookCountDown;
+        while (fillingTime > 0)
+        {
+            fillingTime -= Time.deltaTime;
+            spell2Cooldown.fillAmount = (fillingTime) / spellBookCountDown;
+            // meleeWeaponCooldown.color = new Color(255, 255 - meleeWeaponCooldown.fillAmount * 255, 255 - meleeWeaponCooldown.fillAmount * 255,255);   I wanted the Background to become more bright with each iteration, but actually its instantly white...
+            yield return null;
+        }
+        spell2Cooldown.fillAmount = 1;
+        spell2Cooldown.color = new Color(255, 255, 255, 255); // Visual Indicator for "The CD is done" in form of an "Flash"
+        yield return new WaitForSeconds(0.1f);
+        spell2Cooldown.color = originalColor;
     }
 }
