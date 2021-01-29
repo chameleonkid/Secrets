@@ -392,8 +392,8 @@ public class Inventory : ScriptableObject
             }
             if (currentSpellbookThree)
             {
-                totalMinSpellDamage += currentSpellbookTwo.minSpellDamage;
-                totalMaxSpellDamage += currentSpellbookTwo.maxSpellDamage;
+                totalMinSpellDamage += currentSpellbookThree.minSpellDamage;
+                totalMaxSpellDamage += currentSpellbookThree.maxSpellDamage;
             }
         }
         if (currentAmulet)
