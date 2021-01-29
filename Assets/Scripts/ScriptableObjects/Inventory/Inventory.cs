@@ -6,6 +6,8 @@ public class Inventory : ScriptableObject
 {
     public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
 
+    public event Action OnEquipmentChanged;
+
     public event Action OnCoinCountChanged;
     [SerializeField] private int _coins;
     public int coins {
@@ -275,22 +277,27 @@ public class Inventory : ScriptableObject
 
     private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
     {
+        // Don't do anything if trying to equip the same item.
+        if (currentlyEquipped == newEquip) return;
+
         if (currentlyEquipped != null)
         {
             items[currentlyEquipped]++;
         }
-        else
-        {
-            return;
-        }
 
         currentlyEquipped = newEquip;
-        items[newEquip]--;
 
-        if (newEquip.sound != null)
+        if (newEquip != null)
         {
-            SoundManager.RequestSound(newEquip.sound);
+            items[newEquip]--;
+
+            if (newEquip.sound != null)
+            {
+                SoundManager.RequestSound(newEquip.sound);
+            }
         }
+
+        OnEquipmentChanged?.Invoke();
     }
 
     public void CalcDefense()

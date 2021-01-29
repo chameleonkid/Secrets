@@ -45,11 +45,15 @@ public class InventoryDisplay : ItemDisplay
 
     private void OnEnable() {
         inventory.items.OnContentsChanged += UpdateItemSlots;
+        inventory.OnEquipmentChanged += UpdateEquipmentSlots;
         UpdateItemSlots();
         UpdateEquipmentSlots();
     }
 
-    private void OnDisable() => inventory.items.OnContentsChanged -= UpdateItemSlots;
+    private void OnDisable() {
+        inventory.items.OnContentsChanged -= UpdateItemSlots;
+        inventory.OnEquipmentChanged -= UpdateEquipmentSlots;
+    }
 
     public void SubscribeToEquipmentSlotSelected(Action<Item> action)
     {
