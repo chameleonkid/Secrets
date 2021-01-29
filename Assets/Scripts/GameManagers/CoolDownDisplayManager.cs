@@ -23,9 +23,9 @@ public class CoolDownDisplayManager : MonoBehaviour
         player.OnSpellTriggered += SetSpell0CoolDown;
         player.OnSpellTwoTriggered += SetSpell1CoolDown;
         player.OnLampTriggered += SetLampCoolDown;
-        inventory.OnEquipmentChanged += changeCoolDownSprites;
+        inventory.OnEquipmentChanged += ChangeCoolDownSprites;
         originalColor = meleeWeaponCooldown.color;
-        changeCoolDownSprites();
+        ChangeCoolDownSprites();
     }
 
     private void OnDisable()
@@ -34,10 +34,10 @@ public class CoolDownDisplayManager : MonoBehaviour
         player.OnSpellTriggered -= SetSpell0CoolDown;
         player.OnSpellTwoTriggered -= SetSpell0CoolDown;
         player.OnLampTriggered += SetLampCoolDown;
-        inventory.OnEquipmentChanged -= changeCoolDownSprites;
+        inventory.OnEquipmentChanged -= ChangeCoolDownSprites;
     }
 
-    private void changeCoolDownSprites()
+    private void ChangeCoolDownSprites()
     {
         if (inventory.currentWeapon)
         {
@@ -56,11 +56,8 @@ public class CoolDownDisplayManager : MonoBehaviour
             lampSprite.sprite = inventory.currentLamp.sprite;
         }
     }
-       
-    private void SetCoolDownIcons()
-    {
-        meleeWeaponSprite.sprite = inventory.currentWeapon.sprite;
-    }
+
+    private void SetCoolDownIcons() => meleeWeaponSprite.sprite = inventory.currentWeapon.sprite;
 
     private void SetMeleeCoolDown()
     {
@@ -82,7 +79,7 @@ public class CoolDownDisplayManager : MonoBehaviour
 
     private void SetLampCoolDown()
     {
-        if(lampCooldown.color == new Color(255,0,0))
+        if (lampCooldown.color == new Color(255,0,0))
         {
             lampCooldown.color = originalColor;
         }
@@ -90,7 +87,6 @@ public class CoolDownDisplayManager : MonoBehaviour
         {
             lampCooldown.color = new Color(255, 0, 0);
         }
-
     }
 
     private IEnumerator CooldownCountDownCo(float weaponCooldown)
