@@ -57,9 +57,6 @@ public class Inventory : ScriptableObject
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
 
-    [Header("Sounds")]
-    [SerializeField] private AudioClip noInventorySpace = default;
-
 #if UNITY_EDITOR
     // Needed in order to allow changes to the Inventory in the editor to be saved.
 
@@ -284,7 +281,6 @@ public class Inventory : ScriptableObject
         else
         {
             OnFailToUnequip?.Invoke(item);
-            SoundManager.RequestSound(noInventorySpace);
         }
     }
 

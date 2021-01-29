@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private Inventory inventory = default;
+    [SerializeField] private AudioClip unequipFailSound = default;
     [Header("Components")]
     [SerializeField] private GameObject inventoryPanel = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
@@ -23,8 +24,8 @@ public class InventoryManager : MonoBehaviour
 
     private InventoryDisplay inventoryDisplay;
 
-    private void OnEnable() => inventory.OnFailToUnequip += SetDescriptionFailedUnequip;
-    private void OnDisable() => inventory.OnFailToUnequip -= SetDescriptionFailedUnequip;
+    private void OnEnable() => inventory.OnFailToUnequip += OnFailedUnequip;
+    private void OnDisable() => inventory.OnFailToUnequip -= OnFailedUnequip;
 
     private void Awake()
     {
@@ -114,8 +115,9 @@ public class InventoryManager : MonoBehaviour
 
     private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);
 
-    private void SetDescriptionFailedUnequip(Item triedItem)
+    private void OnFailedUnequip(Item triedItem)
     {
+        SoundManager.RequestSound(unequipFailSound);
         if (triedItem == null)
         {
             descriptionText.text = "Can't take off nothing...";
