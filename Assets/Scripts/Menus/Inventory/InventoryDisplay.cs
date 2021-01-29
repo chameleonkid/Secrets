@@ -142,7 +142,7 @@ public class InventoryDisplay : ItemDisplay
         scepterSlot.OnSlotSelected -= action;
     }
 
-    public void UnSubscribeToEquipmentSlotUsed(Action<Item> action)
+    public void UnsubscribeToEquipmentSlotUsed(Action<Item> action)
     {
         weaponSlot.OnSlotUsed -= action;
         armorSlot.OnSlotUsed -= action;
