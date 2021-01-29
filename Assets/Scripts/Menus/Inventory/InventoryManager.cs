@@ -78,30 +78,24 @@ public class InventoryManager : MonoBehaviour
         descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
 
-
-
-
-
     private void OnItemUsed(Item item)
     {
         if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
         item.Use();
         {
-
             if (item is EquippableItem)
             {
                 inventory.Equip((EquippableItem)item);
                 if (inventory.currentWeapon)
                 {
-                    setWeaponColor();
+                    SetWeaponColor();
                 }
                 if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
                 {
-                    setLaserColor();
+                    SetLaserColor();
                 }
                 OnEquipItem?.Invoke();
-
             }
 
             if (item.usable)
@@ -121,13 +115,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void Unequip(Item newItem)
-    {
-        inventory.UnEquip(newItem as EquippableItem);  
-    }
-
-        
-
+    private void Unequip(Item newItem) => inventory.UnEquip(newItem as EquippableItem);
 
     private void UpdateStatDisplays()
     {
@@ -135,7 +123,7 @@ public class InventoryManager : MonoBehaviour
         defDisplay.text = DefenseDisplayText();
         critDisplay.text = CritDisplayText();
         spellDisplay.text = SpellDamageDisplayText();
-      //  rangeDisplay.text = RangeDamageDisplayText();
+        // rangeDisplay.text = RangeDamageDisplayText();
         lightRadiusDisplay.text = LightRadiusDisplayText();
     }
 
@@ -147,20 +135,14 @@ public class InventoryManager : MonoBehaviour
 
     private string DefenseDisplayText() => (inventory.totalDefense > 0) ? inventory.totalDefense.ToString() : "";
 
-    //private string RangeDamageDisplayText() => (inventory.currentBow) ?
-    //    inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
+    // private string RangeDamageDisplayText() => (inventory.currentBow) ?
+    //     inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
 
     private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentSpellbookTwo || inventory.currentAmulet) ?
         inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
 
     private string LightRadiusDisplayText() => (inventory.currentLamp) ? "" + inventory.currentLamp.outerRadius : "";
 
-    private void setWeaponColor()
-    {
-        swordMaterial.SetColor("_GlowColor", inventory.currentWeapon.glowColor);
-    }
-    private void setLaserColor()
-    {
-        laserMaterial.SetColor("_GlowColor", inventory.currentSpellbook.glowColor);
-    }
+    private void SetWeaponColor() => swordMaterial.SetColor("_GlowColor", inventory.currentWeapon.glowColor);
+    private void SetLaserColor() => laserMaterial.SetColor("_GlowColor", inventory.currentSpellbook.glowColor);
 }
