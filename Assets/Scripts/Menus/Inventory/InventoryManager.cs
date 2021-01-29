@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
-using System;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -19,9 +18,6 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lightRadiusDisplay = default;
     [SerializeField] private Material swordMaterial = default;
     [SerializeField] private Material laserMaterial = default;
-
-    public event Action OnEquipItem;
-    public event Action OnUnEquipItem;
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -78,56 +74,42 @@ public class InventoryManager : MonoBehaviour
         descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
 
-
-
-
-
     private void OnItemUsed(Item item)
     {
         if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
         item.Use();
+
+        if (item is EquippableItem)
         {
-
-            if (item is EquippableItem)
+            inventory.Equip((EquippableItem)item);
+            if (inventory.currentWeapon)
             {
-                inventory.Equip((EquippableItem)item);
-                if (inventory.currentWeapon)
-                {
-                    setWeaponColor();
-                }
-                if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
-                {
-                    setLaserColor();
-                }
-                OnEquipItem?.Invoke();
-
+                SetWeaponColor();
             }
-
-            if (item.usable)
+            if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
             {
-                inventory.items[item]--;
+                SetLaserColor();
             }
-
-            if (inventory.items[item] <= 0)
-            {
-                EventSystem.current.SetSelectedGameObject(closeButton);
-            }
-
-            inventoryDisplay.UpdateEquipmentSlots();
-            UpdateStatDisplays();
-            var context = (item is EquippableItem) ? " was equipped" : " was used";
-            descriptionText.text = item.name + context;
         }
+
+        if (item.usable)
+        {
+            inventory.items[item]--;
+        }
+
+        if (inventory.items[item] <= 0)
+        {
+            EventSystem.current.SetSelectedGameObject(closeButton);
+        }
+
+        inventoryDisplay.UpdateEquipmentSlots();
+        UpdateStatDisplays();
+        var context = (item is EquippableItem) ? " was equipped" : " was used";
+        descriptionText.text = item.name + context;
     }
 
-    private void Unequip(Item newItem)
-    {
-        inventory.UnEquip(newItem as EquippableItem);  
-    }
-
-        
-
+    private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);
 
     private void UpdateStatDisplays()
     {
@@ -135,7 +117,7 @@ public class InventoryManager : MonoBehaviour
         defDisplay.text = DefenseDisplayText();
         critDisplay.text = CritDisplayText();
         spellDisplay.text = SpellDamageDisplayText();
-      //  rangeDisplay.text = RangeDamageDisplayText();
+        // rangeDisplay.text = RangeDamageDisplayText();
         lightRadiusDisplay.text = LightRadiusDisplayText();
     }
 
@@ -147,20 +129,14 @@ public class InventoryManager : MonoBehaviour
 
     private string DefenseDisplayText() => (inventory.totalDefense > 0) ? inventory.totalDefense.ToString() : "";
 
-    //private string RangeDamageDisplayText() => (inventory.currentBow) ?
-    //    inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
+    // private string RangeDamageDisplayText() => (inventory.currentBow) ?
+    //     inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
 
     private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentSpellbookTwo || inventory.currentAmulet) ?
         inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
 
     private string LightRadiusDisplayText() => (inventory.currentLamp) ? "" + inventory.currentLamp.outerRadius : "";
 
-    private void setWeaponColor()
-    {
-        swordMaterial.SetColor("_GlowColor", inventory.currentWeapon.glowColor);
-    }
-    private void setLaserColor()
-    {
-        laserMaterial.SetColor("_GlowColor", inventory.currentSpellbook.glowColor);
-    }
+    private void SetWeaponColor() => swordMaterial.SetColor("_GlowColor", inventory.currentWeapon.glowColor);
+    private void SetLaserColor() => laserMaterial.SetColor("_GlowColor", inventory.currentSpellbook.glowColor);
 }

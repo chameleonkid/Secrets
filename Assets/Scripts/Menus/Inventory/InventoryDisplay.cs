@@ -45,11 +45,15 @@ public class InventoryDisplay : ItemDisplay
 
     private void OnEnable() {
         inventory.items.OnContentsChanged += UpdateItemSlots;
+        inventory.OnEquipmentChanged += UpdateEquipmentSlots;
         UpdateItemSlots();
         UpdateEquipmentSlots();
     }
 
-    private void OnDisable() => inventory.items.OnContentsChanged -= UpdateItemSlots;
+    private void OnDisable() {
+        inventory.items.OnContentsChanged -= UpdateItemSlots;
+        inventory.OnEquipmentChanged -= UpdateEquipmentSlots;
+    }
 
     public void SubscribeToEquipmentSlotSelected(Action<Item> action)
     {
@@ -80,37 +84,36 @@ public class InventoryDisplay : ItemDisplay
         scepterSlot.OnSlotSelected += action;
     }
 
-
     public void SubscribeToEquipmentSlotUsed(Action<Item> action)
     {
-            weaponSlot.OnSlotUsed += action;
-            armorSlot.OnSlotUsed += action;
-            helmetSlot.OnSlotUsed += action;
-            gloveSlot.OnSlotUsed += action;
-            legsSlot.OnSlotUsed += action;
-            shieldSlot.OnSlotUsed += action;
-            ringSlot.OnSlotUsed += action;
-            spellbookThreeSlot.OnSlotUsed += action;
-            spellbookSlot.OnSlotUsed += action;
-            spellbookTwoSlot.OnSlotUsed += action;
-            amuletSlot.OnSlotUsed += action;
-            bootsSlot.OnSlotUsed += action;
-            lampSlot.OnSlotUsed += action;
-            cloakSlot.OnSlotUsed += action;
-            beltSlot.OnSlotUsed += action;
-            shoulderSlot.OnSlotUsed += action;
-            sealSlot.OnSlotUsed += action;
-            seedSlot.OnSlotUsed += action;
-            runeSlot.OnSlotUsed += action;
-            gemSlot.OnSlotUsed += action;
-            pearlSlot.OnSlotUsed += action;
-            dragonEggSlot.OnSlotUsed += action;
-            artifactSlot.OnSlotUsed += action;
-            crownSlot.OnSlotUsed += action;
-            scepterSlot.OnSlotUsed += action;    
+        weaponSlot.OnSlotUsed += action;
+        armorSlot.OnSlotUsed += action;
+        helmetSlot.OnSlotUsed += action;
+        gloveSlot.OnSlotUsed += action;
+        legsSlot.OnSlotUsed += action;
+        shieldSlot.OnSlotUsed += action;
+        ringSlot.OnSlotUsed += action;
+        spellbookThreeSlot.OnSlotUsed += action;
+        spellbookSlot.OnSlotUsed += action;
+        spellbookTwoSlot.OnSlotUsed += action;
+        amuletSlot.OnSlotUsed += action;
+        bootsSlot.OnSlotUsed += action;
+        lampSlot.OnSlotUsed += action;
+        cloakSlot.OnSlotUsed += action;
+        beltSlot.OnSlotUsed += action;
+        shoulderSlot.OnSlotUsed += action;
+        sealSlot.OnSlotUsed += action;
+        seedSlot.OnSlotUsed += action;
+        runeSlot.OnSlotUsed += action;
+        gemSlot.OnSlotUsed += action;
+        pearlSlot.OnSlotUsed += action;
+        dragonEggSlot.OnSlotUsed += action;
+        artifactSlot.OnSlotUsed += action;
+        crownSlot.OnSlotUsed += action;
+        scepterSlot.OnSlotUsed += action;    
     }
 
-        public void UnsubscribeFromEquipmentSlotSelected(Action<Item> action)
+    public void UnsubscribeFromEquipmentSlotSelected(Action<Item> action)
     {
         weaponSlot.OnSlotSelected -= action;
         armorSlot.OnSlotSelected -= action;
@@ -139,8 +142,7 @@ public class InventoryDisplay : ItemDisplay
         scepterSlot.OnSlotSelected -= action;
     }
 
-
-    public void UnSubscribeToEquipmentSlotUsed(Action<Item> action)
+    public void UnsubscribeToEquipmentSlotUsed(Action<Item> action)
     {
         weaponSlot.OnSlotUsed -= action;
         armorSlot.OnSlotUsed -= action;

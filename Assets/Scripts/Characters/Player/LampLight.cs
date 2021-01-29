@@ -6,7 +6,6 @@ public class LampLight : MonoBehaviour
 {
     private Light2D lampLight;
     private PlayerMovement player;
-    [SerializeField] private InventoryManager inventoryManager;
 
     private float timer;
 
@@ -16,25 +15,18 @@ public class LampLight : MonoBehaviour
         player = GetComponentInParent<PlayerMovement>();
         this.enabled = false;
         LumenCheck();
-
     }
 
     private void OnEnable()
     {
-        inventoryManager.OnEquipItem += InventoryManager_OnEquipItem;
-        setLamp();
-
-    }
-
-    private void InventoryManager_OnEquipItem()
-    {
-        setLamp();
+        player.inventory.OnEquipmentChanged += SetLamp;
+        SetLamp();
     }
 
     private void OnDisable()
     {
         lampLight.intensity = 0;
-        inventoryManager.OnEquipItem -= InventoryManager_OnEquipItem;
+        player.inventory.OnEquipmentChanged -= SetLamp;
     }
 
     private void Update()
@@ -59,7 +51,7 @@ public class LampLight : MonoBehaviour
         }
     }
 
-    private void setLamp()
+    private void SetLamp()
     {
         var lamp = player.inventory.currentLamp;
 

@@ -108,31 +108,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         playerInventory.items = new Schwer.ItemSystem.Inventory();
 
         playerInventory.currentItem = null;
-        playerInventory.currentWeapon = null;
-        playerInventory.currentArmor = null;
-        playerInventory.currentHelmet = null;
-        playerInventory.currentGloves = null;
-        playerInventory.currentLegs = null;
-        playerInventory.currentShield = null;
-        playerInventory.currentRing = null;
-        playerInventory.currentSpellbook = null;
-        playerInventory.currentSpellbookTwo = null;
-        playerInventory.currentSpellbookThree = null;
-        playerInventory.currentAmulet = null;
-        playerInventory.currentBoots = null;
-        playerInventory.currentLamp = null;
-        playerInventory.currentCloak = null;
-        playerInventory.currentBelt = null;
-        playerInventory.currentShoulder = null;
-        playerInventory.currentSeal = null;
-        playerInventory.currentSeed = null;
-        playerInventory.currentRune = null;
-        playerInventory.currentGem = null;
-        playerInventory.currentPearl = null;
-        playerInventory.currentArtifact = null;
-        playerInventory.currentDragonEgg = null;
-        playerInventory.currentCrown = null;
-        playerInventory.currentScepter = null;
+        playerInventory.ResetEquipment();
 
         playerInventory.totalDefense = 0;
         playerInventory.totalCritChance = 0;
@@ -149,23 +125,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
             // Would vendors ever have gear?
             v.currentItem = null;
-            v.currentWeapon = null;
-            v.currentArmor = null;
-            v.currentHelmet = null;
-            v.currentGloves = null;
-            v.currentLegs = null;
-            v.currentShield = null;
-            v.currentRing = null;
-            v.currentSpellbook = null;
-            v.currentSpellbookTwo = null;
-            v.currentAmulet = null;
-            v.currentBoots = null;
-            v.currentLamp = null;
-            v.currentCloak = null;
-            v.currentBelt = null;
-            v.currentShoulder = null;
-            v.currentSeal = null;
-
+            v.ResetEquipment();
 
             // Would vendors ever need this?
             v.totalDefense = 0;

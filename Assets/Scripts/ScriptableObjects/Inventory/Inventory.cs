@@ -6,6 +6,8 @@ public class Inventory : ScriptableObject
 {
     public Schwer.ItemSystem.Inventory items = new Schwer.ItemSystem.Inventory();
 
+    public event Action OnEquipmentChanged;
+
     public event Action OnCoinCountChanged;
     [SerializeField] private int _coins;
     public int coins {
@@ -171,14 +173,14 @@ public class Inventory : ScriptableObject
                 Swap(ref currentDragonEgg, dragonEgg);
                 break;
         }
-        // Applies to all equippables.
+
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
     }
 
 
-    public void UnEquip(EquippableItem item)
+    public void Unequip(EquippableItem item)
     {
         switch (item)
         {
@@ -208,11 +210,11 @@ public class Inventory : ScriptableObject
                 break;
 
             case InventorySpellbook spellbook:
-                if (!currentSpellbook)
+                if (currentSpellbook == spellbook)
                 {
                     Swap(ref currentSpellbook, null);
                 }
-                else if (!currentSpellbookTwo)
+                else if (currentSpellbookTwo == spellbook)
                 {
                     Swap(ref currentSpellbookTwo, null);
                 }
@@ -268,29 +270,36 @@ public class Inventory : ScriptableObject
                 Swap(ref currentDragonEgg, null);
                 break;
         }
+
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
     }
 
+    //! Currently doesn't account for `items.maxCapacity`!
     private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
     {
+        // Don't do anything if trying to equip the same item.
+        if (currentlyEquipped == newEquip) return;
+
         if (currentlyEquipped != null)
         {
             items[currentlyEquipped]++;
         }
-        else
-        {
-            return;
-        }
 
         currentlyEquipped = newEquip;
-        items[newEquip]--;
 
-        if (newEquip.sound != null)
+        if (newEquip != null)
         {
-            SoundManager.RequestSound(newEquip.sound);
+            items[newEquip]--;
+
+            if (newEquip.sound != null)
+            {
+                SoundManager.RequestSound(newEquip.sound);
+            }
         }
+
+        OnEquipmentChanged?.Invoke();
     }
 
     public void CalcDefense()
@@ -384,8 +393,8 @@ public class Inventory : ScriptableObject
             }
             if (currentSpellbookThree)
             {
-                totalMinSpellDamage += currentSpellbookTwo.minSpellDamage;
-                totalMaxSpellDamage += currentSpellbookTwo.maxSpellDamage;
+                totalMinSpellDamage += currentSpellbookThree.minSpellDamage;
+                totalMaxSpellDamage += currentSpellbookThree.maxSpellDamage;
             }
         }
         if (currentAmulet)
@@ -400,7 +409,35 @@ public class Inventory : ScriptableObject
         }
     }
 
-    #region Serialisation
+    public void ResetEquipment()
+    {
+        currentWeapon = null;
+        currentArmor = null;
+        currentHelmet = null;
+        currentGloves = null;
+        currentLegs = null;
+        currentShield = null;
+        currentRing = null;
+        currentSpellbook = null;
+        currentSpellbookTwo = null;
+        currentSpellbookThree = null;
+        currentAmulet = null;
+        currentBoots = null;
+        currentLamp = null;
+        currentCloak = null;
+        currentBelt = null;
+        currentShoulder = null;
+        currentSeal = null;
+        currentSeed = null;
+        currentRune = null;
+        currentGem = null;
+        currentPearl = null;
+        currentArtifact = null;
+        currentDragonEgg = null;
+        currentCrown = null;
+        currentScepter = null;
+    }
+
     [Serializable]
     public class SerializableInventory
     {
@@ -505,5 +542,4 @@ public class Inventory : ScriptableObject
             else return int.MinValue;
         }
     }
-    #endregion
 }
