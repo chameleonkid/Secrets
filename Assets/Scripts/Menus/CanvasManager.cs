@@ -12,8 +12,6 @@ public class CanvasManager : MonoBehaviourSingleton<CanvasManager>
     {
         if (IsSameOrCanReplace(canvasGameObject) && NotReplacingSameFrame(canvasGameObject))
         {
-            previousCanvasFrame = Time.frameCount;
-            previousCanvas = activeCanvas;
             activeCanvas = canvasGameObject;
             return true;
         }
@@ -21,6 +19,12 @@ public class CanvasManager : MonoBehaviourSingleton<CanvasManager>
         {
             return false;
         }
+    }
+
+    public void RegisterClosedCanvas(GameObject canvasGameObject)
+    {
+        previousCanvas = activeCanvas;
+        previousCanvasFrame = Time.frameCount;
     }
 
     private bool IsSameOrCanReplace(GameObject newCanvas) => activeCanvas == newCanvas || activeCanvas == null || !activeCanvas.activeInHierarchy;
