@@ -79,35 +79,34 @@ public class InventoryManager : MonoBehaviour
         if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
         item.Use();
+
+        if (item is EquippableItem)
         {
-            if (item is EquippableItem)
+            inventory.Equip((EquippableItem)item);
+            if (inventory.currentWeapon)
             {
-                inventory.Equip((EquippableItem)item);
-                if (inventory.currentWeapon)
-                {
-                    SetWeaponColor();
-                }
-                if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
-                {
-                    SetLaserColor();
-                }
+                SetWeaponColor();
             }
-
-            if (item.usable)
+            if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
             {
-                inventory.items[item]--;
+                SetLaserColor();
             }
-
-            if (inventory.items[item] <= 0)
-            {
-                EventSystem.current.SetSelectedGameObject(closeButton);
-            }
-
-            inventoryDisplay.UpdateEquipmentSlots();
-            UpdateStatDisplays();
-            var context = (item is EquippableItem) ? " was equipped" : " was used";
-            descriptionText.text = item.name + context;
         }
+
+        if (item.usable)
+        {
+            inventory.items[item]--;
+        }
+
+        if (inventory.items[item] <= 0)
+        {
+            EventSystem.current.SetSelectedGameObject(closeButton);
+        }
+
+        inventoryDisplay.UpdateEquipmentSlots();
+        UpdateStatDisplays();
+        var context = (item is EquippableItem) ? " was equipped" : " was used";
+        descriptionText.text = item.name + context;
     }
 
     private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);
