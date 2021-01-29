@@ -173,7 +173,7 @@ public class Inventory : ScriptableObject
                 Swap(ref currentDragonEgg, dragonEgg);
                 break;
         }
-        // Applies to all equippables.
+
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
@@ -210,11 +210,11 @@ public class Inventory : ScriptableObject
                 break;
 
             case InventorySpellbook spellbook:
-                if (!currentSpellbook)
+                if (currentSpellbook == spellbook)
                 {
                     Swap(ref currentSpellbook, null);
                 }
-                else if (!currentSpellbookTwo)
+                else if (currentSpellbookTwo == spellbook)
                 {
                     Swap(ref currentSpellbookTwo, null);
                 }
@@ -270,6 +270,7 @@ public class Inventory : ScriptableObject
                 Swap(ref currentDragonEgg, null);
                 break;
         }
+
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
