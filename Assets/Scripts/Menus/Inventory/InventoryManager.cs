@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private Inventory inventory = default;
+    [SerializeField] private AudioClip unequipFailSound = default;
     [Header("Components")]
     [SerializeField] private GameObject inventoryPanel = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
@@ -23,6 +24,9 @@ public class InventoryManager : MonoBehaviour
 
     private InventoryDisplay inventoryDisplay;
 
+    private void OnEnable() => inventory.OnFailToUnequip += OnFailedUnequip;
+    private void OnDisable() => inventory.OnFailToUnequip -= OnFailedUnequip;
+
     private void Awake()
     {
         inventoryDisplay = GetComponentInChildren<InventoryDisplay>(true);
@@ -30,28 +34,6 @@ public class InventoryManager : MonoBehaviour
         inventoryDisplay.OnSlotUsed = OnItemUsed;
         inventoryDisplay.SubscribeToEquipmentSlotSelected(SetUpItemDescription);
         inventoryDisplay.SubscribeToEquipmentSlotUsed(Unequip);
-    }
-
-    private void OnEnable()
-    {
-        inventory.OnNoSpaceOrNothing += SetDescriptionToFullOrNothing;
-    }
-
-    private void OnDisable()
-    {
-        inventory.OnNoSpaceOrNothing -= SetDescriptionToFullOrNothing;
-    }
-
-    private void SetDescriptionToFullOrNothing(Item item)
-    {
-        if(item == null)
-        {
-            descriptionText.text = "Can't take of nothing...";
-        }
-        else
-        {
-            descriptionText.text = "Not enaugh space to take " + item + " off...";
-        }
     }
 
     public void ClosePanel()
@@ -132,6 +114,19 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);
+
+    private void OnFailedUnequip(Item triedItem)
+    {
+        SoundManager.RequestSound(unequipFailSound);
+        if (triedItem == null)
+        {
+            descriptionText.text = "Can't take off nothing...";
+        }
+        else
+        {
+            descriptionText.text = $"Not enough space to unequip {triedItem.name}...";
+        }
+    }
 
     private void UpdateStatDisplays()
     {
