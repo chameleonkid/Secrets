@@ -124,7 +124,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            descriptionText.text = $"Not enough space to unequip {triedItem}...";
+            descriptionText.text = $"Not enough space to unequip {triedItem.name}...";
         }
     }
 
