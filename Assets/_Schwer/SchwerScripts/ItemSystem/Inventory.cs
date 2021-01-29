@@ -145,7 +145,9 @@ namespace Schwer.ItemSystem {
         }
 
         private void ListsToDictionary() {
-            this.Clear();
+            backingDictionary.Clear();
+            // Must not invoke `OnContentsChanged` to avoid UnityExceptions (no Unity Scripting API access in serialization thread!)
+            // Refer to: https://docs.unity3d.com/Manual/script-Serialization-Errors.html
 
             if(keys.Count != values.Count) {
                 throw new Exception($"Deserialization failed: The number of keys ({keys.Count}) and values ({values.Count}) are not equal.");
