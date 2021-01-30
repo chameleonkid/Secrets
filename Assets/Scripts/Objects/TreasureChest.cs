@@ -10,8 +10,7 @@ public class TreasureChest : Interactable
 
     [Header("Signals & Dialog")]
     [SerializeField] private Signals raiseItem = default;
-    [SerializeField] private GameObject dialogBox = default;
-    [SerializeField] private Text dialogText = default;
+    [SerializeField] private Dialogue dialogue = default;
 
     [Header("Sound FX")]
     [SerializeField] private AudioClip chestSound = default;
@@ -22,19 +21,18 @@ public class TreasureChest : Interactable
 
     private void Start()
     {
+        dialogue.npcName = "Chest";
         anim = GetComponent<Animator>();
         if (isOpen)
         {
             anim.SetBool("opened", true);
         }
 
-        //dialogBox = GameObject.Find("DialogBox");                         Cant find it, since its disabled... is there another way?
-        //dialogText = dialogBox.GetComponentInChildren<Text>();            That would be necessary to "Spawn" Chests
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange)
+        if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
         {
             if (!isOpen)
             {
@@ -56,9 +54,8 @@ public class TreasureChest : Interactable
 
     public void OpenChest()
     {
-        dialogBox.SetActive(true);
-        dialogText.text = contents.description;
-
+        dialogue.sentences[0] = contents.description;
+        TriggerDialogue();
         player.inventory.currentItem = contents;
         player.inventory.items[contents]++;
 
@@ -75,14 +72,12 @@ public class TreasureChest : Interactable
     public void NoInventorySpace()
     {
         SoundManager.RequestSound(noInventorySpace);
-        dialogBox.SetActive(true);
-        dialogText.text = "There is no space left in your inventory";
+        dialogue.sentences[0] = "There is no space left in your inventory";
+        TriggerDialogue();
     }
 
     public void ChestAlreadyOpen()
     {
-        // Dialog off
-        dialogBox.SetActive(false);
         raiseItem.Raise();
     }
 
@@ -108,7 +103,10 @@ public class TreasureChest : Interactable
             player = null;
 
             contextOff.Raise();
-            dialogBox.SetActive(false);
         }
     }
+
+
+
+    public void TriggerDialogue() => DialogueManager.RequestDialogue(dialogue);
 }

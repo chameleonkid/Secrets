@@ -9,5 +9,5 @@ public class Dialogue
     public string npcName;
 
     [TextArea(3, 10)]
-    public string[] sentences;
+    public string[] sentences = new string[1];
 }
