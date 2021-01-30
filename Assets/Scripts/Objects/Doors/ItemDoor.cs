@@ -8,7 +8,7 @@ public class ItemDoor : Interactable
     public Inventory playerInventory;
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
-    public BoolValue storeOpen; //###### Door Memory
+    public BoolValue storeOpen;
     public Item item;
     [SerializeField] private Dialogue dialogue = default;
 
@@ -30,7 +30,7 @@ public class ItemDoor : Interactable
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange)
+        if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
         {
             if(playerInventory.Contains(item))
             {
@@ -39,7 +39,6 @@ public class ItemDoor : Interactable
             else
             {
                 TriggerDialogue();
-                Debug.Log("You need the right Item to open this " + item);
             }
         }
     }
