@@ -446,48 +446,36 @@ public class Inventory : ScriptableObject
         currentScepter = null;
     }
 
-    
-    public bool Contains(Item item)
-    {
-       if(items.ContainsKey(item) || ItemIsEquipped(item)) 
-        {
-            return true;           
-        }
-       else
-        {
-            return false;
-        }
-    }
+    public bool Contains(Item item) => (items.ContainsKey(item) || ItemIsEquipped(item));
 
     public bool ItemIsEquipped(Item item)
     {
         return currentWeapon == item
-        || currentArmor == item
-        || currentHelmet == item
-        || currentGloves == item
-        || currentLegs == item
-        || currentShield == item
-        || currentRing == item
-        || currentSpellbook == item
-        || currentSpellbookTwo == item
-        || currentSpellbookThree == item
-        || currentAmulet == item
-        || currentBoots == item
-        || currentLamp == item
-        || currentCloak == item
-        || currentBelt == item
-        || currentShoulder == item
-        || currentSeal == item
-        || currentSeed == item
-        || currentRune == item
-        || currentGem == item
-        || currentPearl == item
-        || currentArtifact == item
-        || currentDragonEgg == item
-        || currentCrown == item
-        || currentScepter == item;
+            || currentArmor == item
+            || currentHelmet == item
+            || currentGloves == item
+            || currentLegs == item
+            || currentShield == item
+            || currentRing == item
+            || currentSpellbook == item
+            || currentSpellbookTwo == item
+            || currentSpellbookThree == item
+            || currentAmulet == item
+            || currentBoots == item
+            || currentLamp == item
+            || currentCloak == item
+            || currentBelt == item
+            || currentShoulder == item
+            || currentSeal == item
+            || currentSeed == item
+            || currentRune == item
+            || currentGem == item
+            || currentPearl == item
+            || currentArtifact == item
+            || currentDragonEgg == item
+            || currentCrown == item
+            || currentScepter == item;
     }
-    
 
     [Serializable]
     public class SerializableInventory

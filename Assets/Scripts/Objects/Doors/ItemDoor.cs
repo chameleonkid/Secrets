@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class ItemDoor : Interactable
 {
     [Header("Door variables")]
@@ -32,7 +31,7 @@ public class ItemDoor : Interactable
     {
         if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
         {
-            if(playerInventory.Contains(item))
+            if (playerInventory.Contains(item))
             {
                 Open();
             }
