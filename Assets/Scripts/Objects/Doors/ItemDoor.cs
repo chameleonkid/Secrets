@@ -42,8 +42,6 @@ public class ItemDoor : Interactable
                 Debug.Log("You need the right Item to open this " + item);
             }
         }
-
-
     }
 
     public void Open()
