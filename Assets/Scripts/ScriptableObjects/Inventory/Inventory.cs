@@ -57,6 +57,8 @@ public class Inventory : ScriptableObject
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
 
+
+
 #if UNITY_EDITOR
     // Needed in order to allow changes to the Inventory in the editor to be saved.
 
@@ -287,28 +289,29 @@ public class Inventory : ScriptableObject
     //! Currently doesn't account for `items.maxCapacity`!
     private void Swap<T>(ref T currentlyEquipped, T newEquip) where T : EquippableItem
     {
-        // Don't do anything if trying to equip the same item.
-        if (currentlyEquipped == newEquip) return;
 
-        if (currentlyEquipped != null)
-        {
-            items[currentlyEquipped]++;
-        }
+            if (currentlyEquipped == newEquip) return;
 
-        currentlyEquipped = newEquip;
-
-        if (newEquip != null)
-        {
-            items[newEquip]--;
-
-            if (newEquip.sound != null)
+            if (currentlyEquipped != null)
             {
-                SoundManager.RequestSound(newEquip.sound);
+                items[currentlyEquipped]++;
             }
-        }
 
-        OnEquipmentChanged?.Invoke();
-    }
+            currentlyEquipped = newEquip;
+
+            if (newEquip != null)
+            {
+                items[newEquip]--;
+
+                if (newEquip.sound != null)
+                {
+                    SoundManager.RequestSound(newEquip.sound);
+                }
+            }
+
+            OnEquipmentChanged?.Invoke();
+        }
+     
 
     public void CalcDefense()
     {

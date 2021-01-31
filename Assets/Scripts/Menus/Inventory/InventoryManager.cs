@@ -20,6 +20,12 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Material swordMaterial = default;
     [SerializeField] private Material laserMaterial = default;
 
+    [Header("Experience System")]
+    [SerializeField] private XPSystem xPSystem;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip cantEquipSound;
+
     public Item currentItem;   //! What is the purpose of this?
 
     private InventoryDisplay inventoryDisplay;
@@ -87,20 +93,37 @@ public class InventoryManager : MonoBehaviour
 
         if (item is EquippableItem)
         {
-            inventory.Equip((EquippableItem)item);
-            if (inventory.currentWeapon)
+            if (xPSystem.level >= item.level)
             {
-                SetWeaponColor();
+                inventory.Equip((EquippableItem)item);
+                if (inventory.currentWeapon)
+                {
+                    SetWeaponColor();
+                }
+                if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
+                {
+                    SetLaserColor();
+                }
+                descriptionText.text = "You are now wearing " + item.name;
             }
-            if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
-            {
-                SetLaserColor();
-            }
+
         }
 
         if (item.usable)
         {
-            inventory.items[item]--;
+            if (xPSystem.level >= item.level)
+            {
+                inventory.items[item]--;
+                descriptionText.text = "You used " + item.name;
+                var context = (item is EquippableItem) ? "You are now wearing " : "You used ";
+                descriptionText.text = context + item.name;
+            }
+            else
+            {
+                SoundManager.RequestSound(cantEquipSound);
+
+                descriptionText.text = "Your level is not high enaugh to use this";
+            }
         }
 
         if (inventory.items[item] <= 0)
@@ -110,8 +133,7 @@ public class InventoryManager : MonoBehaviour
 
         inventoryDisplay.UpdateEquipmentSlots();
         UpdateStatDisplays();
-        var context = (item is EquippableItem) ? " was equipped" : " was used";
-        descriptionText.text = item.name + context;
+  
     }
 
     private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);

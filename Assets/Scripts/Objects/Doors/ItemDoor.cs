@@ -33,10 +33,13 @@ public class ItemDoor : Interactable
         {
             if (playerInventory.Contains(item))
             {
+                dialogue.sentences[0] = "You hold up " + item.name + " and the door begins to open!";
+                TriggerDialogue();
                 Open();
             }
             else
             {
+                dialogue.sentences[0] = "It seems like you need " + item.name + " to open this door.";
                 TriggerDialogue();
             }
         }
