@@ -6,5 +6,5 @@ public class InventoryArmor : EquippableItem
     public int armorDefense;
 
     public override string fullDescription
-        => description + ("\n\n ARMOR: ") + armorDefense;
+        => description + ("\n\n ARMOR: ") + armorDefense + ("\n\n Level: ") + level;
 }

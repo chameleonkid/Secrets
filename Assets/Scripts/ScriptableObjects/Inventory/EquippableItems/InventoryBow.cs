@@ -7,5 +7,5 @@ public class InventoryBow : EquippableItem
     public int maxDamage;
 
     public override string fullDescription
-        => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage;
+        => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage + ("\n\n Level: ") + level;
 }

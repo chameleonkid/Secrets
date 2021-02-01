@@ -10,6 +10,6 @@ public class InventoryShoulder : EquippableItem
     public int criticalStrikeChance;
 
     public override string fullDescription
-        => description + ("\n\n ARMOR: ") + armorDefense + ("\n\n CRIT: ") + criticalStrikeChance;
+        => description + ("\n\n ARMOR: ") + armorDefense + ("\n\n CRIT: ") + criticalStrikeChance + ("\n\n Level: ") + level;
 }
 

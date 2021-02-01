@@ -9,5 +9,5 @@ public class InventoryLamp : EquippableItem
     public int lumenPerSecond;
 
     public override string fullDescription
-        => description + ("\n\n Lightradius: ") + outerRadius;
+        => description + ("\n\n Lightradius: ") + outerRadius + ("\n\n Level: ") + level;
 }

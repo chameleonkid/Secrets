@@ -19,7 +19,7 @@ public class InventoryWeapon : EquippableItem
     [ColorUsageAttribute(true, true)] public Color glowColor;
 
     public override string fullDescription
-        => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage;
+        => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage + ("\n\n Level: ") + level;
 
     public Vector2[] leftHitboxPolygon {
         get {

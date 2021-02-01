@@ -21,10 +21,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Material laserMaterial = default;
 
     [Header("Experience System")]
-    [SerializeField] private XPSystem xPSystem;
+    [SerializeField] private XPSystem xPSystem = default;
 
     [Header("Sounds")]
-    [SerializeField] private AudioClip cantEquipSound;
+    [SerializeField] private AudioClip cantEquipSound = default;
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -122,7 +122,7 @@ public class InventoryManager : MonoBehaviour
             {
                 SoundManager.RequestSound(cantEquipSound);
 
-                descriptionText.text = "Your level is not high enaugh to use this";
+                descriptionText.text = "Your level is not high enaugh to use this. \n Requires Level: " + item.level;
             }
         }
 

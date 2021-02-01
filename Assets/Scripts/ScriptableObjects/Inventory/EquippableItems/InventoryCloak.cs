@@ -11,5 +11,5 @@ public class InventoryCloak : EquippableItem
     public int criticalStrikeChance;
 
     public override string fullDescription
-        => description + ("\n\n SPELL-DMG: ") + minSpellDamage + " - " + maxSpellDamage + ("\n\n ARMOR: ") + armorDefense + ("\n\n CRIT: ") + criticalStrikeChance;
+        => description + ("\n\n SPELL-DMG: ") + minSpellDamage + " - " + maxSpellDamage + ("\n\n ARMOR: ") + armorDefense + ("\n\n CRIT: ") + criticalStrikeChance + ("\n\n Level: ") + level;
 }
