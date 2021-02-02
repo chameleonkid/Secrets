@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -42,7 +41,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
     }
          
-    public void Save() => SimpleSave.Instance.Save("saveSlot1");
+    public void Save() => SaveManager.Instance.Save("saveSlot1");
 
-    public void Reset() => SimpleSave.Instance.LoadNew();
+    public void Reset() => SaveManager.Instance.LoadNew();
 }

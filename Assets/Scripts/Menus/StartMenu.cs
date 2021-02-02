@@ -7,13 +7,7 @@ public class StartMenu : MonoBehaviour
 
     public void NewGame() => SceneManager.LoadScene("CharacterCreation");
 
-    public void ClickStart()
-    {
-        SimpleSave.Instance.LoadNew();
-    }
+    public void ClickStart() => SaveManager.Instance.LoadNew();
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
+    public void Quit() => Application.Quit();
 }

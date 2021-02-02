@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(ScriptableObjectPersistence))]
-public class SimpleSave : DDOLSingleton<SimpleSave>
+public class SaveManager : DDOLSingleton<SaveManager>
 {
     private ScriptableObjectPersistence so;
 
