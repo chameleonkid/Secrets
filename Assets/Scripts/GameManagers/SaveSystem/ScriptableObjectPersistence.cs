@@ -119,7 +119,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
     {
         foreach (var v in vendorInventories)
         {
-            v.coins = 0;
+            v.coins = 1000;
             v.items = new Schwer.ItemSystem.Inventory();
 
             // Would vendors ever have gear?

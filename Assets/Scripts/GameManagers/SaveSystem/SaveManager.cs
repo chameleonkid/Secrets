@@ -101,14 +101,18 @@ public class SaveManager : DDOLSingleton<SaveManager>
 
     private void SaveVendorInventories(string saveSlot)
     {
-        //! TODO
-        ES3.Save("VendorInventory", so.vendorInventories, saveSlot);
+        for (int i = 0; i < so.vendorInventories.Length; i++)
+        {
+            SaveInventory("VendorInventory" + so.vendorInventories[i].name, so.vendorInventories[i], saveSlot);
+        }
     }
 
     private void LoadVendorInventories(string loadSlot)
     {
-        //! TODO
-        ES3.LoadInto("VendorInventory", loadSlot, so.vendorInventories);
+        for (int i = 0; i < so.vendorInventories.Length; i++)
+        {
+            LoadInventory("VendorInventory"  + so.vendorInventories[i].name , loadSlot, so.vendorInventories[i], so.itemDatabase);
+        }
     }
 
     private void SaveBools(string saveSlot)
