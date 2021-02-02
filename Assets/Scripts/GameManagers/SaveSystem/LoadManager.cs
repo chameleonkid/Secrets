@@ -38,7 +38,7 @@ public class LoadManager : MonoBehaviour
 
     public void Load(string loadSlot)
     {
-        SimpleSave.Instance.Load(loadSlot);
+        SaveManager.Instance.Load(loadSlot);
         loadPanel.SetActive(false);
     }
 }

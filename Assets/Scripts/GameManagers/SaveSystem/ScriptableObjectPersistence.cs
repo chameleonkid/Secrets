@@ -1,7 +1,6 @@
 ﻿using Schwer.ItemSystem;
 using UnityEngine;
 
-[RequireComponent(typeof(SimpleSave))]
 public class ScriptableObjectPersistence : MonoBehaviour
 {
     [Header("Databases")]

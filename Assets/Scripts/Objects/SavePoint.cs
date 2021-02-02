@@ -69,7 +69,7 @@ public class SavePoint : MonoBehaviour
     {
         saveName.RuntimeValue = playerAppearance.playerName + "\nLevel: " + playerXP.level + "\n" + SceneManager.GetActiveScene().name;
 
-        SimpleSave.Instance.Save(saveSlot);
+        SaveManager.Instance.Save(saveSlot);
 
         saveSlotDisplay.text = saveName.RuntimeValue;
 
