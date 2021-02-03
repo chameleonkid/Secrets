@@ -92,7 +92,7 @@ public class SOPInspector : Editor {
         var vendorInventories = new List<Inventory>();
         for (int i = 0; i < inventories.Length; i++) {
             var path = AssetDatabase.GetAssetPath(inventories[i]);
-            if (path.Contains("Vendor")) {
+            if (path.Contains("Vendor") && !path.Contains("Default")) {         // <------ Why is it still resetting?
                 vendorInventories.Add(inventories[i]);
             }
         }

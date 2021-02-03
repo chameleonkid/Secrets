@@ -50,6 +50,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private FloatValue _timeOfDay = default;
     public FloatValue timeOfDay => _timeOfDay;
 
+    [SerializeField] private Inventory mavensStartInventory;
+
     public void ResetScriptableObjects()
     {
         ResetSaveName();
@@ -119,7 +121,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
     {
         foreach (var v in vendorInventories)
         {
-            v.coins = 1000;
+            v.coins = 2500;
             v.items = new Schwer.ItemSystem.Inventory();
 
             // Would vendors ever have gear?
@@ -131,7 +133,13 @@ public class ScriptableObjectPersistence : MonoBehaviour
             v.totalCritChance = 0;
             v.totalMaxSpellDamage = 0;
             v.totalMinSpellDamage = 0;
+            SetVendorStartItems();
         }
+    }
+
+    public void SetVendorStartItems()
+    {
+        vendorInventories[0] = mavensStartInventory;
     }
 
     public void ResetXP() => _xpSystem.ResetExperienceSystem();
