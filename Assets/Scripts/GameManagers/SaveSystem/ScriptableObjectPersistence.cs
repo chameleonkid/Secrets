@@ -122,6 +122,22 @@ public class ScriptableObjectPersistence : MonoBehaviour
             var reg = v.regular;
             var ini = v.initial;
 
+            if (reg != null && ini == null)
+            {
+                Debug.LogWarning($"Runtime inventory '{reg.name}' is missing its default equivalent.");
+                continue;
+            }
+            else if (reg == null && ini != null)
+            {
+                Debug.LogWarning($"Default inventory '{ini.name}' is missing its runtime equivalent.");
+                continue;
+            }
+            else if (reg == null && ini == null)
+            {
+                Debug.LogWarning("Null entry in vendorInventories (skipped)!");
+                continue;
+            }
+
             reg.coins = ini.coins;
             reg.items = ini.items;
 
