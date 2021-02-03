@@ -103,7 +103,7 @@ public class SaveManager : DDOLSingleton<SaveManager>
     {
         for (int i = 0; i < so.vendorInventories.Length; i++)
         {
-            SaveInventory("VendorInventory" + so.vendorInventories[i].name, so.vendorInventories[i], saveSlot);
+            SaveInventory("VendorInventory" + so.vendorInventories[i].regular.name, so.vendorInventories[i].regular, saveSlot);
         }
     }
 
@@ -111,7 +111,7 @@ public class SaveManager : DDOLSingleton<SaveManager>
     {
         for (int i = 0; i < so.vendorInventories.Length; i++)
         {
-            LoadInventory("VendorInventory"  + so.vendorInventories[i].name , loadSlot, so.vendorInventories[i], so.itemDatabase);
+            LoadInventory("VendorInventory"  + so.vendorInventories[i].regular.name , loadSlot, so.vendorInventories[i].regular, so.itemDatabase);
         }
     }
 

@@ -25,9 +25,9 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     [SerializeField] private Inventory _playerInventory = default;
     public Inventory playerInventory => _playerInventory;
-    
-    [SerializeField] private Inventory[] _vendorInventories = default;
-    public Inventory[] vendorInventories => _vendorInventories;
+
+    [SerializeField] private VendorInventorySet[] _vendorInventories = default;
+    public VendorInventorySet[] vendorInventories => _vendorInventories;
 
     [SerializeField] private BoolValue[] _chests = default;
     public BoolValue[] chests => _chests;
@@ -49,8 +49,6 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     [SerializeField] private FloatValue _timeOfDay = default;
     public FloatValue timeOfDay => _timeOfDay;
-
-    [SerializeField] private Inventory mavensStartInventory;
 
     public void ResetScriptableObjects()
     {
@@ -121,26 +119,77 @@ public class ScriptableObjectPersistence : MonoBehaviour
     {
         foreach (var v in vendorInventories)
         {
-            v.coins = 2500;
-            v.items = new Schwer.ItemSystem.Inventory();
+            var reg = v.regular;
+            var ini = v.initial;
+
+            if (reg != null && ini == null)
+            {
+                Debug.LogWarning($"Runtime inventory '{reg.name}' is missing its default equivalent.");
+                continue;
+            }
+            else if (reg == null && ini != null)
+            {
+                Debug.LogWarning($"Default inventory '{ini.name}' is missing its runtime equivalent.");
+                continue;
+            }
+            else if (reg == null && ini == null)
+            {
+                Debug.LogWarning("Null entry in vendorInventories (skipped)!");
+                continue;
+            }
+
+            reg.coins = ini.coins;
+            reg.items = ini.items;
 
             // Would vendors ever have gear?
-            v.currentItem = null;
-            v.ResetEquipment();
+            reg.currentItem = ini.currentItem;
+            reg.currentWeapon = ini.currentWeapon;
+            reg.currentArmor = ini.currentArmor;
+            reg.currentHelmet = ini.currentHelmet;
+            reg.currentGloves = ini.currentGloves;
+            reg.currentLegs = ini.currentLegs;
+            reg.currentShield = ini.currentShield;
+            reg.currentRing = ini.currentRing;
+            reg.currentSpellbook = ini.currentSpellbook;
+            reg.currentSpellbookTwo = ini.currentSpellbookTwo;
+            reg.currentSpellbookThree = ini.currentSpellbookThree;
+            reg.currentAmulet = ini.currentAmulet;
+            reg.currentBoots = ini.currentBoots;
+            reg.currentLamp = ini.currentLamp;
+            reg.currentCloak = ini.currentCloak;
+            reg.currentBelt = ini.currentBelt;
+            reg.currentShoulder = ini.currentShoulder;
+            reg.currentSeal = ini.currentSeal;
+
+            reg.currentSeed = ini.currentSeed;
+            reg.currentRune = ini.currentRune;
+            reg.currentGem = ini.currentGem;
+            reg.currentPearl = ini.currentPearl;
+            reg.currentDragonEgg = ini.currentDragonEgg;
+            reg.currentArtifact = ini.currentArtifact;
+            reg.currentCrown = ini.currentCrown;
+            reg.currentScepter = ini.currentScepter;
 
             // Would vendors ever need this?
-            v.totalDefense = 0;
-            v.totalCritChance = 0;
-            v.totalMaxSpellDamage = 0;
-            v.totalMinSpellDamage = 0;
-            SetVendorStartItems();
+            reg.totalDefense = ini.totalDefense;
+            reg.totalCritChance = ini.totalCritChance;
+            reg.totalMaxSpellDamage = ini.totalMaxSpellDamage;
+            reg.totalMinSpellDamage = ini.totalMinSpellDamage;
         }
     }
 
-    public void SetVendorStartItems()
-    {
-        vendorInventories[0] = mavensStartInventory;
-    }
-
     public void ResetXP() => _xpSystem.ResetExperienceSystem();
+
+    [System.Serializable]
+    public struct VendorInventorySet
+    {
+        public Inventory regular;
+        public Inventory initial;
+
+        public VendorInventorySet(Inventory regular, Inventory initial)
+        {
+            this.regular = regular;
+            this.initial = initial;
+        }
+    }
 }
