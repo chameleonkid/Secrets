@@ -110,6 +110,8 @@ public class SOPInspector : Editor {
         }
         ReflectionUtility.SetPrivateField(sop, "_vendorInventories", vendorInventories.ToArray());
 
+        PrefabUtility.RecordPrefabInstancePropertyModifications(sop);
+        
         Debug.Log("SOP: Refreshed references.");
     }
 }
