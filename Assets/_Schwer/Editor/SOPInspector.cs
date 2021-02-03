@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Schwer.ItemSystem;
 using Schwer.Reflection;
 using SchwerEditor;
@@ -89,15 +90,28 @@ public class SOPInspector : Editor {
         ReflectionUtility.SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
 
         var inventories = AssetsUtility.FindAllAssets<Inventory>();
-        var vendorInventories = new List<Inventory>();
+        var vendorInventories = new List<ScriptableObjectPersistence.VendorInventorySet>();
         for (int i = 0; i < inventories.Length; i++) {
             var path = AssetDatabase.GetAssetPath(inventories[i]);
-            if (path.Contains("Vendor") && !path.Contains("Default")) {         // <------ Why is it still resetting?
-                vendorInventories.Add(inventories[i]);
+            if (path.Contains("Vendor") && !path.Contains("Default")) {
+                var search = path.Split('/').Last();        // Remove anything before the last `/` in the path (i.e. folder names).
+                search = search.Split('.').First();         // Remove file extension.
+                search = search.Replace("Vendor", "");
+                search = search.Replace("Inventory", "");
+                var initial = AssetsUtility.FindFirstAsset<Inventory>(search);
+
+                // Only accept inventories with "Default" in the path.
+                if (initial != null && !AssetDatabase.GetAssetPath(initial).Contains("Default")) {
+                    initial = null;                    
+                }
+
+                vendorInventories.Add(new ScriptableObjectPersistence.VendorInventorySet(inventories[i], initial));
             }
         }
         ReflectionUtility.SetPrivateField(sop, "_vendorInventories", vendorInventories.ToArray());
 
+        PrefabUtility.RecordPrefabInstancePropertyModifications(sop);
+        
         Debug.Log("SOP: Refreshed references.");
     }
 }
