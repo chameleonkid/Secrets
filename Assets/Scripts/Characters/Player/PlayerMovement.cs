@@ -32,7 +32,7 @@ public class PlayerMovement : Character
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => (Input.GetButton("Run")) ? _speed * 2 : _speed;
+    private float speed => (Input.GetButton("Run")) ? _speed * 1.5f : _speed;
     [SerializeField] private float originalSpeed;
 
     private Vector3 change;
