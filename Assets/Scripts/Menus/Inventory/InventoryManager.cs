@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private Inventory inventory = default;
-    [SerializeField] private AudioClip unequipFailSound = default;
+
     [Header("Components")]
     [SerializeField] private GameObject inventoryPanel = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
@@ -25,6 +25,8 @@ public class InventoryManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip cantEquipSound = default;
+    [SerializeField] private AudioClip selectItemSound = default;
+    [SerializeField] private AudioClip unequipFailSound = default;
 
     public Item currentItem;   //! What is the purpose of this?
 
@@ -81,6 +83,7 @@ public class InventoryManager : MonoBehaviour
 
     private void SetUpItemDescription(Item newItem)
     {
+        SoundManager.RequestSound(selectItemSound);
         currentItem = newItem;
         descriptionText.text = (newItem != null) ? newItem.fullDescription : "";
     }
