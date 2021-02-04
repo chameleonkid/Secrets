@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+
 
 public class SzeneTransition : MonoBehaviour
 {
@@ -7,25 +9,32 @@ public class SzeneTransition : MonoBehaviour
     public string sceneToLoad;
     public Vector2 playerPosition;
     public VectorValue playerPosMemory;
+    [SerializeField] private float transitionTime = 3f;
+    [SerializeField] private Animator anim = default;
+    private PlayerMovement player;
 
-    [Header("Transition Variables")]
-    public GameObject fadeInPanel;
 
     public void Awake()
     {
-        if (fadeInPanel != null)
-        {
-            GameObject panel = Instantiate(fadeInPanel, Vector3.zero, Quaternion.identity) as GameObject;
-            Destroy(panel, 1);
-        }
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
+            player = other.GetComponent<PlayerMovement>();
             playerPosMemory.value = playerPosition;
-            SceneManager.LoadScene(sceneToLoad);
+            StartCoroutine(StartSceneCo());
         }
     }
+
+    IEnumerator StartSceneCo()
+    {
+        player.GetComponent<PlayerMovement>().LockMovement(transitionTime + 2f);
+        anim.SetTrigger("StartLoading");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
 }
