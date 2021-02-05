@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -15747,7 +15747,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 8.037352
+      m_AnimationSpeed: 8.813061
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -17, y: 17, z: 0}
@@ -15757,7 +15757,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 9.472678
+      m_AnimationSpeed: 9.088974
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -9, y: 17, z: 0}
@@ -15767,7 +15767,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 9.942321
+      m_AnimationSpeed: 8.372103
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -22753,7 +22753,7 @@ Transform:
   - {fileID: 1337420250258952630}
   - {fileID: 1337420250544926269}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1337420250661953851
 GameObject:
@@ -22778,6 +22778,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 764312270}
     m_Modifications:
+    - target: {fileID: 261042274325323505, guid: b444708351614d340b4830bd8f8231f8,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.37894297
+      objectReference: {fileID: 0}
+    - target: {fileID: 261042274325323505, guid: b444708351614d340b4830bd8f8231f8,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.021092176
+      objectReference: {fileID: 0}
     - target: {fileID: 4888655103632162085, guid: b444708351614d340b4830bd8f8231f8,
         type: 3}
       propertyPath: m_Name
@@ -22837,6 +22847,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168159697118364601, guid: b444708351614d340b4830bd8f8231f8,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.6090522
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168159697118364601, guid: b444708351614d340b4830bd8f8231f8,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.008270979
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b444708351614d340b4830bd8f8231f8, type: 3}

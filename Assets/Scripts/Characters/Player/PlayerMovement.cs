@@ -138,6 +138,7 @@ public class PlayerMovement : Character
 
     private void Update()
     {
+        if (Time.timeScale <= 0) return;
         // Is the player in an interaction?
         if (currentState == State.interact)
         {
