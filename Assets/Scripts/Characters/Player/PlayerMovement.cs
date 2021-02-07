@@ -18,7 +18,7 @@ public class PlayerMovement : Character
     [SerializeField] private CharacterAppearance characterAppearance = default;
 
 
-    [Header("TestInputs")]
+    [Header("TestUIInputs")]
     [SerializeField] private Button uiAttackButton = default;
     [SerializeField] private Button uiSpellButton = default;
     [SerializeField] private Button uiSpellTwoButton = default;
