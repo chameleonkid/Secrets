@@ -127,9 +127,9 @@ public class PlayerMovement : Character
 
         // This is for Using UI-Buttons
         uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
-        uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
-        uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(SpellAttackTwo);
-        uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(SpellAttackThree);
+     //   uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
+     //   uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(SpellAttackTwo);
+     //   uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(SpellAttackThree);
         uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
 
     }
@@ -166,15 +166,15 @@ public class PlayerMovement : Character
 
         if (Input.GetButton("SpellCast"))
         {
-            SpellAttack();
+            SpellAttack(true,false,false);
         }
         if (Input.GetButton("SpellCast2"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            SpellAttackTwo();
+            SpellAttack(false, true, false);
         }
         if (Input.GetButton("SpellCast3"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            SpellAttackThree();
+            SpellAttack(false, false, true);
         }
         if (Input.GetButtonDown("Lamp"))
         {
@@ -307,86 +307,32 @@ public class PlayerMovement : Character
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
-    private IEnumerator SpellAttackCo()
+    private IEnumerator SpellAttackCo(GameObject spellPrefab, InventorySpellbook spellBook)
     {
         animator.SetBool("isCasting", true); // Set to cast Animation
         currentState = State.attack;
-        MakeSpell();
-        OnSpellTriggered?.Invoke();
-        spellCooldown = true;
+        MakeSpell(spellPrefab,spellBook);
+        
+        spellBook.onCooldown = true;
         yield return new WaitForSeconds(0.05f);
         if (currentState != State.interact)
         {
             currentState = State.walk;
         }
         animator.SetBool("isCasting", false);
-        yield return new WaitForSeconds(inventory.currentSpellbook.coolDown);
+        yield return new WaitForSeconds(spellBook.coolDown);
         SoundManager.RequestSound(Spell0CooldownSound);
-        spellCooldown = false;
-    }
-
-    private IEnumerator SpellAttackTwoCo()
-    {
-        animator.SetBool("isCasting", true); // Set to cast Animation
-        currentState = State.attack;
-        MakeSpellTwo();
-        OnSpellTwoTriggered?.Invoke();
-        spellTwoCooldown = true;
-        yield return new WaitForSeconds(0.05f);
-        if (currentState != State.interact)
-        {
-            currentState = State.walk;
-        }
-        animator.SetBool("isCasting", false);
-        yield return new WaitForSeconds(inventory.currentSpellbookTwo.coolDown);
-        SoundManager.RequestSound(Spell0CooldownSound);
-        spellTwoCooldown = false;
-    }
-
-    private IEnumerator SpellAttackThreeCo()
-    {
-        animator.SetBool("isCasting", true); // Set to cast Animation
-        currentState = State.attack;
-        MakeSpellThree();
-        OnSpellThreeTriggered?.Invoke();
-        spellThreeCooldown = true;
-        yield return new WaitForSeconds(0.05f);
-        if (currentState != State.interact)
-        {
-            currentState = State.walk;
-        }
-        animator.SetBool("isCasting", false);
-        yield return new WaitForSeconds(inventory.currentSpellbookThree.coolDown);
-        SoundManager.RequestSound(Spell0CooldownSound);
-        spellThreeCooldown = false;
+        spellBook.onCooldown = false;
     }
 
     //################### instantiate spell when casted ###############################
-    private void MakeSpell()
+    private void MakeSpell(GameObject spellPrefab, InventorySpellbook spellBook)
     {
-        var prefab = inventory.currentSpellbook.prefab;
+        var prefab = spellPrefab;
         // var speed = inventory.currentSpellbook.speed;
         var speed = prefab.GetComponent<Projectile>().projectileSpeed;
         CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
-        mana.current -= inventory.currentSpellbook.manaCosts;
-    }
-
-    private void MakeSpellTwo()
-    {
-        var prefab = inventory.currentSpellbookTwo.prefab;
-        // var speed = inventory.currentSpellbook.speed;
-        var speed = prefab.GetComponent<Projectile>().projectileSpeed;
-        CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
-        mana.current -= inventory.currentSpellbookTwo.manaCosts;
-    }
-
-    private void MakeSpellThree()
-    {
-        var prefab = inventory.currentSpellbookThree.prefab;
-        // var speed = inventory.currentSpellbook.speed;
-        var speed = prefab.GetComponent<Projectile>().projectileSpeed;
-        CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
-        mana.current -= inventory.currentSpellbookThree.manaCosts;
+        mana.current -= spellBook.manaCosts;
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -465,29 +411,43 @@ public class PlayerMovement : Character
         }
     }
 
-    public void SpellAttack()
+    public void SpellAttack(bool spell1, bool spell2, bool spell3)
     {
-        if (inventory.currentSpellbook && mana.current >= inventory.currentSpellbook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellCooldown == false)
+        if (spell1 && inventory.currentSpellbook)
         {
-            StartCoroutine(SpellAttackCo());
+            var spellBook = inventory.currentSpellbook;
+            var prefab = spellBook.prefab;
+            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            {
+                StartCoroutine(SpellAttackCo(prefab, spellBook));
+                OnSpellTriggered?.Invoke();
+            }
+
         }
+        if (spell2 && inventory.currentSpellbookTwo)
+        {
+            var spellBook = inventory.currentSpellbookTwo;
+            var prefab = spellBook.prefab;
+            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            {
+                StartCoroutine(SpellAttackCo(prefab, spellBook));
+                OnSpellTwoTriggered?.Invoke();
+            }
+        }
+        if (spell3 && inventory.currentSpellbookThree)
+        {
+            var spellBook = inventory.currentSpellbookThree;
+            var prefab = spellBook.prefab;
+            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            {
+                StartCoroutine(SpellAttackCo(prefab, spellBook));
+                OnSpellThreeTriggered?.Invoke();
+            }
+
+        }
+
     }
 
-    public void SpellAttackTwo()
-    {
-        if (inventory.currentSpellbookTwo && mana.current >= inventory.currentSpellbookTwo.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellTwoCooldown == false)
-        {
-            StartCoroutine(SpellAttackTwoCo());
-        }
-    }
-
-    public void SpellAttackThree()
-    {
-        if (inventory.currentSpellbookThree && mana.current >= inventory.currentSpellbookThree.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellThreeCooldown == false)
-        {
-            StartCoroutine(SpellAttackThreeCo());
-        }
-    }
 
     public void ToggleLamp()
     {
