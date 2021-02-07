@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
+using TMPro;
+using System.Collections;
+using System;
 
 public class Room : MonoBehaviour
 {
     [SerializeField] protected GameObject virtualCamera = default;
     [SerializeField] protected Enemy[] enemies = default;
     [SerializeField] protected Breakable[] breakables = default;
+    [Header("AreaNameDisplay")]
+    [SerializeField] protected string  areaName = default;
+    [SerializeField] protected TextMeshProUGUI areaNameText = default;
+
+
+
 
     public void OnDisable() => virtualCamera.SetActive(false);
 
@@ -13,6 +22,10 @@ public class Room : MonoBehaviour
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             SetActiveRoom(true);
+            if(areaNameText && areaNameText.text != "" && areaNameText)
+            {
+                StartCoroutine(ShowAreaTextCo());
+            }
         }
     }
 
@@ -37,5 +50,13 @@ public class Room : MonoBehaviour
         {
             breakables[i].gameObject.SetActive(value);
         }
+    }
+
+    IEnumerator ShowAreaTextCo()
+    {
+        areaNameText.text = areaName;
+        areaNameText.enabled = true;
+        yield return new WaitForSeconds(5f);
+        areaNameText.enabled = false;
     }
 }

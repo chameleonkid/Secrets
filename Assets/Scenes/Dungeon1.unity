@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -668,6 +668,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 54457216}
   enemies: []
   breakables: []
+  areaName: 
+  areaNameText: {fileID: 755194099}
 --- !u!114 &87537670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,18 +728,6 @@ Transform:
   m_Father: {fileID: 1693286798}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &108276472 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1306760324, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
-    type: 3}
-  m_PrefabInstance: {fileID: 755194098}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &118458546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1222,18 +1212,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 200360672}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &202580371 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 725613483, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
-    type: 3}
-  m_PrefabInstance: {fileID: 755194098}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &213781299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1390,18 +1368,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 873204328}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &226197282 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 345762106, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
-    type: 3}
-  m_PrefabInstance: {fileID: 755194098}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &235482141 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7634449230901348986, guid: 8e65b5fc062875340895e683b5583ef1,
@@ -3980,6 +3946,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96, type: 3}
+--- !u!114 &755194099 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8500792005227412612, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
+    type: 3}
+  m_PrefabInstance: {fileID: 755194098}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &761233382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4702,18 +4680,6 @@ Transform:
   m_Father: {fileID: 87537667}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &913696121 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2133317256, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
-    type: 3}
-  m_PrefabInstance: {fileID: 755194098}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &939910381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5064,6 +5030,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 1762892701}
   enemies: []
   breakables: []
+  areaName: 
+  areaNameText: {fileID: 755194099}
 --- !u!114 &999581264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5265,18 +5233,6 @@ PolygonCollider2D:
       - {x: -29.290014, y: 28.690975}
       - {x: -29.485783, y: 8.135601}
       - {x: -11.168673, y: 8.066934}
---- !u!114 &1065882792 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1295674669, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
-    type: 3}
-  m_PrefabInstance: {fileID: 755194098}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1068922281 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7290780269828354134, guid: cdad374a17ee3d142a6a4a43791a3bd8,
@@ -5417,6 +5373,16 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
       value: -6.09321
       objectReference: {fileID: 0}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaName
+      value: Mavens Cave
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaNameText
+      value: 
+      objectReference: {fileID: 755194099}
     - target: {fileID: 2521785702417430902, guid: 8e65b5fc062875340895e683b5583ef1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6677,6 +6643,16 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 235482143}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaNameText
+      value: 
+      objectReference: {fileID: 755194099}
     - target: {fileID: 2521785702417430902, guid: 8e65b5fc062875340895e683b5583ef1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6867,6 +6843,16 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].y
       value: -6.01518
       objectReference: {fileID: 0}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaNameText
+      value: 
+      objectReference: {fileID: 755194099}
     - target: {fileID: 2521785702417430902, guid: 8e65b5fc062875340895e683b5583ef1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7988,6 +7974,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 420822612}
   enemies: []
   breakables: []
+  areaName: 
+  areaNameText: {fileID: 755194099}
 --- !u!114 &1605253403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8097,6 +8085,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 290158505}
   enemies: []
   breakables: []
+  areaName: 
+  areaNameText: {fileID: 755194099}
 --- !u!114 &1622651275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8740,6 +8730,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 1649791344}
   enemies: []
   breakables: []
+  areaName: 
+  areaNameText: {fileID: 755194099}
 --- !u!114 &1693286801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9935,27 +9927,27 @@ PrefabInstance:
         type: 3}
       propertyPath: uiLampButton
       value: 
-      objectReference: {fileID: 913696121}
+      objectReference: {fileID: 0}
     - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: uiSpellButton
       value: 
-      objectReference: {fileID: 1065882792}
+      objectReference: {fileID: 0}
     - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: uiAttackButton
       value: 
-      objectReference: {fileID: 226197282}
+      objectReference: {fileID: 0}
     - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: uiSpellTwoButton
       value: 
-      objectReference: {fileID: 108276472}
+      objectReference: {fileID: 0}
     - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: uiSpellThreeButton
       value: 
-      objectReference: {fileID: 202580371}
+      objectReference: {fileID: 0}
     - target: {fileID: 3563088278929260502, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: inventoryManager
@@ -11338,6 +11330,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 5002059222739762074}
   enemies: []
   breakables: []
+  areaName: 
+  areaNameText: {fileID: 755194099}
 --- !u!114 &1553582542936354804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11353,6 +11347,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 5002059221144471901}
   enemies: []
   breakables: []
+  areaName: 
+  areaNameText: {fileID: 755194099}
 --- !u!1 &1562672386376996671
 GameObject:
   m_ObjectHideFlags: 0

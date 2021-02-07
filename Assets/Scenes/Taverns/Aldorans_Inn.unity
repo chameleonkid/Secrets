@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -252,6 +252,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 17585007}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &17585009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8833009003962535076, guid: 5276e0f7c123b7b4c871bc76458cff0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 17585007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &75075795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -299,6 +311,16 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
       value: -2
       objectReference: {fileID: 0}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaName
+      value: Aldorons Inn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
+        type: 3}
+      propertyPath: areaNameText
+      value: 
+      objectReference: {fileID: 17585009}
     - target: {fileID: 5869894821540672883, guid: 8e65b5fc062875340895e683b5583ef1,
         type: 3}
       propertyPath: m_RootOrder
@@ -15747,7 +15769,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 8.813061
+      m_AnimationSpeed: 8.69685
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -17, y: 17, z: 0}
@@ -15757,7 +15779,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 9.088974
+      m_AnimationSpeed: 9.270347
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -9, y: 17, z: 0}
@@ -15767,7 +15789,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 8.372103
+      m_AnimationSpeed: 8.645678
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
