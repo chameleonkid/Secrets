@@ -127,9 +127,9 @@ public class PlayerMovement : Character
 
         // This is for Using UI-Buttons
         uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
-     //   uiSpellButton.GetComponent<Button>().onClick.AddListener(SpellAttack);
-     //   uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(SpellAttackTwo);
-     //   uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(SpellAttackThree);
+        uiSpellButton.GetComponent<Button>().onClick.AddListener(UISpellAttack);
+        uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(UISpellAttackTwo);
+        uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(UISpellAttackThree);
         uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
 
     }
@@ -294,10 +294,12 @@ public class PlayerMovement : Character
 
     private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed, float projectileDamage)
     {
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Pfeil höher setzen
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Set Projectile higher
         var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
         proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
+
         var hitbox = proj.GetComponent<DamageOnTrigger>();
         if (hitbox)
         {
@@ -328,10 +330,8 @@ public class PlayerMovement : Character
     //################### instantiate spell when casted ###############################
     private void MakeSpell(GameObject spellPrefab, InventorySpellbook spellBook)
     {
-        var prefab = spellPrefab;
-        // var speed = inventory.currentSpellbook.speed;
-        var speed = prefab.GetComponent<Projectile>().projectileSpeed;
-        CreateProjectile(prefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
+        var speed = spellPrefab.GetComponent<Projectile>().projectileSpeed;
+        CreateProjectile(spellPrefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
         mana.current -= spellBook.manaCosts;
     }
 
@@ -411,43 +411,22 @@ public class PlayerMovement : Character
         }
     }
 
-    public void SpellAttack(bool spell1, bool spell2, bool spell3)
+    public void UISpellAttack()
     {
-        if (spell1 && inventory.currentSpellbook)
-        {
-            var spellBook = inventory.currentSpellbook;
-            var prefab = spellBook.prefab;
-            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
-            {
-                StartCoroutine(SpellAttackCo(prefab, spellBook));
-                OnSpellTriggered?.Invoke();
-            }
-
-        }
-        if (spell2 && inventory.currentSpellbookTwo)
-        {
-            var spellBook = inventory.currentSpellbookTwo;
-            var prefab = spellBook.prefab;
-            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
-            {
-                StartCoroutine(SpellAttackCo(prefab, spellBook));
-                OnSpellTwoTriggered?.Invoke();
-            }
-        }
-        if (spell3 && inventory.currentSpellbookThree)
-        {
-            var spellBook = inventory.currentSpellbookThree;
-            var prefab = spellBook.prefab;
-            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
-            {
-                StartCoroutine(SpellAttackCo(prefab, spellBook));
-                OnSpellThreeTriggered?.Invoke();
-            }
-
-        }
-
+        SpellAttack(true, false, false);
     }
 
+    public void UISpellAttackTwo()
+    {
+        SpellAttack(false, true, false);
+    }
+
+    public void UISpellAttackThree()
+    {
+        SpellAttack(false, false, true);
+    }
+
+  
 
     public void ToggleLamp()
     {
@@ -457,7 +436,6 @@ public class PlayerMovement : Character
             OnLampTriggered?.Invoke();
         }
     }
-
 
     public void LockMovement(float seconds)
     {
@@ -495,6 +473,45 @@ public class PlayerMovement : Character
             eyesSkin.ResetRenderer();
         }
     }
+
+
+    public void SpellAttack(bool spell1, bool spell2, bool spell3)
+    {
+        if (spell1 && inventory.currentSpellbook)
+        {
+            var spellBook = inventory.currentSpellbook;
+            var prefab = spellBook.prefab;
+            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            {
+                StartCoroutine(SpellAttackCo(prefab, spellBook));
+                OnSpellTriggered?.Invoke();
+            }
+
+        }
+        if (spell2 && inventory.currentSpellbookTwo)
+        {
+            var spellBook = inventory.currentSpellbookTwo;
+            var prefab = spellBook.prefab;
+            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            {
+                StartCoroutine(SpellAttackCo(prefab, spellBook));
+                OnSpellTwoTriggered?.Invoke();
+            }
+        }
+        if (spell3 && inventory.currentSpellbookThree)
+        {
+            var spellBook = inventory.currentSpellbookThree;
+            var prefab = spellBook.prefab;
+            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            {
+                StartCoroutine(SpellAttackCo(prefab, spellBook));
+                OnSpellThreeTriggered?.Invoke();
+            }
+
+        }
+
+    }
+
 
 
 }
