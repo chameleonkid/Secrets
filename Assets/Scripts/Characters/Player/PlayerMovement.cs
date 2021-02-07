@@ -411,32 +411,6 @@ public class PlayerMovement : Character
         }
     }
 
-    // #################################### LIFT Item ######################################
-    /* 
-       public void LiftItem()
-       {
-           if (playerInventory.currentItem != null)
-           {
-               if (currentState != State.lift)
-               {             
-                   animator.SetBool("isCarrying", true);
-                   currentState = State.lift;
-                   Debug.Log("State = Lift");
-                   thingSprite.sprite = myInventory.currentItem.itemImage;
-               }
-               else
-               {   
-                   animator.SetBool("isCarrying", false);
-                   currentState = State.idle;
-                   Debug.Log("State = idle");
-                   thingSprite.sprite = null;
-
-                   myInventory.currentItem = null;
-               }
-           }
-       }
-    */
-
     public override void TakeDamage(float damage, bool isCritical)
     {
         if (!isInvulnerable)
