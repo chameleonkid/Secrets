@@ -24,7 +24,7 @@ public class GlobalLightManager : MonoBehaviour
             float intensityMultiplier = 1;
             if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.75f)
             {
-                intensityMultiplier = 0;
+                intensityMultiplier = 0.015f;         // 0 = absolute Darkness 
             }
             else if (normalizedTimeOfDay <= 0.25f)
             {
