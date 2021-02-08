@@ -4,8 +4,13 @@ using TMPro;
 
 public class CharacterCreation : MonoBehaviour
 {
+    [Header("Gender")]
+    [SerializeField] private bool isFemale = false;
+
     [Header("Skins")]
     [SerializeField] private SkinTexturesDatabase skinTextures = default;
+    [SerializeField] private SkinTexturesDatabase skinTexturesFemale = default;
+    [SerializeField] private SkinTexturesDatabase skinTexturesMale = default;
 
     [Header("Body")]
     [SerializeField] private SpriteSkinRPC bodyChanger = default;
@@ -43,17 +48,7 @@ public class CharacterCreation : MonoBehaviour
     }
     private void Awake()
     {
-        bodyChanger.newSprite = skinTextures.bodySkins[0];
-        bodyChanger.ResetRenderer();
-
-        hairChanger.newSprite = skinTextures.hairStyles[0];
-        hairChanger.ResetRenderer();
-
-        armorChanger.newSprite = skinTextures.armorSkins[0];
-        armorChanger.ResetRenderer();
-
-        eyeChanger.newSprite = skinTextures.eyeSkins[0];
-        eyeChanger.ResetRenderer();
+        ResetTextures();
     }
 
     public void NextBody()
@@ -191,7 +186,46 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.armorIndex = armorCounter;
         characterAppearance.eyeIndex = eyeCounter;
 
+        characterAppearance.isFemale = isFemale;
+
         SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
+    }
+
+    public void ResetTextures()
+    {
+        bodyChanger.newSprite = skinTextures.bodySkins[0];
+        bodyChanger.ResetRenderer();
+
+        hairChanger.newSprite = skinTextures.hairStyles[0];
+        hairChanger.ResetRenderer();
+
+        armorChanger.newSprite = skinTextures.armorSkins[0];
+        armorChanger.ResetRenderer();
+
+        eyeChanger.newSprite = skinTextures.eyeSkins[0];
+        eyeChanger.ResetRenderer();
+    }
+
+    public void GenderToMale()
+    {
+        isFemale = false;
+        skinTextures = skinTexturesMale;
+        bodyChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/1 - Base/";
+        hairChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/5 - Hairstyles/";
+        armorChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/3 - Outfits/";
+        eyeChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/2 - Eye Colors/";      
+        ResetTextures();
+    }
+
+    public void GenderToFemale()
+    {
+        isFemale = true;
+        skinTextures = skinTexturesFemale;
+        bodyChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/1 - Base/";
+        hairChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/5 - Hairstyles/";
+        armorChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/3 - Outfits/";
+        eyeChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/2 - Eye Colors/";
+        ResetTextures();
     }
 }
