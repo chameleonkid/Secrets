@@ -10,7 +10,7 @@ public class HomingProjectile : Projectile
         rigidbody.velocity = Vector2.zero;  // Needed to stop the rigidbody working vs the transform change
     }
 
-    protected override void Update()
+    protected override void Update()    //! Probably should use FixedUpdate and affect rigidbody instead.
     {
         this.transform.position = Vector2.MoveTowards(this.transform.position, target.position, projectileSpeed * Time.deltaTime);
 
