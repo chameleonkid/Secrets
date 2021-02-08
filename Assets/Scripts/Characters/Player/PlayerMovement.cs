@@ -451,7 +451,7 @@ public class PlayerMovement : Character
 
     private void SetAppearance()
     {
-
+        /*
         if(characterAppearance.isFemale == true)
         {
             bodySkin.folderPath = "Retro Pixel Characters/Spritesheets/Female/1 - Base/";
@@ -466,7 +466,7 @@ public class PlayerMovement : Character
             armorSkin.folderPath = "Retro Pixel Characters/Spritesheets/Male/3 - Outfits/";
             eyesSkin.folderPath = "Retro Pixel Characters/Spritesheets/Male/2 - Eye Colors/";
         }
-
+*/
         if (characterAppearance.bodyStyle)
         {
             bodySkin.newSprite = characterAppearance.bodyStyle;

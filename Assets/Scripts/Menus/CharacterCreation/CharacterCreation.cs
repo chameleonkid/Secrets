@@ -9,8 +9,8 @@ public class CharacterCreation : MonoBehaviour
 
     [Header("Skins")]
     [SerializeField] private SkinTexturesDatabase skinTextures = default;
-    [SerializeField] private SkinTexturesDatabase skinTexturesFemale = default;
-    [SerializeField] private SkinTexturesDatabase skinTexturesMale = default;
+  //  [SerializeField] private SkinTexturesDatabase skinTexturesFemale = default;
+   // [SerializeField] private SkinTexturesDatabase skinTexturesMale = default;
 
     [Header("Body")]
     [SerializeField] private SpriteSkinRPC bodyChanger = default;
@@ -54,11 +54,21 @@ public class CharacterCreation : MonoBehaviour
     public void NextBody()
     {
         bodyCounter++;
-        if (bodyCounter >= skinTextures.bodySkins.Length)
+        if (isFemale == true)
         {
-            bodyCounter = 0;
+            if (bodyCounter >= 4)
+            {
+                bodyCounter = 0;
+            }
         }
-
+        else
+        {
+            if (bodyCounter >= skinTextures.bodySkins.Length)
+            {
+                bodyCounter = 4;
+            }
+        }
+        Debug.Log(skinTextures.bodySkins[bodyCounter].name);
         SoundManager.RequestSound(buttonClick);
         bodyChanger.newSprite = skinTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
@@ -67,10 +77,21 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousBody()
     {
         bodyCounter--;
-        if (bodyCounter < 0)
+        if (isFemale == true)
         {
-            bodyCounter = skinTextures.bodySkins.Length - 1;
+            if (bodyCounter < 0)
+            {
+                bodyCounter = 3;
+            }
         }
+        else
+        {
+            if (bodyCounter < 4)
+            {
+                bodyCounter = skinTextures.bodySkins.Length - 1;
+            }
+        }
+        Debug.Log(skinTextures.bodySkins[bodyCounter].name);
         SoundManager.RequestSound(buttonClick);
         bodyChanger.newSprite = skinTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
@@ -79,10 +100,21 @@ public class CharacterCreation : MonoBehaviour
     public void NextHair()
     {
         hairCounter++;
-        if (hairCounter >= skinTextures.hairStyles.Length )
+        if (isFemale == true)
         {
-            hairCounter = 0;
+            if (hairCounter >= 13)
+            {
+                hairCounter = 0;
+            }
         }
+        else
+        {
+            if (hairCounter >= skinTextures.hairStyles.Length)
+            {
+                hairCounter = 13;
+            }
+        }
+        Debug.Log(skinTextures.hairStyles[hairCounter].name);
         SoundManager.RequestSound(buttonClick);
         hairChanger.newSprite = skinTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
@@ -91,22 +123,44 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousHair()
     {
         hairCounter--;
-        if (hairCounter < 0)
+        if (isFemale == true)
         {
-            hairCounter = skinTextures.hairStyles.Length -1;
+            if (hairCounter < 0)
+            {
+                hairCounter = 12;
+            }
         }
+        else
+        {
+            if (hairCounter < 13)
+            {
+                hairCounter = skinTextures.hairStyles.Length - 1;
+            }
+        }
+        Debug.Log(skinTextures.hairStyles[hairCounter].name);
         SoundManager.RequestSound(buttonClick);
         hairChanger.newSprite = skinTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
     }
-
+// TEST
     public void NextArmor()
     {
         armorCounter++;
-        if (armorCounter >= skinTextures.armorSkins.Length)
+        if (isFemale == true)
         {
-            armorCounter = 0;
+            if (armorCounter >= 6)
+            {
+                armorCounter = 0;
+            }
         }
+        else 
+        {
+            if(armorCounter >= skinTextures.armorSkins.Length)
+            {
+                armorCounter = 6;
+            }
+        }
+        Debug.Log(skinTextures.armorSkins[armorCounter].name);
         SoundManager.RequestSound(buttonClick);
         armorChanger.newSprite = skinTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
@@ -115,15 +169,28 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousArmor()
     {
         armorCounter--;
-        if (armorCounter < 0)
+        if (isFemale == true)
         {
-            armorCounter = skinTextures.armorSkins.Length -1;
+            if (armorCounter < 0)
+            {
+                armorCounter = 5;
+            }
         }
+        else
+        {
+            if (armorCounter < 6)
+            {
+                armorCounter = skinTextures.armorSkins.Length -1;
+            }
+        }
+        Debug.Log(skinTextures.armorSkins[armorCounter].name);
         SoundManager.RequestSound(buttonClick);
         armorChanger.newSprite = skinTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
     }
 
+
+// TEST
     public void NextEyes()
     {
         eyeCounter++;
@@ -210,22 +277,45 @@ public class CharacterCreation : MonoBehaviour
     public void GenderToMale()
     {
         isFemale = false;
-        skinTextures = skinTexturesMale;
-        bodyChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/1 - Base/";
-        hairChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/5 - Hairstyles/";
-        armorChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/3 - Outfits/";
-        eyeChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/2 - Eye Colors/";      
-        ResetTextures();
+        bodyCounter = 4;
+        hairCounter = 13;
+        eyeCounter = 7;
+        armorCounter = 6;
+        Debug.Log("Switched to Male");
+        /*  skinTextures = skinTexturesMale;
+            bodyChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/1 - Base/";
+            hairChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/5 - Hairstyles/";
+            armorChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/3 - Outfits/";
+            eyeChanger.folderPath = "Retro Pixel Characters/Spritesheets/Male/2 - Eye Colors/";      
+        */
+        bodyChanger.newSprite = skinTextures.bodySkins[bodyCounter];
+        bodyChanger.ResetRenderer();
+
+        hairChanger.newSprite = skinTextures.hairStyles[hairCounter];
+        hairChanger.ResetRenderer();
+
+        armorChanger.newSprite = skinTextures.armorSkins[armorCounter];
+        armorChanger.ResetRenderer();
+
+        eyeChanger.newSprite = skinTextures.eyeSkins[eyeCounter];
+        eyeChanger.ResetRenderer();
     }
 
     public void GenderToFemale()
     {
         isFemale = true;
-        skinTextures = skinTexturesFemale;
-        bodyChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/1 - Base/";
-        hairChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/5 - Hairstyles/";
-        armorChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/3 - Outfits/";
-        eyeChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/2 - Eye Colors/";
+        bodyCounter = 0;
+        hairCounter = 0;
+        eyeCounter = 0;
+        armorCounter = 0;
+        Debug.Log("switched to female");
+        /*    skinTextures = skinTexturesFemale;
+            bodyChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/1 - Base/";
+            hairChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/5 - Hairstyles/";
+            armorChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/3 - Outfits/";
+            eyeChanger.folderPath = "Retro Pixel Characters/Spritesheets/Female/2 - Eye Colors/";
+        */
         ResetTextures();
     }
+
 }
