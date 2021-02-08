@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerMovement : Character
 {
-
     [Header("Appearance")]
     [SerializeField] private SpriteSkinRPC bodySkin = default;
     [SerializeField] private SpriteSkinRPC armorSkin = default;
@@ -16,7 +15,6 @@ public class PlayerMovement : Character
     [SerializeField] private SpriteSkinRPC eyesSkin = default;
     private Color hairColor;
     [SerializeField] private CharacterAppearance characterAppearance = default;
-
 
     [Header("TestUIInputs")]
     [SerializeField] private Button uiAttackButton = default;
@@ -98,8 +96,8 @@ public class PlayerMovement : Character
 
     protected override void Awake()
     {
-    GetCharacterComponents();
-    SetAppearance();
+        GetCharacterComponents();
+        SetAppearance();
     }
 
 
@@ -124,14 +122,12 @@ public class PlayerMovement : Character
         transform.position = startingPosition.value;
         originalSpeed = speed;
 
-
         // This is for Using UI-Buttons
         uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
         uiSpellButton.GetComponent<Button>().onClick.AddListener(UISpellAttack);
         uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(UISpellAttackTwo);
         uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(UISpellAttackThree);
         uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
-
     }
 
     private AudioClip GetLevelUpSound() => levelUpSound;
@@ -166,7 +162,7 @@ public class PlayerMovement : Character
 
         if (Input.GetButton("SpellCast"))
         {
-            SpellAttack(true,false,false);
+            SpellAttack(true, false, false);
         }
         if (Input.GetButton("SpellCast2"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
@@ -203,10 +199,7 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
-
-
         var currentWeapon = inventory.currentWeapon;
-
 
         if (inventory.currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
         {
@@ -274,7 +267,6 @@ public class PlayerMovement : Character
             meeleCooldown = false;
             SoundManager.RequestSound(meleeCooldownSound);
         }
-
     }
 
     // ############################# Roundattack ################################################
@@ -313,8 +305,8 @@ public class PlayerMovement : Character
     {
         animator.SetBool("isCasting", true); // Set to cast Animation
         currentState = State.attack;
-        MakeSpell(spellPrefab,spellBook);
-        
+        MakeSpell(spellPrefab, spellBook);
+
         spellBook.onCooldown = true;
         yield return new WaitForSeconds(0.05f);
         if (currentState != State.interact)
@@ -426,8 +418,6 @@ public class PlayerMovement : Character
         SpellAttack(false, false, true);
     }
 
-  
-
     public void ToggleLamp()
     {
         if (inventory.currentLamp && lumen.current > 0)
@@ -474,7 +464,6 @@ public class PlayerMovement : Character
         }
     }
 
-
     public void SpellAttack(bool spell1, bool spell2, bool spell3)
     {
         if (spell1 && inventory.currentSpellbook)
@@ -486,7 +475,6 @@ public class PlayerMovement : Character
                 StartCoroutine(SpellAttackCo(prefab, spellBook));
                 OnSpellTriggered?.Invoke();
             }
-
         }
         if (spell2 && inventory.currentSpellbookTwo)
         {
@@ -507,12 +495,6 @@ public class PlayerMovement : Character
                 StartCoroutine(SpellAttackCo(prefab, spellBook));
                 OnSpellThreeTriggered?.Invoke();
             }
-
         }
-
     }
-
-
-
 }
-
