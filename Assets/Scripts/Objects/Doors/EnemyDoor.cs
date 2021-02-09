@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyDoor : MonoBehaviour
 {
     [Header("Door Attributes")]
-    [SerializeField] private bool isOpen = false;
     [SerializeField] private SpriteRenderer doorSpriteRenderer = default;
     [SerializeField] private Sprite closedSprite = default;
     [SerializeField] private Sprite openedSprite = default;
