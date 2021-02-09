@@ -118,29 +118,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5645902281776300154}
     m_Modifications:
-    - target: {fileID: 1217532459, guid: e107199547d94fd4292bbf8e94e4e0b8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496071976871470982, guid: e107199547d94fd4292bbf8e94e4e0b8,
+    - target: {fileID: 244670895159155075, guid: e107199547d94fd4292bbf8e94e4e0b8,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496071978128605200, guid: e107199547d94fd4292bbf8e94e4e0b8,
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9688ff5d7d21416449457d59d35f63fd,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496071978198241700, guid: e107199547d94fd4292bbf8e94e4e0b8,
+    - target: {fileID: 2118764511621875656, guid: e107199547d94fd4292bbf8e94e4e0b8,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1870286775173287181, guid: e107199547d94fd4292bbf8e94e4e0b8,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_Name
+      value: TotalStrength
       objectReference: {fileID: 0}
     - target: {fileID: 3169858031378882595, guid: e107199547d94fd4292bbf8e94e4e0b8,
         type: 3}
@@ -252,16 +239,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5703648155880917274, guid: e107199547d94fd4292bbf8e94e4e0b8,
+    - target: {fileID: 7053270374383983470, guid: e107199547d94fd4292bbf8e94e4e0b8,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Name
+      value: TotalStrengthValueText
       objectReference: {fileID: 0}
-    - target: {fileID: 8359401337393163318, guid: e107199547d94fd4292bbf8e94e4e0b8,
+    - target: {fileID: 8319563767418139534, guid: e107199547d94fd4292bbf8e94e4e0b8,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: strengthDisplay
+      value: 
+      objectReference: {fileID: 6292735547813220261}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e107199547d94fd4292bbf8e94e4e0b8, type: 3}
 --- !u!224 &5645902280875756306 stripped
@@ -270,6 +257,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7325068663259343665}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6292735547813220261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3671443599281251476, guid: e107199547d94fd4292bbf8e94e4e0b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7325068663259343665}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7542698455734934446
 PrefabInstance:
   m_ObjectHideFlags: 0
