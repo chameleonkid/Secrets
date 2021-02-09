@@ -56,6 +56,7 @@ public class Inventory : ScriptableObject
     public float totalCritChance;
     public int totalMinSpellDamage;
     public int totalMaxSpellDamage;
+    public int totalStrenght;
 
 
 
@@ -180,6 +181,7 @@ public class Inventory : ScriptableObject
         CalcDefense();
         CalcCritChance();
         CalcSpellDamage();
+        CalcStrength();
     }
 
 
@@ -279,6 +281,7 @@ public class Inventory : ScriptableObject
             CalcDefense();
             CalcCritChance();
             CalcSpellDamage();
+            CalcStrength();
         }
         else
         {
@@ -418,6 +421,17 @@ public class Inventory : ScriptableObject
             totalMinSpellDamage += currentCloak.minSpellDamage;
             totalMaxSpellDamage += currentCloak.maxSpellDamage;
         }
+    }
+
+
+    public void CalcStrength()
+    {
+        totalStrenght = 0;
+        if(currentGloves)
+        {
+            totalStrenght += currentGloves.strength;
+        }
+
     }
 
     public void ResetEquipment()

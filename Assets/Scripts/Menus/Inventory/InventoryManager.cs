@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dmgDisplay = default;
     [SerializeField] private TextMeshProUGUI defDisplay = default;
     [SerializeField] private TextMeshProUGUI spellDisplay = default;
-    [SerializeField] private TextMeshProUGUI rangeDisplay = default;
+    [SerializeField] private TextMeshProUGUI strengthDisplay = default;
     [SerializeField] private TextMeshProUGUI lightRadiusDisplay = default;
     [SerializeField] private Material swordMaterial = default;
     [SerializeField] private Material laserMaterial = default;
@@ -139,7 +139,11 @@ public class InventoryManager : MonoBehaviour
   
     }
 
-    private void Unequip(Item itemToUnequip) => inventory.Unequip(itemToUnequip as EquippableItem);
+    private void Unequip(Item itemToUnequip)
+    {
+        inventory.Unequip(itemToUnequip as EquippableItem);
+        UpdateStatDisplays();
+    }
 
     private void OnFailedUnequip(Item triedItem)
     {
@@ -160,7 +164,7 @@ public class InventoryManager : MonoBehaviour
         defDisplay.text = DefenseDisplayText();
         critDisplay.text = CritDisplayText();
         spellDisplay.text = SpellDamageDisplayText();
-        // rangeDisplay.text = RangeDamageDisplayText();
+        strengthDisplay.text = StrenghtDisplayText();
         lightRadiusDisplay.text = LightRadiusDisplayText();
     }
 
@@ -172,8 +176,8 @@ public class InventoryManager : MonoBehaviour
 
     private string DefenseDisplayText() => (inventory.totalDefense > 0) ? inventory.totalDefense.ToString() : "";
 
-    // private string RangeDamageDisplayText() => (inventory.currentBow) ?
-    //     inventory.currentBow.minDamage + " - " + inventory.currentBow.maxDamage : "";
+     private string StrenghtDisplayText() => (inventory.totalStrenght > 0 ) ?
+         inventory.totalStrenght +"" : "";
 
     private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentSpellbookTwo || inventory.currentAmulet) ?
         inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
