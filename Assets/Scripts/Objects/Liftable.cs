@@ -3,49 +3,40 @@
 public class Liftable : Interactable
 {
     public Item contents;
-    public Inventory playerInventory;
-    public Signals LiftItem;
-    private Animator anim;
-    public GameObject thing;
-    bool isCarrying;
-
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
+    [SerializeField] private Inventory playerInventory;
+    [SerializeField] private int neededStrenght;
+    [SerializeField] private AudioClip liftingSound;
+    [SerializeField] private Dialogue dialogue = default;
 
     private void LateUpdate()
     {
-        if (Input.GetButtonDown("Lift") && playerInRange && isCarrying == false && playerInventory.items.HasCapacity(contents)) // Add an Unique Item which makes you able to lift things!
+        if (Input.GetButtonDown("Lift") && playerInRange && playerInventory.items.HasCapacity(contents))
         {
-            Debug.Log("HOCHHEBEN!");
             Lifting();
-            isCarrying = true;
-        }
-        else if (Input.GetButtonDown("Lift") && isCarrying == true)
-        {
-            Debug.Log("ABSTELLEN!");
-            Dropping();
         }
     }
 
     //############### TEST-Lift ###################################
     public void Lifting()
     {
-        Debug.Log("LIFT OBJECT");
-        playerInventory.items[contents]++;
-        contextOff.Raise();
-        thing.SetActive(false);
-        LiftItem.Raise();
+
+            if (playerInventory.currentGloves && playerInventory.currentGloves.strength >= neededStrenght)
+            {
+                playerInventory.items[contents]++;
+                Destroy(this.gameObject);
+                if(liftingSound)
+                {
+                    SoundManager.RequestSound(liftingSound);
+                }
+
+        }
+            else
+            {
+            DialogueManager.RequestDialogue(dialogue);
+            }
+      
     }
 
-    // ############################## Test-Drop ###################### WIESO WIRD DAS NIE AUFGERUFEN!?
-    public void Dropping()
-    {
-        Debug.Log("Drop OBJECT");
-        thing.SetActive(true);
-    }
-    // ############################## Test-Drop ######################
 
     private void OnTriggerEnter2D(Collider2D other)
     {
