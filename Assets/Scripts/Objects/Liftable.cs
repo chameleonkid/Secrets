@@ -10,9 +10,17 @@ public class Liftable : Interactable
 
     private void LateUpdate()
     {
-        if (Input.GetButtonDown("Lift") && playerInRange && playerInventory.items.HasCapacity(contents))
+        if (Input.GetButtonDown("Lift") && playerInRange && Time.timeScale > 0)
         {
-            Lifting();
+            if(playerInventory.items.HasCapacity(contents))
+            {
+                Lifting();
+            }
+            else
+            {
+                NoInventorySpace();
+            }
+
         }
     }
 
@@ -20,20 +28,21 @@ public class Liftable : Interactable
     public void Lifting()
     {
 
-            if (playerInventory.currentGloves && playerInventory.currentGloves.strength >= neededStrenght)
+        if (playerInventory.currentGloves && playerInventory.currentGloves.strength >= neededStrenght)
+        {
+            playerInventory.items[contents]++;
+            Destroy(this.gameObject);
+            if(liftingSound)
             {
-                playerInventory.items[contents]++;
-                Destroy(this.gameObject);
-                if(liftingSound)
-                {
-                    SoundManager.RequestSound(liftingSound);
-                }
+                SoundManager.RequestSound(liftingSound);
+            }
 
         }
-            else
-            {
+        else
+        {
+            dialogue.sentences[0] = "You don't seem strong enaugh to lift this up...";
             DialogueManager.RequestDialogue(dialogue);
-            }
+        }
       
     }
 
@@ -57,4 +66,14 @@ public class Liftable : Interactable
 
         }
     }
+
+
+    public void NoInventorySpace()
+    {
+        dialogue.sentences[0] = "There is no space left in your inventory";
+        TriggerDialogue();
+    }
+
+    public void TriggerDialogue() => DialogueManager.RequestDialogue(dialogue);
+
 }
