@@ -3,7 +3,7 @@ using System;
 
 public class MusicManager : MonoBehaviour
 {
-    private int clipCounter = 0; // Newly added
+    //private int clipCounter = 0; // Newly added
     private static event Action<AudioClip[]> OnMusicRequested; //<---- Made to array
     [SerializeField] private AudioClip[] currentClips;
 
