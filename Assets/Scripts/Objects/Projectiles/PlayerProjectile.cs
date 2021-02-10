@@ -5,7 +5,6 @@ public class PlayerProjectile : Projectile
     [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
     [SerializeField] protected float destroyDelay;
 
-
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("enemy"))
@@ -18,9 +17,9 @@ public class PlayerProjectile : Projectile
 
     protected void OnHitCollider(Transform other)
     {
-      //  Debug.Log(this.name + " hit " + other.name);
+        // Debug.Log(this.name + " hit " + other.name);
         collider.enabled = false;
-        if(rigidbody)
+        if (rigidbody)
         {
             rigidbody.velocity = Vector2.zero;  // Is this line necessary if we are destroying the rigidbody?
         }
