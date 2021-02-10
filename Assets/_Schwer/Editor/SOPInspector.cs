@@ -23,8 +23,8 @@ public class SOPInspector : Editor {
         var itemDB = AssetsUtility.FindFirstAsset<ItemDatabase>("");
         ReflectionUtility.SetPrivateField(sop, "_itemDatabase", itemDB);
 
-        var skinTexDB = AssetsUtility.FindFirstAsset<SkinTexturesDatabase>("");
-        ReflectionUtility.SetPrivateField(sop, "_skinTexturesDatabase", skinTexDB);
+        var skinTexDBs = AssetsUtility.FindAllAssets<SkinTexturesDatabase>();
+        ReflectionUtility.SetPrivateField(sop, "_skinTexturesDatabases", skinTexDBs);
 
         var name = AssetsUtility.FindFirstAsset<StringValue>("Save");
         ReflectionUtility.SetPrivateField(sop, "_saveName", name);

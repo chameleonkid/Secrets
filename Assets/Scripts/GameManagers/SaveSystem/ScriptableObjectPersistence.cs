@@ -9,7 +9,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
 
     [SerializeField] private SkinTexturesDatabase[] _skinTexturesDatabases = default;
     public SkinTexturesDatabase[] skinTexturesDatabases => _skinTexturesDatabases;
-    [System.NonSerialized] public SkinTexturesDatabase activeTexturesDatabase;
+    public SkinTexturesDatabase activeTexturesDatabase { get; set; }
 
     [Header("Save Data")]
     [SerializeField] private StringValue _saveName = default;
