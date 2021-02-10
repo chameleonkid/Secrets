@@ -18417,8 +18417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1e07feb39872349a4611ff104132c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFemale: 0
-  skinTextures: {fileID: 11400000, guid: 7907b70aa19927e48a572b52cf43fce0, type: 2}
   bodyChanger: {fileID: 7737533577643927656}
   hairChanger: {fileID: 7706854872672644315}
   hairColorRenderer: {fileID: 7606598637489005249}
@@ -19417,7 +19415,7 @@ GameObject:
   - component: {fileID: 1918210545}
   - component: {fileID: 1918210544}
   m_Layer: 5
-  m_Name: GenderToMale
+  m_Name: Previous_Textures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19506,7 +19504,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1698162552}
-        m_MethodName: GenderToMale
+        m_MethodName: PreviousTextureSet
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21706,7 +21704,7 @@ GameObject:
   - component: {fileID: 2139398769}
   - component: {fileID: 2139398768}
   m_Layer: 5
-  m_Name: GenderToFemale
+  m_Name: Next_Textures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21795,7 +21793,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1698162552}
-        m_MethodName: GenderToFemale
+        m_MethodName: NextTextureSet
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
