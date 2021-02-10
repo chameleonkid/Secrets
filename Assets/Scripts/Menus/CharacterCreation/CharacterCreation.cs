@@ -34,11 +34,12 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private CharacterAppearance characterAppearance = default;
 
     private int texturesCounter;
-    private ScriptableObjectPersistence so => SaveManager.Instance.so;
+    private ScriptableObjectPersistence so;
     private SkinTexturesDatabase activeTextures => so.skinTexturesDatabases[texturesCounter];
 
     private void Start()
     {
+        so = SaveManager.Instance.GetComponent<ScriptableObjectPersistence>();
         MusicManager.RequestMusic(creatorMusic);
         ResetTextures();
     }
