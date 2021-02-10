@@ -172,15 +172,19 @@ public class CharacterCreation : MonoBehaviour
 
     private void RefreshTextures()
     {
+        bodyChanger.folderPath = activeTextures.bodyFolderPath;
         bodyChanger.newSprite = activeTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
 
+        hairChanger.folderPath = activeTextures.hairFolderPath;
         hairChanger.newSprite = activeTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
 
+        armorChanger.folderPath = activeTextures.armorFolderPath;
         armorChanger.newSprite = activeTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
 
+        eyeChanger.folderPath = activeTextures.eyeFolderPath;
         eyeChanger.newSprite = activeTextures.eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
