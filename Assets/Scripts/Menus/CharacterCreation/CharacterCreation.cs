@@ -130,13 +130,13 @@ public class CharacterCreation : MonoBehaviour
     public void NextTextureSet()
     {
         IncrementCounter(ref texturesCounter, so.skinTexturesDatabases);
-        ResetRenderers();
+        RefreshTextures();
     }
 
     public void PreviousTextureSet()
     {
         DecrementCounter(ref texturesCounter, so.skinTexturesDatabases);
-        ResetRenderers();
+        RefreshTextures();
     }
 
     public void SaveAppearance()
@@ -174,11 +174,18 @@ public class CharacterCreation : MonoBehaviour
         eyeChanger.ResetRenderer();
     }
 
-    private void ResetRenderers()
+    private void RefreshTextures()
     {
+        bodyChanger.newSprite = activeTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
+
+        hairChanger.newSprite = activeTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
+
+        armorChanger.newSprite = activeTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
+
+        eyeChanger.newSprite = activeTextures.eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
 
