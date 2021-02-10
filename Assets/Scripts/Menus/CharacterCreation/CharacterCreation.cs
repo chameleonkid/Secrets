@@ -37,14 +37,10 @@ public class CharacterCreation : MonoBehaviour
     private ScriptableObjectPersistence so => SaveManager.Instance.so;
     private SkinTexturesDatabase activeTextures => so.skinTexturesDatabases[texturesCounter];
 
-    private void Awake()
-    {
-        ResetTextures();
-    }
-
     private void Start()
     {
         MusicManager.RequestMusic(creatorMusic);
+        ResetTextures();
     }
 
     public void NextBody()
