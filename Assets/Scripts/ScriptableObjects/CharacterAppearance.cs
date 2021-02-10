@@ -24,7 +24,7 @@ public class CharacterAppearance : ScriptableObject
 
     public CharacterAppearanceSerializable GetSerializable() => new CharacterAppearanceSerializable(this);
 
-    public SkinTexturesDatabase Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase[] skinTextures)
+    public void Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase[] skinTextures)
     {
         hairColor = cas.hairColor;
         playerName = cas.playerName;
@@ -46,8 +46,6 @@ public class CharacterAppearance : ScriptableObject
         hairFolderPath = activeTextures.hairFolderPath;
         armorFolderPath = activeTextures.armorFolderPath;
         eyeFolderPath = activeTextures.eyeFolderPath;
-
-        return activeTextures;
     }
 
     [System.Serializable]
