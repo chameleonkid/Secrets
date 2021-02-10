@@ -19,12 +19,14 @@ public class CharacterAppearanceSetter : MonoBehaviour
     {
         if (characterAppearance.eyeColor)
         {
+            eyesSkin.folderPath = characterAppearance.eyeFolderPath;
             eyesSkin.newSprite = characterAppearance.eyeColor;
             eyesSkin.ResetRenderer();
         }
 
         if (characterAppearance.hairStyle)
         {
+            hairStyle.folderPath = characterAppearance.hairFolderPath;
             hairStyle.newSprite = characterAppearance.hairStyle;
             hairRenderer.color = characterAppearance.hairColor;
             hairStyle.ResetRenderer();
@@ -32,12 +34,14 @@ public class CharacterAppearanceSetter : MonoBehaviour
 
         if (characterAppearance.bodyStyle)
         {
+            bodySkin.folderPath = characterAppearance.bodyFolderPath;
             bodySkin.newSprite = characterAppearance.bodyStyle;
             bodySkin.ResetRenderer();
         }
 
         if (characterAppearance.armorStyle)
         {
+            armorSkin.folderPath = characterAppearance.armorFolderPath;
             armorSkin.newSprite = characterAppearance.armorStyle;
             armorSkin.ResetRenderer();
         }

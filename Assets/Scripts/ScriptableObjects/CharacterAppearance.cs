@@ -16,6 +16,11 @@ public class CharacterAppearance : ScriptableObject
     public int armorIndex { get; set; }
     public int eyeIndex { get; set; }
 
+    public string bodyFolderPath { get; set; }
+    public string hairFolderPath { get; set; }
+    public string armorFolderPath { get; set; }
+    public string eyeFolderPath { get; set; }
+
     public CharacterAppearanceSerializable GetSerializable() => new CharacterAppearanceSerializable(this);
 
     public SkinTexturesDatabase Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase[] skinTextures)
@@ -36,6 +41,11 @@ public class CharacterAppearance : ScriptableObject
         armorStyle = activeTextures.armorSkins[armorIndex];
         eyeColor = activeTextures.eyeSkins[eyeIndex];
 
+        bodyFolderPath = cas.bodyFolderPath;
+        hairFolderPath = cas.hairFolderPath;
+        armorFolderPath = cas.armorFolderPath;
+        eyeFolderPath = cas.eyeFolderPath;
+
         return activeTextures;
     }
 
@@ -52,6 +62,11 @@ public class CharacterAppearance : ScriptableObject
         [ES3Serializable] public int armorIndex { get; private set; }
         [ES3Serializable] public int eyeIndex { get; private set; }
 
+        [ES3Serializable] public string bodyFolderPath { get; set; }
+        [ES3Serializable] public string hairFolderPath { get; set; }
+        [ES3Serializable] public string armorFolderPath { get; set; }
+        [ES3Serializable] public string eyeFolderPath { get; set; }
+
         public CharacterAppearanceSerializable(CharacterAppearance ca)
         {
             hairColor = ca.hairColor;
@@ -62,6 +77,11 @@ public class CharacterAppearance : ScriptableObject
             armorIndex = ca.armorIndex;
             eyeIndex = ca.eyeIndex;
             index = ca.index;
+
+            bodyFolderPath = ca.bodyFolderPath;
+            hairFolderPath = ca.hairFolderPath;
+            armorFolderPath = ca.armorFolderPath;
+            eyeFolderPath = ca.eyeFolderPath;
         }
     }
 }

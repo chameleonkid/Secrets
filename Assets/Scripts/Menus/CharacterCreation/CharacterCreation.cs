@@ -151,6 +151,11 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.armorIndex = armorCounter;
         characterAppearance.eyeIndex = eyeCounter;
 
+        characterAppearance.armorFolderPath = activeTextures.armorFolderPath;
+        characterAppearance.hairFolderPath = activeTextures.hairFolderPath;
+        characterAppearance.eyeFolderPath = activeTextures.eyeFolderPath;
+        characterAppearance.bodyFolderPath = activeTextures.bodyFolderPath;
+
         SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }
