@@ -7,8 +7,9 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private ItemDatabase _itemDatabase = default;
     public ItemDatabase itemDatabase => _itemDatabase;
 
-    [SerializeField] private SkinTexturesDatabase _skinTexturesDatabase = default;
-    public SkinTexturesDatabase skinTexturesDatabase => _skinTexturesDatabase;
+    [SerializeField] private SkinTexturesDatabase[] _skinTexturesDatabases = default;
+    public SkinTexturesDatabase[] skinTexturesDatabases => _skinTexturesDatabases;
+    [System.NonSerialized] public SkinTexturesDatabase activeTexturesDatabase;
 
     [Header("Save Data")]
     [SerializeField] private StringValue _saveName = default;

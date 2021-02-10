@@ -9,8 +9,8 @@ public class CharacterAppearance : ScriptableObject
     public Texture2D armorStyle;
     public Texture2D eyeColor;
     public string playerName;
-    public bool isFemale = false;
 
+    public int index { get; set; }
     public int bodyIndex { get; set; }
     public int hairIndex { get; set; }
     public int armorIndex { get; set; }
@@ -18,29 +18,34 @@ public class CharacterAppearance : ScriptableObject
 
     public CharacterAppearanceSerializable GetSerializable() => new CharacterAppearanceSerializable(this);
 
-    public void Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase skinTextures)
+    public SkinTexturesDatabase Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase[] skinTextures)
     {
         hairColor = cas.hairColor;
         playerName = cas.playerName;
-        isFemale = cas.isFemale;
+        index = cas.index;
 
         bodyIndex = cas.bodyIndex;
         hairIndex = cas.hairIndex;
         armorIndex = cas.armorIndex;
         eyeIndex = cas.eyeIndex;
 
-        bodyStyle = skinTextures.bodySkins[bodyIndex];
-        hairStyle = skinTextures.hairStyles[hairIndex];
-        armorStyle = skinTextures.armorSkins[armorIndex];
-        eyeColor = skinTextures.eyeSkins[eyeIndex];
+        var activeTextures = skinTextures[index];
+
+        bodyStyle = activeTextures.bodySkins[bodyIndex];
+        hairStyle = activeTextures.hairStyles[hairIndex];
+        armorStyle = activeTextures.armorSkins[armorIndex];
+        eyeColor = activeTextures.eyeSkins[eyeIndex];
+
+        return activeTextures;
     }
 
     [System.Serializable]
     public struct CharacterAppearanceSerializable
     {
+        [ES3Serializable] public int index { get; private set; }
+
         [ES3Serializable] public Color hairColor { get; private set; }
         [ES3Serializable] public string playerName { get; private set; }
-        [ES3Serializable] public bool isFemale { get; private set; }
 
         [ES3Serializable] public int bodyIndex { get; private set; }
         [ES3Serializable] public int hairIndex { get; private set; }
@@ -56,7 +61,7 @@ public class CharacterAppearance : ScriptableObject
             hairIndex = ca.hairIndex;
             armorIndex = ca.armorIndex;
             eyeIndex = ca.eyeIndex;
-            isFemale = ca.isFemale;
+            index = ca.index;
         }
     }
 }
