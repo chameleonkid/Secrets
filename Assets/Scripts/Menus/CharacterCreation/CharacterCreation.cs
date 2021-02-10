@@ -124,17 +124,29 @@ public class CharacterCreation : MonoBehaviour
         hairChanger.ResetRenderer();
     }
 
-    public void NextTextureSet()
+    public void ToMale()
     {
-        IncrementCounter(ref texturesCounter, so.skinTexturesDatabases);
+        texturesCounter = 1;
         RefreshTextures();
     }
 
-    public void PreviousTextureSet()
+    public void ToFemale()
     {
-        DecrementCounter(ref texturesCounter, so.skinTexturesDatabases);
+        texturesCounter = 0;
         RefreshTextures();
     }
+
+    // public void NextTextureSet()
+    // {
+    //     IncrementCounter(ref texturesCounter, so.skinTexturesDatabases);
+    //     RefreshTextures();
+    // }
+
+    // public void PreviousTextureSet()
+    // {
+    //     DecrementCounter(ref texturesCounter, so.skinTexturesDatabases);
+    //     RefreshTextures();
+    // }
 
     public void SaveAppearance()
     {
