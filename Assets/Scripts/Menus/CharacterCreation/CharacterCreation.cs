@@ -33,9 +33,10 @@ public class CharacterCreation : MonoBehaviour
     [Header("Persistence")]
     [SerializeField] private CharacterAppearance characterAppearance = default;
 
-    private int texturesCounter;
-    private ScriptableObjectPersistence so;
-    private SkinTexturesDatabase activeTextures => so.skinTexturesDatabases[texturesCounter];
+    [Header("Database")]
+    [SerializeField] private int texturesCounter;
+    [SerializeField] private ScriptableObjectPersistence so;
+    [SerializeField] private SkinTexturesDatabase activeTextures => so.skinTexturesDatabases[texturesCounter];
 
     private void Start()
     {
