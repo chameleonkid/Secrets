@@ -61,7 +61,7 @@ public class SaveManager : DDOLSingleton<SaveManager>
     private void LoadAppearance(string loadSlot)
     {
         var cas = (CharacterAppearance.CharacterAppearanceSerializable)ES3.Load("Appearance", loadSlot);
-        so.characterAppearance.Deserialize(cas, so.skinTexturesDatabase);
+        so.characterAppearance.Deserialize(cas, so.skinTexturesDatabases);
     }
 
     private void SavePlayer(string saveSlot)

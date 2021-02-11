@@ -1,25 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HomingProjectile : Projectile
 {
     protected Transform target;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
         rigidbody.velocity = Vector2.zero;  // Needed to stop the rigidbody working vs the transform change
     }
 
-    // Update is called once per frame
-    protected override void Update()
+    protected override void Update()    //! Probably should use FixedUpdate and affect rigidbody instead.
     {
-       
-         this.transform.position = Vector2.MoveTowards(this.transform.position, target.position, projectileSpeed * Time.deltaTime);
-   
+        this.transform.position = Vector2.MoveTowards(this.transform.position, target.position, projectileSpeed * Time.deltaTime);
+
         LifetimeCountdown();
     }
 }

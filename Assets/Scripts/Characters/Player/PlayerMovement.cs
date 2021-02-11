@@ -7,17 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerMovement : Character
 {
-
-    [Header("Appearance")]
-    [SerializeField] private SpriteSkinRPC bodySkin = default;
-    [SerializeField] private SpriteSkinRPC armorSkin = default;
-    [SerializeField] private SpriteSkinRPC hairStyle = default;
-    [SerializeField] private SpriteRenderer hairRenderer = default;
-    [SerializeField] private SpriteSkinRPC eyesSkin = default;
-    private Color hairColor;
-    [SerializeField] private CharacterAppearance characterAppearance = default;
-
-
     [Header("TestUIInputs")]
     [SerializeField] private Button uiAttackButton = default;
     [SerializeField] private Button uiSpellButton = default;
@@ -96,13 +85,6 @@ public class PlayerMovement : Character
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
 
-    protected override void Awake()
-    {
-    GetCharacterComponents();
-    SetAppearance();
-    }
-
-
     private void LevelUpPlayer()
     {
         _health.max = _health.max + 10;
@@ -124,14 +106,12 @@ public class PlayerMovement : Character
         transform.position = startingPosition.value;
         originalSpeed = speed;
 
-
         // This is for Using UI-Buttons
         uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
         uiSpellButton.GetComponent<Button>().onClick.AddListener(UISpellAttack);
         uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(UISpellAttackTwo);
         uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(UISpellAttackThree);
         uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
-
     }
 
     private AudioClip GetLevelUpSound() => levelUpSound;
@@ -166,15 +146,15 @@ public class PlayerMovement : Character
 
         if (Input.GetButton("SpellCast"))
         {
-            SpellAttack(true,false,false);
+            SpellAttack(inventory.currentSpellbook);
         }
         if (Input.GetButton("SpellCast2"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            SpellAttack(false, true, false);
+            SpellAttack(inventory.currentSpellbookTwo);
         }
         if (Input.GetButton("SpellCast3"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
-            SpellAttack(false, false, true);
+            SpellAttack(inventory.currentSpellbookThree);
         }
         if (Input.GetButtonDown("Lamp"))
         {
@@ -203,10 +183,7 @@ public class PlayerMovement : Character
     // #################################### Casual Attack ####################################
     private IEnumerator AttackCo()
     {
-
-
         var currentWeapon = inventory.currentWeapon;
-
 
         if (inventory.currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
         {
@@ -274,7 +251,6 @@ public class PlayerMovement : Character
             meeleCooldown = false;
             SoundManager.RequestSound(meleeCooldownSound);
         }
-
     }
 
     // ############################# Roundattack ################################################
@@ -309,12 +285,12 @@ public class PlayerMovement : Character
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
-    private IEnumerator SpellAttackCo(GameObject spellPrefab, InventorySpellbook spellBook)
+    private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
         animator.SetBool("isCasting", true); // Set to cast Animation
         currentState = State.attack;
-        MakeSpell(spellPrefab,spellBook);
-        
+        MakeSpell(spellBook.prefab, spellBook);
+
         spellBook.onCooldown = true;
         yield return new WaitForSeconds(0.05f);
         if (currentState != State.interact)
@@ -411,22 +387,11 @@ public class PlayerMovement : Character
         }
     }
 
-    public void UISpellAttack()
-    {
-        SpellAttack(true, false, false);
-    }
+    public void UISpellAttack() => SpellAttack(inventory.currentSpellbook);
 
-    public void UISpellAttackTwo()
-    {
-        SpellAttack(false, true, false);
-    }
+    public void UISpellAttackTwo() => SpellAttack(inventory.currentSpellbookTwo);
 
-    public void UISpellAttackThree()
-    {
-        SpellAttack(false, false, true);
-    }
-
-  
+    public void UISpellAttackThree() => SpellAttack(inventory.currentSpellbookThree);
 
     public void ToggleLamp()
     {
@@ -449,86 +414,24 @@ public class PlayerMovement : Character
         this._speed = this.originalSpeed;
     }
 
-    private void SetAppearance()
+    public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
     {
-        /*
-        if(characterAppearance.isFemale == true)
+        if (spellBook != null && mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && !spellBook.onCooldown)
         {
-            bodySkin.folderPath = "Retro Pixel Characters/Spritesheets/Female/1 - Base/";
-            hairStyle.folderPath = "Retro Pixel Characters/Spritesheets/Female/5 - Hairstyles/";
-            armorSkin.folderPath = "Retro Pixel Characters/Spritesheets/Female/3 - Outfits/";
-            eyesSkin.folderPath = "Retro Pixel Characters/Spritesheets/Female/2 - Eye Colors/";
-        }
-        else
-        {
-            bodySkin.folderPath = "Retro Pixel Characters/Spritesheets/Male/1 - Base/";
-            hairStyle.folderPath = "Retro Pixel Characters/Spritesheets/Male/5 - Hairstyles/";
-            armorSkin.folderPath = "Retro Pixel Characters/Spritesheets/Male/3 - Outfits/";
-            eyesSkin.folderPath = "Retro Pixel Characters/Spritesheets/Male/2 - Eye Colors/";
-        }
-*/
-        if (characterAppearance.bodyStyle)
-        {
-            bodySkin.newSprite = characterAppearance.bodyStyle;
-            bodySkin.ResetRenderer();
-        }
-        if (characterAppearance.armorStyle)
-        {
-            armorSkin.newSprite = characterAppearance.armorStyle;
-            armorSkin.ResetRenderer();
-        }
-        if (characterAppearance.hairStyle)
-        {
-            hairStyle.newSprite = characterAppearance.hairStyle;
-            hairRenderer.color = characterAppearance.hairColor;
-            hairStyle.ResetRenderer();
-        }
-        if (characterAppearance.eyeColor)
-        {
-            eyesSkin.newSprite = characterAppearance.eyeColor;
-            eyesSkin.ResetRenderer();
-        }
-    }
+            StartCoroutine(SpellAttackCo(spellBook));
 
-
-    public void SpellAttack(bool spell1, bool spell2, bool spell3)
-    {
-        if (spell1 && inventory.currentSpellbook)
-        {
-            var spellBook = inventory.currentSpellbook;
-            var prefab = spellBook.prefab;
-            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            if (spellBook == inventory.currentSpellbook)
             {
-                StartCoroutine(SpellAttackCo(prefab, spellBook));
                 OnSpellTriggered?.Invoke();
             }
-
-        }
-        if (spell2 && inventory.currentSpellbookTwo)
-        {
-            var spellBook = inventory.currentSpellbookTwo;
-            var prefab = spellBook.prefab;
-            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            else if (spellBook == inventory.currentSpellbookTwo)
             {
-                StartCoroutine(SpellAttackCo(prefab, spellBook));
                 OnSpellTwoTriggered?.Invoke();
             }
-        }
-        if (spell3 && inventory.currentSpellbookThree)
-        {
-            var spellBook = inventory.currentSpellbookThree;
-            var prefab = spellBook.prefab;
-            if (mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && spellBook.onCooldown == false)
+            else if (spellBook == inventory.currentSpellbookThree)
             {
-                StartCoroutine(SpellAttackCo(prefab, spellBook));
                 OnSpellThreeTriggered?.Invoke();
             }
-
         }
-
     }
-
-
-
 }
-
