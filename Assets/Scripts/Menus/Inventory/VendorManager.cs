@@ -83,10 +83,10 @@ public class VendorManager : ItemDisplay
         Time.timeScale = 1;
     }
 
-    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.sellPrice, "sell");
-    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.buyPrice, "buy");
+    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.sellPrice, "sell for:\n");
+    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.buyPrice, "buy for:\n");
     private void UpdateDescription(Item item, int price, string action)
-        => descriptionText.text = (item != null) ? $"{item.name}\n\n{action}: {price}" : "";
+        => descriptionText.text = (item != null) ? $"{item.name}\n\n{action} {price}" : " Gold";
 
     protected override void InstantiateSlots()
     {
