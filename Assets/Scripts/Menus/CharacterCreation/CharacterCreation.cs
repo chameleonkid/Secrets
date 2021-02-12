@@ -127,12 +127,14 @@ public class CharacterCreation : MonoBehaviour
 
     public void ToMale()
     {
+        SoundManager.RequestSound(buttonClick);
         texturesCounter = 1;
         RefreshTextures();
     }
 
     public void ToFemale()
     {
+        SoundManager.RequestSound(buttonClick);
         texturesCounter = 0;
         RefreshTextures();
     }
