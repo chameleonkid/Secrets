@@ -37,7 +37,7 @@ public class GlobalLightManager : MonoBehaviour
 
             globalLight.intensity = initialIntensity * intensityMultiplier;
         }
-        else if (SceneManager.GetActiveScene().name.Contains("Dungeon"))
+        else if (SceneManager.GetActiveScene().name.Contains("Dungeon") || SceneManager.GetActiveScene().name.Contains("Cave"))
         {
             globalLight.intensity = 0;
         }                                                                   //This is the case for Houses / Taverns and so on
