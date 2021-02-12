@@ -111,15 +111,18 @@ public abstract class Character : MonoBehaviour
 
     protected virtual IEnumerator ShrinkCo(float shrinkValue, float duration)
     {
+        
         var hit = this.transform;
+        var originalScale = hit.localScale;
 
-        if (!isShrinked && (hit.localScale.x >= 1 || hit.localScale.y >= 1))
+        if (!isShrinked) //(!isShrinked && (hit.localScale.x >= 1 || hit.localScale.y >= 1))
         {
+   
             hit.localScale = new Vector3(shrinkValue, shrinkValue, 0);
             isShrinked = true;
             yield return new WaitForSeconds(duration);
             {
-                hit.localScale = new Vector3(1, 1, 0);
+                hit.localScale = originalScale;
                 isShrinked = false;
             }
         }
