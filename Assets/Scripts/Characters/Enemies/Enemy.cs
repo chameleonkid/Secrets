@@ -86,6 +86,15 @@ public class Enemy : Character
 
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(!other.gameObject.GetComponent<PlayerMovement>())
+        {
+            randomMovement();
+        }
+
+    }
+
     protected virtual void FixedUpdate()
     {
 
