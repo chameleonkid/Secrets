@@ -9,13 +9,30 @@ public class MeleeEnemy : Enemy
         if (distance <= chaseRadius && distance > attackRadius)
         {
             if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
-            {
-                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-
-                SetAnimatorXYSingleAxis(temp - transform.position);
-                rigidbody.MovePosition(temp);
-                currentState = State.walk;
+            {             
+                if (path == null)
+                {
+                    return;
+                }
+                if (currentWaipoint >= path.vectorPath.Count)
+                {
+                    reachedEndOfPath = true;
+                    return;
+                }
                 animator.SetBool("isMoving", true);
+                Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * Time.deltaTime);
+                rigidbody.MovePosition(temp);
+                float wayPointdistance = Vector2.Distance(rigidbody.position, path.vectorPath[currentWaipoint]);
+                SetAnimatorXYSingleAxis(temp - transform.position);
+
+                if (wayPointdistance < nextWaypointDistance)
+                {
+                    currentWaipoint++;
+                }
+                else
+                {
+                    reachedEndOfPath = false;
+                }          
             }
 
         }

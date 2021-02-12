@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Random = UnityEngine.Random;
+using Pathfinding;
 
 public class Enemy : Character
 {
@@ -32,7 +33,7 @@ public class Enemy : Character
 
             if (value < _health)
             {
-                chaseRadius = originalChaseRadius * 10;
+                chaseRadius = originalChaseRadius * 5;
                 OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )
                                                                             // Need to prevent the enemy from moving and set idle/moving Anim
             }
@@ -62,7 +63,20 @@ public class Enemy : Character
     [SerializeField] protected Signals roomSignal = default;
     [SerializeField] protected LootTable thisLoot = default;
 
-    protected Transform target = default;
+
+    [Header("Pathfinding")]
+    [SerializeField] protected Transform target = default;
+    public float nextWaypointDistance = 0.5f;
+    [SerializeField] protected Path path;
+    [SerializeField] protected int currentWaipoint = 0;
+    [SerializeField] protected bool reachedEndOfPath;
+    [SerializeField] protected Seeker seeker;
+
+
+    private void Start()
+    {
+
+    }
 
     protected virtual void OnEnable()
     {
@@ -81,10 +95,43 @@ public class Enemy : Character
         originalChaseRadius = chaseRadius;
 
         target = GameObject.FindWithTag("Player").transform;
+        seeker = GetComponent<Seeker>();
+        InvokeRepeating("UpdatePath", 0f, 0.5f);
 
         roamingPosition = GetRoamingPostion();
 
     }
+
+    void UpdatePath()
+    {
+        if (seeker.IsDone() && IsInRange())
+        {
+            seeker.StartPath(rigidbody.position, target.position, OnPathComplete);
+        }
+    }
+
+    void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            path = p;
+            currentWaipoint = 0;
+        }
+    }
+
+
+    protected bool IsInRange()
+    {
+        if (Vector2.Distance(transform.position, target.transform.position) <= chaseRadius)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -119,12 +166,31 @@ public class Enemy : Character
     {
         if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
         {
-            Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            {
+                if (path == null)
+                {
+                    return;
+                }
+                if (currentWaipoint >= path.vectorPath.Count)
+                {
+                    reachedEndOfPath = true;
+                    return;
+                }
+                animator.SetBool("isMoving", true);
+                Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * Time.deltaTime);
+                rigidbody.MovePosition(temp);
+                float distance = Vector2.Distance(rigidbody.position, path.vectorPath[currentWaipoint]);
+                SetAnimatorXYSingleAxis(temp - transform.position);
 
-            SetAnimatorXYSingleAxis(temp - transform.position);
-            rigidbody.MovePosition(temp);
-            currentState = State.walk;
-            animator.SetBool("isMoving", true);
+                if (distance < nextWaypointDistance)
+                {
+                    currentWaipoint++;
+                }
+                else
+                {
+                    reachedEndOfPath = false;
+                }
+            }
         }
     }
 

@@ -10,7 +10,6 @@ public class SplittingEnemy : Enemy
     protected override void Die()
     {
         StartCoroutine(SpawnOnKillCo());
-
     }
 
     IEnumerator SpawnOnKillCo()
