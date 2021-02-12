@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4821109577977272683}
   - component: {fileID: 4821109577977272662}
   - component: {fileID: 4821109577977272686}
+  - component: {fileID: -622644466295011760}
   m_Layer: 8
   m_Name: Blob_Purple_Splitter
   m_TagString: enemy
@@ -269,6 +270,8 @@ MonoBehaviour:
   attackSounds: []
   meeleCooldown: 0
   spellCooldown: 0
+  spellTwoCooldown: 0
+  spellThreeCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 1
   maxHealth: {fileID: 11400000, guid: 0459fc57e8370e84285c35ccb4509662, type: 2}
@@ -287,6 +290,39 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 0}
   thisLoot: {fileID: 0}
+  target: {fileID: 0}
+  nextWaypointDistance: 0.5
+  currentWaipoint: 0
+  reachedEndOfPath: 0
+  seeker: {fileID: 0}
   maxSplit: 3
   enemiesToSpawn: {fileID: 3850764193548615579, guid: 437ac163632026948a14af397e13e9b1,
     type: 3}
+--- !u!114 &-622644466295011760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821109577977272682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1

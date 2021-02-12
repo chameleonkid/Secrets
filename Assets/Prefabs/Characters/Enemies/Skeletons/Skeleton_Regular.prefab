@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 5401824811137856012}
   - component: {fileID: 6825456830845884822}
   - component: {fileID: 3335763206203761669}
+  - component: {fileID: 5319533124526680854}
   m_Layer: 8
   m_Name: Skeleton_Regular
   m_TagString: enemy
@@ -577,6 +578,7 @@ MonoBehaviour:
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
+  spellThreeCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 5
   maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
@@ -595,6 +597,11 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 0}
+  target: {fileID: 0}
+  nextWaypointDistance: 0.5
+  currentWaipoint: 0
+  reachedEndOfPath: 0
+  seeker: {fileID: 0}
 --- !u!114 &6256331092031663733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,3 +658,31 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: bde602e06d070d44b9f7082a67e587e7, type: 3}
   folderPath: Retro Pixel Monsters/Spritesheets/
   useColorOutline: 1
+--- !u!114 &5319533124526680854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290780269828354143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1

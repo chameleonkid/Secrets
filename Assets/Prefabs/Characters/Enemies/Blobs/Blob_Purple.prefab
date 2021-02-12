@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8597497086802355451}
   - component: {fileID: 7266744987202986097}
   - component: {fileID: 7266744987202986060}
+  - component: {fileID: -7051442827011734247}
   m_Layer: 8
   m_Name: Blob_Purple
   m_TagString: enemy
@@ -200,14 +201,19 @@ MonoBehaviour:
   attackSounds: []
   meeleCooldown: 0
   spellCooldown: 0
+  spellTwoCooldown: 0
+  spellThreeCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 50
   maxHealth: {fileID: 11400000, guid: 9c0a3f01b9dcb1241aec80bff41cea8d, type: 2}
   _health: 0
+  isWalking: 0
+  walkingTimer: 3
   isMinion: 0
   enemyName: Billy the Blob
   moveSpeed: 1
   homePosition: {x: -41.36593, y: 0.3133607}
+  roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
   attackRadius: 0.5
   deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
@@ -215,6 +221,11 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 9bd2c356e44c69943bcaed4af766e4bf, type: 2}
+  target: {fileID: 0}
+  nextWaypointDistance: 0.5
+  currentWaipoint: 0
+  reachedEndOfPath: 0
+  seeker: {fileID: 0}
 --- !u!114 &8597497086802355451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,3 +295,31 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &-7051442827011734247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7266744987202986096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1

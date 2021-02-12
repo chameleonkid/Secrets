@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 2038283469379425304}
   - component: {fileID: 578351760259628930}
   - component: {fileID: 8715962787253043729}
+  - component: {fileID: -841018799691008434}
   m_Layer: 8
   m_Name: Goblin_Purple
   m_TagString: enemy
@@ -409,6 +410,11 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 9bd2c356e44c69943bcaed4af766e4bf, type: 2}
+  target: {fileID: 0}
+  nextWaypointDistance: 0.5
+  currentWaipoint: 0
+  reachedEndOfPath: 0
+  seeker: {fileID: 0}
 --- !u!114 &30576270017120353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,6 +471,34 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: f353bbe4e76e4c64d8d8e99caa015143, type: 3}
   folderPath: Retro Pixel Monsters/Spritesheets/
   useColorOutline: 1
+--- !u!114 &-841018799691008434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715571987018520139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &3715571987370466294
 GameObject:
   m_ObjectHideFlags: 0

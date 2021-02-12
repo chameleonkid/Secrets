@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 2541903352681107375}
   - component: {fileID: 6031799315371684412}
   - component: {fileID: 1788014214475949675}
+  - component: {fileID: -420112373825999427}
   m_Layer: 8
   m_Name: Skeleton_Wizard
   m_TagString: enemy
@@ -533,7 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectAnimator: {fileID: 0}
   isShrinked: 0
   gotHitSound:
   - {fileID: 8300000, guid: 6363840ebdde81e4fb33b23a7e8d3be7, type: 3}
@@ -541,14 +541,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 487f6670089a55447b190751f6728e5c, type: 3}
   meeleCooldown: 0
   spellCooldown: 0
+  spellTwoCooldown: 0
+  spellThreeCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 50
   maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
   _health: 0
+  isWalking: 0
+  walkingTimer: 3
   isMinion: 0
   enemyName: Wizard Skeleton
   moveSpeed: 2
   homePosition: {x: 0, y: 0}
+  roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
   attackRadius: 1
   deathEffect: {fileID: 4464167541414145869, guid: c81b33afa26f52445aa9093e9b0562c8,
@@ -556,12 +561,46 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 0}
   thisLoot: {fileID: 11400000, guid: 390b39db646cd71418f2af0cc809ccf2, type: 2}
+  target: {fileID: 0}
+  nextWaypointDistance: 0.5
+  currentWaipoint: 0
+  reachedEndOfPath: 0
+  seeker: {fileID: 0}
   projectile: {fileID: 8755954809695844891, guid: 908dfa3d79cf8ea4b8e3d60d21bf3c64,
     type: 3}
+  canAttack: 0
   fireDelay: 5
-  canFire: 1
-  projectileSpeed: 5
-  minDistance: 0
+  fireDelaySeconds: 0
+  shootingRange: 3
+  escapeRange: 1
+--- !u!114 &-420112373825999427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788014214475949670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &1788014214557363163
 GameObject:
   m_ObjectHideFlags: 0

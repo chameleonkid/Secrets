@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2612872237981825419}
   - component: {fileID: 7228977669612884613}
   - component: {fileID: 1187539961920588526}
+  - component: {fileID: 2725645799438664014}
   m_Layer: 8
   m_Name: log
   m_TagString: enemy
@@ -194,12 +195,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32f154c8e0fc96458916c6004ec658a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShrinked: 0
+  gotHitSound: []
+  attackSounds: []
+  meeleCooldown: 0
+  spellCooldown: 0
+  spellTwoCooldown: 0
+  spellThreeCooldown: 0
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 0
   maxHealth: {fileID: 11400000, guid: 2018cffd7e1b42b4d881773846999610, type: 2}
+  _health: 0
+  isWalking: 0
+  walkingTimer: 3
+  isMinion: 0
   enemyName: Larry the Log
   moveSpeed: 3
   homePosition: {x: -41.36593, y: 0.3133607}
+  roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
   attackRadius: 0.5
   deathEffect: {fileID: 4464167541414145869, guid: b38d238355dafda4d808da54e94ac1fd,
@@ -207,6 +220,11 @@ MonoBehaviour:
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: 9bd2c356e44c69943bcaed4af766e4bf, type: 2}
+  target: {fileID: 0}
+  nextWaypointDistance: 0.5
+  currentWaipoint: 0
+  reachedEndOfPath: 0
+  seeker: {fileID: 0}
 --- !u!114 &2612872237981825419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +266,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2725645799438664014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284330758867340901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
