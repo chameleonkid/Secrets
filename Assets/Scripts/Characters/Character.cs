@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour , ISlow
+public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
 {
     public State currentState { get; protected set; }
     public abstract float health { get; set; }
@@ -27,6 +27,10 @@ public abstract class Character : MonoBehaviour , ISlow
     [Header("Inflictable Statuses")]
     [SerializeField] private Slow _slow = default;
     public Slow slow => _slow;
+    [SerializeField] private Shrink _shrink = default;
+    public Shrink shrink => _shrink;
+    [SerializeField] private Gigantism _gigantism = default;
+    public Gigantism gigantism => _gigantism;
 
     public float speedModifier { get; set; } = 1;
 
@@ -37,8 +41,9 @@ public abstract class Character : MonoBehaviour , ISlow
     private void OnValidate(bool overrideExisting)
     {
         if (overrideExisting || _renderer == null) _renderer = GetComponentInChildren<SpriteRenderer>();
-      //  if (overrideExisting || _gigantism == null) _gigantism = GetComponentInChildren<Gigantism>();
-      //  if (overrideExisting || _dashless == null) _dashless = GetComponentInChildren<Dashless>();
+        if (overrideExisting || _shrink == null) _shrink = GetComponentInChildren<Shrink>();
+        if (overrideExisting || _gigantism == null) _gigantism = GetComponentInChildren<Gigantism>();
+        //  if (overrideExisting || _dashless == null) _dashless = GetComponentInChildren<Dashless>();
         if (overrideExisting || _slow == null) _slow = GetComponentInChildren<Slow>();
     }
 
@@ -50,8 +55,9 @@ public abstract class Character : MonoBehaviour , ISlow
 
     protected virtual void Awake()
     {
-     //   gigantism?.Initialise(this);
-     //   dashless?.Initialise(this);
+        shrink?.Initialise(this);
+        gigantism?.Initialise(this);
+        //   dashless?.Initialise(this);
         slow?.Initialise(this);
         GetCharacterComponents();
     }
