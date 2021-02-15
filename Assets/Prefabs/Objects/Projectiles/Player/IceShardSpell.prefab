@@ -12,15 +12,13 @@ GameObject:
   - component: {fileID: 5877249715732768611}
   - component: {fileID: 8877344846437935194}
   - component: {fileID: -3089408764058353687}
-  - component: {fileID: 1055195562799656782}
   - component: {fileID: -7808032024076065048}
-  - component: {fileID: 1573727120417516918}
-  - component: {fileID: 266455817330487601}
   - component: {fileID: 7665310896547460175}
   - component: {fileID: 8488362489792843553}
   - component: {fileID: 5379144640911285020}
   - component: {fileID: -9144808553770054626}
   - component: {fileID: -1384756122879492081}
+  - component: {fileID: -3818744993156896388}
   m_Layer: 13
   m_Name: IceShardSpell
   m_TagString: spell
@@ -139,21 +137,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7508464, y: 0.25023317}
   m_EdgeRadius: 0
---- !u!114 &1055195562799656782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015206087574396294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 1
-  force: 1.5
-  duration: 0.25
 --- !u!114 &-7808032024076065048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,36 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableWhenHit: 0
   _damage: 1
---- !u!114 &1573727120417516918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015206087574396294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9652f56df2d5f4795488acde50ac84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 1
-  slowFactor: 0.5
-  slowDuration: 2
---- !u!114 &266455817330487601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015206087574396294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ebff8109c8713a40be5e585ed777cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 1
-  color: {r: 0, g: 0, b: 1, a: 1}
-  duration: 2
 --- !u!114 &7665310896547460175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,3 +334,15 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &-3818744993156896388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015206087574396294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1940d35a13cd40d41b71f34de695c72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
