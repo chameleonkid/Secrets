@@ -169,7 +169,7 @@ public class PlayerMovement : Character
     {
         if (currentState == State.walk || currentState == State.idle || currentState == State.lift)
         {
-            rigidbody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
+            rigidbody.MovePosition(transform.position + change.normalized * speed* speedModifier * Time.deltaTime);
         }
 
         if (currentState != State.stagger)

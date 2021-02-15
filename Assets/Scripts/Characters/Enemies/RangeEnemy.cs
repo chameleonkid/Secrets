@@ -22,7 +22,7 @@ public class RangeEnemy : TurretEnemy
                     return;
                 }
                 animator.SetBool("isMoving", true);
-                Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * Time.deltaTime);
+                Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * speedModifier * Time.deltaTime);
                 rigidbody.MovePosition(temp);
                 float wayPointdistance = Vector2.Distance(rigidbody.position, path.vectorPath[currentWaipoint]);
                 SetAnimatorXYSingleAxis(temp - transform.position);

@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour , ISlow
 {
     public State currentState { get; protected set; }
     public abstract float health { get; set; }
     public bool isInvulnerable { get; set; }
+
+    [SerializeField] protected SpriteRenderer _renderer = default;
+    public new SpriteRenderer renderer => _renderer;
 
     public new Transform transform { get; private set; }
     public new Rigidbody2D rigidbody { get; private set; }
@@ -21,7 +24,37 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected bool spellTwoCooldown = false;
     [SerializeField] protected bool spellThreeCooldown = false;
 
-    protected virtual void Awake() => GetCharacterComponents();
+    [Header("Inflictable Statuses")]
+    [SerializeField] private Slow _slow = default;
+    public Slow slow => _slow;
+
+    public float speedModifier { get; set; } = 1;
+
+    private void Reset() => OnValidate(true);
+
+
+    private void OnValidate() => OnValidate(false);
+    private void OnValidate(bool overrideExisting)
+    {
+        if (overrideExisting || _renderer == null) _renderer = GetComponentInChildren<SpriteRenderer>();
+      //  if (overrideExisting || _gigantism == null) _gigantism = GetComponentInChildren<Gigantism>();
+      //  if (overrideExisting || _dashless == null) _dashless = GetComponentInChildren<Dashless>();
+        if (overrideExisting || _slow == null) _slow = GetComponentInChildren<Slow>();
+    }
+
+
+
+
+
+
+
+    protected virtual void Awake()
+    {
+     //   gigantism?.Initialise(this);
+     //   dashless?.Initialise(this);
+        slow?.Initialise(this);
+        GetCharacterComponents();
+    }
 
     protected void GetCharacterComponents()
     {

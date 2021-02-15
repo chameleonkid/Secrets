@@ -177,7 +177,7 @@ public class Enemy : Character
                     return;
                 }
                 animator.SetBool("isMoving", true);
-                Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * Time.deltaTime);
+                Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * speedModifier * Time.deltaTime);
                 rigidbody.MovePosition(temp);
                 float distance = Vector2.Distance(rigidbody.position, path.vectorPath[currentWaipoint]);
                 SetAnimatorXYSingleAxis(temp - transform.position);
@@ -275,7 +275,7 @@ public class Enemy : Character
             if(walkingTimer > 0)
             {
                 walkingTimer -= Time.deltaTime;
-                Vector3 temp = Vector3.MoveTowards(transform.position, roamingPosition, moveSpeed * Time.deltaTime);
+                Vector3 temp = Vector3.MoveTowards(transform.position, roamingPosition, moveSpeed * speedModifier * Time.deltaTime);
                 SetAnimatorXYSingleAxis(temp - transform.position);
                 rigidbody.MovePosition(temp);
                 currentState = State.walk;
@@ -312,7 +312,7 @@ public class Enemy : Character
     protected void Flee()
     {
      //   var randomFleeDirection = transform.position += GetRandomDirection();
-        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * Time.deltaTime);
+        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * speedModifier* Time.deltaTime);
         SetAnimatorXYSingleAxis(temp - transform.position);
         rigidbody.MovePosition(temp);
         animator.SetBool("isMoving", true);
@@ -320,7 +320,7 @@ public class Enemy : Character
 
     protected void AvoidPlayer()
     {
-        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * Time.deltaTime);
+        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * speedModifier * Time.deltaTime);
         SetAnimatorXYSingleAxis(temp - transform.position);
         rigidbody.MovePosition(temp);
         animator.SetBool("isMoving", true);
