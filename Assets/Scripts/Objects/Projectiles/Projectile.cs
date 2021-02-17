@@ -7,6 +7,11 @@ public class Projectile : MonoBehaviour
     protected float lifetimeCountdown;
     [SerializeField] public float projectileSpeed;
 
+    [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
+    [SerializeField] protected float destroyDelay;
+
+    public string targetTag { get; set; }
+
     public new Rigidbody2D rigidbody { get; protected set; }
     protected new Collider2D collider;
 
@@ -29,7 +34,33 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other) => Destroy(this.gameObject);
+    protected void OnCollisionEnter2D(Collision2D other) => OnHitCollider(other.transform);
+    protected void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag(targetTag))
+        {
+            OnHitCollider(other.transform);
+        }
+    }
+
+    protected void OnHitCollider(Transform other)
+    {
+        if (destroyDelay > 0)
+        {
+            // Prevent this projectile from any other interactions
+            collider.enabled = false;
+            
+            // Attach the rigidbody to the transform it collided with
+            Destroy(rigidbody);
+            transform.SetParent(other);
+
+            lifetimeCountdown = destroyDelay;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     public static Quaternion CalculateRotation(Vector2 direction)
     {

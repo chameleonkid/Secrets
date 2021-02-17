@@ -274,6 +274,7 @@ public class PlayerMovement : Character
         var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
 
         var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
+        proj.targetTag = "enemy";   //! Temp — should refactor instantiation (add an init function to Projectile?)
         proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
 
         var hitbox = proj.GetComponent<DamageOnTrigger>();

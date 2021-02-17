@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerHomingProjectile : PlayerProjectile
+public class PlayerHomingProjectile : Projectile
 {
     protected Transform target;
 
