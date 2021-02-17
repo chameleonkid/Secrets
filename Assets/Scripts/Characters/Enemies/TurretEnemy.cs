@@ -56,9 +56,9 @@ public class TurretEnemy : SimpleEnemy
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;
         var difference = target.transform.position - transform.position;
-        var proj = Instantiate(projectile, transform.position, Quaternion.identity);
-        var projSpeed = proj.GetComponent<Projectile>().projectileSpeed;
-        proj.GetComponent<Projectile>().rigidbody.velocity = difference.normalized * projSpeed;
+        var proj = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
+        proj.rigidbody.velocity = difference.normalized * proj.projectileSpeed;
+        proj.targetTag = "Player";  //! Temp — should refactor instantiation (add an init function to Projectile?)
     }
 
     public void HalfCooldown()

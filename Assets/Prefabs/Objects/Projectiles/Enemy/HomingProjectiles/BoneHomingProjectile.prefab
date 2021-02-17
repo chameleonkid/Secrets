@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 5796913756293673793}
   - component: {fileID: 4596141420500315408}
   - component: {fileID: 2797258304518211204}
-  - component: {fileID: -5315855432877006427}
+  - component: {fileID: 7925636165274623834}
+  - component: {fileID: 3986391352275955635}
   m_Layer: 9
   m_Name: BoneHomingProjectile
   m_TagString: enemy
@@ -269,7 +270,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-5315855432877006427
+--- !u!114 &7925636165274623834
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,8 +279,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8755954809695844891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5dc66ad6369b64897b77aadd8b052d, type: 3}
+  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
   projectileSpeed: 6
+  destroyDelay: 0
+--- !u!114 &3986391352275955635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755954809695844891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bab48e7ea414eb4e8d419baff4ce85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

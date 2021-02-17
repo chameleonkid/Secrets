@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 5796913756293673793}
   - component: {fileID: 4596141420500315408}
   - component: {fileID: 1628679738}
-  - component: {fileID: 767654884920917000}
+  - component: {fileID: 8654859084888931407}
+  - component: {fileID: 7337841895836419795}
   m_Layer: 9
   m_Name: HazelHomingProjectile 1
   m_TagString: enemy
@@ -264,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1000
   clockWise: 1
---- !u!114 &767654884920917000
+--- !u!114 &8654859084888931407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,8 +274,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8755954809695844891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5dc66ad6369b64897b77aadd8b052d, type: 3}
+  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
   projectileSpeed: 6
+  destroyDelay: 0
+--- !u!114 &7337841895836419795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755954809695844891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bab48e7ea414eb4e8d419baff4ce85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
