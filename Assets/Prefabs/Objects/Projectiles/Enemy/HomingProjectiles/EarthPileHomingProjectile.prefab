@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 9206361163915547932}
   - component: {fileID: 2605778485016810401}
   - component: {fileID: 3128601509262177299}
-  - component: {fileID: -570925748809368487}
+  - component: {fileID: 1938161490515416184}
+  - component: {fileID: 212272674960539722}
   m_Layer: 9
   m_Name: EarthPileHomingProjectile
   m_TagString: enemySpell
@@ -188,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableWhenHit: 0
   _damage: 0.5
---- !u!114 &-570925748809368487
+--- !u!114 &1938161490515416184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,8 +198,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 125730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5dc66ad6369b64897b77aadd8b052d, type: 3}
+  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
   projectileSpeed: 6
+  destroyDelay: 0
+--- !u!114 &212272674960539722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bab48e7ea414eb4e8d419baff4ce85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

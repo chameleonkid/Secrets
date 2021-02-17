@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 894691745684358625}
   - component: {fileID: 5164950695082900530}
   - component: {fileID: 1899613322963544318}
-  - component: {fileID: 4243170905419023416}
+  - component: {fileID: 4175110305369637282}
+  - component: {fileID: 5940767646545471818}
   m_Layer: 9
   m_Name: FireballHomingProjectile
   m_TagString: enemySpell
@@ -230,7 +231,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &4243170905419023416
+--- !u!114 &4175110305369637282
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,8 +240,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 125730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5dc66ad6369b64897b77aadd8b052d, type: 3}
+  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
   projectileSpeed: 6
+  destroyDelay: 0
+--- !u!114 &5940767646545471818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bab48e7ea414eb4e8d419baff4ce85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
