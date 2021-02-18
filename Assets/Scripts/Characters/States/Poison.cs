@@ -53,6 +53,7 @@ public class Poison : Status
         {
             for (int i = 0; i < timers.Length; i++)
             {
+
                 if (timers[i] <= 0)
                 {
                     timers[i] = duration;
