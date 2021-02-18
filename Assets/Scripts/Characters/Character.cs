@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
+public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDashless
 {
     public State currentState { get; protected set; }
     public abstract float health { get; set; }
@@ -31,6 +31,8 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
     public Shrink shrink => _shrink;
     [SerializeField] private Gigantism _gigantism = default;
     public Gigantism gigantism => _gigantism;
+    [SerializeField] private Dashless _dashless = default;
+    public Dashless dashless => _dashless;
 
     [Header("Dash Values")]
     [SerializeField] private float _maxDashDistance = 4;
@@ -38,7 +40,7 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
     [SerializeField] private float _dashDuration = 4;
     public float dashDuration => _dashDuration;
     [SerializeField] private bool _canDash = true;
-    public bool canDash => _canDash;
+    public bool canDash { get; set; } = true;
 
     public float speedModifier { get; set; } = 1;
 
@@ -51,7 +53,7 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
         if (overrideExisting || _renderer == null) _renderer = GetComponentInChildren<SpriteRenderer>();
         if (overrideExisting || _shrink == null) _shrink = GetComponentInChildren<Shrink>();
         if (overrideExisting || _gigantism == null) _gigantism = GetComponentInChildren<Gigantism>();
-        //  if (overrideExisting || _dashless == null) _dashless = GetComponentInChildren<Dashless>();
+        if (overrideExisting || _dashless == null) _dashless = GetComponentInChildren<Dashless>();
         if (overrideExisting || _slow == null) _slow = GetComponentInChildren<Slow>();
     }
 
@@ -65,7 +67,7 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
     {
         shrink?.Initialise(this);
         gigantism?.Initialise(this);
-        //   dashless?.Initialise(this);
+        dashless?.Initialise(this);
         slow?.Initialise(this);
         GetCharacterComponents();
     }
@@ -169,12 +171,15 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
     {
         for(int i = 0; i <= dashDuration; i++)
         {
-            character.rigidbody.AddForce(forceDirection.normalized * 750f);
+            character.rigidbody.AddForce(forceDirection.normalized * 500f);
             character.rigidbody.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.01f);
         }
 
         
     }
+
+
+
 
 }
