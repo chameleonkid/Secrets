@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40cfe28a7c778742a72b1b8bcd71687, type: 3}
-  m_Name: New Dash Spell
+  m_Name: DashSpell
   m_EditorClassIdentifier: 
-  _id: 0
-  _name: 
-  _description: 
-  _sprite: {fileID: 0}
+  _id: 1010
+  _name: Dash
+  _description: DASH!
+  _sprite: {fileID: 21300000, guid: 17eed75290e034b6ea00810356d31f45, type: 3}
   _sound: {fileID: 0}
-  _unique: 0
-  _usable: 0
+  _unique: 1
+  _usable: 1
   _level: 0
   OnUse:
     m_PersistentCalls:
@@ -26,7 +26,6 @@ MonoBehaviour:
   _buyPrice: 0
   _sellPrice: 0
   _manaCost: 0
-  coolDown: 0
+  coolDown: 1
   onCooldown: 0
   glowColor: {r: 0, g: 0, b: 0, a: 0}
-  dashTarget: {x: 0, y: 0, z: 0}

@@ -284,8 +284,6 @@ public class PlayerMovement : Character
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
-        animator.SetBool("isCasting", true); // Set to cast Animation
-        currentState = State.attack;
 
         switch (spellBook)
         {
@@ -294,9 +292,11 @@ public class PlayerMovement : Character
             case InstantiationSpellbook instantiationSpellbook:
                 var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
                 CreateProjectile(instantiationSpellbook.prefab);
+                animator.SetBool("isCasting", true);
                 break;
             case UnityEventSpell eventSpell:
                 eventSpell.Use();
+                animator.SetBool("isCasting", true);
                 break;
             case DashSpell dashSpell:
                 dashSpell.Dash(this);
