@@ -7,6 +7,8 @@ public class Slow : Status
     [SerializeField] private float duration = 3;
     [SerializeField] private int maxStacks = 8;
 
+    [SerializeField] private ParticleSystem particles = default;
+
     /// <summary>
     /// This value should be cached where possible (uses a for loop).
     /// </summary>
@@ -44,6 +46,9 @@ public class Slow : Status
     {
         if (target == null) return;
 
+        var e = particles.emission;
+        e.enabled = true;
+
         if (stacks < maxStacks)
         {
             for (int i = 0; i < timers.Length; i++)
@@ -73,6 +78,8 @@ public class Slow : Status
     {
         if (target == null) return;
 
+
+
         for (int i = 0; i < stacks; i++)
         {
             target.speedModifier /= speedMultiplier;
@@ -84,6 +91,10 @@ public class Slow : Status
         }
 
         target.renderer.color = initialColor;
+
+        var e = particles.emission;
+        e.enabled = false;
+
         this.enabled = false;
     }
 
@@ -105,6 +116,8 @@ public class Slow : Status
                 if (stacks <= 0)
                 {
                     target.renderer.color = initialColor;
+                    var e = particles.emission;
+                    e.enabled = false;
                     this.enabled = false;
                 }
             }
