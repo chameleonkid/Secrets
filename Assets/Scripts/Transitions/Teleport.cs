@@ -15,7 +15,6 @@ public class Teleport : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerMovement>() && !other.isTrigger)
         {
             player = other.GetComponent<PlayerMovement>();
-
             StartCoroutine(StartTeleportCo());
         }
     }
