@@ -298,6 +298,9 @@ public class PlayerMovement : Character
             case UnityEventSpell eventSpell:
                 eventSpell.Use();
                 break;
+            case DashSpell dashSpell:
+                dashSpell.Dash(this);
+                break;
         }
 
         spellBook.onCooldown = true;

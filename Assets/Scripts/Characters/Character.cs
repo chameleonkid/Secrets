@@ -32,6 +32,14 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
     [SerializeField] private Gigantism _gigantism = default;
     public Gigantism gigantism => _gigantism;
 
+    [Header("Dash Values")]
+    [SerializeField] private float _maxDashDistance = 4;
+    public float maxDashDistance => _maxDashDistance;
+    [SerializeField] private float _dashDuration = 4;
+    public float dashDuration => _dashDuration;
+    [SerializeField] private bool _canDash = true;
+    public bool canDash => _canDash;
+
     public float speedModifier { get; set; } = 1;
 
     private void Reset() => OnValidate(true);
@@ -138,32 +146,35 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism
         waiting
     }
 
-    //############################# StatusEffects instead of fire and forget ############################################################
-    // This might be usefuf if you want to be able to revert effects. Like using an anti-poison.                                        #
-    //                                                                                                                                  #
-    //###################################################################################################################################
-
-    public virtual void Shrink(float shrinkPercentValue, float shrinkDuration)
+    public void TeleportTowards(Vector2 destination, float maxDelta)
     {
-        StartCoroutine(ShrinkCo(shrinkPercentValue, shrinkDuration));
-    }
-
-    protected virtual IEnumerator ShrinkCo(float shrinkValue, float duration)
-    {
-        
-        var hit = this.transform;
-        var originalScale = hit.localScale;
-
-        if (!isShrinked) //(!isShrinked && (hit.localScale.x >= 1 || hit.localScale.y >= 1))
+        var difference = destination - (Vector2)transform.position;
+        if (difference.magnitude > maxDelta)
         {
-   
-            hit.localScale = new Vector3(shrinkValue, shrinkValue, 0);
-            isShrinked = true;
-            yield return new WaitForSeconds(duration);
-            {
-                hit.localScale = originalScale;
-                isShrinked = false;
-            }
+            difference.Normalize();
+            transform.Translate(difference * maxDelta);
+        }
+        else
+        {
+            transform.Translate(difference);
         }
     }
+
+    public void Dash(Character character,Vector2 forceDirection)
+    {
+        StartCoroutine(DashCo(character, forceDirection));
+    }
+
+    IEnumerator DashCo(Character character, Vector2 forceDirection)
+    {
+        for(int i = 0; i <= dashDuration; i++)
+        {
+            character.rigidbody.AddForce(forceDirection.normalized * 750f);
+            character.rigidbody.velocity = Vector2.zero;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        
+    }
+
 }
