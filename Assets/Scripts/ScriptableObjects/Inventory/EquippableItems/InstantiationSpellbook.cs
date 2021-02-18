@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable Object/Items/Spellbook")]
-public class InventorySpellbook : EquippableItem
+public class InstantiationSpellbook : EquippableItem
 {
 
 
