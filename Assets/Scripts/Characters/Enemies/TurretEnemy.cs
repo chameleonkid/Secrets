@@ -9,7 +9,6 @@ public class TurretEnemy : SimpleEnemy
     public float fireDelay;
     [SerializeField] private float fireDelaySeconds;
 
-
     protected virtual void Update()
     {
         fireDelaySeconds -= Time.deltaTime;
@@ -55,10 +54,9 @@ public class TurretEnemy : SimpleEnemy
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;
+
         var difference = target.transform.position - transform.position;
-        var proj = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Projectile>();
-        proj.rigidbody.velocity = difference.normalized * proj.projectileSpeed;
-        proj.targetTag = "Player";  //! Temp — should refactor instantiation (add an init function to Projectile?)
+        Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
     }
 
     public void HalfCooldown()

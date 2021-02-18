@@ -268,21 +268,13 @@ public class PlayerMovement : Character
         mana.current -= 1;
     }
 
-    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed, float projectileDamage)
+    private void CreateProjectile(GameObject prefab, float speed, float damage)
     {
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Set Projectile higher
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
         var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-
-        var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
-        proj.targetTag = "enemy";   //! Temp — should refactor instantiation (add an init function to Projectile?)
-        proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
-
-        var hitbox = proj.GetComponent<DamageOnTrigger>();
-        if (hitbox)
-        {
-            hitbox.damage = projectileDamage;    //replace defaultvalue with the value given from the makespell()/playervalue
-            hitbox.isCritical = IsCriticalHit();  // gets written into Derived class
-        }
+        var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
+        projectile.OverrideSpeed(speed);
+        projectile.OverrideDamage(damage, IsCriticalHit());
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
