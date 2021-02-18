@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDashless
+public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDashless,IPoison
 {
     public State currentState { get; protected set; }
     public abstract float health { get; set; }
@@ -33,6 +33,8 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
     public Gigantism gigantism => _gigantism;
     [SerializeField] private Dashless _dashless = default;
     public Dashless dashless => _dashless;
+    [SerializeField] private Poison _poison = default;
+    public Poison poison => _poison;
 
     [Header("Dash Values")]
     [SerializeField] private float _maxDashDistance = 4;
@@ -55,13 +57,8 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         if (overrideExisting || _gigantism == null) _gigantism = GetComponentInChildren<Gigantism>();
         if (overrideExisting || _dashless == null) _dashless = GetComponentInChildren<Dashless>();
         if (overrideExisting || _slow == null) _slow = GetComponentInChildren<Slow>();
+        if (overrideExisting || _poison == null) _poison = GetComponentInChildren<Poison>();
     }
-
-
-
-
-
-
 
     protected virtual void Awake()
     {
@@ -69,6 +66,7 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         gigantism?.Initialise(this);
         dashless?.Initialise(this);
         slow?.Initialise(this);
+        poison?.Initialise(this);
         GetCharacterComponents();
     }
 
