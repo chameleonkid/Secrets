@@ -395,20 +395,20 @@ public class Inventory : ScriptableObject
 
         if (currentSpellbook || currentSpellbookTwo || currentSpellbookThree)
         {
-            if (currentSpellbook)
+            if (currentSpellbook is InstantiationSpellbook instantiationSpell)
             {
-                totalMinSpellDamage += currentSpellbook.minSpellDamage;
-                totalMaxSpellDamage += currentSpellbook.maxSpellDamage;
+                totalMinSpellDamage += instantiationSpell.minSpellDamage;
+                totalMaxSpellDamage += instantiationSpell.maxSpellDamage;
             }
-            if (currentSpellbookTwo)
+            if (currentSpellbookTwo is InstantiationSpellbook instantiationSpellTwo)
             {
-                totalMinSpellDamage += currentSpellbookTwo.minSpellDamage;
-                totalMaxSpellDamage += currentSpellbookTwo.maxSpellDamage;
+                totalMinSpellDamage += instantiationSpellTwo.minSpellDamage;
+                totalMaxSpellDamage += instantiationSpellTwo.maxSpellDamage;
             }
-            if (currentSpellbookThree)
+            if (currentSpellbookThree is InstantiationSpellbook instantiationSpellThree)
             {
-                totalMinSpellDamage += currentSpellbookThree.minSpellDamage;
-                totalMaxSpellDamage += currentSpellbookThree.maxSpellDamage;
+                totalMinSpellDamage += instantiationSpellThree.minSpellDamage;
+                totalMaxSpellDamage += instantiationSpellThree.maxSpellDamage;
             }
         }
         if (currentAmulet)
@@ -422,7 +422,6 @@ public class Inventory : ScriptableObject
             totalMaxSpellDamage += currentCloak.maxSpellDamage;
         }
     }
-
 
     public void CalcStrength()
     {

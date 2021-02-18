@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
     [SerializeField] protected float destroyDelay;
 
-    public string targetTag { get; set; }
+    public string targetTag { get; private set; }
 
     public new Rigidbody2D rigidbody { get; protected set; }
     protected new Collider2D collider;
@@ -60,6 +60,39 @@ public class Projectile : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void OverrideSpeed(float speed)
+    {
+        projectileSpeed = speed;
+        rigidbody.velocity = rigidbody.velocity.normalized * projectileSpeed;
+    }
+
+    public void OverrideDamage(float damage)
+    {
+        var hitbox = GetComponent<DamageOnTrigger>();
+        if (hitbox != null)
+        {
+            hitbox.damage = damage;
+        }
+    }
+
+    public void OverrideDamage(float damage, bool isCritical)
+    {
+        var hitbox = GetComponent<DamageOnTrigger>();
+        if (hitbox != null)
+        {
+            hitbox.damage = damage;
+            hitbox.isCritical = isCritical;
+        }
+    }
+
+    public static Projectile Instantiate(GameObject prefab, Vector2 position, Vector2 direction, Quaternion rotation, string targetTag)
+    {
+        var projectile = GameObject.Instantiate(prefab, position, rotation).GetComponent<Projectile>();
+        projectile.targetTag = targetTag;
+        projectile.rigidbody.velocity = direction.normalized * projectile.projectileSpeed;
+        return projectile;
     }
 
     public static Quaternion CalculateRotation(Vector2 direction)

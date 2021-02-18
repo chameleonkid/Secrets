@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93ba588bc6af9fc4688038deee402799, type: 3}
-  m_Name: SpellbookShrink
+  m_Name: SpellbookLaserMissle
   m_EditorClassIdentifier: 
-  _id: 1005
-  _name: Spellbook Shrinking
-  _description: The Spellbook is used to shoot a ShrinkBeam that shrinks enemys.
-  _sprite: {fileID: 21300000, guid: 3b32f727d1fda40a192fc13d7bf53b07, type: 3}
+  _id: 1006
+  _name: Spellbook of Laserbeam
+  _description: Rapidfirelaserbeam!
+  _sprite: {fileID: 21300000, guid: da9f62f7c985c415eb0553b908d54987, type: 3}
   _sound: {fileID: 8300000, guid: 0f13cc91f4699e74e81cc0076678e9c4, type: 3}
   _unique: 1
   _usable: 1
@@ -25,11 +25,11 @@ MonoBehaviour:
       m_Calls: []
   _buyPrice: 100
   _sellPrice: 50
-  minSpellDamage: 2
-  maxSpellDamage: 4
+  _manaCost: 10
   coolDown: 0
   onCooldown: 0
-  glowColor: {r: 3.482202, g: 0, b: 0, a: 0}
-  manaCosts: 5
-  prefab: {fileID: 2015206087574396294, guid: a71afd008b0e16d42b4344d5748ed578, type: 3}
+  glowColor: {r: 0.695431, g: 6.3656015, b: 0, a: 0}
+  minSpellDamage: 2
+  maxSpellDamage: 4
+  prefab: {fileID: 2015206087574396294, guid: dc2e41d470d30b14eb8ae6fc13b20a26, type: 3}
   speed: 10

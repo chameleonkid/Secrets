@@ -194,7 +194,12 @@ public class PlayerMovement : Character
                 inventory.items[arrow]--;
                 currentState = State.attack;
                 animator.SetBool("isShooting", true);
-                CreateProjectile(projectile, arrowSpeed, Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1));
+
+                var proj = CreateProjectile(projectile);
+                var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+                proj.OverrideSpeed(arrowSpeed);
+                proj.OverrideDamage(damage, IsCriticalHit());
+
                 yield return new WaitForSeconds(0.3f);
 
                 if (currentState != State.interact)
@@ -268,21 +273,12 @@ public class PlayerMovement : Character
         mana.current -= 1;
     }
 
-    private void CreateProjectile(GameObject projectilePrefab, float projectileSpeed, float projectileDamage)
+    private Projectile CreateProjectile(GameObject prefab)
     {
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f); // Set Projectile higher
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
         var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-
-        var proj = Instantiate(projectilePrefab, position, Projectile.CalculateRotation(direction)).GetComponent<Projectile>();
-        proj.targetTag = "enemy";   //! Temp — should refactor instantiation (add an init function to Projectile?)
-        proj.rigidbody.velocity = direction.normalized * projectileSpeed; // This makes the object move
-
-        var hitbox = proj.GetComponent<DamageOnTrigger>();
-        if (hitbox)
-        {
-            hitbox.damage = projectileDamage;    //replace defaultvalue with the value given from the makespell()/playervalue
-            hitbox.isCritical = IsCriticalHit();  // gets written into Derived class
-        }
+        var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
+        return projectile;
     }
 
     // ############################## Using the SpellBook /Spellcasting #########################################
@@ -290,7 +286,19 @@ public class PlayerMovement : Character
     {
         animator.SetBool("isCasting", true); // Set to cast Animation
         currentState = State.attack;
-        MakeSpell(spellBook.prefab, spellBook);
+
+        switch (spellBook)
+        {
+            default:
+                break;
+            case InstantiationSpellbook instantiationSpellbook:
+                var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
+                CreateProjectile(instantiationSpellbook.prefab);
+                break;
+            case UnityEventSpell eventSpell:
+                eventSpell.Use();
+                break;
+        }
 
         spellBook.onCooldown = true;
         yield return new WaitForSeconds(0.05f);
@@ -302,14 +310,6 @@ public class PlayerMovement : Character
         yield return new WaitForSeconds(spellBook.coolDown);
         SoundManager.RequestSound(Spell0CooldownSound);
         spellBook.onCooldown = false;
-    }
-
-    //################### instantiate spell when casted ###############################
-    private void MakeSpell(GameObject spellPrefab, InventorySpellbook spellBook)
-    {
-        var speed = spellPrefab.GetComponent<Projectile>().projectileSpeed;
-        CreateProjectile(spellPrefab, speed, Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1));
-        mana.current -= spellBook.manaCosts;
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -417,8 +417,9 @@ public class PlayerMovement : Character
 
     public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
     {
-        if (spellBook != null && mana.current >= spellBook.manaCosts && notStaggeredOrLifting && currentState != State.attack && !spellBook.onCooldown)
+        if (spellBook != null && mana.current >= spellBook.manaCost && notStaggeredOrLifting && currentState != State.attack && !spellBook.onCooldown)
         {
+            mana.current -= spellBook.manaCost;
             StartCoroutine(SpellAttackCo(spellBook));
 
             if (spellBook == inventory.currentSpellbook)
