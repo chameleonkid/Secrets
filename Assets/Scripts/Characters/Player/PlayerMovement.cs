@@ -295,6 +295,9 @@ public class PlayerMovement : Character
                 var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
                 CreateProjectile(instantiationSpellbook.prefab);
                 break;
+            case UnityEventSpell eventSpell:
+                eventSpell.Use();
+                break;
         }
 
         spellBook.onCooldown = true;
