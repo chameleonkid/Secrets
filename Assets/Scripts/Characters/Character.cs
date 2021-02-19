@@ -51,10 +51,10 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
     public State currentState {
         get => _currentState;
         set {
-            if (value != null && value.GetType() != _currentState?.GetType()) {
+            if (value == null || value.GetType() != _currentState?.GetType()) {
                 _currentState?.Exit();
                 _currentState = value;
-                _currentState.Enter();
+                _currentState?.Enter();
             }
         }
     }
