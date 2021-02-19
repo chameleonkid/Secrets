@@ -5,7 +5,7 @@ using System;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
 
-public class PlayerMovement : Character
+public class PlayerMovement : Character, ICanMove
 {
     [Header("TestUIInputs")]
     [SerializeField] private Button uiAttackButton = default;
@@ -25,6 +25,8 @@ public class PlayerMovement : Character
     [SerializeField] private float originalSpeed;
 
     private Vector3 change;
+    public Vector2 direction => change;
+    public float moveSpeed => speed * speedModifier;
 
     [SerializeField] private ConstrainedFloat _lumen = default;
     public ConstrainedFloat lumen => _lumen;
@@ -81,6 +83,16 @@ public class PlayerMovement : Character
     public event Action OnSpellTwoTriggered;
     public event Action OnSpellThreeTriggered;
     public event Action OnLampTriggered;
+
+    private Move _moveState;
+    private Move moveState {
+        get {
+            if (_moveState == null) {
+                _moveState = new Move(this);
+            }
+            return _moveState;
+        }
+    }
 
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
@@ -167,7 +179,7 @@ public class PlayerMovement : Character
     {
         if (currentState == State.walk || currentState == State.idle || currentState == State.lift)
         {
-            rigidbody.MovePosition(transform.position + change.normalized * speed * speedModifier * Time.deltaTime);
+            moveState.FixedUpdate();
         }
 
         if (currentState != State.stagger)
