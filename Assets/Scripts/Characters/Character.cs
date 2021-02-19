@@ -46,6 +46,18 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
 
     public float speedModifier { get; set; } = 1;
 
+    private State _currentState;
+    public State currentState {
+        get => _currentState;
+        set {
+            if (value != null && value.GetType() != _currentState?.GetType()) {
+                _currentState?.Exit();
+                _currentState = value;
+                _currentState.Enter();
+            }
+        }
+    }
+
     private void Reset() => OnValidate(true);
     private void OnValidate() => OnValidate(false);
     private void OnValidate(bool overrideExisting)

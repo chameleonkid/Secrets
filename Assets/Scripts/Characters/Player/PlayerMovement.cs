@@ -84,16 +84,6 @@ public class PlayerMovement : Character, ICanMove
     public event Action OnSpellThreeTriggered;
     public event Action OnLampTriggered;
 
-    private Move _moveState;
-    private Move moveState {
-        get {
-            if (_moveState == null) {
-                _moveState = new Move(this);
-            }
-            return _moveState;
-        }
-    }
-
     private void OnEnable() => levelSystem.OnLevelChanged += LevelUpPlayer;
     private void OnDisable() => levelSystem.OnLevelChanged -= LevelUpPlayer;
 
@@ -114,6 +104,7 @@ public class PlayerMovement : Character, ICanMove
     private void Start()
     {
         SetAnimatorXY(Vector2.down);
+        currentState = new Move(this);
         currentStateEnum = StateEnum.walk;
         transform.position = startingPosition.value;
         originalSpeed = speed;
@@ -143,7 +134,7 @@ public class PlayerMovement : Character, ICanMove
         //  change.x = joystick.Horizontal;
         //  change.y = joystick.Vertical;
 
-        moveState.Update();
+        currentState?.Update();
 
         animator.SetBool("isRunning", Input.GetButton("Run") && change != Vector3.zero);
 
@@ -178,7 +169,7 @@ public class PlayerMovement : Character, ICanMove
     {
         if (currentStateEnum == StateEnum.walk || currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.lift)
         {
-            moveState.FixedUpdate();
+            currentState?.FixedUpdate();
         }
 
         if (currentStateEnum != StateEnum.stagger)
