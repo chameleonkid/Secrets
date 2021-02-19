@@ -163,8 +163,6 @@ public class PlayerMovement : Character, ICanMove
         {
             ToggleLamp();
         }
-
-        animator.SetBool("isHurt", (currentStateEnum == StateEnum.stagger));
     }
 
     private void FixedUpdate()

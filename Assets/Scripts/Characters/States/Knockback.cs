@@ -14,6 +14,7 @@ namespace Schwer.States {
         }
 
         public override void Enter() {
+            target.animator.SetBool("isHurt", true);
             target.rigidbody.AddForce(force, ForceMode2D.Impulse);
         }
 
@@ -25,10 +26,15 @@ namespace Schwer.States {
                 target.currentState = null;
             }
         }
+
+        public override void Exit() {
+            target.animator.SetBool("isHurt", false);
+        }
     }
 
     public interface ICanKnockback {
         Rigidbody2D rigidbody { get; }
+        Animator animator { get; }
         State currentState { get; set; }
     }
 }
