@@ -1,7 +1,8 @@
-﻿public abstract class State
-{
-    public virtual void Enter() {}
-    public virtual void Update() {}
-    public virtual void FixedUpdate() {}
-    public virtual void Exit() {}
+﻿namespace Schwer.States {
+    public abstract class State {
+        public virtual void Enter() {}
+        public virtual void Update() {}
+        public virtual void FixedUpdate() {}
+        public virtual void Exit() {}
+    }
 }

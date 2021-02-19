@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using Schwer.States;
 
 public class PlayerMovement : Character, ICanMove
 {

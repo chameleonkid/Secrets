@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Schwer.States;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDashless, IPoison
