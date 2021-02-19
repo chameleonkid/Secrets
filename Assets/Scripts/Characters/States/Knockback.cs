@@ -29,6 +29,6 @@ namespace Schwer.States {
 
     public interface ICanKnockback {
         Rigidbody2D rigidbody { get; }
-        State currentState { set; }
+        State currentState { get; set; }
     }
 }

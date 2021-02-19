@@ -8,7 +8,7 @@ public class Knockback : Hitbox
     protected override void OnHit(Collider2D other)
     {
         var hit = other.GetComponent<Schwer.States.ICanKnockback>();
-        if (hit != null)
+        if (hit != null && !(hit.currentState is Schwer.States.PlayerDead))
         {
             var knockback = other.transform.position - transform.position;
             knockback.Normalize();

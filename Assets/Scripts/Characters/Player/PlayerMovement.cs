@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
@@ -43,7 +42,7 @@ public class PlayerMovement : Character, ICanMove
             _health.current = value;
             if (_health.current <= 0)
             {
-                StartCoroutine(DeathCo());
+                currentState = new PlayerDead(this);
             }
         }
     }
@@ -364,16 +363,6 @@ public class PlayerMovement : Character, ICanMove
             }
             //    Debug.Log(finalDamage + " damage after defense calculation.");
         }
-    }
-
-    //##################### Death animation and screen ##############################
-
-    private IEnumerator DeathCo()
-    {
-        currentStateEnum = StateEnum.dead;
-        animator.SetBool("isDead", true);
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("DeathMenu");
     }
 
     // ############################################# Refactor ####################################################################################
