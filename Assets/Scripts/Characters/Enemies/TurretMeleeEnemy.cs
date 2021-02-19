@@ -11,17 +11,17 @@ public class TurretMeleeEnemy : TurretEnemy
         if (canAttack)
         {
 
-            currentState = State.attack;
+            currentStateEnum = StateEnum.attack;
             MeleeAttack();
         }
 
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
         
     }
 
     protected override void OutsideChaseRadiusUpdate()
     {
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
         animator.SetBool("isInRange", false);
     }
 
@@ -29,7 +29,7 @@ public class TurretMeleeEnemy : TurretEnemy
     {
         StartCoroutine(MeleeAttackCo());
         canAttack = false;
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
     }
 
     protected virtual IEnumerator MeleeAttackCo()

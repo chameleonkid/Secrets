@@ -103,7 +103,7 @@ public class PlayerMovement : Character, ICanMove
         _mana.max = _mana.max + 10;
         _health.current = _health.max;
         _mana.current = _mana.max;
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
         SoundManager.RequestSound(levelUpSound);
         if (effectAnimator)
         {
@@ -114,7 +114,7 @@ public class PlayerMovement : Character, ICanMove
     private void Start()
     {
         SetAnimatorXY(Vector2.down);
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
         transform.position = startingPosition.value;
         originalSpeed = speed;
 
@@ -130,7 +130,7 @@ public class PlayerMovement : Character, ICanMove
     {
         if (Time.timeScale <= 0) return;
         // Is the player in an interaction?
-        if (currentState == State.interact)
+        if (currentStateEnum == StateEnum.interact)
         {
             // Debug.Log("helpmeout");
             return;
@@ -147,7 +147,7 @@ public class PlayerMovement : Character, ICanMove
 
         animator.SetBool("isRunning", Input.GetButton("Run") && change != Vector3.zero);
 
-        notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
+        notStaggeredOrLifting = (currentStateEnum != StateEnum.stagger && currentStateEnum != StateEnum.lift);
 
         if (Input.GetButtonDown("Attack"))
         {
@@ -171,18 +171,18 @@ public class PlayerMovement : Character, ICanMove
             ToggleLamp();
         }
 
-        animator.SetBool("isHurt", (currentState == State.stagger));
+        animator.SetBool("isHurt", (currentStateEnum == StateEnum.stagger));
         animator.SetBool("Moving", (change != Vector3.zero));
     }
 
     private void FixedUpdate()
     {
-        if (currentState == State.walk || currentState == State.idle || currentState == State.lift)
+        if (currentStateEnum == StateEnum.walk || currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.lift)
         {
             moveState.FixedUpdate();
         }
 
-        if (currentState != State.stagger)
+        if (currentStateEnum != StateEnum.stagger)
         {
             rigidbody.velocity = Vector2.zero;
         }
@@ -202,7 +202,7 @@ public class PlayerMovement : Character, ICanMove
                 OnAttackTriggered?.Invoke();
                 meeleCooldown = true;
                 inventory.items[arrow]--;
-                currentState = State.attack;
+                currentStateEnum = StateEnum.attack;
                 animator.SetBool("isShooting", true);
 
                 var proj = CreateProjectile(projectile);
@@ -212,9 +212,9 @@ public class PlayerMovement : Character, ICanMove
 
                 yield return new WaitForSeconds(0.3f);
 
-                if (currentState != State.interact)
+                if (currentStateEnum != StateEnum.interact)
                 {
-                    currentState = State.walk;
+                    currentStateEnum = StateEnum.walk;
                 }
                 animator.SetBool("isShooting", false);
                 yield return new WaitForSeconds(currentWeapon.swingTime);
@@ -252,14 +252,14 @@ public class PlayerMovement : Character, ICanMove
             SoundManager.RequestSound(attackSounds.GetRandomElement());
 
             animator.SetBool("Attacking", true);
-            currentState = State.attack;
+            currentStateEnum = StateEnum.attack;
             yield return null;
             animator.SetBool("Attacking", false);
             yield return new WaitForSeconds(0.3f);
 
-            if (currentState != State.interact)
+            if (currentStateEnum != StateEnum.interact)
             {
-                currentState = State.walk;
+                currentStateEnum = StateEnum.walk;
             }
 
             yield return new WaitForSeconds(currentWeapon.swingTime);
@@ -275,10 +275,10 @@ public class PlayerMovement : Character, ICanMove
         roundAttack.isCritical = IsCriticalHit();
         //! Is this missing a sound request?
         animator.SetBool("RoundAttacking", true);
-        currentState = State.roundattack;
+        currentStateEnum = StateEnum.roundattack;
         yield return null;  //! This allows a round attack to be executed every other frame when the input is held, causing mana to drain very quickly
         animator.SetBool("RoundAttacking", false);
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
 
         mana.current -= 1;
     }
@@ -314,9 +314,9 @@ public class PlayerMovement : Character, ICanMove
 
         spellBook.onCooldown = true;
         yield return new WaitForSeconds(0.05f);
-        if (currentState != State.interact)
+        if (currentStateEnum != StateEnum.interact)
         {
-            currentState = State.walk;
+            currentStateEnum = StateEnum.walk;
         }
         animator.SetBool("isCasting", false);
         yield return new WaitForSeconds(spellBook.coolDown);
@@ -330,16 +330,16 @@ public class PlayerMovement : Character, ICanMove
     {
         if (inventory.currentItem != null)
         {
-            if (currentState != State.interact)
+            if (currentStateEnum != StateEnum.interact)
             {
                 animator.SetBool("receiveItem", true);
-                currentState = State.interact;
+                currentStateEnum = StateEnum.interact;
                 receivedItemSprite.sprite = inventory.currentItem.sprite;
             }
             else
             {
                 animator.SetBool("receiveItem", false);
-                currentState = State.idle;
+                currentStateEnum = StateEnum.idle;
                 receivedItemSprite.sprite = null;
                 inventory.currentItem = null;
             }
@@ -371,7 +371,7 @@ public class PlayerMovement : Character, ICanMove
 
     public override void Knockback(Vector2 knockback, float duration)
     {
-        if (currentState != State.stagger && this.gameObject.activeInHierarchy)
+        if (currentStateEnum != StateEnum.stagger && this.gameObject.activeInHierarchy)
         {
             StartCoroutine(KnockbackCo(knockback, duration));
         }
@@ -381,7 +381,7 @@ public class PlayerMovement : Character, ICanMove
 
     private IEnumerator DeathCo()
     {
-        currentState = State.dead;
+        currentStateEnum = StateEnum.dead;
         animator.SetBool("isDead", true);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("DeathMenu");
@@ -393,7 +393,7 @@ public class PlayerMovement : Character, ICanMove
 
     public void MeleeAttack()
     {
-        if (currentState != State.attack && inventory.currentWeapon != null && meeleCooldown == false)
+        if (currentStateEnum != StateEnum.attack && inventory.currentWeapon != null && meeleCooldown == false)
         {
             StartCoroutine(AttackCo());
         }
@@ -425,7 +425,7 @@ public class PlayerMovement : Character, ICanMove
 
     public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
     {
-        if (spellBook != null && mana.current >= spellBook.manaCost && notStaggeredOrLifting && currentState != State.attack && !spellBook.onCooldown)
+        if (spellBook != null && mana.current >= spellBook.manaCost && notStaggeredOrLifting && currentStateEnum != StateEnum.attack && !spellBook.onCooldown)
         {
             mana.current -= spellBook.manaCost;
             StartCoroutine(SpellAttackCo(spellBook));

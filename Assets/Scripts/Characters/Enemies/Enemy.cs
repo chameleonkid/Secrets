@@ -83,7 +83,7 @@ public class Enemy : Character
         health = maxHealth.value;
         transform.position = homePosition;
         chaseRadius = originalChaseRadius;
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
     }
 
     protected override void Awake()
@@ -164,7 +164,7 @@ public class Enemy : Character
 
     protected virtual void InsideChaseRadiusUpdate()
     {
-        if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
+        if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
         {
             {
                 if (path == null)
@@ -278,7 +278,7 @@ public class Enemy : Character
                 Vector3 temp = Vector3.MoveTowards(transform.position, roamingPosition, moveSpeed * speedModifier * Time.deltaTime);
                 SetAnimatorXYSingleAxis(temp - transform.position);
                 rigidbody.MovePosition(temp);
-                currentState = State.walk;
+                currentStateEnum = StateEnum.walk;
                 animator.SetBool("isMoving", true);
             }
             else
@@ -302,7 +302,7 @@ public class Enemy : Character
     protected virtual IEnumerator randomWaiting()
     {
         isWalking = true;
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
         animator.SetBool("isMoving", false);
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 4f));
         roamingPosition = GetRoamingPostion();

@@ -21,21 +21,21 @@ public class TurretEnemy : SimpleEnemy
 
     protected override void InsideChaseRadiusUpdate()
     {
-        if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
+        if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
         {
             if (canAttack)
             {
-                currentState = State.attack;
+                currentStateEnum = StateEnum.attack;
                 FireProjectile();
             }
-            currentState = State.walk;
+            currentStateEnum = StateEnum.walk;
             animator.SetBool("isMoving", true);
         }
     }
 
     protected override void OutsideChaseRadiusUpdate()
     {
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
         animator.SetBool("isMoving", false);
     }
 
@@ -43,7 +43,7 @@ public class TurretEnemy : SimpleEnemy
     {
         StartCoroutine(FireCo());
         canAttack = false;
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
     }
 
     protected virtual IEnumerator FireCo()

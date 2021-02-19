@@ -10,7 +10,7 @@ public class RangeEnemy : TurretEnemy
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance >= shootingRange)
         {
-            if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
+            if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
             {
                 if (path == null)
                 {
@@ -39,11 +39,11 @@ public class RangeEnemy : TurretEnemy
         }
         else if(distance <= chaseRadius && distance <= shootingRange && distance > escapeRange)
         {
-            currentState = State.idle;
+            currentStateEnum = StateEnum.idle;
             animator.SetBool("isMoving", false);
             if (canAttack)
             {
-                currentState = State.attack;
+                currentStateEnum = StateEnum.attack;
                 FireProjectile();
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDashless, IPoison
 {
-    public State currentState { get; protected set; }
+    public StateEnum currentStateEnum { get; protected set; }
     public abstract float health { get; set; }
     public bool isInvulnerable { get; set; }
 
@@ -117,7 +117,7 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
 
     public virtual void Knockback(Vector2 knockback, float duration)
     {
-        if (this.gameObject.activeInHierarchy && currentState != State.stagger)
+        if (this.gameObject.activeInHierarchy && currentStateEnum != StateEnum.stagger)
         {
             StartCoroutine(KnockbackCo(knockback, duration));
         }
@@ -125,11 +125,11 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
 
     protected IEnumerator KnockbackCo(Vector2 knockback, float duration)
     {
-        currentState = State.stagger;
+        currentStateEnum = StateEnum.stagger;
         rigidbody.AddForce(knockback, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
         rigidbody.velocity = Vector2.zero;
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
     }
 
     public void TeleportTowards(Vector2 destination, float maxDelta)
@@ -158,7 +158,7 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
         }
     }
 
-    public enum State
+    public enum StateEnum
     {
         idle,
         walk,

@@ -25,21 +25,21 @@ public class BossPumpkin : TurretEnemy
 
     protected override void OutsideChaseRadiusUpdate()
     {
-        currentState = State.waiting;
+        currentStateEnum = StateEnum.waiting;
     }
 
     protected override void InsideChaseRadiusUpdate()
     {
         base.InsideChaseRadiusUpdate();
 
-        if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
+        if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
         {
             if (canFireTwo)
             {
-                currentState = State.attack;
+                currentStateEnum = StateEnum.attack;
                 FireProjectileTwo();
             }
-            currentState = State.idle;
+            currentStateEnum = StateEnum.idle;
         }
 
 
@@ -50,7 +50,7 @@ public class BossPumpkin : TurretEnemy
     {
         StartCoroutine(FireTwoCo());
         canFireTwo = false;
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
     }
 
 
