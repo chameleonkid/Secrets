@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDashless,IPoison
+public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDashless, IPoison
 {
     public State currentState { get; protected set; }
     public abstract float health { get; set; }
@@ -47,8 +47,6 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
     public float speedModifier { get; set; } = 1;
 
     private void Reset() => OnValidate(true);
-
-
     private void OnValidate() => OnValidate(false);
     private void OnValidate(bool overrideExisting)
     {
@@ -62,12 +60,13 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
 
     protected virtual void Awake()
     {
+        GetCharacterComponents();
+
         shrink?.Initialise(this);
         gigantism?.Initialise(this);
         dashless?.Initialise(this);
         slow?.Initialise(this);
         poison?.Initialise(this);
-        GetCharacterComponents();
     }
 
     protected void GetCharacterComponents()
@@ -133,19 +132,6 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         currentState = State.idle;
     }
 
-    public enum State
-    {
-        idle,
-        walk,
-        stagger,
-        interact,
-        attack,
-        roundattack,
-        lift,
-        dead,
-        waiting
-    }
-
     public void TeleportTowards(Vector2 destination, float maxDelta)
     {
         var difference = destination - (Vector2)transform.position;
@@ -160,24 +146,28 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         }
     }
 
-    public void Dash(Character character,Vector2 forceDirection)
-    {
-        StartCoroutine(DashCo(character, forceDirection));
-    }
+    public void Dash(Character character, Vector2 forceDirection) => StartCoroutine(DashCo(character, forceDirection));
 
-    IEnumerator DashCo(Character character, Vector2 forceDirection)
+    private IEnumerator DashCo(Character character, Vector2 forceDirection)
     {
-        for(int i = 0; i <= dashDuration; i++)
+        for (int i = 0; i <= dashDuration; i++)
         {
             character.rigidbody.AddForce(forceDirection.normalized * 500f);
             character.rigidbody.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.01f);
         }
-
-        
     }
 
-
-
-
+    public enum State
+    {
+        idle,
+        walk,
+        stagger,
+        interact,
+        attack,
+        roundattack,
+        lift,
+        dead,
+        waiting
+    }
 }
