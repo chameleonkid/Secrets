@@ -15,7 +15,7 @@ public class Move : State
     public override void FixedUpdate()
     {
         target.rigidbody.MovePosition((Vector2)target.transform.position
-            + target.direction * target.moveSpeed * Time.deltaTime);
+            + target.direction.normalized * target.moveSpeed * Time.deltaTime);
     }
 
     public override void Exit()
