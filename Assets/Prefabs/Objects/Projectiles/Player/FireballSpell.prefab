@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -3089408764058353687}
   - component: {fileID: 8525046493401663380}
   - component: {fileID: 8226493659351810451}
-  - component: {fileID: 8199492714421472431}
   - component: {fileID: 6768971471492383634}
   - component: {fileID: -7352489870780604428}
   - component: {fileID: 5379144640911285020}
@@ -172,21 +171,6 @@ MonoBehaviour:
   ticks: 3
   tickDuration: 1
   tickDamage: 1
---- !u!114 &8199492714421472431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015206087574396294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ebff8109c8713a40be5e585ed777cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 1
-  color: {r: 1, g: 0, b: 0, a: 1}
-  duration: 2
 --- !u!114 &6768971471492383634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +533,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 50
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1246,7 +1230,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 25
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5194,7 +5178,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.518
-  m_Color: {r: 0.9716981, g: 0.29573345, b: 0.1512549, a: 1}
+  m_Color: {r: 0.4339623, g: 0.17983261, b: 0.16990031, a: 1}
   m_Intensity: 0.2
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000

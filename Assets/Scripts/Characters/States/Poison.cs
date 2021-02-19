@@ -3,9 +3,10 @@
 public class Poison : Status
 {
     [SerializeField] private float poisonDmg = 2;
-    [SerializeField] private Color colorChange = new Color(0f, 0.7667949f, 0f, 1);
+    [SerializeField] private Color colorChange = new Color(0f, 0.25f, 0f, 1);
     [SerializeField] private float duration = 3;
     [SerializeField] private int maxStacks = 8;
+    [SerializeField] private GameObject particleLight = default;
 
     [SerializeField] private ParticleSystem particles = default;
 
@@ -46,6 +47,7 @@ public class Poison : Status
     {
         if (target == null) return;
 
+        particleLight.SetActive(true);
         var e = particles.emission;
         e.enabled = true;
 
@@ -93,6 +95,7 @@ public class Poison : Status
 
         target.renderer.color = initialColor;
 
+        particleLight.SetActive(false);
         var e = particles.emission;
         e.enabled = false;
 
@@ -118,6 +121,7 @@ public class Poison : Status
                 if (stacks <= 0)
                 {
                     target.renderer.color = initialColor;
+                    particleLight.SetActive(false);
                     var e = particles.emission;
                     e.enabled = false;
                     this.enabled = false;
