@@ -135,6 +135,8 @@ public class PlayerMovement : Character, ICanMove
         //  change.x = joystick.Horizontal;
         //  change.y = joystick.Vertical;
 
+        HandleState();
+
         currentState?.Update();
 
         animator.SetBool("isRunning", Input.GetButton("Run") && change != Vector3.zero);
@@ -173,6 +175,15 @@ public class PlayerMovement : Character, ICanMove
         if (!(currentState is Schwer.States.Knockback))
         {
             rigidbody.velocity = Vector2.zero;
+        }
+    }
+
+    private void HandleState()
+    {
+        // Full state machine logic should be here
+        if (currentState == null)
+        {
+            currentState = new Move(this);
         }
     }
 
