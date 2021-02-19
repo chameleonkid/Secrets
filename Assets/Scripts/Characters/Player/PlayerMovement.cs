@@ -114,8 +114,6 @@ public class PlayerMovement : Character
         uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
     }
 
-    private AudioClip GetLevelUpSound() => levelUpSound;
-
     private void Update()
     {
         if (Time.timeScale <= 0) return;
@@ -169,7 +167,7 @@ public class PlayerMovement : Character
     {
         if (currentState == State.walk || currentState == State.idle || currentState == State.lift)
         {
-            rigidbody.MovePosition(transform.position + change.normalized * speed* speedModifier * Time.deltaTime);
+            rigidbody.MovePosition(transform.position + change.normalized * speed * speedModifier * Time.deltaTime);
         }
 
         if (currentState != State.stagger)
@@ -284,7 +282,6 @@ public class PlayerMovement : Character
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
-
         switch (spellBook)
         {
             default:
@@ -378,10 +375,9 @@ public class PlayerMovement : Character
         SceneManager.LoadScene("DeathMenu");
     }
 
-    //############################################# Refcator #####################################################################################
-    //################################### Functions for UI Input or Controller ###################################################################
-    //############################################################################################################################################
-    //############################################################################################################################################
+    // ############################################# Refactor ####################################################################################
+    // ################################### Functions for UI Input or Controller ##################################################################
+    // ###########################################################################################################################################
 
     public void MeleeAttack()
     {
@@ -406,10 +402,7 @@ public class PlayerMovement : Character
         }
     }
 
-    public void LockMovement(float seconds)
-    {
-        StartCoroutine(LockCo(seconds));
-    }
+    public void LockMovement(float seconds) => StartCoroutine(LockCo(seconds));
 
     private IEnumerator LockCo(float seconds)
     {
