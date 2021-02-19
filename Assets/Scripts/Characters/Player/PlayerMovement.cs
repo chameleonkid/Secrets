@@ -168,12 +168,9 @@ public class PlayerMovement : Character, ICanMove
 
     private void FixedUpdate()
     {
-        if (currentStateEnum == StateEnum.walk || currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.lift)
-        {
-            currentState?.FixedUpdate();
-        }
+        currentState?.FixedUpdate();
 
-        if (currentStateEnum != StateEnum.stagger)
+        if (!(currentState is Schwer.States.Knockback))
         {
             rigidbody.velocity = Vector2.zero;
         }
@@ -355,16 +352,6 @@ public class PlayerMovement : Character, ICanMove
                 DamagePopUpManager.RequestDamagePopUp(0, isCritical, transform);
             }
             //    Debug.Log(finalDamage + " damage after defense calculation.");
-        }
-    }
-
-    // ########################### Getting hit and die ##############################################
-
-    public override void Knockback(Vector2 knockback, float duration)
-    {
-        if (currentStateEnum != StateEnum.stagger && this.gameObject.activeInHierarchy)
-        {
-            StartCoroutine(KnockbackCo(knockback, duration));
         }
     }
 

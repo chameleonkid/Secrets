@@ -2,7 +2,7 @@
 using Schwer.States;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDashless, IPoison
+public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, IGigantism, IDashless, IPoison
 {
     public StateEnum currentStateEnum { get; protected set; }
     public abstract float health { get; set; }
@@ -126,23 +126,6 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
             SoundManager.RequestSound(gotHitSound.GetRandomElement());
             iframes?.TriggerInvulnerability();
         }
-    }
-
-    public virtual void Knockback(Vector2 knockback, float duration)
-    {
-        if (this.gameObject.activeInHierarchy && currentStateEnum != StateEnum.stagger)
-        {
-            StartCoroutine(KnockbackCo(knockback, duration));
-        }
-    }
-
-    protected IEnumerator KnockbackCo(Vector2 knockback, float duration)
-    {
-        currentStateEnum = StateEnum.stagger;
-        rigidbody.AddForce(knockback, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(duration);
-        rigidbody.velocity = Vector2.zero;
-        currentStateEnum = StateEnum.idle;
     }
 
     public void TeleportTowards(Vector2 destination, float maxDelta)

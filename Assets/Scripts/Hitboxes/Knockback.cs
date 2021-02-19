@@ -7,13 +7,13 @@ public class Knockback : Hitbox
 
     protected override void OnHit(Collider2D other)
     {
-        var hit = other.GetComponent<Character>();
+        var hit = other.GetComponent<Schwer.States.ICanKnockback>();
         if (hit != null)
         {
-            var knockback = hit.transform.position - transform.position;
+            var knockback = other.transform.position - transform.position;
             knockback.Normalize();
             knockback *= force;
-            hit.Knockback(knockback, duration);
+            hit.currentState = new Schwer.States.Knockback(hit, knockback, duration);
         }
     }
 }
