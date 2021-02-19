@@ -258,7 +258,7 @@ public class PlayerMovement : Character
         }
     }
 
-    // ############################# Roundattack ################################################
+    // ############################# Roundattack ################################################ Might be used for a Combo later?
     private IEnumerator RoundAttackCo()
     {
         roundAttack.damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
@@ -272,6 +272,7 @@ public class PlayerMovement : Character
 
         mana.current -= 1;
     }
+    // ###########################################################################################
 
     private Projectile CreateProjectile(GameObject prefab)
     {
@@ -290,7 +291,7 @@ public class PlayerMovement : Character
             default:
                 break;
             case InstantiationSpellbook instantiationSpellbook:
-                var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
+                var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1); //Where is this used <----?
                 CreateProjectile(instantiationSpellbook.prefab);
                 animator.SetBool("isCasting", true);
                 break;
