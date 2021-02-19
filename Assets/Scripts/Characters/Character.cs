@@ -77,7 +77,7 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 
-    protected void SetAnimatorXY(Vector2 direction)
+    public void SetAnimatorXY(Vector2 direction)
     {
         direction.Normalize();
         if (direction != Vector2.zero)
@@ -91,7 +91,7 @@ public abstract class Character : MonoBehaviour, ISlow, IShrink, IGigantism, IDa
         }
     }
 
-    protected void SetAnimatorXYSingleAxis(Vector2 direction)
+    public void SetAnimatorXYSingleAxis(Vector2 direction)
     {
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {

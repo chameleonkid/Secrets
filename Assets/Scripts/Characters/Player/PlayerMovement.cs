@@ -143,7 +143,7 @@ public class PlayerMovement : Character, ICanMove
         //  change.x = joystick.Horizontal;
         //  change.y = joystick.Vertical;
 
-        SetAnimatorXY(change);
+        moveState.Update();
 
         animator.SetBool("isRunning", Input.GetButton("Run") && change != Vector3.zero);
 
@@ -172,7 +172,6 @@ public class PlayerMovement : Character, ICanMove
         }
 
         animator.SetBool("isHurt", (currentStateEnum == StateEnum.stagger));
-        animator.SetBool("Moving", (change != Vector3.zero));
     }
 
     private void FixedUpdate()
