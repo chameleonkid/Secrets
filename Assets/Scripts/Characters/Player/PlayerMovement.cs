@@ -93,7 +93,6 @@ public class PlayerMovement : Character, ICanMove
         _mana.max = _mana.max + 10;
         _health.current = _health.max;
         _mana.current = _mana.max;
-        currentStateEnum = StateEnum.idle;
         SoundManager.RequestSound(levelUpSound);
         if (effectAnimator)
         {
@@ -105,7 +104,6 @@ public class PlayerMovement : Character, ICanMove
     {
         SetAnimatorXY(Vector2.down);
         currentState = new Move(this);
-        currentStateEnum = StateEnum.walk;
         transform.position = startingPosition.value;
         originalSpeed = speed;
 
@@ -120,12 +118,6 @@ public class PlayerMovement : Character, ICanMove
     private void Update()
     {
         if (Time.timeScale <= 0) return;
-        // Is the player in an interaction?
-        if (currentStateEnum == StateEnum.interact)
-        {
-            // Debug.Log("helpmeout");
-            return;
-        }
 
         // ################################################# Change Inputtype to Joystick on IOS ################################################
         change.x = Input.GetAxisRaw("Horizontal");
@@ -326,16 +318,14 @@ public class PlayerMovement : Character, ICanMove
     {
         if (inventory.currentItem != null)
         {
-            if (currentStateEnum != StateEnum.interact)
+            if (!(currentState is Locked))
             {
-                animator.SetBool("receiveItem", true);
-                currentStateEnum = StateEnum.interact;
+                currentState = new Locked(this, "receiveItem");
                 receivedItemSprite.sprite = inventory.currentItem.sprite;
             }
             else
             {
-                animator.SetBool("receiveItem", false);
-                currentStateEnum = StateEnum.idle;
+                currentState = null;
                 receivedItemSprite.sprite = null;
                 inventory.currentItem = null;
             }
