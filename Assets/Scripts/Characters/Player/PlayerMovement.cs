@@ -318,16 +318,16 @@ public class PlayerMovement : Character, ICanMove
     {
         if (inventory.currentItem != null)
         {
-            if (!(currentState is Locked))
-            {
-                currentState = new Locked(this, "receiveItem");
-                receivedItemSprite.sprite = inventory.currentItem.sprite;
-            }
-            else
+            if (currentState is Locked)
             {
                 currentState = null;
                 receivedItemSprite.sprite = null;
                 inventory.currentItem = null;
+            }
+            else
+            {
+                currentState = new Locked(this, "receiveItem");
+                receivedItemSprite.sprite = inventory.currentItem.sprite;
             }
         }
     }
