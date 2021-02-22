@@ -195,10 +195,9 @@ public class PlayerMovement : Character
                 currentState = State.attack;
                 animator.SetBool("isShooting", true);
 
-                var proj = CreateProjectile(projectile);
                 var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+                var proj = CreateProjectile(projectile, damage, IsCriticalHit());
                 proj.OverrideSpeed(arrowSpeed);
-                proj.OverrideDamage(damage, IsCriticalHit());
 
                 yield return new WaitForSeconds(0.3f);
 
@@ -282,6 +281,20 @@ public class PlayerMovement : Character
         return projectile;
     }
 
+    private Projectile CreateProjectile(GameObject prefab, float damage)
+    {
+        var projectile = CreateProjectile(prefab);
+        projectile.OverrideDamage(damage);
+        return projectile;
+    }
+
+    private Projectile CreateProjectile(GameObject prefab, float damage, bool isCritical)
+    {
+        var projectile = CreateProjectile(prefab);
+        projectile.OverrideDamage(damage, isCritical);
+        return projectile;
+    }
+
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
@@ -292,7 +305,7 @@ public class PlayerMovement : Character
                 break;
             case InstantiationSpellbook instantiationSpellbook:
                 var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1); //Where is this used <----?
-                CreateProjectile(instantiationSpellbook.prefab);
+                CreateProjectile(instantiationSpellbook.prefab, damage);
                 animator.SetBool("isCasting", true);
                 break;
             case UnityEventSpell eventSpell:
