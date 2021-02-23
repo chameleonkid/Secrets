@@ -32,7 +32,7 @@ public abstract class Hitbox : MonoBehaviour
     {
         var hitbox = this.gameObject;
         var isPlayerHitbox = hitbox.CompareTag("Player") || hitbox.CompareTag("arrow") || hitbox.CompareTag("spell"); // Whatever is true first
-        var isEnemyHitbox = hitbox.CompareTag("enemy") || hitbox.CompareTag("enemySpell");
+        var isEnemyHitbox = hitbox.CompareTag("enemy") || hitbox.CompareTag("enemySpell") || hitbox.CompareTag("FlameKnight");
 
         var hitPlayer = other.CompareTag("Player"); //Boolean
         var hitEnemy = other.CompareTag("enemy");   // Boolean

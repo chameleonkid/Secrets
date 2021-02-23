@@ -305,7 +305,7 @@ public class PlayerMovement : Character
                 break;
             case InstantiationSpellbook instantiationSpellbook:
                 var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1); //Where is this used <----?
-                CreateProjectile(instantiationSpellbook.prefab, damage);
+                CreateProjectile(instantiationSpellbook.prefab, damage, IsCriticalHit());
                 animator.SetBool("isCasting", true);
                 break;
             case UnityEventSpell eventSpell:
