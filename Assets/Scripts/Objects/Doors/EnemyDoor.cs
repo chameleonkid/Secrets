@@ -11,6 +11,22 @@ public class EnemyDoor : MonoBehaviour
     [SerializeField] private BoxCollider2D doorCollider = default;
     [SerializeField] private Enemy[] enemies = default;
 
+    [Header("Saving")]
+    [SerializeField] private bool isDefeated;
+    [SerializeField] private BoolValue storeDefeated;
+
+
+    private void Awake()
+    {
+        if(storeDefeated)
+        isDefeated = storeDefeated.RuntimeValue;
+        {
+            if (isDefeated)
+            {
+                OpenEnemyDoor();
+            }
+        }
+    }
 
     private void OnEnable()
     {
@@ -44,7 +60,15 @@ public class EnemyDoor : MonoBehaviour
 
     public void OpenEnemyDoor()
     {
-        this.doorSpriteRenderer.sprite = openedSprite;
+        if(openedSprite)
+        {
+            this.doorSpriteRenderer.sprite = openedSprite;
+        }
+        else
+        {
+            this.doorSpriteRenderer.enabled =false;
+        }
+
         this.doorCollider.enabled = false;
     }
 }

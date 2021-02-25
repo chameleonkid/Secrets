@@ -3,66 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossDoor : MonoBehaviour
-
-
 {
-
     [Header("Door Attributes")]
-    [SerializeField] private SpriteRenderer doorSpriteRenderer;
-    [SerializeField] private Sprite closedSprite;
-    [SerializeField] private Sprite openedSprite;
-    [SerializeField] private BoxCollider2D doorCollider;
-    [Header("Which Boss?")]
-    [SerializeField] private Enemy boss;
-    [Header("Check if Boss was defeated already")]
-    [SerializeField] private BoolValue isBossDead = default;
-    // Start is called before the first frame update
+    [SerializeField] private SpriteRenderer doorSpriteRenderer = default;
+    [SerializeField] private Sprite closedSprite = default;
+    [SerializeField] private Sprite openedSprite = default;
+    [SerializeField] private BoxCollider2D doorCollider = default;
+    [SerializeField] private EnemyBoss[] bosses = default;
+    [Header("Saves")]
+    [SerializeField] private bool isDefeated;
+    [SerializeField] private BoolValue storeDefeated;
 
 
-    private void OnEnable()
+    private void Awake()
     {
-        boss.OnEnemyDied += CheckBossKill;
+
+        isDefeated = storeDefeated.RuntimeValue;
+        if (isDefeated)
+        {
+            OpenEnemyDoor();
+        }
+    }
+
+        private void OnEnable()
+    {
+        this.doorSpriteRenderer.sprite = closedSprite;
+        for (int i = 0; i < bosses.Length; i++)
+        {
+            bosses[i].OnBossDied += CheckBossDead;
+        }
     }
 
     private void OnDisable()
     {
-        boss.OnEnemyDied -= CheckBossKill;
+        for (int i = 0; i < bosses.Length; i++)
+        {
+            bosses[i].OnBossDied -= CheckBossDead;
+        }
     }
 
-    private void Awake()
+    public void CheckBossDead()
     {
-        CheckBossKill();
+        for (int i = 0; i < bosses.Length; i++)
+        {
+            if (bosses[i].gameObject.activeInHierarchy)
+            {
+                return;
+            }
+        }
+        OpenEnemyDoor();
     }
 
 
-
-    public void OpenBossDoor()
+    public void OpenEnemyDoor()
     {
-        this.doorSpriteRenderer.sprite = openedSprite;
+        this.doorSpriteRenderer.enabled = false;
         this.doorCollider.enabled = false;
     }
-
-    public void CloseBossDoor()
-    {
-        this.doorSpriteRenderer.sprite = closedSprite;
-        this.doorCollider.enabled = true;
-    }
-
-    public void CheckBossKill()
-    {
-        StartCoroutine(CheckBossKillCo());
-    }
-
-    IEnumerator CheckBossKillCo()
-    {
-        yield return new WaitForSeconds(1.5f);
-        if (isBossDead.RuntimeValue)
-        {
-            OpenBossDoor();
-        }
-        else
-        {
-            CloseBossDoor();
-        }
-    }
 }
+
