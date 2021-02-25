@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2607130021515583026}
   - component: {fileID: 2607130021515583027}
   - component: {fileID: 2607130021515583039}
-  - component: {fileID: 2607130021515583036}
   - component: {fileID: 2607130021515583033}
+  - component: {fileID: 2607130021515583036}
   - component: {fileID: 5628120032068693728}
   - component: {fileID: 332230753533627376}
   - component: {fileID: 2531231011340040633}
@@ -131,6 +131,32 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &2607130021515583033
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2607130021515583024}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.022464752, y: 1.9329708}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.7820892, y: 1.8803296}
+  m_EdgeRadius: 0
 --- !u!61 &2607130021515583036
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -156,32 +182,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.9157767, y: 0.61136675}
-  m_EdgeRadius: 0
---- !u!61 &2607130021515583033
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607130021515583024}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.022464752, y: 1.9329708}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 4, y: 4}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.7820892, y: 1.8803296}
   m_EdgeRadius: 0
 --- !u!114 &5628120032068693728
 MonoBehaviour:
@@ -999,6 +999,7 @@ MonoBehaviour:
   spawnPostionList: []
   boss: {fileID: 705950091702437940}
   bossGameObject: {fileID: 2607130021515583024}
+  bossHurtBox: {fileID: 0}
   stage: 0
   bossshield: {fileID: 2699053893516789833}
   isDefeated: 0

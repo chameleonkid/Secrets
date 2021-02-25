@@ -32,6 +32,8 @@ public class BossBattleTower : MonoBehaviour
     [Header("The Boss")]
     [SerializeField] private BossPumpkin boss = default;
     [SerializeField] private GameObject bossGameObject = default;
+    [SerializeField] private Collider2D bossHurtBox = default;
+
     [Header("Stages")]
     [SerializeField] private Stage stage = default;
 
@@ -107,16 +109,22 @@ public class BossBattleTower : MonoBehaviour
 
     private void EnterBossArea()
     {
-        boss.animator.SetBool("isWaiting", false);
-        StartBattle();
-        colliderTrigger.OnPlayerEnterTrigger -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
+        if(bossGameObject.activeInHierarchy== true)
+        {
+            StartBattle();
+            colliderTrigger.OnPlayerEnterTrigger -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
+        }
+
     }
 
     private void StartBattle()
     {
         Debug.Log("BossBattle has started!");
+        boss.animator.SetTrigger("StartBattle");
+        StartCoroutine(ActivateBossValuesCo());
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);                                          
+        InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);
+
     }
 
     private void SpawnEnemy()
@@ -211,6 +219,13 @@ public class BossBattleTower : MonoBehaviour
       //  var boss = this.GetComponent<BossPumpkin>();
         boss.HalfCooldown();
         boss.HalfCooldownSpellTwo();
+    }
+
+    IEnumerator ActivateBossValuesCo()
+    {
+        yield return new WaitForSeconds(4f);
+        bossHurtBox.enabled = true;
+        boss.GetComponent<BossPumpkin>().enabled = true;
     }
     
 
