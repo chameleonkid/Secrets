@@ -19,7 +19,7 @@ public class GlobalLightManager : MonoBehaviour
 
     private void UpdateSun(float normalizedTimeOfDay)
     {
-        if (SceneManager.GetActiveScene().name == "Overworld")
+        if (SceneManager.GetActiveScene().name == "Overworld" || SceneManager.GetActiveScene().name.Contains("Test"))
         {
             float intensityMultiplier = 1;
             if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.75f)
