@@ -12,8 +12,7 @@ public class EnemyBoss : Character
     [SerializeField] protected FloatValue maxHealth = default;
     [SerializeField] private float _health;
     public event Action OnEnemyTakeDamage;
-    public event Action OnEnemyDied;
-    public event Action OnMinionDied;
+    public event Action OnBossDied;
     [Header("BossFight-Values")]
     public bool isMinion = false;
 
@@ -57,6 +56,24 @@ public class EnemyBoss : Character
     [SerializeField] protected Signals roomSignal = default;
     [SerializeField] protected LootTable thisLoot = default;
 
+    [Header("Saving")]
+    [SerializeField] private bool isDefeated;
+    [SerializeField] private BoolValue storeDefeated;
+    [SerializeField] private GameObject bossGameObject;
+
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+        health = maxHealth.value;
+        isDefeated = storeDefeated.RuntimeValue;
+        if (isDefeated)
+        {
+            bossGameObject.SetActive(false);
+        }
+    }
+
 
     protected virtual void OnEnable()
     {
@@ -64,19 +81,13 @@ public class EnemyBoss : Character
         currentState = State.idle;
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        health = maxHealth.value;
-    }
-
-
     protected virtual void Die()
     {
         DeathEffect();
         thisLoot?.GenerateLoot(transform.position);
         levelSystem.AddExperience(enemyXp);
+        storeDefeated.RuntimeValue = true;
+
 
         if (roomSignal != null)
         {
@@ -84,6 +95,7 @@ public class EnemyBoss : Character
         }
 
         this.gameObject.SetActive(false);
+        OnBossDied?.Invoke();
     }
 
     protected void DeathEffect()

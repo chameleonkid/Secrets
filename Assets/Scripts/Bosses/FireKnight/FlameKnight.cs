@@ -32,6 +32,7 @@ public class FlameKnight : MonoBehaviour
     [SerializeField] private bool isTouchingDown;
     [SerializeField] private bool goingLeft = true;
     [SerializeField] private bool isTouchingWall;
+
     [Header("Rigidbody")]
     [SerializeField] private Rigidbody2D enemyRB;
 
@@ -39,6 +40,7 @@ public class FlameKnight : MonoBehaviour
     [SerializeField] private BoxCollider2D hurtBox;
     [SerializeField] private GameObject hitBox;
     [SerializeField] private GameObject bossTrigger;
+    [SerializeField] private bool fightHasStarted = false;
 
     [Header("Animator")]
     [SerializeField] private Animator anim;
@@ -48,8 +50,6 @@ public class FlameKnight : MonoBehaviour
     [SerializeField] private AudioClip fireKnightCharge;
     [SerializeField] private AudioClip fireKnightWW;
     [SerializeField] private AudioClip fireKnightSlam;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +69,6 @@ public class FlameKnight : MonoBehaviour
         // IdleState();
         // AttackState();
     }
-
 
     void RandomStatePicker()
     {
@@ -94,11 +93,14 @@ public class FlameKnight : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.GetComponent<PlayerMovement>())
+        if (!fightHasStarted)
         {
-            StartFlameKnight();
+            if (other.GetComponent<PlayerMovement>())
+            {
+                StartFlameKnight();
+                fightHasStarted = true;
+            }
         }
-
     }
 
     public void StartFlameKnight()
