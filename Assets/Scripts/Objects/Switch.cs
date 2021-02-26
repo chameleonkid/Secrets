@@ -10,6 +10,8 @@ public class Switch : MonoBehaviour
     public Sprite activeSprite;
     private SpriteRenderer mySprite;
     public Door thisDoor;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip switchSound;
 
 
     // Start is called before the first frame update
@@ -26,6 +28,7 @@ public class Switch : MonoBehaviour
 
     public void ActivateSwitch()
     {
+        SoundManager.RequestSound(switchSound);
         active = true;
         storeValue.RuntimeValue = active;
         thisDoor.Open();
@@ -35,8 +38,9 @@ public class Switch : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         //Is it the player?
-        if (other.GetComponent<PlayerMovement>())
+        if (other.GetComponent<PlayerMovement>() && !active)
         {
+            other.GetComponent<PlayerMovement>().LockMovement(0.25f);
             ActivateSwitch();
         }
     }
