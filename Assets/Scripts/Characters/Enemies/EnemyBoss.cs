@@ -11,6 +11,7 @@ public class EnemyBoss : Character
     [SerializeField] protected int enemyXp = default;
     [SerializeField] protected FloatValue maxHealth = default;
     [SerializeField] private float _health;
+    [SerializeField] private GameObject openEntrance;
     public event Action OnEnemyTakeDamage;
     public event Action OnBossDied;
     [Header("BossFight-Values")]
@@ -87,6 +88,11 @@ public class EnemyBoss : Character
         thisLoot?.GenerateLoot(transform.position);
         levelSystem.AddExperience(enemyXp);
         storeDefeated.RuntimeValue = true;
+
+        if (openEntrance)
+        {
+            openEntrance.SetActive(false);
+        }
 
 
         if (roomSignal != null)

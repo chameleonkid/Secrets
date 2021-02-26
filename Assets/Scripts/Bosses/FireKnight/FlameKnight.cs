@@ -5,28 +5,28 @@ using UnityEngine;
 public class FlameKnight : MonoBehaviour
 {
     [Header("Idle")]
-    [SerializeField] private float idleMoveSpeed;
+    [SerializeField] private float idleMoveSpeed = default;
     [SerializeField] private Vector2 idleMoveDirection;
 
 
     [Header("AttackUpNDown")]
-    [SerializeField] private float attackMoveSpeed;
+    [SerializeField] private float attackMoveSpeed = default;
     [SerializeField] private Vector2 attackMoveDirection;
 
     [Header("AttackPlayer")]
-    [SerializeField] private float attackPlayerSpeed;
-    [SerializeField] private Transform player;
+    [SerializeField] private float attackPlayerSpeed = default;
+    [SerializeField] private Transform player = default;
     [SerializeField] private bool hasPlayerPosition;
     [Header("Target")]
     [SerializeField] private Vector2 playerPosition;
 
 
     [Header("Orienation")]
-    [SerializeField] private Transform groundCheckUp;
-    [SerializeField] private Transform groundCheckDown;
-    [SerializeField] private Transform groundCheckWall;
-    [SerializeField] private float groundCheckRadius;
-    [SerializeField] private LayerMask wallLayer;        // ProjectileCollision
+    [SerializeField] private Transform groundCheckUp = default;
+    [SerializeField] private Transform groundCheckDown = default;
+    [SerializeField] private Transform groundCheckWall = default;
+    [SerializeField] private float groundCheckRadius = default;
+    [SerializeField] private LayerMask wallLayer = default;        // ProjectileCollision
     [SerializeField] private bool goingUp = true;
     [SerializeField] private bool isTouchingUp;
     [SerializeField] private bool isTouchingDown;
@@ -37,9 +37,9 @@ public class FlameKnight : MonoBehaviour
     [SerializeField] private Rigidbody2D enemyRB;
 
     [Header("Colliders")]
-    [SerializeField] private BoxCollider2D hurtBox;
-    [SerializeField] private GameObject hitBox;
-    [SerializeField] private GameObject bossTrigger;
+    [SerializeField] private BoxCollider2D hurtBox = default;
+    [SerializeField] private GameObject hitBox = default;
+    [SerializeField] private GameObject bossTrigger = default;
     [SerializeField] private bool fightHasStarted = false;
     [SerializeField] private GameObject closeEntrance;
 
@@ -47,10 +47,10 @@ public class FlameKnight : MonoBehaviour
     [SerializeField] private Animator anim;
 
     [Header("Sounds")]
-    [SerializeField] private AudioClip fireKnightLaugh;
-    [SerializeField] private AudioClip fireKnightCharge;
-    [SerializeField] private AudioClip fireKnightWW;
-    [SerializeField] private AudioClip fireKnightSlam;
+    [SerializeField] private AudioClip fireKnightLaugh = default;
+    [SerializeField] private AudioClip fireKnightCharge = default;
+    [SerializeField] private AudioClip fireKnightWW = default;
+    [SerializeField] private AudioClip fireKnightSlam = default;
 
     // Start is called before the first frame update
     void Start()
@@ -112,7 +112,10 @@ public class FlameKnight : MonoBehaviour
         {
             SoundManager.RequestSound(fireKnightLaugh);
         }
-        closeEntrance.SetActive(true);
+        if(closeEntrance)
+        {
+            closeEntrance.SetActive(true);
+        }
         anim.SetTrigger("StartFight");
         bossTrigger.SetActive(false);
         StartCoroutine(ActivateHurtBoxCo());
