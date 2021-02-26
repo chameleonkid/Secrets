@@ -50,7 +50,7 @@ public class TurretEnemy : SimpleEnemy
     {
         var originalMovespeed = this.moveSpeed;
         animator.Play("Attacking");
-        SoundManager.RequestSound(attackSounds.GetRandomElement());
+        //SoundManager.RequestSound(attackSounds.GetRandomElement());
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;

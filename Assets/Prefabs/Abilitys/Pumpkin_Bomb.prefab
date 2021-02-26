@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5748689181677635391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 5748689182226431399}
   - component: {fileID: 5607402890448290320}
   - component: {fileID: 8062091968217733760}
+  - component: {fileID: 6779294066499479729}
   m_Layer: 0
   m_Name: AoE
   m_TagString: enemy
@@ -356,6 +357,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6779294066499479729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748689182226431398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb32ddb58c49ef4db8e4013f4542038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToRequest: {fileID: 8300000, guid: 487f6670089a55447b190751f6728e5c, type: 3}
 --- !u!1 &8062091967951039001
 GameObject:
   m_ObjectHideFlags: 0

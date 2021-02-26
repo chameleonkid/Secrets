@@ -6463,6 +6463,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989529, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
         type: 3}
       propertyPath: m_RootOrder
@@ -8227,54 +8232,29 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 705950091702437940, guid: 23497ca391cf1b645bcef24d0c78e4c9,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: fireDelay
+      value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 2607130021515583024, guid: 23497ca391cf1b645bcef24d0c78e4c9,
+    - target: {fileID: 705950091702437940, guid: 23497ca391cf1b645bcef24d0c78e4c9,
         type: 3}
-      propertyPath: m_Name
-      value: PumpkinWizard
-      objectReference: {fileID: 0}
-    - target: {fileID: 2607130021515583024, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2607130021515583033, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306322924391243034, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 4.0034904
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306322924391243034, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 3.342619
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306322924391243034, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.111722946
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306322924391243034, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 2.4081259
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306322925851714564, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: spawnRate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306322925851714564, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-        type: 3}
-      propertyPath: bossHurtBox
+      propertyPath: attack1Sound
       value: 
-      objectReference: {fileID: 1827405912}
+      objectReference: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
+    - target: {fileID: 705950091702437940, guid: 23497ca391cf1b645bcef24d0c78e4c9,
+        type: 3}
+      propertyPath: attack2Sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 00d0633e20d12604a848ddb7983cd4e2, type: 3}
+    - target: {fileID: 705950091702437940, guid: 23497ca391cf1b645bcef24d0c78e4c9,
+        type: 3}
+      propertyPath: fireDelayTwo
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306322925851714564, guid: 23497ca391cf1b645bcef24d0c78e4c9,
+        type: 3}
+      propertyPath: startBattleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c8d872e660b2434e81fcaf26f339950, type: 3}
     - target: {fileID: 3306322925851714565, guid: 23497ca391cf1b645bcef24d0c78e4c9,
         type: 3}
       propertyPath: m_Name
@@ -9755,12 +9735,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7290780269828354137, guid: cdad374a17ee3d142a6a4a43791a3bd8,
     type: 3}
   m_PrefabInstance: {fileID: 1814450152}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1827405912 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 2607130021515583033, guid: 23497ca391cf1b645bcef24d0c78e4c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1639180513}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1861779479 stripped
 Transform:

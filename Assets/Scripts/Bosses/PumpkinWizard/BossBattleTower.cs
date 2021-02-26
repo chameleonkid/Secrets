@@ -44,6 +44,9 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private bool isDefeated;
     [SerializeField] private BoolValue storeDefeated;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip startBattleSound;
+
 
 
 
@@ -223,7 +226,9 @@ public class BossBattleTower : MonoBehaviour
 
     IEnumerator ActivateBossValuesCo()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
+        SoundManager.RequestSound(startBattleSound);
+        yield return new WaitForSeconds(3f);
         bossHurtBox.enabled = true;
         boss.GetComponent<BossPumpkin>().enabled = true;
     }
