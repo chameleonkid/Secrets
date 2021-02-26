@@ -41,6 +41,7 @@ public class FlameKnight : MonoBehaviour
     [SerializeField] private GameObject hitBox;
     [SerializeField] private GameObject bossTrigger;
     [SerializeField] private bool fightHasStarted = false;
+    [SerializeField] private GameObject closeEntrance;
 
     [Header("Animator")]
     [SerializeField] private Animator anim;
@@ -75,17 +76,19 @@ public class FlameKnight : MonoBehaviour
         int randomState = Random.Range(0, 3);
         if( randomState == 0)
         {
+            SoundManager.RequestSound(fireKnightWW);
             anim.SetTrigger("AttackUpAndDown");
         }
         
         else if( randomState == 1)
         {
+            SoundManager.RequestSound(fireKnightCharge);
             anim.SetTrigger("AttackPlayer");
         }
         
         else if (randomState == 2)
         {
-            //Stay in Idle
+            SoundManager.RequestSound(fireKnightLaugh);
             return;
         }
         
@@ -109,6 +112,7 @@ public class FlameKnight : MonoBehaviour
         {
             SoundManager.RequestSound(fireKnightLaugh);
         }
+        closeEntrance.SetActive(true);
         anim.SetTrigger("StartFight");
         bossTrigger.SetActive(false);
         StartCoroutine(ActivateHurtBoxCo());
