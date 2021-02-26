@@ -17,6 +17,9 @@ public class EnemyBoss : Character
     [Header("BossFight-Values")]
     public bool isMinion = false;
 
+    [Header("Boss defeated Music")]
+    [SerializeField] private AudioClip[] bossDefeatedMusic;
+
     public override float health
     {
         get => _health;
@@ -91,6 +94,10 @@ public class EnemyBoss : Character
         if (deathSounds[0])
         {
             SoundManager.RequestSound(deathSounds.GetRandomElement());
+        }
+        if (deathSounds[0])
+        {
+            MusicManager.RequestMusic(bossDefeatedMusic);
         }
 
         if (openEntrance)

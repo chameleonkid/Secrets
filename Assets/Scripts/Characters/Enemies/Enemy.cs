@@ -227,7 +227,7 @@ public class Enemy : Character
      //   Debug.Log("Baseclass DIE wurde ausgeführt");
 
         DeathEffect();
-        if(deathSounds[0])
+        if(deathSounds.Length >= 0)
         {
             SoundManager.RequestSound(deathSounds.GetRandomElement());
         }
