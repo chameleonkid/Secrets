@@ -10,6 +10,11 @@ public class RangeEnemy : TurretEnemy
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance >= shootingRange)
         {
+            if (leftChaseRadius)
+            {
+                SoundManager.RequestSound(inRangeSounds.GetRandomElement());
+            }
+            leftChaseRadius = false;
             if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
             {
                 if (path == null)
@@ -50,6 +55,7 @@ public class RangeEnemy : TurretEnemy
         else if(distance > chaseRadius)
         {
             randomMovement();
+            leftChaseRadius = true;
         }
 
         if (distance <= escapeRange)

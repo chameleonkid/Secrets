@@ -203,6 +203,9 @@ MonoBehaviour:
   gotHitSound:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds: []
+  deathSounds: []
+  inRangeSounds:
+  - {fileID: 8300000, guid: 00d0633e20d12604a848ddb7983cd4e2, type: 3}
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -210,6 +213,11 @@ MonoBehaviour:
   _slow: {fileID: 516028988604789922}
   _shrink: {fileID: 7372415183120384706}
   _gigantism: {fileID: 3544170664298815504}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 50
   maxHealth: {fileID: 11400000, guid: 9c0a3f01b9dcb1241aec80bff41cea8d, type: 2}

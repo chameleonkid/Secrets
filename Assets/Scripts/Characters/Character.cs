@@ -18,6 +18,8 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
     [Header("ParentSounds")]
     [SerializeField] protected AudioClip[] gotHitSound = default;
     [SerializeField] protected AudioClip[] attackSounds = default;
+    [SerializeField] protected AudioClip[] deathSounds = default;
+    [SerializeField] protected AudioClip[] inRangeSounds = default;
     [Header("CoolDowns")]
     [SerializeField] protected bool meeleCooldown = false;
     [SerializeField] protected bool spellCooldown = false;

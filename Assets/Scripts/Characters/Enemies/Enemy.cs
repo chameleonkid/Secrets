@@ -63,7 +63,6 @@ public class Enemy : Character
     [SerializeField] protected Signals roomSignal = default;
     [SerializeField] protected LootTable thisLoot = default;
 
-
     [Header("Pathfinding")]
     [SerializeField] protected Transform target = default;
     public float nextWaypointDistance = 0.5f;
@@ -71,6 +70,9 @@ public class Enemy : Character
     [SerializeField] protected int currentWaipoint = 0;
     [SerializeField] protected bool reachedEndOfPath;
     [SerializeField] protected Seeker seeker;
+
+    [Header("SoundsOnDemand")]
+    [SerializeField] protected bool leftChaseRadius = true;
 
 
     private void Start()
@@ -164,6 +166,11 @@ public class Enemy : Character
 
     protected virtual void InsideChaseRadiusUpdate()
     {
+        if(leftChaseRadius)
+        {
+            SoundManager.RequestSound(inRangeSounds.GetRandomElement());
+        }
+        leftChaseRadius = false;
         if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
         {
             {
@@ -197,6 +204,7 @@ public class Enemy : Character
     protected virtual void OutsideChaseRadiusUpdate()
     {
         randomMovement();
+        leftChaseRadius = true;
     }
 
     protected virtual void CheckForMinion()
@@ -219,6 +227,11 @@ public class Enemy : Character
      //   Debug.Log("Baseclass DIE wurde ausgeführt");
 
         DeathEffect();
+        if(deathSounds[0])
+        {
+            SoundManager.RequestSound(deathSounds.GetRandomElement());
+        }
+    
         thisLoot?.GenerateLoot(transform.position);
         levelSystem.AddExperience(enemyXp);
 

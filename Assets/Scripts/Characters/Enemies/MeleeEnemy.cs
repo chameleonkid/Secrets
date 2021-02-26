@@ -8,6 +8,11 @@ public class MeleeEnemy : Enemy
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius)
         {
+            if (leftChaseRadius)
+            {
+                SoundManager.RequestSound(inRangeSounds.GetRandomElement());
+            }
+            leftChaseRadius = false;
             if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
             {             
                 if (path == null)
@@ -45,6 +50,7 @@ public class MeleeEnemy : Enemy
         }
         else if (distance >= chaseRadius && distance >= attackRadius)
         {
+            leftChaseRadius = true;
             randomMovement();
         }
     }
