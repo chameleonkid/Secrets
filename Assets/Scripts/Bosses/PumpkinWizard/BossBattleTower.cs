@@ -46,6 +46,8 @@ public class BossBattleTower : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private AudioClip startBattleSound;
+    [SerializeField] private AudioClip[] endBattleMusic;
+    [SerializeField] private AudioClip bossDiedSound;
 
 
 
@@ -85,6 +87,8 @@ public class BossBattleTower : MonoBehaviour
     private void BossDied()
     {
         Debug.Log("The Boss died!");
+        SoundManager.RequestSound(bossDiedSound);
+        MusicManager.RequestMusic(endBattleMusic);
         DestroyAllEnemies();
         storeDefeated.RuntimeValue = true;
         CancelInvoke("SpawnEnemy");                                                          // Stop spawning enemies
