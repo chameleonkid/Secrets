@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 7
 --- !u!60 &7290780267909940646
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 7
 --- !u!60 &7290780268476715908
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 7
 --- !u!60 &7290780269330328547
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 7
 --- !u!60 &7290780269679869409
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -579,6 +579,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds:
   - {fileID: 8300000, guid: f768dcc7c7fccf44aa1aece22c1b182d, type: 3}
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -586,9 +588,14 @@ MonoBehaviour:
   _slow: {fileID: 591510210751845024}
   _shrink: {fileID: 7372415181596312009}
   _gigantism: {fileID: 3544170662718870434}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 50
-  maxHealth: {fileID: 11400000, guid: 9c0a3f01b9dcb1241aec80bff41cea8d, type: 2}
+  enemyXp: 10
+  maxHealth: {fileID: 11400000, guid: d13126d5838c7b045a992a2123026c6c, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 3
@@ -609,6 +616,7 @@ MonoBehaviour:
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
+  leftChaseRadius: 1
 --- !u!114 &6256331092031663733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 7
 --- !u!114 &6825456830845884822
 MonoBehaviour:
   m_ObjectHideFlags: 0

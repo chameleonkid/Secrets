@@ -303,6 +303,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds:
   - {fileID: 8300000, guid: f768dcc7c7fccf44aa1aece22c1b182d, type: 3}
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -310,8 +312,13 @@ MonoBehaviour:
   _slow: {fileID: 8130448736732265690}
   _shrink: {fileID: 7372415182778294415}
   _gigantism: {fileID: 3544170662215827691}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 500
+  enemyXp: 250
   maxHealth: {fileID: 11400000, guid: 57dd4fd73ca91334dabc8dbe11dfef40, type: 2}
   _health: 0
   isWalking: 0
@@ -333,6 +340,7 @@ MonoBehaviour:
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
+  leftChaseRadius: 1
 --- !u!114 &3788448946878517481
 MonoBehaviour:
   m_ObjectHideFlags: 0
