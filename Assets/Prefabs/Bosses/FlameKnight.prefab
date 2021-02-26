@@ -46,9 +46,9 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.4339623, g: 0.01842292, b: 0.04710138, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_LightVolumeOpacity: 0.635
+  m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
@@ -193,6 +193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1986142892}
   - component: {fileID: 1986142893}
+  - component: {fileID: 1310813146}
   m_Layer: 0
   m_Name: FlameKnightTrigger
   m_TagString: Untagged
@@ -240,6 +241,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.307339, y: 4.024802}
   m_EdgeRadius: 0
+--- !u!114 &1310813146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986142891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859180ec2079ac84787469246412f072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaMusic:
+  - {fileID: 8300000, guid: 13e395d266365c241b13ce320b3bda1b, type: 3}
 --- !u!1 &2365728132727622173
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3937266223630013207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.67, z: 0}
+  m_LocalPosition: {x: 0, y: 1.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3937266224420804674}
@@ -545,6 +560,7 @@ GameObject:
   - component: {fileID: 789890310}
   - component: {fileID: 789890311}
   - component: {fileID: 683517772217324383}
+  - component: {fileID: 468575572}
   m_Layer: 0
   m_Name: FlameKnight
   m_TagString: enemy
@@ -609,9 +625,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb2ccc7d28e71f498364ead97672f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleMoveSpeed: 5
+  idleMoveSpeed: 7
   idleMoveDirection: {x: -1, y: 2}
-  attackMoveSpeed: 15
+  attackMoveSpeed: 20
   attackMoveDirection: {x: -1, y: 5}
   attackPlayerSpeed: 25
   player: {fileID: 0}
@@ -620,7 +636,7 @@ MonoBehaviour:
   groundCheckUp: {fileID: 3937266223630013206}
   groundCheckDown: {fileID: 3937266225186133460}
   groundCheckWall: {fileID: 3937266224843781214}
-  groundCheckRadius: 0.6
+  groundCheckRadius: 0.5
   wallLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -634,10 +650,11 @@ MonoBehaviour:
   hitBox: {fileID: 2365728132727622173}
   bossTrigger: {fileID: 1986142891}
   fightHasStarted: 0
+  closeEntrance: {fileID: 0}
   anim: {fileID: 0}
   fireKnightLaugh: {fileID: 8300000, guid: 4df4d5f353291694ba4132633903c6de, type: 3}
-  fireKnightCharge: {fileID: 0}
-  fireKnightWW: {fileID: 0}
+  fireKnightCharge: {fileID: 8300000, guid: 1a42721e4d9cecd42b8ae13b35aafe77, type: 3}
+  fireKnightWW: {fileID: 8300000, guid: 0c2182a586a9d224daa254f783819b66, type: 3}
   fireKnightSlam: {fileID: 0}
 --- !u!61 &789890304
 BoxCollider2D:
@@ -750,6 +767,8 @@ MonoBehaviour:
   isShrinked: 0
   gotHitSound: []
   attackSounds: []
+  deathSounds:
+  - {fileID: 8300000, guid: 2fd78b0f1d90dba4c9152f15483d2ad4, type: 3}
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -766,13 +785,18 @@ MonoBehaviour:
   enemyXp: 500
   maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
   _health: 0
+  openEntrance: {fileID: 0}
   isMinion: 0
   enemyName: FlameKnight
   moveSpeed: 0
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 4464167541414145869, guid: c36ef29998f9470479149b340186546e,
+    type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
   thisLoot: {fileID: 11400000, guid: d21b88da7e3806e4480efd0091f8bb6a, type: 2}
+  isDefeated: 0
+  storeDefeated: {fileID: 11400000, guid: 91c6cb77d8d01b84694059fb13ffd560, type: 2}
+  bossGameObject: {fileID: 3937266224420804679}
 --- !u!61 &683517772217324383
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -799,6 +823,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3657534, y: 2.2724266}
   m_EdgeRadius: 0
+--- !u!114 &468575572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3937266224420804679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb32ddb58c49ef4db8e4013f4542038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToRequest1: {fileID: 8300000, guid: 854c009633fee7247a3ece751c4e191a, type: 3}
+  soundToRequest2: {fileID: 8300000, guid: 7925c788d001b874f88dc3348ca603a7, type: 3}
+  soundToRequest3: {fileID: 0}
 --- !u!1 &3937266224843781215
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3937266224843781215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.13, y: 1.32, z: 0}
+  m_LocalPosition: {x: -0.559, y: 1.466, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3937266224420804674}

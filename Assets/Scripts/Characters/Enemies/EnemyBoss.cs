@@ -88,6 +88,10 @@ public class EnemyBoss : Character
         thisLoot?.GenerateLoot(transform.position);
         levelSystem.AddExperience(enemyXp);
         storeDefeated.RuntimeValue = true;
+        if (deathSounds[0])
+        {
+            SoundManager.RequestSound(deathSounds.GetRandomElement());
+        }
 
         if (openEntrance)
         {

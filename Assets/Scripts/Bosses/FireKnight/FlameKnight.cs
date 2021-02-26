@@ -168,7 +168,7 @@ public class FlameKnight : MonoBehaviour
         {
             enemyRB.velocity = playerPosition * attackPlayerSpeed;
         }
-        if(isTouchingDown || isTouchingUp || isTouchingWall)
+        if(isTouchingDown || isTouchingWall)
         {
             StopMoving();
             hasPlayerPosition = false;
