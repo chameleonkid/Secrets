@@ -50,6 +50,10 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private AudioClip bossDiedSound;
 
 
+    [Header("TriggerArea")]
+    [SerializeField] private GameObject triggerArea;
+
+
 
 
 
@@ -120,6 +124,7 @@ public class BossBattleTower : MonoBehaviour
         {
             StartBattle();
             colliderTrigger.OnPlayerEnterTrigger -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
+            triggerArea.SetActive(false);
         }
 
     }
