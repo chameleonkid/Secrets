@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ba588bc6af9fc4688038deee402799, type: 3}
+  m_Name: SpellbookArcaneBall
+  m_EditorClassIdentifier: 
+  _id: 1006
+  _name: Spellbook of Arcane
+  _description: Hurl an arcane ball into your enemies.
+  _sprite: {fileID: 21300000, guid: da9f62f7c985c415eb0553b908d54987, type: 3}
+  _sound: {fileID: 8300000, guid: 0f13cc91f4699e74e81cc0076678e9c4, type: 3}
+  _unique: 1
+  _usable: 1
+  _level: 2
+  OnUse:
+    m_PersistentCalls:
+      m_Calls: []
+  _buyPrice: 100
+  _sellPrice: 50
+  _manaCost: 10
+  coolDown: 0
+  onCooldown: 0
+  glowColor: {r: 0.695431, g: 6.3656015, b: 0, a: 0}
+  minSpellDamage: 2
+  maxSpellDamage: 4
+  prefab: {fileID: 2015206087574396294, guid: dc2e41d470d30b14eb8ae6fc13b20a26, type: 3}
+  speed: 10
