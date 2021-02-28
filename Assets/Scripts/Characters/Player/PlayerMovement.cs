@@ -295,6 +295,7 @@ public class PlayerMovement : Character
         return projectile;
     }
 
+
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
@@ -304,8 +305,7 @@ public class PlayerMovement : Character
             default:
                 break;
             case InstantiationSpellbook instantiationSpellbook:
-                var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1); //Where is this used <----?
-                CreateProjectile(instantiationSpellbook.prefab, damage, IsCriticalHit());
+                StartCoroutine(CreateProjectilesCo(instantiationSpellbook.delayBetweenProjectiles,instantiationSpellbook));
                 animator.SetBool("isCasting", true);
                 break;
             case UnityEventSpell eventSpell:
@@ -430,6 +430,17 @@ public class PlayerMovement : Character
         this._speed = 0;
         yield return new WaitForSeconds(seconds);
         this._speed = this.originalSpeed;
+    }
+
+    private IEnumerator CreateProjectilesCo(float delayBetweenProjectiles, InstantiationSpellbook instantiationSpellbook)
+    {
+        for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
+        {
+            var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
+            CreateProjectile(instantiationSpellbook.prefab, damage, IsCriticalHit());
+            yield return new WaitForSeconds(delayBetweenProjectiles);
+        }
+
     }
 
     public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
