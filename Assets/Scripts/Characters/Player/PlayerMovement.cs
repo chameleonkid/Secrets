@@ -305,7 +305,7 @@ public class PlayerMovement : Character
             default:
                 break;
             case InstantiationSpellbook instantiationSpellbook:
-                StartCoroutine(CreateProjectilesCo(instantiationSpellbook.delayBetweenProjectiles,instantiationSpellbook));
+                StartCoroutine(CreateProjectilesCo(instantiationSpellbook.delayBetweenProjectiles,instantiationSpellbook, instantiationSpellbook.spreadAngle));
                 animator.SetBool("isCasting", true);
                 break;
             case UnityEventSpell eventSpell:
@@ -432,15 +432,16 @@ public class PlayerMovement : Character
         this._speed = this.originalSpeed;
     }
 
-    private IEnumerator CreateProjectilesCo(float delayBetweenProjectiles, InstantiationSpellbook instantiationSpellbook)
+
+    private IEnumerator CreateProjectilesCo(float delayBetweenProjectiles, InstantiationSpellbook instantiationSpellbook, float angle)
     {
+        RadialLayout.GetPositions(instantiationSpellbook.amountOfProjectiles, 0, angle,instantiationSpellbook.radius);
         for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
         {
             var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
             CreateProjectile(instantiationSpellbook.prefab, damage, IsCriticalHit());
             yield return new WaitForSeconds(delayBetweenProjectiles);
         }
-
     }
 
     public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
