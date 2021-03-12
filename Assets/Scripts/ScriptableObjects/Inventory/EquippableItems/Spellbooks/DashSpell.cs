@@ -16,11 +16,11 @@ public void Dash(Character character)
         temp.x = facingDirection.x * character.maxDashDistance;
         temp.y = facingDirection.y * character.maxDashDistance;
         Vector2 dashTarget = (Vector2)character.transform.position + temp;
-        Debug.Log("Player is at: " + character.transform.position);
-        Debug.Log("DashTarget it at: " + dashTarget);
+       // Debug.Log("Player is at: " + character.transform.position);
+       //  Debug.Log("DashTarget it at: " + dashTarget);
         if (character.canDash)
         {
-            Debug.Log("Dashing to " + dashTarget);
+           // Debug.Log("Dashing to " + dashTarget);
             character.Dash(character, temp);
           //  character.TeleportTowards(dashTarget, character.maxDashDistance * character.speedModifier);
         }
