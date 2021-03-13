@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using System;
-
+﻿using UnityEngine;
 
 public static class MathfEx
 {
@@ -11,5 +8,5 @@ public static class MathfEx
         return new Vector2(Mathf.Cos(radAngle), Mathf.Sin(radAngle));
     }
 
-    public static float Vector2ToAngle(Vector2 vector) => Mathf.Atan2(vector.x, vector.y) * Mathf.Rad2Deg;
+    public static float Vector2ToAngle(Vector2 vector) => Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
 }
