@@ -432,6 +432,7 @@ public class PlayerMovement : Character
             var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
             var projectile = CreateProjectile(instantiationSpellbook.prefab, position + (offsets[i] * instantiationSpellbook.radius), offsets[i].normalized);
             projectile.OverrideDamage(damage, IsCriticalHit());
+            projectile.OverrideSpeed(instantiationSpellbook.speed);
 
             if (instantiationSpellbook.delayBetweenProjectiles > 0)
             {
@@ -460,5 +461,11 @@ public class PlayerMovement : Character
                 OnSpellThreeTriggered?.Invoke();
             }
         }
+    }
+
+    public void freePlayerStuck()
+    {
+        Vector2 zeroPos = new Vector2(0, 0);
+        transform.position = zeroPos;       
     }
 }
