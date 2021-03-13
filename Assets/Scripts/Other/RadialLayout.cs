@@ -1,26 +1,21 @@
-﻿using System.Collections;
-using UnityEngine;
-using System;
-using System.Collections.Generic;
+﻿using UnityEngine;
 
 public static class RadialLayout
 {
-    public static Vector2[] GetPositions(int amountOfPositions, float facingDirection, float spreadAngle, float radius)
+    public static Vector2[] GetOffsets(int amountOfPositions, float facingDirection, float spreadAngle)
     {
         var offsets = new Vector2[amountOfPositions];
 
         float originAngle = facingDirection + (spreadAngle / 2f);
-        float increment = spreadAngle / (amountOfPositions - 1);
+        float increment = (amountOfPositions != 1) ? (spreadAngle / (amountOfPositions - 1)) : 0;
 
         for (int i = 0; i < amountOfPositions; i++)
         {
             float angle = originAngle - (increment * i);
             var vector = MathfEx.AngleToVector2(angle);
-            vector *= radius;
 
             offsets[i] = vector;
         }
         return offsets;
     }
 }
-
