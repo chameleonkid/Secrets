@@ -196,7 +196,8 @@ public class PlayerMovement : Character
                 animator.SetBool("isShooting", true);
 
                 var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-                var proj = CreateProjectile(projectile, damage, IsCriticalHit());
+                var proj = CreateProjectile(projectile);
+                proj.OverrideDamage(damage, IsCriticalHit());
                 proj.OverrideSpeed(arrowSpeed);
 
                 yield return new WaitForSeconds(0.3f);
@@ -271,41 +272,29 @@ public class PlayerMovement : Character
 
         mana.current -= 1;
     }
-    // ###########################################################################################
 
     private Projectile CreateProjectile(GameObject prefab)
     {
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
-        var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var position =  new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
+        var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
+        return projectile;
+    }
+
+    private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
+    {
         var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
         return projectile;
     }
 
-    private Projectile CreateProjectile(GameObject prefab, float damage)
-    {
-        var projectile = CreateProjectile(prefab);
-        projectile.OverrideDamage(damage);
-        return projectile;
-    }
-
-    private Projectile CreateProjectile(GameObject prefab, float damage, bool isCritical)
-    {
-        var projectile = CreateProjectile(prefab);
-        projectile.OverrideDamage(damage, isCritical);
-        return projectile;
-    }
-
-
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
-
         switch (spellBook)
         {
             default:
                 break;
             case InstantiationSpellbook instantiationSpellbook:
-                StartCoroutine(CreateProjectilesCo(instantiationSpellbook.delayBetweenProjectiles,instantiationSpellbook, instantiationSpellbook.spreadAngle));
+                StartCoroutine(CreateProjectilesCo(instantiationSpellbook));
                 animator.SetBool("isCasting", true);
                 break;
             case UnityEventSpell eventSpell:
@@ -432,15 +421,22 @@ public class PlayerMovement : Character
         this._speed = this.originalSpeed;
     }
 
-
-    private IEnumerator CreateProjectilesCo(float delayBetweenProjectiles, InstantiationSpellbook instantiationSpellbook, float angle)
+    private IEnumerator CreateProjectilesCo(InstantiationSpellbook instantiationSpellbook)
     {
-        RadialLayout.GetPositions(instantiationSpellbook.amountOfProjectiles, 0, angle,instantiationSpellbook.radius);
+        var offsets = RadialLayout.GetOffsets(instantiationSpellbook.amountOfProjectiles, MathfEx.Vector2ToAngle(GetAnimatorXY()), instantiationSpellbook.spreadAngle);
         for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
         {
+            // Should probably not hard-code the offset.
+            var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
+
             var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
-            CreateProjectile(instantiationSpellbook.prefab, damage, IsCriticalHit());
-            yield return new WaitForSeconds(delayBetweenProjectiles);
+            var projectile = CreateProjectile(instantiationSpellbook.prefab, position + (offsets[i] * instantiationSpellbook.radius), offsets[i].normalized);
+            projectile.OverrideDamage(damage, IsCriticalHit());
+
+            if (instantiationSpellbook.delayBetweenProjectiles > 0)
+            {
+                yield return new WaitForSeconds(instantiationSpellbook.delayBetweenProjectiles);
+            }
         }
     }
 
