@@ -196,7 +196,8 @@ public class PlayerMovement : Character
                 animator.SetBool("isShooting", true);
 
                 var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-                var proj = CreateProjectile(projectile, damage, IsCriticalHit());
+                var proj = CreateProjectile(projectile);
+                proj.OverrideDamage(damage, IsCriticalHit());
                 proj.OverrideSpeed(arrowSpeed);
 
                 yield return new WaitForSeconds(0.3f);
@@ -271,35 +272,23 @@ public class PlayerMovement : Character
 
         mana.current -= 1;
     }
-    // ###########################################################################################
 
     private Projectile CreateProjectile(GameObject prefab)
     {
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
-        var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var position =  new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
+        var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
+        return projectile;
+    }
+
+    private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
+    {
         var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
         return projectile;
     }
 
-    private Projectile CreateProjectile(GameObject prefab, float damage)
-    {
-        var projectile = CreateProjectile(prefab);
-        projectile.OverrideDamage(damage);
-        return projectile;
-    }
-
-    private Projectile CreateProjectile(GameObject prefab, float damage, bool isCritical)
-    {
-        var projectile = CreateProjectile(prefab);
-        projectile.OverrideDamage(damage, isCritical);
-        return projectile;
-    }
-
-
     // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
-
         switch (spellBook)
         {
             default:
@@ -439,7 +428,8 @@ public class PlayerMovement : Character
         for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
         {
             var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
-            CreateProjectile(instantiationSpellbook.prefab, damage, IsCriticalHit());
+            var projectile = CreateProjectile(instantiationSpellbook.prefab);
+            projectile.OverrideDamage(damage, IsCriticalHit());
             yield return new WaitForSeconds(delayBetweenProjectiles);
         }
     }
