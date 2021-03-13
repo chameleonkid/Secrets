@@ -421,14 +421,16 @@ public class PlayerMovement : Character
         this._speed = this.originalSpeed;
     }
 
-
     private IEnumerator CreateProjectilesCo(float delayBetweenProjectiles, InstantiationSpellbook instantiationSpellbook, float angle)
     {
-        RadialLayout.GetPositions(instantiationSpellbook.amountOfProjectiles, 0, angle,instantiationSpellbook.radius);
+        // Should probably not hard-code the offset.
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
+
+        var offsets = RadialLayout.GetOffsets(instantiationSpellbook.amountOfProjectiles, MathfEx.Vector2ToAngle(GetAnimatorXY()), angle);
         for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
         {
             var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
-            var projectile = CreateProjectile(instantiationSpellbook.prefab);
+            var projectile = CreateProjectile(instantiationSpellbook.prefab, position + (offsets[i] * instantiationSpellbook.radius), offsets[i].normalized);
             projectile.OverrideDamage(damage, IsCriticalHit());
             yield return new WaitForSeconds(delayBetweenProjectiles);
         }
