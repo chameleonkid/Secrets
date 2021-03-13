@@ -423,12 +423,12 @@ public class PlayerMovement : Character
 
     private IEnumerator CreateProjectilesCo(InstantiationSpellbook instantiationSpellbook)
     {
-        // Should probably not hard-code the offset.
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
-
         var offsets = RadialLayout.GetOffsets(instantiationSpellbook.amountOfProjectiles, MathfEx.Vector2ToAngle(GetAnimatorXY()), instantiationSpellbook.spreadAngle);
         for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
         {
+            // Should probably not hard-code the offset.
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
+        
             var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
             var projectile = CreateProjectile(instantiationSpellbook.prefab, position + (offsets[i] * instantiationSpellbook.radius), offsets[i].normalized);
             projectile.OverrideDamage(damage, IsCriticalHit());
