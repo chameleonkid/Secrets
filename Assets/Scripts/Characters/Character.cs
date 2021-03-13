@@ -50,7 +50,6 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
 
     private void Reset() => OnValidate(true);
 
-
     private void OnValidate() => OnValidate(false);
     private void OnValidate(bool overrideExisting)
     {
@@ -105,6 +104,8 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
             SetAnimatorXY(direction * Vector2.up);
         }
     }
+
+    public Vector2 GetAnimatorXY() => new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
 
     //! A bit messy to have both a public health property and `TakeDamage`, but unsure how to address
     public virtual void TakeDamage(float damage, bool isCritical)
@@ -162,24 +163,15 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         }
     }
 
-    public void Dash(Character character,Vector2 forceDirection)
-    {
-        StartCoroutine(DashCo(character, forceDirection));
-    }
+    public void Dash(Character character, Vector2 forceDirection) => StartCoroutine(DashCo(character, forceDirection));
 
-    IEnumerator DashCo(Character character, Vector2 forceDirection)
+    private IEnumerator DashCo(Character character, Vector2 forceDirection)
     {
-        for(int i = 0; i <= dashDuration; i++)
+        for (int i = 0; i <= dashDuration; i++)
         {
             character.rigidbody.AddForce(forceDirection.normalized * 500f);
             character.rigidbody.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.01f);
-        }
-
-        
+        }    
     }
-
-
-
-
 }
