@@ -8,6 +8,7 @@ public class Room : MonoBehaviour
     [SerializeField] protected GameObject virtualCamera = default;
     [SerializeField] protected Enemy[] enemies = default;
     [SerializeField] protected Breakable[] breakables = default;
+    [SerializeField] protected ParticleSystem[] particleSystems = default;
     [Header("AreaNameDisplay")]
     [SerializeField] protected string  areaName = default;
     [SerializeField] protected TextMeshProUGUI areaNameText = default;
@@ -49,6 +50,11 @@ public class Room : MonoBehaviour
         for (int i = 0; i < breakables.Length; i++)
         {
             breakables[i].gameObject.SetActive(value);
+        }
+
+        for (int i = 0; i < particleSystems.Length; i++)
+        {
+            particleSystems[i].gameObject.SetActive(value);
         }
     }
 
