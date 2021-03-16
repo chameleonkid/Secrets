@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 4821109577977272680}
   - component: {fileID: 4821109577977272681}
   - component: {fileID: 4821109577977272677}
-  - component: {fileID: 4821109577977272678}
   - component: {fileID: 4821109577977272675}
   - component: {fileID: 5863930265273589217}
   - component: {fileID: 4821109577977272683}
   - component: {fileID: 4821109577977272662}
   - component: {fileID: 4821109577977272686}
   - component: {fileID: -622644466295011760}
+  - component: {fileID: 7732716755730280119}
   m_Layer: 8
   m_Name: Blob_Purple_Splitter
   m_TagString: enemy
@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 4821109577977272682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.02, y: 2.17, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 6156864125611166411}
   - {fileID: 7372415183495770060}
@@ -134,32 +134,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &4821109577977272678
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4821109577977272682}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0065476894, y: -0.06150949}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.63165045, y: 0.4120047}
-  m_EdgeRadius: 0
 --- !u!61 &4821109577977272675
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005366087, y: -0.055979013}
+  m_Offset: {x: -0.004272461, y: -0.042060852}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -184,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8915458, y: 0.64793444}
+  m_Size: {x: 0.6324158, y: 0.4787445}
   m_EdgeRadius: 0
 --- !u!114 &5863930265273589217
 MonoBehaviour:
@@ -272,6 +246,8 @@ MonoBehaviour:
   gotHitSound:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -279,6 +255,11 @@ MonoBehaviour:
   _slow: {fileID: 6156864125611166410}
   _shrink: {fileID: 7372415183495770061}
   _gigantism: {fileID: 3544170663046108140}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 1
   maxHealth: {fileID: 11400000, guid: 0459fc57e8370e84285c35ccb4509662, type: 2}
@@ -296,14 +277,15 @@ MonoBehaviour:
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 0}
-  thisLoot: {fileID: 0}
+  thisLoot: {fileID: 11400000, guid: c6db8195369e2014b8c95c4ddb498ef7, type: 2}
   target: {fileID: 0}
   nextWaypointDistance: 0.5
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
+  leftChaseRadius: 1
   maxSplit: 3
-  enemiesToSpawn: {fileID: 3850764193548615579, guid: 437ac163632026948a14af397e13e9b1,
+  enemiesToSpawn: {fileID: 7266744987202986110, guid: 2e8b2fe9d7d4307409e83810506ff48c,
     type: 3}
 --- !u!114 &-622644466295011760
 MonoBehaviour:
@@ -333,6 +315,22 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!58 &7732716755730280119
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821109577977272682}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.060094833}
+  serializedVersion: 2
+  m_Radius: 0.18990517
 --- !u!1001 &1502200
 PrefabInstance:
   m_ObjectHideFlags: 0
