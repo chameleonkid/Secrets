@@ -57,7 +57,6 @@ public class MeleeEnemy : Enemy
 
     public IEnumerator AttackCo()
     {
-        SoundManager.RequestSound(attackSounds.GetRandomElement());
         currentState = State.attack;
         animator.SetBool("Attacking", true);
         yield return null;
@@ -65,6 +64,7 @@ public class MeleeEnemy : Enemy
         yield return new WaitForSeconds(0.5f); //Attack CD
         currentState = State.walk;
     }
+
 }
 
 

@@ -174,4 +174,9 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
             yield return new WaitForSeconds(0.01f);
         }    
     }
+
+    public void RequestAttackSound()
+    {
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
+    }
 }
