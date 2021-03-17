@@ -110,8 +110,6 @@ GameObject:
   - component: {fileID: 2311297493767853762}
   - component: {fileID: 2311297493767853763}
   - component: {fileID: 2311297493767853769}
-  - component: {fileID: 1436539630286817514}
-  - component: {fileID: 1137807473856500883}
   - component: {fileID: 1983142973471604489}
   - component: {fileID: 7743495509848146586}
   - component: {fileID: 5922390990570326740}
@@ -253,7 +251,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010851145, y: 0.3747115}
+  m_Offset: {x: -0.010851145, y: 0.28349698}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -264,7 +262,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4662676, y: 0.73201275}
+  m_Size: {x: 0.4662676, y: 0.5495837}
   m_EdgeRadius: 0
 --- !u!95 &2311297493767853763
 Animator:
@@ -330,7 +328,7 @@ MonoBehaviour:
   homePosition: {x: 0, y: 0}
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
-  attackRadius: 0.5
+  attackRadius: 0.7
   deathEffect: {fileID: 4464167541414145869, guid: f8e0af8e3d37e604aa3ee77b03016376,
     type: 3}
   deathEffectDelay: 1
@@ -342,35 +340,6 @@ MonoBehaviour:
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
---- !u!114 &1436539630286817514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2311297493767853760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 1
-  duration: 1
---- !u!114 &1137807473856500883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2311297493767853760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  _damage: 5
 --- !u!114 &1983142973471604489
 MonoBehaviour:
   m_ObjectHideFlags: 0
