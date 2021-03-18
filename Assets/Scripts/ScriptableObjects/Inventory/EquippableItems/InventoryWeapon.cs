@@ -116,9 +116,9 @@ public class InventoryWeapon : EquippableItem
     private static Vector2[] swordDown =  {
         new Vector2(0f, 0.25f),
         new Vector2(0.5f, 0.15f),
-        new Vector2(0.35f, -0.25f),
-        new Vector2(0f, -0.25f),
-        new Vector2(-0.35f, -0.25f),
+        new Vector2(0.35f, -0.5f),
+        new Vector2(0f, -0.5f),
+        new Vector2(-0.35f, -0.5f),
         new Vector2(-0.5f, 0.15f)
     };
     #endregion
