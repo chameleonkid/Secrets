@@ -386,8 +386,6 @@ GameObject:
   - component: {fileID: 3056126619641711534}
   - component: {fileID: 3056126619641711535}
   - component: {fileID: 3056126619641711525}
-  - component: {fileID: 1843510507698443654}
-  - component: {fileID: 410012261094312447}
   - component: {fileID: 1296860917631459941}
   - component: {fileID: 6993111687737925622}
   - component: {fileID: 7167179961454147088}
@@ -606,7 +604,7 @@ MonoBehaviour:
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
   attackRadius: 0.65
-  deathEffect: {fileID: 4464167541414145869, guid: ce3134dc6306d2e40a4946c2789f5826,
+  deathEffect: {fileID: 4464167541414145869, guid: 98bb19b5165f6d44bbd0449b5a89a481,
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
@@ -617,35 +615,6 @@ MonoBehaviour:
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
---- !u!114 &1843510507698443654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3056126619641711532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 1
-  duration: 1
---- !u!114 &410012261094312447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3056126619641711532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  _damage: 20
 --- !u!114 &1296860917631459941
 MonoBehaviour:
   m_ObjectHideFlags: 0
