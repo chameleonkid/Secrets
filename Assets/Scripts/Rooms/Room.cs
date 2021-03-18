@@ -7,6 +7,7 @@ public class Room : MonoBehaviour
 {
     [SerializeField] protected GameObject virtualCamera = default;
     [SerializeField] protected Enemy[] enemies = default;
+    [SerializeField] protected GameObject npcs = default;
     [SerializeField] protected Breakable[] breakables = default;
     [SerializeField] protected ParticleSystem[] particleSystems = default;
     [Header("AreaNameDisplay")]
@@ -56,6 +57,7 @@ public class Room : MonoBehaviour
         {
             particleSystems[i].gameObject.SetActive(value);
         }
+            npcs.SetActive(value);   
     }
 
     IEnumerator ShowAreaTextCo()
@@ -65,4 +67,5 @@ public class Room : MonoBehaviour
         yield return new WaitForSeconds(5f);
         areaNameText.enabled = false;
     }
+
 }
