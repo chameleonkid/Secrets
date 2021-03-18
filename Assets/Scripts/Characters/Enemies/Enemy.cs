@@ -146,7 +146,10 @@ public class Enemy : Character
 
     protected virtual void FixedUpdate()
     {
-
+        if (currentState != State.stagger)
+        {
+            rigidbody.velocity = Vector2.zero;
+        }
         var percentHealh = maxHealth.value / 100f;
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius && this.health > (percentHealh * 10))
