@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -730,7 +730,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 54457216}
   enemies: []
+  npcs: {fileID: 0}
   breakables: []
+  particleSystems: []
   areaName: 
   areaNameText: {fileID: 755194099}
 --- !u!114 &87537670
@@ -4707,7 +4709,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1762892701}
   enemies: []
+  npcs: {fileID: 0}
   breakables: []
+  particleSystems: []
   areaName: 
   areaNameText: {fileID: 755194099}
 --- !u!114 &999581264
@@ -7391,7 +7395,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 420822612}
   enemies: []
+  npcs: {fileID: 0}
   breakables: []
+  particleSystems: []
   areaName: 
   areaNameText: {fileID: 755194099}
 --- !u!114 &1605253403
@@ -7502,7 +7508,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 290158505}
   enemies: []
+  npcs: {fileID: 0}
   breakables: []
+  particleSystems: []
   areaName: 
   areaNameText: {fileID: 755194099}
 --- !u!114 &1622651275
@@ -7720,6 +7728,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 5.09
       objectReference: {fileID: 0}
+    - target: {fileID: 3306322925851714564, guid: 23497ca391cf1b645bcef24d0c78e4c9,
+        type: 3}
+      propertyPath: enemy3
+      value: 
+      objectReference: {fileID: 1788014214475949675, guid: 6d19ecdb93fb8444482e68628dcf8456,
+        type: 3}
     - target: {fileID: 3306322925851714564, guid: 23497ca391cf1b645bcef24d0c78e4c9,
         type: 3}
       propertyPath: spawnRate
@@ -8293,7 +8307,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1649791344}
   enemies: []
+  npcs: {fileID: 0}
   breakables: []
+  particleSystems: []
   areaName: 
   areaNameText: {fileID: 755194099}
 --- !u!114 &1693286801
@@ -10644,7 +10660,7 @@ PrefabInstance:
         type: 3}
       propertyPath: contents
       value: 
-      objectReference: {fileID: 11400000, guid: ca37bf1b624cc844dacbd976b58d0d8e,
+      objectReference: {fileID: 11400000, guid: 25d64f5e8266f794491efa4cc7ebd575,
         type: 2}
     - target: {fileID: 2728290692212629437, guid: e085a7c43a784334483fc769f004cca4,
         type: 3}
@@ -10985,7 +11001,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 5002059222739762074}
   enemies: []
+  npcs: {fileID: 0}
   breakables: []
+  particleSystems: []
   areaName: 
   areaNameText: {fileID: 755194099}
 --- !u!114 &1553582542936354804
@@ -11002,7 +11020,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 5002059221144471901}
   enemies: []
+  npcs: {fileID: 0}
   breakables: []
+  particleSystems: []
   areaName: 
   areaNameText: {fileID: 755194099}
 --- !u!1 &1562672386376996671
