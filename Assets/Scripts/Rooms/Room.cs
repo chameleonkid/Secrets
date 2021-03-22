@@ -53,11 +53,19 @@ public class Room : MonoBehaviour
             breakables[i].gameObject.SetActive(value);
         }
 
-        for (int i = 0; i < particleSystems.Length; i++)
+        if(particleSystems.Length > 0)
         {
-            particleSystems[i].gameObject.SetActive(value);
+            for (int i = 0; i < particleSystems.Length; i++)
+            {
+                particleSystems[i].gameObject.SetActive(value);
+            }
         }
-            npcs.SetActive(value);   
+
+        if(npcs)
+        {
+            npcs.SetActive(value);
+        }
+  
     }
 
     IEnumerator ShowAreaTextCo()
