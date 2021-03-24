@@ -7,10 +7,12 @@ public class Healer : MonoBehaviour
     private bool playerInRange;
     [SerializeField] private ConstrainedFloat playerHealth;
     [SerializeField] private ConstrainedFloat playerMana;
+    [SerializeField] private AudioClip healSound;
+
 
     private void Update()
         {
-            if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
+            if (Input.GetButtonDown("Interact") && playerInRange)
             {
                 HealPlayer();
             }
@@ -18,8 +20,16 @@ public class Healer : MonoBehaviour
 
     public void HealPlayer()
     {
-        playerHealth.current = playerHealth.max;
-        playerMana.current = playerMana.max;
+        if(Time.timeScale > 0)
+        {
+            Debug.Log("Player gets healed");
+            playerHealth.current = playerHealth.max;
+            playerMana.current = playerMana.max;
+            if (healSound)
+            {
+                SoundManager.RequestSound(healSound);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
