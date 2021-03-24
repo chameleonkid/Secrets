@@ -15,8 +15,6 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private Button uiLampButton = default;
     [SerializeField] private Joystick joystick = default;
 
-    [SerializeField] private bool notStaggeredOrLifting = default;
-
     [SerializeField] private Animator effectAnimator = default;
 
     [SerializeField] private XPSystem levelSystem = default;
@@ -126,31 +124,7 @@ public class PlayerMovement : Character, ICanMove
         Debug.Log(currentState);
         currentState?.Update();
 
-        animator.SetBool("isRunning", input.run && input.direction != Vector2.zero);
-
-        notStaggeredOrLifting = (currentStateEnum != StateEnum.stagger && currentStateEnum != StateEnum.lift);
-
-        if (input.attack || uiInput.attack)
-        {
-            MeleeAttack();
-        }
-
-        if (input.spellCast1 || uiInput.spellCast1)
-        {
-            SpellAttack(inventory.currentSpellbook);
-        }
-        if (input.spellCast2 || uiInput.spellCast2)
-        {
-            SpellAttack(inventory.currentSpellbookTwo);
-        }
-        if (input.spellCast3 || uiInput.spellCast3)
-        {
-            SpellAttack(inventory.currentSpellbookThree);
-        }
-        if (input.lamp || uiInput.lamp)
-        {
-            ToggleLamp();
-        }
+        animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
 
         uiInput.ClearBools();
     }
@@ -184,10 +158,18 @@ public class PlayerMovement : Character, ICanMove
     private void HandleState()
     {
         // Full state machine logic should be here
-        if (currentState == null)
+        if (currentState == null) currentState = new Move(this);
+
+        if (input.attack || uiInput.attack) MeleeAttack();
+
+        if (!(currentState is Schwer.States.Knockback))
         {
-            currentState = new Move(this);
+            if (input.spellCast1 || uiInput.spellCast1) SpellAttack(inventory.currentSpellbook);
+            if (input.spellCast2 || uiInput.spellCast2) SpellAttack(inventory.currentSpellbookTwo);
+            if (input.spellCast3 || uiInput.spellCast3) SpellAttack(inventory.currentSpellbookThree);
         }
+
+        if (input.lamp || uiInput.lamp) ToggleLamp();
     }
 
     public bool IsCriticalHit() => (inventory.totalCritChance > 0 && Random.Range(0, 99) <= inventory.totalCritChance);
@@ -399,7 +381,7 @@ public class PlayerMovement : Character, ICanMove
 
     public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
     {
-        if (spellBook != null && mana.current >= spellBook.manaCost && notStaggeredOrLifting && currentStateEnum != StateEnum.attack && !spellBook.onCooldown)
+        if (spellBook != null && mana.current >= spellBook.manaCost && currentStateEnum != StateEnum.attack && !spellBook.onCooldown)
         {
             mana.current -= spellBook.manaCost;
             StartCoroutine(SpellAttackCo(spellBook));
