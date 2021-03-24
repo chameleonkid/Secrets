@@ -14,4 +14,5 @@ public class SleepTrigger : MonoBehaviour
         playerHealth.current = playerHealth.max;
         playerMana.current = playerMana.max;
     }
+
 }
