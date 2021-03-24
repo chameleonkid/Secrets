@@ -169,6 +169,7 @@ public class PlayerMovement : Character, ICanMove
         input.run = Input.GetButton("Run");
 
         input.attack = Input.GetButtonDown("Attack");
+        input.lamp = Input.GetButtonDown("Lamp");
 
         input.spellCast1 = Input.GetButton("SpellCast");
         input.spellCast2 = Input.GetButton("SpellCast2");
