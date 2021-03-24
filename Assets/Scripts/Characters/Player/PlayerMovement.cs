@@ -21,11 +21,11 @@ public class PlayerMovement : Character, ICanMove
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => (Input.GetButton("Run")) ? _speed * 1.5f : _speed;
+    private float speed => input.run ? _speed * 1.5f : _speed;
     [SerializeField] private float originalSpeed;
 
-    private Vector3 change;
-    public Vector2 direction => change;
+    private PlayerInput input;
+    public Vector2 direction => input.direction;
     public float moveSpeed => speed * speedModifier;
 
     [SerializeField] private ConstrainedFloat _lumen = default;
@@ -108,50 +108,44 @@ public class PlayerMovement : Character, ICanMove
         originalSpeed = speed;
 
         // This is for Using UI-Buttons
-        uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
-        uiSpellButton.GetComponent<Button>().onClick.AddListener(UISpellAttack);
-        uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(UISpellAttackTwo);
-        uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(UISpellAttackThree);
-        uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
+        uiAttackButton.onClick.AddListener(InputAttack);
+        uiSpellButton.onClick.AddListener(UISpellAttack);
+        uiSpellTwoButton.onClick.AddListener(UISpellAttackTwo);
+        uiSpellThreeButton.onClick.AddListener(UISpellAttackThree);
+        uiLampButton.onClick.AddListener(ToggleLamp);
     }
 
     private void Update()
     {
         if (Time.timeScale <= 0) return;
 
-        // ################################################# Change Inputtype to Joystick on IOS ################################################
-        change.x = Input.GetAxisRaw("Horizontal");
-        change.y = Input.GetAxisRaw("Vertical");
-
-        //  change.x = joystick.Horizontal;
-        //  change.y = joystick.Vertical;
-
+        HandleInput();
         HandleState();
 
         currentState?.Update();
 
-        animator.SetBool("isRunning", Input.GetButton("Run") && change != Vector3.zero);
+        animator.SetBool("isRunning", input.run && input.direction != Vector2.zero);
 
         notStaggeredOrLifting = (currentStateEnum != StateEnum.stagger && currentStateEnum != StateEnum.lift);
 
-        if (Input.GetButtonDown("Attack"))
+        if (input.attack)
         {
             MeleeAttack();
         }
 
-        if (Input.GetButton("SpellCast"))
+        if (input.spellCast1)
         {
             SpellAttack(inventory.currentSpellbook);
         }
-        if (Input.GetButton("SpellCast2"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (input.spellCast2)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             SpellAttack(inventory.currentSpellbookTwo);
         }
-        if (Input.GetButton("SpellCast3"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (input.spellCast3)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             SpellAttack(inventory.currentSpellbookThree);
         }
-        if (Input.GetButtonDown("Lamp"))
+        if (input.lamp)
         {
             ToggleLamp();
         }
@@ -165,6 +159,20 @@ public class PlayerMovement : Character, ICanMove
         {
             rigidbody.velocity = Vector2.zero;
         }
+    }
+
+    private void HandleInput()
+    {
+        input.direction.x = Input.GetAxisRaw("Horizontal");
+        input.direction.y = Input.GetAxisRaw("Vertical");
+
+        input.run = Input.GetButton("Run");
+
+        input.attack = Input.GetButtonDown("Attack");
+
+        input.spellCast1 = Input.GetButton("SpellCast");
+        input.spellCast2 = Input.GetButton("SpellCast2");
+        input.spellCast3 = Input.GetButton("SpellCast3");
     }
 
     private void HandleState()
@@ -410,4 +418,12 @@ public class PlayerMovement : Character, ICanMove
             }
         }
     }
+
+    #region UI Controls
+    public void InputAttack() => input.attack = true;
+    public void InputSpell1() => input.spellCast1 = true;
+    public void InputSpell2() => input.spellCast2 = true;
+    public void InputSpell3() => input.spellCast3 = true;
+    public void InputLamp() => input.lamp = true;
+    #endregion
 }
