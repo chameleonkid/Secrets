@@ -28,6 +28,8 @@ public class PlayerMovement : Character, ICanMove
     public Vector2 direction => input.direction;
     public float moveSpeed => speed * speedModifier;
 
+    private PlayerInput uiInput;
+
     [SerializeField] private ConstrainedFloat _lumen = default;
     public ConstrainedFloat lumen => _lumen;
     [SerializeField] private ConstrainedFloat _mana = default;
@@ -109,10 +111,10 @@ public class PlayerMovement : Character, ICanMove
 
         // This is for Using UI-Buttons
         uiAttackButton.onClick.AddListener(InputAttack);
-        uiSpellButton.onClick.AddListener(UISpellAttack);
-        uiSpellTwoButton.onClick.AddListener(UISpellAttackTwo);
-        uiSpellThreeButton.onClick.AddListener(UISpellAttackThree);
-        uiLampButton.onClick.AddListener(ToggleLamp);
+        uiSpellButton.onClick.AddListener(InputSpell1);
+        uiSpellTwoButton.onClick.AddListener(InputSpell2);
+        uiSpellThreeButton.onClick.AddListener(InputSpell3);
+        uiLampButton.onClick.AddListener(InputLamp);
     }
 
     private void Update()
@@ -121,34 +123,36 @@ public class PlayerMovement : Character, ICanMove
 
         HandleInput();
         HandleState();
-
+        Debug.Log(currentState);
         currentState?.Update();
 
         animator.SetBool("isRunning", input.run && input.direction != Vector2.zero);
 
         notStaggeredOrLifting = (currentStateEnum != StateEnum.stagger && currentStateEnum != StateEnum.lift);
 
-        if (input.attack)
+        if (input.attack || uiInput.attack)
         {
             MeleeAttack();
         }
 
-        if (input.spellCast1)
+        if (input.spellCast1 || uiInput.spellCast1)
         {
             SpellAttack(inventory.currentSpellbook);
         }
-        if (input.spellCast2)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (input.spellCast2 || uiInput.spellCast2)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             SpellAttack(inventory.currentSpellbookTwo);
         }
-        if (input.spellCast3)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (input.spellCast3 || uiInput.spellCast3)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
         {
             SpellAttack(inventory.currentSpellbookThree);
         }
-        if (input.lamp)
+        if (input.lamp || uiInput.lamp)
         {
             ToggleLamp();
         }
+
+        uiInput.ClearBools();
     }
 
     private void FixedUpdate()
@@ -421,10 +425,10 @@ public class PlayerMovement : Character, ICanMove
     }
 
     #region UI Controls
-    public void InputAttack() => input.attack = true;
-    public void InputSpell1() => input.spellCast1 = true;
-    public void InputSpell2() => input.spellCast2 = true;
-    public void InputSpell3() => input.spellCast3 = true;
-    public void InputLamp() => input.lamp = true;
+    public void InputAttack() => uiInput.attack = true;
+    public void InputSpell1() => uiInput.spellCast1 = true;
+    public void InputSpell2() => uiInput.spellCast2 = true;
+    public void InputSpell3() => uiInput.spellCast3 = true;
+    public void InputLamp() => uiInput.lamp = true;
     #endregion
 }
