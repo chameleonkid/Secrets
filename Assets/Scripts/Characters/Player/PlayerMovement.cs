@@ -139,11 +139,11 @@ public class PlayerMovement : Character, ICanMove
         {
             SpellAttack(inventory.currentSpellbook);
         }
-        if (input.spellCast2 || uiInput.spellCast2)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (input.spellCast2 || uiInput.spellCast2)
         {
             SpellAttack(inventory.currentSpellbookTwo);
         }
-        if (input.spellCast3 || uiInput.spellCast3)  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
+        if (input.spellCast3 || uiInput.spellCast3)
         {
             SpellAttack(inventory.currentSpellbookThree);
         }
@@ -175,6 +175,7 @@ public class PlayerMovement : Character, ICanMove
         input.attack = Input.GetButtonDown("Attack");
         input.lamp = Input.GetButtonDown("Lamp");
 
+        // GetButton in GetButtonDown für die nicht dauerhafte Abfrage
         input.spellCast1 = Input.GetButton("SpellCast");
         input.spellCast2 = Input.GetButton("SpellCast2");
         input.spellCast3 = Input.GetButton("SpellCast3");
@@ -377,12 +378,6 @@ public class PlayerMovement : Character, ICanMove
             StartCoroutine(AttackCo());
         }
     }
-
-    public void UISpellAttack() => SpellAttack(inventory.currentSpellbook);
-
-    public void UISpellAttackTwo() => SpellAttack(inventory.currentSpellbookTwo);
-
-    public void UISpellAttackThree() => SpellAttack(inventory.currentSpellbookThree);
 
     public void ToggleLamp()
     {
