@@ -129,9 +129,17 @@ public class PlayerMovement : Character
         // ################################################# Change Inputtype to Joystick on IOS ################################################
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
+        if(joystick.isActiveAndEnabled)
+        {
+            change.x = joystick.Horizontal;
+            change.y = joystick.Vertical;
+        }
+        else
+        {
+            change.x = Input.GetAxisRaw("Horizontal");
+            change.y = Input.GetAxisRaw("Vertical");
+        }
 
-        //  change.x = joystick.Horizontal;
-        //  change.y = joystick.Vertical;
 
         SetAnimatorXY(change);
 
