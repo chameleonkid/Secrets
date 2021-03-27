@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class BossBattleTower : MonoBehaviour
 {
     public enum Stage
@@ -12,8 +11,9 @@ public class BossBattleTower : MonoBehaviour
         Stage_2,
         Stage_3,
     }
+
     [Header("TriggerArea")]
-    [SerializeField] private ColliderTrigger colliderTrigger = default;
+    [SerializeField] private PlayerEventTrigger playerTrigger = default;
     [Header("Potential Enemies")]
     [SerializeField] private Enemy enemy1 = default;
     [SerializeField] private Enemy enemy2 = default;
@@ -49,19 +49,11 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private AudioClip[] endBattleMusic;
     [SerializeField] private AudioClip bossDiedSound;
 
-
     [Header("TriggerArea")]
     [SerializeField] private GameObject triggerArea;
 
-
-
-
-
-
-
     private void Awake()
     {
-
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {
@@ -78,12 +70,11 @@ public class BossBattleTower : MonoBehaviour
 
             stage = Stage.WaitingToStart;
         }
-        
     }
 
     private void Start()
     {
-        colliderTrigger.OnPlayerEnterTrigger += EnterBossArea;       //Subscribe to not start the Battle multiple Times
+        playerTrigger.OnTriggerEnter += EnterBossArea;       //Subscribe to not start the Battle multiple Times
         boss.OnEnemyTakeDamage += BossTakesDamage;
         boss.OnEnemyDied += BossDied;
     }
@@ -104,7 +95,7 @@ public class BossBattleTower : MonoBehaviour
         switch (stage)
         {
             case Stage.Stage_1:
-                   if(boss.GetPercentHealth() <= 70)
+                if (boss.GetPercentHealth() <= 70)
                 {
                     StartNextStage();
                 }
@@ -120,13 +111,12 @@ public class BossBattleTower : MonoBehaviour
 
     private void EnterBossArea()
     {
-        if(bossGameObject.activeInHierarchy== true)
+        if (bossGameObject.activeInHierarchy == true)
         {
             StartBattle();
-            colliderTrigger.OnPlayerEnterTrigger -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
+            playerTrigger.OnTriggerEnter -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
             triggerArea.SetActive(false);
         }
-
     }
 
     private void StartBattle()
@@ -136,7 +126,6 @@ public class BossBattleTower : MonoBehaviour
         StartCoroutine(ActivateBossValuesCo());
         StartNextStage();
         InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);
-
     }
 
     private void SpawnEnemy()
@@ -146,12 +135,11 @@ public class BossBattleTower : MonoBehaviour
 
         if (stage == Stage.Stage_1)
         {
-
             Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
 
             if (rndEnemy < 35)
             {
-               minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
+                minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
             }
             if (rndEnemy >= 35 && rndEnemy <= 75)
             {
@@ -167,7 +155,7 @@ public class BossBattleTower : MonoBehaviour
         {
             if (minionsSpawned == false)                                    //Spawn X " SHIELD-MINIONS "
             {
-                for (int i = 0; i <= minionsToSpawn; i++)    
+                for (int i = 0; i <= minionsToSpawn; i++)
                 {
                     Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
                     minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
@@ -191,7 +179,7 @@ public class BossBattleTower : MonoBehaviour
     private void MinionKilled()
     {
         spawnedMinionsCounter--;
-        if(spawnedMinionsCounter <= 0)
+        if (spawnedMinionsCounter <= 0)
         {
             bossshield.triggerShield();
         }
@@ -207,7 +195,7 @@ public class BossBattleTower : MonoBehaviour
 
     private void StartNextStage()
     {
-        switch(stage)
+        switch (stage)
         {
             case Stage.WaitingToStart:
                 stage = Stage.Stage_1;
@@ -220,20 +208,19 @@ public class BossBattleTower : MonoBehaviour
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;
-                break;     
+                break;
         }
         Debug.Log("Next Stage has started " + stage);
     }
 
-
     private void EnhanceAttacks()
     {
-      //  var boss = this.GetComponent<BossPumpkin>();
+        //  var boss = this.GetComponent<BossPumpkin>();
         boss.HalfCooldown();
         boss.HalfCooldownSpellTwo();
     }
 
-    IEnumerator ActivateBossValuesCo()
+    private IEnumerator ActivateBossValuesCo()
     {
         yield return new WaitForSeconds(1f);
         SoundManager.RequestSound(startBattleSound);
@@ -241,6 +228,4 @@ public class BossBattleTower : MonoBehaviour
         bossHurtBox.enabled = true;
         boss.GetComponent<BossPumpkin>().enabled = true;
     }
-    
-
 }
