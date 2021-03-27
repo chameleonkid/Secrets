@@ -160,7 +160,7 @@ public class PlayerMovement : Character, ICanMove
         // Full state machine logic should be here
         if (currentState == null) currentState = new Move(this);
 
-        if (input.attack || uiInput.attack) MeleeAttack();
+        if (input.attack || uiInput.attack) Attack();
 
         if (!(currentState is Schwer.States.Knockback))
         {
@@ -175,81 +175,89 @@ public class PlayerMovement : Character, ICanMove
     public bool IsCriticalHit() => (inventory.totalCritChance > 0 && Random.Range(0, 99) <= inventory.totalCritChance);
 
     // #################################### Casual Attack ####################################
-    private IEnumerator AttackCo()
+    private void Attack()
     {
         var currentWeapon = inventory.currentWeapon;
 
-        if (inventory.currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
+        if (currentStateEnum != StateEnum.attack && currentWeapon != null && !meeleCooldown)
         {
-            if (arrow != null && inventory.items[arrow] > 0)
+            if (currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
             {
-                OnAttackTriggered?.Invoke();
-                meeleCooldown = true;
-                inventory.items[arrow]--;
-                currentStateEnum = StateEnum.attack;
-                animator.SetBool("isShooting", true);
-
-                var proj = CreateProjectile(projectile);
-                var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-                proj.OverrideSpeed(arrowSpeed);
-                proj.OverrideDamage(damage, IsCriticalHit());
-
-                yield return new WaitForSeconds(0.3f);
-
-                if (currentStateEnum != StateEnum.interact)
+                if (arrow != null && inventory.items[arrow] > 0)
                 {
-                    currentStateEnum = StateEnum.walk;
+                    StartCoroutine(BowAttackCo(currentWeapon));
                 }
-                animator.SetBool("isShooting", false);
-                yield return new WaitForSeconds(currentWeapon.swingTime);
-                meeleCooldown = false;
-                SoundManager.RequestSound(meleeCooldownSound);
+            }
+            else
+            {
+                StartCoroutine(MeleeAttackCo(currentWeapon));
             }
         }
-        else
+    }
+
+    private IEnumerator MeleeAttackCo(InventoryWeapon weapon)
+    {
+        OnAttackTriggered?.Invoke();
+        meeleCooldown = true;
+        // This part is not working properly in BUILD
+        hitBoxColliders[0].points = weapon.upHitboxPolygon;
+        hitBoxColliders[1].points = weapon.downHitboxPolygon;
+        hitBoxColliders[2].points = weapon.rightHitboxPolygon;
+        hitBoxColliders[3].points = weapon.leftHitboxPolygon;
+        //! ^ The order of the hitboxes colliders cannot be safely determined by index,
+        //    as the order is arbitrarily assigned via Inspector.
+
+        weaponSkinChanger.newSprite = weapon.weaponSkin;
+
+        if (weapon.weaponSkin != oldWeaponSkin)
         {
-            OnAttackTriggered?.Invoke();
-            meeleCooldown = true;
-            // This part is not working properly in BUILD
-            hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
-            hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
-            hitBoxColliders[2].points = currentWeapon.rightHitboxPolygon;
-            hitBoxColliders[3].points = currentWeapon.leftHitboxPolygon;
-            //! ^ The order of the hitboxes colliders cannot be safely determined by index,
-            //    as the order is arbitrarily assigned via Inspector.
-
-            weaponSkinChanger.newSprite = currentWeapon.weaponSkin;
-
-            if (currentWeapon.weaponSkin != oldWeaponSkin)
-            {
-                weaponSkinChanger.ResetRenderer();
-            }
-            oldWeaponSkin = currentWeapon.weaponSkin;
-
-            var isCritical = IsCriticalHit();
-            for (int i = 0; i < directionalAttacks.Length; i++)
-            {
-                directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-                directionalAttacks[i].isCritical = isCritical;
-            }
-
-            SoundManager.RequestSound(attackSounds.GetRandomElement());
-
-            animator.SetBool("Attacking", true);
-            currentStateEnum = StateEnum.attack;
-            yield return null;
-            animator.SetBool("Attacking", false);
-            yield return new WaitForSeconds(0.3f);
-
-            if (currentStateEnum != StateEnum.interact)
-            {
-                currentStateEnum = StateEnum.walk;
-            }
-
-            yield return new WaitForSeconds(currentWeapon.swingTime);
-            meeleCooldown = false;
-            SoundManager.RequestSound(meleeCooldownSound);
+            weaponSkinChanger.ResetRenderer();
         }
+        oldWeaponSkin = weapon.weaponSkin;
+
+        var isCritical = IsCriticalHit();
+        for (int i = 0; i < directionalAttacks.Length; i++)
+        {
+            directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+            directionalAttacks[i].isCritical = isCritical;
+        }
+
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
+
+        // currentState = new PlayerMeleeAttack(this, 0.3f);
+        animator.SetBool("Attacking", true);
+        currentStateEnum = StateEnum.attack;
+        yield return null;
+        animator.SetBool("Attacking", false);
+
+        yield return new WaitForSeconds(0.3f + weapon.swingTime);
+        meeleCooldown = false;
+        SoundManager.RequestSound(meleeCooldownSound);
+    }
+
+    private IEnumerator BowAttackCo(InventoryWeapon weapon)
+    {
+        OnAttackTriggered?.Invoke();
+        meeleCooldown = true;
+        inventory.items[arrow]--;
+        currentStateEnum = StateEnum.attack;
+        animator.SetBool("isShooting", true);
+
+        var proj = CreateProjectile(projectile);
+        var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+        proj.OverrideSpeed(arrowSpeed);
+        proj.OverrideDamage(damage, IsCriticalHit());
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (currentStateEnum != StateEnum.interact)
+        {
+            currentStateEnum = StateEnum.walk;
+        }
+        animator.SetBool("isShooting", false);
+        yield return new WaitForSeconds(weapon.swingTime);
+        meeleCooldown = false;
+        SoundManager.RequestSound(meleeCooldownSound);
     }
 
     // ############################# Roundattack ################################################
@@ -352,14 +360,6 @@ public class PlayerMovement : Character, ICanMove
     // ############################################# Refactor ####################################################################################
     // ################################### Functions for UI Input or Controller ##################################################################
     // ###########################################################################################################################################
-
-    public void MeleeAttack()
-    {
-        if (currentStateEnum != StateEnum.attack && inventory.currentWeapon != null && meeleCooldown == false)
-        {
-            StartCoroutine(AttackCo());
-        }
-    }
 
     public void ToggleLamp()
     {
