@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Schwer.States;
 
 public class SzeneTransition : ComponentTrigger<PlayerMovement>
 {

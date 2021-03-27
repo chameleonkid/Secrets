@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Schwer.States;
 using UnityEngine;
 
 public class Teleport : ComponentTrigger<PlayerMovement>
