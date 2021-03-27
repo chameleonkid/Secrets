@@ -370,15 +370,6 @@ public class PlayerMovement : Character, ICanMove
         }
     }
 
-    public void LockMovement(float seconds) => StartCoroutine(LockCo(seconds));
-
-    private IEnumerator LockCo(float seconds)
-    {
-        this._speed = 0;
-        yield return new WaitForSeconds(seconds);
-        this._speed = this.originalSpeed;
-    }
-
     public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
     {
         if (spellBook != null && mana.current >= spellBook.manaCost && currentStateEnum != StateEnum.attack && !spellBook.onCooldown)
