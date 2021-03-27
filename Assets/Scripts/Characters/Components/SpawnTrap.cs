@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnTrap : MonoBehaviour
@@ -19,10 +18,9 @@ public class SpawnTrap : MonoBehaviour
     [Header("This sound will be played when the trap will be activated:")]
     [SerializeField] private bool isActive = true;
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.GetComponent<PlayerMovement>() && other.isTrigger && isActive == true)
+        if (other.GetComponent<PlayerMovement>() && other.isTrigger && isActive == true)
         {
             StartSpawning();
             other.GetComponent<PlayerMovement>().LockMovement(lockTime);
@@ -34,13 +32,12 @@ public class SpawnTrap : MonoBehaviour
         StartCoroutine(StartSpawningCo());
     }
 
-
     protected virtual IEnumerator StartSpawningCo()
     {
         this.GetComponent<SpriteRenderer>().sprite = null;
         isActive = false;
         SoundManager.RequestSound(trapSound);
-        for(int i = 0; i < spawnCounter; i++)
+        for (int i = 0; i < spawnCounter; i++)
         {
             Vector2 homePos = this.transform.position;
             var randomPosition = homePos + Random.insideUnitCircle * spawnRadius;
@@ -48,8 +45,6 @@ public class SpawnTrap : MonoBehaviour
             var spawn = Instantiate(thingToSpawn[randomSpawn], randomPosition, Quaternion.identity);  //this.transform.position needs to vary slightly for iteration
             yield return new WaitForSeconds(spawnDelay);
         }
-        isActive = false;        
+        isActive = false;
     }
-
-
 }

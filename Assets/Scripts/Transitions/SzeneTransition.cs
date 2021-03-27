@@ -2,7 +2,6 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-
 public class SzeneTransition : MonoBehaviour
 {
     [Header("New Scene Variables")]
@@ -12,12 +11,6 @@ public class SzeneTransition : MonoBehaviour
     [SerializeField] private float transitionTime = 3f;
     [SerializeField] private Animator anim = default;
     private PlayerMovement player;
-
-
-    public void Awake()
-    {
-
-    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,12 +22,11 @@ public class SzeneTransition : MonoBehaviour
         }
     }
 
-    IEnumerator StartSceneCo()
+    private IEnumerator StartSceneCo()
     {
         player.GetComponent<PlayerMovement>().LockMovement(transitionTime + 2f);
         anim.SetTrigger("StartLoading");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(sceneToLoad);
     }
-
 }

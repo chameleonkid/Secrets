@@ -1,25 +1,22 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RoomMove : MonoBehaviour
 {
-
-
     public Vector3 playerChange;
     public bool needText;
     public string AreaName;
     public GameObject IGAreaText;
     public Text AreaText;
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             other.GetComponent<PlayerMovement>().LockMovement(2);
             other.transform.position += playerChange;
-            if (needText) 
+            if (needText)
             {
                 StartCoroutine(placeNameCo());
             }
@@ -33,5 +30,4 @@ public class RoomMove : MonoBehaviour
         yield return new WaitForSeconds(4f);
         IGAreaText.SetActive(false);
     }
-
 }

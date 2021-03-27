@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Teleport : MonoBehaviour
 {
@@ -10,7 +8,7 @@ public class Teleport : MonoBehaviour
     private PlayerMovement player;
     [SerializeField] private Animator anim = default;
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<PlayerMovement>() && !other.isTrigger)
         {
@@ -19,7 +17,7 @@ public class Teleport : MonoBehaviour
         }
     }
 
-    IEnumerator StartTeleportCo()
+    private IEnumerator StartTeleportCo()
     {
         player.GetComponent<PlayerMovement>().LockMovement(transitionTime + 2f);
         anim.SetTrigger("StartLoading");
@@ -28,6 +26,4 @@ public class Teleport : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         anim.SetTrigger("StopLoading");
     }
-
-
 }
