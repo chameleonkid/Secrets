@@ -56,7 +56,8 @@ public class PlayerMovement : Character, ICanMove
 
     [Header("Hitboxes")]
     [SerializeField] private DamageOnTrigger[] directionalAttacks = default;
-    [SerializeField] private DamageOnTrigger roundAttack = default;
+    [SerializeField] private DamageOnTrigger _roundAttack = default;
+    public DamageOnTrigger roundAttack => _roundAttack;
     [SerializeField] private PolygonCollider2D[] hitBoxColliders = default;
 
     [Header("Projectiles")]
@@ -247,21 +248,6 @@ public class PlayerMovement : Character, ICanMove
         yield return new WaitForSeconds(0.3f + weapon.swingTime);
         meeleCooldown = false;
         SoundManager.RequestSound(meleeCooldownSound);
-    }
-
-    // ############################# Roundattack ################################################
-    private IEnumerator RoundAttackCo()
-    {
-        roundAttack.damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-        roundAttack.isCritical = IsCriticalHit();
-        //! Is this missing a sound request?
-        animator.SetBool("RoundAttacking", true);
-        currentStateEnum = StateEnum.roundattack;
-        yield return null;  //! This allows a round attack to be executed every other frame when the input is held, causing mana to drain very quickly
-        animator.SetBool("RoundAttacking", false);
-        currentStateEnum = StateEnum.walk;
-
-        mana.current -= 1;
     }
 
     private Projectile CreateProjectile(GameObject prefab)
