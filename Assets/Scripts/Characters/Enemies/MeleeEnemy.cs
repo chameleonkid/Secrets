@@ -17,6 +17,11 @@ public class MeleeEnemy : Enemy
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius)
         {
+            if (leftChaseRadius)
+            {
+                SoundManager.RequestSound(inRangeSounds.GetRandomElement());
+            }
+            leftChaseRadius = false;
             if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
             {
                 if (path == null)
@@ -53,13 +58,13 @@ public class MeleeEnemy : Enemy
         }
         else if (distance >= chaseRadius && distance >= attackRadius)
         {
+            leftChaseRadius = true;
             randomMovement();
         }
     }
 
     public IEnumerator AttackCo()
     {
-        SoundManager.RequestSound(attackSounds.GetRandomElement());
         currentStateEnum = StateEnum.attack;
         animator.SetBool("Attacking", true);
         yield return null;

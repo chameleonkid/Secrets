@@ -142,8 +142,16 @@ public class PlayerMovement : Character, ICanMove
 
     private void HandleInput()
     {
-        input.direction.x = Input.GetAxisRaw("Horizontal");
-        input.direction.y = Input.GetAxisRaw("Vertical");
+        if (joystick.isActiveAndEnabled)
+        {
+            input.direction.x = joystick.Horizontal;
+            input.direction.y = joystick.Vertical;
+        }
+        else
+        {
+            input.direction.x = Input.GetAxisRaw("Horizontal");
+            input.direction.y = Input.GetAxisRaw("Vertical");
+        }
 
         input.run = Input.GetButton("Run");
 
@@ -260,8 +268,8 @@ public class PlayerMovement : Character, ICanMove
         meeleCooldown = true;
         inventory.items[arrow]--;
 
-        var proj = CreateProjectile(projectile);
         var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+        var proj = CreateProjectile(projectile);
         proj.OverrideSpeed(arrowSpeed);
         proj.OverrideDamage(damage, IsCriticalHit());
 
@@ -279,8 +287,7 @@ public class PlayerMovement : Character, ICanMove
             default:
                 break;
             case InstantiationSpellbook instantiationSpellbook:
-                var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
-                CreateProjectile(instantiationSpellbook.prefab);
+                StartCoroutine(CreateProjectilesCo(instantiationSpellbook));
                 animator.SetBool("isCasting", true);
                 break;
             case UnityEventSpell eventSpell:
@@ -303,8 +310,13 @@ public class PlayerMovement : Character, ICanMove
 
     private Projectile CreateProjectile(GameObject prefab)
     {
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
-        var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var position =  new Vector2(transform.position.x, transform.position.y);      // Set projectile higher since transform is at player's pivot point (feet).
+        var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
+        return projectile;
+    }
+
+    private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
+    {
         var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
         return projectile;
     }
@@ -361,6 +373,32 @@ public class PlayerMovement : Character, ICanMove
             lamp.enabled = !lamp.enabled;
             OnLampTriggered?.Invoke();
         }
+    }
+
+    private IEnumerator CreateProjectilesCo(InstantiationSpellbook instantiationSpellbook)
+    {
+        var offsets = RadialLayout.GetOffsets(instantiationSpellbook.amountOfProjectiles, MathfEx.Vector2ToAngle(GetAnimatorXY()), instantiationSpellbook.spreadAngle);
+        for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
+        {
+            // Should probably not hard-code the offset.
+            var position = new Vector2(transform.position.x, transform.position.y + 0.25f);      // Set projectile higher since transform is at player's pivot point (feet).
+
+            var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
+            var projectile = CreateProjectile(instantiationSpellbook.prefab, position + (offsets[i] * instantiationSpellbook.radius), offsets[i].normalized);
+            projectile.OverrideDamage(damage, IsCriticalHit());
+            projectile.OverrideSpeed(instantiationSpellbook.speed);
+
+            if (instantiationSpellbook.delayBetweenProjectiles > 0)
+            {
+                yield return new WaitForSeconds(instantiationSpellbook.delayBetweenProjectiles);
+            }
+        }
+    }
+
+    public void freePlayerStuck()
+    {
+        Vector2 zeroPos = new Vector2(0, 0);
+        transform.position = zeroPos;       
     }
 
     #region UI Controls

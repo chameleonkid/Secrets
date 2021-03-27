@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 10
 --- !u!60 &3056126617805176405
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 10
 --- !u!60 &3056126618346776695
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 10
 --- !u!60 &3056126619334463504
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 10
 --- !u!60 &3056126619558495762
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -386,8 +386,6 @@ GameObject:
   - component: {fileID: 3056126619641711534}
   - component: {fileID: 3056126619641711535}
   - component: {fileID: 3056126619641711525}
-  - component: {fileID: 1843510507698443654}
-  - component: {fileID: 410012261094312447}
   - component: {fileID: 1296860917631459941}
   - component: {fileID: 6993111687737925622}
   - component: {fileID: 7167179961454147088}
@@ -552,7 +550,7 @@ Animator:
   m_GameObject: {fileID: 3056126619641711532}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a18bd076809a10542ad2bcb802a6923c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 35891e951bdfc344298430a82ec7ee12, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -579,6 +577,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds:
   - {fileID: 8300000, guid: f768dcc7c7fccf44aa1aece22c1b182d, type: 3}
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -586,20 +586,25 @@ MonoBehaviour:
   _slow: {fileID: 3064241424972875848}
   _shrink: {fileID: 7372415182287951932}
   _gigantism: {fileID: 3544170662300674766}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 100
-  maxHealth: {fileID: 11400000, guid: 0459fc57e8370e84285c35ccb4509662, type: 2}
+  enemyXp: 25
+  maxHealth: {fileID: 11400000, guid: 9c0a3f01b9dcb1241aec80bff41cea8d, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 3
   isMinion: 0
   enemyName: 
-  moveSpeed: 1
+  moveSpeed: 3
   homePosition: {x: 0, y: 0}
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
   attackRadius: 0.65
-  deathEffect: {fileID: 4464167541414145869, guid: ce3134dc6306d2e40a4946c2789f5826,
+  deathEffect: {fileID: 4464167541414145869, guid: 98bb19b5165f6d44bbd0449b5a89a481,
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
@@ -609,35 +614,7 @@ MonoBehaviour:
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
---- !u!114 &1843510507698443654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3056126619641711532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 1
-  duration: 1
---- !u!114 &410012261094312447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3056126619641711532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  _damage: 20
+  leftChaseRadius: 1
 --- !u!114 &1296860917631459941
 MonoBehaviour:
   m_ObjectHideFlags: 0

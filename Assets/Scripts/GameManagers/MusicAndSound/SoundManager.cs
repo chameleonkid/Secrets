@@ -14,4 +14,5 @@ public class SoundManager : MonoBehaviour
     private void Awake() => audioSource = GetComponent<AudioSource>();
 
     private void PlaySound(AudioClip sound) => audioSource.PlayOneShot(sound);
+  //  private void LoopSound(AudioClip sound) => audioSource.Play();
 }

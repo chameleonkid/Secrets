@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 137455740367087131}
   - component: {fileID: 137455740367087130}
   - component: {fileID: 137455740367087126}
-  - component: {fileID: 137455740367087125}
+  - component: {fileID: 3389735149448852629}
   - component: {fileID: 137455740367087120}
   - component: {fileID: 137455740367087127}
   - component: {fileID: 1324215901438993042}
@@ -134,8 +134,8 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &137455740367087125
-BoxCollider2D:
+--- !u!58 &3389735149448852629
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,19 +147,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0065476894, y: -0.06150949}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: -0.035292387}
   serializedVersion: 2
-  m_Size: {x: 0.63165045, y: 0.4120047}
-  m_EdgeRadius: 0
+  m_Radius: 0.16907263
 --- !u!61 &137455740367087120
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +163,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005366087, y: -0.055979013}
+  m_Offset: {x: 0.0014321804, y: -0.044963717}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -184,7 +174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8915458, y: 0.64793444}
+  m_Size: {x: 0.49342012, y: 0.3646829}
   m_EdgeRadius: 0
 --- !u!114 &137455740367087127
 MonoBehaviour:
@@ -203,6 +193,9 @@ MonoBehaviour:
   gotHitSound:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds: []
+  deathSounds: []
+  inRangeSounds:
+  - {fileID: 8300000, guid: 00d0633e20d12604a848ddb7983cd4e2, type: 3}
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -210,9 +203,14 @@ MonoBehaviour:
   _slow: {fileID: 4827436345419559335}
   _shrink: {fileID: 7372415182704665557}
   _gigantism: {fileID: 3544170663368051305}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 1
-  maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
+  maxHealth: {fileID: 11400000, guid: eab9d78fd91e32145901665c34f9b019, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 0
@@ -227,12 +225,13 @@ MonoBehaviour:
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
-  thisLoot: {fileID: 11400000, guid: 05d3919ae3c5476418135c27aa5bcb68, type: 2}
+  thisLoot: {fileID: 11400000, guid: 7fc18ac19e8fc1845b2a09a01b36d0b0, type: 2}
   target: {fileID: 0}
   nextWaypointDistance: 0.5
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
+  leftChaseRadius: 1
 --- !u!114 &1324215901438993042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +259,7 @@ MonoBehaviour:
   disableWhenHit: 0
   charactersInAreaList: []
   tickDuration: 1
-  tickDamage: 1
+  tickDamage: 2
 --- !u!114 &137455740367087141
 MonoBehaviour:
   m_ObjectHideFlags: 0

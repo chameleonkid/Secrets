@@ -2,5 +2,10 @@
 {
     protected void Start() => animator.SetBool("isMoving", false);
 
-    protected override void OutsideChaseRadiusUpdate() => randomMovement();
+    protected override void OutsideChaseRadiusUpdate()
+    {
+        randomMovement();
+        leftChaseRadius = true;
+    }
+
 }

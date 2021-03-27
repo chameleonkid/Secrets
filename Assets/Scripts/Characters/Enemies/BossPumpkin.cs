@@ -9,6 +9,10 @@ public class BossPumpkin : TurretEnemy
     public float fireDelayTwo;
     [SerializeField] private float fireDelaySecondsTwo;
 
+    [Header("Boss Attack Sounds")]
+    [SerializeField] private AudioClip attack1Sound;
+    [SerializeField] private AudioClip attack2Sound;
+
     protected override void Update()
     {
         if (currentState is Schwer.States.Knockback) return;
@@ -54,7 +58,7 @@ public class BossPumpkin : TurretEnemy
     {
         var originalMovespeed = this.moveSpeed;
         animator.Play("Attacking 2");
-        SoundManager.RequestSound(attackSounds.GetRandomElement());
+       // SoundManager.RequestSound(attackSounds.GetRandomElement());
         yield return new WaitForSeconds(1f);
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
@@ -66,5 +70,15 @@ public class BossPumpkin : TurretEnemy
     public void HalfCooldownSpellTwo()
     {
         fireDelayTwo = fireDelayTwo / 2;
+    }
+
+    public void PlayAttack1Sound()
+    {
+        SoundManager.RequestSound(attack1Sound);
+    }
+
+    public void PlayAttack2Sound()
+    {
+        SoundManager.RequestSound(attack2Sound);
     }
 }

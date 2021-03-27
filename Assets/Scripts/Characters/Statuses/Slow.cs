@@ -3,9 +3,10 @@
 public class Slow : Status
 {
     [SerializeField] private float speedMultiplier = 0.5f;
-    [SerializeField] private Color colorChange = new Color(0.1850303f, 0.7667949f, 0.9339623f, 1);
+    [SerializeField] private Color colorChange = new Color(0.03f, 0.25f, 0.0f, 1);
     [SerializeField] private float duration = 3;
     [SerializeField] private int maxStacks = 8;
+    [SerializeField] private GameObject particleLight = default;
 
     [SerializeField] private ParticleSystem particles = default;
 
@@ -46,6 +47,7 @@ public class Slow : Status
     {
         if (target == null) return;
 
+        particleLight.SetActive(true);
         var e = particles.emission;
         e.enabled = true;
 
@@ -94,6 +96,7 @@ public class Slow : Status
 
         var e = particles.emission;
         e.enabled = false;
+        particleLight.SetActive(false);
 
         this.enabled = false;
     }
@@ -118,6 +121,7 @@ public class Slow : Status
                     target.renderer.color = initialColor;
                     var e = particles.emission;
                     e.enabled = false;
+                    particleLight.SetActive(false);
                     this.enabled = false;
                 }
             }

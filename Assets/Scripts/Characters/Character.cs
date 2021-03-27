@@ -19,6 +19,8 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     [Header("ParentSounds")]
     [SerializeField] protected AudioClip[] gotHitSound = default;
     [SerializeField] protected AudioClip[] attackSounds = default;
+    [SerializeField] protected AudioClip[] deathSounds = default;
+    [SerializeField] protected AudioClip[] inRangeSounds = default;
     [Header("CoolDowns")]
     [SerializeField] protected bool meeleCooldown = false;
     [SerializeField] protected bool spellCooldown = false;
@@ -86,7 +88,7 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     {
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 
@@ -115,6 +117,8 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
             SetAnimatorXY(direction * Vector2.up);
         }
     }
+
+    public Vector2 GetAnimatorXY() => new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
 
     //! A bit messy to have both a public health property and `TakeDamage`, but unsure how to address
     public virtual void TakeDamage(float damage, bool isCritical)
@@ -165,5 +169,10 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
         lift,
         dead,
         waiting
+    }
+
+    public void RequestAttackSound()
+    {
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
     }
 }

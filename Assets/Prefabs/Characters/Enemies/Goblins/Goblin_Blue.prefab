@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 8
 --- !u!60 &7290780267909940646
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 8
 --- !u!60 &7290780268476715908
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -182,6 +182,7 @@ PolygonCollider2D:
     - - {x: -0.030443668, y: 0.5230528}
       - {x: -0.5409889, y: 0.2886529}
       - {x: -0.51979685, y: -0.21696854}
+      - {x: -0.09054797, y: -0.4523474}
       - {x: 0.4205556, y: -0.38256705}
       - {x: 0.35233545, y: 0.34960848}
 --- !u!1 &7290780269330328548
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 8
 --- !u!60 &7290780269330328547
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 8
 --- !u!60 &7290780269679869409
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -386,8 +387,6 @@ GameObject:
   - component: {fileID: 7290780269828354141}
   - component: {fileID: 7290780269828354140}
   - component: {fileID: 7290780269828354134}
-  - component: {fileID: 6256331092031663733}
-  - component: {fileID: 5401824811137856012}
   - component: {fileID: 6825456830845884822}
   - component: {fileID: 3335763206203761669}
   - component: {fileID: 2879971062725114650}
@@ -552,7 +551,7 @@ Animator:
   m_GameObject: {fileID: 7290780269828354143}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a18bd076809a10542ad2bcb802a6923c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 35891e951bdfc344298430a82ec7ee12, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -579,6 +578,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds:
   - {fileID: 8300000, guid: f768dcc7c7fccf44aa1aece22c1b182d, type: 3}
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -586,20 +587,25 @@ MonoBehaviour:
   _slow: {fileID: 591510210751845024}
   _shrink: {fileID: 7372415181596312009}
   _gigantism: {fileID: 3544170662718870434}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 50
-  maxHealth: {fileID: 11400000, guid: 9c0a3f01b9dcb1241aec80bff41cea8d, type: 2}
+  enemyXp: 10
+  maxHealth: {fileID: 11400000, guid: d13126d5838c7b045a992a2123026c6c, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 3
   isMinion: 0
   enemyName: 
-  moveSpeed: 1
+  moveSpeed: 2
   homePosition: {x: 0, y: 0}
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
   attackRadius: 0.65
-  deathEffect: {fileID: 4464167541414145869, guid: ce3134dc6306d2e40a4946c2789f5826,
+  deathEffect: {fileID: 4464167541414145869, guid: 6b179a6bc1ff7624eab8bbfd03c3acca,
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
@@ -609,35 +615,7 @@ MonoBehaviour:
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
---- !u!114 &6256331092031663733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290780269828354143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 1
-  duration: 1
---- !u!114 &5401824811137856012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7290780269828354143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  _damage: 10
+  leftChaseRadius: 1
 --- !u!114 &6825456830845884822
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -58,6 +59,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -80,7 +82,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &1719361526987702605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,8 +105,10 @@ MonoBehaviour:
   - {fileID: 1719361527801927012}
   - {fileID: 1719361527660305436}
   m_Bounds:
-    m_Center: {x: -0.039299548, y: -0.27655607, z: 0}
-    m_Extent: {x: 1.0665332, y: 1.0317138, z: 0}
+    m_Center: {x: -0.13056159, y: 0.83750904, z: 0}
+    m_Extent: {x: 0.86943936, y: 0.8375086, z: 0}
+  m_UseBatching: 1
+  m_AlwaysUpdate: 1
 --- !u!1 &1719361527187356234
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +341,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -348,6 +353,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -370,7 +376,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &1719361528073255702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,8 +395,10 @@ MonoBehaviour:
   - {fileID: 1719361527326148518}
   - {fileID: 1719361527842452270}
   m_Bounds:
-    m_Center: {x: 0.869392, y: -0.011004269, z: 0}
-    m_Extent: {x: 1.2117745, y: 0.16619124, z: 0}
+    m_Center: {x: -0.048566148, y: 0.77003217, z: 0}
+    m_Extent: {x: 0.19530594, y: 0.9694194, z: 0}
+  m_UseBatching: 1
+  m_AlwaysUpdate: 1
 --- !u!95 &1719361528073255697
 Animator:
   serializedVersion: 3

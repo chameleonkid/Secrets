@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4596141420500315408}
   - component: {fileID: 2797258304518211204}
   - component: {fileID: 4770058634158852541}
+  - component: {fileID: 4678176875130520162}
   m_Layer: 9
   m_Name: IceProjectile
   m_TagString: enemy
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 5
+  _damage: 3
 --- !u!82 &4596141420500315408
 AudioSource:
   m_ObjectHideFlags: 0
@@ -283,3 +284,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 5
   projectileSpeed: 9
+  destroyDelay: 0
+--- !u!114 &4678176875130520162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755954809695844891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1940d35a13cd40d41b71f34de695c72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

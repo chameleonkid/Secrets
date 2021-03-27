@@ -176,6 +176,11 @@ public class CharacterCreation : MonoBehaviour
         SceneManager.LoadScene("Mavens_Inn_Cutscene");
     }
 
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
     public void ResetTextures()
     {
         bodyChanger.newSprite = activeTextures.bodySkins[0];

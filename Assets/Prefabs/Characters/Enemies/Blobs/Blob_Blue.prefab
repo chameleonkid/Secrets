@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3492503705776306311}
   - component: {fileID: 3492503705776306310}
   - component: {fileID: 3492503705776306314}
-  - component: {fileID: 3492503705776306313}
+  - component: {fileID: 5922027658073989320}
   - component: {fileID: 3492503705776306316}
   - component: {fileID: 3492503705776306315}
   - component: {fileID: 2593797965962476558}
@@ -134,8 +134,8 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3492503705776306313
-BoxCollider2D:
+--- !u!58 &5922027658073989320
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,19 +147,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0065476894, y: -0.06150949}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: -0.06960282}
   serializedVersion: 2
-  m_Size: {x: 0.63165045, y: 0.4120047}
-  m_EdgeRadius: 0
+  m_Radius: 0.18039718
 --- !u!61 &3492503705776306316
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +163,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005366087, y: -0.055979013}
+  m_Offset: {x: -0.0033494234, y: -0.07491171}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -184,7 +174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8915458, y: 0.64793444}
+  m_Size: {x: 0.4938481, y: 0.36336923}
   m_EdgeRadius: 0
 --- !u!114 &3492503705776306315
 MonoBehaviour:
@@ -203,6 +193,9 @@ MonoBehaviour:
   gotHitSound:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds: []
+  deathSounds: []
+  inRangeSounds:
+  - {fileID: 8300000, guid: 00d0633e20d12604a848ddb7983cd4e2, type: 3}
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -210,9 +203,14 @@ MonoBehaviour:
   _slow: {fileID: 2863901240433274056}
   _shrink: {fileID: 7372415182850564971}
   _gigantism: {fileID: 3544170664228871050}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 20
-  maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
+  enemyXp: 2
+  maxHealth: {fileID: 11400000, guid: 5574c8f4f04003545b68b09e2dc70343, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 3
@@ -233,6 +231,7 @@ MonoBehaviour:
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
+  leftChaseRadius: 1
 --- !u!114 &2593797965962476558
 MonoBehaviour:
   m_ObjectHideFlags: 0

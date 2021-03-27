@@ -64,7 +64,6 @@ public class Enemy : Character, ICanKnockback
     [SerializeField] protected Signals roomSignal = default;
     [SerializeField] protected LootTable thisLoot = default;
 
-
     [Header("Pathfinding")]
     [SerializeField] protected Transform target = default;
     public float nextWaypointDistance = 0.5f;
@@ -72,6 +71,9 @@ public class Enemy : Character, ICanKnockback
     [SerializeField] protected int currentWaipoint = 0;
     [SerializeField] protected bool reachedEndOfPath;
     [SerializeField] protected Seeker seeker;
+
+    [Header("SoundsOnDemand")]
+    [SerializeField] protected bool leftChaseRadius = true;
 
     protected virtual void OnEnable()
     {
@@ -163,6 +165,11 @@ public class Enemy : Character, ICanKnockback
 
     protected virtual void InsideChaseRadiusUpdate()
     {
+        if (leftChaseRadius)
+        {
+            SoundManager.RequestSound(inRangeSounds.GetRandomElement());
+        }
+        leftChaseRadius = false;
         if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
         {
             if (path == null)
@@ -194,6 +201,7 @@ public class Enemy : Character, ICanKnockback
     protected virtual void OutsideChaseRadiusUpdate()
     {
         randomMovement();
+        leftChaseRadius = true;
     }
 
     protected virtual void CheckForMinion()
@@ -215,6 +223,11 @@ public class Enemy : Character, ICanKnockback
         //   Debug.Log("Baseclass DIE wurde ausgeführt");
 
         DeathEffect();
+        if(deathSounds.Length >= 0)
+        {
+            SoundManager.RequestSound(deathSounds.GetRandomElement());
+        }
+    
         thisLoot?.GenerateLoot(transform.position);
         levelSystem.AddExperience(enemyXp);
 
