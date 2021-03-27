@@ -196,6 +196,28 @@ public class PlayerMovement : Character, ICanMove
         }
     }
 
+    private void SpellAttack(InventorySpellbook spellBook)
+    {
+        if (spellBook != null && mana.current >= spellBook.manaCost && !spellBook.onCooldown)
+        {
+            mana.current -= spellBook.manaCost;
+            StartCoroutine(SpellAttackCo(spellBook));
+
+            if (spellBook == inventory.currentSpellbook)
+            {
+                OnSpellTriggered?.Invoke();
+            }
+            else if (spellBook == inventory.currentSpellbookTwo)
+            {
+                OnSpellTwoTriggered?.Invoke();
+            }
+            else if (spellBook == inventory.currentSpellbookThree)
+            {
+                OnSpellThreeTriggered?.Invoke();
+            }
+        }
+    }
+
     private IEnumerator MeleeAttackCo(InventoryWeapon weapon)
     {
         OnAttackTriggered?.Invoke();
@@ -250,15 +272,6 @@ public class PlayerMovement : Character, ICanMove
         SoundManager.RequestSound(meleeCooldownSound);
     }
 
-    private Projectile CreateProjectile(GameObject prefab)
-    {
-        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
-        var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-        var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
-        return projectile;
-    }
-
-    // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
         switch (spellBook)
@@ -286,6 +299,14 @@ public class PlayerMovement : Character, ICanMove
         yield return new WaitForSeconds(0.05f + spellBook.coolDown);
         SoundManager.RequestSound(Spell0CooldownSound);
         spellBook.onCooldown = false;
+    }
+
+    private Projectile CreateProjectile(GameObject prefab)
+    {
+        var position = new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
+        var direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
+        return projectile;
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -333,34 +354,12 @@ public class PlayerMovement : Character, ICanMove
     // ################################### Functions for UI Input or Controller ##################################################################
     // ###########################################################################################################################################
 
-    public void ToggleLamp()
+    private void ToggleLamp()
     {
         if (inventory.currentLamp && lumen.current > 0)
         {
             lamp.enabled = !lamp.enabled;
             OnLampTriggered?.Invoke();
-        }
-    }
-
-    public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
-    {
-        if (spellBook != null && mana.current >= spellBook.manaCost && !spellBook.onCooldown)
-        {
-            mana.current -= spellBook.manaCost;
-            StartCoroutine(SpellAttackCo(spellBook));
-
-            if (spellBook == inventory.currentSpellbook)
-            {
-                OnSpellTriggered?.Invoke();
-            }
-            else if (spellBook == inventory.currentSpellbookTwo)
-            {
-                OnSpellTwoTriggered?.Invoke();
-            }
-            else if (spellBook == inventory.currentSpellbookThree)
-            {
-                OnSpellThreeTriggered?.Invoke();
-            }
         }
     }
 
