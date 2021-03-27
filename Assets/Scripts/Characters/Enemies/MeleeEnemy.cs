@@ -5,6 +5,15 @@ public class MeleeEnemy : Enemy
 {
     protected override void FixedUpdate()
     {
+        //! Temporary!
+        if (currentState is Schwer.States.Knockback) {
+            currentState.FixedUpdate();
+            return;
+        }
+        else {
+            rigidbody.velocity = Vector2.zero;
+        }
+
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius)
         {

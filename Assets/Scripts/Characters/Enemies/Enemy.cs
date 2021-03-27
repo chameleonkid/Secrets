@@ -2,8 +2,9 @@
 using System;
 using System.Collections;
 using Pathfinding;
+using Schwer.States;
 
-public class Enemy : Character
+public class Enemy : Character, ICanKnockback
 {
     [Header("Enemy Stats")]
     [SerializeField] protected XPSystem levelSystem = default;
@@ -135,6 +136,15 @@ public class Enemy : Character
 
     protected virtual void FixedUpdate()
     {
+        //! Temporary!
+        if (currentState is Schwer.States.Knockback) {
+            currentState.FixedUpdate();
+            return;
+        }
+        else {
+            rigidbody.velocity = Vector2.zero;
+        }
+
         var percentHealh = maxHealth.value / 100f;
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius && this.health > (percentHealh * 10))

@@ -11,6 +11,8 @@ public class BossPumpkin : TurretEnemy
 
     protected override void Update()
     {
+        if (currentState is Schwer.States.Knockback) return;
+
         base.Update();
 
         fireDelaySecondsTwo -= Time.deltaTime;

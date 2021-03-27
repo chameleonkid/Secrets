@@ -11,6 +11,8 @@ public class TurretEnemy : SimpleEnemy
 
     protected virtual void Update()
     {
+        if (currentState is Schwer.States.Knockback) return;
+
         fireDelaySeconds -= Time.deltaTime;
         if (fireDelaySeconds <= 0)
         {
