@@ -160,10 +160,10 @@ public class PlayerMovement : Character, ICanMove
         // Full state machine logic should be here
         if (currentState == null) currentState = new Move(this);
 
-        if (input.attack || uiInput.attack) Attack();
-
-        if (!(currentState is Schwer.States.Knockback))
+        if (!((currentState is Schwer.States.Knockback) || (currentState is PlayerMeleeAttack) || (currentState is PlayerBowAttack)))
         {
+            if (input.attack || uiInput.attack) Attack();
+
             if (input.spellCast1 || uiInput.spellCast1) SpellAttack(inventory.currentSpellbook);
             if (input.spellCast2 || uiInput.spellCast2) SpellAttack(inventory.currentSpellbookTwo);
             if (input.spellCast3 || uiInput.spellCast3) SpellAttack(inventory.currentSpellbookThree);
@@ -179,7 +179,7 @@ public class PlayerMovement : Character, ICanMove
     {
         var currentWeapon = inventory.currentWeapon;
 
-        if (currentStateEnum != StateEnum.attack && currentWeapon != null && !meeleCooldown)
+        if (currentWeapon != null && !meeleCooldown)
         {
             if (currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
             {
@@ -224,11 +224,7 @@ public class PlayerMovement : Character, ICanMove
 
         SoundManager.RequestSound(attackSounds.GetRandomElement());
 
-        // currentState = new PlayerMeleeAttack(this, 0.3f);
-        animator.SetBool("Attacking", true);
-        currentStateEnum = StateEnum.attack;
-        yield return null;
-        animator.SetBool("Attacking", false);
+        currentState = new PlayerMeleeAttack(this, 0.3f);
 
         yield return new WaitForSeconds(0.3f + weapon.swingTime);
         meeleCooldown = false;
@@ -240,22 +236,15 @@ public class PlayerMovement : Character, ICanMove
         OnAttackTriggered?.Invoke();
         meeleCooldown = true;
         inventory.items[arrow]--;
-        currentStateEnum = StateEnum.attack;
-        animator.SetBool("isShooting", true);
 
         var proj = CreateProjectile(projectile);
         var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
         proj.OverrideSpeed(arrowSpeed);
         proj.OverrideDamage(damage, IsCriticalHit());
 
-        yield return new WaitForSeconds(0.3f);
+        currentState = new PlayerBowAttack(this, 0.3f);
 
-        if (currentStateEnum != StateEnum.interact)
-        {
-            currentStateEnum = StateEnum.walk;
-        }
-        animator.SetBool("isShooting", false);
-        yield return new WaitForSeconds(weapon.swingTime);
+        yield return new WaitForSeconds(0.3f + weapon.swingTime);
         meeleCooldown = false;
         SoundManager.RequestSound(meleeCooldownSound);
     }
@@ -372,7 +361,7 @@ public class PlayerMovement : Character, ICanMove
 
     public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
     {
-        if (spellBook != null && mana.current >= spellBook.manaCost && currentStateEnum != StateEnum.attack && !spellBook.onCooldown)
+        if (spellBook != null && mana.current >= spellBook.manaCost && !spellBook.onCooldown)
         {
             mana.current -= spellBook.manaCost;
             StartCoroutine(SpellAttackCo(spellBook));
