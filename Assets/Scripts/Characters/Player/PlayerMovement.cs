@@ -294,13 +294,10 @@ public class PlayerMovement : Character, ICanMove
         }
 
         spellBook.onCooldown = true;
-        yield return new WaitForSeconds(0.05f);
-        if (currentStateEnum != StateEnum.interact)
-        {
-            currentStateEnum = StateEnum.walk;
-        }
-        animator.SetBool("isCasting", false);
-        yield return new WaitForSeconds(spellBook.coolDown);
+
+        currentState = new PlayerSpellAttack(this, 0.05f);
+
+        yield return new WaitForSeconds(0.05f + spellBook.coolDown);
         SoundManager.RequestSound(Spell0CooldownSound);
         spellBook.onCooldown = false;
     }
