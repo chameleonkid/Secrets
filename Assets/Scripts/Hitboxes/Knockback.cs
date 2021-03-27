@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Schwer.States;
+using UnityEngine;
 
 public class Knockback : Hitbox
 {
@@ -7,8 +8,8 @@ public class Knockback : Hitbox
 
     protected override void OnHit(Collider2D other)
     {
-        var hit = other.GetComponent<Schwer.States.ICanKnockback>();
-        if (hit != null && !(hit.currentState is Schwer.States.PlayerDead))
+        var hit = other.GetComponent<ICanKnockback>();
+        if (hit != null && !((hit.currentState is PlayerDead) || (hit.currentState is Locked)))
         {
             var knockback = other.transform.position - transform.position;
             knockback.Normalize();
