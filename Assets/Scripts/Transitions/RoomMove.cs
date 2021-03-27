@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomMove : MonoBehaviour
+public class RoomMove : ComponentTrigger<PlayerMovement>
 {
     public Vector3 playerChange;
     public bool needText;
@@ -10,20 +10,17 @@ public class RoomMove : MonoBehaviour
     public GameObject IGAreaText;
     public Text AreaText;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnEnter(PlayerMovement player)
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        player.currentState = new Locked(player, 2);
+        player.transform.position += playerChange;
+        if (needText)
         {
-            other.GetComponent<PlayerMovement>().LockMovement(2);
-            other.transform.position += playerChange;
-            if (needText)
-            {
-                StartCoroutine(placeNameCo());
-            }
+            StartCoroutine(PlaceNameCo());
         }
     }
 
-    private IEnumerator placeNameCo()
+    private IEnumerator PlaceNameCo()
     {
         IGAreaText.SetActive(true);
         AreaText.text = AreaName;
