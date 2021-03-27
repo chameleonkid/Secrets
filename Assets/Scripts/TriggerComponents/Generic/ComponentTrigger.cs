@@ -7,7 +7,7 @@ public abstract class ComponentTrigger<T> : MonoBehaviour where T : MonoBehaviou
         var component = other.GetComponent<T>();
         if (component != null)
         {
-            OnTriggerEnter2D(component);
+            OnEnter(component);
         }
     }
 
@@ -16,10 +16,10 @@ public abstract class ComponentTrigger<T> : MonoBehaviour where T : MonoBehaviou
         var component = other.GetComponent<T>();
         if (component != null)
         {
-            OnTriggerExit2D(component);
+            OnExit(component);
         }
     }
 
-    protected virtual void OnTriggerEnter2D(T component) {}
-    protected virtual void OnTriggerExit2D(T component) {}
+    protected virtual void OnEnter(T component) {}
+    protected virtual void OnExit(T component) {}
 }
