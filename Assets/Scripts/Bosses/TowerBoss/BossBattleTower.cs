@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
 
 public class BossBattleTower : MonoBehaviour
 {
@@ -12,6 +10,7 @@ public class BossBattleTower : MonoBehaviour
         Stage_2,
         Stage_3,
     }
+
     [Header("TriggerArea")]
     [SerializeField] private ColliderTrigger colliderTrigger = default;
     [Header("Potential Enemies")]
@@ -42,15 +41,8 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private bool isDefeated;
     [SerializeField] private BoolValue storeDefeated;
 
-
-
-
-
-
-
     private void Awake()
     {
-
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {
@@ -67,7 +59,6 @@ public class BossBattleTower : MonoBehaviour
 
             stage = Stage.WaitingToStart;
         }
-        
     }
 
     private void Start()
@@ -91,7 +82,7 @@ public class BossBattleTower : MonoBehaviour
         switch (stage)
         {
             case Stage.Stage_1:
-                   if(boss.GetPercentHealth() <= 70)
+                if (boss.GetPercentHealth() <= 70)
                 {
                     StartNextStage();
                 }
@@ -116,7 +107,7 @@ public class BossBattleTower : MonoBehaviour
     {
         Debug.Log("BossBattle has started!");
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);                                          
+        InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);
     }
 
     private void SpawnEnemy()
@@ -126,12 +117,11 @@ public class BossBattleTower : MonoBehaviour
 
         if (stage == Stage.Stage_1)
         {
-
             Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
 
             if (rndEnemy < 35)
             {
-               minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
+                minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
             }
             if (rndEnemy >= 35 && rndEnemy <= 75)
             {
@@ -147,7 +137,7 @@ public class BossBattleTower : MonoBehaviour
         {
             if (minionsSpawned == false)                                    //Spawn X " SHIELD-MINIONS "
             {
-                for (int i = 0; i <= minionsToSpawn; i++)    
+                for (int i = 0; i <= minionsToSpawn; i++)
                 {
                     Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
                     minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
@@ -171,7 +161,7 @@ public class BossBattleTower : MonoBehaviour
     private void MinionKilled()
     {
         spawnedMinionsCounter--;
-        if(spawnedMinionsCounter <= 0)
+        if (spawnedMinionsCounter <= 0)
         {
             bossshield.triggerShield();
         }
@@ -187,7 +177,7 @@ public class BossBattleTower : MonoBehaviour
 
     private void StartNextStage()
     {
-        switch(stage)
+        switch (stage)
         {
             case Stage.WaitingToStart:
                 stage = Stage.Stage_1;
@@ -200,18 +190,15 @@ public class BossBattleTower : MonoBehaviour
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;
-                break;     
+                break;
         }
         Debug.Log("Next Stage has started " + stage);
     }
 
-
     private void EnhanceAttacks()
     {
-      //  var boss = this.GetComponent<BossPumpkin>();
+        // var boss = this.GetComponent<BossPumpkin>();
         boss.HalfCooldown();
         boss.HalfCooldownSpellTwo();
     }
-    
-
 }
