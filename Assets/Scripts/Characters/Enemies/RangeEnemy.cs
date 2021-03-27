@@ -37,7 +37,7 @@ public class RangeEnemy : TurretEnemy
                 }
             }
         }
-        else if(distance <= chaseRadius && distance <= shootingRange && distance > escapeRange)
+        else if (distance <= chaseRadius && distance <= shootingRange && distance > escapeRange)
         {
             currentStateEnum = StateEnum.idle;
             animator.SetBool("isMoving", false);
@@ -47,7 +47,7 @@ public class RangeEnemy : TurretEnemy
                 FireProjectile();
             }
         }
-        else if(distance > chaseRadius)
+        else if (distance > chaseRadius)
         {
             randomMovement();
         }
@@ -56,8 +56,5 @@ public class RangeEnemy : TurretEnemy
         {
             AvoidPlayer();
         }
-
     }
-
 }
-

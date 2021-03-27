@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossPumpkin : TurretEnemy
@@ -9,7 +8,6 @@ public class BossPumpkin : TurretEnemy
     public bool canFireTwo = false;
     public float fireDelayTwo;
     [SerializeField] private float fireDelaySecondsTwo;
-
 
     protected override void Update()
     {
@@ -41,10 +39,7 @@ public class BossPumpkin : TurretEnemy
             }
             currentStateEnum = StateEnum.idle;
         }
-
-
     }
-
 
     protected virtual void FireProjectileTwo()
     {
@@ -52,7 +47,6 @@ public class BossPumpkin : TurretEnemy
         canFireTwo = false;
         currentStateEnum = StateEnum.walk;
     }
-
 
     protected virtual IEnumerator FireTwoCo()
     {
@@ -65,7 +59,6 @@ public class BossPumpkin : TurretEnemy
         this.moveSpeed = originalMovespeed;
         var randomProjectile = Random.Range(0, projectileTwo.Length);
         var proj = Instantiate(projectileTwo[randomProjectile], target.transform.position, Quaternion.identity);
-
     }
 
     public void HalfCooldownSpellTwo()

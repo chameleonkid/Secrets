@@ -9,7 +9,7 @@ public class MeleeEnemy : Enemy
         if (distance <= chaseRadius && distance > attackRadius)
         {
             if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
-            {             
+            {
                 if (path == null)
                 {
                     return;
@@ -32,9 +32,8 @@ public class MeleeEnemy : Enemy
                 else
                 {
                     reachedEndOfPath = false;
-                }          
+                }
             }
-
         }
         else if (distance <= chaseRadius && distance <= attackRadius)
         {
@@ -60,5 +59,3 @@ public class MeleeEnemy : Enemy
         currentStateEnum = StateEnum.walk;
     }
 }
-
-

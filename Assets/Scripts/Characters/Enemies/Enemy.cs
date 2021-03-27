@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-using Random = UnityEngine.Random;
 using Pathfinding;
 
 public class Enemy : Character
@@ -46,6 +45,7 @@ public class Enemy : Character
             }
         }
     }
+
     [Header("Enemy Attributes")]
     [SerializeField] protected string enemyName = default;      // Unused, is it necessary?
     public float moveSpeed = default;                           // Should make protected
@@ -72,12 +72,6 @@ public class Enemy : Character
     [SerializeField] protected bool reachedEndOfPath;
     [SerializeField] protected Seeker seeker;
 
-
-    private void Start()
-    {
-
-    }
-
     protected virtual void OnEnable()
     {
         health = maxHealth.value;
@@ -99,7 +93,6 @@ public class Enemy : Character
         InvokeRepeating("UpdatePath", 0f, 0.5f);
 
         roamingPosition = GetRoamingPostion();
-
     }
 
     void UpdatePath()
@@ -119,7 +112,6 @@ public class Enemy : Character
         }
     }
 
-
     protected bool IsInRange()
     {
         if (Vector2.Distance(transform.position, target.transform.position) <= chaseRadius)
@@ -132,10 +124,9 @@ public class Enemy : Character
         }
     }
 
-
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(!other.gameObject.GetComponent<PlayerMovement>())
+        if (!other.gameObject.GetComponent<PlayerMovement>())
         {
             randomMovement();
         }
@@ -144,7 +135,6 @@ public class Enemy : Character
 
     protected virtual void FixedUpdate()
     {
-
         var percentHealh = maxHealth.value / 100f;
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius && this.health > (percentHealh * 10))
@@ -159,37 +149,34 @@ public class Enemy : Character
         {
             OutsideChaseRadiusUpdate();
         }
-
     }
 
     protected virtual void InsideChaseRadiusUpdate()
     {
         if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
         {
+            if (path == null)
             {
-                if (path == null)
-                {
-                    return;
-                }
-                if (currentWaipoint >= path.vectorPath.Count)
-                {
-                    reachedEndOfPath = true;
-                    return;
-                }
-                animator.SetBool("isMoving", true);
-                Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * speedModifier * Time.deltaTime);
-                rigidbody.MovePosition(temp);
-                float distance = Vector2.Distance(rigidbody.position, path.vectorPath[currentWaipoint]);
-                SetAnimatorXYSingleAxis(temp - transform.position);
+                return;
+            }
+            if (currentWaipoint >= path.vectorPath.Count)
+            {
+                reachedEndOfPath = true;
+                return;
+            }
+            animator.SetBool("isMoving", true);
+            Vector3 temp = Vector3.MoveTowards(rigidbody.position, path.vectorPath[currentWaipoint], moveSpeed * speedModifier * Time.deltaTime);
+            rigidbody.MovePosition(temp);
+            float distance = Vector2.Distance(rigidbody.position, path.vectorPath[currentWaipoint]);
+            SetAnimatorXYSingleAxis(temp - transform.position);
 
-                if (distance < nextWaypointDistance)
-                {
-                    currentWaipoint++;
-                }
-                else
-                {
-                    reachedEndOfPath = false;
-                }
+            if (distance < nextWaypointDistance)
+            {
+                currentWaipoint++;
+            }
+            else
+            {
+                reachedEndOfPath = false;
             }
         }
     }
@@ -203,20 +190,19 @@ public class Enemy : Character
     {
         if (isMinion)
         {
-         //   Debug.Log("Minion was killed");
+            // Debug.Log("Minion was killed");
             OnMinionDied?.Invoke();
         }
         else
         {
-        //    Debug.Log("Normal Enemy was killed");
+            // Debug.Log("Normal Enemy was killed");
             OnEnemyDied?.Invoke();
         }
     }
 
-
     protected virtual void Die()
     {
-     //   Debug.Log("Baseclass DIE wurde ausgeführt");
+        //   Debug.Log("Baseclass DIE wurde ausgeführt");
 
         DeathEffect();
         thisLoot?.GenerateLoot(transform.position);
@@ -244,8 +230,6 @@ public class Enemy : Character
 
     public void KillEnemy() => health = 0;
 
-
-
     protected Vector3 GetRandomDirection()
     {
         return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
@@ -264,15 +248,11 @@ public class Enemy : Character
         return vec3Home;
     }
 
-
-
     protected void randomMovement()
     {
-       
         if (this.transform.position != roamingPosition)
         {
-            
-            if(walkingTimer > 0)
+            if (walkingTimer > 0)
             {
                 walkingTimer -= Time.deltaTime;
                 Vector3 temp = Vector3.MoveTowards(transform.position, roamingPosition, moveSpeed * speedModifier * Time.deltaTime);
@@ -286,17 +266,14 @@ public class Enemy : Character
                 StartCoroutine(randomWaiting());
                 walkingTimer = 3f;
             }
-          
         }
         else
         {
-            if(isWalking == false)
+            if (isWalking == false)
             {
                 StartCoroutine(randomWaiting());
             }
-
         }
-
     }
 
     protected virtual IEnumerator randomWaiting()
@@ -311,8 +288,8 @@ public class Enemy : Character
 
     protected void Flee()
     {
-     //   var randomFleeDirection = transform.position += GetRandomDirection();
-        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * speedModifier* Time.deltaTime);
+        //   var randomFleeDirection = transform.position += GetRandomDirection();
+        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * speedModifier * Time.deltaTime);
         SetAnimatorXYSingleAxis(temp - transform.position);
         rigidbody.MovePosition(temp);
         animator.SetBool("isMoving", true);
@@ -328,9 +305,9 @@ public class Enemy : Character
 
     public void GetHealed(float healAmount)
     {
-        if(this.health < this.maxHealth.value)
+        if (this.health < this.maxHealth.value)
         {
-            if(this.health + healAmount > this.maxHealth.value)
+            if (this.health + healAmount > this.maxHealth.value)
             {
                 this.health = this.maxHealth.value;
             }
@@ -343,5 +320,4 @@ public class Enemy : Character
     {
         return this.maxHealth.value;
     }
-
 }

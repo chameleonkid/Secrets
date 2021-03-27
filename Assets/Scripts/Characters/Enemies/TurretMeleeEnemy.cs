@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretMeleeEnemy : TurretEnemy
@@ -7,16 +6,14 @@ public class TurretMeleeEnemy : TurretEnemy
     protected override void InsideChaseRadiusUpdate()
     {
         animator.SetBool("isInRange", true);
-        
+
         if (canAttack)
         {
-
             currentStateEnum = StateEnum.attack;
             MeleeAttack();
         }
 
         currentStateEnum = StateEnum.idle;
-        
     }
 
     protected override void OutsideChaseRadiusUpdate()
@@ -40,6 +37,4 @@ public class TurretMeleeEnemy : TurretEnemy
         yield return new WaitForSeconds(1f);              //This would equal the "CastTime"
         animator.SetBool("isAttacking", false);
     }
-
-
 }
