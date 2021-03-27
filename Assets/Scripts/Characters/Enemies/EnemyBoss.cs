@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
-using Random = UnityEngine.Random;
-using Pathfinding;
 
 public class EnemyBoss : Character
 {
@@ -20,11 +17,9 @@ public class EnemyBoss : Character
     [Header("Boss defeated Music")]
     [SerializeField] private AudioClip[] bossDefeatedMusic;
 
-    public override float health
-    {
+    public override float health {
         get => _health;
-        set
-        {
+        set {
             if (value > maxHealth.value)
             {
                 value = maxHealth.value;
@@ -47,10 +42,10 @@ public class EnemyBoss : Character
             }
         }
     }
+
     [Header("Enemy Attributes")]
     [SerializeField] protected string enemyName = default;      // Unused, is it necessary?
     public float moveSpeed = default;                           // Should make protected
-
 
     [Header("Death Effects")]
     [SerializeField] protected GameObject deathEffect = default;
@@ -65,8 +60,6 @@ public class EnemyBoss : Character
     [SerializeField] private BoolValue storeDefeated;
     [SerializeField] private GameObject bossGameObject;
 
-
-
     protected override void Awake()
     {
         base.Awake();
@@ -78,11 +71,10 @@ public class EnemyBoss : Character
         }
     }
 
-
     protected virtual void OnEnable()
     {
         health = maxHealth.value;
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
     }
 
     protected virtual void Die()
@@ -104,7 +96,6 @@ public class EnemyBoss : Character
         {
             openEntrance.SetActive(false);
         }
-
 
         if (roomSignal != null)
         {
@@ -128,7 +119,6 @@ public class EnemyBoss : Character
 
     public void KillEnemy() => health = 0;
 
-
     public void GetHealed(float healAmount)
     {
         if (this.health < this.maxHealth.value)
@@ -146,5 +136,4 @@ public class EnemyBoss : Character
     {
         return this.maxHealth.value;
     }
-
 }
