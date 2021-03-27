@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerEventTrigger : EventComponentTrigger<PlayerMovement>
+public class PlayerEventTrigger : ComponentEventTrigger<PlayerMovement>
 {
     protected override void OnEnter(PlayerMovement player)
     {
