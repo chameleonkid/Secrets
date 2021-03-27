@@ -12,7 +12,7 @@ public class BossBattleTower : MonoBehaviour
     }
 
     [Header("TriggerArea")]
-    [SerializeField] private ColliderTrigger colliderTrigger = default;
+    [SerializeField] private PlayerEventTrigger playerTrigger = default;
     [Header("Potential Enemies")]
     [SerializeField] private Enemy enemy1 = default;
     [SerializeField] private Enemy enemy2 = default;
@@ -63,7 +63,7 @@ public class BossBattleTower : MonoBehaviour
 
     private void Start()
     {
-        colliderTrigger.OnPlayerEnterTrigger += EnterBossArea;       //Subscribe to not start the Battle multiple Times
+        playerTrigger.OnTriggerEnter += EnterBossArea;       //Subscribe to not start the Battle multiple Times
         boss.OnEnemyTakeDamage += BossTakesDamage;
         boss.OnEnemyDied += BossDied;
     }
@@ -100,7 +100,7 @@ public class BossBattleTower : MonoBehaviour
     {
         boss.animator.SetBool("isWaiting", false);
         StartBattle();
-        colliderTrigger.OnPlayerEnterTrigger -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
+        playerTrigger.OnTriggerEnter -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
     }
 
     private void StartBattle()
