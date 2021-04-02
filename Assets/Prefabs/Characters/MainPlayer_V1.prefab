@@ -1096,7 +1096,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7737533577142277431}
   - component: {fileID: 7737533577142277429}
-  - component: {fileID: 7737533577142277430}
   m_Layer: 11
   m_Name: ReceivedItem
   m_TagString: Untagged
@@ -1168,33 +1167,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7737533577142277430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7737533577142277424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4018a4bba0d46f74abbe977380f14ece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 15c9e51236d60904db5257012ac6bf60, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3547411412465680931}
-        m_MethodName: RaiseItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &7737533578274349695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,6 +1734,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6960c1f9511b269489e94d5ddca222fc, type: 3}
+--- !u!4 &1050764382815432770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4000011767326100, guid: 6960c1f9511b269489e94d5ddca222fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1052476026869093846}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1084847676518758374 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114000011509588528, guid: 6960c1f9511b269489e94d5ddca222fc,

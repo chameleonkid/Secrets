@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Schwer.States;
 using UnityEngine;
 
-public class Switch : MonoBehaviour
+public class Switch : ComponentTrigger<PlayerMovement>
 {
-
     public bool active;
     public BoolValue storeValue;
     public Sprite activeSprite;
@@ -12,7 +10,6 @@ public class Switch : MonoBehaviour
     public Door thisDoor;
     [Header("Sounds")]
     [SerializeField] private AudioClip switchSound;
-
 
     void Start()
     {
@@ -24,8 +21,7 @@ public class Switch : MonoBehaviour
         }
     }
 
-
-    public void ActivateSwitch()
+    private void ActivateSwitch()
     {
         SoundManager.RequestSound(switchSound);
         active = true;
@@ -34,11 +30,11 @@ public class Switch : MonoBehaviour
         mySprite.sprite = activeSprite;
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    protected override void OnEnter(PlayerMovement player)
     {
-        if (other.GetComponent<PlayerMovement>() && !active)
+        if (!active)
         {
-            other.GetComponent<PlayerMovement>().LockMovement(0.25f);
+            player.currentState = new Locked(player, 0.25f);
             ActivateSwitch();
         }
     }

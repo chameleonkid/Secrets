@@ -1,37 +1,31 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Schwer.States;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomMove : MonoBehaviour
+public class RoomMove : ComponentTrigger<PlayerMovement>
 {
-
-
     public Vector3 playerChange;
     public bool needText;
     public string AreaName;
     public GameObject IGAreaText;
     public Text AreaText;
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected override void OnEnter(PlayerMovement player)
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        player.currentState = new Locked(player, 2);
+        player.transform.position += playerChange;
+        if (needText)
         {
-            other.GetComponent<PlayerMovement>().LockMovement(2);
-            other.transform.position += playerChange;
-            if (needText) 
-            {
-                StartCoroutine(placeNameCo());
-            }
+            StartCoroutine(PlaceNameCo());
         }
     }
 
-    private IEnumerator placeNameCo()
+    private IEnumerator PlaceNameCo()
     {
         IGAreaText.SetActive(true);
         AreaText.text = AreaName;
         yield return new WaitForSeconds(4f);
         IGAreaText.SetActive(false);
     }
-
 }

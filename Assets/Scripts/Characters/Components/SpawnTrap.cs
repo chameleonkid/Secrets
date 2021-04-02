@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Schwer.States;
 using UnityEngine;
 
-public class SpawnTrap : MonoBehaviour
+public class SpawnTrap : ComponentTrigger<PlayerMovement>
 {
     [Header("Choose random things to spawn of this:")]
     [SerializeField] private GameObject[] thingToSpawn;
@@ -19,28 +19,21 @@ public class SpawnTrap : MonoBehaviour
     [Header("This sound will be played when the trap will be activated:")]
     [SerializeField] private bool isActive = true;
 
-
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnEnter(PlayerMovement player)
     {
-        if(other.GetComponent<PlayerMovement>() && other.isTrigger && isActive == true)
+        if (isActive)
         {
-            StartSpawning();
-            other.GetComponent<PlayerMovement>().LockMovement(lockTime);
+            StartCoroutine(StartSpawningCo());
+            player.currentState = new Locked(player, lockTime);
         }
     }
 
-    protected virtual void StartSpawning()
-    {
-        StartCoroutine(StartSpawningCo());
-    }
-
-
-    protected virtual IEnumerator StartSpawningCo()
+    private IEnumerator StartSpawningCo()
     {
         this.GetComponent<SpriteRenderer>().sprite = null;
         isActive = false;
         SoundManager.RequestSound(trapSound);
-        for(int i = 0; i < spawnCounter; i++)
+        for (int i = 0; i < spawnCounter; i++)
         {
             Vector2 homePos = this.transform.position;
             var randomPosition = homePos + Random.insideUnitCircle * spawnRadius;
@@ -48,8 +41,6 @@ public class SpawnTrap : MonoBehaviour
             var spawn = Instantiate(thingToSpawn[randomSpawn], randomPosition, Quaternion.identity);  //this.transform.position needs to vary slightly for iteration
             yield return new WaitForSeconds(spawnDelay);
         }
-        isActive = false;        
+        isActive = false;
     }
-
-
 }

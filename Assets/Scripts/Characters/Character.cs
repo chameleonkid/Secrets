@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using Schwer.States;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDashless,IPoison
+public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, IGigantism, IDashless, IPoison
 {
-    public State currentState { get; protected set; }
+    public StateEnum currentStateEnum { get; protected set; }
     public abstract float health { get; set; }
     public bool isInvulnerable { get; set; }
 
@@ -48,8 +49,19 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
 
     public float speedModifier { get; set; } = 1;
 
-    private void Reset() => OnValidate(true);
+    private State _currentState;
+    public State currentState {
+        get => _currentState;
+        set {
+            if (value == null || value.GetType() != _currentState?.GetType()) {
+                _currentState?.Exit();
+                _currentState = value;
+                _currentState?.Enter();
+            }
+        }
+    }
 
+    private void Reset() => OnValidate(true);
     private void OnValidate() => OnValidate(false);
     private void OnValidate(bool overrideExisting)
     {
@@ -63,12 +75,13 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
 
     protected virtual void Awake()
     {
+        GetCharacterComponents();
+
         shrink?.Initialise(this);
         gigantism?.Initialise(this);
         dashless?.Initialise(this);
         slow?.Initialise(this);
         poison?.Initialise(this);
-        GetCharacterComponents();
     }
 
     protected void GetCharacterComponents()
@@ -79,7 +92,7 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 
-    protected void SetAnimatorXY(Vector2 direction)
+    public void SetAnimatorXY(Vector2 direction)
     {
         direction.Normalize();
         if (direction != Vector2.zero)
@@ -93,7 +106,7 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         }
     }
 
-    protected void SetAnimatorXYSingleAxis(Vector2 direction)
+    public void SetAnimatorXYSingleAxis(Vector2 direction)
     {
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
@@ -119,36 +132,6 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
         }
     }
 
-    public virtual void Knockback(Vector2 knockback, float duration)
-    {
-        if (this.gameObject.activeInHierarchy && currentState != State.stagger)
-        {
-            StartCoroutine(KnockbackCo(knockback, duration));
-        }
-    }
-
-    protected IEnumerator KnockbackCo(Vector2 knockback, float duration)
-    {
-        currentState = State.stagger;
-        rigidbody.AddForce(knockback, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(duration);
-        rigidbody.velocity = Vector2.zero;
-        currentState = State.idle;
-    }
-
-    public enum State
-    {
-        idle,
-        walk,
-        stagger,
-        interact,
-        attack,
-        roundattack,
-        lift,
-        dead,
-        waiting
-    }
-
     public void TeleportTowards(Vector2 destination, float maxDelta)
     {
         var difference = destination - (Vector2)transform.position;
@@ -172,7 +155,20 @@ public abstract class Character : MonoBehaviour , ISlow, IShrink,IGigantism,IDas
             character.rigidbody.AddForce(forceDirection.normalized * 500f);
             character.rigidbody.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.01f);
-        }    
+        }
+    }
+
+    public enum StateEnum
+    {
+        idle,
+        walk,
+        stagger,
+        interact,
+        attack,
+        roundattack,
+        lift,
+        dead,
+        waiting
     }
 
     public void RequestAttackSound()

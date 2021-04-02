@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SplittingEnemy : Enemy
@@ -12,7 +11,7 @@ public class SplittingEnemy : Enemy
         StartCoroutine(SpawnOnKillCo());
     }
 
-    IEnumerator SpawnOnKillCo()
+    private IEnumerator SpawnOnKillCo()
     {
         yield return new WaitForSeconds(0.25f);
         Debug.Log("Derived Class wurde ausgeführt DIE wurde ausgeführt");
@@ -27,6 +26,4 @@ public class SplittingEnemy : Enemy
         }
         base.Die();
     }
-
-
 }

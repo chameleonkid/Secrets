@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossPumpkin : TurretEnemy
@@ -16,6 +15,8 @@ public class BossPumpkin : TurretEnemy
 
     protected override void Update()
     {
+        if (currentState is Schwer.States.Knockback) return;
+
         base.Update();
 
         fireDelaySecondsTwo -= Time.deltaTime;
@@ -28,34 +29,30 @@ public class BossPumpkin : TurretEnemy
 
     protected override void OutsideChaseRadiusUpdate()
     {
-        currentState = State.waiting;
+        currentStateEnum = StateEnum.waiting;
     }
 
     protected override void InsideChaseRadiusUpdate()
     {
         base.InsideChaseRadiusUpdate();
 
-        if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
+        if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
         {
             if (canFireTwo)
             {
-                currentState = State.attack;
+                currentStateEnum = StateEnum.attack;
                 FireProjectileTwo();
             }
-            currentState = State.idle;
+            currentStateEnum = StateEnum.idle;
         }
-
-
     }
-
 
     protected virtual void FireProjectileTwo()
     {
         StartCoroutine(FireTwoCo());
         canFireTwo = false;
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
     }
-
 
     protected virtual IEnumerator FireTwoCo()
     {
@@ -68,7 +65,6 @@ public class BossPumpkin : TurretEnemy
         this.moveSpeed = originalMovespeed;
         var randomProjectile = Random.Range(0, projectileTwo.Length);
         var proj = Instantiate(projectileTwo[randomProjectile], target.transform.position, Quaternion.identity);
-
     }
 
     public void HalfCooldownSpellTwo()

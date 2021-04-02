@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class TreasureChest : Interactable
 {
@@ -8,8 +7,7 @@ public class TreasureChest : Interactable
     [SerializeField] private BoolValue storeOpen = default;
     private bool isOpen { get => storeOpen.RuntimeValue; set => storeOpen.RuntimeValue = value; }
 
-    [Header("Signals & Dialog")]
-    [SerializeField] private Signals raiseItem = default;
+    [Header("Dialogue")]
     [SerializeField] private Dialogue dialogue = default;
 
     [Header("Sound FX")]
@@ -47,7 +45,7 @@ public class TreasureChest : Interactable
             }
             else
             {
-                ChestAlreadyOpen();
+                player?.RaiseItem();
             }
         }
     }
@@ -60,7 +58,7 @@ public class TreasureChest : Interactable
         player.inventory.items[contents]++;
 
         // raise the signal to animate
-        raiseItem.Raise();
+        player?.RaiseItem();
         // set the chest to opened
         isOpen = true;
         SoundManager.RequestSound(chestSound);
@@ -74,11 +72,6 @@ public class TreasureChest : Interactable
         SoundManager.RequestSound(noInventorySpace);
         dialogue.sentences[0] = "There is no space left in your inventory";
         TriggerDialogue();
-    }
-
-    public void ChestAlreadyOpen()
-    {
-        raiseItem.Raise();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -105,8 +98,6 @@ public class TreasureChest : Interactable
             contextOff.Raise();
         }
     }
-
-
 
     public void TriggerDialogue() => DialogueManager.RequestDialogue(dialogue);
 }

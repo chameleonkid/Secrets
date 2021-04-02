@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretMeleeEnemy : TurretEnemy
@@ -7,21 +6,19 @@ public class TurretMeleeEnemy : TurretEnemy
     protected override void InsideChaseRadiusUpdate()
     {
         animator.SetBool("isInRange", true);
-        
+
         if (canAttack)
         {
-
-            currentState = State.attack;
+            currentStateEnum = StateEnum.attack;
             MeleeAttack();
         }
 
-        currentState = State.idle;
-        
+        currentStateEnum = StateEnum.idle;
     }
 
     protected override void OutsideChaseRadiusUpdate()
     {
-        currentState = State.idle;
+        currentStateEnum = StateEnum.idle;
         animator.SetBool("isInRange", false);
     }
 
@@ -29,7 +26,7 @@ public class TurretMeleeEnemy : TurretEnemy
     {
         StartCoroutine(MeleeAttackCo());
         canAttack = false;
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
     }
 
     protected virtual IEnumerator MeleeAttackCo()
@@ -40,6 +37,4 @@ public class TurretMeleeEnemy : TurretEnemy
         yield return new WaitForSeconds(1f);              //This would equal the "CastTime"
         animator.SetBool("isAttacking", false);
     }
-
-
 }

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Schwer.States;
 
-
-public class SzeneTransition : MonoBehaviour
+public class SzeneTransition : ComponentTrigger<PlayerMovement>
 {
     [Header("New Scene Variables")]
     public string sceneToLoad;
@@ -11,30 +11,18 @@ public class SzeneTransition : MonoBehaviour
     public VectorValue playerPosMemory;
     [SerializeField] private float transitionTime = 3f;
     [SerializeField] private Animator anim = default;
-    private PlayerMovement player;
 
-
-    public void Awake()
+    protected override void OnEnter(PlayerMovement player)
     {
-
+        playerPosMemory.value = playerPosition;
+        StartCoroutine(StartSceneCo(player));
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    private IEnumerator StartSceneCo(PlayerMovement player)
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
-        {
-            player = other.GetComponent<PlayerMovement>();
-            playerPosMemory.value = playerPosition;
-            StartCoroutine(StartSceneCo());
-        }
-    }
-
-    IEnumerator StartSceneCo()
-    {
-        player.GetComponent<PlayerMovement>().LockMovement(transitionTime + 2f);
+        player.currentState = new Locked(player, transitionTime + 2f);
         anim.SetTrigger("StartLoading");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(sceneToLoad);
     }
-
 }

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using Schwer.States;
 
-public class PlayerMovement : Character
+public class PlayerMovement : Character, ICanMove
 {
     [Header("TestUIInputs")]
     [SerializeField] private Button uiAttackButton = default;
@@ -15,16 +15,18 @@ public class PlayerMovement : Character
     [SerializeField] private Button uiLampButton = default;
     [SerializeField] private Joystick joystick = default;
 
-    [SerializeField] private bool notStaggeredOrLifting = default;
-
     [SerializeField] private Animator effectAnimator = default;
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => (Input.GetButton("Run")) ? _speed * 1.5f : _speed;
+    private float speed => input.run ? _speed * 1.5f : _speed;
     [SerializeField] private float originalSpeed;
 
-    private Vector3 change;
+    private PlayerInput input;
+    public Vector2 direction => input.direction;
+    public float moveSpeed => speed * speedModifier;
+
+    private PlayerInput uiInput;
 
     [SerializeField] private ConstrainedFloat _lumen = default;
     public ConstrainedFloat lumen => _lumen;
@@ -40,7 +42,7 @@ public class PlayerMovement : Character
             _health.current = value;
             if (_health.current <= 0)
             {
-                StartCoroutine(DeathCo());
+                currentState = new PlayerDead(this);
             }
         }
     }
@@ -54,7 +56,8 @@ public class PlayerMovement : Character
 
     [Header("Hitboxes")]
     [SerializeField] private DamageOnTrigger[] directionalAttacks = default;
-    [SerializeField] private DamageOnTrigger roundAttack = default;
+    [SerializeField] private DamageOnTrigger _roundAttack = default;
+    public DamageOnTrigger roundAttack => _roundAttack;
     [SerializeField] private PolygonCollider2D[] hitBoxColliders = default;
 
     [Header("Projectiles")]
@@ -91,7 +94,6 @@ public class PlayerMovement : Character
         _mana.max = _mana.max + 10;
         _health.current = _health.max;
         _mana.current = _mana.max;
-        currentState = State.idle;
         SoundManager.RequestSound(levelUpSound);
         if (effectAnimator)
         {
@@ -102,199 +104,182 @@ public class PlayerMovement : Character
     private void Start()
     {
         SetAnimatorXY(Vector2.down);
-        currentState = State.walk;
+        currentState = new Move(this);
         transform.position = startingPosition.value;
         originalSpeed = speed;
 
         // This is for Using UI-Buttons
-        uiAttackButton.GetComponent<Button>().onClick.AddListener(MeleeAttack);
-        uiSpellButton.GetComponent<Button>().onClick.AddListener(UISpellAttack);
-        uiSpellTwoButton.GetComponent<Button>().onClick.AddListener(UISpellAttackTwo);
-        uiSpellThreeButton.GetComponent<Button>().onClick.AddListener(UISpellAttackThree);
-        uiLampButton.GetComponent<Button>().onClick.AddListener(ToggleLamp);
+        uiAttackButton.onClick.AddListener(InputAttack);
+        uiSpellButton.onClick.AddListener(InputSpell1);
+        uiSpellTwoButton.onClick.AddListener(InputSpell2);
+        uiSpellThreeButton.onClick.AddListener(InputSpell3);
+        uiLampButton.onClick.AddListener(InputLamp);
     }
-
-    private AudioClip GetLevelUpSound() => levelUpSound;
 
     private void Update()
     {
         if (Time.timeScale <= 0) return;
-        // Is the player in an interaction?
-        if (currentState == State.interact)
-        {
-            // Debug.Log("helpmeout");
-            return;
-        }
 
-        // ################################################# Change Inputtype to Joystick on IOS ################################################
-        change.x = Input.GetAxisRaw("Horizontal");
-        change.y = Input.GetAxisRaw("Vertical");
-        if(joystick.isActiveAndEnabled)
-        {
-            change.x = joystick.Horizontal;
-            change.y = joystick.Vertical;
-        }
-        else
-        {
-            change.x = Input.GetAxisRaw("Horizontal");
-            change.y = Input.GetAxisRaw("Vertical");
-        }
+        HandleInput();
+        HandleState();
+        Debug.Log($"{name}: {currentState}");
+        currentState?.Update();
 
+        animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
 
-        SetAnimatorXY(change);
-
-        animator.SetBool("isRunning", Input.GetButton("Run") && change != Vector3.zero);
-
-        notStaggeredOrLifting = (currentState != State.stagger && currentState != State.lift);
-
-        if (Input.GetButtonDown("Attack"))
-        {
-            MeleeAttack();
-        }
-
-        if (Input.GetButton("SpellCast"))
-        {
-            SpellAttack(inventory.currentSpellbook);
-        }
-        if (Input.GetButton("SpellCast2"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
-        {
-            SpellAttack(inventory.currentSpellbookTwo);
-        }
-        if (Input.GetButton("SpellCast3"))  //Getbutton in GetButtonDown für die nicht dauerhafte Abfrage
-        {
-            SpellAttack(inventory.currentSpellbookThree);
-        }
-        if (Input.GetButtonDown("Lamp"))
-        {
-            ToggleLamp();
-        }
-
-        animator.SetBool("isHurt", (currentState == State.stagger));
-        animator.SetBool("Moving", (change != Vector3.zero));
+        uiInput.ClearBools();
     }
 
     private void FixedUpdate()
     {
-        if (currentState == State.walk || currentState == State.idle || currentState == State.lift)
-        {
-            rigidbody.MovePosition(transform.position + change.normalized * speed* speedModifier * Time.deltaTime);
-        }
+        currentState?.FixedUpdate();
 
-        if (currentState != State.stagger)
+        if (!(currentState is Schwer.States.Knockback))
         {
             rigidbody.velocity = Vector2.zero;
         }
     }
 
-    public bool IsCriticalHit() => (inventory.totalCritChance > 0 && Random.Range(0, 99) <= inventory.totalCritChance);
-
-    // #################################### Casual Attack ####################################
-    private IEnumerator AttackCo()
+    private void HandleInput()
     {
-        var currentWeapon = inventory.currentWeapon;
-
-        if (inventory.currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
+        if (joystick.isActiveAndEnabled)
         {
-            if (arrow != null && inventory.items[arrow] > 0)
-            {
-                OnAttackTriggered?.Invoke();
-                meeleCooldown = true;
-                inventory.items[arrow]--;
-                currentState = State.attack;
-                animator.SetBool("isShooting", true);
-
-                var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-                var proj = CreateProjectile(projectile);
-                proj.OverrideDamage(damage, IsCriticalHit());
-                proj.OverrideSpeed(arrowSpeed);
-
-                yield return new WaitForSeconds(0.3f);
-
-                if (currentState != State.interact)
-                {
-                    currentState = State.walk;
-                }
-                animator.SetBool("isShooting", false);
-                yield return new WaitForSeconds(currentWeapon.swingTime);
-                meeleCooldown = false;
-                SoundManager.RequestSound(meleeCooldownSound);
-            }
+            input.direction.x = joystick.Horizontal;
+            input.direction.y = joystick.Vertical;
         }
         else
         {
-            OnAttackTriggered?.Invoke();
-            meeleCooldown = true;
-            // This part is not working properly in BUILD
-            hitBoxColliders[0].points = currentWeapon.upHitboxPolygon;
-            hitBoxColliders[1].points = currentWeapon.downHitboxPolygon;
-            hitBoxColliders[2].points = currentWeapon.rightHitboxPolygon;
-            hitBoxColliders[3].points = currentWeapon.leftHitboxPolygon;
-            //! ^ The order of the hitboxes colliders cannot be safely determined by index,
-            //    as the order is arbitrarily assigned via Inspector.
+            input.direction.x = Input.GetAxisRaw("Horizontal");
+            input.direction.y = Input.GetAxisRaw("Vertical");
+        }
 
-            weaponSkinChanger.newSprite = currentWeapon.weaponSkin;
+        input.run = Input.GetButton("Run");
 
-            if (currentWeapon.weaponSkin != oldWeaponSkin)
+        input.attack = Input.GetButtonDown("Attack");
+        input.lamp = Input.GetButtonDown("Lamp");
+
+        // GetButton in GetButtonDown für die nicht dauerhafte Abfrage
+        input.spellCast1 = Input.GetButton("SpellCast");
+        input.spellCast2 = Input.GetButton("SpellCast2");
+        input.spellCast3 = Input.GetButton("SpellCast3");
+    }
+
+    private void HandleState()
+    {
+        // Full state machine logic should be here
+        if (currentState == null) currentState = new Move(this);
+
+        if (!((currentState is Schwer.States.Knockback) || (currentState is PlayerMeleeAttack) || (currentState is PlayerBowAttack)))
+        {
+            if (input.attack || uiInput.attack) Attack();
+
+            if (input.spellCast1 || uiInput.spellCast1) SpellAttack(inventory.currentSpellbook);
+            if (input.spellCast2 || uiInput.spellCast2) SpellAttack(inventory.currentSpellbookTwo);
+            if (input.spellCast3 || uiInput.spellCast3) SpellAttack(inventory.currentSpellbookThree);
+        }
+
+        if (input.lamp || uiInput.lamp) ToggleLamp();
+    }
+
+    public bool IsCriticalHit() => (inventory.totalCritChance > 0 && Random.Range(0, 99) <= inventory.totalCritChance);
+
+    // #################################### Casual Attack ####################################
+    private void Attack()
+    {
+        var currentWeapon = inventory.currentWeapon;
+
+        if (currentWeapon != null && !meeleCooldown)
+        {
+            if (currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
             {
-                weaponSkinChanger.ResetRenderer();
+                if (arrow != null && inventory.items[arrow] > 0)
+                {
+                    StartCoroutine(BowAttackCo(currentWeapon));
+                }
             }
-            oldWeaponSkin = currentWeapon.weaponSkin;
-
-            var isCritical = IsCriticalHit();
-            for (int i = 0; i < directionalAttacks.Length; i++)
+            else
             {
-                directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-                directionalAttacks[i].isCritical = isCritical;
+                StartCoroutine(MeleeAttackCo(currentWeapon));
             }
-
-            SoundManager.RequestSound(attackSounds.GetRandomElement());
-
-            animator.SetBool("Attacking", true);
-            currentState = State.attack;
-            yield return null;
-            animator.SetBool("Attacking", false);
-            yield return new WaitForSeconds(0.3f);
-
-            if (currentState != State.interact)
-            {
-                currentState = State.walk;
-            }
-
-            yield return new WaitForSeconds(currentWeapon.swingTime);
-            meeleCooldown = false;
-            SoundManager.RequestSound(meleeCooldownSound);
         }
     }
 
-    // ############################# Roundattack ################################################ Might be used for a Combo later?
-    private IEnumerator RoundAttackCo()
+    private void SpellAttack(InventorySpellbook spellBook)
     {
-        roundAttack.damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-        roundAttack.isCritical = IsCriticalHit();
-        //! Is this missing a sound request?
-        animator.SetBool("RoundAttacking", true);
-        currentState = State.roundattack;
-        yield return null;  //! This allows a round attack to be executed every other frame when the input is held, causing mana to drain very quickly
-        animator.SetBool("RoundAttacking", false);
-        currentState = State.walk;
+        if (spellBook != null && mana.current >= spellBook.manaCost && !spellBook.onCooldown)
+        {
+            mana.current -= spellBook.manaCost;
+            StartCoroutine(SpellAttackCo(spellBook));
 
-        mana.current -= 1;
+            if (spellBook == inventory.currentSpellbook)
+            {
+                OnSpellTriggered?.Invoke();
+            }
+            else if (spellBook == inventory.currentSpellbookTwo)
+            {
+                OnSpellTwoTriggered?.Invoke();
+            }
+            else if (spellBook == inventory.currentSpellbookThree)
+            {
+                OnSpellThreeTriggered?.Invoke();
+            }
+        }
     }
 
-    private Projectile CreateProjectile(GameObject prefab)
+    private IEnumerator MeleeAttackCo(InventoryWeapon weapon)
     {
-        var position =  new Vector2(transform.position.x, transform.position.y);      // Set projectile higher since transform is at player's pivot point (feet).
-        var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
-        return projectile;
+        OnAttackTriggered?.Invoke();
+        meeleCooldown = true;
+        // This part is not working properly in BUILD
+        hitBoxColliders[0].points = weapon.upHitboxPolygon;
+        hitBoxColliders[1].points = weapon.downHitboxPolygon;
+        hitBoxColliders[2].points = weapon.rightHitboxPolygon;
+        hitBoxColliders[3].points = weapon.leftHitboxPolygon;
+        //! ^ The order of the hitboxes colliders cannot be safely determined by index,
+        //    as the order is arbitrarily assigned via Inspector.
+
+        weaponSkinChanger.newSprite = weapon.weaponSkin;
+
+        if (weapon.weaponSkin != oldWeaponSkin)
+        {
+            weaponSkinChanger.ResetRenderer();
+        }
+        oldWeaponSkin = weapon.weaponSkin;
+
+        var isCritical = IsCriticalHit();
+        for (int i = 0; i < directionalAttacks.Length; i++)
+        {
+            directionalAttacks[i].damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+            directionalAttacks[i].isCritical = isCritical;
+        }
+
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
+
+        currentState = new PlayerMeleeAttack(this, 0.3f);
+
+        yield return new WaitForSeconds(0.3f + weapon.swingTime);
+        meeleCooldown = false;
+        SoundManager.RequestSound(meleeCooldownSound);
     }
 
-    private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
+    private IEnumerator BowAttackCo(InventoryWeapon weapon)
     {
-        var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
-        return projectile;
+        OnAttackTriggered?.Invoke();
+        meeleCooldown = true;
+        inventory.items[arrow]--;
+
+        var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+        var proj = CreateProjectile(projectile);
+        proj.OverrideSpeed(arrowSpeed);
+        proj.OverrideDamage(damage, IsCriticalHit());
+
+        currentState = new PlayerBowAttack(this, 0.3f);
+
+        yield return new WaitForSeconds(0.3f + weapon.swingTime);
+        meeleCooldown = false;
+        SoundManager.RequestSound(meleeCooldownSound);
     }
 
-    // ############################## Using the SpellBook /Spellcasting #########################################
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
         switch (spellBook)
@@ -315,15 +300,25 @@ public class PlayerMovement : Character
         }
 
         spellBook.onCooldown = true;
-        yield return new WaitForSeconds(0.05f);
-        if (currentState != State.interact)
-        {
-            currentState = State.walk;
-        }
-        animator.SetBool("isCasting", false);
-        yield return new WaitForSeconds(spellBook.coolDown);
+
+        currentState = new PlayerSpellAttack(this, 0.05f);
+
+        yield return new WaitForSeconds(0.05f + spellBook.coolDown);
         SoundManager.RequestSound(Spell0CooldownSound);
         spellBook.onCooldown = false;
+    }
+
+    private Projectile CreateProjectile(GameObject prefab)
+    {
+        var position =  new Vector2(transform.position.x, transform.position.y);      // Set projectile higher since transform is at player's pivot point (feet).
+        var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
+        return projectile;
+    }
+
+    private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
+    {
+        var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "enemy");
+        return projectile;
     }
 
     //#################################### Item Found RAISE IT! #######################################
@@ -332,18 +327,16 @@ public class PlayerMovement : Character
     {
         if (inventory.currentItem != null)
         {
-            if (currentState != State.interact)
+            if (currentState is Locked)
             {
-                animator.SetBool("receiveItem", true);
-                currentState = State.interact;
-                receivedItemSprite.sprite = inventory.currentItem.sprite;
+                currentState = null;
+                receivedItemSprite.sprite = null;
+                inventory.currentItem = null;
             }
             else
             {
-                animator.SetBool("receiveItem", false);
-                currentState = State.idle;
-                receivedItemSprite.sprite = null;
-                inventory.currentItem = null;
+                currentState = new Locked(this, "receiveItem");
+                receivedItemSprite.sprite = inventory.currentItem.sprite;
             }
         }
     }
@@ -369,64 +362,17 @@ public class PlayerMovement : Character
         }
     }
 
-    // ########################### Getting hit and die ##############################################
+    // ############################################# Refactor ####################################################################################
+    // ################################### Functions for UI Input or Controller ##################################################################
+    // ###########################################################################################################################################
 
-    public override void Knockback(Vector2 knockback, float duration)
-    {
-        if (currentState != State.stagger && this.gameObject.activeInHierarchy)
-        {
-            StartCoroutine(KnockbackCo(knockback, duration));
-        }
-    }
-
-    //##################### Death animation and screen ##############################
-
-    private IEnumerator DeathCo()
-    {
-        currentState = State.dead;
-        animator.SetBool("isDead", true);
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("DeathMenu");
-    }
-
-    //############################################# Refcator #####################################################################################
-    //################################### Functions for UI Input or Controller ###################################################################
-    //############################################################################################################################################
-    //############################################################################################################################################
-
-    public void MeleeAttack()
-    {
-        if (currentState != State.attack && inventory.currentWeapon != null && meeleCooldown == false)
-        {
-            StartCoroutine(AttackCo());
-        }
-    }
-
-    public void UISpellAttack() => SpellAttack(inventory.currentSpellbook);
-
-    public void UISpellAttackTwo() => SpellAttack(inventory.currentSpellbookTwo);
-
-    public void UISpellAttackThree() => SpellAttack(inventory.currentSpellbookThree);
-
-    public void ToggleLamp()
+    private void ToggleLamp()
     {
         if (inventory.currentLamp && lumen.current > 0)
         {
             lamp.enabled = !lamp.enabled;
             OnLampTriggered?.Invoke();
         }
-    }
-
-    public void LockMovement(float seconds)
-    {
-        StartCoroutine(LockCo(seconds));
-    }
-
-    private IEnumerator LockCo(float seconds)
-    {
-        this._speed = 0;
-        yield return new WaitForSeconds(seconds);
-        this._speed = this.originalSpeed;
     }
 
     private IEnumerator CreateProjectilesCo(InstantiationSpellbook instantiationSpellbook)
@@ -449,31 +395,17 @@ public class PlayerMovement : Character
         }
     }
 
-    public void SpellAttack(InventorySpellbook spellBook)  // Does this need to be public?
-    {
-        if (spellBook != null && mana.current >= spellBook.manaCost && notStaggeredOrLifting && currentState != State.attack && !spellBook.onCooldown)
-        {
-            mana.current -= spellBook.manaCost;
-            StartCoroutine(SpellAttackCo(spellBook));
-
-            if (spellBook == inventory.currentSpellbook)
-            {
-                OnSpellTriggered?.Invoke();
-            }
-            else if (spellBook == inventory.currentSpellbookTwo)
-            {
-                OnSpellTwoTriggered?.Invoke();
-            }
-            else if (spellBook == inventory.currentSpellbookThree)
-            {
-                OnSpellThreeTriggered?.Invoke();
-            }
-        }
-    }
-
     public void freePlayerStuck()
     {
         Vector2 zeroPos = new Vector2(0, 0);
         transform.position = zeroPos;       
     }
+
+    #region UI Controls
+    public void InputAttack() => uiInput.attack = true;
+    public void InputSpell1() => uiInput.spellCast1 = true;
+    public void InputSpell2() => uiInput.spellCast2 = true;
+    public void InputSpell3() => uiInput.spellCast3 = true;
+    public void InputLamp() => uiInput.lamp = true;
+    #endregion
 }

@@ -7,6 +7,15 @@ public class RangeEnemy : TurretEnemy
 
     protected override void FixedUpdate()
     {
+        //! Temporary!
+        if (currentState is Schwer.States.Knockback) {
+            currentState.FixedUpdate();
+            return;
+        }
+        else {
+            rigidbody.velocity = Vector2.zero;
+        }
+
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance >= shootingRange)
         {
@@ -15,7 +24,7 @@ public class RangeEnemy : TurretEnemy
                 SoundManager.RequestSound(inRangeSounds.GetRandomElement());
             }
             leftChaseRadius = false;
-            if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
+            if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
             {
                 if (path == null)
                 {
@@ -42,17 +51,17 @@ public class RangeEnemy : TurretEnemy
                 }
             }
         }
-        else if(distance <= chaseRadius && distance <= shootingRange && distance > escapeRange)
+        else if (distance <= chaseRadius && distance <= shootingRange && distance > escapeRange)
         {
-            currentState = State.idle;
+            currentStateEnum = StateEnum.idle;
             animator.SetBool("isMoving", false);
             if (canAttack)
             {
-                currentState = State.attack;
+                currentStateEnum = StateEnum.attack;
                 FireProjectile();
             }
         }
-        else if(distance > chaseRadius)
+        else if (distance > chaseRadius)
         {
             randomMovement();
             leftChaseRadius = true;
@@ -62,8 +71,5 @@ public class RangeEnemy : TurretEnemy
         {
             AvoidPlayer();
         }
-
     }
-
 }
-

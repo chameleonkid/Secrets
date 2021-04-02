@@ -5,10 +5,15 @@ public class MeleeEnemy : Enemy
 {
     protected override void FixedUpdate()
     {
-        if (currentState != State.stagger)
-        {
+        //! Temporary!
+        if (currentState is Schwer.States.Knockback) {
+            currentState.FixedUpdate();
+            return;
+        }
+        else {
             rigidbody.velocity = Vector2.zero;
         }
+
         var distance = Vector3.Distance(target.position, transform.position);
         if (distance <= chaseRadius && distance > attackRadius)
         {
@@ -17,8 +22,8 @@ public class MeleeEnemy : Enemy
                 SoundManager.RequestSound(inRangeSounds.GetRandomElement());
             }
             leftChaseRadius = false;
-            if (currentState == State.idle || currentState == State.walk && currentState != State.stagger)
-            {             
+            if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
+            {
                 if (path == null)
                 {
                     return;
@@ -41,13 +46,12 @@ public class MeleeEnemy : Enemy
                 else
                 {
                     reachedEndOfPath = false;
-                }          
+                }
             }
-
         }
         else if (distance <= chaseRadius && distance <= attackRadius)
         {
-            if ((currentState == State.idle || currentState == State.walk) && currentState != State.stagger)
+            if ((currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk) && currentStateEnum != StateEnum.stagger)
             {
                 StartCoroutine(AttackCo());
             }
@@ -61,14 +65,11 @@ public class MeleeEnemy : Enemy
 
     public IEnumerator AttackCo()
     {
-        currentState = State.attack;
+        currentStateEnum = StateEnum.attack;
         animator.SetBool("Attacking", true);
         yield return null;
         animator.SetBool("Attacking", false);
         yield return new WaitForSeconds(0.5f); //Attack CD
-        currentState = State.walk;
+        currentStateEnum = StateEnum.walk;
     }
-
 }
-
-
