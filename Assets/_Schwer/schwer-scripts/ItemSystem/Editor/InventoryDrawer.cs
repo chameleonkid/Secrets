@@ -17,7 +17,11 @@ namespace SchwerEditor.ItemSystem {
                 //! ^ Need to convert from `EditorGUILayout` to `EditorGUI`
             }
 
-            var foldoutRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+            var capacityRect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+            EditorGUI.PropertyField(capacityRect, property.FindPropertyRelative("_maxCapacity"));
+            GUILayout.Space(EditorGUIUtility.singleLineHeight);
+
+            var foldoutRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight, position.width, EditorGUIUtility.singleLineHeight);
             property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, "Contents (" + keys.arraySize + ")", true);
 
             if (property.isExpanded) {
@@ -27,7 +31,7 @@ namespace SchwerEditor.ItemSystem {
                 var kvpSpacing = EditorGUIUtility.standardVerticalSpacing;
                 var halfWidth = position.width / 2;
                 for (int i = 0; i < keys.arraySize; i++) {
-                    var posY = position.y + ((i + 1) * (kvpHeight + kvpSpacing));
+                    var posY = position.y + EditorGUIUtility.singleLineHeight + ((i + 1) * (kvpHeight + kvpSpacing));
                     var keyRect = new Rect(position.x, posY, halfWidth, kvpHeight);
                     var valueRect = new Rect(position.x + halfWidth, posY, halfWidth, kvpHeight);
                     var key = keys.GetArrayElementAtIndex(i);
