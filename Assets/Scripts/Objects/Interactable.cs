@@ -5,6 +5,12 @@ public class Interactable : MonoBehaviour
     public bool playerInRange;
     public Signals contextOn;
     public Signals contextOff;
+    [SerializeField] protected PlayerMovement player;
+
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
