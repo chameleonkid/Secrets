@@ -15,10 +15,11 @@ public class TreasureChest : Interactable
     [SerializeField] private AudioClip noInventorySpace = default;
 
     private Animator anim;
-    private PlayerMovement player;
+
 
     private void Start()
     {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
         dialogue.npcName = "Chest";
         anim = GetComponent<Animator>();
         if (isOpen)
@@ -26,11 +27,12 @@ public class TreasureChest : Interactable
             anim.SetBool("opened", true);
         }
 
+
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
+        if ((Input.GetButtonDown("Interact") || player.GetInteraction()) && playerInRange && Time.timeScale > 0)
         {
             if (!isOpen)
             {
@@ -79,7 +81,7 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && other.isTrigger)
         {
             playerInRange = true;
-            player = other.GetComponent<PlayerMovement>();
+           // player = other.GetComponent<PlayerMovement>();
 
             if (!isOpen)
             {
@@ -93,7 +95,7 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && other.isTrigger)
         {
             playerInRange = false;
-            player = null;
+           // player = null;
 
             contextOff.Raise();
         }
