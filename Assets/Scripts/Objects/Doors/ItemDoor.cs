@@ -14,6 +14,7 @@ public class ItemDoor : Interactable
     //########################## Doormemory ##################################
     private void Start()
     {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
         open = storeOpen.RuntimeValue;
         if (open)
         {
@@ -29,7 +30,7 @@ public class ItemDoor : Interactable
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
+        if ((Input.GetButtonDown("Interact") || player.GetInteraction()) && playerInRange && Time.timeScale > 0)
         {
             if (playerInventory.Contains(item))
             {
