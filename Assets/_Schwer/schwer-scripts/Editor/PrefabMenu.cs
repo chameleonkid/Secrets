@@ -13,8 +13,7 @@ namespace SchwerEditor {
         // Intended for `Instantiate Prefab` to be below `Create Empty`, but can't use priority `1` since `3D Object` uses that.
 
         [MenuItem("GameObject/Instantiate Prefab/Item Chest", false, 0)]
-        public static void InstantiateChestPrefab(MenuCommand command) => InstantiatePrefab(command,
-            "Assets/Prefabs/Objects/Chests/ItemChest.prefab");
+        public static void InstantiateChestPrefab(MenuCommand command) => InstantiatePrefab(command, "Assets/Prefabs/Objects/Chests/ItemChest.prefab");
 
         private static void InstantiatePrefab(MenuCommand command, string path) {
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
