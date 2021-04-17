@@ -13,13 +13,14 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private Button uiSpellTwoButton = default;
     [SerializeField] private Button uiSpellThreeButton = default;
     [SerializeField] private Button uiLampButton = default;
+    [SerializeField] private Button uiRunAndInteractButton = default;
     [SerializeField] private Joystick joystick = default;
 
     [SerializeField] private Animator effectAnimator = default;
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => input.run ? _speed * 1.5f : _speed;
+    private float speed => input.run || uiInput.run ? _speed * 1.5f : _speed;
     [SerializeField] private float originalSpeed;
 
     private PlayerInput input;
@@ -114,6 +115,7 @@ public class PlayerMovement : Character, ICanMove
         uiSpellTwoButton.onClick.AddListener(InputSpell2);
         uiSpellThreeButton.onClick.AddListener(InputSpell3);
         uiLampButton.onClick.AddListener(InputLamp);
+        uiRunAndInteractButton.onClick.AddListener(InputRunAndInteract);
     }
 
     private void Update()
@@ -122,7 +124,7 @@ public class PlayerMovement : Character, ICanMove
 
         HandleInput();
         HandleState();
-        Debug.Log($"{name}: {currentState}");
+   //     Debug.Log($"{name}: {currentState}");
         currentState?.Update();
 
         animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
@@ -407,5 +409,15 @@ public class PlayerMovement : Character, ICanMove
     public void InputSpell2() => uiInput.spellCast2 = true;
     public void InputSpell3() => uiInput.spellCast3 = true;
     public void InputLamp() => uiInput.lamp = true;
+    public void InputRunAndInteract()
+    {
+        uiInput.run = true;
+        Debug.Log("RUNNING NOW!");
+        uiInput.interact = true;
+    }
     #endregion
+    public bool GetInteraction()
+    {
+        return uiInput.interact;
+    }
 }
