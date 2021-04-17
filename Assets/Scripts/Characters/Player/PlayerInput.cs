@@ -3,6 +3,7 @@
 public struct PlayerInput {
     public Vector2 direction;
     public bool run;
+    public bool interact;
 
     public bool attack;
     public bool lamp;
@@ -18,6 +19,7 @@ public struct PlayerInput {
 
     public void ClearBools() {
         run = false;
+        interact = false;
 
         attack = false;
         lamp = false;
