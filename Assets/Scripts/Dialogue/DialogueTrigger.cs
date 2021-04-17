@@ -4,10 +4,20 @@ public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] private Dialogue dialogue = default;
     private bool playerInRange;
+    private PlayerMovement player;
+
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
+    }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange && Time.timeScale > 0)
+        if(player.GetInteraction())
+        {
+            Debug.Log("Interaction" + player.GetInteraction());
+        }
+        if ((Input.GetButtonDown("Interact") || player.GetInteraction()) && playerInRange && Time.timeScale > 0)
         {
             TriggerDialogue();
         }
