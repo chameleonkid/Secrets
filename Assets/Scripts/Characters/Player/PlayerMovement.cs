@@ -118,7 +118,8 @@ public class PlayerMovement : Character, ICanMove
         uiSpellTwoButton.onClick.AddListener(InputSpell2);
         uiSpellThreeButton.onClick.AddListener(InputSpell3);
         uiLampButton.onClick.AddListener(InputLamp);
-        uiRunAndInteractButton.onClick.AddListener(InputRunAndInteract);
+        uiRunAndInteractButton.onClick.AddListener(InputRun);
+        uiRunAndInteractButton.onClick.AddListener(InputInteract);
     }
 
     private void Update()
@@ -414,11 +415,7 @@ public class PlayerMovement : Character, ICanMove
     public void InputSpell2() => uiInput.spellCast2 = true;
     public void InputSpell3() => uiInput.spellCast3 = true;
     public void InputLamp() => uiInput.lamp = true;
-    public void InputRunAndInteract()
-    {
-        uiInput.run = true;
-        Debug.Log("RUNNING NOW!");
-        uiInput.interact = true;
-    }
+    public void InputRun() { uiInput.run = true; Debug.Log("RUNNING NOW!"); }
+    public void InputInteract() => uiInput.interact = true;
     #endregion
 }
