@@ -16,23 +16,19 @@ public class TreasureChest : Interactable
 
     private Animator anim;
 
-
     private void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>();
         dialogue.npcName = "Chest";
         anim = GetComponent<Animator>();
         if (isOpen)
         {
             anim.SetBool("opened", true);
         }
-
-
     }
 
     private void Update()
     {
-        if (player.inputInteract && playerInRange && Time.timeScale > 0)
+        if (playerInRange && player.inputInteract && Time.timeScale > 0)
         {
             if (!isOpen)
             {
@@ -76,28 +72,12 @@ public class TreasureChest : Interactable
         TriggerDialogue();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnEnter(PlayerMovement player)
     {
-        if (other.CompareTag("Player") && other.isTrigger)
+        this.player = player;
+        if (!isOpen)
         {
-            playerInRange = true;
-           // player = other.GetComponent<PlayerMovement>();
-
-            if (!isOpen)
-            {
-                contextOn.Raise();
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && other.isTrigger)
-        {
-            playerInRange = false;
-           // player = null;
-
-            contextOff.Raise();
+            contextOn.Raise();
         }
     }
 
