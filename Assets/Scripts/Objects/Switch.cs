@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Switch : ComponentTrigger<PlayerMovement>
 {
+    protected override bool? needOtherIsTrigger => null;
+
     public bool active;
     public BoolValue storeValue;
     public Sprite activeSprite;
