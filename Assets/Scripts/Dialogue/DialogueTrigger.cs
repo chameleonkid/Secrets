@@ -1,19 +1,15 @@
 ﻿using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueTrigger : ComponentTrigger<PlayerMovement>
 {
-    [SerializeField] private Dialogue dialogue = default;
-    private bool playerInRange;
-    private PlayerMovement player;
+    protected override bool? needOtherIsTrigger => true;
 
-    private void Start()
-    {
-        player = GameObject.FindObjectOfType<PlayerMovement>();
-    }
+    [SerializeField] private Dialogue dialogue = default;
+    private PlayerMovement player;
 
     private void Update()
     {
-        if (player.inputInteract && playerInRange && Time.timeScale > 0)
+        if (player != null && player.inputInteract && Time.timeScale > 0)
         {
             Debug.Log("Interaction" + player.inputInteract);
             TriggerDialogue();
@@ -22,20 +18,14 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue() => DialogueManager.RequestDialogue(dialogue);
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnEnter(PlayerMovement player)
     {
-        if (other.CompareTag("Player") && other.isTrigger)
-        {
-            playerInRange = true;
-        }
+        this.player = player;
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected override void OnExit(PlayerMovement player)
     {
-        if (other.CompareTag("Player") && other.isTrigger)
-        {
-            DialogueManager.RequestEndDialogue();
-            playerInRange = false;
-        }
+        DialogueManager.RequestEndDialogue();
+        this.player = null;
     }
 }
