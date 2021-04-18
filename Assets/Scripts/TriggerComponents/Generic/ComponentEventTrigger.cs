@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ComponentEventTrigger<T> : ComponentTrigger<T> where T : MonoBehaviour
+public abstract class ComponentEventTrigger<T> : ComponentTrigger<T> where T : MonoBehaviour
 {
     public event Action OnTriggerEnter;
     public event Action OnTriggerExit;

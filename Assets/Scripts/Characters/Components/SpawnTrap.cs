@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnTrap : ComponentTrigger<PlayerMovement>
 {
+    protected override bool? needOtherIsTrigger => true;
+
     [Header("Choose random things to spawn of this:")]
     [SerializeField] private GameObject[] thingToSpawn;
     [Header("How many Randoms should be spawned?:")]
