@@ -20,14 +20,17 @@ public class PlayerMovement : Character, ICanMove
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => input.run || uiInput.run ? _speed * 1.5f : _speed;
+    private float speed => inputRun ? _speed * 1.5f : _speed;
     [SerializeField] private float originalSpeed;
 
     private PlayerInput input;
+    private PlayerInput uiInput;
+
+    public bool inputRun => input.run || uiInput.run;
+    public bool inputInteract => input.interact || uiInput.interact;
+
     public Vector2 direction => input.direction;
     public float moveSpeed => speed * speedModifier;
-
-    private PlayerInput uiInput;
 
     [SerializeField] private ConstrainedFloat _lumen = default;
     public ConstrainedFloat lumen => _lumen;
@@ -156,6 +159,7 @@ public class PlayerMovement : Character, ICanMove
         }
 
         input.run = Input.GetButton("Run");
+        input.interact = Input.GetButtonDown("Interact");
 
         input.attack = Input.GetButtonDown("Attack");
         input.lamp = Input.GetButtonDown("Lamp");
@@ -416,8 +420,4 @@ public class PlayerMovement : Character, ICanMove
         uiInput.interact = true;
     }
     #endregion
-    public bool GetInteraction()
-    {
-        return uiInput.interact;
-    }
 }

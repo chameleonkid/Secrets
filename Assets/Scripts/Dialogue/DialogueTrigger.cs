@@ -13,12 +13,9 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(player.GetInteraction())
+        if (player.inputInteract && playerInRange && Time.timeScale > 0)
         {
-            Debug.Log("Interaction" + player.GetInteraction());
-        }
-        if ((Input.GetButtonDown("Interact") || player.GetInteraction()) && playerInRange && Time.timeScale > 0)
-        {
+            Debug.Log("Interaction" + player.inputInteract);
             TriggerDialogue();
         }
     }

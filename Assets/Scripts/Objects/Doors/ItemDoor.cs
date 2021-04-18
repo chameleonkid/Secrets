@@ -30,7 +30,7 @@ public class ItemDoor : Interactable
 
     private void Update()
     {
-        if ((Input.GetButtonDown("Interact") || player.GetInteraction()) && playerInRange && Time.timeScale > 0)
+        if (player.inputInteract && playerInRange && Time.timeScale > 0)
         {
             if (playerInventory.Contains(item))
             {
