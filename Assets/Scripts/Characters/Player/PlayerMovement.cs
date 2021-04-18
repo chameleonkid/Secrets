@@ -133,9 +133,9 @@ public class PlayerMovement : Character, ICanMove
 
             animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
         }
-
-        uiInput.ClearBools();
     }
+
+    private void LateUpdate() => uiInput.ClearBools();
 
     private void FixedUpdate()
     {
