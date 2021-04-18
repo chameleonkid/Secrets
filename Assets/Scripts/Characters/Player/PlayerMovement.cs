@@ -123,14 +123,15 @@ public class PlayerMovement : Character, ICanMove
 
     private void Update()
     {
-        if (Time.timeScale <= 0) return;
+        if (Time.timeScale > 0)
+        {
+            HandleInput();
+            HandleState();
+            // Debug.Log($"{name}: {currentState}");
+            currentState?.Update();
 
-        HandleInput();
-        HandleState();
-   //     Debug.Log($"{name}: {currentState}");
-        currentState?.Update();
-
-        animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
+            animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
+        }
 
         uiInput.ClearBools();
     }
