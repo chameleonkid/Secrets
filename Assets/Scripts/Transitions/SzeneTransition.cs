@@ -5,6 +5,8 @@ using Schwer.States;
 
 public class SzeneTransition : ComponentTrigger<PlayerMovement>
 {
+    protected override bool? needOtherIsTrigger => false;
+
     [Header("New Scene Variables")]
     public string sceneToLoad;
     public Vector2 playerPosition;

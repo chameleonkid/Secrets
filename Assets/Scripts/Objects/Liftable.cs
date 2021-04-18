@@ -10,9 +10,9 @@ public class Liftable : Interactable
 
     private void LateUpdate()
     {
-        if (Input.GetButtonDown("Lift") && playerInRange && Time.timeScale > 0)
+        if (playerInRange && Input.GetButtonDown("Lift") && Time.timeScale > 0)
         {
-            if(playerInventory.items.HasCapacity(contents))
+            if (playerInventory.items.HasCapacity(contents))
             {
                 Lifting();
             }
@@ -20,53 +20,27 @@ public class Liftable : Interactable
             {
                 NoInventorySpace();
             }
-
         }
     }
 
     //############### TEST-Lift ###################################
     public void Lifting()
     {
-
         if (playerInventory.currentGloves && playerInventory.currentGloves.strength >= neededStrenght)
         {
             playerInventory.items[contents]++;
             Destroy(this.gameObject);
-            if(liftingSound)
+            if (liftingSound)
             {
                 SoundManager.RequestSound(liftingSound);
             }
-
         }
         else
         {
             dialogue.sentences[0] = "You don't seem strong enaugh to lift this up...";
             DialogueManager.RequestDialogue(dialogue);
         }
-      
     }
-
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && other.isTrigger)
-        {
-            contextOn.Raise();
-            playerInRange = true;
-
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && other.isTrigger)
-        {
-            contextOff.Raise();
-            playerInRange = false;
-
-        }
-    }
-
 
     public void NoInventorySpace()
     {
@@ -75,5 +49,4 @@ public class Liftable : Interactable
     }
 
     public void TriggerDialogue() => DialogueManager.RequestDialogue(dialogue);
-
 }

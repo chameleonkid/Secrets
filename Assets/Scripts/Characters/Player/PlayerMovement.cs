@@ -20,14 +20,17 @@ public class PlayerMovement : Character, ICanMove
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => input.run || uiInput.run ? _speed * 1.5f : _speed;
+    private float speed => inputRun ? _speed * 1.5f : _speed;
     [SerializeField] private float originalSpeed;
 
     private PlayerInput input;
+    private PlayerInput uiInput;
+
+    public bool inputRun => input.run || uiInput.run;
+    public bool inputInteract => input.interact || uiInput.interact;
+
     public Vector2 direction => input.direction;
     public float moveSpeed => speed * speedModifier;
-
-    private PlayerInput uiInput;
 
     [SerializeField] private ConstrainedFloat _lumen = default;
     public ConstrainedFloat lumen => _lumen;
@@ -115,22 +118,24 @@ public class PlayerMovement : Character, ICanMove
         uiSpellTwoButton.onClick.AddListener(InputSpell2);
         uiSpellThreeButton.onClick.AddListener(InputSpell3);
         uiLampButton.onClick.AddListener(InputLamp);
-        uiRunAndInteractButton.onClick.AddListener(InputRunAndInteract);
+        uiRunAndInteractButton.onClick.AddListener(InputRun);
+        uiRunAndInteractButton.onClick.AddListener(InputInteract);
     }
 
     private void Update()
     {
-        if (Time.timeScale <= 0) return;
+        if (Time.timeScale > 0)
+        {
+            HandleInput();
+            HandleState();
+            // Debug.Log($"{name}: {currentState}");
+            currentState?.Update();
 
-        HandleInput();
-        HandleState();
-   //     Debug.Log($"{name}: {currentState}");
-        currentState?.Update();
-
-        animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
-
-        uiInput.ClearBools();
+            animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
+        }
     }
+
+    private void LateUpdate() => uiInput.ClearBools();
 
     private void FixedUpdate()
     {
@@ -156,6 +161,7 @@ public class PlayerMovement : Character, ICanMove
         }
 
         input.run = Input.GetButton("Run");
+        input.interact = Input.GetButtonDown("Interact");
 
         input.attack = Input.GetButtonDown("Attack");
         input.lamp = Input.GetButtonDown("Lamp");
@@ -409,15 +415,7 @@ public class PlayerMovement : Character, ICanMove
     public void InputSpell2() => uiInput.spellCast2 = true;
     public void InputSpell3() => uiInput.spellCast3 = true;
     public void InputLamp() => uiInput.lamp = true;
-    public void InputRunAndInteract()
-    {
-        uiInput.run = true;
-        Debug.Log("RUNNING NOW!");
-        uiInput.interact = true;
-    }
+    public void InputRun() { uiInput.run = true; Debug.Log("RUNNING NOW!"); }
+    public void InputInteract() => uiInput.interact = true;
     #endregion
-    public bool GetInteraction()
-    {
-        return uiInput.interact;
-    }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Teleport : ComponentTrigger<PlayerMovement>
 {
+    protected override bool? needOtherIsTrigger => false;
+
     public Vector3 playerChange;
     [SerializeField] private float transitionTime = 2f;
     [SerializeField] private Animator anim = default;

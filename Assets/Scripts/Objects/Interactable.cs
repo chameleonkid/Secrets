@@ -1,32 +1,22 @@
-﻿using UnityEngine;
-
-public class Interactable : MonoBehaviour
+﻿public class Interactable : ComponentTrigger<PlayerMovement>
 {
-    public bool playerInRange;
+    protected override bool? needOtherIsTrigger => true;
+
     public Signals contextOn;
     public Signals contextOff;
-    [SerializeField] protected PlayerMovement player;
 
-    private void Start()
+    public bool playerInRange => player != null;
+    protected PlayerMovement player;
+
+    protected override void OnEnter(PlayerMovement player)
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>();
+        contextOn.Raise();
+        this.player = player;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnExit(PlayerMovement player)
     {
-        if (other.CompareTag("Player") && other.isTrigger)
-        {
-            contextOn.Raise();
-            playerInRange = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && other.isTrigger)
-        {
-            contextOff.Raise();
-            playerInRange = false;
-        }
+        contextOff.Raise();
+        this.player = null;
     }
 }

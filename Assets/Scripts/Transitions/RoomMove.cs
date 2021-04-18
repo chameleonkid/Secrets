@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class RoomMove : ComponentTrigger<PlayerMovement>
 {
+    protected override bool? needOtherIsTrigger => false;
+
     public Vector3 playerChange;
     public bool needText;
     public string AreaName;
