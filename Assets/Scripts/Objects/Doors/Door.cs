@@ -30,28 +30,23 @@ public class Door : Interactable
         {
             Close();
         }
-
     }
     //########################## Doormemory END ##################################
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact"))
+        if (playerInRange && player.inputInteract)
         {
-            if (playerInRange && thisDoorType == DoorType.key)
+            if (thisDoorType == DoorType.key && playerInventory.items[key] >= 1)
             {
-                if (playerInventory.items[key] >= 1)
-                {
-                    playerInventory.items[key]--;
-                    Open();
-                }
+                playerInventory.items[key]--;
+                Open();
             }
         }
     }
 
     public void Open()
     {
-
         //Turn off the Door sprite renderer
         doorSprite.enabled = false;
         // set open to true

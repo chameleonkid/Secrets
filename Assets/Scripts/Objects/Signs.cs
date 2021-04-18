@@ -9,7 +9,7 @@ public class Signs : Interactable
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange)
+        if (playerInRange && player.inputInteract)
         {
             if (dialogBox.activeInHierarchy)
             {
