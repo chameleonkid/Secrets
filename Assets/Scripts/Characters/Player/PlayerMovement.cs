@@ -132,7 +132,7 @@ public class PlayerMovement : Character, ICanMove
             // Debug.Log($"{name}: {currentState}");
             currentState?.Update();
 
-            animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
+            animator.SetBool("isRunning", inputRun && input.direction != Vector2.zero); //!
         }
     }
 
