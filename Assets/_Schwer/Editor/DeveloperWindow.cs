@@ -7,6 +7,10 @@ namespace SchwerEditor.Secrets {
     public class DeveloperWindow : EditorWindow {
         private const string _name = "Developer Controls";
 
+        private static void Log(object message, Object context = null) => Debug.Log($"{_name}: {message}", context);
+        private static void LogWarning(object message, Object context = null) => Debug.LogWarning($"{_name}: {message}", context);
+        private static void LogError(object message, Object context = null) => Debug.LogError($"{_name}: {message}", context);
+
         [MenuItem("Window/" + _name)]
         public static void ShowWindow() => GetWindow<DeveloperWindow>(_name);
 
@@ -17,20 +21,17 @@ namespace SchwerEditor.Secrets {
 
             EditorGUI.BeginDisabledGroup(!Application.isPlaying);
 
-            GUILayout.Label("General");
-            ReloadCurrentSceneButton();
-
-            GUILayout.Label("Time Controls");
-            FreezeTimeMiddayButton();
-            FreezeTimeMidnightButton();
-            ResumeTimeButton();
-
-            GUILayout.Label("Player Controls");
-            SetHealthToMax();
-            SetManaToMax();
-            SetLumenToMax();
+            DrawGeneralControls();
+            DrawTimeControls();
+            DrawPlayerControls();
 
             EditorGUI.EndDisabledGroup();
+        }
+
+        #region General Controls
+        private void DrawGeneralControls() {
+            GUILayout.Label("General");
+            ReloadCurrentSceneButton();
         }
 
         private void ReloadCurrentSceneButton() {
@@ -41,8 +42,16 @@ namespace SchwerEditor.Secrets {
             }
             EditorGUILayout.HelpBox("Reloading a scene may take some time, depending on scene complexity.", MessageType.Info);
         }
+        #endregion
 
         #region Time Controls
+        private void DrawTimeControls() {
+            GUILayout.Label("Time Controls");
+            FreezeTimeMiddayButton();
+            FreezeTimeMidnightButton();
+            ResumeTimeButton();
+        }
+
         private void FreezeTimeMiddayButton() {
             if (GUILayout.Button("Freeze Time Midday")) {
                 var time = FindObjectOfType<TimeManager>();
@@ -80,6 +89,13 @@ namespace SchwerEditor.Secrets {
         #endregion
 
         #region Player Controls
+        private void DrawPlayerControls() {
+            GUILayout.Label("Player Controls");
+            SetHealthToMax();
+            SetManaToMax();
+            SetLumenToMax();
+        }
+
         private void SetHealthToMax() {
             if (GUILayout.Button("Set Health To Max")) {
                 var player = FindObjectOfType<PlayerMovement>();
@@ -113,9 +129,5 @@ namespace SchwerEditor.Secrets {
             }
         }
         #endregion
-
-        private static void Log(object message, Object context = null) => Debug.Log($"{_name}: {message}", context);
-        private static void LogWarning(object message, Object context = null) => Debug.LogWarning($"{_name}: {message}", context);
-        private static void LogError(object message, Object context = null) => Debug.LogError($"{_name}: {message}", context);
     }
 }
