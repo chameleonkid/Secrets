@@ -136,11 +136,12 @@ public class PlayerMovement : Character, ICanMove
         }
     }
 
-    private void LateUpdate() => uiInput.ClearBools();
+    private void LateUpdate() => uiInput.ClearTriggerBools();
 
     private void FixedUpdate()
     {
         currentState?.FixedUpdate();
+        uiInput.run = false;
 
         if (!(currentState is Schwer.States.Knockback))
         {
