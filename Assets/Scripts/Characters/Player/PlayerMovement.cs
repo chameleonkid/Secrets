@@ -419,11 +419,4 @@ public class PlayerMovement : Character, ICanMove
     public void InputRun() { uiInput.run = true; Debug.Log("RUNNING NOW!"); }
     public void InputInteract() => uiInput.interact = true;
     #endregion
-
-    public void StopRunning()
-    {
-        Debug.Log("Stop Running");
-        uiInput.ClearRun();
-    }
-
 }

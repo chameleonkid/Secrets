@@ -18,6 +18,7 @@ public struct PlayerInput {
     }
 
     public void ClearBools() {
+        run = false;
         interact = false;
 
         attack = false;
@@ -26,9 +27,5 @@ public struct PlayerInput {
         spellCast1 = false;
         spellCast2 = false;
         spellCast3 = false;
-    }
-    public void ClearRun()
-    {
-        run = false;
     }
 }
