@@ -422,6 +422,7 @@ public class PlayerMovement : Character, ICanMove
 
     public void StopRunning()
     {
+        Debug.Log("Stop Running");
         uiInput.ClearRun();
     }
 
