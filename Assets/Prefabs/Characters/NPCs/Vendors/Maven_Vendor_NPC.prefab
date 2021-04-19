@@ -265,7 +265,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012141705, y: 0.5631366}
+  m_Offset: {x: -0.44135356, y: 0.5631366}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -276,7 +276,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6167936, y: 1.4759512}
+  m_Size: {x: 2.5237842, y: 1.4759512}
   m_EdgeRadius: 0
 --- !u!50 &143447065167033498
 Rigidbody2D:
@@ -340,6 +340,7 @@ MonoBehaviour:
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   vendorInventory: {fileID: 11400000, guid: 62852320f1a21704da2ad5d5ccaed6a7, type: 2}
+  player: {fileID: 0}
 --- !u!114 &9065420880404859201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd143d5d32f0b4d879c711d546dd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
 --- !u!114 &7159806304060136831
@@ -371,6 +371,8 @@ MonoBehaviour:
   isShrinked: 0
   gotHitSound: []
   attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -378,6 +380,15 @@ MonoBehaviour:
   _slow: {fileID: 487566112902886485}
   _shrink: {fileID: 7372415182406246055}
   _gigantism: {fileID: 3544170664029913722}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
+  lookUp: 0
+  lookDown: 0
+  lookLeft: 0
+  lookRight: 0
 --- !u!1 &94525713563375658
 GameObject:
   m_ObjectHideFlags: 0
