@@ -4,11 +4,11 @@ public abstract class ComponentTrigger<T> : MonoBehaviour where T : MonoBehaviou
 {
     protected abstract bool? needOtherIsTrigger { get; }
 
-    private bool passTriggerCheck => !(needOtherIsTrigger.HasValue && !needOtherIsTrigger.Value);
+    private bool bypassTriggerCheck => !(needOtherIsTrigger.HasValue && !needOtherIsTrigger.Value);
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
-        if (passTriggerCheck)
+        if (bypassTriggerCheck || other.isTrigger)
         {
             var component = other.GetComponent<T>();
             if (component != null)
@@ -20,7 +20,7 @@ public abstract class ComponentTrigger<T> : MonoBehaviour where T : MonoBehaviou
 
     protected void OnTriggerExit2D(Collider2D other)
     {
-        if (passTriggerCheck)
+        if (bypassTriggerCheck || other.isTrigger)
         {
             var component = other.GetComponent<T>();
             if (component != null)
