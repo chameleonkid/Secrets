@@ -528,16 +528,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1111764214188206027}
     m_Modifications:
-    - target: {fileID: 894538186415120396, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: joystick
       value: 
       objectReference: {fileID: 6225464375843590235}
+    - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
+      propertyPath: uiRunButton
+      value: 
+      objectReference: {fileID: 8816619300765190770}
     - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: uiLampButton
@@ -555,6 +555,11 @@ PrefabInstance:
       objectReference: {fileID: 8833009003095479079}
     - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
+      propertyPath: uiInteractButton
+      value: 
+      objectReference: {fileID: 8833009002887407626}
+    - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
+        type: 3}
       propertyPath: uiSpellTwoButton
       value: 
       objectReference: {fileID: 8833009004015595161}
@@ -563,26 +568,6 @@ PrefabInstance:
       propertyPath: uiSpellThreeButton
       value: 
       objectReference: {fileID: 8833009003390910902}
-    - target: {fileID: 3547411412465680931, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: uiRunAndInteractButton
-      value: 
-      objectReference: {fileID: 8833009002887407626}
-    - target: {fileID: 3563088278929260502, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: inventoryManager
-      value: 
-      objectReference: {fileID: 1855236346269722783}
-    - target: {fileID: 4045718978915790569, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4382020920128985596, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4819439860390361883, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: m_RootOrder
@@ -636,21 +621,6 @@ PrefabInstance:
     - target: {fileID: 4819439860390361883, guid: 102a75eb932804e43a803a9aaa241069,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6381249727854900383, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7606598636552271384, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7607462306545391926, guid: 102a75eb932804e43a803a9aaa241069,
-        type: 3}
-      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7656288679364536789, guid: 102a75eb932804e43a803a9aaa241069,
@@ -1112,15 +1082,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1855236346269722783 stripped
+--- !u!114 &8816619300765190770 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1644614348447946943, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
+  m_CorrespondingSourceObject: {fileID: 8446267056755227218, guid: f00f16c5e36fe6d45b1c1c05f2dbaa96,
     type: 3}
   m_PrefabInstance: {fileID: 1111764215687606304}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c64082fa50436c4da1fb290f8749247, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

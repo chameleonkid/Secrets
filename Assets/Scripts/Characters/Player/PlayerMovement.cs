@@ -13,7 +13,8 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private Button uiSpellTwoButton = default;
     [SerializeField] private Button uiSpellThreeButton = default;
     [SerializeField] private Button uiLampButton = default;
-    [SerializeField] private Button uiRunAndInteractButton = default;
+    [SerializeField] private Button uiInteractButton = default;
+    [SerializeField] private Button uiRunButton = default;
     [SerializeField] private Joystick joystick = default;
 
     [SerializeField] private Animator effectAnimator = default;
@@ -118,8 +119,8 @@ public class PlayerMovement : Character, ICanMove
         uiSpellTwoButton.onClick.AddListener(InputSpell2);
         uiSpellThreeButton.onClick.AddListener(InputSpell3);
         uiLampButton.onClick.AddListener(InputLamp);
-        uiRunAndInteractButton.onClick.AddListener(InputRun);
-        uiRunAndInteractButton.onClick.AddListener(InputInteract);
+        uiRunButton.onClick.AddListener(InputRun);
+        uiInteractButton.onClick.AddListener(InputInteract);
     }
 
     private void Update()
@@ -418,4 +419,10 @@ public class PlayerMovement : Character, ICanMove
     public void InputRun() { uiInput.run = true; Debug.Log("RUNNING NOW!"); }
     public void InputInteract() => uiInput.interact = true;
     #endregion
+
+    public void StopRunning()
+    {
+        uiInput.ClearRun();
+    }
+
 }
