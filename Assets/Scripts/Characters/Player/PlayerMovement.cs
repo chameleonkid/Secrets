@@ -21,7 +21,8 @@ public class PlayerMovement : Character, ICanMove
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => inputRun ? _speed * 1.5f : _speed;
+    [SerializeField] private float runSpeedModifier = 1.5f;
+    private float speed => inputRun ? _speed * runSpeedModifier : _speed;
     [SerializeField] private float originalSpeed;
 
     private PlayerInput input;
