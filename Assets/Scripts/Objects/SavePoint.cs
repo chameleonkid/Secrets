@@ -18,6 +18,13 @@ public class SavePoint : MonoBehaviour
     [Header("Player Data")]
     [SerializeField] CharacterAppearance playerAppearance;
     [SerializeField] XPSystem playerXP;
+    [SerializeField] private PlayerMovement player;
+
+
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
+    }
 
     private void Awake()
     {
@@ -31,7 +38,7 @@ public class SavePoint : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange == true && Input.GetButtonDown("Interact") && CanvasManager.Instance.IsFreeOrActive(saveMenu))
+        if (playerInRange == true && player.inputInteract && CanvasManager.Instance.IsFreeOrActive(saveMenu))
         {
             saveMenu.SetActive(true);
             Time.timeScale = 0;
