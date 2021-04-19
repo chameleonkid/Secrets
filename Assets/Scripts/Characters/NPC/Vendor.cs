@@ -6,12 +6,18 @@ public class Vendor : MonoBehaviour
     [SerializeField] private Signals contextOff = default;
 
     [SerializeField] private Inventory vendorInventory = default;
+    [SerializeField] private PlayerMovement player;
 
     private bool playerInRange;
 
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
+    }
+
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && playerInRange)
+        if (playerInRange && player.inputInteract && Time.timeScale > 0)
         {
             VendorManager.RequestInterface(vendorInventory);
         }
