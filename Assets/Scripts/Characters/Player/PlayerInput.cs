@@ -14,10 +14,11 @@ public struct PlayerInput {
 
     public void ClearAll() {
         direction = Vector2.zero;
-        ClearBools();
+        ClearTriggerBools();
+        run = false;
     }
 
-    public void ClearBools() {
+    public void ClearTriggerBools() {
         interact = false;
 
         attack = false;
@@ -26,9 +27,5 @@ public struct PlayerInput {
         spellCast1 = false;
         spellCast2 = false;
         spellCast3 = false;
-    }
-    public void ClearRun()
-    {
-        run = false;
     }
 }

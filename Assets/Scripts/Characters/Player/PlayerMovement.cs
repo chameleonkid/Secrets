@@ -21,7 +21,8 @@ public class PlayerMovement : Character, ICanMove
 
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
-    private float speed => inputRun ? _speed * 1.5f : _speed;
+    [SerializeField] private float runSpeedModifier = 1.5f;
+    private float speed => inputRun ? _speed * runSpeedModifier : _speed;
     [SerializeField] private float originalSpeed;
 
     private PlayerInput input;
@@ -132,15 +133,16 @@ public class PlayerMovement : Character, ICanMove
             // Debug.Log($"{name}: {currentState}");
             currentState?.Update();
 
-            animator.SetBool("isRunning", input.run && input.direction != Vector2.zero); //!
+            animator.SetBool("isRunning", inputRun && input.direction != Vector2.zero); //!
         }
     }
 
-    private void LateUpdate() => uiInput.ClearBools();
+    private void LateUpdate() => uiInput.ClearTriggerBools();
 
     private void FixedUpdate()
     {
         currentState?.FixedUpdate();
+        uiInput.run = false;
 
         if (!(currentState is Schwer.States.Knockback))
         {
@@ -419,11 +421,4 @@ public class PlayerMovement : Character, ICanMove
     public void InputRun() { uiInput.run = true; Debug.Log("RUNNING NOW!"); }
     public void InputInteract() => uiInput.interact = true;
     #endregion
-
-    public void StopRunning()
-    {
-        Debug.Log("Stop Running");
-        uiInput.ClearRun();
-    }
-
 }
