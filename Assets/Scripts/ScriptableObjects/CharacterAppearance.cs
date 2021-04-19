@@ -24,6 +24,23 @@ public class CharacterAppearance : ScriptableObject
     public string armorFolderPath { get; set; }
     public string eyeFolderPath { get; set; }
 
+#if UNITY_EDITOR
+    private void OnValidate() => OnEnable();
+    private void OnEnable() {
+        if (!Application.isPlaying) return;
+
+        var path = "Assets/Resources/";
+        bodyFolderPath = UnityEditor.AssetDatabase.GetAssetPath(bodyStyle).Replace(path, "");
+        bodyFolderPath = bodyFolderPath.Remove(bodyFolderPath.LastIndexOf("/") + 1);
+        hairFolderPath = UnityEditor.AssetDatabase.GetAssetPath(hairStyle).Replace(path, "");
+        hairFolderPath = hairFolderPath.Remove(hairFolderPath.LastIndexOf("/") + 1);
+        armorFolderPath = UnityEditor.AssetDatabase.GetAssetPath(armorStyle).Replace(path, "");
+        armorFolderPath = armorFolderPath.Remove(armorFolderPath.LastIndexOf("/") + 1);
+        eyeFolderPath = UnityEditor.AssetDatabase.GetAssetPath(eyeColor).Replace(path, "");
+        eyeFolderPath = eyeFolderPath.Remove(eyeFolderPath.LastIndexOf("/") + 1);
+    }
+#endif
+
     public CharacterAppearanceSerializable GetSerializable() => new CharacterAppearanceSerializable(this);
 
     public void Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase[] skinTextures)

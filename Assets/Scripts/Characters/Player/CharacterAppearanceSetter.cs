@@ -13,7 +13,7 @@ public class CharacterAppearanceSetter : MonoBehaviour
 
     private Color hairColor;
 
-    private void Awake() => SetAppearance();
+    private void Start() => SetAppearance();
 
     private void SetAppearance()
     {
