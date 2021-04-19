@@ -17,7 +17,7 @@ public class Vendor : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange && player.inputInteract && Time.timeScale > 0)
+        if (playerInRange && player.inputInteract)
         {
             VendorManager.RequestInterface(vendorInventory);
         }
