@@ -38,7 +38,7 @@ public class SavePoint : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange == true && player.inputInteract && CanvasManager.Instance.IsFreeOrActive(saveMenu))
+        if (playerInRange == true && player.inputInteract && CanvasManager.Instance.IsFreeOrActive(saveMenu) && Time.timeScale > 0)
         {
             saveMenu.SetActive(true);
             Time.timeScale = 0;
