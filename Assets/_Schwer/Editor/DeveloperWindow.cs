@@ -20,12 +20,12 @@ namespace SchwerEditor.Secrets {
             }
 
             EditorGUI.BeginDisabledGroup(!Application.isPlaying);
-
             DrawGeneralControls();
             DrawTimeControls();
             DrawPlayerControls();
-
             EditorGUI.EndDisabledGroup();
+
+            DrawResetSOs();
         }
 
         #region General Controls
@@ -126,6 +126,48 @@ namespace SchwerEditor.Secrets {
                     Log($"Player lumen set to max ({player.lumen.max}).");
                 }
                 else Log("No active Player found.");
+            }
+        }
+        #endregion
+
+        #region Reset Scriptable Objects
+        private void DrawResetSOs() {
+            GUILayout.Label("Reset Scriptable Objects");
+            ResetBoolValues();
+            ResetInventory();
+            ResetVendorInventories();
+        }
+
+        private void ResetBoolValues() {
+            if (GUILayout.Button("Reset BoolValues")) {
+                var so = FindObjectOfType<ScriptableObjectPersistence>();
+                if (so != null) {
+                    so.ResetBools();
+                    Log("Reset BoolValues.");
+                }
+                else Log("No active ScriptableObjectPersistence found.");
+            }
+        }
+
+        private void ResetInventory() {
+            if (GUILayout.Button("Reset Player Inventory")) {
+                var so = FindObjectOfType<ScriptableObjectPersistence>();
+                if (so != null) {
+                    so.ResetInventory();
+                    Log($"Reset player inventory ({so.playerInventory.name}).");
+                }
+                else Log("No active ScriptableObjectPersistence found.");
+            }
+        }
+
+        private void ResetVendorInventories() {
+            if (GUILayout.Button("Reset Vendor Inventories")) {
+                var so = FindObjectOfType<ScriptableObjectPersistence>();
+                if (so != null) {
+                    so.ResetVendorInventories();
+                    Log($"Reset {so.vendorInventories.Length} vendor inventories.");
+                }
+                else Log("No active ScriptableObjectPersistence found.");
             }
         }
         #endregion
