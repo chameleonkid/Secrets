@@ -27,7 +27,7 @@ public class CharacterAppearance : ScriptableObject
 #if UNITY_EDITOR
     private void OnValidate() => OnEnable();
     private void OnEnable() {
-        if (!Application.isPlaying) return;
+        // if (!Application.isPlaying) return;
 
         var path = "Assets/Resources/";
         bodyFolderPath = UnityEditor.AssetDatabase.GetAssetPath(bodyStyle).Replace(path, "");
