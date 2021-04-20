@@ -7,12 +7,19 @@ public class PauseManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject loadPanel;
     public GameObject firstButtonPause;
+    [SerializeField] private PlayerMovement player;
 
     private bool isPaused = false;
 
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
+    }
+
     private void Update()
     {
-        if (Input.GetButtonDown("Pause") && CanvasManager.Instance.IsFreeOrActive(pausePanel))
+        
+        if (player.inputLoad && CanvasManager.Instance.IsFreeOrActive(pausePanel))
         {
             loadPanel.SetActive(false);
             ChangePause();

@@ -30,9 +30,15 @@ public class PlayerMovement : Character, ICanMove
     private PlayerInput input;
     private PlayerInput uiInput;
 
+
+
     public bool inputRun => input.run || uiInput.run;
     public bool inputInteract => input.interact || uiInput.interact;
     public bool inputInv => input.openInv || uiInput.openInv;
+    public bool inputLoad => input.openLoad || uiInput.openLoad;
+
+
+
 
     public Vector2 direction => input.direction;
     public float moveSpeed => speed * speedModifier;
@@ -180,6 +186,7 @@ public class PlayerMovement : Character, ICanMove
         input.spellCast3 = Input.GetButton("SpellCast3");
 
         input.openInv = Input.GetButtonDown("Inventory");
+        input.openLoad = Input.GetButtonDown("Pause");
     }
 
     private void HandleState()
@@ -428,6 +435,6 @@ public class PlayerMovement : Character, ICanMove
     public void InputRun() { uiInput.run = true; Debug.Log("RUNNING CALLED!"); }
     public void InputInteract() => uiInput.interact = true;
     public void InputOpenInv() { uiInput.openInv = true; Debug.Log("INVENTORY CALLED!"); }
-    public void InputOpenLoad() => uiInput.openLoad = true;
+    public void InputOpenLoad() { uiInput.openLoad = true; Debug.Log("PAUSEMENU CALLED!"); }
     #endregion
 }
