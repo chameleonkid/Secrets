@@ -30,15 +30,10 @@ public class PlayerMovement : Character, ICanMove
     private PlayerInput input;
     private PlayerInput uiInput;
 
-
-
     public bool inputRun => input.run || uiInput.run;
     public bool inputInteract => input.interact || uiInput.interact;
     public bool inputInv => input.openInv || uiInput.openInv;
     public bool inputLoad => input.openLoad || uiInput.openLoad;
-
-
-
 
     public Vector2 direction => input.direction;
     public float moveSpeed => speed * speedModifier;
