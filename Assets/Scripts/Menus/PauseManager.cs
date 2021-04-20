@@ -18,18 +18,21 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        
-        if (player.inputLoad && CanvasManager.Instance.IsFreeOrActive(pausePanel))
+        if(player)
         {
-            loadPanel.SetActive(false);
-            ChangePause();
-            if (firstButtonPause)
+            if (player.inputLoad && CanvasManager.Instance.IsFreeOrActive(pausePanel))
             {
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(firstButtonPause);
+                loadPanel.SetActive(false);
+                ChangePause();
+                if (firstButtonPause)
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(firstButtonPause);
+                }
             }
         }
     }
+
    
     private void ChangePause()
     {
