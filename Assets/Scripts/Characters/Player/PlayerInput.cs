@@ -12,6 +12,9 @@ public struct PlayerInput {
     public bool spellCast2;
     public bool spellCast3;
 
+    public bool openInv;
+    public bool openLoad;
+
     public void ClearAll() {
         direction = Vector2.zero;
         ClearTriggerBools();
@@ -27,5 +30,9 @@ public struct PlayerInput {
         spellCast1 = false;
         spellCast2 = false;
         spellCast3 = false;
+
+        openInv = false;
+        openLoad = false;
+
     }
 }

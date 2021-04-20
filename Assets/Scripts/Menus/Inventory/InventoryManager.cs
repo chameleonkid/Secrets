@@ -6,6 +6,9 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private Inventory inventory = default;
 
+    [Header("References")]
+    [SerializeField] private PlayerMovement player = default;
+
     [Header("Components")]
     [SerializeField] private GameObject inventoryPanel = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
@@ -28,12 +31,19 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private AudioClip selectItemSound = default;
     [SerializeField] private AudioClip unequipFailSound = default;
 
+
+
     public Item currentItem;   //! What is the purpose of this?
 
     private InventoryDisplay inventoryDisplay;
 
     private void OnEnable() => inventory.OnFailToUnequip += OnFailedUnequip;
     private void OnDisable() => inventory.OnFailToUnequip -= OnFailedUnequip;
+
+    private void Start()
+    {
+        player = GameObject.FindObjectOfType<PlayerMovement>();
+    }
 
     private void Awake()
     {
@@ -68,8 +78,9 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Inventory") && CanvasManager.Instance.IsFreeOrActive(inventoryPanel.gameObject))
+        if (player.inputInv && CanvasManager.Instance.IsFreeOrActive(inventoryPanel.gameObject))
         {
+            Debug.Log("INV OPEN");
             if (inventoryPanel.activeInHierarchy)
             {
                 ClosePanel();

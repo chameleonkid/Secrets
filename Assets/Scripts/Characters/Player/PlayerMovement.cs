@@ -15,6 +15,8 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private Button uiLampButton = default;
     [SerializeField] private Button uiInteractButton = default;
     [SerializeField] private Button uiRunButton = default;
+    [SerializeField] private Button uiInventoryButton = default;
+    [SerializeField] private Button uiLoadButton = default;
     [SerializeField] private Joystick joystick = default;
 
     [SerializeField] private Animator effectAnimator = default;
@@ -30,6 +32,7 @@ public class PlayerMovement : Character, ICanMove
 
     public bool inputRun => input.run || uiInput.run;
     public bool inputInteract => input.interact || uiInput.interact;
+    public bool inputInv => input.openInv || uiInput.openInv;
 
     public Vector2 direction => input.direction;
     public float moveSpeed => speed * speedModifier;
@@ -122,6 +125,8 @@ public class PlayerMovement : Character, ICanMove
         uiLampButton.onClick.AddListener(InputLamp);
         uiRunButton.onClick.AddListener(InputRun);
         uiInteractButton.onClick.AddListener(InputInteract);
+        uiInventoryButton.onClick.AddListener(InputOpenInv);
+        uiLoadButton.onClick.AddListener(InputOpenLoad);
     }
 
     private void Update()
@@ -173,6 +178,8 @@ public class PlayerMovement : Character, ICanMove
         input.spellCast1 = Input.GetButton("SpellCast");
         input.spellCast2 = Input.GetButton("SpellCast2");
         input.spellCast3 = Input.GetButton("SpellCast3");
+
+        input.openInv = Input.GetButtonDown("Inventory");
     }
 
     private void HandleState()
@@ -418,7 +425,9 @@ public class PlayerMovement : Character, ICanMove
     public void InputSpell2() => uiInput.spellCast2 = true;
     public void InputSpell3() => uiInput.spellCast3 = true;
     public void InputLamp() => uiInput.lamp = true;
-    public void InputRun() { uiInput.run = true; Debug.Log("RUNNING NOW!"); }
+    public void InputRun() { uiInput.run = true; Debug.Log("RUNNING CALLED!"); }
     public void InputInteract() => uiInput.interact = true;
+    public void InputOpenInv() { uiInput.openInv = true; Debug.Log("INVENTORY CALLED!"); }
+    public void InputOpenLoad() => uiInput.openLoad = true;
     #endregion
 }
