@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject loadPanel;
     public GameObject firstButtonPause;
+    [SerializeField] private BoolValue torchAndBrazierParticlesOn;
     [SerializeField] private PlayerMovement player;
 
     private bool isPaused = false;
@@ -54,4 +55,9 @@ public class PauseManager : MonoBehaviour
     public void Save() => SaveManager.Instance.Save("saveSlot1");
 
     public void Reset() => SaveManager.Instance.LoadNew();
+
+    public void SwapParticles()
+    {
+        torchAndBrazierParticlesOn.RuntimeValue = !torchAndBrazierParticlesOn.RuntimeValue;
+    }
 }
