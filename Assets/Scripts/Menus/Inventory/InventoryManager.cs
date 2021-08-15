@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class InventoryManager : MonoBehaviour
 {
+    private static event Action OnInventoryMenuRequested;
+    public static void RequestInventoryMenu() => OnInventoryMenuRequested?.Invoke();
+
     [SerializeField] private Inventory inventory = default;
 
     [Header("References")]
@@ -37,8 +41,15 @@ public class InventoryManager : MonoBehaviour
 
     private InventoryDisplay inventoryDisplay;
 
-    private void OnEnable() => inventory.OnFailToUnequip += OnFailedUnequip;
-    private void OnDisable() => inventory.OnFailToUnequip -= OnFailedUnequip;
+    private void OnEnable() {
+        OnInventoryMenuRequested += HandleMenuRequest;
+        inventory.OnFailToUnequip += OnFailedUnequip;
+    }
+
+    private void OnDisable() {
+        OnInventoryMenuRequested -= HandleMenuRequest;
+        inventory.OnFailToUnequip -= OnFailedUnequip;
+    }
 
     private void Start()
     {
@@ -76,9 +87,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void HandleMenuRequest()
     {
-        if (player.inputInv && CanvasManager.Instance.IsFreeOrActive(inventoryPanel.gameObject))
+        if (CanvasManager.Instance.IsFreeOrActive(inventoryPanel.gameObject))
         {
             Debug.Log("INV OPEN");
             if (inventoryPanel.activeInHierarchy)

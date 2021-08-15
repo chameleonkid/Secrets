@@ -162,6 +162,7 @@ public class PlayerMovement : Character, ICanMove
         input.openInv = Input.GetButtonDown("Inventory");
         input.openLoad = Input.GetButtonDown("Pause");
 
+        if (inputInv) InventoryManager.RequestInventoryMenu();
         if (inputLoad) PauseManager.RequestPauseMenu();
     }
 
