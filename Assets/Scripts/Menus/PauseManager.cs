@@ -10,7 +10,6 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private BoolValue torchAndBrazierParticlesOn;
     [SerializeField] private PlayerMovement player;
 
-    private bool isPaused = false;
 
     private void Start()
     {
@@ -37,7 +36,7 @@ public class PauseManager : MonoBehaviour
    
     private void ChangePause()
     {
-        isPaused = !isPaused;
+        var isPaused = !pausePanel.activeSelf;
         Time.timeScale = isPaused ? 0 : 1;
         pausePanel.SetActive(isPaused);
         if (!isPaused)
@@ -51,7 +50,7 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
         Time.timeScale = 1f;
     }
-         
+
     public void Save() => SaveManager.Instance.Save("saveSlot1");
 
     public void Reset() => SaveManager.Instance.LoadNew();
