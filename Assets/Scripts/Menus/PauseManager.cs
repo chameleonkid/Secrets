@@ -1,16 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    private static event Action OnPauseMenuRequested;
+    public static void RequestPauseMenu() => OnPauseMenuRequested?.Invoke();
+
     public GameObject pausePanel;
     public GameObject loadPanel;
     public GameObject firstButtonPause;
     [SerializeField] private BoolValue torchAndBrazierParticlesOn;
 
+    private void OnEnable() => OnPauseMenuRequested += OpenMenu;
+    private void OnDisable() => OnPauseMenuRequested -= OpenMenu;
 
-    private void Update()
+    private void OpenMenu()
     {
         if (CanvasManager.Instance.IsFreeOrActive(pausePanel))
         {
