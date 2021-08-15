@@ -8,32 +8,22 @@ public class PauseManager : MonoBehaviour
     public GameObject loadPanel;
     public GameObject firstButtonPause;
     [SerializeField] private BoolValue torchAndBrazierParticlesOn;
-    [SerializeField] private PlayerMovement player;
 
-
-    private void Start()
-    {
-        player = GameObject.FindObjectOfType<PlayerMovement>();
-    }
 
     private void Update()
     {
-        if(player)
+        if (CanvasManager.Instance.IsFreeOrActive(pausePanel))
         {
-            if (player.inputLoad && CanvasManager.Instance.IsFreeOrActive(pausePanel))
+            loadPanel.SetActive(false);
+            ChangePause();
+            if (firstButtonPause)
             {
-                loadPanel.SetActive(false);
-                ChangePause();
-                if (firstButtonPause)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(firstButtonPause);
-                }
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(firstButtonPause);
             }
         }
     }
 
-   
     private void ChangePause()
     {
         var isPaused = !pausePanel.activeSelf;
