@@ -134,6 +134,7 @@ public class PlayerMovement : Character, ICanMove
     {
         if (Time.timeScale > 0)
         {
+            HandleMenus();
             HandleInput();
             HandleState();
             // Debug.Log($"{name}: {currentState}");
@@ -154,6 +155,14 @@ public class PlayerMovement : Character, ICanMove
         {
             rigidbody.velocity = Vector2.zero;
         }
+    }
+
+    private void HandleMenus()
+    {
+        input.openInv = Input.GetButtonDown("Inventory");
+        input.openLoad = Input.GetButtonDown("Pause");
+
+        if (inputLoad) PauseManager.RequestPauseMenu();
     }
 
     private void HandleInput()
@@ -179,9 +188,6 @@ public class PlayerMovement : Character, ICanMove
         input.spellCast1 = Input.GetButton("SpellCast");
         input.spellCast2 = Input.GetButton("SpellCast2");
         input.spellCast3 = Input.GetButton("SpellCast3");
-
-        input.openInv = Input.GetButtonDown("Inventory");
-        input.openLoad = Input.GetButtonDown("Pause");
     }
 
     private void HandleState()
