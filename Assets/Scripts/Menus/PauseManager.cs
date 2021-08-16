@@ -1,43 +1,38 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    private static event Action OnPauseMenuRequested;
+    public static void RequestPauseMenu() => OnPauseMenuRequested?.Invoke();
+
     public GameObject pausePanel;
     public GameObject loadPanel;
     public GameObject firstButtonPause;
     [SerializeField] private BoolValue torchAndBrazierParticlesOn;
-    [SerializeField] private PlayerMovement player;
 
-    private bool isPaused = false;
+    private void OnEnable() => OnPauseMenuRequested += OpenMenu;
+    private void OnDisable() => OnPauseMenuRequested -= OpenMenu;
 
-    private void Start()
+    private void OpenMenu()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>();
-    }
-
-    private void Update()
-    {
-        if(player)
+        if (CanvasManager.Instance.IsFreeOrActive(pausePanel))
         {
-            if (player.inputLoad && CanvasManager.Instance.IsFreeOrActive(pausePanel))
+            loadPanel.SetActive(false);
+            ChangePause();
+            if (firstButtonPause)
             {
-                loadPanel.SetActive(false);
-                ChangePause();
-                if (firstButtonPause)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(firstButtonPause);
-                }
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(firstButtonPause);
             }
         }
     }
 
-   
     private void ChangePause()
     {
-        isPaused = !isPaused;
+        var isPaused = !pausePanel.activeSelf;
         Time.timeScale = isPaused ? 0 : 1;
         pausePanel.SetActive(isPaused);
         if (!isPaused)
@@ -51,7 +46,7 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
         Time.timeScale = 1f;
     }
-         
+
     public void Save() => SaveManager.Instance.Save("saveSlot1");
 
     public void Reset() => SaveManager.Instance.LoadNew();
