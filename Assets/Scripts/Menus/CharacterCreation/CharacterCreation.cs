@@ -153,7 +153,7 @@ public class CharacterCreation : MonoBehaviour
 
     public void SaveAppearance()
     {
-        characterAppearance.index = texturesCounter;
+        characterAppearance.skinIndex = texturesCounter;
 
         characterAppearance.armorStyle = activeTextures.armorSkins[armorCounter];
         characterAppearance.eyeColor = activeTextures.eyeSkins[eyeCounter];

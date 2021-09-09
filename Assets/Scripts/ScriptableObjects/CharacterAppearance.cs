@@ -7,28 +7,24 @@ public class CharacterAppearance : ScriptableObject
     public Texture2D hairStyle;
     public Texture2D armorStyle;
     public Texture2D eyeColor;
+    public Color hairColor;
+    public string playerName;
 
-    public string playerName;   // Should probably make into property with private backing field exposed to Inspector
-
-    public int index { get; set; }
-
+    // Runtime only — not serialized (indexes and paths)
+    public int skinIndex { get; set; }
     public int bodyIndex { get; set; }
     public int hairIndex { get; set; }
-    public Color hairColor;     // Should probably make into property with private backing field exposed to Inspector
     public int armorIndex { get; set; }
     public int eyeIndex { get; set; }
 
-    // Runtime only
     public string bodyFolderPath { get; set; }
     public string hairFolderPath { get; set; }
     public string armorFolderPath { get; set; }
     public string eyeFolderPath { get; set; }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR    // Reason: paths are normally set when save data is loaded, but this is skipped in editor
     private void OnValidate() => OnEnable();
     private void OnEnable() {
-        if (!Application.isPlaying) return;
-
         var path = "Assets/Resources/";
         bodyFolderPath = UnityEditor.AssetDatabase.GetAssetPath(bodyStyle).Replace(path, "");
         bodyFolderPath = bodyFolderPath.Remove(bodyFolderPath.LastIndexOf("/") + 1);
@@ -46,7 +42,7 @@ public class CharacterAppearance : ScriptableObject
     public void Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase[] skinTextures)
     {
         playerName = cas.playerName;
-        index = cas.index;
+        skinIndex = cas.skinIndex;
 
         bodyIndex = cas.bodyIndex;
         hairIndex = cas.hairIndex;
@@ -54,7 +50,7 @@ public class CharacterAppearance : ScriptableObject
         armorIndex = cas.armorIndex;
         eyeIndex = cas.eyeIndex;
 
-        var activeTextures = skinTextures[index];
+        var activeTextures = skinTextures[skinIndex];
 
         bodyStyle = activeTextures.bodySkins[bodyIndex];
         hairStyle = activeTextures.hairStyles[hairIndex];
@@ -72,7 +68,7 @@ public class CharacterAppearance : ScriptableObject
     {
         [ES3Serializable] public string playerName { get; private set; }
 
-        [ES3Serializable] public int index { get; private set; }
+        [ES3Serializable] public int skinIndex { get; private set; }
 
         [ES3Serializable] public int bodyIndex { get; private set; }
         [ES3Serializable] public int hairIndex { get; private set; }
@@ -84,7 +80,7 @@ public class CharacterAppearance : ScriptableObject
         {
             playerName = ca.playerName;
 
-            index = ca.index;
+            skinIndex = ca.skinIndex;
 
             bodyIndex = ca.bodyIndex;
             hairIndex = ca.hairIndex;
