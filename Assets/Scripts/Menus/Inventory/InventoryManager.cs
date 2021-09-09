@@ -125,9 +125,9 @@ public class InventoryManager : MonoBehaviour
 
         item.Use();
 
-        if (item is EquippableItem)
+        if (item is EquippableItem equippable)
         {
-            inventory.Equip((EquippableItem)item);
+            inventory.Equip(equippable);
             if (inventory.currentWeapon)
             {
                 SetWeaponColor();
@@ -138,13 +138,10 @@ public class InventoryManager : MonoBehaviour
             }
             descriptionText.text = "You are now wearing " + item.name;
         }
-
-        if (item.usable)
+        else
         {
             inventory.items[item]--;
             descriptionText.text = "You used " + item.name;
-            var context = (item is EquippableItem) ? "You are now wearing " : "You used ";
-            descriptionText.text = context + item.name;
         }
 
         if (inventory.items[item] <= 0)
