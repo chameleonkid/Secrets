@@ -24,11 +24,9 @@ public class CharacterAppearance : ScriptableObject
     public string armorFolderPath { get; set; }
     public string eyeFolderPath { get; set; }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR    // Reason: paths are normally set when save data is loaded, but this is skipped in editor
     private void OnValidate() => OnEnable();
     private void OnEnable() {
-        // if (!Application.isPlaying) return;
-
         var path = "Assets/Resources/";
         bodyFolderPath = UnityEditor.AssetDatabase.GetAssetPath(bodyStyle).Replace(path, "");
         bodyFolderPath = bodyFolderPath.Remove(bodyFolderPath.LastIndexOf("/") + 1);
