@@ -116,41 +116,35 @@ public class InventoryManager : MonoBehaviour
     {
         if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
+        if (xPSystem.level < item.level)
+        {
+            descriptionText.text = "Your level is not high enough to use this. \n Requires level: " + item.level;
+            SoundManager.RequestSound(cantEquipSound);
+            return;
+        }
+
         item.Use();
 
         if (item is EquippableItem)
         {
-            if (xPSystem.level >= item.level)
+            inventory.Equip((EquippableItem)item);
+            if (inventory.currentWeapon)
             {
-                inventory.Equip((EquippableItem)item);
-                if (inventory.currentWeapon)
-                {
-                    SetWeaponColor();
-                }
-                if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
-                {
-                    SetLaserColor();
-                }
-                descriptionText.text = "You are now wearing " + item.name;
+                SetWeaponColor();
             }
-
+            if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
+            {
+                SetLaserColor();
+            }
+            descriptionText.text = "You are now wearing " + item.name;
         }
 
         if (item.usable)
         {
-            if (xPSystem.level >= item.level)
-            {
-                inventory.items[item]--;
-                descriptionText.text = "You used " + item.name;
-                var context = (item is EquippableItem) ? "You are now wearing " : "You used ";
-                descriptionText.text = context + item.name;
-            }
-            else
-            {
-                SoundManager.RequestSound(cantEquipSound);
-
-                descriptionText.text = "Your level is not high enaugh to use this. \n Requires Level: " + item.level;
-            }
+            inventory.items[item]--;
+            descriptionText.text = "You used " + item.name;
+            var context = (item is EquippableItem) ? "You are now wearing " : "You used ";
+            descriptionText.text = context + item.name;
         }
 
         if (inventory.items[item] <= 0)
