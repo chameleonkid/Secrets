@@ -11,8 +11,7 @@ public class CharacterAppearance : ScriptableObject
     public string playerName;
 
     // Runtime only — not serialized (indexes and paths)
-    public int index { get; set; }  //! Currently used for differentiating between male and female skin textures, should rename
-
+    public int skinIndex { get; set; }
     public int bodyIndex { get; set; }
     public int hairIndex { get; set; }
     public int armorIndex { get; set; }
@@ -43,7 +42,7 @@ public class CharacterAppearance : ScriptableObject
     public void Deserialize(CharacterAppearanceSerializable cas, SkinTexturesDatabase[] skinTextures)
     {
         playerName = cas.playerName;
-        index = cas.index;
+        skinIndex = cas.skinIndex;
 
         bodyIndex = cas.bodyIndex;
         hairIndex = cas.hairIndex;
@@ -51,7 +50,7 @@ public class CharacterAppearance : ScriptableObject
         armorIndex = cas.armorIndex;
         eyeIndex = cas.eyeIndex;
 
-        var activeTextures = skinTextures[index];
+        var activeTextures = skinTextures[skinIndex];
 
         bodyStyle = activeTextures.bodySkins[bodyIndex];
         hairStyle = activeTextures.hairStyles[hairIndex];
@@ -69,7 +68,7 @@ public class CharacterAppearance : ScriptableObject
     {
         [ES3Serializable] public string playerName { get; private set; }
 
-        [ES3Serializable] public int index { get; private set; }
+        [ES3Serializable] public int skinIndex { get; private set; }
 
         [ES3Serializable] public int bodyIndex { get; private set; }
         [ES3Serializable] public int hairIndex { get; private set; }
@@ -81,7 +80,7 @@ public class CharacterAppearance : ScriptableObject
         {
             playerName = ca.playerName;
 
-            index = ca.index;
+            skinIndex = ca.skinIndex;
 
             bodyIndex = ca.bodyIndex;
             hairIndex = ca.hairIndex;
