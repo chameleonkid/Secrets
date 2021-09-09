@@ -7,18 +7,17 @@ public class CharacterAppearance : ScriptableObject
     public Texture2D hairStyle;
     public Texture2D armorStyle;
     public Texture2D eyeColor;
+    public Color hairColor;
+    public string playerName;
 
-    public string playerName;   // Should probably make into property with private backing field exposed to Inspector
-
-    public int index { get; set; }
+    // Runtime only — not serialized (indexes and paths)
+    public int index { get; set; }  //! Currently used for differentiating between male and female skin textures, should rename
 
     public int bodyIndex { get; set; }
     public int hairIndex { get; set; }
-    public Color hairColor;     // Should probably make into property with private backing field exposed to Inspector
     public int armorIndex { get; set; }
     public int eyeIndex { get; set; }
 
-    // Runtime only
     public string bodyFolderPath { get; set; }
     public string hairFolderPath { get; set; }
     public string armorFolderPath { get; set; }
