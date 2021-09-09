@@ -41,12 +41,14 @@ public class InventoryManager : MonoBehaviour
 
     private InventoryDisplay inventoryDisplay;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         OnInventoryMenuRequested += HandleMenuRequest;
         inventory.OnFailToUnequip += OnFailedUnequip;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         OnInventoryMenuRequested -= HandleMenuRequest;
         inventory.OnFailToUnequip -= OnFailedUnequip;
     }
@@ -114,41 +116,32 @@ public class InventoryManager : MonoBehaviour
     {
         if (item == null || !item.usable || inventory.items[item] <= 0) return;
 
-        item.Use();
-
-        if (item is EquippableItem)
+        if (xPSystem.level < item.level)
         {
-            if (xPSystem.level >= item.level)
-            {
-                inventory.Equip((EquippableItem)item);
-                if (inventory.currentWeapon)
-                {
-                    SetWeaponColor();
-                }
-                if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
-                {
-                    SetLaserColor();
-                }
-                descriptionText.text = "You are now wearing " + item.name;
-            }
-
+            descriptionText.text = "Your level is not high enough to use this. \n Requires level: " + item.level;
+            SoundManager.RequestSound(cantEquipSound);
+            return;
         }
 
-        if (item.usable)
-        {
-            if (xPSystem.level >= item.level)
-            {
-                inventory.items[item]--;
-                descriptionText.text = "You used " + item.name;
-                var context = (item is EquippableItem) ? "You are now wearing " : "You used ";
-                descriptionText.text = context + item.name;
-            }
-            else
-            {
-                SoundManager.RequestSound(cantEquipSound);
+        item.Use();
 
-                descriptionText.text = "Your level is not high enaugh to use this. \n Requires Level: " + item.level;
+        if (item is EquippableItem equippable)
+        {
+            inventory.Equip(equippable);
+            if (inventory.currentWeapon)
+            {
+                SetWeaponColor();
             }
+            if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
+            {
+                SetLaserColor();
+            }
+            descriptionText.text = "You are now wearing " + item.name;
+        }
+        else
+        {
+            inventory.items[item]--;
+            descriptionText.text = "You used " + item.name;
         }
 
         if (inventory.items[item] <= 0)
@@ -158,7 +151,6 @@ public class InventoryManager : MonoBehaviour
 
         inventoryDisplay.UpdateEquipmentSlots();
         UpdateStatDisplays();
-  
     }
 
     private void Unequip(Item itemToUnequip)
@@ -191,18 +183,18 @@ public class InventoryManager : MonoBehaviour
     }
 
     private string DamageDisplayText() => (inventory.currentWeapon) ?
-        inventory.currentWeapon.minDamage + " - " + inventory.currentWeapon.maxDamage : "" ;
+        inventory.currentWeapon.minDamage + " - " + inventory.currentWeapon.maxDamage : "";
 
     private string CritDisplayText() => (inventory.totalCritChance > 0) ?
         inventory.totalCritChance + "%" : "";
 
     private string DefenseDisplayText() => (inventory.totalDefense > 0) ? inventory.totalDefense.ToString() : "";
 
-     private string StrenghtDisplayText() => (inventory.totalStrenght > 0 ) ?
-         inventory.totalStrenght +"" : "";
+    private string StrenghtDisplayText() => (inventory.totalStrenght > 0) ?
+        inventory.totalStrenght + "" : "";
 
     private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentSpellbookTwo || inventory.currentAmulet) ?
-        inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
+        inventory.totalMinSpellDamage + " - " + inventory.totalMaxSpellDamage : "";
 
     private string LightRadiusDisplayText() => (inventory.currentLamp) ? "" + inventory.currentLamp.outerRadius : "";
 
