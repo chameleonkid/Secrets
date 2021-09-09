@@ -41,12 +41,14 @@ public class InventoryManager : MonoBehaviour
 
     private InventoryDisplay inventoryDisplay;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         OnInventoryMenuRequested += HandleMenuRequest;
         inventory.OnFailToUnequip += OnFailedUnequip;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         OnInventoryMenuRequested -= HandleMenuRequest;
         inventory.OnFailToUnequip -= OnFailedUnequip;
     }
@@ -158,7 +160,6 @@ public class InventoryManager : MonoBehaviour
 
         inventoryDisplay.UpdateEquipmentSlots();
         UpdateStatDisplays();
-  
     }
 
     private void Unequip(Item itemToUnequip)
@@ -191,18 +192,18 @@ public class InventoryManager : MonoBehaviour
     }
 
     private string DamageDisplayText() => (inventory.currentWeapon) ?
-        inventory.currentWeapon.minDamage + " - " + inventory.currentWeapon.maxDamage : "" ;
+        inventory.currentWeapon.minDamage + " - " + inventory.currentWeapon.maxDamage : "";
 
     private string CritDisplayText() => (inventory.totalCritChance > 0) ?
         inventory.totalCritChance + "%" : "";
 
     private string DefenseDisplayText() => (inventory.totalDefense > 0) ? inventory.totalDefense.ToString() : "";
 
-     private string StrenghtDisplayText() => (inventory.totalStrenght > 0 ) ?
-         inventory.totalStrenght +"" : "";
+    private string StrenghtDisplayText() => (inventory.totalStrenght > 0) ?
+        inventory.totalStrenght + "" : "";
 
     private string SpellDamageDisplayText() => (inventory.currentSpellbook || inventory.currentSpellbookTwo || inventory.currentAmulet) ?
-        inventory.totalMinSpellDamage + " - "  + inventory.totalMaxSpellDamage : "";
+        inventory.totalMinSpellDamage + " - " + inventory.totalMaxSpellDamage : "";
 
     private string LightRadiusDisplayText() => (inventory.currentLamp) ? "" + inventory.currentLamp.outerRadius : "";
 
