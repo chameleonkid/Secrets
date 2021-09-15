@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
     [SerializeField] public float projectileSpeed;
+    [SerializeField] private bool _rotationNeeded;
+    public bool rotationNeeded => _rotationNeeded;
 
     [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
     [SerializeField] protected float destroyDelay;
@@ -89,11 +91,27 @@ public class Projectile : MonoBehaviour
 
     public static Projectile Instantiate(GameObject prefab, Vector2 position, Vector2 direction, Quaternion rotation, string targetTag)
     {
-        var projectile = GameObject.Instantiate(prefab, position, rotation).GetComponent<Projectile>();
-        projectile.targetTag = targetTag;
-        projectile.rigidbody.velocity = direction.normalized * projectile.projectileSpeed;
-        return projectile;
+
+        var instance = GameObject.Instantiate(prefab, position, rotation);
+        var projectile = instance.GetComponentInChildren<Projectile>();
+        // replace `projectile.transform` with `instance.transform`
+        if (projectile._rotationNeeded == false)
+            {
+            // Get x-direction from rotation
+            var xDirection = Mathf.Sign(Mathf.Cos(rotation.eulerAngles.z * Mathf.Deg2Rad));
+            // Reset the projectile rotation
+            instance.transform.localRotation = Quaternion.identity;
+            // Adjust x-scale to match x-direction
+            var newScale = instance.transform.localScale;
+            newScale.z = xDirection;
+            instance.transform.localScale = newScale;
+        }
+            projectile.targetTag = targetTag;
+            projectile.rigidbody.velocity = direction.normalized * projectile.projectileSpeed;
+            return projectile;
+
     }
+
 
     public static Quaternion CalculateRotation(Vector2 direction)
     {
