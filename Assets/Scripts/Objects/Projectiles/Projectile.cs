@@ -32,7 +32,15 @@ public class Projectile : MonoBehaviour
         lifetimeCountdown -= Time.deltaTime;
         if (lifetimeCountdown <= 0)
         {
-            Destroy(this.gameObject);
+            if(this.transform.parent == null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Destroy(this.transform.parent.gameObject);
+            }
+
         }
     }
 
