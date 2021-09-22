@@ -36,10 +36,18 @@ public class Projectile : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
+            // Dangerous! Its destroying the world :) might be usefull later hehe
+            /*
             else
             {
                 Destroy(this.transform.parent.gameObject);
             }
+            */
+            if(this.transform.parent.tag == "spell")
+            {
+                Destroy(this.transform.parent.gameObject);
+            }
+        
 
         }
     }
