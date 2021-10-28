@@ -4,8 +4,8 @@ using UnityEngine;
 public class Breakable : MonoBehaviour
 {
     public LootTable thisLoot;
-
     private Animator anim;
+    [SerializeField] private AudioClip switchSound;
 
     void Start()
     {
@@ -22,6 +22,7 @@ public class Breakable : MonoBehaviour
     IEnumerator breakCo()
     {
         yield return new WaitForSeconds(0.3f);
+        SoundManager.RequestSound(switchSound);
         this.gameObject.SetActive(false);
     }
 }
