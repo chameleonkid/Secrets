@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &284330758867340904
 Transform:
   m_ObjectHideFlags: 0
@@ -58,6 +58,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -200,7 +201,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 284330758867340903}
   isShrinked: 0
-  gotHitSound: []
+  gotHitSound:
+  - {fileID: 8300000, guid: f570166c184cd6d4f9a63d36112a6df5, type: 3}
   attackSounds: []
   deathSounds: []
   inRangeSounds: []
