@@ -8,7 +8,8 @@ public class InventoryWeapon : EquippableItem
         Sword,
         Axe,
         Spear,
-        Bow
+        Bow,
+        Hammer
     }
 
     public int minDamage;
@@ -237,6 +238,44 @@ public class InventoryWeapon : EquippableItem
     };
     #endregion
 
+    #region Hammer Hitboxes
+    private static Vector2[] hammerLeft = {
+        new Vector2(0, 0),
+        new Vector2(5, 2),
+        new Vector2(3, 3),
+        new Vector2(0.1f, 0.1f),
+        new Vector2(0.1f, 0.1f),
+        new Vector2(0.1f, 0.1f)
+    };
+
+    private static Vector2[] hammerRight = {
+        new Vector2(0, 0),
+        new Vector2(2, 2),
+        new Vector2(3, 3),
+        new Vector2(-0.5f, 0.8f),
+        new Vector2(-0.25f, 0.5f),
+        new Vector2(0.2f, 0.5f)
+    };
+
+    private static Vector2[] hammerUp = {
+        new Vector2(0, 0),
+        new Vector2(1, 1),
+        new Vector2(1, 1),
+        new Vector2(-0.5f, 0.8f),
+        new Vector2(-0.25f, 0.5f),
+        new Vector2(0.2f, 0.5f)
+    };
+
+    private static Vector2[] hammerDown = {
+        new Vector2(0, 0),
+        new Vector2(1, 1),
+        new Vector2(0.6f, 1.1f),
+        new Vector2(-0.5f, 0.8f),
+        new Vector2(-0.25f, 0.5f),
+        new Vector2(0.2f, 0.5f)
+    };
+    #endregion
+
     private void OnValidate()
     {
         switch (weaponType)
@@ -252,6 +291,9 @@ public class InventoryWeapon : EquippableItem
                 swingTime = 0.6f;
                 break;
             case WeaponType.Bow:
+                swingTime = 1.25f;     //Maybe make a field for swingTime so every weapon can have a specific CD
+                break;
+            case WeaponType.Hammer:
                 swingTime = 1.25f;     //Maybe make a field for swingTime so every weapon can have a specific CD
                 break;
         }
