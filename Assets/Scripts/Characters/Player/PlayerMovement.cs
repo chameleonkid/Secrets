@@ -337,7 +337,7 @@ public class PlayerMovement : Character, ICanMove
 
     private Projectile CreateProjectile(GameObject prefab)
     {
-        var position =  new Vector2(transform.position.x, transform.position.y);      // Set projectile higher since transform is at player's pivot point (feet).
+        var position =  new Vector2(transform.position.x, transform.position.y + 0.25f);      // Set projectile higher since transform is at player's pivot point (feet).
         var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
         return projectile;
     }
