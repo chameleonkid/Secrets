@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7197445271929895023
 Transform:
   m_ObjectHideFlags: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1345728457
-  m_SortingLayer: -3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300340, guid: 47c6a039472216d4384b29e942993912, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!61 &7197445271929895009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -98,10 +98,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0056916475, y: 0.2041955}
+  m_Offset: {x: -0.015016556, y: -0.07018779}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.0625}
+    pivot: {x: 0.49221325, y: 0.21045542}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -109,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6471832, y: 0.5612402}
+  m_Size: {x: 0.543643, y: 0.3230962}
   m_EdgeRadius: 0
 --- !u!95 &7197445271929895021
 Animator:
@@ -142,11 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c765410ff646d46aaf5e54ef5884bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyableByAny: 1
   thisLoot: {fileID: 11400000, guid: ff3a84c0c81f85f46afe78367c94c977, type: 2}
   breakSound: {fileID: 8300000, guid: 9a97f00013de69e43b87b68af1f7eda8, type: 3}
   destroyDelay: 2
   lootGenerateDelay: 0.5
   thisCollider: {fileID: 7197445271929895009}
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
+  destroyableByAny: 1
   destroyableBy: 0
