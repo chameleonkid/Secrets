@@ -88,39 +88,39 @@ public class InventoryWeapon : EquippableItem
     
     #region Sword Hitboxes
     private static Vector2[] swordLeft = {
-        new Vector2(0f, 0.5f),
-        new Vector2(0, 0.6f),
-        new Vector2(-0.55f, 0.7f),
-        new Vector2(-0.55f, 0.7f),
-        new Vector2(-0.55f, 0f),
-        new Vector2(0f, 0f)
+        new Vector2(-0.1f, 0.42f),
+        new Vector2(-0.15f, 0.49f),
+        new Vector2(-0.43f, 0.5f),
+        new Vector2(-0.77f, 0.27f),
+        new Vector2(-0.73f, 0f),
+        new Vector2(-0.17f, -0.10f)
     };
 
     private static Vector2[] swordRight = {
         new Vector2(0f, 0.5f),
         new Vector2(0, 0.6f),
-        new Vector2(0.55f, 0.7f),
-        new Vector2(0.55f, 0.7f),
-        new Vector2(0.55f, 0f),
+        new Vector2(0.35f, 0.7f),
+        new Vector2(0.71f, 0.67f),
+        new Vector2(0.83f, -0.25f),
         new Vector2(0f, 0f)
     };
 
     private static Vector2[] swordUp = {
-        new Vector2(0f, 0.5f),
+        new Vector2(0.3135682f, 0.2233148f),
+        new Vector2(0.37f, 0.39f),
         new Vector2(0.4f, 0.75f),
-        new Vector2(0.3f, 1.1f),
-        new Vector2(-0.3f, 1.1f),
-        new Vector2(-0.4f, 0.75f),
-        new Vector2(0f, 0.5f)
+        new Vector2(0.003511429f, 0.8854774f),
+        new Vector2(-0.3554774f, 0.7410107f),
+        new Vector2(-0.26095535f, 0.2233147f)
     };
 
     private static Vector2[] swordDown =  {
-        new Vector2(0f, 0.25f),
-        new Vector2(0.5f, 0.15f),
-        new Vector2(0.35f, -0.5f),
-        new Vector2(0f, -0.5f),
-        new Vector2(-0.35f, -0.5f),
-        new Vector2(-0.5f, 0.15f)
+        new Vector2(-0.075f, 0.074f),
+        new Vector2(0.3193865f, 0.06972781f),
+        new Vector2(0.4972434f, -0.01664543f),
+        new Vector2(0.6710907f, -0.6605458f),
+        new Vector2(-0.05017042f, -0.7659035f),
+        new Vector2(-0.3951536f, -0.6153917f)
     };
     #endregion
 
