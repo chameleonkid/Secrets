@@ -21,6 +21,11 @@ public class Breakable : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        thisCollider.enabled = true;
+    }
+
     public void Smash()
     {
         if (destroyableByAny || playerInventory.currentWeapon.weaponType == destroyableBy)
