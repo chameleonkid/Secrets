@@ -41,6 +41,9 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private BoolValue[] _manaCrystals = default;
     public BoolValue[] manaCrystals => _manaCrystals;
 
+    [SerializeField] private BoolValue[] _cutscenes = default;
+    public BoolValue[] cutscenes => _cutscenes;
+
     [SerializeField] private CharacterAppearance _characterAppearance = default;
     public CharacterAppearance characterAppearance => _characterAppearance;
 
@@ -98,6 +101,10 @@ public class ScriptableObjectPersistence : MonoBehaviour
         for (int i = 0; i < manaCrystals.Length; i++)
         {
             manaCrystals[i].RuntimeValue = manaCrystals[i].initialValue;
+        }
+        for (int i = 0; i < cutscenes.Length; i++)
+        {
+            cutscenes[i].RuntimeValue = cutscenes[i].initialValue;
         }
     }
 

@@ -122,6 +122,7 @@ public class SaveManager : DDOLSingleton<SaveManager>
         ES3.Save("Bosses", so.bosses, saveSlot);
         ES3.Save("HealthCrystals", so.healthCrystals, saveSlot);
         ES3.Save("ManaCrystals", so.manaCrystals, saveSlot);
+        ES3.Save("Cutscenes", so.cutscenes, saveSlot);
     }
 
     private void LoadBools(string loadSlot)
@@ -131,6 +132,7 @@ public class SaveManager : DDOLSingleton<SaveManager>
         ES3.LoadInto("Bosses", loadSlot, so.bosses);
         ES3.LoadInto("HealthCrystals", loadSlot, so.healthCrystals);
         ES3.LoadInto("ManaCrystals", loadSlot, so.manaCrystals);
+        ES3.LoadInto("Cutscenes", loadSlot, so.cutscenes);
     }
 
     private void SaveTime(string saveSlot) => ES3.Save("Time", so.timeOfDay, saveSlot);
