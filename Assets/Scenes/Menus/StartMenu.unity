@@ -123,6 +123,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &27585002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8998440270037989528, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998440270037989530, guid: f3201cafe47f6ba42a8866119576045d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f3201cafe47f6ba42a8866119576045d, type: 3}
 --- !u!1 &184357282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1793,8 @@ MonoBehaviour:
   - {fileID: 1654084116}
   - {fileID: 811505459}
   slot1Button: {fileID: 839412490}
+  buttonPressedSound: {fileID: 8300000, guid: 04e1e07668593fb4d9687261aca47c66, type: 3}
+  buttonSelectedSound: {fileID: 0}
 --- !u!114 &1121959858
 MonoBehaviour:
   m_ObjectHideFlags: 0

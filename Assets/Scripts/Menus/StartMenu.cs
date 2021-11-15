@@ -8,10 +8,16 @@ public class StartMenu : MonoBehaviour
     public GameObject pausePanel;
     [SerializeField] private Button[] mainButtons;
     [SerializeField] private GameObject slot1Button;
+    [SerializeField] protected AudioClip buttonPressedSound;
+    [SerializeField] protected AudioClip buttonSelectedSound;
 
 
 
-    public void NewGame() => SceneManager.LoadScene("CharacterCreation");
+    public void NewGame()
+    {
+        SoundManager.RequestSound(buttonPressedSound);
+        SceneManager.LoadScene("CharacterCreation");
+    }
 
     public void ClickStart() => SaveManager.Instance.LoadNew();
 
@@ -19,7 +25,8 @@ public class StartMenu : MonoBehaviour
 
     public void LoadClick()
     {
-        for(int i = 0; i < mainButtons.Length; i++)
+        SoundManager.RequestSound(buttonPressedSound);
+        for (int i = 0; i < mainButtons.Length; i++)
         {
             mainButtons[i].interactable = false;
         }
