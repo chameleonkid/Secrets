@@ -388,7 +388,6 @@ GameObject:
   - component: {fileID: 4786434875989235048}
   - component: {fileID: 4786434875989235050}
   - component: {fileID: 4786434875989235040}
-  - component: {fileID: 8183085418706488131}
   - component: {fileID: 8789407979251154080}
   - component: {fileID: 651291144713224499}
   - component: {fileID: 3481065640004061565}
@@ -435,6 +434,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -610,21 +610,6 @@ MonoBehaviour:
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
---- !u!114 &8183085418706488131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4786434875989235049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 1
-  duration: 1
 --- !u!114 &8789407979251154080
 MonoBehaviour:
   m_ObjectHideFlags: 0
