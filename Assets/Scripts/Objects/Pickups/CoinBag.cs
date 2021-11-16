@@ -1,9 +1,9 @@
-﻿public class CoinBag : PickUp
+﻿public class Coin : PickUp
 {
    
     protected override void PlayerPickUp(PlayerMovement player)
     {
-        player.inventory.coins = player.inventory.coins + 10;
+        player.inventory.coins++;
         Destroy(this.gameObject);
         SoundManager.RequestSound(pickUpSound);
     }
