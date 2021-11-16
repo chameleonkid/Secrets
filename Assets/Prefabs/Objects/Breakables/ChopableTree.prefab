@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7409324465184634883}
   - component: {fileID: 7409324465184634882}
   - component: {fileID: 7409324465184634893}
-  - component: {fileID: 7409324465184634881}
   - component: {fileID: 7409324465184634880}
   m_Layer: 0
   m_Name: ChopableTree
@@ -111,25 +110,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8114154, y: 0.5035019}
   m_EdgeRadius: 0
---- !u!95 &7409324465184634881
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7409324465184634892}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 145ae09f592b49a4f9f9270f1a4220fb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7409324465184634880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c765410ff646d46aaf5e54ef5884bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisLoot: {fileID: 11400000, guid: ff3a84c0c81f85f46afe78367c94c977, type: 2}
+  thisLoot: {fileID: 11400000, guid: 8dd99c450b9cddf448fa214f7b003792, type: 2}
   breakSound: {fileID: 8300000, guid: f570166c184cd6d4f9a63d36112a6df5, type: 3}
   destroyDelay: 0
   lootGenerateDelay: 0.5

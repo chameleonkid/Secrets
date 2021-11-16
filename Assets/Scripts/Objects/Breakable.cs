@@ -30,7 +30,11 @@ public class Breakable : MonoBehaviour
     {
         if (destroyableByAny || playerInventory.currentWeapon.weaponType == destroyableBy)
         {
-            anim.SetBool("Smash", true);
+            if(anim)
+            {
+                anim.SetBool("Smash", true);
+            }
+
             StartCoroutine(breakCo());
         }
 
