@@ -53,6 +53,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -187,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 0.5
+  _damage: 15
 --- !u!114 &3258620178005796262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,3 +203,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 5
   projectileSpeed: 9
+  _rotationNeeded: 0
+  destroyDelay: 0
