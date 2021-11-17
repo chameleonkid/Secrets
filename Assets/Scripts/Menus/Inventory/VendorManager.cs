@@ -86,7 +86,7 @@ public class VendorManager : ItemDisplay
     private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.sellPrice, "sell for:\n");
     private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.buyPrice, "buy for:\n");
     private void UpdateDescription(Item item, int price, string action)
-        => descriptionText.text = (item != null) ? $"{item.name}\n\n{action} {price}" : " Gold ";
+        => descriptionText.text = (item != null) ? $"{item.name}\n {item.fullDescription} \n{action} {price}" : " Gold ";
 
     protected override void InstantiateSlots()
     {
