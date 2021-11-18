@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class BossPumpkin : TurretEnemy
+public class TowerBoss : TurretEnemy
 {
     [Header("AbilityValues Boss")]
     public GameObject[] projectileTwo;

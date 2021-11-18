@@ -30,7 +30,7 @@ public class BossBattleTower : MonoBehaviour
     [Header("Spawn Positions")]
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [Header("The Boss")]
-    [SerializeField] private BossPumpkin boss = default;
+    [SerializeField] private TowerBoss boss = default;
     [SerializeField] private GameObject bossGameObject = default;
     [SerializeField] private Collider2D bossHurtBox = default;
 
@@ -121,7 +121,7 @@ public class BossBattleTower : MonoBehaviour
 
     private void StartBattle()
     {
-        Debug.Log("BossBattle has started!");
+        Debug.Log("Battle has started!");
         boss.animator.SetTrigger("StartBattle");
         StartCoroutine(ActivateBossValuesCo());
         StartNextStage();
@@ -226,6 +226,6 @@ public class BossBattleTower : MonoBehaviour
         SoundManager.RequestSound(startBattleSound);
         yield return new WaitForSeconds(3f);
         bossHurtBox.enabled = true;
-        boss.GetComponent<BossPumpkin>().enabled = true;
+        boss.GetComponent<TowerBoss>().enabled = true;
     }
 }

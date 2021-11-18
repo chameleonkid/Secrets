@@ -28,10 +28,12 @@ public class TurretEnemy : SimpleEnemy
             if (canAttack)
             {
                 currentStateEnum = StateEnum.attack;
+                animator.SetTrigger("isAttacking");
                 FireProjectile();
             }
             currentStateEnum = StateEnum.walk;
-            animator.SetBool("isMoving", true);
+            //animator.SetBool("isAttacking", true);
+            
         }
     }
 
@@ -51,7 +53,7 @@ public class TurretEnemy : SimpleEnemy
     protected virtual IEnumerator FireCo()
     {
         var originalMovespeed = this.moveSpeed;
-        animator.Play("Attacking");
+        //animator.Play("Attacking");
         //SoundManager.RequestSound(attackSounds.GetRandomElement());
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"

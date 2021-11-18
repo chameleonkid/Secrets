@@ -8,7 +8,13 @@ AnimatorController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Water Witch
   serializedVersion: 5
-  m_AnimatorParameters: []
+  m_AnimatorParameters:
+  - m_Name: isHurt
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -156,7 +162,7 @@ AnimatorStateTransition:
   m_CanTransitionToSelf: 1
 --- !u!1102 &1102000010588358256
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -183,7 +189,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102000010702081614
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -210,7 +216,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102000011482938324
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -237,7 +243,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102000012257607358
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -264,7 +270,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102000013929655476
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -291,7 +297,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &1102000014062877468
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -318,7 +324,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1107 &1107000012539452640
 AnimatorStateMachine:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -333,13 +339,13 @@ AnimatorStateMachine:
     m_Position: {x: 384, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102000012257607358}
-    m_Position: {x: 264, y: 360, z: 0}
+    m_Position: {x: 170, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102000011482938324}
     m_Position: {x: 504, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102000014062877468}
-    m_Position: {x: 384, y: 480, z: 0}
+    m_Position: {x: 550, y: 530, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102000010702081614}
     m_Position: {x: 384, y: 600, z: 0}
