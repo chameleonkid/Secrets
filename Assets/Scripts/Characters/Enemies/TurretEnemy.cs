@@ -34,7 +34,6 @@ public class TurretEnemy : SimpleEnemy
                 FireProjectile();
             }
             currentStateEnum = StateEnum.walk;
-            //animator.SetBool("isAttacking", true);
             
         }
     }
@@ -42,7 +41,8 @@ public class TurretEnemy : SimpleEnemy
     protected override void OutsideChaseRadiusUpdate()
     {
         currentStateEnum = StateEnum.idle;
-        animator.SetBool("isMoving", false);
+        //animator.SetBool("isMoving", false);
+        animator.SetTrigger("isSleeping");
     }
 
     protected virtual void FireProjectile()
