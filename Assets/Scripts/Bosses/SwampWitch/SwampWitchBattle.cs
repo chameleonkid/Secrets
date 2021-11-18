@@ -28,8 +28,14 @@ public class SwampWitchBattle : MonoBehaviour
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [Header("The Boss")]
     [SerializeField] private SwampWitchBoss boss = default;
+    [SerializeField] private SwampWitchBoss bossTwo = default;
     [SerializeField] private GameObject bossGameObject = default;
+    [SerializeField] private GameObject bossTwoGameObject = default;
+    [SerializeField] private GameObject bossTwoPhaseTwoProjectile = default;
     [SerializeField] private Collider2D bossHurtBox = default;
+    [SerializeField] private Collider2D bossTwoHurtBox = default;
+    [SerializeField] private int bossKillCounter = 0;
+
 
     [Header("Stages")]
     [SerializeField] private Stage stage = default;
@@ -53,10 +59,13 @@ public class SwampWitchBattle : MonoBehaviour
         if (isDefeated)
         {
             bossGameObject.SetActive(false);
+            bossTwoGameObject.SetActive(false);
+            triggerArea.SetActive(false);
         }
         else
         {
             bossGameObject.SetActive(true);
+            bossTwoGameObject.SetActive(true);
             spawnPostionList = new List<Vector3>();
             foreach (Transform spawnPoint in transform.Find("SpawnPoints"))
             {
@@ -72,7 +81,9 @@ public class SwampWitchBattle : MonoBehaviour
     {
         playerTrigger.OnTriggerEnter += EnterBossArea;       //Subscribe to not start the Battle multiple Times
         boss.OnEnemyTakeDamage += BossTakesDamage;
+        bossTwo.OnEnemyTakeDamage += BossTakesDamage;
         boss.OnEnemyDied += BossDied;
+        bossTwo.OnEnemyDied += BossDied;
     }
 
     // Update is called once per frame
@@ -83,18 +94,23 @@ public class SwampWitchBattle : MonoBehaviour
 
     private void BossTakesDamage()
     {
+        //TAKE CARE! THIS HAPPENS 4 TIMES. START WITH HIGH COOLDOWNS!
         Debug.Log("Boss took DMG!");
         switch (stage)
         {
             case Stage.Stage_1:
-                if (boss.GetPercentHealth() <= 70)
+                if (boss.GetPercentHealth() <= 70 || bossTwo.GetPercentHealth() <= 70)
                 {
                     StartNextStage();
                 }
                 break;
             case Stage.Stage_2:
-                if (boss.GetPercentHealth() <= 50)
+                if (boss.GetPercentHealth() <= 50 || bossTwo.GetPercentHealth() <= 50)
                 {
+                    bossTwo.projectile = bossTwoPhaseTwoProjectile;
+                    bossTwo.setAmountOfPojectiles(3);
+                    bossTwo.setTimeBetweenProjectiles(0.5f);
+
                     StartNextStage();
                 }
                 break;
@@ -103,12 +119,17 @@ public class SwampWitchBattle : MonoBehaviour
 
     private void BossDied()
     {
-        Debug.Log("The Boss died!");
+        bossKillCounter++;
+        Debug.Log("One Boss died!");
         SoundManager.RequestSound(bossDiedSound);
-        MusicManager.RequestMusic(endBattleMusic);
-        DestroyAllEnemies();
-        storeDefeated.RuntimeValue = true;
-        CancelInvoke("SpawnEnemy");                                                          // Stop spawning enemies
+        if (bossKillCounter == 2)
+        {
+            MusicManager.RequestMusic(endBattleMusic);
+            DestroyAllEnemies();
+            storeDefeated.RuntimeValue = true;
+            CancelInvoke("SpawnEnemy");
+        }
+                                                       // Stop spawning enemies
     }
 
     private void DestroyAllEnemies()
@@ -135,6 +156,7 @@ public class SwampWitchBattle : MonoBehaviour
     {
         Debug.Log("BossBattle has started!");
         boss.animator.SetTrigger("StartBattle");
+        bossTwo.animator.SetTrigger("StartBattle");
         StartCoroutine(ActivateBossValuesCo());
         StartNextStage();
         InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);
@@ -150,8 +172,7 @@ public class SwampWitchBattle : MonoBehaviour
                 break;
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
-                EnhanceAttacks();
-                Debug.Log("Shield should be active now!");
+                EnhanceAttacks();     
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;
@@ -164,7 +185,9 @@ public class SwampWitchBattle : MonoBehaviour
     {
         //  var boss = this.GetComponent<BossPumpkin>();
         boss.HalfCooldown();
+        bossTwo.HalfCooldown();
         boss.HalfCooldownSpellTwo();
+        bossTwo.HalfCooldownSpellTwo();
     }
 
     private IEnumerator ActivateBossValuesCo()
@@ -173,7 +196,9 @@ public class SwampWitchBattle : MonoBehaviour
         SoundManager.RequestSound(startBattleSound);
         yield return new WaitForSeconds(3f);
         bossHurtBox.enabled = true;
+        bossTwoHurtBox.enabled = true;
         boss.GetComponent<SwampWitchBoss>().enabled = true;
+        bossTwo.GetComponent<SwampWitchBoss>().enabled = true;
     }
 
 

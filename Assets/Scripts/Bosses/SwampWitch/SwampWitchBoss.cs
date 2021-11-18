@@ -5,7 +5,6 @@ using UnityEngine;
 public class SwampWitchBoss : TurretEnemy
 {
     [Header("AbilityValues Boss")]
-    public GameObject[] projectileTwo;
     public bool canTeleport = false;
     public float canTeleportTimer;
     [SerializeField] private float canTeleportCD;
@@ -17,8 +16,8 @@ public class SwampWitchBoss : TurretEnemy
     [SerializeField] private Transform points;
 
     [Header("Boss Attack Sounds")]
-    [SerializeField] private AudioClip attack1Sound;
-    [SerializeField] private AudioClip attack2Sound;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip teleportSound;
 
     protected override void Update()
     {
@@ -87,33 +86,7 @@ public class SwampWitchBoss : TurretEnemy
 
         Vector3 rndTeleportPoint = TeleportPositionList[Random.Range(0, TeleportPositionList.Count)];
         this.transform.position = rndTeleportPoint;
-        /*
-        int rndTeleportPosition = Random.Range(0, 100);
-        if (rndTeleportPosition < 20)
-        {
-        this.transform.position = TeleportPositionList.
-        }
-        if (rndTeleportPosition > 20 && rndTeleportPosition <= 40)
-        {
-     
-        }
-        if (rndTeleportPosition > 40 && rndTeleportPosition <= 60)
-        {
-
-        }
-        if (rndTeleportPosition > 60 && rndTeleportPosition <= 80)
-        {
-
-        }
-        else
-        {
-
-        }
-        */
-
-
-
-
+       
     }
 
     public void HalfCooldownSpellTwo()
@@ -121,13 +94,13 @@ public class SwampWitchBoss : TurretEnemy
         canTeleportTimer = canTeleportTimer / 2;
     }
 
-    public void PlayAttack1Sound()
+    public void PlayAttackSound()
     {
-        SoundManager.RequestSound(attack1Sound);
+        SoundManager.RequestSound(attackSound);
     }
 
-    public void PlayAttack2Sound()
+    public void PlayTeleportSound()
     {
-        SoundManager.RequestSound(attack2Sound);
+        SoundManager.RequestSound(teleportSound);
     }
 }

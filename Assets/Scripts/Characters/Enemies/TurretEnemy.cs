@@ -7,6 +7,8 @@ public class TurretEnemy : SimpleEnemy
     public GameObject projectile;
     public bool canAttack = false;
     public float fireDelay;
+    [SerializeField] private int amountOfProjectiles = 1;
+    [SerializeField] private float timeBetweenProjectiles = 1;
     [SerializeField] private float fireDelaySeconds;
 
     protected virtual void Update()
@@ -59,8 +61,24 @@ public class TurretEnemy : SimpleEnemy
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;
 
-        var difference = target.transform.position - transform.position;
-        Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
+        
+        for(int i = 0; i <= amountOfProjectiles; i++)
+        {
+            var difference = target.transform.position - transform.position;
+            Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
+            yield return new WaitForSeconds(timeBetweenProjectiles);
+        }
+
+    }
+
+    public void setAmountOfPojectiles(int amount)
+    {
+        amountOfProjectiles = amount-1;
+    }
+
+    public void setTimeBetweenProjectiles(float timeBetween)
+    {
+        timeBetweenProjectiles = timeBetween;
     }
 
     public void HalfCooldown()
