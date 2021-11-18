@@ -32,10 +32,12 @@ public class Projectile : MonoBehaviour
         lifetimeCountdown -= Time.deltaTime;
         if (lifetimeCountdown <= 0)
         {
-            if(this.transform.parent == null)
+         /*   if(this.transform.parent == null)
             {
                 Destroy(this.gameObject);
             }
+         *
+         *
             // Dangerous! Its destroying the world :) might be usefull later hehe
             /*
             else
@@ -43,12 +45,14 @@ public class Projectile : MonoBehaviour
                 Destroy(this.transform.parent.gameObject);
             }
             */
-            if(this.transform.parent.tag == "spell")
+            if(this.transform.parent.tag == "Enemy")
             {
-                Destroy(this.transform.parent.gameObject);
+               
             }
-        
-
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
