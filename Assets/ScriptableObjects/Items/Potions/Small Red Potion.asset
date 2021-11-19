@@ -16,7 +16,7 @@ MonoBehaviour:
   _name: Red Potion
   _description: It's glowing and you feel your hands become warmer.
   _sprite: {fileID: 21300000, guid: ae8c547b52a86487294fa5c5abe1adea, type: 3}
-  _sound: {fileID: 0}
+  _sound: {fileID: 8300000, guid: 04e1e07668593fb4d9687261aca47c66, type: 3}
   _unique: 0
   _usable: 1
   _level: 0
@@ -24,6 +24,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: a7c927416c6f42341b12f50ed23d8b81, type: 2}
+        m_TargetAssemblyTypeName: UnityEventNexus, Assembly-CSharp
         m_MethodName: ModifyCurrentHealth
         m_Mode: 4
         m_Arguments:
