@@ -85,4 +85,9 @@ public class TurretEnemy : SimpleEnemy
     {
         fireDelay = fireDelay / 2;
     }
+
+    public void setFireDelaySeconds(float timeTillAttack)
+    {
+        fireDelaySeconds = timeTillAttack;
+    }
 }
