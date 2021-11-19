@@ -5031,10 +5031,10 @@ GameObject:
   - component: {fileID: 8242921446140128613}
   - component: {fileID: 8242921446140128610}
   - component: {fileID: 7056126307209013735}
-  - component: {fileID: 8242921446140128621}
   - component: {fileID: 8242921446140128592}
   - component: {fileID: 7580553462079864577}
   - component: {fileID: 8326287257408384856}
+  - component: {fileID: -3773884417315327279}
   m_Layer: 8
   m_Name: Healing_Blob_Green
   m_TagString: enemy
@@ -5261,22 +5261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8242921446140128621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8242921446140128620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4ab939732abb584f87f015c5c1330a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  charactersInAreaList: []
-  tickDuration: 1
-  tickDamage: 2
 --- !u!114 &8242921446140128592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5368,3 +5352,19 @@ MonoBehaviour:
   startHealPercent: 75
   fastHealPercent: 50
   xTimesFasterHealingValue: 4
+--- !u!114 &-3773884417315327279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8242921446140128620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748e89f8c16353045a34383cdf7b9a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  charactersInAreaList: []
+  tickDuration: 1
+  tickDamage: 1

@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 137455740367087120}
   - component: {fileID: 137455740367087127}
   - component: {fileID: 1324215901438993042}
-  - component: {fileID: 137455740367087128}
   - component: {fileID: 137455740367087141}
   - component: {fileID: -7296003947986537356}
+  - component: {fileID: 5677238305574767830}
   m_Layer: 8
   m_Name: Blob_Green
   m_TagString: enemy
@@ -58,6 +58,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -244,22 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &137455740367087128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137455740367087129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4ab939732abb584f87f015c5c1330a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  charactersInAreaList: []
-  tickDuration: 1
-  tickDamage: 2
 --- !u!114 &137455740367087141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +314,22 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &5677238305574767830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137455740367087129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748e89f8c16353045a34383cdf7b9a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  charactersInAreaList: []
+  tickDuration: 1
+  tickDamage: 1
 --- !u!1001 &825108448
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4821109577977272686}
   - component: {fileID: -622644466295011760}
   - component: {fileID: 7732716755730280119}
+  - component: {fileID: -2317031399754800984}
   m_Layer: 8
   m_Name: Splitting_Blob_Blue
   m_TagString: enemy
@@ -58,6 +59,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -285,7 +287,7 @@ MonoBehaviour:
   seeker: {fileID: 0}
   leftChaseRadius: 1
   maxSplit: 3
-  enemiesToSpawn: {fileID: 7266744987202986110, guid: 2e8b2fe9d7d4307409e83810506ff48c,
+  enemiesToSpawn: {fileID: 8242921446140128610, guid: 6cdee10761b18bf43ba8b8055ec25f17,
     type: 3}
 --- !u!114 &-622644466295011760
 MonoBehaviour:
@@ -331,6 +333,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.060094833}
   serializedVersion: 2
   m_Radius: 0.18990517
+--- !u!114 &-2317031399754800984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821109577977272682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748e89f8c16353045a34383cdf7b9a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  charactersInAreaList: []
+  tickDuration: 1
+  tickDamage: 5
 --- !u!1001 &1502200
 PrefabInstance:
   m_ObjectHideFlags: 0
