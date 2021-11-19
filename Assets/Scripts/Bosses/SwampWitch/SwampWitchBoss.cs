@@ -16,7 +16,7 @@ public class SwampWitchBoss : TurretEnemy
     [SerializeField] private Transform points;
 
     [Header("Boss Attack Sounds")]
-    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip[] attackSound;
     [SerializeField] private AudioClip teleportSound;
 
     protected override void Update()
@@ -96,7 +96,7 @@ public class SwampWitchBoss : TurretEnemy
 
     public void PlayAttackSound()
     {
-        SoundManager.RequestSound(attackSound);
+        SoundManager.RequestSound(attackSound.GetRandomElement());
     }
 
     public void PlayTeleportSound()

@@ -693,7 +693,7 @@ MonoBehaviour:
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 400
   attackRadius: 0
-  deathEffect: {fileID: 4464167541414145869, guid: 4a9a3d49c120cfd44a026039cc3f7ff5,
+  deathEffect: {fileID: 4464167541414145869, guid: 1bedd70b0f7784449af3b41e473303cd,
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
@@ -716,7 +716,9 @@ MonoBehaviour:
   canTeleportCD: 10
   TeleportPositionList: []
   points: {fileID: 1126997058}
-  attackSound: {fileID: 8300000, guid: 1a42721e4d9cecd42b8ae13b35aafe77, type: 3}
+  attackSound:
+  - {fileID: 8300000, guid: b626ac82c31ed7f45843d8699cb2201a, type: 3}
+  - {fileID: 8300000, guid: 9fcfb6ac941f82b4d904f6b567009e28, type: 3}
   teleportSound: {fileID: 8300000, guid: 7dda8499f6183bb4299fceeebe54fd56, type: 3}
 --- !u!95 &405336941
 Animator:
@@ -1170,7 +1172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195953893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.57, y: -6.49, z: 0}
+  m_LocalPosition: {x: -3.53, y: -10.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1554903739}
@@ -1230,7 +1232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436743353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.07, y: -7.0400004, z: 0}
+  m_LocalPosition: {x: 8.91, y: -10.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1554903739}
@@ -1390,6 +1392,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3306322925851714564, guid: 23497ca391cf1b645bcef24d0c78e4c9,
+        type: 3}
+      propertyPath: startBattleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b092c07963624674483b59ad579fee0a, type: 3}
     - target: {fileID: 3306322925851714565, guid: 23497ca391cf1b645bcef24d0c78e4c9,
         type: 3}
       propertyPath: m_Name
@@ -1596,10 +1603,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrigger: {fileID: 1563263273}
-  enemy1: {fileID: 7290780269828354134, guid: cdad374a17ee3d142a6a4a43791a3bd8, type: 3}
-  enemy2: {fileID: 7290780269828354134, guid: cdad374a17ee3d142a6a4a43791a3bd8, type: 3}
-  enemy3: {fileID: 7290780269828354134, guid: cdad374a17ee3d142a6a4a43791a3bd8, type: 3}
-  spawnRate: 60
+  enemy1: {fileID: 3492503705776306315, guid: 02fc4e9a1e96030418e0b9f90a066bb7, type: 3}
+  enemy2: {fileID: 137455740367087127, guid: 75c88211dd6f248429623f600593314c, type: 3}
+  enemy3: {fileID: 4821109577977272686, guid: 5b72f042d0c83b249811672a4ac97231, type: 3}
+  spawnRate: 5
   spawnedEnemiesList: []
   spawnPostionList: []
   boss: {fileID: 405336940}
@@ -1614,7 +1621,7 @@ MonoBehaviour:
   stage: 0
   isDefeated: 0
   storeDefeated: {fileID: 11400000, guid: d3f66d1503b2ac84bb588d670c9a11dd, type: 2}
-  startBattleSound: {fileID: 8300000, guid: 4df4d5f353291694ba4132633903c6de, type: 3}
+  startBattleSound: {fileID: 8300000, guid: b092c07963624674483b59ad579fee0a, type: 3}
   endBattleMusic:
   - {fileID: 8300000, guid: da46cea26244aeb45a5f33cdde825e0b, type: 3}
   bossDiedSound: {fileID: 8300000, guid: 328fd789e0002b441bacc42412186621, type: 3}
@@ -2141,7 +2148,7 @@ MonoBehaviour:
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 400
   attackRadius: 0
-  deathEffect: {fileID: 4464167541414145869, guid: 4a9a3d49c120cfd44a026039cc3f7ff5,
+  deathEffect: {fileID: 4464167541414145869, guid: d594094de16ae2c479cecb3256299a43,
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
@@ -2164,7 +2171,9 @@ MonoBehaviour:
   canTeleportCD: 10
   TeleportPositionList: []
   points: {fileID: 343346456}
-  attackSound: {fileID: 8300000, guid: 1c8d872e660b2434e81fcaf26f339950, type: 3}
+  attackSound:
+  - {fileID: 8300000, guid: b626ac82c31ed7f45843d8699cb2201a, type: 3}
+  - {fileID: 8300000, guid: 9fcfb6ac941f82b4d904f6b567009e28, type: 3}
   teleportSound: {fileID: 8300000, guid: 2fd78b0f1d90dba4c9152f15483d2ad4, type: 3}
 --- !u!19719996 &210687315285193513
 TilemapCollider2D:
