@@ -142,6 +142,7 @@ public class InventoryManager : MonoBehaviour
         {
             inventory.items[item]--;
             descriptionText.text = "You used " + item.name;
+            SoundManager.RequestSound(item.sound);
         }
 
         if (inventory.items[item] <= 0)
