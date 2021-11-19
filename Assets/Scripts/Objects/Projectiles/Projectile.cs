@@ -32,20 +32,7 @@ public class Projectile : MonoBehaviour
         lifetimeCountdown -= Time.deltaTime;
         if (lifetimeCountdown <= 0)
         {
-         /*   if(this.transform.parent == null)
-            {
-                Destroy(this.gameObject);
-            }
-         *
-         *
-            // Dangerous! Its destroying the world :) might be usefull later hehe
-            /*
-            else
-            {
-                Destroy(this.transform.parent.gameObject);
-            }
-            */
-            if(this.transform.parent.tag == "Enemy")
+            if(this.transform.parent && this.transform.parent.tag == "Enemy")
             {
                
             }
