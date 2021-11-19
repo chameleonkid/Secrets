@@ -30,6 +30,7 @@ public class SwampWitchBoss : TurretEnemy
         {
             canTeleport = true;
             canTeleportCD = canTeleportTimer;
+            setFireDelaySeconds(5);
         }
 
         if(canTeleport == true)
