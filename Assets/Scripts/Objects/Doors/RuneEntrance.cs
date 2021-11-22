@@ -38,6 +38,7 @@ public class RuneEntrance : MonoBehaviour
         Debug.Log("A rune was triggered");
         if (AreAllRunesActive() == true)
         {
+            SoundManager.RequestSound(appearSound);
             ActiveEntrance();
         }
     }
@@ -47,7 +48,6 @@ public class RuneEntrance : MonoBehaviour
     {
         entranceActive = true;
         animator.SetTrigger("PortalAppearTrigger");
-        SoundManager.RequestSound(appearSound);
         entranceCollider.enabled = true;
         entranceRenderer.enabled = true;
     }
