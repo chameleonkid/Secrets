@@ -38,7 +38,6 @@ public class RuneEntrance : MonoBehaviour
         Debug.Log("A rune was triggered");
         if (AreAllRunesActive() == true)
         {
-            SoundManager.RequestSound(appearSound);
             ActiveEntrance();
         }
     }
@@ -46,6 +45,7 @@ public class RuneEntrance : MonoBehaviour
 
     private void ActiveEntrance()
     {
+        SoundManager.RequestSound(appearSound); // This is triggered every Time the scene is loaded and ALL Runes are active already... makes sense... needs to be fixed
         entranceActive = true;
         animator.SetTrigger("PortalAppearTrigger");
         entranceCollider.enabled = true;
