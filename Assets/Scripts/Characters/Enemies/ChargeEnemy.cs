@@ -5,7 +5,7 @@ public class ChargeEnemy : Enemy
 {
 
     [SerializeField] private bool hasPlayerPosition = false;
-    [SerializeField] private Vector2 playerPosition;
+    [SerializeField] private Vector2 chargePosition;
     [SerializeField] private float chargeSpeed = 10;
     protected override void FixedUpdate()
     {
@@ -74,7 +74,7 @@ public class ChargeEnemy : Enemy
         Debug.Log("ChargeCo has started");
         currentStateEnum = StateEnum.attack;
         yield return new WaitForSeconds(1f);
-        rigidbody.velocity = playerPosition * chargeSpeed;
+        rigidbody.velocity = chargePosition * chargeSpeed;
         Debug.Log("I charged!");
         yield return new WaitForSeconds(5f);
         hasPlayerPosition = false;
@@ -89,9 +89,9 @@ public class ChargeEnemy : Enemy
         if (!hasPlayerPosition)
         {
             // take player position
-            playerPosition = target.position - transform.position;
+            chargePosition = target.position - transform.position;
             // normalize position
-            playerPosition.Normalize();
+            chargePosition.Normalize();
             // Attack that position
             hasPlayerPosition = true;
         }
