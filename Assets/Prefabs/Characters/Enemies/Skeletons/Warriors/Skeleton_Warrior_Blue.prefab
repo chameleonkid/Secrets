@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6078412745995031453}
   - component: {fileID: 4631500579470379966}
   - component: {fileID: 2311297493261831548}
+  - component: {fileID: 5053656035743578571}
   m_Layer: 8
   m_Name: right hit box
   m_TagString: enemy
@@ -95,6 +96,18 @@ PolygonCollider2D:
       - {x: -0.029655933, y: 0.19561613}
       - {x: 0.4258268, y: -0.15205085}
       - {x: 0.569402, y: 0.32997322}
+--- !u!114 &5053656035743578571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311297493261831547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1940d35a13cd40d41b71f34de695c72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2311297493767853760
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,8 +123,6 @@ GameObject:
   - component: {fileID: 2311297493767853762}
   - component: {fileID: 2311297493767853763}
   - component: {fileID: 2311297493767853769}
-  - component: {fileID: 1436539630286817514}
-  - component: {fileID: 1137807473856500883}
   - component: {fileID: 1983142973471604489}
   - component: {fileID: 7743495509848146586}
   - component: {fileID: 3266076881449268564}
@@ -331,7 +342,7 @@ MonoBehaviour:
   homePosition: {x: 0, y: 0}
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
-  attackRadius: 0.5
+  attackRadius: 0.66
   deathEffect: {fileID: 4464167541414145869, guid: 4df1e9fa6c62eb5499d6a1a1ccbd1453,
     type: 3}
   deathEffectDelay: 1
@@ -343,35 +354,7 @@ MonoBehaviour:
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
---- !u!114 &1436539630286817514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2311297493767853760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 1
-  duration: 1
---- !u!114 &1137807473856500883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2311297493767853760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  _damage: 5
+  attackCoolDown: 0
 --- !u!114 &1983142973471604489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +422,7 @@ GameObject:
   - component: {fileID: 3292183094371600427}
   - component: {fileID: 2897992266752493383}
   - component: {fileID: 2311297494156499838}
+  - component: {fileID: 7669216615776213793}
   m_Layer: 8
   m_Name: left hit box
   m_TagString: enemy
@@ -519,6 +503,18 @@ PolygonCollider2D:
       - {x: -0.53818035, y: -0.036345124}
       - {x: 0.0702467, y: -0.058079004}
       - {x: -0.0028381348, y: 0.35975605}
+--- !u!114 &7669216615776213793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311297494156499837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1940d35a13cd40d41b71f34de695c72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2311297494550586164
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +527,7 @@ GameObject:
   - component: {fileID: 9221743435294795355}
   - component: {fileID: 5565437448348793172}
   - component: {fileID: 2311297494550586169}
+  - component: {fileID: 418549839762602775}
   m_Layer: 8
   m_Name: up hit box
   m_TagString: enemy
@@ -611,6 +608,18 @@ PolygonCollider2D:
       - {x: -0.1412816, y: 0.39857256}
       - {x: 0.2501545, y: 0.42530584}
       - {x: 0.5773773, y: 0.9766395}
+--- !u!114 &418549839762602775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311297494550586164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1940d35a13cd40d41b71f34de695c72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2311297495092196630
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,6 +632,7 @@ GameObject:
   - component: {fileID: 8976648551724662252}
   - component: {fileID: 8918097313034439848}
   - component: {fileID: 2311297495092196635}
+  - component: {fileID: 4658456661033946904}
   m_Layer: 8
   m_Name: down hit box
   m_TagString: enemy
@@ -703,6 +713,18 @@ PolygonCollider2D:
       - {x: -0.51979685, y: -0.21696854}
       - {x: 0.4205556, y: -0.38256705}
       - {x: 0.35233545, y: 0.34960848}
+--- !u!114 &4658456661033946904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311297495092196630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1940d35a13cd40d41b71f34de695c72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &399626688
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MeleeEnemy : Enemy
 {
+    [SerializeField] private float attackCoolDown = 0.5f;
     protected override void FixedUpdate()
     {
         //! Temporary!
@@ -69,7 +70,7 @@ public class MeleeEnemy : Enemy
         animator.SetBool("Attacking", true);
         yield return null;
         animator.SetBool("Attacking", false);
-        yield return new WaitForSeconds(0.5f); //Attack CD
+        yield return new WaitForSeconds(attackCoolDown); //Attack CD
         currentStateEnum = StateEnum.walk;
     }
 }
