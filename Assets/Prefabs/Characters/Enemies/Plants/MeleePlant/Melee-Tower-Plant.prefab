@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2230807509142788756}
   - component: {fileID: 1872288383178095892}
   - component: {fileID: 2230807509142788764}
-  - component: {fileID: 6456052910380491088}
   - component: {fileID: 6456052910380491089}
   - component: {fileID: -2785870674370667802}
   m_Layer: 8
@@ -62,6 +61,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1345728457
-  m_SortingLayer: -3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -5227478119433368630, guid: 908b3893d75d48a458be28e80c7a5d6e,
     type: 3}
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &2230807509142788766
 Animator:
   serializedVersion: 3
@@ -219,6 +219,8 @@ MonoBehaviour:
   gotHitSound:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -226,6 +228,11 @@ MonoBehaviour:
   _slow: {fileID: 7170869075618961497}
   _shrink: {fileID: 7372415183484544218}
   _gigantism: {fileID: 3544170663096339663}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 1
   maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
@@ -248,25 +255,13 @@ MonoBehaviour:
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
+  leftChaseRadius: 1
   projectile: {fileID: 0}
   canAttack: 0
   fireDelay: 5
+  amountOfProjectiles: 1
+  timeBetweenProjectiles: 1
   fireDelaySeconds: 0
---- !u!114 &6456052910380491088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2230807509142788765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 3
-  duration: 0.2
 --- !u!114 &6456052910380491089
 MonoBehaviour:
   m_ObjectHideFlags: 0

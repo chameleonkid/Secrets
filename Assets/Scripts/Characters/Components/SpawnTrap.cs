@@ -18,7 +18,7 @@ public class SpawnTrap : ComponentTrigger<PlayerMovement>
     [SerializeField] private float lockTime;
     [Header("This sound will be played when the trap will be activated:")]
     [SerializeField] private AudioClip trapSound;
-    [Header("This sound will be played when the trap will be activated:")]
+    [Header("Is the trap still active?:")]
     [SerializeField] private bool isActive = true;
 
     protected override void OnEnter(PlayerMovement player)
