@@ -11,6 +11,10 @@ public class ChargeEnemy : Enemy
     [SerializeField] private Vector3 chargeDestination;
     [SerializeField] private float chargeSpeed = 10;
     [SerializeField] private float chargeThreshhold = 0.25f;
+    [SerializeField] private float chargeCastTime = 1f;
+    [SerializeField] private float chargeRecoverTime = 3f;
+
+    [SerializeField] private AudioClip chargeSound;
     protected override void FixedUpdate()
     {
         //! Temporary!
@@ -89,17 +93,19 @@ public class ChargeEnemy : Enemy
 
     public IEnumerator ChargeCo()
     {
+        
         animator.SetBool("isMoving", false);
         isCharging = true;
-        Debug.Log("ChargeCo has started");
         currentStateEnum = StateEnum.attack;
         animator.SetTrigger("PrepareCharge");
-        yield return new WaitForSeconds(0.5f); //ChargePrepareTime
+        SoundManager.RequestSound(attackSounds.GetRandomElement());
+        yield return new WaitForSeconds(chargeCastTime); //ChargePrepareTime
         animator.SetTrigger("isCharging");
         rigidbody.velocity = chargeDirection * chargeSpeed;
+        SoundManager.RequestSound(chargeSound);
         animator.SetTrigger("isCoolingDown");
         Debug.Log("I charged!");
-        yield return new WaitForSeconds(2f); // Stay at Chargedestination for a while and 
+        yield return new WaitForSeconds(chargeRecoverTime); // Stay at Chargedestination for a while and 
         animator.SetBool("isMoving", true);
         isCharging = false;
         hasPlayerPosition = false;
