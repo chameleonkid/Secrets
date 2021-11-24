@@ -5,7 +5,8 @@ public class ChargeEnemy : Enemy
 {
 
     [SerializeField] private bool hasPlayerPosition = false;
-    [SerializeField] private Vector2 chargePosition;
+    [SerializeField] private bool isCharging = false;
+    [SerializeField] private Vector3 chargePosition;
     [SerializeField] private float chargeSpeed = 10;
     protected override void FixedUpdate()
     {
@@ -15,6 +16,12 @@ public class ChargeEnemy : Enemy
             currentState.FixedUpdate();
             return;
         }
+
+        if(isCharging)
+        {
+
+        }
+        
         else
         {
             rigidbody.velocity = Vector2.zero;
@@ -71,21 +78,36 @@ public class ChargeEnemy : Enemy
     
     public IEnumerator ChargeCo()
     {
+        animator.SetBool("isMoving", false);
+        isCharging = true;
         Debug.Log("ChargeCo has started");
         currentStateEnum = StateEnum.attack;
-        yield return new WaitForSeconds(1f);
+        animator.SetTrigger("PrepareCharge");
+        yield return new WaitForSeconds(0.5f); //ChargePrepareTime
+        animator.SetTrigger("isCharging");
         rigidbody.velocity = chargePosition * chargeSpeed;
+        if(transform.position == chargePosition)
+        {
+            rigidbody.velocity = Vector2.zero; //If reached Chargedestination stop NOT WORKING!?
+        }
+        yield return new WaitForSeconds(0.25f); //Chargeduration
+        rigidbody.velocity = Vector2.zero;
+        animator.SetTrigger("isIdle");
         Debug.Log("I charged!");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f); // Stay at Chargedestination for a while and 
+        isCharging = false;
+
         hasPlayerPosition = false;
-        currentStateEnum = StateEnum.walk;
-        Debug.Log("I waited 5 seconds and charge again!");
+        currentStateEnum = StateEnum.idle;
+        Debug.Log("I waited X seconds and charge again!");
+
 
     }
     
 
     public void AttackPlayer()
     {
+
         if (!hasPlayerPosition)
         {
             // take player position
@@ -96,7 +118,7 @@ public class ChargeEnemy : Enemy
             hasPlayerPosition = true;
         }
 
-        if (hasPlayerPosition)
+        if (hasPlayerPosition )
         {
             StartCoroutine(ChargeCo());
 
