@@ -92,11 +92,11 @@ public class ChargeEnemy : Enemy
         }
         yield return new WaitForSeconds(0.25f); //Chargeduration
         rigidbody.velocity = Vector2.zero;
-        animator.SetTrigger("isIdle");
+        animator.SetTrigger("isCoolingDown");
         Debug.Log("I charged!");
         yield return new WaitForSeconds(2f); // Stay at Chargedestination for a while and 
+        animator.SetBool("isMoving", true);
         isCharging = false;
-
         hasPlayerPosition = false;
         currentStateEnum = StateEnum.idle;
         Debug.Log("I waited X seconds and charge again!");
