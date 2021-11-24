@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class ChargeEnemy : Enemy
 {
 
     [SerializeField] private bool hasPlayerPosition = false;
     [SerializeField] private bool isCharging = false;
-    [SerializeField] private Vector3 chargePosition;
+    [SerializeField] private Vector3 chargeDirection;
+    [SerializeField] private Vector3 chargeDestination;
     [SerializeField] private float chargeSpeed = 10;
+    [SerializeField] private float chargeThreshhold = 0.25f;
     protected override void FixedUpdate()
     {
         //! Temporary!
@@ -75,7 +78,15 @@ public class ChargeEnemy : Enemy
             randomMovement();
         }
     }
-    
+
+    public void Update()
+    {
+        if ((transform.position - chargeDestination).magnitude < chargeThreshhold)
+        {
+            rigidbody.velocity = Vector2.zero; //If reached Chargedestination stop NOT WORKING!?
+        }
+    }
+
     public IEnumerator ChargeCo()
     {
         animator.SetBool("isMoving", false);
@@ -85,13 +96,7 @@ public class ChargeEnemy : Enemy
         animator.SetTrigger("PrepareCharge");
         yield return new WaitForSeconds(0.5f); //ChargePrepareTime
         animator.SetTrigger("isCharging");
-        rigidbody.velocity = chargePosition * chargeSpeed;
-        if(transform.position == chargePosition)
-        {
-            rigidbody.velocity = Vector2.zero; //If reached Chargedestination stop NOT WORKING!?
-        }
-        yield return new WaitForSeconds(0.25f); //Chargeduration
-        rigidbody.velocity = Vector2.zero;
+        rigidbody.velocity = chargeDirection * chargeSpeed;
         animator.SetTrigger("isCoolingDown");
         Debug.Log("I charged!");
         yield return new WaitForSeconds(2f); // Stay at Chargedestination for a while and 
@@ -100,8 +105,6 @@ public class ChargeEnemy : Enemy
         hasPlayerPosition = false;
         currentStateEnum = StateEnum.idle;
         Debug.Log("I waited X seconds and charge again!");
-
-
     }
     
 
@@ -110,15 +113,16 @@ public class ChargeEnemy : Enemy
 
         if (!hasPlayerPosition)
         {
+            chargeDestination = target.position;
             // take player position
-            chargePosition = target.position - transform.position;
+            chargeDirection = target.position - transform.position;
             // normalize position
-            chargePosition.Normalize();
+            chargeDirection.Normalize();
             // Attack that position
             hasPlayerPosition = true;
         }
 
-        if (hasPlayerPosition )
+        if (hasPlayerPosition)
         {
             StartCoroutine(ChargeCo());
 
