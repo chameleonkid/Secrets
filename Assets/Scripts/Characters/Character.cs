@@ -132,6 +132,18 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
         }
     }
 
+    public virtual void TakeDamageNoArmor(float damage, bool isCritical)
+    {
+        if (!isInvulnerable)
+        {
+            health -= damage;
+            DamagePopUpManager.RequestDamagePopUp(damage, isCritical, transform);
+            SoundManager.RequestSound(gotHitSound.GetRandomElement());
+            iframes?.TriggerInvulnerability();
+        }
+    }
+
+
     public void TeleportTowards(Vector2 destination, float maxDelta)
     {
         var difference = destination - (Vector2)transform.position;
@@ -174,5 +186,10 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     public void RequestAttackSound()
     {
         SoundManager.RequestSound(attackSounds.GetRandomElement());
+    }
+
+    public void RequestGotHitSound()
+    {
+        SoundManager.RequestSound(gotHitSound.GetRandomElement());
     }
 }

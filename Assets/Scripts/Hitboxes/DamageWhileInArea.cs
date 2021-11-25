@@ -54,7 +54,8 @@ public class DamageWhileInArea : Hitbox
         {
             if (hit != null)
             {
-                hit.TakeDamage(tickDamage, isCritical);                                           // This means DMG WITHOUT ARMOR and No iFrames!
+                hit.TakeDamage(tickDamage, isCritical);
+                hit.RequestGotHitSound();
                 yield return new WaitForSeconds(tickDuration);
                 Debug.Log("Character took dmg from AOE");
             }
