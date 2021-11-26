@@ -57,17 +57,19 @@ public class TurretEnemy : SimpleEnemy
         var originalMovespeed = this.moveSpeed;
         //animator.Play("Attacking");
         //SoundManager.RequestSound(attackSounds.GetRandomElement());
+        animator.SetBool("Attacking", true);
         this.moveSpeed = 0;
         yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;
 
         
-        for(int i = 0; i <= amountOfProjectiles; i++)
+        for(int i = 0; i <= amountOfProjectiles-1; i++)
         {
             var difference = target.transform.position - transform.position;
             Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
             yield return new WaitForSeconds(timeBetweenProjectiles);
         }
+        animator.SetBool("Attacking", false);
 
     }
 
