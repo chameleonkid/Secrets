@@ -24,9 +24,9 @@ public class ActivateableRune : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(!activated)
+        if(!activated && other.GetComponent<PlayerMovement>())
         {
             SoundManager.RequestSound(runeSound); // Only play the sound when you walk on it and it wasnt active yet!
             ActivateRune();

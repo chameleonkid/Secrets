@@ -8,6 +8,7 @@ public class RuneEntrance : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private BoolValue[] runeActive;
     [SerializeField] private bool entranceActive = false;
+    [SerializeField] private BoxCollider2D transitionCollider;
     [SerializeField] private Collider2D entranceCollider;
     [SerializeField] private SpriteRenderer entranceRenderer;
     // Start is called before the first frame update
@@ -21,8 +22,10 @@ public class RuneEntrance : MonoBehaviour
     private void Awake()
     {
         animator = this.GetComponent<Animator>(); ;
-        entranceCollider = this.GetComponent<Collider2D>();
+
+        entranceCollider = this.GetComponent<PolygonCollider2D>();
         entranceRenderer = this.GetComponent<SpriteRenderer>();
+        transitionCollider.enabled = false;
         entranceCollider.enabled = false;
         entranceRenderer.enabled = false;
 
@@ -48,6 +51,7 @@ public class RuneEntrance : MonoBehaviour
         SoundManager.RequestSound(appearSound); // This is triggered every Time the scene is loaded and ALL Runes are active already... makes sense... needs to be fixed
         entranceActive = true;
         animator.SetTrigger("PortalAppearTrigger");
+        transitionCollider.enabled = true;
         entranceCollider.enabled = true;
         entranceRenderer.enabled = true;
     }
