@@ -26,7 +26,7 @@ public class ItemDoor : Interactable
     }
     //########################## Doormemory END ##################################
 
-    private void Update()
+    private void LateUpdate()
     {
         if (playerInRange && player.inputInteract && Time.timeScale > 0)
         {
