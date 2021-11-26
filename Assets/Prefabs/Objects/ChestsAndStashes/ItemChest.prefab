@@ -51,6 +51,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -72,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1345728457
-  m_SortingLayer: -3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300392, guid: 47c6a039472216d4384b29e942993912, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &2728290692212629432
 Animator:
   serializedVersion: 3
@@ -118,10 +119,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.036772728, y: 0.16214848}
+  m_Offset: {x: -0.036772728, y: -0.050060146}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1.375, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -129,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.59723854, y: 0.67570305}
+  m_Size: {x: 0.59723854, y: 0.3521374}
   m_EdgeRadius: 0
 --- !u!61 &2728290692212629430
 BoxCollider2D:
@@ -144,10 +145,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.024838448, y: 0.0071128607}
+  m_Offset: {x: -0.024838448, y: -0.17988284}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1.375, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -155,7 +156,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2546291, y: 0.9857743}
+  m_Size: {x: 1.2546291, y: 0.6117829}
   m_EdgeRadius: 0
 --- !u!114 &2728290692212629437
 MonoBehaviour:
@@ -169,16 +170,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856eed6a847b7ef439d00bbd87b349b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   contents: {fileID: 11400000, guid: d5d783953bf427840948e4bcc24f00c4, type: 2}
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  isOpen: 0
   storeOpen: {fileID: 11400000, guid: 3edad9a2abf15a544887eacd584cfbac, type: 2}
-  raiseItem: {fileID: 11400000, guid: 15c9e51236d60904db5257012ac6bf60, type: 2}
-  dialogBox: {fileID: 0}
-  dialogText: {fileID: 0}
+  dialogue:
+    npcName: 
+    sentences:
+    - 
   chestSound: {fileID: 8300000, guid: 04e1e07668593fb4d9687261aca47c66, type: 3}
   noInventorySpace: {fileID: 8300000, guid: 99a7404bb65be254395cd520b0ecb3f1, type: 3}
 --- !u!114 &5879292201254276645

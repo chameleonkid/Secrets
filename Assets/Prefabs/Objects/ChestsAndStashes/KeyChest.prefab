@@ -50,6 +50,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -71,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1345728457
-  m_SortingLayer: -3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300392, guid: 47c6a039472216d4384b29e942993912, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &1441152064425185801
 Animator:
   serializedVersion: 3
@@ -117,10 +118,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.056334496, y: 0.067600965}
+  m_Offset: {x: -0.017601967, y: -0.043432504}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1.375, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -128,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.262331, y: 0.86479807}
+  m_Size: {x: 0.5651455, y: 0.40517122}
   m_EdgeRadius: 0
 --- !u!61 &1441152064425185799
 BoxCollider2D:
@@ -143,10 +144,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.021579027, y: -0.24718714}
+  m_Offset: {x: -0.008667946, y: -0.21878314}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.25}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1.375, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -154,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.891276, y: 1.4943743}
+  m_Size: {x: 1.1612186, y: 0.7662014}
   m_EdgeRadius: 0
 --- !u!114 &1441152064425185804
 MonoBehaviour:
@@ -168,14 +169,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856eed6a847b7ef439d00bbd87b349b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   contents: {fileID: 11400000, guid: 982de6d362ecc9c48863f6e37c3984f2, type: 2}
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  isOpen: 0
   storeOpen: {fileID: 11400000, guid: b9fc16a4d29af67438b4ead56d2269a9, type: 2}
-  raiseItem: {fileID: 11400000, guid: 15c9e51236d60904db5257012ac6bf60, type: 2}
-  dialogBox: {fileID: 0}
-  dialogText: {fileID: 0}
+  dialogue:
+    npcName: 
+    sentences:
+    - 
   chestSound: {fileID: 0}
+  noInventorySpace: {fileID: 0}
