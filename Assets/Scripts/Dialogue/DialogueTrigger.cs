@@ -7,7 +7,7 @@ public class DialogueTrigger : ComponentTrigger<PlayerMovement>
     [SerializeField] private Dialogue dialogue = default;
     private PlayerMovement player;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (player != null && player.inputInteract && Time.timeScale > 0)
         {

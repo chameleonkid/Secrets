@@ -35,9 +35,11 @@ public class DialogueManager : MonoBehaviour
 
     private void StartDialogue(Dialogue dialogue)
     {
-        dialoguePanel.SetActive(true);
         if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel))
         {
+            dialoguePanel.SetActive(true);
+            animator.SetBool("isActive", true);
+
             if (nextButton)
             {
                 EventSystem.current.SetSelectedGameObject(null);
@@ -76,7 +78,6 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator TypeSentence(string sentence)
     {
-        animator.SetBool("isActive", true);
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
