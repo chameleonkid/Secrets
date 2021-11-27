@@ -11,6 +11,11 @@ public class RuneEntrance : MonoBehaviour
     [SerializeField] private BoxCollider2D transitionCollider;
     [SerializeField] private Collider2D entranceCollider;
     [SerializeField] private SpriteRenderer entranceRenderer;
+
+    [Header("This will set the current VCam Inactive and the CutsceneCam Active")]
+    [SerializeField] private GameObject currentVCam;
+    [SerializeField] private GameObject cutsceneVCam;
+    [SerializeField] private float cutsceneDuration;
     // Start is called before the first frame update
 
 
@@ -48,12 +53,8 @@ public class RuneEntrance : MonoBehaviour
 
     private void ActiveEntrance()
     {
-        SoundManager.RequestSound(appearSound); // This is triggered every Time the scene is loaded and ALL Runes are active already... makes sense... needs to be fixed
-        entranceActive = true;
-        animator.SetTrigger("PortalAppearTrigger");
-        transitionCollider.enabled = true;
-        entranceCollider.enabled = true;
-        entranceRenderer.enabled = true;
+        StartCoroutine(ShowAndOpen());
+
     }
 
     private bool AreAllRunesActive()
@@ -68,6 +69,24 @@ public class RuneEntrance : MonoBehaviour
         }
         Debug.Log("All Runes are triggered!");
         return true;
+    }
+
+
+    private IEnumerator ShowAndOpen()
+    {
+        Debug.Log("Cutscene Started");
+        currentVCam.SetActive(false);
+        cutsceneVCam.SetActive(true);
+        SoundManager.RequestSound(appearSound); // This is triggered every Time the scene is loaded and ALL Runes are active already... makes sense... needs to be fixed
+        entranceActive = true;
+        animator.SetTrigger("PortalAppearTrigger");
+        transitionCollider.enabled = true;
+        entranceCollider.enabled = true;
+        entranceRenderer.enabled = true;
+        yield return new WaitForSecondsRealtime(cutsceneDuration);
+        currentVCam.SetActive(true);
+        cutsceneVCam.SetActive(false);
+        Debug.Log("Cutscene Ended");
     }
 
 
