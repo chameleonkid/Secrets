@@ -36,7 +36,7 @@ public class RuneEntrance : MonoBehaviour
 
         if (AreAllRunesActive() == true)
         {
-            ActiveEntrance();
+            StartCoroutine(ShowWithOutCutscene());
         }
 
     }
@@ -54,7 +54,6 @@ public class RuneEntrance : MonoBehaviour
     private void ActiveEntrance()
     {
         StartCoroutine(ShowAndOpen());
-
     }
 
     private bool AreAllRunesActive()
@@ -74,10 +73,11 @@ public class RuneEntrance : MonoBehaviour
 
     private IEnumerator ShowAndOpen()
     {
-        Debug.Log("Cutscene Started");
         currentVCam.SetActive(false);
         cutsceneVCam.SetActive(true);
-        SoundManager.RequestSound(appearSound); // This is triggered every Time the scene is loaded and ALL Runes are active already... makes sense... needs to be fixed
+        SoundManager.RequestSound(appearSound);
+        Debug.Log("Cutscene Started");
+ // This is triggered every Time the scene is loaded and ALL Runes are active already... makes sense... needs to be fixed
         entranceActive = true;
         animator.SetTrigger("PortalAppearTrigger");
         transitionCollider.enabled = true;
@@ -86,6 +86,19 @@ public class RuneEntrance : MonoBehaviour
         yield return new WaitForSecondsRealtime(cutsceneDuration);
         currentVCam.SetActive(true);
         cutsceneVCam.SetActive(false);
+        Debug.Log("Cutscene Ended");
+    }
+
+
+    private IEnumerator ShowWithOutCutscene()
+    {
+        Debug.Log("Cutscene Started");
+        entranceActive = true;
+        animator.SetTrigger("PortalAppearTrigger");
+        transitionCollider.enabled = true;
+        entranceCollider.enabled = true;
+        entranceRenderer.enabled = true;
+        yield return new WaitForSecondsRealtime(cutsceneDuration);
         Debug.Log("Cutscene Ended");
     }
 

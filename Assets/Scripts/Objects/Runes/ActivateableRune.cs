@@ -35,6 +35,7 @@ public class ActivateableRune : MonoBehaviour
             {
                 SoundManager.RequestSound(runeSound); // Only play the sound when you walk on it and it wasnt active yet!
                 ActivateRune();
+                OnRuneActivated?.Invoke(); // Only send the signal in the moment you WALK on it
             }
 
         }
@@ -47,7 +48,7 @@ public class ActivateableRune : MonoBehaviour
         runeMaterial.SetColor("_GlowColor", glowColorActive);
         activated = true;
         runeActive.RuntimeValue = activated;
-        OnRuneActivated?.Invoke();
+
     }
 
    
