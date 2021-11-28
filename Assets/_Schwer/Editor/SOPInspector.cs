@@ -56,16 +56,22 @@ public class SOPInspector : Editor {
         var bools = AssetsUtility.FindAllAssets<BoolValue>();
         var strings = AssetsUtility.FindAllAssets<StringValue>();
         var chests = new List<BoolValue>();
+        var stashes = new List<BoolValue>();
         var doors = new List<BoolValue>();
         var bosses = new List<BoolValue>();
         var healthCrystals = new List<BoolValue>();
         var manaCrystals = new List<BoolValue>();
         var cutscenes = new List<BoolValue>();
+        var quests = new List<BoolValue>();
 
         for (int i = 0; i < bools.Length; i++) {
             var path = AssetDatabase.GetAssetPath(bools[i]);
             if (path.Contains("Chest")) {
                 chests.Add(bools[i]);
+            }
+            if (path.Contains("Stashes"))
+            {
+                stashes.Add(bools[i]);
             }
             else if (path.Contains("Doors")) {
                 doors.Add(bools[i]);
@@ -86,14 +92,20 @@ public class SOPInspector : Editor {
             {
                 cutscenes.Add(bools[i]);
             }
+            else if (path.Contains("QuestsBools"))
+            {
+                quests.Add(bools[i]);
+            }
         }
 
         ReflectionUtility.SetPrivateField(sop, "_chests", chests.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_stashes", stashes.ToArray());
         ReflectionUtility.SetPrivateField(sop, "_doors", doors.ToArray());
         ReflectionUtility.SetPrivateField(sop, "_bosses", bosses.ToArray());
         ReflectionUtility.SetPrivateField(sop, "_healthCrystals", healthCrystals.ToArray());
         ReflectionUtility.SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
         ReflectionUtility.SetPrivateField(sop, "_cutscenes", cutscenes.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_quests", quests.ToArray());
 
         var inventories = AssetsUtility.FindAllAssets<Inventory>();
         var vendorInventories = new List<ScriptableObjectPersistence.VendorInventorySet>();

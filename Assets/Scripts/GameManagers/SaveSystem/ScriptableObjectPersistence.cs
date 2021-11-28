@@ -44,6 +44,12 @@ public class ScriptableObjectPersistence : MonoBehaviour
     [SerializeField] private BoolValue[] _cutscenes = default;
     public BoolValue[] cutscenes => _cutscenes;
 
+    [SerializeField] private BoolValue[] _quests = default;
+    public BoolValue[] quests => _quests;
+
+    [SerializeField] private BoolValue[] _stashes = default;
+    public BoolValue[] stashes => _stashes;
+
     [SerializeField] private CharacterAppearance _characterAppearance = default;
     public CharacterAppearance characterAppearance => _characterAppearance;
 
@@ -105,6 +111,14 @@ public class ScriptableObjectPersistence : MonoBehaviour
         for (int i = 0; i < cutscenes.Length; i++)
         {
             cutscenes[i].RuntimeValue = cutscenes[i].initialValue;
+        }
+        for (int i = 0; i < quests.Length; i++)
+        {
+            quests[i].RuntimeValue = quests[i].initialValue;
+        }
+        for (int i = 0; i < stashes.Length; i++)
+        {
+            stashes[i].RuntimeValue = stashes[i].initialValue;
         }
     }
 
