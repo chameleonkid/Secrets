@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1314109721205213777
+--- !u!1 &3237651925266430701
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1314109721205213803}
-  - component: {fileID: 1314109721205213780}
-  - component: {fileID: 1314109721205213781}
-  - component: {fileID: 1314109721205213782}
-  - component: {fileID: 1314109721205213783}
+  - component: {fileID: 3237651925266430697}
+  - component: {fileID: 3237651925266430698}
+  - component: {fileID: 3237651925266430699}
+  - component: {fileID: 3237651925266430700}
   m_Layer: 0
-  m_Name: LightStone-Strength1
+  m_Name: MagicPowder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1314109721205213803
+--- !u!4 &3237651925266430697
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314109721205213777}
+  m_GameObject: {fileID: 3237651925266430701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.27, y: -1.53, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1314109721205213780
+--- !u!212 &3237651925266430698
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314109721205213777}
+  m_GameObject: {fileID: 3237651925266430701}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,88 +73,54 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300016, guid: c507432aeff0e87449186904f4effd19, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4232d1fd569c5463dbf8ead50df0bdda, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.375, y: 1}
+  m_Size: {x: 0.25, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1314109721205213781
+--- !u!61 &3237651925266430699
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314109721205213777}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.035095215, y: -0.010284424}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1.375, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.36782837, y: 0.3591919}
-  m_EdgeRadius: 0
---- !u!61 &1314109721205213782
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314109721205213777}
+  m_GameObject: {fileID: 3237651925266430701}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.024116516, y: 0.0113220215}
+  m_Offset: {x: 0.0029657334, y: 0.00022625923}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1.375, y: 1}
+    oldSize: {x: 0.46, y: 0.46}
+    newSize: {x: 0.25, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6119232, y: 0.6368103}
+  m_Size: {x: 0.23736277, y: 0.35523558}
   m_EdgeRadius: 0
---- !u!114 &1314109721205213783
+--- !u!114 &3237651925266430700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1314109721205213777}
+  m_GameObject: {fileID: 3237651925266430701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bced85d4d6ab6c94db35e46090a844bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 52e4059ab83fec14cab0effc3277c493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
-  contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
-  contents: {fileID: 11400000, guid: 7ef67d6c7b80fdb40831386c89a99660, type: 2}
-  playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
-  neededStrenght: 1
-  liftingSound: {fileID: 8300000, guid: a13d745ab5c816346a968841ee9fc8d3, type: 3}
-  dialogue:
-    npcName: Light Stone
-    sentences:
-    - 
+  pickUpSound: {fileID: 0}
+  item: {fileID: 11400000, guid: ca21d55fdb8f6964ba1ac4e10ca3bd0f, type: 2}
