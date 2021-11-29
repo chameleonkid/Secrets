@@ -433,6 +433,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -609,13 +610,14 @@ MonoBehaviour:
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
-  thisLoot: {fileID: 11400000, guid: 7fc18ac19e8fc1845b2a09a01b36d0b0, type: 2}
+  thisLoot: {fileID: 11400000, guid: d21b88da7e3806e4480efd0091f8bb6a, type: 2}
   target: {fileID: 0}
   nextWaypointDistance: 0.5
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
+  attackCoolDown: 0
 --- !u!114 &6825456830845884822
 MonoBehaviour:
   m_ObjectHideFlags: 0

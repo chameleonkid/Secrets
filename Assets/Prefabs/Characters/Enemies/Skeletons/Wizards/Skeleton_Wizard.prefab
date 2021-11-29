@@ -340,6 +340,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -518,7 +519,7 @@ MonoBehaviour:
     type: 3}
   deathEffectDelay: 1
   roomSignal: {fileID: 0}
-  thisLoot: {fileID: 11400000, guid: c6b29f7ddbb19c449b1d68c627a111d6, type: 2}
+  thisLoot: {fileID: 11400000, guid: b48aefa15f4d16847acecb97c6fff2f9, type: 2}
   target: {fileID: 0}
   nextWaypointDistance: 0.5
   currentWaipoint: 0
@@ -529,6 +530,8 @@ MonoBehaviour:
     type: 3}
   canAttack: 0
   fireDelay: 7
+  amountOfProjectiles: 1
+  timeBetweenProjectiles: 1
   fireDelaySeconds: 0
   shootingRange: 4
   escapeRange: 3
