@@ -50,6 +50,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -97,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e86c919eb9ceef41a64cb671a59449d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountToIncrease: 1
+  pickUpSound: {fileID: 0}
+  amountToIncrease: 5
   storePickedUp: {fileID: 0}
 --- !u!58 &7865107353905536275
 CircleCollider2D:
