@@ -66,6 +66,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -409,7 +410,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 20
+  m_VelocityNeededToStart: 50
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
@@ -494,9 +495,8 @@ PolygonCollider2D:
       - {x: 0.42182136, y: 0.8914459}
       - {x: 0.06064582, y: 1.1080023}
       - {x: -0.48921943, y: 0.8417026}
-      - {x: -0.25734425, y: 0.46721572}
-      - {x: 0.18234968, y: 0.46910006}
-      - {x: 0.20919561, y: 0.4814393}
+      - {x: -0.2456519, y: 0.28403538}
+      - {x: 0.18624714, y: 0.29761207}
 --- !u!114 &9210356173545002712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,7 +822,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.06237918}
+  m_Offset: {x: -0.019191742, y: 0.30901527}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -833,7 +833,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45067883, y: 0.6412395}
+  m_Size: {x: 0.3893013, y: 0.6356926}
   m_EdgeRadius: 0
 --- !u!61 &7050798517902194487
 BoxCollider2D:
@@ -848,7 +848,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.16472048}
+  m_Offset: {x: -0.011084557, y: 0.079143524}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -859,7 +859,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.33283758, y: 0.18898928}
+  m_Size: {x: 0.2774105, y: 0.17790985}
   m_EdgeRadius: 0
 --- !u!114 &3547411412465680931
 MonoBehaviour:
@@ -902,10 +902,13 @@ MonoBehaviour:
   uiLampButton: {fileID: 0}
   uiInteractButton: {fileID: 0}
   uiRunButton: {fileID: 0}
+  uiInventoryButton: {fileID: 0}
+  uiLoadButton: {fileID: 0}
   joystick: {fileID: 0}
   effectAnimator: {fileID: 1029923363}
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   _speed: 3
+  runSpeedModifier: 1.5
   originalSpeed: 0
   _lumen: {fileID: 11400000, guid: 4f1b8e485a4d225498a06b8076d463bc, type: 2}
   _mana: {fileID: 11400000, guid: fa821302db7f4d4488aa27583b131f47, type: 2}
@@ -983,6 +986,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7737533578558960297}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Disable
         m_Mode: 1
         m_Arguments:
@@ -1010,6 +1014,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7737533578558960297}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Enable
         m_Mode: 1
         m_Arguments:
@@ -1133,6 +1138,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1215,6 +1221,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1267,6 +1274,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3547411412465680931}
+        m_TargetAssemblyTypeName: 
         m_MethodName: LiftItem
         m_Mode: 1
         m_Arguments:
@@ -1323,6 +1331,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1384,7 +1393,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 20
+  m_VelocityNeededToStart: 50
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
@@ -1417,7 +1426,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 20
+  m_VelocityNeededToStart: 50
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
@@ -1453,7 +1462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8261462296307142165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7741206510266321344}
@@ -1484,6 +1493,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1578,7 +1588,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 20
+  m_VelocityNeededToStart: 50
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
