@@ -2,7 +2,7 @@
 
 public class ItemPickUp : PickUp
 {
-    [SerializeField] private Item item = default;
+    [SerializeField] protected Item item = default;
 
     protected override void PlayerPickUp(PlayerMovement player)
     {
