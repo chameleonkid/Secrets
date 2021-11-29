@@ -17,6 +17,7 @@ public class VendorManager : ItemDisplay
     [SerializeField] private AudioClip sellSound = default;
     [SerializeField] private AudioClip buySound = default;
     [SerializeField] private AudioClip cantSellOrBuySound = default;
+    [SerializeField] private AudioClip SelectItemSound= default;
 
     private Inventory _inventory;
     public override Inventory inventory {
@@ -83,8 +84,16 @@ public class VendorManager : ItemDisplay
         Time.timeScale = 1;
     }
 
-    private void UpdateDescriptionPlayer(Item item) => UpdateDescription(item, item.sellPrice, "sell for:\n");
-    private void UpdateDescriptionVendor(Item item) => UpdateDescription(item, item.buyPrice, "buy for:\n");
+    private void UpdateDescriptionPlayer(Item item)
+    {
+        UpdateDescription(item, item.sellPrice, "\nsell for: ");
+        SoundManager.RequestSound(SelectItemSound);
+    }
+    private void UpdateDescriptionVendor(Item item)
+    {
+        UpdateDescription(item, item.buyPrice, "\nbuy for: ");
+        SoundManager.RequestSound(SelectItemSound);
+    }
     private void UpdateDescription(Item item, int price, string action)
         => descriptionText.text = (item != null) ? $"{item.name}\n {item.fullDescription} \n{action} {price}" : " Gold ";
 
