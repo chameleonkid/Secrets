@@ -19,6 +19,10 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private Button uiLoadButton = default;
     [SerializeField] private Joystick joystick = default;
 
+    [Header("Development Case: Collider to NoClip")]
+    [SerializeField] private Collider2D clipCollider;
+
+    [Header("PlayerStuff")]
     [SerializeField] private Animator effectAnimator = default;
 
     [SerializeField] private XPSystem levelSystem = default;
@@ -422,13 +426,9 @@ public class PlayerMovement : Character, ICanMove
         }
     }
 
-    public void freePlayerStuck()
+    public void NoClip()
     {
-        Vector2 newPos = new Vector2(0, 0);
-        newPos = transform.position;
-        newPos.y += 2;
-        newPos.x += 2;
-        transform.position = newPos;       
+        clipCollider.enabled = !clipCollider.enabled;
     }
 
     #region UI Controls
