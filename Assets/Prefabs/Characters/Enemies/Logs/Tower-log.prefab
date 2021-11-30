@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &472834060355724291
 Transform:
   m_ObjectHideFlags: 0
@@ -259,7 +259,9 @@ MonoBehaviour:
   projectile: {fileID: 8755954809695844891, guid: c9028f5d007aa5f45a9ff462b665a1b4,
     type: 3}
   canAttack: 0
-  fireDelay: 2
+  fireDelay: 4
+  amountOfProjectiles: 5
+  timeBetweenProjectiles: 0.25
   fireDelaySeconds: 0
 --- !u!114 &-9114995563809209465
 MonoBehaviour:
