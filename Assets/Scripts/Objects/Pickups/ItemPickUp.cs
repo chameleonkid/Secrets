@@ -9,6 +9,10 @@ public class ItemPickUp : PickUp
         if (player.inventory.items.HasCapacity(item))
         {
             player.inventory.items[item]++;
+            if(pickUpSound)
+            {
+                SoundManager.RequestSound(pickUpSound);
+            }
             Destroy(this.gameObject);
         }
         else

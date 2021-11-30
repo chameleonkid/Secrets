@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickUpOnce : ItemPickUp
 {
     [SerializeField] private BoolValue pickupSave;
+    [SerializeField] private Dialogue pickupDialogue;
 
     public void Awake()
     {
@@ -20,6 +21,14 @@ public class PickUpOnce : ItemPickUp
         {
             player.inventory.items[item]++;
             pickupSave.RuntimeValue = true;
+            if (pickUpSound)
+            {
+                SoundManager.RequestSound(pickUpSound);
+                if(pickupDialogue != null)
+                {
+                    DialogueManager.RequestDialogue(pickupDialogue);
+                }
+            }
             Destroy(this.gameObject);
         }
         else

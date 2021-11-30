@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7371077646035284821}
   - component: {fileID: 7371077646035284822}
   - component: {fileID: 7371077646035284823}
-  - component: {fileID: 7371077646035284820}
+  - component: {fileID: 1013174537}
   m_Layer: 0
   m_Name: Waterseal
   m_TagString: Untagged
@@ -110,7 +110,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5413208, y: 0.24619341}
   m_EdgeRadius: 0
---- !u!114 &7371077646035284820
+--- !u!114 &1013174537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +119,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7371077646035284816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e4059ab83fec14cab0effc3277c493, type: 3}
+  m_Script: {fileID: 11500000, guid: e0e7bbc34ad9a89458443f9b877d6047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpSound: {fileID: 0}
+  pickUpSound: {fileID: 8300000, guid: 328fd789e0002b441bacc42412186621, type: 3}
   item: {fileID: 11400000, guid: 1dac8cced6f968c4b9882bc0679e196f, type: 2}
+  pickupSave: {fileID: 11400000, guid: e02f27920ec4dc0498facaf7d86b2dc1, type: 2}
