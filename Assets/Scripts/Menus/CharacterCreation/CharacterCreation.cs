@@ -173,7 +173,7 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.bodyFolderPath = activeTextures.bodyFolderPath;
 
         SoundManager.RequestSound(buttonClick);
-        SceneManager.LoadScene("Mavens_Inn_Cutscene");
+        SceneManager.LoadScene("Intro");
     }
 
     public void ToMainMenu()

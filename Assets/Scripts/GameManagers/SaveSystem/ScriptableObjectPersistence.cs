@@ -81,8 +81,8 @@ public class ScriptableObjectPersistence : MonoBehaviour
         health.current = health.max;
         mana.max = 100;
         mana.current = mana.max;
-        lumen.max = 100;
-        lumen.current = 100;
+        lumen.max = 500;
+        lumen.current = 500;
     }
 
     public void ResetBools()
