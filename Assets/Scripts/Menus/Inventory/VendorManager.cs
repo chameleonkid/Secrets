@@ -48,7 +48,7 @@ public class VendorManager : ItemDisplay
         playerDisplay.SubscribeToEquipmentSlotSelected(UpdateDescriptionPlayer);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!vendorPanel.activeInHierarchy) return;
         

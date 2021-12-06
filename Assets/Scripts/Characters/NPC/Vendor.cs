@@ -15,7 +15,7 @@ public class Vendor : MonoBehaviour
         player = GameObject.FindObjectOfType<PlayerMovement>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (playerInRange && player.inputInteract)
         {

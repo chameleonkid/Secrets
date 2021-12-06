@@ -36,7 +36,7 @@ public class SavePoint : MonoBehaviour
         saveSlot3.text = saveNames[2];
     }
 
-    private void Update()
+    private void  LateUpdate()
     {
         if (playerInRange == true && player.inputInteract && CanvasManager.Instance.IsFreeOrActive(saveMenu) && Time.timeScale > 0)
         {
