@@ -164,7 +164,7 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     {
         for (int i = 0; i <= dashDuration; i++)
         {
-            character.rigidbody.AddForce(forceDirection.normalized * 500f);
+            character.rigidbody.AddForce(forceDirection.normalized * 2000f);
             character.rigidbody.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.01f);
         }
