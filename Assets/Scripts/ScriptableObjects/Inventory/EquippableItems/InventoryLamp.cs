@@ -3,8 +3,8 @@
 [CreateAssetMenu(menuName = "Scriptable Object/Items/Lamp")]
 public class InventoryLamp : EquippableItem
 {
-    public int innerRadius;
-    public int outerRadius;
+    public float innerRadius;
+    public float outerRadius;
     public Color color;
     public int lumenPerSecond;
 

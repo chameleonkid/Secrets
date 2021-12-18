@@ -60,6 +60,7 @@ public class LampLight : MonoBehaviour
             lampLight.intensity = 1;
             lampLight.color = lamp.color;
             lampLight.pointLightOuterRadius = lamp.outerRadius;
+            lampLight.pointLightInnerRadius = lamp.innerRadius;
         }
         else
         {
