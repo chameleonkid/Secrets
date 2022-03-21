@@ -12,7 +12,11 @@ public class PositionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       playerTransform = GameObject.FindObjectOfType<PlayerMovement>().transform;
+       if(playerTransform == null)
+        {
+            playerTransform = GameObject.FindObjectOfType<PlayerMovement>().transform;
+        }
+
     }
 
     // Update is called once per frame
