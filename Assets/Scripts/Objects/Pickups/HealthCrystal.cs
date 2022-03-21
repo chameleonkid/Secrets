@@ -2,6 +2,7 @@
 
 public class HealthCrystal : PickUp
 {
+
     [SerializeField] private float amountToIncrease = default;
     [SerializeField] private BoolValue storePickedUp = default;
     [SerializeField] private bool isPickedUp { get => storePickedUp.RuntimeValue; set => storePickedUp.RuntimeValue = value; }

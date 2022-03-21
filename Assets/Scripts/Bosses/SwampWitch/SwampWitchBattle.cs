@@ -35,6 +35,8 @@ public class SwampWitchBattle : MonoBehaviour
     [SerializeField] private Collider2D bossHurtBox = default;
     [SerializeField] private Collider2D bossTwoHurtBox = default;
     [SerializeField] private int bossKillCounter = 0;
+    [Header("TriggerArea")]
+    [SerializeField] private GameObject leaveBlock = default;
 
 
     [Header("Stages")]
@@ -55,12 +57,14 @@ public class SwampWitchBattle : MonoBehaviour
 
     private void Awake()
     {
+        leaveBlock.SetActive(false);
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {
             bossGameObject.SetActive(false);
             bossTwoGameObject.SetActive(false);
             triggerArea.SetActive(false);
+
         }
         else
         {
@@ -124,6 +128,7 @@ public class SwampWitchBattle : MonoBehaviour
         SoundManager.RequestSound(bossDiedSound);
         if (bossKillCounter == 2)
         {
+            leaveBlock.SetActive(false);
             MusicManager.RequestMusic(endBattleMusic);
             DestroyAllEnemies();
             storeDefeated.RuntimeValue = true;
@@ -149,6 +154,7 @@ public class SwampWitchBattle : MonoBehaviour
             StartBattle();
             playerTrigger.OnTriggerEnter -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
             triggerArea.SetActive(false);
+            leaveBlock.SetActive(true);
         }
     }
 
