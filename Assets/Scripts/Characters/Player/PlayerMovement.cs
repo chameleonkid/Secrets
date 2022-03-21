@@ -24,7 +24,6 @@ public class PlayerMovement : Character, ICanMove
 
     [Header("PlayerStuff")]
     [SerializeField] private Animator effectAnimator = default;
-
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
     [SerializeField] private float runSpeedModifier = 1.5f;

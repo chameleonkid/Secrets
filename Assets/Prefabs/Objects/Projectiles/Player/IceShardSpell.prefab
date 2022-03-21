@@ -4850,6 +4850,7 @@ GameObject:
   - component: {fileID: -9144808553770054626}
   - component: {fileID: -1384756122879492081}
   - component: {fileID: -3818744993156896388}
+  - component: {fileID: -848435715783322642}
   m_Layer: 13
   m_Name: IceShardSpell
   m_TagString: spell
@@ -5181,6 +5182,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1940d35a13cd40d41b71f34de695c72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-848435715783322642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015206087574396294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8edf2d55ca588547881b7472e926510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrailName: Iceshard
+  m_CurrentTrailPreset: {fileID: 11400000, guid: 53255a3ffd65af1498cf4e6d7a5b674b,
+    type: 2}
+  m_TrailParent: {fileID: 5422618619393421168}
+  m_SpriteToDuplicate: {fileID: 5877249715732768611}
+  m_Layer: 0
+  m_ZMoveStep: 0
+  m_ZMoveMax: 0
+  m_HideTrailOnDisabled: 1
+  m_TrailActivationCondition: 0
+  m_TrailDeactivationCondition: 0
+  m_StartIfUnderVelocity: 0
+  m_VelocityStartIsLocalSpace: 0
+  m_VelocityNeededToStart: 1
+  m_StopIfOverVelocity: 0
+  m_VelocityStopIsLocalSpace: 0
+  m_VelocityNeededToStop: 0
+  m_TrailActivationDuration: 0
+  m_SortingLayerID: 0
+  m_OrderInSortingLayer: 0
+  m_DisabledElementsInTrail: []
 --- !u!1 &5158801618468925673
 GameObject:
   m_ObjectHideFlags: 0
