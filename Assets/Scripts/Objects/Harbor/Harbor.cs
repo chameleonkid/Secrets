@@ -8,20 +8,12 @@ public class Harbor : MonoBehaviour
     [SerializeField] private AudioClip harborSound;
     [SerializeField] private ShipMovement myShip;
     [SerializeField] private VectorValue playerPos;
+
+    [Header("This is the World that will be loaded")]
+    [SerializeField] private string sceneToLoad;
     [Header("This is the position the player will be")]
-    [SerializeField] private Vector2 HarborPlayerPos;
+    [SerializeField] private Vector2 harborPlayerPos;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -36,8 +28,8 @@ public class Harbor : MonoBehaviour
 
             }
             // I want this to happen on Shipmovement Interact
-            playerPos.value = HarborPlayerPos;
-            SceneManager.LoadScene("Overworld");
+            playerPos.value = harborPlayerPos;
+            SceneManager.LoadScene(sceneToLoad);
         }
 
     }
