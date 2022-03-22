@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 0}
   myAnim: {fileID: 0}
-  _speed: 5
+  _speed: 3
   runSpeedModifier: 1.5
   shipCollider: {fileID: 152799946}
   shipTriggerCollider: {fileID: 152799945}
@@ -286,7 +286,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5, y: 3}
+    oldSize: {x: 1.25, y: 1.5}
     newSize: {x: 0.8, y: 0.96}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -312,7 +312,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5, y: 3}
+    oldSize: {x: 1.25, y: 1.5}
     newSize: {x: 0.8, y: 0.96}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1652,8 +1652,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d150ec068ab42845b6ee1e0379a1dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inRangeToEnter: {fileID: 0}
   harborSound: {fileID: 0}
+  myShip: {fileID: 0}
+  playerPos: {fileID: 0}
+  HarborPlayerPos: {x: 0, y: 0}
 --- !u!4 &1986176545
 Transform:
   m_ObjectHideFlags: 0

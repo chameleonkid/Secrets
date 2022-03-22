@@ -48,7 +48,7 @@ public class ShipMovement : MonoBehaviour
 
     public void MoveShip()
     {
-        myRigidbody.MovePosition(new Vector2(transform.position.x,transform.position.y) + input.direction * _speed * Time.deltaTime);
+        myRigidbody.MovePosition(new Vector2(transform.position.x,transform.position.y) + input.direction.normalized * _speed * Time.deltaTime);
         myAnim.SetBool("isMoving", true);
     }
 }
