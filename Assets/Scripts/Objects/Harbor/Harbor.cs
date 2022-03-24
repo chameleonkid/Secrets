@@ -1,11 +1,12 @@
-using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Harbor : ComponentTrigger<ShipMovement>
 {
     protected override bool? needOtherIsTrigger => true;
 
-    [SerializeField] private AudioClip harborSound;
+    [SerializeField] private AudioClip harborInRangeSound;
+    [SerializeField] private AudioClip enterHarborSound;
     [SerializeField] private VectorValue playerPos;
 
     [Header("This is the World that will be loaded")]
@@ -20,6 +21,10 @@ public class Harbor : ComponentTrigger<ShipMovement>
         if (ship != null && ship.inputInteract)
         {
             playerPos.value = harborPlayerPos;
+            if (enterHarborSound)
+            {
+                SoundManager.RequestSound(enterHarborSound);
+            }
             SceneManager.LoadScene(sceneToLoad);
         }
     }
@@ -27,12 +32,10 @@ public class Harbor : ComponentTrigger<ShipMovement>
     protected override void OnEnter(ShipMovement ship)
     {
         this.ship = ship;
-
         Debug.Log("isInHarborRange");
-        if (harborSound)
+        if (harborInRangeSound)
         {
-            SoundManager.RequestSound(harborSound); //When you enter the area to land, the bell rings
-            Debug.Log("ENTER HARBOR");
+            SoundManager.RequestSound(harborInRangeSound);
         }
     }
 
