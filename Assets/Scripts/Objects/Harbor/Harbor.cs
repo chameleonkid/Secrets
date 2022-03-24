@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class Harbor : MonoBehaviour
+public class Harbor : ComponentTrigger<ShipMovement>
 {
+    protected override bool? needOtherIsTrigger => true;
+
     [SerializeField] private AudioClip harborSound;
     [SerializeField] private ShipMovement myShip;
     [SerializeField] private VectorValue playerPos;
@@ -14,23 +14,19 @@ public class Harbor : MonoBehaviour
     [Header("This is the position the player will be")]
     [SerializeField] private Vector2 harborPlayerPos;
 
-
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnEnter(ShipMovement other)
     {
-        this.myShip = other.GetComponent<ShipMovement>();
-        Debug.Log("isInHarborRange");
-        if (other.GetComponent<ShipMovement>() && other.isTrigger)
-        {
-            if (harborSound)
-            {
-                SoundManager.RequestSound(harborSound); //When you enter the area to land, the bell rings
-                Debug.Log("ENTER HARBOR");
+        myShip = other;
 
-            }
-            // I want this to happen on Shipmovement Interact
-            playerPos.value = harborPlayerPos;
-            SceneManager.LoadScene(sceneToLoad);
+        Debug.Log("isInHarborRange");
+        if (harborSound)
+        {
+            SoundManager.RequestSound(harborSound); //When you enter the area to land, the bell rings
+            Debug.Log("ENTER HARBOR");
         }
 
+        // I want this to happen on Shipmovement Interact
+        playerPos.value = harborPlayerPos;
+        SceneManager.LoadScene(sceneToLoad);
     }
 }
