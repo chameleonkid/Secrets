@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
@@ -14,10 +12,10 @@ public class ShipMovement : MonoBehaviour
     private PlayerInput input;
     private PlayerInput uiInput;
 
+    public bool inputInteract => input.interact || uiInput.interact;
 
-
-     // Start is called before the first frame update
-     void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
@@ -28,6 +26,8 @@ public class ShipMovement : MonoBehaviour
     {
         input.direction.x = Input.GetAxisRaw("Horizontal");
         input.direction.y = Input.GetAxisRaw("Vertical");
+
+        input.interact = Input.GetButtonDown("Interact");
     }
 
     private void FixedUpdate()
@@ -42,13 +42,11 @@ public class ShipMovement : MonoBehaviour
         {
             myAnim.SetBool("isMoving", false);
         }
-
-
     }
 
     public void MoveShip()
     {
-        myRigidbody.MovePosition(new Vector2(transform.position.x,transform.position.y) + input.direction.normalized * _speed * Time.deltaTime);
+        myRigidbody.MovePosition(new Vector2(transform.position.x, transform.position.y) + input.direction.normalized * _speed * Time.deltaTime);
         myAnim.SetBool("isMoving", true);
     }
 }
