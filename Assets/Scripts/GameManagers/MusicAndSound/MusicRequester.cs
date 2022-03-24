@@ -7,7 +7,8 @@ public class MusicRequester : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var player = other.GetComponent<PlayerMovement>();
-        if (player != null)
+        var ship = other.GetComponent<ShipMovement>();
+        if (player != null || ship != null)
         {
             // MusicManager.RequestMusic(areaMusic.GetRandomElement());
             MusicManager.RequestMusic(areaMusic);           // Return Array
