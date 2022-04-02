@@ -3,8 +3,7 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
-namespace SchwerEditor
-{
+namespace SchwerEditor {
     public class AnimationRelinker : EditorWindow {
         private const string _name = "Animation Relinker";
 
