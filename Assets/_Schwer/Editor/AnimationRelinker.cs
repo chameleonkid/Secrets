@@ -9,7 +9,6 @@ namespace SchwerEditor {
 
         private static AnimatorController controller;
         private static GameObject originalGameObject;
-        private static string attribute = "m_Sprite";
 
         [MenuItem("Window/" + _name)]
         public static void ShowWindow() => GetWindow<AnimationRelinker>(_name);
@@ -17,9 +16,8 @@ namespace SchwerEditor {
         private void OnGUI() {
             controller = (AnimatorController)EditorGUILayout.ObjectField("Animator Controller", controller, typeof(AnimatorController), false);
             originalGameObject = (GameObject)EditorGUILayout.ObjectField("Original Game Object", originalGameObject, typeof(GameObject), true);
-            attribute = EditorGUILayout.TextField("Attribute", attribute);
 
-            EditorGUI.BeginDisabledGroup(EditorApplication.isPlaying || controller == null || originalGameObject == null || string.IsNullOrWhiteSpace(attribute));
+            EditorGUI.BeginDisabledGroup(EditorApplication.isPlaying || controller == null || originalGameObject == null);
             if (GUILayout.Button("Relink")) {
                 Relink();
             }
@@ -34,9 +32,13 @@ namespace SchwerEditor {
                     var lines = File.ReadAllLines(path);
 
                     for (int i = 0; i + 1 < lines.Length; i++) {
-                        if (lines[i].Contains($"attribute: {attribute}")) {
+                        if (lines[i].Contains($"attribute: ")) {
+                            var key = "path: ";
                             if (lines[i + 1].TrimStart() == "path: ") {
                                 lines[i + 1] += originalGameObject.name;
+                            }
+                            else if (lines[i + 1].TrimStart().StartsWith(key) && !lines[i + 1].Contains(originalGameObject.name)) {
+                                lines[i + 1] = lines[i + 1].Replace(key, $"{key}{originalGameObject.name}/");
                             }
                         }
                     }
