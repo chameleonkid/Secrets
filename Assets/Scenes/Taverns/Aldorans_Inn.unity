@@ -628,7 +628,6 @@ GameObject:
   m_Component:
   - component: {fileID: 181076980}
   - component: {fileID: 181076988}
-  - component: {fileID: 181076987}
   - component: {fileID: 181076986}
   - component: {fileID: 181076985}
   - component: {fileID: 181076984}
@@ -636,7 +635,7 @@ GameObject:
   - component: {fileID: 181076982}
   - component: {fileID: 181076981}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,25 +794,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &181076987
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181076979}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &181076988
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1132,7 +1112,6 @@ GameObject:
   m_Component:
   - component: {fileID: 288946352}
   - component: {fileID: 288946360}
-  - component: {fileID: 288946359}
   - component: {fileID: 288946358}
   - component: {fileID: 288946357}
   - component: {fileID: 288946356}
@@ -1140,7 +1119,7 @@ GameObject:
   - component: {fileID: 288946354}
   - component: {fileID: 288946353}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1299,25 +1278,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &288946359
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288946351}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &288946360
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1454,6 +1414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410376418}
   - component: {fileID: 410376419}
+  - component: {fileID: 410376420}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -1502,6 +1463,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &410376420
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410376417}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &481196553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2446,7 +2426,6 @@ GameObject:
   m_Component:
   - component: {fileID: 775036216}
   - component: {fileID: 775036224}
-  - component: {fileID: 775036223}
   - component: {fileID: 775036222}
   - component: {fileID: 775036221}
   - component: {fileID: 775036220}
@@ -2454,7 +2433,7 @@ GameObject:
   - component: {fileID: 775036218}
   - component: {fileID: 775036217}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2613,25 +2592,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &775036223
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775036215}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &775036224
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2693,6 +2653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 782258938}
   - component: {fileID: 782258939}
+  - component: {fileID: 782258940}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -2741,6 +2702,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &782258940
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782258937}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &788725176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2887,6 +2867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888453334}
   - component: {fileID: 888453335}
+  - component: {fileID: 888453336}
   m_Layer: 0
   m_Name: Yondu
   m_TagString: Untagged
@@ -2935,6 +2916,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.4403944, y: 3.9628325}
   m_EdgeRadius: 0
+--- !u!95 &888453336
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888453333}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &985690566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2945,7 +2945,6 @@ GameObject:
   m_Component:
   - component: {fileID: 985690567}
   - component: {fileID: 985690575}
-  - component: {fileID: 985690574}
   - component: {fileID: 985690573}
   - component: {fileID: 985690572}
   - component: {fileID: 985690571}
@@ -2953,7 +2952,7 @@ GameObject:
   - component: {fileID: 985690569}
   - component: {fileID: 985690568}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3112,25 +3111,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &985690574
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985690566}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &985690575
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3260,6 +3240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1030834362}
   - component: {fileID: 1030834363}
+  - component: {fileID: 1030834364}
   m_Layer: 0
   m_Name: Waiter (2)
   m_TagString: Untagged
@@ -3308,6 +3289,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &1030834364
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030834361}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1100367015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3460,7 +3460,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1166074006}
   - component: {fileID: 1166074014}
-  - component: {fileID: 1166074013}
   - component: {fileID: 1166074012}
   - component: {fileID: 1166074011}
   - component: {fileID: 1166074010}
@@ -3468,7 +3467,7 @@ GameObject:
   - component: {fileID: 1166074008}
   - component: {fileID: 1166074007}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3627,25 +3626,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &1166074013
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166074005}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1166074014
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3707,6 +3687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1215355747}
   - component: {fileID: 1215355748}
+  - component: {fileID: 1215355749}
   m_Layer: 0
   m_Name: Waiter (1)
   m_TagString: Untagged
@@ -3755,6 +3736,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &1215355749
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215355746}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1221158584
 GameObject:
   m_ObjectHideFlags: 0
@@ -3765,7 +3765,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1221158585}
   - component: {fileID: 1221158593}
-  - component: {fileID: 1221158592}
   - component: {fileID: 1221158591}
   - component: {fileID: 1221158590}
   - component: {fileID: 1221158589}
@@ -3773,7 +3772,7 @@ GameObject:
   - component: {fileID: 1221158587}
   - component: {fileID: 1221158586}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3932,25 +3931,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &1221158592
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221158584}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1221158593
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4012,7 +3992,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1247792416}
   - component: {fileID: 1247792424}
-  - component: {fileID: 1247792423}
   - component: {fileID: 1247792422}
   - component: {fileID: 1247792421}
   - component: {fileID: 1247792420}
@@ -4020,7 +3999,7 @@ GameObject:
   - component: {fileID: 1247792418}
   - component: {fileID: 1247792417}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4179,25 +4158,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &1247792423
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247792415}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1247792424
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4259,6 +4219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1273161190}
   - component: {fileID: 1273161191}
+  - component: {fileID: 1273161192}
   m_Layer: 0
   m_Name: Yvan
   m_TagString: Untagged
@@ -4307,6 +4268,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &1273161192
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273161189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1305292658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4891,6 +4871,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1701252932}
   - component: {fileID: 1701252933}
+  - component: {fileID: 1701252934}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -4939,6 +4920,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &1701252934
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701252931}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1732633534 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013575396198, guid: 8bcd420644f5b02429809802e51d27e6,
@@ -5186,6 +5186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1838545094}
   - component: {fileID: 1838545095}
+  - component: {fileID: 1838545096}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -5234,6 +5235,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &1838545096
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838545093}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1867728601
 GameObject:
   m_ObjectHideFlags: 0
@@ -5244,7 +5264,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1867728602}
   - component: {fileID: 1867728610}
-  - component: {fileID: 1867728609}
   - component: {fileID: 1867728608}
   - component: {fileID: 1867728607}
   - component: {fileID: 1867728606}
@@ -5252,7 +5271,7 @@ GameObject:
   - component: {fileID: 1867728604}
   - component: {fileID: 1867728603}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5411,25 +5430,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: 4cde2eee1a5ed7d4b98cd96067b818ba, type: 3}
   folderPath: Retro Pixel Characters/Spritesheets/Female/1 - Base/
   isChildSprite: 0
---- !u!95 &1867728609
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867728601}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1867728610
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17106,7 +17106,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 9.572307
+      m_AnimationSpeed: 8.355564
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -17, y: 17, z: 0}
@@ -17116,7 +17116,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 9.941317
+      m_AnimationSpeed: 9.651575
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -9, y: 17, z: 0}
@@ -17126,7 +17126,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 9.267698
+      m_AnimationSpeed: 9.691049
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -24888,25 +24888,6 @@ MonoBehaviour:
     npcName: Waiter
     sentences:
     - Good Evening! If you need something, let it Aldoran know.
---- !u!95 &9094665817488915354
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9179657531638390986}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &9147441988326690550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24946,7 +24927,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9180879897812061782}
   - component: {fileID: 9049438649937020960}
-  - component: {fileID: 9094665817488915354}
   - component: {fileID: 9147441988326690550}
   - component: {fileID: 9205229328372095680}
   - component: {fileID: 9211724761297930988}
@@ -24954,7 +24934,7 @@ GameObject:
   - component: {fileID: 9179657531638390985}
   - component: {fileID: 9179657531638390987}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25071,6 +25051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9180372758161979709}
   - component: {fileID: 9180372758161979708}
+  - component: {fileID: 9180372758161979712}
   m_Layer: 0
   m_Name: Waiter
   m_TagString: Untagged
@@ -25078,6 +25059,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &9180372758161979712
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9180372758161979711}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &9180879897812061782
 Transform:
   m_ObjectHideFlags: 0
