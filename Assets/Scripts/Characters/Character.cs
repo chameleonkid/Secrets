@@ -88,7 +88,7 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     {
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInParent<Animator>();
         iframes = GetComponent<InvulnerabilityFrames>();
     }
 

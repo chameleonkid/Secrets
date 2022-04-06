@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539181881438314436}
   - component: {fileID: 1539181881438314437}
+  - component: {fileID: 6852289178964375541}
   m_Layer: 0
   m_Name: Sara
   m_TagString: Untagged
@@ -58,6 +59,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &6852289178964375541
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539181881438314438}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1539181882132602075
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +125,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -202,6 +223,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -262,7 +284,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1536413815396051119}
   - component: {fileID: 1706135454196969177}
-  - component: {fileID: 1445030710793706851}
   - component: {fileID: 1497807118789994511}
   - component: {fileID: 1550631266705194041}
   - component: {fileID: 1580173560581106709}
@@ -270,7 +291,7 @@ GameObject:
   - component: {fileID: 1540169800443512368}
   - component: {fileID: 1540169800443512370}
   m_Layer: 0
-  m_Name: RNDFemale1
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,6 +332,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -346,25 +368,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!95 &1445030710793706851
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540169800443512371}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1497807118789994511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,6 +446,8 @@ MonoBehaviour:
   isShrinked: 0
   gotHitSound: []
   attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -450,6 +455,11 @@ MonoBehaviour:
   _slow: {fileID: 487566113137938613}
   _shrink: {fileID: 7372415182763782314}
   _gigantism: {fileID: 3544170664218868998}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   speed: 1
   bound: {fileID: 1539181881438314437}
   moveTime: 5
@@ -466,7 +476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd143d5d32f0b4d879c711d546dd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
 --- !u!61 &1540169800443512370

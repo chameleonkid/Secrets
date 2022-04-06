@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8012385416634094151}
   - component: {fileID: 8012385416634094150}
+  - component: {fileID: 930745672}
   m_Layer: 0
   m_Name: Leomar
   m_TagString: Untagged
@@ -134,6 +135,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.933031, y: 9.398068}
   m_EdgeRadius: 0
+--- !u!95 &930745672
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012385416634094149}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8012532194408893360
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +164,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8016270895952225580}
   - component: {fileID: 7908491327287583578}
-  - component: {fileID: 7953414217879802080}
   - component: {fileID: 7972695643944691084}
   - component: {fileID: 8012532194408893361}
   - component: {fileID: 8063977956465471930}
@@ -152,7 +171,7 @@ GameObject:
   - component: {fileID: 8012385416001724675}
   - component: {fileID: 8012532194408893363}
   m_Layer: 0
-  m_Name: RNDMale
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,6 +213,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -229,25 +249,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!95 &7953414217879802080
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8012532194408893360}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7972695643944691084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +353,8 @@ MonoBehaviour:
   isShrinked: 0
   gotHitSound: []
   attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -359,6 +362,11 @@ MonoBehaviour:
   _slow: {fileID: 487566113216905170}
   _shrink: {fileID: 7372415183396079694}
   _gigantism: {fileID: 3544170663523196021}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   speed: 1
   bound: {fileID: 8012385416634094150}
   moveTime: 5
@@ -375,7 +383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd143d5d32f0b4d879c711d546dd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
 --- !u!1001 &25755467

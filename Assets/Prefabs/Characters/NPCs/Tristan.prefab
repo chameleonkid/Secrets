@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5606397100404705983}
   - component: {fileID: 5706893518007700681}
-  - component: {fileID: 5517573144022073203}
   - component: {fileID: 5500825816307550751}
   - component: {fileID: 5602570334096090146}
   - component: {fileID: 5556156229305998889}
@@ -18,7 +17,7 @@ GameObject:
   - component: {fileID: 5603561541726260880}
   - component: {fileID: 5602570334096090144}
   m_Layer: 0
-  m_Name: RNDMale
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +59,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -95,25 +95,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!95 &5517573144022073203
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602570334096090147}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5500825816307550751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +199,8 @@ MonoBehaviour:
   isShrinked: 0
   gotHitSound: []
   attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -225,6 +208,11 @@ MonoBehaviour:
   _slow: {fileID: 487566112770987773}
   _shrink: {fileID: 7372415181535064277}
   _gigantism: {fileID: 3544170663328859865}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   speed: 1
   bound: {fileID: 5603561543243480533}
   moveTime: 5
@@ -241,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bd143d5d32f0b4d879c711d546dd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
 --- !u!1 &5603561543243480534
@@ -254,6 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5603561543243480532}
   - component: {fileID: 5603561543243480533}
+  - component: {fileID: 5967130090594689650}
   m_Layer: 0
   m_Name: Tristan
   m_TagString: Untagged
@@ -302,6 +290,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!95 &5967130090594689650
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603561543243480534}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1acf68c77bf6f034e866c8adbdb5a27d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5714958959507180929
 GameObject:
   m_ObjectHideFlags: 0
