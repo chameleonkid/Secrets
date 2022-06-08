@@ -7,9 +7,11 @@ public class Laser : MonoBehaviour
 
     [SerializeField] private float defDistanceRay = 100;
     [SerializeField] private float laserDamage = 5;
-    public Transform laserFirePoint;
-    public LineRenderer m_lineRenderer;
-    Transform m_transform;
+    [SerializeField] private Transform laserFirePoint;
+    [SerializeField] private LineRenderer m_lineRenderer;
+    [Header("Check this box to make the laser hit enemies as well")]
+    [SerializeField] private bool canHitEnemies = false;
+    [SerializeField] private Transform m_transform;
     
     // Start is called before the first frame update
     void Awake()
@@ -27,6 +29,11 @@ public class Laser : MonoBehaviour
             {
                 Debug.Log("Player was hit by Ray");
                 _hit.collider.GetComponent<PlayerMovement>().TakeDamage(laserDamage, false);
+            }
+            if (canHitEnemies == true && _hit.collider.GetComponent<Enemy>())
+            {
+                Debug.Log("Enemy was hit by Ray");
+                _hit.collider.GetComponent<Character>().TakeDamage(laserDamage, false);
             }
         }
         else
