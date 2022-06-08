@@ -6,6 +6,7 @@ public class Laser : MonoBehaviour
 {
 
     [SerializeField] private float defDistanceRay = 100;
+    [SerializeField] private float laserDamage = 5;
     public Transform laserFirePoint;
     public LineRenderer m_lineRenderer;
     Transform m_transform;
@@ -25,6 +26,7 @@ public class Laser : MonoBehaviour
             if(_hit.collider.GetComponent<PlayerMovement>())
             {
                 Debug.Log("Player was hit by Ray");
+                _hit.collider.GetComponent<PlayerMovement>().TakeDamage(laserDamage, false);
             }
         }
         else
