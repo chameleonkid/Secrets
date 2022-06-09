@@ -12,15 +12,19 @@ public class Rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(clockWise == false)
+        if(rotationSpeed > 0)
         {
-            rotZ += Time.deltaTime * rotationSpeed;
-        }
-        else
-        {
-            rotZ += -Time.deltaTime * rotationSpeed;
+            if (clockWise == false)
+            {
+                rotZ += Time.deltaTime * rotationSpeed;
+            }
+            else
+            {
+                rotZ += -Time.deltaTime * rotationSpeed;
+            }
+
+            this.transform.rotation = Quaternion.Euler(0, 0, rotZ);
         }
 
-        this.transform.rotation = Quaternion.Euler(0,0,rotZ);
     }
 }
