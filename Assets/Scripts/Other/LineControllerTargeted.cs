@@ -47,7 +47,7 @@ public class LineControllerTargeted : MonoBehaviour
         }
         if (target.GetComponent<Enemy>())
         {
-            target.GetComponent<Enemy>().TakeDamage(10, false);
+            target.GetComponent<Character>().TakeDamage(10, false);
         }
 
     }

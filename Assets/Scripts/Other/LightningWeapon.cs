@@ -5,15 +5,14 @@ using UnityEngine;
 public class LightningWeapon : MonoBehaviour
 {
     [SerializeField] private List<Transform> targetedEnemies;
-    [SerializeField] private List<LineControllerTargeted> allLines;
     [SerializeField] private LineControllerTargeted linePrefab;
     [SerializeField] private bool canHitPlayer;
     [SerializeField] private bool canHitEnemy;
+    [SerializeField] private Dictionary<Transform, LineControllerTargeted> enemiesBeingLasered;
 
 
     private void Awake()
     {
-        allLines = new List<LineControllerTargeted>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -21,15 +20,25 @@ public class LightningWeapon : MonoBehaviour
         if(other.GetComponent<Enemy>() && canHitEnemy)
         {
             LineControllerTargeted newLine = Instantiate(linePrefab);
-            allLines.Add(newLine);
+
             newLine.AssignTarget(this.transform.position, other.transform);
+            enemiesBeingLasered.Add(other.transform, newLine);
         }
         if (other.GetComponent<PlayerMovement>() && canHitPlayer)
         {
             LineControllerTargeted newLine = Instantiate(linePrefab);
-            allLines.Add(newLine);
             newLine.AssignTarget(this.transform.position, other.transform);
+            enemiesBeingLasered.Add(other.transform, newLine);
+            Debug.Log(enemiesBeingLasered);
         }
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(enemiesBeingLasered.ContainsKey(other.transform))
+        {
+            Debug.Log("Something left the range of weapon");
+        }
+    }
+
 
 }

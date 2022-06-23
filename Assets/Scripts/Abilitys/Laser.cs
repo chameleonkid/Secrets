@@ -12,7 +12,11 @@ public class Laser : MonoBehaviour
     [Header("Check this box to make the laser hit enemies as well")]
     [SerializeField] private bool canHitEnemies = false;
     [SerializeField] private Transform m_transform;
-    
+    [SerializeField] private Texture[] textures;
+    [SerializeField] private int animationStep;
+    [SerializeField] private float fps = 30f;
+    [SerializeField] private float fpsCounter = 30f;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -53,5 +57,19 @@ public class Laser : MonoBehaviour
     void Update()
     {
         ShootLaser();
+
+        fpsCounter += Time.deltaTime;
+        if (fpsCounter >= 1f / fps)
+        {
+            animationStep++;
+            if (animationStep == textures.Length)
+            {
+                animationStep = 0;
+            }
+            m_lineRenderer.material.SetTexture("_MainTex", textures[animationStep]);
+            fpsCounter = 0f;
+        }
     }
+
 }
+
