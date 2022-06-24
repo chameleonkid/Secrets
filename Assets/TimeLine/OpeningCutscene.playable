@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8156145696408882329
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
-  m_Name: Signal Emitter
-  m_EditorClassIdentifier: 
-  m_Time: 5.75
-  m_Retroactive: 0
-  m_EmitOnce: 0
-  m_Asset: {fileID: 11400000, guid: deaf73fc9e871ec41a460c31e628b835, type: 2}
 --- !u!114 &-7745909800657283134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,6 +41,23 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &-7533238297873421699
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa53eb722cc11124fa1677fd77224d8c, type: 3}
+  m_Name: Dialogue Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 5.75
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: deaf73fc9e871ec41a460c31e628b835, type: 2}
+  _parameter: {fileID: 11400000, guid: 00f1f9bbe709d87429ef5c567112ba4c, type: 2}
 --- !u!114 &-6802957200508825279
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,7 +571,7 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects:
-    - {fileID: -8156145696408882329}
+    - {fileID: -7533238297873421699}
 --- !u!114 &4454808801353666771
 MonoBehaviour:
   m_ObjectHideFlags: 1
