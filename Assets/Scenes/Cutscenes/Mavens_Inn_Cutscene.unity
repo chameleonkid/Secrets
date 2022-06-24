@@ -3048,6 +3048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1733759624}
   - component: {fileID: 1733759623}
+  - component: {fileID: 1733759625}
   m_Layer: 0
   m_Name: TimeLineManager
   m_TagString: Untagged
@@ -3092,6 +3093,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1733759625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733759622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: deaf73fc9e871ec41a460c31e628b835, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2108386366}
+          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+          m_MethodName: StartDialogue
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 00f1f9bbe709d87429ef5c567112ba4c,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: DialogueSO, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1748063453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3554,6 +3586,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5276e0f7c123b7b4c871bc76458cff0a, type: 3}
+--- !u!114 &2108386366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1395598622741407489, guid: 5276e0f7c123b7b4c871bc76458cff0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2108386365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ef95982a21ed44eae1d7a223c16625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &338648976605178803
 PrefabInstance:
   m_ObjectHideFlags: 0
