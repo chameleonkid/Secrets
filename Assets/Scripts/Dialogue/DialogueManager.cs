@@ -33,6 +33,8 @@ public class DialogueManager : MonoBehaviour
         OnEndDialogue -= EndDialogue;
     }
 
+    public void StartDialogue(DialogueSO dialogue) => StartDialogue(dialogue.value);
+
     private void StartDialogue(Dialogue dialogue)
     {
         if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel))
