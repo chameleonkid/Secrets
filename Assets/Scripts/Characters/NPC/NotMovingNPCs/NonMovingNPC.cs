@@ -10,6 +10,7 @@ public class NonMovingNPC : Character
     [SerializeField] private bool lookDown;
     [SerializeField] private bool lookLeft;
     [SerializeField] private bool lookRight;
+    [SerializeField] private bool isDead;
 
     protected override void Awake()
     {
@@ -30,6 +31,10 @@ public class NonMovingNPC : Character
         if (lookRight)
         {
             animator.SetFloat("moveX", 1);
+        }
+        if (isDead)
+        {
+            animator.Play("Dead");
         }
     }
 }

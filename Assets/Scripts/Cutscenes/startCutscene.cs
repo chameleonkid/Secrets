@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class startCutscene : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class startCutscene : MonoBehaviour
     [SerializeField] private GameObject cutsceneVCam;
     [SerializeField] private float cutsceneDuration;
     [SerializeField] private BoolValue cutSceneBool;
+    public PlayableDirector playableDirector;
+    public TimelineAsset timeLineToPlay;
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,6 +29,10 @@ public class startCutscene : MonoBehaviour
     public void StartCutscene()
     {
         StartCoroutine(StartStopCutscene());
+        if (timeLineToPlay)
+        {
+            playableDirector.Play(timeLineToPlay);
+        }
         cutSceneBool.RuntimeValue = true;
     }
     private IEnumerator StartStopCutscene()
@@ -34,6 +42,7 @@ public class startCutscene : MonoBehaviour
         currentVCam.SetActive(false);
         cutsceneVCam.SetActive(true);
         yield return new WaitForSecondsRealtime(cutsceneDuration);
+
         currentVCam.SetActive(true);
         cutsceneVCam.SetActive(false);
         Debug.Log("Cutscene Ended");
