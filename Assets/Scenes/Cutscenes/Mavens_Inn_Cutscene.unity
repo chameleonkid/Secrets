@@ -3048,6 +3048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1733759624}
   - component: {fileID: 1733759623}
+  - component: {fileID: 1733759625}
   m_Layer: 0
   m_Name: TimeLineManager
   m_TagString: Untagged
@@ -3076,6 +3077,8 @@ PlayableDirector:
     value: {fileID: 766396329}
   - key: {fileID: -1932929307147882573, guid: 605efd19a3f8a454da62981cc30b01ba, type: 2}
     value: {fileID: 766396329}
+  - key: {fileID: 3585430965542914627, guid: 605efd19a3f8a454da62981cc30b01ba, type: 2}
+    value: {fileID: 1733759622}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1733759624
@@ -3092,6 +3095,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1733759625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733759622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd35b80fca3424498096df7ecf4d942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1748063453
 PrefabInstance:
   m_ObjectHideFlags: 0
