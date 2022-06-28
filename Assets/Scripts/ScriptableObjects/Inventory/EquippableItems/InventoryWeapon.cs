@@ -14,7 +14,7 @@ public class InventoryWeapon : EquippableItem
 
     public int minDamage;
     public int maxDamage;
-    [SerializeField] GameObject projectile;
+    public GameObject projectile;
     public Texture2D weaponSkin = default;
     public WeaponType weaponType = default;
     public float swingTime = 0.0f;
@@ -289,7 +289,7 @@ public class InventoryWeapon : EquippableItem
                 swingTime = 1;
                 break;
             case WeaponType.Boomerang:
-                swingTime = 1f;
+                swingTime = 0.25f;
                 break;
             case WeaponType.Bow:
                 swingTime = 1.25f;     //Maybe make a field for swingTime so every weapon can have a specific CD

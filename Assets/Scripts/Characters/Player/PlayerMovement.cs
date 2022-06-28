@@ -76,7 +76,7 @@ public class PlayerMovement : Character, ICanMove
     [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
-    public GameObject BoomerangProjectile;
+
 
     [Header("Sound FX")]
     [SerializeField] private AudioClip levelUpSound = default;
@@ -221,6 +221,16 @@ public class PlayerMovement : Character, ICanMove
 
         if (currentWeapon != null && !meeleCooldown)
         {
+
+            weaponSkinChanger.newSprite = currentWeapon.weaponSkin;
+
+            if (currentWeapon.weaponSkin != oldWeaponSkin)
+            {
+                weaponSkinChanger.ResetRenderer();
+            }
+            oldWeaponSkin = currentWeapon.weaponSkin;
+
+
             if (currentWeapon.weaponType == InventoryWeapon.WeaponType.Bow)
             {
                 if (arrow != null && inventory.items[arrow] > 0)
@@ -233,7 +243,7 @@ public class PlayerMovement : Character, ICanMove
 
                     StartCoroutine(BoomerangAttackCo(currentWeapon));
             }
-            else
+            if(currentWeapon.weaponType != InventoryWeapon.WeaponType.Boomerang && currentWeapon.weaponType != InventoryWeapon.WeaponType.Bow)
             {
                 StartCoroutine(MeleeAttackCo(currentWeapon));
             }
@@ -274,13 +284,7 @@ public class PlayerMovement : Character, ICanMove
         //! ^ The order of the hitboxes colliders cannot be safely determined by index,
         //    as the order is arbitrarily assigned via Inspector.
 
-        weaponSkinChanger.newSprite = weapon.weaponSkin;
 
-        if (weapon.weaponSkin != oldWeaponSkin)
-        {
-            weaponSkinChanger.ResetRenderer();
-        }
-        oldWeaponSkin = weapon.weaponSkin;
 
         var isCritical = IsCriticalHit();
         for (int i = 0; i < directionalAttacks.Length; i++)
@@ -300,6 +304,15 @@ public class PlayerMovement : Character, ICanMove
 
     private IEnumerator BowAttackCo(InventoryWeapon weapon)
     {
+/*
+        weaponSkinChanger.newSprite = weapon.weaponSkin;
+
+        if (weapon.weaponSkin != oldWeaponSkin)
+        {
+            weaponSkinChanger.ResetRenderer();
+        }
+        oldWeaponSkin = weapon.weaponSkin;
+*/
         OnAttackTriggered?.Invoke();
         meeleCooldown = true;
         inventory.items[arrow]--;
@@ -318,12 +331,19 @@ public class PlayerMovement : Character, ICanMove
 
     private IEnumerator BoomerangAttackCo(InventoryWeapon weapon)
     {
+  /*      weaponSkinChanger.newSprite = weapon.weaponSkin;
+
+        if (weapon.weaponSkin != oldWeaponSkin)
+        {
+            weaponSkinChanger.ResetRenderer();
+        }
+        oldWeaponSkin = weapon.weaponSkin;
+  */
         OnAttackTriggered?.Invoke();
         meeleCooldown = true;
-        inventory.items[arrow]--;
 
         var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-        var proj = CreateProjectile(BoomerangProjectile);
+        var proj = CreateProjectile(projectile);
         proj.OverrideSpeed(arrowSpeed);
         proj.OverrideDamage(damage, IsCriticalHit());
 
