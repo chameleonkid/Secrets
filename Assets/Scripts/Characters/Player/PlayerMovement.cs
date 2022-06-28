@@ -76,6 +76,7 @@ public class PlayerMovement : Character, ICanMove
     [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
+    public GameObject BoomerangProjectile;
 
     [Header("Sound FX")]
     [SerializeField] private AudioClip levelUpSound = default;
@@ -227,6 +228,11 @@ public class PlayerMovement : Character, ICanMove
                     StartCoroutine(BowAttackCo(currentWeapon));
                 }
             }
+            if (currentWeapon.weaponType == InventoryWeapon.WeaponType.Boomerang)
+            {
+
+                    StartCoroutine(BoomerangAttackCo(currentWeapon));
+            }
             else
             {
                 StartCoroutine(MeleeAttackCo(currentWeapon));
@@ -310,6 +316,24 @@ public class PlayerMovement : Character, ICanMove
         SoundManager.RequestSound(meleeCooldownSound);
     }
 
+    private IEnumerator BoomerangAttackCo(InventoryWeapon weapon)
+    {
+        OnAttackTriggered?.Invoke();
+        meeleCooldown = true;
+        inventory.items[arrow]--;
+
+        var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
+        var proj = CreateProjectile(BoomerangProjectile);
+        proj.OverrideSpeed(arrowSpeed);
+        proj.OverrideDamage(damage, IsCriticalHit());
+
+        currentState = new PlayerBowAttack(this, 0.3f);
+
+        yield return new WaitForSeconds(0.3f + weapon.swingTime);
+        meeleCooldown = false;
+        SoundManager.RequestSound(meleeCooldownSound);
+    }
+
     private IEnumerator SpellAttackCo(InventorySpellbook spellBook)
     {
         switch (spellBook)
@@ -340,7 +364,7 @@ public class PlayerMovement : Character, ICanMove
 
     private Projectile CreateProjectile(GameObject prefab)
     {
-        var position =  new Vector2(transform.position.x, transform.position.y + 0.25f);      // Set projectile higher since transform is at player's pivot point (feet).
+        var position =  new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
         var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
         return projectile;
     }
