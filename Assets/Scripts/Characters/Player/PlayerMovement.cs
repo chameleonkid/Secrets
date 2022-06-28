@@ -76,7 +76,7 @@ public class PlayerMovement : Character, ICanMove
     [Header("Projectiles")]
     [SerializeField] private float arrowSpeed = 1;
     public GameObject projectile; //arrows and so on
-
+    public GameObject BoomerangProjectile;
 
     [Header("Sound FX")]
     [SerializeField] private AudioClip levelUpSound = default;
@@ -320,9 +320,10 @@ public class PlayerMovement : Character, ICanMove
     {
         OnAttackTriggered?.Invoke();
         meeleCooldown = true;
+        inventory.items[arrow]--;
 
         var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
-        var proj = CreateProjectile(projectile);
+        var proj = CreateProjectile(BoomerangProjectile);
         proj.OverrideSpeed(arrowSpeed);
         proj.OverrideDamage(damage, IsCriticalHit());
 

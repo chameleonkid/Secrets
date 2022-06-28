@@ -14,7 +14,7 @@ public class InventoryWeapon : EquippableItem
 
     public int minDamage;
     public int maxDamage;
-    public GameObject projectile;
+    [SerializeField] GameObject projectile;
     public Texture2D weaponSkin = default;
     public WeaponType weaponType = default;
     public float swingTime = 0.0f;

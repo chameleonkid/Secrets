@@ -131,10 +131,6 @@ public class InventoryManager : MonoBehaviour
             if (inventory.currentWeapon)
             {
                 SetWeaponColor();
-                if(inventory.currentWeapon.projectile)
-                {
-                    player.projectile = inventory.currentWeapon.projectile;
-                }
             }
             if (inventory.currentSpellbook || inventory.currentSpellbookTwo)
             {
