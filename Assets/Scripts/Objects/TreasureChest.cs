@@ -26,7 +26,7 @@ public class TreasureChest : Interactable
         }
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (playerInRange && player.inputInteract && Time.timeScale > 0)
         {
