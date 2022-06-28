@@ -7,13 +7,14 @@ public class InventoryWeapon : EquippableItem
     {
         Sword,
         Axe,
-        Spear,
+        Boomerang,
         Bow,
         Hammer
     }
 
     public int minDamage;
     public int maxDamage;
+    [SerializeField] GameObject projectile;
     public Texture2D weaponSkin = default;
     public WeaponType weaponType = default;
     public float swingTime = 0.0f;
@@ -30,7 +31,7 @@ public class InventoryWeapon : EquippableItem
                     return swordLeft;
                 case WeaponType.Axe:
                     return axeLeft;
-                case WeaponType.Spear:
+                case WeaponType.Boomerang:
                     return spearLeft;
                 case WeaponType.Bow:
                     return bowLeft;
@@ -46,7 +47,7 @@ public class InventoryWeapon : EquippableItem
                     return swordRight;
                 case WeaponType.Axe:
                     return axeRight;
-                case WeaponType.Spear:
+                case WeaponType.Boomerang:
                     return spearRight;
                 case WeaponType.Bow:
                     return bowRight;
@@ -62,7 +63,7 @@ public class InventoryWeapon : EquippableItem
                     return swordUp;
                 case WeaponType.Axe:
                     return axeUp;
-                case WeaponType.Spear:
+                case WeaponType.Boomerang:
                     return spearUp;
                 case WeaponType.Bow:
                     return bowUp;
@@ -78,7 +79,7 @@ public class InventoryWeapon : EquippableItem
                     return swordDown;
                 case WeaponType.Axe:
                     return axeDown;
-                case WeaponType.Spear:
+                case WeaponType.Boomerang:
                     return spearDown;
                 case WeaponType.Bow:
                     return bowDown;
@@ -287,8 +288,8 @@ public class InventoryWeapon : EquippableItem
             case WeaponType.Axe:
                 swingTime = 1;
                 break;
-            case WeaponType.Spear:
-                swingTime = 0.6f;
+            case WeaponType.Boomerang:
+                swingTime = 1f;
                 break;
             case WeaponType.Bow:
                 swingTime = 1.25f;     //Maybe make a field for swingTime so every weapon can have a specific CD
