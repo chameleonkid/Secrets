@@ -263,7 +263,7 @@ public class Enemy : Character, ICanKnockback
         Vector3 vec3Home;
         vec3Home = homePosition;
         vec3Home += (GetRandomDirection() * UnityEngine.Random.Range(3f, 3f));
-        while (!Physics2D.OverlapPoint(vec3Home))
+        while (Physics2D.OverlapPoint(vec3Home))
         {
             vec3Home += (GetRandomDirection() * UnityEngine.Random.Range(3f, 3f));
            // Debug.Log("" + this + " Roamingpoint was in an collider");
