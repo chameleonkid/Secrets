@@ -289,7 +289,7 @@ public class InventoryWeapon : EquippableItem
                 swingTime = 1;
                 break;
             case WeaponType.Boomerang:
-                swingTime = 0.25f;
+                swingTime = 0.75f;
                 break;
             case WeaponType.Bow:
                 swingTime = 1.25f;     //Maybe make a field for swingTime so every weapon can have a specific CD
