@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 2
+  _damage: 10
 --- !u!82 &4596141420500315408
 AudioSource:
   m_ObjectHideFlags: 0
@@ -315,6 +315,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 720
   clockWise: 1
+  objectToDeactivate: {fileID: 0}
+  deactivationAngle: 0
+  deactivationAngle2: 0
 --- !u!114 &-8755828350860274059
 MonoBehaviour:
   m_ObjectHideFlags: 0
