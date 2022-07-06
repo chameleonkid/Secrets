@@ -7,7 +7,7 @@ public class Room : MonoBehaviour
 {
     [SerializeField] protected GameObject virtualCamera = default;
     [SerializeField] protected Enemy[] enemies = default;
-    [SerializeField] protected GameObject npcs = default;
+    [SerializeField] protected GameObject[] npcs = default;
     [SerializeField] protected Breakable[] breakables = default;
     [SerializeField] protected ParticleSystem[] particleSystems = default;
     [Header("AreaNameDisplay")]
@@ -61,9 +61,12 @@ public class Room : MonoBehaviour
             }
         }
 
-        if(npcs)
+        if(npcs.Length > 0)
         {
-            npcs.SetActive(value);
+            for (int i = 0; i < npcs.Length; i++)
+            {
+                npcs[i].gameObject.SetActive(value);
+            }
         }
   
     }
