@@ -6,21 +6,27 @@ using UnityEngine.UI;
 
 public class AreaNameManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro areaNameDisplay;
+    [SerializeField] private TextMeshProUGUI areaNameDisplay;
     [SerializeField] private string areaNameText;
 
     // Start is called before the first frame update
-    void Start()
+
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        StartCoroutine(ShowAreaNameCo());
+        if (other.CompareTag("Player") && !other.isTrigger)
+        {
+            if (areaNameDisplay && areaNameDisplay.text != "" && areaNameDisplay)
+            {
+                StartCoroutine(ShowAreaNameCo());
+            }
+        }
     }
 
     IEnumerator ShowAreaNameCo()
     {
-        this.gameObject.SetActive(true);
         areaNameDisplay.text = areaNameText;
-        yield return new WaitForSeconds(3);
-        this.gameObject.SetActive(false);
-
+        areaNameDisplay.enabled = true;
+        yield return new WaitForSeconds(5f);
+        areaNameDisplay.enabled = false;
     }
 }
