@@ -23,7 +23,6 @@ public class RockGiantBattle : MonoBehaviour
     [Header("TriggerArea")]
     [SerializeField] private GameObject leaveBlock = default;
 
-
     [Header("Stages")]
     [SerializeField] private Stage stage = default;
 
@@ -74,6 +73,7 @@ public class RockGiantBattle : MonoBehaviour
                 if (boss.GetPercentHealth() <= 70)
                 {
                     StartNextStage();
+                    Debug.Log("Stage 2 has started!");
                 }
                 break;
             case Stage.Stage_2:
@@ -81,6 +81,7 @@ public class RockGiantBattle : MonoBehaviour
                 {
 
                     StartNextStage();
+                    Debug.Log("Stage 3 has started!");
                 }
                 break;
         }
@@ -125,8 +126,7 @@ public class RockGiantBattle : MonoBehaviour
                 stage = Stage.Stage_1;
                 break;
             case Stage.Stage_1:
-                stage = Stage.Stage_2;
-                EnhanceAttacks();     
+                stage = Stage.Stage_2;  
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;
@@ -135,11 +135,7 @@ public class RockGiantBattle : MonoBehaviour
         Debug.Log("Next Stage has started " + stage);
     }
 
-    private void EnhanceAttacks()
-    {
-        boss.HalfCooldown();
-        boss.HalfCooldownSpellTwo();
-    }
+
 
     private IEnumerator ActivateBossValuesCo()
     {

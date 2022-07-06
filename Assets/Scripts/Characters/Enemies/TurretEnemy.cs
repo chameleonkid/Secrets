@@ -7,9 +7,9 @@ public class TurretEnemy : SimpleEnemy
     public GameObject projectile;
     public bool canAttack = false;
     public float fireDelay;
-    [SerializeField] private int amountOfProjectiles = 1;
-    [SerializeField] private float timeBetweenProjectiles = 1;
-    [SerializeField] private float fireDelaySeconds;
+    [SerializeField] protected int amountOfProjectiles = 1;
+    [SerializeField] protected float timeBetweenProjectiles = 1;
+    [SerializeField] protected float fireDelaySeconds;
 
     protected virtual void Update()
     {

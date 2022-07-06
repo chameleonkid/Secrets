@@ -5,51 +5,22 @@ using UnityEngine;
 public class RockGiantBoss : TurretEnemy
 {
     [Header("AbilityValues Boss")]
-    public bool canTeleport = false;
-    public float canTeleportTimer;
-    [SerializeField] private float canTeleportCD;
-
-    [Header("Teleport Positions")]
-    [SerializeField] private List<Vector3> TeleportPositionList = default;
-
-    [Header("TeleportPointHolder")]
-    [SerializeField] private Transform points;
 
     [Header("Boss Attack Sounds")]
     [SerializeField] private AudioClip[] attackSound;
-    [SerializeField] private AudioClip teleportSound;
+    [SerializeField] private AudioClip earthQuakeSound;
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
         if (currentState is Schwer.States.Knockback) return;
 
-        base.Update();
-
-        canTeleportCD -= Time.deltaTime;
-        if (canTeleportCD <= 0)
-        {
-            canTeleport = true;
-            canTeleportCD = canTeleportTimer;
-            setFireDelaySeconds(5);
-        }
-
-        if(canTeleport == true)
-        {
-            TeleportSwampWitch();
-        }
+        base.FixedUpdate();
 
     }
-
 
     protected override void Awake()
     {
         base.Awake();
-        TeleportPositionList = new List<Vector3>();
-        foreach (Transform teleportPoint in points)
-        {
-            TeleportPositionList.Add(teleportPoint.position);
-        }
-        
     }
 
     protected override void OutsideChaseRadiusUpdate()
@@ -59,49 +30,50 @@ public class RockGiantBoss : TurretEnemy
 
     protected override void InsideChaseRadiusUpdate()
     {
-        base.InsideChaseRadiusUpdate();
-
         if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
         {
+            if (canAttack)
+            {
+                currentStateEnum = StateEnum.attack;
+                animator.SetTrigger("isThrowing");
+                //throwAttack(); -------> Set in the animation!!!
+            }
+            currentStateEnum = StateEnum.walk;
 
-            currentStateEnum = StateEnum.idle;
         }
     }
 
-    protected virtual void TeleportSwampWitch()
+    private void throwAttack()
     {
-        StartCoroutine(TeleportCo());
-        canTeleport = false;
-        currentStateEnum = StateEnum.walk;
+        StartCoroutine(StoneThrowCo());
     }
+       
 
-    protected virtual IEnumerator TeleportCo()
+    protected virtual IEnumerator StoneThrowCo()
     {
         var originalMovespeed = this.moveSpeed;
-        animator.SetTrigger("canTeleport");
-        // SoundManager.RequestSound(attackSounds.GetRandomElement());
-        yield return new WaitForSeconds(1f);
+        //animator.Play("Attacking");
+        //SoundManager.RequestSound(attackSounds.GetRandomElement());
         this.moveSpeed = 0;
-        yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
+        yield return new WaitForSeconds(0f);              //This would equal the "CastTime"
         this.moveSpeed = originalMovespeed;
 
-        Vector3 rndTeleportPoint = TeleportPositionList[Random.Range(0, TeleportPositionList.Count)];
-        this.transform.position = rndTeleportPoint;
-       
+
+        for (int i = 0; i <= amountOfProjectiles - 1; i++)
+        {
+            var difference = target.transform.position - transform.position;
+            Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
+            yield return new WaitForSeconds(timeBetweenProjectiles);
+        }
+        animator.SetBool("Attacking", false);
+
     }
 
-    public void HalfCooldownSpellTwo()
-    {
-        canTeleportTimer = canTeleportTimer / 2;
-    }
+
 
     public void PlayAttackSound()
     {
         SoundManager.RequestSound(attackSound.GetRandomElement());
     }
 
-    public void PlayTeleportSound()
-    {
-        SoundManager.RequestSound(teleportSound);
-    }
 }
