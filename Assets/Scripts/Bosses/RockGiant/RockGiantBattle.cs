@@ -38,9 +38,16 @@ public class RockGiantBattle : MonoBehaviour
     [Header("TriggerArea")]
     [SerializeField] private GameObject triggerArea;
 
+    [Header("Object for Throwers")]
+    [SerializeField] private GameObject boulderThrowersObject;
+
+    [Header("Dialogues while fighting")]
+    [SerializeField] private Dialogue dialogue = default;
+
 
     private void Awake()
     {
+        dialogue.npcName = "Alvarez - Heart of the Mountain";
         leaveBlock.SetActive(false);
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
@@ -79,7 +86,9 @@ public class RockGiantBattle : MonoBehaviour
             case Stage.Stage_2:
                 if (boss.GetPercentHealth() <= 50)
                 {
-
+                    dialogue.sentences[0] = "You know nothing! Let the Mountain collapse!!! HAHAHA!";
+                    DialogueManager.RequestDialogue(dialogue);
+                    boulderThrowersObject.SetActive(true);
                     StartNextStage();
                     Debug.Log("Stage 3 has started!");
                 }
@@ -89,11 +98,13 @@ public class RockGiantBattle : MonoBehaviour
 
     private void BossDied()
     {
-        Debug.Log("One Boss died!");
+        Debug.Log("Boss died!");
         SoundManager.RequestSound(bossDiedSound);
         leaveBlock.SetActive(false);
+        boulderThrowersObject.SetActive(false);
         MusicManager.RequestMusic(endBattleMusic);
         storeDefeated.RuntimeValue = true;
+
 
     }
 
