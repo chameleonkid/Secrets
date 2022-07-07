@@ -113,12 +113,20 @@ public class RockGiantBattle : MonoBehaviour
     {
         Debug.Log("BossBattle has started!");
         boss.animator.SetTrigger("StartBattle");
-        StartCoroutine(ActivateBossValuesCo());
+        SoundManager.RequestSound(startBattleSound);
+        StartCoroutine(ActivateBossCo());
         StartNextStage();
     }
 
+    private IEnumerator ActivateBossCo()
+    {
+        yield return new WaitForSeconds(3f);
+        boss.GetComponent<RockGiantBoss>().enabled = true;
+        bossHurtBox.enabled = true;
+    }
 
-    private void StartNextStage()
+
+        private void StartNextStage()
     {
         switch (stage)
         {
@@ -137,14 +145,9 @@ public class RockGiantBattle : MonoBehaviour
 
 
 
-    private IEnumerator ActivateBossValuesCo()
-    {
-        yield return new WaitForSeconds(1f);
-        SoundManager.RequestSound(startBattleSound);
-        yield return new WaitForSeconds(3f);
-        bossHurtBox.enabled = true;
-        boss.GetComponent<RockGiantBoss>().enabled = true;
-    }
+
+
+
 
 }
 

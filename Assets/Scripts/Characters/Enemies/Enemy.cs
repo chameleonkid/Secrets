@@ -240,7 +240,7 @@ public class Enemy : Character, ICanKnockback
         CheckForMinion();
     }
 
-    protected void DeathEffect()
+    protected virtual void DeathEffect()
     {
         if (deathEffect != null)
         {
