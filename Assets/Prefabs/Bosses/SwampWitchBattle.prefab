@@ -171,7 +171,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2509145760992848666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.75, y: -25, z: 0}
+  m_LocalPosition: {x: 9.84, y: -22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145760841920280}
@@ -266,7 +266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2509145761288934214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: -25, z: 0}
+  m_LocalPosition: {x: -4, y: -22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145760841920280}
@@ -633,10 +633,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrigger: {fileID: 2509145760850287754}
-  enemy1: {fileID: 3492503705776306315, guid: 02fc4e9a1e96030418e0b9f90a066bb7, type: 3}
-  enemy2: {fileID: 137455740367087127, guid: 75c88211dd6f248429623f600593314c, type: 3}
+  enemy1: {fileID: 1325239579952758200, guid: dce9c0b7da614564f85b8563a8f8cf32, type: 3}
+  enemy2: {fileID: 4749321459190552299, guid: 59c963868bcdc114594fe6d7f2a24cc3, type: 3}
   enemy3: {fileID: 4821109577977272686, guid: 5b72f042d0c83b249811672a4ac97231, type: 3}
-  spawnRate: 5
+  spawnRate: 30
   spawnedEnemiesList: []
   spawnPostionList: []
   boss: {fileID: 2509145761840492239}
@@ -648,6 +648,8 @@ MonoBehaviour:
   bossHurtBox: {fileID: 2509145761840492234}
   bossTwoHurtBox: {fileID: 2509145761378040370}
   bossKillCounter: 0
+  leaveBlock: {fileID: 0}
+  portal: {fileID: 0}
   stage: 0
   isDefeated: 0
   storeDefeated: {fileID: 11400000, guid: d3f66d1503b2ac84bb588d670c9a11dd, type: 2}
