@@ -52,6 +52,17 @@ public class FlameKnight : MonoBehaviour
     [SerializeField] private AudioClip fireKnightWW = default;
     [SerializeField] private AudioClip fireKnightSlam = default;
 
+
+    [Header("Choose random things to spawn of this:")]
+    [SerializeField] private GameObject[] thingToSpawn;
+    [Header("How many Randoms should be spawned?:")]
+    [SerializeField] private int spawnCounter;
+    [Header("How much delay between spawns?:")]
+    [SerializeField] private float spawnDelay;
+    [Header("How long will the thing remain?:")]
+    [SerializeField] private float destroyTime;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -199,6 +210,24 @@ public class FlameKnight : MonoBehaviour
             {
                 FlipDirection();
             }
+        }
+    }
+
+    public void StartFlames()
+    {
+        StartCoroutine(StartFlamesCo());
+    }
+
+    private IEnumerator StartFlamesCo()
+    {
+        this.GetComponent<SpriteRenderer>().sprite = null;
+        for (int i = 0; i < spawnCounter; i++)
+        {
+            Vector2 homePos = this.transform.position;
+            var randomSpawn = Random.Range(0, thingToSpawn.Length);
+            var spawn = Instantiate(thingToSpawn[randomSpawn], this.transform.position, Quaternion.identity);  //this.transform.position needs to vary slightly for iteration
+            yield return new WaitForSeconds(spawnDelay);
+            Destroy(spawn, destroyTime);
         }
     }
 

@@ -570,7 +570,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1868002878}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -1011,7 +1012,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1685105303}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -1225,6 +1227,75 @@ Transform:
   m_Father: {fileID: 88956347}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &149716982
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1410966786}
+    m_Modifications:
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 84.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 27.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 94.29271
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978958, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Brazier_FK (15)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 463c49413513a4c4b8241a5b9608b2e5, type: 3}
 --- !u!1001 &153917186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2171,7 +2242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 559541081}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -2579,7 +2651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1139331672}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: Knightbrook Dining Room
@@ -3537,7 +3610,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 832209179}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -3714,6 +3788,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdad374a17ee3d142a6a4a43791a3bd8, type: 3}
+--- !u!4 &424969109 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 149716982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &427539977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2311297493767853766, guid: a44a2c3fe6ca6de4fb912ca3afc5c189,
@@ -4184,9 +4264,41 @@ PrefabInstance:
       objectReference: {fileID: 1968102040}
     - target: {fileID: 3937266224420804678, guid: 9650b413d442d3648a3dbb87c7d64455,
         type: 3}
+      propertyPath: spawnDelay
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937266224420804678, guid: 9650b413d442d3648a3dbb87c7d64455,
+        type: 3}
+      propertyPath: destroyTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937266224420804678, guid: 9650b413d442d3648a3dbb87c7d64455,
+        type: 3}
+      propertyPath: spawnCounter
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937266224420804678, guid: 9650b413d442d3648a3dbb87c7d64455,
+        type: 3}
       propertyPath: closeEntrance
       value: 
       objectReference: {fileID: 1394696258}
+    - target: {fileID: 3937266224420804678, guid: 9650b413d442d3648a3dbb87c7d64455,
+        type: 3}
+      propertyPath: thingToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3937266224420804678, guid: 9650b413d442d3648a3dbb87c7d64455,
+        type: 3}
+      propertyPath: thingToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 6005173262255785062, guid: a2ad421ba54be124faed30553354f134,
+        type: 3}
+    - target: {fileID: 3937266224420804678, guid: 9650b413d442d3648a3dbb87c7d64455,
+        type: 3}
+      propertyPath: thingToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 6005173262255785062, guid: 8ab91984f59f2254580353b149e5104d,
+        type: 3}
     - target: {fileID: 3937266224420804679, guid: 9650b413d442d3648a3dbb87c7d64455,
         type: 3}
       propertyPath: m_Name
@@ -4687,7 +4799,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1307497089}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -5515,7 +5628,7 @@ PrefabInstance:
     - target: {fileID: 4679737262555868965, guid: 86389fede0ebcaf448266711a09d70eb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4679737262555868965, guid: 86389fede0ebcaf448266711a09d70eb,
         type: 3}
@@ -5857,6 +5970,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 629233874}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &634926411
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1410966786}
+    m_Modifications:
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 78.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 27.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 94.29271
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978958, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Brazier_FK (16)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 463c49413513a4c4b8241a5b9608b2e5, type: 3}
 --- !u!1001 &647878622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9070,7 +9252,7 @@ Transform:
   - {fileID: 1564206956}
   - {fileID: 556707353}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1001067104
 PrefabInstance:
@@ -10516,7 +10698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1306815017}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -10990,7 +11173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 368407191}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: Knightbrook Dungeon
@@ -11667,10 +11851,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 941674163}
   enemies: []
-  npcs: {fileID: 0}
+  npcs: []
   breakables: []
   particleSystems: []
-  areaName: 
+  areaName: Chamber of Light
   areaNameText: {fileID: 1111764214783385553}
 --- !u!114 &1330199498
 MonoBehaviour:
@@ -12205,7 +12389,7 @@ Transform:
   - {fileID: 943011169}
   - {fileID: 264251381}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1400519452 stripped
 Transform:
@@ -12331,6 +12515,8 @@ Transform:
   - {fileID: 1211573967}
   - {fileID: 183355029}
   - {fileID: 1629926020}
+  - {fileID: 424969109}
+  - {fileID: 1620871788}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12603,7 +12789,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 603273199}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -13097,6 +13284,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6456810897387002501, guid: 06845811850da954ebc94edf9a9d08e8,
     type: 3}
   m_PrefabInstance: {fileID: 1587866220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1620871788 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 634926411}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1629926020 stripped
 Transform:
@@ -14209,7 +14402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 918508086}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: 
@@ -15595,7 +15789,7 @@ PrefabInstance:
     - target: {fileID: 8855686165718899162, guid: d2e1a785e77057b4a850b34b10d98c8d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8855686165718899162, guid: d2e1a785e77057b4a850b34b10d98c8d,
         type: 3}
@@ -16225,7 +16419,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 963741848}
   enemies: []
-  npcs: {fileID: 0}
+  npcs:
+  - {fileID: 0}
   breakables: []
   particleSystems: []
   areaName: Knightbrook Mansion
@@ -16662,7 +16857,7 @@ PrefabInstance:
     - target: {fileID: 6273702000782647731, guid: 884dc4f00c7b18441bd81bbe1c322d8b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6273702000782647731, guid: 884dc4f00c7b18441bd81bbe1c322d8b,
         type: 3}
@@ -17781,7 +17976,7 @@ PrefabInstance:
     - target: {fileID: 1111764214188206027, guid: 5276e0f7c123b7b4c871bc76458cff0a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1111764214188206027, guid: 5276e0f7c123b7b4c871bc76458cff0a,
         type: 3}
@@ -17832,6 +18027,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588915104132762240, guid: 5276e0f7c123b7b4c871bc76458cff0a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 84.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588915104132762240, guid: 5276e0f7c123b7b4c871bc76458cff0a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 32.3
       objectReference: {fileID: 0}
     - target: {fileID: 8833009003930575235, guid: 5276e0f7c123b7b4c871bc76458cff0a,
         type: 3}
@@ -18703,7 +18908,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e16238cf9789ddc4aaaadd78ba44e2d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37844,7 +38049,7 @@ Tilemap:
       - {fileID: 21300154, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300156, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
       - {fileID: 21300158, guid: 5ef41e60e7e05014990aa70061bb211c, type: 3}
-      m_AnimationSpeed: 9.47315
+      m_AnimationSpeed: 8.419506
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -94160,7 +94365,7 @@ Transform:
   - {fileID: 6113359882052575410}
   - {fileID: 6113359882304593721}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6113359882186510399
 GameObject:
