@@ -5,14 +5,6 @@ using UnityEngine;
 public class RockGiantBoss : TurretEnemy
 {
 
-    [Header("Moving Points")]
-    [SerializeField] private List<Vector3> MovementPositionList = default;
-    [SerializeField] private Vector3 currentMovementPoint = default;
-    [Header("MovingPointHolder")]
-    [SerializeField] private Transform points;
-    [Header("Moving Stuff")]
-    [SerializeField] private bool hasGoal = false;
-    public float roundingDistance;
 
     [Header("Boulder ability")]
     [SerializeField] private float canThrowBoulderCD;
@@ -79,28 +71,7 @@ public class RockGiantBoss : TurretEnemy
             //Earthquake(); -------> Set in the animation!!!
         }
 
-        //################################## Movement with given Points ###########################
 
-
-
-        if (hasGoal == true)
-            {            
-                var newPosition = Vector3.MoveTowards(transform.position, currentMovementPoint, moveSpeed * Time.deltaTime);
-                SetAnimatorXYSingleAxis(newPosition - transform.position);
-                rigidbody.MovePosition(newPosition);
-
-                var distance = Vector3.Distance(transform.position, currentMovementPoint);
-                if (distance <= roundingDistance)
-                {
-                    hasGoal = false;
-                }
-            }
-        else
-            {
-                Vector3 rndMovementPoint = MovementPositionList[Random.Range(0, MovementPositionList.Count)];
-                currentMovementPoint = rndMovementPoint;
-                hasGoal = true;
-            }
 }
 
    
@@ -109,11 +80,6 @@ public class RockGiantBoss : TurretEnemy
     protected override void Awake()
     {
         base.Awake();
-        MovementPositionList = new List<Vector3>();
-        foreach (Transform teleportPoint in points)
-        {
-            MovementPositionList.Add(teleportPoint.position);
-        }
     }
 
     protected override void OutsideChaseRadiusUpdate()
