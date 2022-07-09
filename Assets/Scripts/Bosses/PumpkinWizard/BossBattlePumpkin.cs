@@ -14,6 +14,7 @@ public class BossBattlePumpkin : MonoBehaviour
 
     [Header("TriggerArea")]
     [SerializeField] private PlayerEventTrigger playerTrigger = default;
+    [SerializeField] private GameObject leaverBlock = default;
     [Header("Potential Enemies")]
     [SerializeField] private Enemy enemy1 = default;
     [SerializeField] private Enemy enemy2 = default;
@@ -63,6 +64,7 @@ public class BossBattlePumpkin : MonoBehaviour
         if (isDefeated)
         {
             bossGameObject.SetActive(false);
+            leaverBlock.SetActive(false);
         }
         else
         {
@@ -90,6 +92,7 @@ public class BossBattlePumpkin : MonoBehaviour
         SoundManager.RequestSound(bossDiedSound);
         MusicManager.RequestMusic(endBattleMusic);
         DestroyAllEnemies();
+        leaverBlock.SetActive(false);
         storeDefeated.RuntimeValue = true;                                                         // Stop spawning enemies
     }
 
@@ -122,6 +125,7 @@ public class BossBattlePumpkin : MonoBehaviour
             StartBattle();
             playerTrigger.OnTriggerEnter -= EnterBossArea;       //Unsubscribe to not start the Battle multiple Times
             triggerArea.SetActive(false);
+            leaverBlock.SetActive(true);
         }
     }
 
