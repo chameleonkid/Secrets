@@ -15,14 +15,21 @@ public class TowerBoss : TurretEnemy
 
     protected override void Update()
     {
-        if (currentState is Schwer.States.Knockback) return;
-
+    //    if (currentState is Schwer.States.Knockback) return;
+    //################# CD for Projectile 1 ############################
         base.Update();
+        fireDelaySeconds -= Time.deltaTime;
+        if (fireDelaySeconds <= 0)
+        {
+            animator.SetTrigger("CanFireOrb");
+            fireDelaySeconds = fireDelay;
+        }
 
+        //################# CD for Projectile 2 ############################
         fireDelaySecondsTwo -= Time.deltaTime;
         if (fireDelaySecondsTwo <= 0)
         {
-            canFireTwo = true;
+            animator.SetTrigger("CanSpawnPumpkinBomb");
             fireDelaySecondsTwo = fireDelayTwo;
         }
     }
@@ -34,35 +41,36 @@ public class TowerBoss : TurretEnemy
 
     protected override void InsideChaseRadiusUpdate()
     {
-        base.InsideChaseRadiusUpdate();
-
-        if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
-        {
-            if (canFireTwo)
-            {
-                currentStateEnum = StateEnum.attack;
-                FireProjectileTwo();
-            }
-            currentStateEnum = StateEnum.idle;
-        }
+ 
     }
+
+    protected override void FireProjectile()
+    {
+        StartCoroutine(FireCo());
+    }
+
+    protected override IEnumerator FireCo()
+    {
+        yield return new WaitForSeconds(0f);              //This would equal the "CastTime"
+
+        for (int i = 0; i <= amountOfProjectiles - 1; i++)
+        {
+            var difference = target.transform.position - transform.position;
+            Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
+            yield return new WaitForSeconds(timeBetweenProjectiles);
+        }
+
+    }
+
 
     protected virtual void FireProjectileTwo()
     {
         StartCoroutine(FireTwoCo());
-        canFireTwo = false;
-        currentStateEnum = StateEnum.walk;
     }
 
     protected virtual IEnumerator FireTwoCo()
     {
-        var originalMovespeed = this.moveSpeed;
-        animator.Play("Attacking 2");
-       // SoundManager.RequestSound(attackSounds.GetRandomElement());
-        yield return new WaitForSeconds(1f);
-        this.moveSpeed = 0;
-        yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
-        this.moveSpeed = originalMovespeed;
+        yield return new WaitForSeconds(0f);            
         var randomProjectile = Random.Range(0, projectileTwo.Length);
         var proj = Instantiate(projectileTwo[randomProjectile], target.transform.position, Quaternion.identity);
     }
