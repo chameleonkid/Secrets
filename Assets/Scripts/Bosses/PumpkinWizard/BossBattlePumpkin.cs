@@ -28,6 +28,7 @@ public class BossBattlePumpkin : MonoBehaviour
     [SerializeField] private float timeBetweenMinionSpawn = 0.25f;
     [Header("Spawn Positions")]
     [SerializeField] private List<Vector3> spawnPostionList = default;
+    [SerializeField] private GameObject[] spawnPostionLights = default;
     [Header("The Boss")]
     [SerializeField] private PumpkinBoss boss = default;
     [SerializeField] private GameObject bossGameObject = default;
@@ -130,27 +131,12 @@ public class BossBattlePumpkin : MonoBehaviour
         boss.animator.SetTrigger("StartBattle");
         StartCoroutine(ActivateBossValuesCo());
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);
+        InvokeRepeating("SpawnEnemy", 10.0f, spawnRate);
     }
 
     private void SpawnEnemy()
     {
-
-        Enemy minion;
-
-        if (stage == Stage.Stage_1)
-        {
-            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-            minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
-            SoundManager.RequestSound(spawnEnemysound);
-        }
-        else
-        {
-            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-            minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
-            SoundManager.RequestSound(spawnEnemysound);
-        }
-            spawnedEnemiesList.Add(minion);
+        StartCoroutine(SpawnEnemiesCo());
     }
 
     private void MinionKilled()
@@ -191,7 +177,7 @@ public class BossBattlePumpkin : MonoBehaviour
         Debug.Log("Next Stage has started " + stage);
     }
 
-    private void EnhanceAttacks()
+    private void enhanceAttacks()
     {
         boss.HalfCooldown();
         boss.HalfCooldownSpellTwo();
@@ -202,6 +188,8 @@ public class BossBattlePumpkin : MonoBehaviour
         StartCoroutine(SpawnMinionsCo());
     }
 
+    
+
     private IEnumerator ActivateBossValuesCo()
     {
         yield return new WaitForSeconds(1f);
@@ -211,6 +199,33 @@ public class BossBattlePumpkin : MonoBehaviour
         boss.GetComponent<PumpkinBoss>().enabled = true;
     }
 
+
+    private IEnumerator SpawnEnemiesCo()
+    {
+
+        var randomSpawnPoint = Random.Range(0, spawnPostionList.Count);
+        Enemy minion;
+        if (stage == Stage.Stage_1)
+        {
+            Vector3 spawnPoint = spawnPostionList[randomSpawnPoint];
+            spawnPostionLights[randomSpawnPoint].SetActive(true);
+            yield return new WaitForSeconds(1f);
+            minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
+            spawnPostionLights[randomSpawnPoint].SetActive(false);
+            SoundManager.RequestSound(spawnEnemysound);
+
+        }
+        else
+        {
+            Vector3 spawnPoint = spawnPostionList[randomSpawnPoint];
+            spawnPostionLights[randomSpawnPoint].SetActive(true);
+            yield return new WaitForSeconds(1f);
+            minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
+            spawnPostionLights[randomSpawnPoint].SetActive(false);
+            SoundManager.RequestSound(spawnEnemysound);
+        }
+        spawnedEnemiesList.Add(minion);
+    }
     private IEnumerator SpawnMinionsCo()
     {
         dialogue.sentences[0] = "My Skeleton Champions will show you where you are supposed to be! ATTACK!";
@@ -219,9 +234,15 @@ public class BossBattlePumpkin : MonoBehaviour
         Enemy minion;
         for (int i = 0; i < minionsToSpawn; i++)
         {
+            spawnPostionLights[i].SetActive(true);
+        }
+
+        for (int i = 0; i < minionsToSpawn; i++)
+        {
             SoundManager.RequestSound(spawnEnemysound);
             Vector3 spawnPoint = spawnPostionList[i];
             minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
+            spawnPostionLights[i].SetActive(false);
             minion.isMinion = true;
             minion.OnMinionDied += MinionKilled;
             spawnedMinionsCounter++;
