@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TowerBoss : TurretEnemy
+public class PumpkinBoss : TurretEnemy
 {
     [Header("AbilityValues Boss")]
     public GameObject[] projectileTwo;
@@ -15,9 +15,7 @@ public class TowerBoss : TurretEnemy
 
     protected override void Update()
     {
-    //    if (currentState is Schwer.States.Knockback) return;
     //################# CD for Projectile 1 ############################
-        base.Update();
         fireDelaySeconds -= Time.deltaTime;
         if (fireDelaySeconds <= 0)
         {
@@ -52,14 +50,15 @@ public class TowerBoss : TurretEnemy
     protected override IEnumerator FireCo()
     {
         yield return new WaitForSeconds(0f);              //This would equal the "CastTime"
-
+        
         for (int i = 0; i <= amountOfProjectiles - 1; i++)
         {
             var difference = target.transform.position - transform.position;
-            Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
+            GameObject orb = Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player").gameObject;
             yield return new WaitForSeconds(timeBetweenProjectiles);
+            Destroy(orb, projectileDestructionTimer);
         }
-
+  
     }
 
 
@@ -77,7 +76,7 @@ public class TowerBoss : TurretEnemy
 
     public void HalfCooldownSpellTwo()
     {
-        fireDelayTwo = fireDelayTwo / 2;
+        fireDelayTwo = fireDelayTwo / 3;
     }
 
     public void PlayAttack1Sound()

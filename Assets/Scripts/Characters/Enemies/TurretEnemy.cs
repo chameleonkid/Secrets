@@ -8,8 +8,9 @@ public class TurretEnemy : SimpleEnemy
     public bool canAttack = false;
     public float fireDelay;
     [SerializeField] protected int amountOfProjectiles = 1;
-    [SerializeField] protected float timeBetweenProjectiles = 1;
+    [SerializeField] protected float timeBetweenProjectiles = 1f;
     [SerializeField] protected float fireDelaySeconds;
+    [SerializeField] protected float projectileDestructionTimer=1f;
 
     protected virtual void Update()
     {
@@ -85,7 +86,7 @@ public class TurretEnemy : SimpleEnemy
 
     public void HalfCooldown()
     {
-        fireDelay = fireDelay / 2;
+        fireDelay = fireDelay / 3;
     }
 
     public void setFireDelaySeconds(float timeTillAttack)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBattleTower : MonoBehaviour
+public class BossBattlePumpkin : MonoBehaviour
 {
     public enum Stage
     {
@@ -17,7 +17,6 @@ public class BossBattleTower : MonoBehaviour
     [Header("Potential Enemies")]
     [SerializeField] private Enemy enemy1 = default;
     [SerializeField] private Enemy enemy2 = default;
-    [SerializeField] private Enemy enemy3 = default;
     [Header("Spawnrate in seconds")]
     [SerializeField] private float spawnRate = 1;
     [Header("List of spawned Enemies")]
@@ -26,11 +25,11 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private Enemy bossMinion = default;
     [SerializeField] private int minionsToSpawn;                //set the minions to spawn in inspector
     [SerializeField] private int spawnedMinionsCounter = 0;
-    [SerializeField] private bool minionsSpawned = false;
+    [SerializeField] private float timeBetweenMinionSpawn = 0.25f;
     [Header("Spawn Positions")]
     [SerializeField] private List<Vector3> spawnPostionList = default;
     [Header("The Boss")]
-    [SerializeField] private TowerBoss boss = default;
+    [SerializeField] private PumpkinBoss boss = default;
     [SerializeField] private GameObject bossGameObject = default;
     [SerializeField] private Collider2D bossHurtBox = default;
 
@@ -48,12 +47,17 @@ public class BossBattleTower : MonoBehaviour
     [SerializeField] private AudioClip startBattleSound;
     [SerializeField] private AudioClip[] endBattleMusic;
     [SerializeField] private AudioClip bossDiedSound;
+    [SerializeField] private AudioClip spawnEnemysound;
 
     [Header("TriggerArea")]
     [SerializeField] private GameObject triggerArea;
 
+    [Header("Dialogues while fighting")]
+    [SerializeField] private Dialogue dialogue = default;
+
     private void Awake()
     {
+        dialogue.npcName = "Sylandrel - The Pumpkin Wizard";
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {
@@ -85,8 +89,7 @@ public class BossBattleTower : MonoBehaviour
         SoundManager.RequestSound(bossDiedSound);
         MusicManager.RequestMusic(endBattleMusic);
         DestroyAllEnemies();
-        storeDefeated.RuntimeValue = true;
-        CancelInvoke("SpawnEnemy");                                                          // Stop spawning enemies
+        storeDefeated.RuntimeValue = true;                                                         // Stop spawning enemies
     }
 
     private void BossTakesDamage()
@@ -98,6 +101,8 @@ public class BossBattleTower : MonoBehaviour
                 if (boss.GetPercentHealth() <= 70)
                 {
                     StartNextStage();
+                    CancelInvoke("SpawnEnemy");
+                    SpawnMinions();
                 }
                 break;
             case Stage.Stage_2:
@@ -130,50 +135,22 @@ public class BossBattleTower : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        int rndEnemy = Random.Range(0, 100);
+
         Enemy minion;
 
         if (stage == Stage.Stage_1)
         {
             Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-
-            if (rndEnemy < 35)
-            {
-                minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
-            }
-            if (rndEnemy >= 35 && rndEnemy <= 75)
-            {
-                minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
-            }
-            else
-            {
-                minion = Instantiate(enemy3, spawnPoint, Quaternion.identity);
-            }
-            spawnedEnemiesList.Add(minion);
+            minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
+            SoundManager.RequestSound(spawnEnemysound);
         }
-        if (stage == Stage.Stage_2)
+        else
         {
-            if (minionsSpawned == false)                                    //Spawn X " SHIELD-MINIONS "
-            {
-                for (int i = 0; i <= minionsToSpawn; i++)
-                {
-                    Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-                    minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
-                    minion.isMinion = true;
-                    minion.OnMinionDied += MinionKilled;
-                    spawnedMinionsCounter++;
-                }
-                minionsSpawned = true;
-            }
-            else
-            {
-                {
-                    Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-                    minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
-                    spawnedEnemiesList.Add(minion);
-                }
-            }
+            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
+            minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
+            SoundManager.RequestSound(spawnEnemysound);
         }
+            spawnedEnemiesList.Add(minion);
     }
 
     private void MinionKilled()
@@ -203,10 +180,11 @@ public class BossBattleTower : MonoBehaviour
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
                 bossshield.triggerShield();
-                EnhanceAttacks();
+                boss.HalfCooldownSpellTwo();
                 Debug.Log("Shield should be active now!");
                 break;
             case Stage.Stage_2:
+                boss.HalfCooldownSpellTwo();
                 stage = Stage.Stage_3;
                 break;
         }
@@ -215,9 +193,13 @@ public class BossBattleTower : MonoBehaviour
 
     private void EnhanceAttacks()
     {
-        //  var boss = this.GetComponent<BossPumpkin>();
         boss.HalfCooldown();
         boss.HalfCooldownSpellTwo();
+    }
+
+    private void SpawnMinions()
+    {
+        StartCoroutine(SpawnMinionsCo());
     }
 
     private IEnumerator ActivateBossValuesCo()
@@ -226,6 +208,24 @@ public class BossBattleTower : MonoBehaviour
         SoundManager.RequestSound(startBattleSound);
         yield return new WaitForSeconds(3f);
         bossHurtBox.enabled = true;
-        boss.GetComponent<TowerBoss>().enabled = true;
+        boss.GetComponent<PumpkinBoss>().enabled = true;
+    }
+
+    private IEnumerator SpawnMinionsCo()
+    {
+        dialogue.sentences[0] = "My Skeleton Champions will show you where you are supposed to be! ATTACK!";
+        DialogueManager.RequestDialogue(dialogue);
+        yield return new WaitForSeconds(2f);
+        Enemy minion;
+        for (int i = 0; i < minionsToSpawn; i++)
+        {
+            SoundManager.RequestSound(spawnEnemysound);
+            Vector3 spawnPoint = spawnPostionList[i];
+            minion = Instantiate(bossMinion, spawnPoint, Quaternion.identity);
+            minion.isMinion = true;
+            minion.OnMinionDied += MinionKilled;
+            spawnedMinionsCounter++;
+            yield return new WaitForSeconds(timeBetweenMinionSpawn);
+        }
     }
 }
