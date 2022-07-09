@@ -8,6 +8,7 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] private float runSpeedModifier = 1.5f;
     [SerializeField] private BoxCollider2D shipCollider = default;
     [SerializeField] private BoxCollider2D shipTriggerCollider = default;
+    public VectorValue startingPosition;
 
     private PlayerInput input;
     private PlayerInput uiInput;
@@ -19,7 +20,8 @@ public class ShipMovement : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
-    }
+        this.transform.position = startingPosition.value;
+}
 
     // Update is called once per frame
     void Update()
