@@ -1631,11 +1631,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrigger: {fileID: 3306322924391243028}
+  leaverBlock: {fileID: 6168386057613054211}
   enemy1: {fileID: 7290780269828354134, guid: cdad374a17ee3d142a6a4a43791a3bd8, type: 3}
   enemy2: {fileID: 2311297493767853769, guid: a44a2c3fe6ca6de4fb912ca3afc5c189, type: 3}
   spawnRate: 15
   spawnedEnemiesList: []
-  bossMinion: {fileID: 2311297493767853769, guid: af3549b52276e5440a4f775514b84bbe,
+  bossMinion: {fileID: 2311297493767853769, guid: 5f906051d8d17b7468b6191481b843e7,
     type: 3}
   minionsToSpawn: 7
   spawnedMinionsCounter: 0
@@ -1755,7 +1756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8626763409829077595
 Transform:
   m_ObjectHideFlags: 0
@@ -1835,7 +1836,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.40893364}
+  m_Offset: {x: 0, y: -0.46797943}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1846,7 +1847,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1.3383827}
+  m_Size: {x: 2, y: 1.2202911}
   m_EdgeRadius: 0
 --- !u!1001 &1268227709
 PrefabInstance:
