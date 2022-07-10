@@ -20,12 +20,14 @@ public class SwampWitchBattle : MonoBehaviour
     [SerializeField] private Enemy enemy1 = default;
     [SerializeField] private Enemy enemy2 = default;
     [SerializeField] private Enemy enemy3 = default;
+    [SerializeField] private int numberOfEnemiesToSpawn = 1;
     [Header("Spawnrate in seconds")]
     [SerializeField] private float spawnRate = 1;
     [Header("List of spawned Enemies")]
     [SerializeField] private List<Enemy> spawnedEnemiesList = default;
     [Header("Spawn Positions")]
     [SerializeField] private List<Vector3> spawnPostionList = default;
+    [SerializeField] private GameObject[] spawnPostionLights = default;
     [Header("The Boss")]
     [SerializeField] private SwampWitchBoss boss = default;
     [SerializeField] private SwampWitchBoss bossTwo = default;
@@ -52,6 +54,7 @@ public class SwampWitchBattle : MonoBehaviour
     [SerializeField] private AudioClip startBattleSound;
     [SerializeField] private AudioClip[] endBattleMusic;
     [SerializeField] private AudioClip bossDiedSound;
+    [SerializeField] private AudioClip spawnEnemysound;
 
     [Header("TriggerArea")]
     [SerializeField] private GameObject triggerArea;
@@ -94,11 +97,6 @@ public class SwampWitchBattle : MonoBehaviour
         bossTwo.OnEnemyDied += BossDied;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void BossTakesDamage()
     {
@@ -170,7 +168,7 @@ public class SwampWitchBattle : MonoBehaviour
         bossTwo.animator.SetTrigger("StartBattle");
         StartCoroutine(ActivateBossValuesCo());
         StartNextStage();
-        InvokeRepeating("SpawnEnemy", 1.0f, spawnRate);
+        InvokeRepeating("SpawnEnemy", 10.0f, spawnRate);
     }
 
 
@@ -215,54 +213,25 @@ public class SwampWitchBattle : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        int rndEnemy = Random.Range(0, 100);
+        StartCoroutine(SpawnEnemiesCo());
+    }
+
+    private IEnumerator SpawnEnemiesCo()
+    {
+        var randomSpawnPoint = Random.Range(0, spawnPostionList.Count);
         Enemy minion;
-
-        if (stage == Stage.Stage_1)
+        Vector3 spawnPoint = spawnPostionList[randomSpawnPoint];
+        spawnPostionLights[randomSpawnPoint].SetActive(true);
+        yield return new WaitForSeconds(1f);
+        SoundManager.RequestSound(spawnEnemysound);
+        for(int i=0; i<numberOfEnemiesToSpawn;i++)
         {
-            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-
-            if (rndEnemy < 35)
-            {
-                minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
-            }
-            if (rndEnemy >= 35 && rndEnemy <= 75)
-            {
-                minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
-            }
-            else
-            {
-                minion = Instantiate(enemy3, spawnPoint, Quaternion.identity);
-            }
+            minion = Instantiate(enemy3, spawnPoint, Quaternion.identity);
             spawnedEnemiesList.Add(minion);
         }
-        if (stage == Stage.Stage_2)
-        {
-            Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-
-            if (rndEnemy < 35)
-            {
-                minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
-            }
-            if (rndEnemy >= 35 && rndEnemy <= 75)
-            {
-                minion = Instantiate(enemy2, spawnPoint, Quaternion.identity);
-            }
-            else
-            {
-                minion = Instantiate(enemy3, spawnPoint, Quaternion.identity);
-            }
-            spawnedEnemiesList.Add(minion);
-        }
-
-        else
-        {
-           Vector3 spawnPoint = spawnPostionList[Random.Range(0, spawnPostionList.Count)];
-           minion = Instantiate(enemy1, spawnPoint, Quaternion.identity);
-           spawnedEnemiesList.Add(minion);
-            
-        }
-     }
+        spawnPostionLights[randomSpawnPoint].SetActive(false);
+        
+    }
 }
 
 

@@ -19,12 +19,15 @@ public class SwampWitchBoss : TurretEnemy
     [SerializeField] private AudioClip[] attackSound;
     [SerializeField] private AudioClip teleportSound;
 
+    [Header("Waterball ability")]
+    [SerializeField] private float canThrowWaterCD;
+    public float canThrowWaterTimer;
+    public bool canThrowWater;
+    [SerializeField] private float WaterYPosition;
+
     protected override void Update()
     {
-        if (currentState is Schwer.States.Knockback) return;
-
-        base.Update();
-
+        //############## TELEPORT SPELL #######################
         canTeleportCD -= Time.deltaTime;
         if (canTeleportCD <= 0)
         {
@@ -35,11 +38,25 @@ public class SwampWitchBoss : TurretEnemy
 
         if(canTeleport == true)
         {
-            TeleportSwampWitch();
+            animator.SetTrigger("canTeleport");
+            canTeleport = false;
+        }
+        //############## Water-Projectile Spell #######################
+        //###################### Throw Boulder Ability ######################################
+        canThrowWaterCD -= Time.deltaTime;
+        if (canThrowWaterCD <= 0)
+        {
+            canThrowWater = true;
+            canThrowWaterCD = canThrowWaterTimer;
+        }
+        if (canThrowWater == true)
+        {
+            animator.SetTrigger("canThrowWater");
+            canThrowWater = false;
+            //FireProjectile(); -------> Set in the animation!!!
         }
 
     }
-
 
     protected override void Awake()
     {
@@ -59,36 +76,15 @@ public class SwampWitchBoss : TurretEnemy
 
     protected override void InsideChaseRadiusUpdate()
     {
-        base.InsideChaseRadiusUpdate();
 
-        if (currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk && currentStateEnum != StateEnum.stagger)
-        {
-
-            currentStateEnum = StateEnum.idle;
-        }
     }
 
     protected virtual void TeleportSwampWitch()
-    {
-        StartCoroutine(TeleportCo());
-        canTeleport = false;
-        currentStateEnum = StateEnum.walk;
-    }
-
-    protected virtual IEnumerator TeleportCo()
-    {
-        var originalMovespeed = this.moveSpeed;
-        animator.SetTrigger("canTeleport");
-        // SoundManager.RequestSound(attackSounds.GetRandomElement());
-        yield return new WaitForSeconds(1f);
-        this.moveSpeed = 0;
-        yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
-        this.moveSpeed = originalMovespeed;
-
+    { 
         Vector3 rndTeleportPoint = TeleportPositionList[Random.Range(0, TeleportPositionList.Count)];
         this.transform.position = rndTeleportPoint;
-       
     }
+
 
     public void HalfCooldownSpellTwo()
     {
