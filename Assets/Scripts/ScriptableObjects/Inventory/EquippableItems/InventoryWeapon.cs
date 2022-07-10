@@ -116,12 +116,20 @@ public class InventoryWeapon : EquippableItem
     };
 
     private static Vector2[] swordDown =  {
-        new Vector2(-0.075f, 0.074f),
-        new Vector2(0.3193865f, 0.06972781f),
-        new Vector2(0.4972434f, -0.01664543f),
-        new Vector2(0.6710907f, -0.6605458f),
-        new Vector2(-0.05017042f, -0.7659035f),
-        new Vector2(-0.3951536f, -0.6153917f)
+        new Vector2(-0.2358f, 0.2629f),
+        new Vector2(-0.1795859f, 0.06671722f),
+        new Vector2(-0.3346993f, -0.01477894f),
+        new Vector2(-0.4056413f, -0.1583749f),
+        new Vector2(-0.5530407f, -0.1325015f),
+        new Vector2(-0.5242767f, -0.3492174f),
+        new Vector2(-0.4158325f, -0.4849291f),
+        new Vector2(-0.2136993f, -0.5695391f),
+        new Vector2(0.07230663f, -0.5696025f),
+        new Vector2(0.3982315f,  -0.3832312f),
+        new Vector2(0.4726486f,  -0.2432566f),
+        new Vector2(0.5810461f, -0.1280579f),
+        new Vector2(0.6830292f, 0.3905234f),
+        new Vector2(0.5639355f, 0.5707344f)
     };
     #endregion
 
