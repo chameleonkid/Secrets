@@ -148,6 +148,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -254,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaMusic:
-  - {fileID: 8300000, guid: 13e395d266365c241b13ce320b3bda1b, type: 3}
+  - {fileID: 8300000, guid: a5f7ed7a93d87b841b6fe0818cc9049c, type: 3}
 --- !u!1 &2365728132727622173
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 7
 --- !u!1 &3099740594900701916
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 50
+  _damage: 10
 --- !u!1 &3331111358689645877
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 100
+  _damage: 20
 --- !u!61 &5832394684001341120
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -656,6 +657,12 @@ MonoBehaviour:
   fireKnightCharge: {fileID: 8300000, guid: 1a42721e4d9cecd42b8ae13b35aafe77, type: 3}
   fireKnightWW: {fileID: 8300000, guid: 0c2182a586a9d224daa254f783819b66, type: 3}
   fireKnightSlam: {fileID: 0}
+  thingToSpawn:
+  - {fileID: 6005173262255785062, guid: a2ad421ba54be124faed30553354f134, type: 3}
+  - {fileID: 6005173262255785062, guid: 8ab91984f59f2254580353b149e5104d, type: 3}
+  spawnCounter: 30
+  spawnDelay: 0.33
+  destroyTime: 30
 --- !u!61 &789890304
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -697,6 +704,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -784,10 +792,12 @@ MonoBehaviour:
   _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 50
-  maxHealth: {fileID: 11400000, guid: 0459fc57e8370e84285c35ccb4509662, type: 2}
+  maxHealth: {fileID: 11400000, guid: 08a183bc611295d45881b6748eda4ea7, type: 2}
   _health: 0
   openEntrance: {fileID: 0}
   isMinion: 0
+  bossDefeatedMusic:
+  - {fileID: 8300000, guid: 68084643edf1c4749bf8514c0dfe383c, type: 3}
   enemyName: FlameKnight
   moveSpeed: 0
   deathEffect: {fileID: 4464167541414145869, guid: c36ef29998f9470479149b340186546e,
