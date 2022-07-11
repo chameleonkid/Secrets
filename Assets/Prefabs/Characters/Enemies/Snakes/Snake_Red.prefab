@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 12
 --- !u!60 &4786434874067755152
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -88,10 +88,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.053575516, y: 1.1501601}
-      - {x: -0.31868553, y: 0.8441961}
+      - {x: -0.47960663, y: 0.8157983}
       - {x: -0.1412816, y: 0.39857256}
       - {x: 0.17203903, y: 0.39492774}
-      - {x: 0.29028893, y: 0.8919623}
+      - {x: 0.399148, y: 0.8777633}
 --- !u!1 &4786434874591540927
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 12
 --- !u!60 &4786434874591540914
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -181,8 +181,10 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.00013303757, y: 0.37149942}
       - {x: -0.15907383, y: 0.13709974}
+      - {x: -0.36887455, y: -0.09301567}
       - {x: -0.33287, y: -0.52107024}
       - {x: 0.3736148, y: -0.5020548}
+      - {x: 0.3727951, y: -0.06659722}
       - {x: 0.16440916, y: 0.13743383}
 --- !u!1 &4786434875348930258
 GameObject:
@@ -245,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 12
 --- !u!60 &4786434875348930261
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -271,7 +273,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.7153816, y: 0.3982445}
+    - - {x: 0.74851227, y: 0.41244328}
+      - {x: 0.74528027, y: 0.5277047}
       - {x: 0.67133045, y: 0.7643676}
       - {x: 0.13335228, y: 0.6245496}
       - {x: 0.11253929, y: 0.6151805}
@@ -280,7 +283,7 @@ PolygonCollider2D:
       - {x: 0.40412784, y: 0.077955365}
       - {x: 0.53263855, y: 0.104869604}
       - {x: 0.7389574, y: 0.11023426}
-      - {x: 0.76169133, y: 0.21580029}
+      - {x: 0.80428815, y: 0.22053337}
 --- !u!1 &4786434875535874260
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 12
 --- !u!60 &4786434875535874263
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -370,6 +373,7 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.292063, y: 0.6586001}
       - {x: -0.8000674, y: 0.5790889}
+      - {x: -0.92311096, y: 0.40080833}
       - {x: -0.78833675, y: 0.05657041}
       - {x: -0.24221516, y: 0.033055782}
       - {x: -0.21548557, y: 0.34239703}
@@ -588,7 +592,7 @@ MonoBehaviour:
   _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 5
-  maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
+  maxHealth: {fileID: 11400000, guid: 62d3763edb41ce64fb12ee28103b221c, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 3
@@ -610,6 +614,7 @@ MonoBehaviour:
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
+  attackCoolDown: 0
 --- !u!114 &8789407979251154080
 MonoBehaviour:
   m_ObjectHideFlags: 0
