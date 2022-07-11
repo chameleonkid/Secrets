@@ -319,7 +319,7 @@ public class PlayerMovement : Character, ICanMove
 
         var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
         var proj = CreateProjectile(projectile);
-        proj.OverrideSpeed(arrowSpeed);
+//        proj.OverrideSpeed(arrowSpeed);  Speed is set in the Projectile-Prefab now!
         proj.OverrideDamage(damage, IsCriticalHit());
 
         currentState = new PlayerBowAttack(this, 0.3f);
@@ -344,7 +344,7 @@ public class PlayerMovement : Character, ICanMove
 
         var damage = Random.Range(inventory.currentWeapon.minDamage, inventory.currentWeapon.maxDamage + 1);
         var proj = CreateProjectile(projectile);
-        proj.OverrideSpeed(arrowSpeed);
+//      proj.OverrideSpeed(arrowSpeed);   Speed is set in the Projectile-Prefab now!
         proj.OverrideDamage(damage, IsCriticalHit());
 
         currentState = new PlayerBowAttack(this, 0.3f);
