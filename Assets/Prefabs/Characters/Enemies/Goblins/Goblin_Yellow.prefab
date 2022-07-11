@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 25
 --- !u!60 &3056126617805176405
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 25
 --- !u!60 &3056126618346776695
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 25
 --- !u!60 &3056126619334463504
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 10
+  _damage: 25
 --- !u!60 &3056126619558495762
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -432,6 +432,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -615,6 +616,7 @@ MonoBehaviour:
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
+  attackCoolDown: 0.5
 --- !u!114 &1296860917631459941
 MonoBehaviour:
   m_ObjectHideFlags: 0
