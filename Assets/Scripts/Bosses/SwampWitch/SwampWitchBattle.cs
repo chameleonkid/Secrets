@@ -39,8 +39,10 @@ public class SwampWitchBattle : MonoBehaviour
     [SerializeField] private int bossKillCounter = 0;
     [Header("TriggerArea")]
     [SerializeField] private GameObject leaveBlock = default;
-    [Header("BackPortal")]
-    [SerializeField] private GameObject portal = default;
+    [Header("FinalRoomBlock")]
+    [SerializeField] private GameObject FinalRoomBlock = default;
+    [Header("EndOfFightLights")]
+    [SerializeField] private GameObject EndOfFightLights = default;
 
 
     [Header("Stages")]
@@ -66,15 +68,15 @@ public class SwampWitchBattle : MonoBehaviour
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {
-            portal.SetActive(true);
+            FinalRoomBlock.SetActive(false);
             bossGameObject.SetActive(false);
             bossTwoGameObject.SetActive(false);
             triggerArea.SetActive(false);
-
+            EndOfFightLights.SetActive(true);
         }
         else
         {
-            portal.SetActive(false);
+            FinalRoomBlock.SetActive(true);
             bossGameObject.SetActive(true);
             bossTwoGameObject.SetActive(true);
             spawnPostionList = new List<Vector3>();
@@ -130,7 +132,8 @@ public class SwampWitchBattle : MonoBehaviour
         SoundManager.RequestSound(bossDiedSound);
         if (bossKillCounter == 2)
         {
-            portal.SetActive(true);
+            FinalRoomBlock.SetActive(false);
+            EndOfFightLights.SetActive(true);
             leaveBlock.SetActive(false);
             MusicManager.RequestMusic(endBattleMusic);
             DestroyAllEnemies();
