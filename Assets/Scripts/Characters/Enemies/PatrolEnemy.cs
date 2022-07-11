@@ -2,7 +2,7 @@
 
 public class PatrolEnemy : SimpleEnemy
 {
-    public Transform[] path;
+    public Transform[] pathes;
     public int currentPoint;
     public Transform currentGoal;
     public float roundingDistance;
@@ -10,10 +10,10 @@ public class PatrolEnemy : SimpleEnemy
     protected override void OutsideChaseRadiusUpdate()
     {
         animator.SetBool("isMoving", true);
-        var distance = Vector3.Distance(transform.position, path[currentPoint].position);
+        var distance = Vector3.Distance(transform.position, pathes[currentPoint].position);
         if (distance > roundingDistance)
         {
-            var newPosition = Vector3.MoveTowards(transform.position, path[currentPoint].position, moveSpeed * Time.deltaTime);
+            var newPosition = Vector3.MoveTowards(transform.position, pathes[currentPoint].position, moveSpeed * Time.deltaTime);
             SetAnimatorXYSingleAxis(newPosition - transform.position);
             rigidbody.MovePosition(newPosition);
         }
@@ -25,15 +25,15 @@ public class PatrolEnemy : SimpleEnemy
 
     private void ChangeGoal()
     {
-        if (currentPoint == path.Length - 1)
+        if (currentPoint == pathes.Length - 1)
         {
             currentPoint = 0;
-            currentGoal = path[0];
+            currentGoal = pathes[0];
         }
         else
         {
             currentPoint++;
-            currentGoal = path[currentPoint];
+            currentGoal = pathes[currentPoint];
         }
     }
 }

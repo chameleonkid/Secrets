@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1199569761
+--- !u!1 &446096226
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,71 +8,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1199569762}
-  - component: {fileID: 1199569763}
+  - component: {fileID: 446096227}
   m_Layer: 0
-  m_Name: WaterRuneSpawnLight (1)
+  m_Name: TelePointF
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1199569762
+--- !u!4 &446096227
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199569761}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 446096226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.03, y: -25.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2509145760992848665}
-  m_RootOrder: 0
+  m_Father: {fileID: 2509145761219445217}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1199569763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199569761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LightType: 1
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.894
-  m_Color: {r: 0, g: 0.07107735, b: 1, a: 1}
-  m_Intensity: 1
-  m_LightVolumeOpacity: 0.595
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 0
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
-  m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_PointLightDistance: 3
-  m_PointLightQuality: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.16848803, y: -0.6075363, z: 0}
-  - {x: 0.18478537, y: -0.6105194, z: 0}
-  - {x: 0.043124676, y: 1.0210419, z: 0}
-  - {x: 0.020630836, y: 1.0122681, z: 0}
---- !u!1 &1441507180
+--- !u!1 &1619708543
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,36 +38,66 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1441507181}
-  - component: {fileID: 1441507182}
+  - component: {fileID: 1619708544}
+  m_Layer: 0
+  m_Name: TelePointF
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1619708544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619708543}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.27, y: -25.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2509145762046283963}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &948471470266737278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2040929623934404931}
+  - component: {fileID: 4533159814636656100}
   m_Layer: 0
   m_Name: WaterRuneSpawnLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1441507181
+  m_IsActive: 0
+--- !u!4 &2040929623934404931
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441507180}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 948471470266737278}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145761288934213}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1441507182
+--- !u!114 &4533159814636656100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441507180}
+  m_GameObject: {fileID: 948471470266737278}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -118,7 +106,7 @@ MonoBehaviour:
   m_LightType: 1
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.894
-  m_Color: {r: 0, g: 1, b: 0.12923098, a: 1}
+  m_Color: {r: 0.0073931217, g: 1, b: 0, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0.595
   m_ApplyToSortingLayers: 00000000
@@ -140,10 +128,10 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.16848803, y: -0.6075363, z: 0}
-  - {x: 0.18478537, y: -0.6105194, z: 0}
-  - {x: 0.043124676, y: 1.0210419, z: 0}
-  - {x: 0.020630836, y: 1.0122681, z: 0}
+  - {x: -0.5, y: -0.6, z: 0}
+  - {x: 0.5, y: -0.6, z: 0}
+  - {x: 0.1, y: 9, z: 0}
+  - {x: -0.1, y: 9, z: 0}
 --- !u!1 &2509145760841920281
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509145760848420865}
   m_Layer: 0
-  m_Name: TelePointF
+  m_Name: TelePointB
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -204,7 +192,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145762046283963}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2509145760850287749
 GameObject:
@@ -300,6 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2509145760992848665}
+  - component: {fileID: 1240133051}
   m_Layer: 0
   m_Name: PointB
   m_TagString: Untagged
@@ -315,13 +304,64 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2509145760992848666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.84, y: -22, z: 0}
+  m_LocalPosition: {x: 4.51, y: -11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1199569762}
+  - {fileID: 2298624187932356854}
   m_Father: {fileID: 2509145760841920280}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1240133051
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2509145760992848666}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5412290abbfba8147857753914484879, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9bcec3449be9ece49a9d6c30c4183ed8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.9765625, y: 0.9765625}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2509145761142983925
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2509145761142983925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -18, z: 0}
+  m_LocalPosition: {x: -5, y: -18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145762046283963}
@@ -381,9 +421,10 @@ Transform:
   m_Children:
   - {fileID: 2509145762729238122}
   - {fileID: 2509145761882061644}
-  - {fileID: 2509145762705049030}
   - {fileID: 2509145762855082578}
+  - {fileID: 2509145762705049030}
   - {fileID: 2509145762720587932}
+  - {fileID: 446096227}
   m_Father: {fileID: 2509145761807323960}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -412,10 +453,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2509145761288934214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -22, z: 0}
+  m_LocalPosition: {x: 1.46, y: -11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1441507181}
+  - {fileID: 2040929623934404931}
   m_Father: {fileID: 2509145760841920280}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -438,7 +479,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: bc7d1c2fe5459de4db4ffd557571fe89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -480,7 +521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509145761314691923}
   m_Layer: 0
-  m_Name: TelePointC
+  m_Name: TelePointE
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -498,7 +539,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145762046283963}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2509145761378040371
 GameObject:
@@ -836,12 +877,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrigger: {fileID: 2509145760850287754}
-  enemy1: {fileID: 1325239579952758200, guid: dce9c0b7da614564f85b8563a8f8cf32, type: 3}
-  enemy2: {fileID: 4749321459190552299, guid: 59c963868bcdc114594fe6d7f2a24cc3, type: 3}
-  enemy3: {fileID: 4821109577977272686, guid: 5b72f042d0c83b249811672a4ac97231, type: 3}
-  spawnRate: 30
+  blueBlob: {fileID: 2573993995446378507, guid: 81c3a8eecbcdfb7498753c83f9c1c174,
+    type: 3}
+  greenBlob: {fileID: 4407032660196389926, guid: 80e2d556ff34cd148b588e39aa466e2c,
+    type: 3}
+  numberOfEnemiesToSpawn: 30
+  timeBetweenSpawns: 0.25
+  spawnRate: 45
   spawnedEnemiesList: []
   spawnPostionList: []
+  spawnPostionLights:
+  - {fileID: 948471470266737278}
+  - {fileID: 7082754632174889154}
   boss: {fileID: 2509145761840492239}
   bossTwo: {fileID: 2509145761378040378}
   bossGameObject: {fileID: 2509145761840492235}
@@ -860,6 +907,7 @@ MonoBehaviour:
   endBattleMusic:
   - {fileID: 8300000, guid: da46cea26244aeb45a5f33cdde825e0b, type: 3}
   bossDiedSound: {fileID: 8300000, guid: 328fd789e0002b441bacc42412186621, type: 3}
+  spawnEnemysound: {fileID: 8300000, guid: acb4d2008a16b694f9d8e02066cc828a, type: 3}
   triggerArea: {fileID: 2509145760850287749}
 --- !u!1 &2509145761840492235
 GameObject:
@@ -1187,7 +1235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509145761925715279}
   m_Layer: 0
-  m_Name: TelePointB
+  m_Name: TelePointC
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1205,7 +1253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145762046283963}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2509145762046283956
 GameObject:
@@ -1235,10 +1283,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2509145762235946779}
-  - {fileID: 2509145761925715279}
-  - {fileID: 2509145761314691923}
-  - {fileID: 2509145761142983924}
   - {fileID: 2509145760848420865}
+  - {fileID: 2509145761925715279}
+  - {fileID: 2509145761142983924}
+  - {fileID: 2509145761314691923}
+  - {fileID: 1619708544}
   m_Father: {fileID: 2509145761807323960}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1282,7 +1331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509145762705049030}
   m_Layer: 0
-  m_Name: TelePointC
+  m_Name: TelePointD
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1296,11 +1345,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2509145762705049031}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.75, y: -18, z: 0}
+  m_LocalPosition: {x: 10.75, y: -18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145761219445217}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2509145762720587933
 GameObject:
@@ -1312,7 +1361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509145762720587932}
   m_Layer: 0
-  m_Name: TelePointF
+  m_Name: TelePointE
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1372,7 +1421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509145762855082578}
   m_Layer: 0
-  m_Name: TelePointD
+  m_Name: TelePointC
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1390,5 +1439,77 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2509145761219445217}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7082754632174889154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2298624187932356854}
+  - component: {fileID: 348190611037954724}
+  m_Layer: 0
+  m_Name: WaterRuneSpawnLight (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2298624187932356854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7082754632174889154}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2509145760992848665}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &348190611037954724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7082754632174889154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.894
+  m_Color: {r: 0, g: 0.14361954, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0.595
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.6, z: 0}
+  - {x: 0.5, y: -0.6, z: 0}
+  - {x: 0.1, y: 9, z: 0}
+  - {x: -0.1, y: 9, z: 0}

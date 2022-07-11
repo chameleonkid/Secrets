@@ -17,11 +17,11 @@ public class SwampWitchBattle : MonoBehaviour
     [Header("TriggerArea")]
     [SerializeField] private PlayerEventTrigger playerTrigger = default;
     [Header("Potential Enemies")]
-    [SerializeField] private Enemy enemy1 = default;
-    [SerializeField] private Enemy enemy2 = default;
-    [SerializeField] private Enemy enemy3 = default;
+    [SerializeField] private GameObject blueBlob = default;
+    [SerializeField] private GameObject greenBlob = default;
     [SerializeField] private int numberOfEnemiesToSpawn = 1;
-    [Header("Spawnrate in seconds")]
+    [SerializeField] private float timeBetweenSpawns = 1f;
+    [Header("Interval between Spawnwaves")]
     [SerializeField] private float spawnRate = 1;
     [Header("List of spawned Enemies")]
     [SerializeField] private List<Enemy> spawnedEnemiesList = default;
@@ -218,19 +218,24 @@ public class SwampWitchBattle : MonoBehaviour
 
     private IEnumerator SpawnEnemiesCo()
     {
-        var randomSpawnPoint = Random.Range(0, spawnPostionList.Count);
-        Enemy minion;
-        Vector3 spawnPoint = spawnPostionList[randomSpawnPoint];
-        spawnPostionLights[randomSpawnPoint].SetActive(true);
-        yield return new WaitForSeconds(1f);
+        GameObject minion;
+        Vector2 spawnPointGreen = spawnPostionList[0];
+        Vector2 spawnPointBlue = spawnPostionList[1];
+        spawnPostionLights[0].SetActive(true);
+        spawnPostionLights[1].SetActive(true);
         SoundManager.RequestSound(spawnEnemysound);
-        for(int i=0; i<numberOfEnemiesToSpawn;i++)
+        yield return new WaitForSeconds(2f);
+        for (int i=0; i<numberOfEnemiesToSpawn;i++)
         {
-            minion = Instantiate(enemy3, spawnPoint, Quaternion.identity);
-            spawnedEnemiesList.Add(minion);
+            minion = Instantiate(blueBlob, spawnPointBlue, Quaternion.identity);
+            Destroy(minion, 12f);
+            minion = Instantiate(greenBlob, spawnPointGreen, Quaternion.identity);
+            Destroy(minion, 12f);
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
-        spawnPostionLights[randomSpawnPoint].SetActive(false);
-        
+        spawnPostionLights[0].SetActive(false);
+        spawnPostionLights[1].SetActive(false);
+
     }
 }
 
