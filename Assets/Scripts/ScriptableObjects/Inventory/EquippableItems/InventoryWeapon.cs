@@ -89,30 +89,45 @@ public class InventoryWeapon : EquippableItem
     
     #region Sword Hitboxes
     private static Vector2[] swordLeft = {
-        new Vector2(-0.1f, 0.42f),
-        new Vector2(-0.15f, 0.49f),
-        new Vector2(-0.43f, 0.5f),
-        new Vector2(-0.77f, 0.27f),
-        new Vector2(-0.73f, 0f),
-        new Vector2(-0.17f, -0.10f)
+        new Vector2(-0.4069519f, -0.3820038f),
+        new Vector2(-0.1808929f, -0.390152f),
+        new Vector2(0.3363366f, -0.1696549f),
+        new Vector2(0.3117828f, 0.01402283f),
+        new Vector2(-0.157196f, 0.1885376f),
+        new Vector2(0.07695651f, 0.6883322f),
+        new Vector2(-0.678606f, 0.6328795f),
+        new Vector2(-0.9410026f, 0.3514785f),
+        new Vector2(-0.8930984f, 0.1099698f),
+        new Vector2(-0.7081349f, -0.1537272f),
+        new Vector2(-0.54772f, -0.3385902f),
     };
 
     private static Vector2[] swordRight = {
-        new Vector2(0f, 0.5f),
-        new Vector2(0, 0.6f),
-        new Vector2(0.35f, 0.7f),
-        new Vector2(0.71f, 0.67f),
-        new Vector2(0.83f, -0.25f),
-        new Vector2(0f, 0f)
+        new Vector2(0.5872498f, 0.6769409f),
+        new Vector2(-0.1358874f, 0.6984687f),
+        new Vector2(-0.128545f, 0.5766439f),
+        new Vector2(0.125824f, 0.2002258f),
+        new Vector2(-0.3581474f, -0.01712887f),
+        new Vector2(-0.3356709f, -0.1835297f),
+        new Vector2(0.1340637f, -0.3865051f),
+        new Vector2(0.495224f, -0.379425f),
+        new Vector2(0.6174347f, -0.1728446f),
+        new Vector2(0.8308065f, 0.05306007f),
+        new Vector2(0.8740206f, 0.4863611f),
     };
 
     private static Vector2[] swordUp = {
-        new Vector2(0.3135682f, 0.2233148f),
-        new Vector2(0.37f, 0.39f),
-        new Vector2(0.4f, 0.75f),
-        new Vector2(0.003511429f, 0.8854774f),
-        new Vector2(-0.3554774f, 0.7410107f),
-        new Vector2(-0.26095535f, 0.2233147f)
+        new Vector2(0.7838745f, 0.263092f),
+        new Vector2(0.8469129f, 0.555679f),
+        new Vector2(0.640686f, 0.8614197f),
+        new Vector2(0.4284437f, 0.9774902f),
+        new Vector2(0.1268232f, 1.088135f),
+        new Vector2(-0.0275116f, 0.8649139f),
+        new Vector2(-0.3745728f, 0.8208923f),
+        new Vector2(-0.6811445f, 0.3949863f),
+        new Vector2(-0.2655188f, 0.1351249f),
+        new Vector2(0.3759766f, 0.09655762f),
+        new Vector2(0.6164382f, 0.08582008f)
     };
 
     private static Vector2[] swordDown =  {
