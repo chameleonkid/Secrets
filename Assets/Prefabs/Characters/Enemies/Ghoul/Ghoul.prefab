@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3941302233348102914}
   - component: {fileID: 5062529055931770513}
   - component: {fileID: 9153377416110403295}
+  - component: {fileID: 892446293}
   m_Layer: 8
   m_Name: Ghoul
   m_TagString: enemy
@@ -225,7 +226,7 @@ MonoBehaviour:
   homePosition: {x: 0, y: 0}
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 7
-  attackRadius: 0.75
+  attackRadius: 0.7
   deathEffect: {fileID: 4464167541414145869, guid: ebf28c7b79182c348a757f74868378ee,
     type: 3}
   deathEffectDelay: 1
@@ -293,6 +294,47 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &892446293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947088160707605195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 2
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &947088160856096630
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,9 +423,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.292063, y: 0.6586001}
-      - {x: -0.8000674, y: 0.5790889}
-      - {x: -0.78833675, y: 0.05657041}
+    - - {x: -0.21091676, y: 0.57745385}
+      - {x: -0.64356947, y: 0.5906818}
+      - {x: -0.62024593, y: 0.05657041}
       - {x: -0.24221516, y: 0.033055782}
       - {x: -0.21548557, y: 0.34239703}
 --- !u!114 &947088160856096628
@@ -486,16 +528,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.7153816, y: 0.3982445}
-      - {x: 0.67133045, y: 0.7643676}
-      - {x: 0.13335228, y: 0.6245496}
-      - {x: 0.11253929, y: 0.6151805}
-      - {x: 0.10974932, y: 0.30232596}
-      - {x: 0.23072863, y: 0.1522187}
-      - {x: 0.40412784, y: 0.077955365}
-      - {x: 0.53263855, y: 0.104869604}
-      - {x: 0.7389574, y: 0.11023426}
-      - {x: 0.76169133, y: 0.21580029}
+    - - {x: 0.5299034, y: 0.340284}
+      - {x: 0.46846104, y: 0.42818213}
+      - {x: 0.37792206, y: 0.37533188}
+      - {x: 0.2222023, y: 0.4713707}
+      - {x: 0.12755394, y: 0.3637197}
+      - {x: 0.11253929, y: 0.38333082}
+      - {x: 0.057583332, y: 0.14002967}
+      - {x: 0.19595003, y: 0.1522187}
+      - {x: 0.33457065, y: -0.072748065}
+      - {x: 0.45729065, y: -0.016849756}
+      - {x: 0.5882578, y: 0.0059022903}
+      - {x: 0.5936005, y: 0.20420742}
 --- !u!114 &947088161071409534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,8 +642,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.00013303757, y: 0.37149942}
       - {x: -0.15907383, y: 0.13709974}
-      - {x: -0.33287, y: -0.52107024}
-      - {x: 0.3736148, y: -0.5020548}
+      - {x: -0.33287, y: -0.42833114}
+      - {x: 0.35622358, y: -0.41511023}
       - {x: 0.16440916, y: 0.13743383}
 --- !u!114 &947088162059227418
 MonoBehaviour:
@@ -701,11 +745,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.053575516, y: 1.1501601}
-      - {x: -0.31868553, y: 0.8441961}
+    - - {x: -0.04778099, y: 0.848757}
+      - {x: -0.35925865, y: 0.6065519}
       - {x: -0.1412816, y: 0.39857256}
       - {x: 0.17203903, y: 0.39492774}
-      - {x: 0.29028893, y: 0.8919623}
+      - {x: 0.2832489, y: 0.54821014}
+      - {x: 0.33665657, y: 0.6890967}
 --- !u!114 &947088162609219389
 MonoBehaviour:
   m_ObjectHideFlags: 0
