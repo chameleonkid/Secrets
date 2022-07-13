@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1044994121}
   - component: {fileID: 3563088278929260502}
   - component: {fileID: 1044994120}
-  - component: {fileID: 1035172371}
+  - component: {fileID: 1925468432}
   m_Layer: 11
   m_Name: Lamp
   m_TagString: Untagged
@@ -188,7 +188,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!95 &1035172371
+--- !u!95 &1925468432
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -280,13 +280,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.21627569, y: 0.41277307}
-      - {x: -0.230798, y: 0.9563681}
-      - {x: -0.6752796, y: 1.0266783}
-      - {x: -0.93769145, y: 0.6162185}
-      - {x: -0.8434615, y: 0.116592094}
-      - {x: -0.6287129, y: -0.06769812}
-      - {x: -0.39880943, y: -0.10033947}
+    - - {x: -0.4069519, y: -0.38200378}
+      - {x: -0.18089294, y: -0.39015198}
+      - {x: 0.3363366, y: -0.1696549}
+      - {x: 0.31178284, y: 0.014022827}
+      - {x: -0.15719604, y: 0.1885376}
+      - {x: 0.07695651, y: 0.6883322}
+      - {x: -0.67860603, y: 0.6328795}
+      - {x: -0.9410026, y: 0.35147852}
+      - {x: -0.89309835, y: 0.10996978}
+      - {x: -0.7081349, y: -0.15372717}
+      - {x: -0.54771996, y: -0.3385902}
 --- !u!114 &3084345826519001305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrailName: PlayerDash
-  m_CurrentTrailPreset: {fileID: 11400000, guid: b267638f7d1b7ca41bd6977b96b8348e,
+  m_CurrentTrailPreset: {fileID: 11400000, guid: 7866618821f7ffe448539c9e8e601636,
     type: 2}
   m_TrailParent: {fileID: 0}
   m_SpriteToDuplicate: {fileID: 0}
@@ -430,7 +434,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 50
+  m_VelocityNeededToStart: 30
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
@@ -511,12 +515,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.49284792, y: 0.7807156}
-      - {x: 0.42182136, y: 0.8914459}
-      - {x: 0.06064582, y: 1.1080023}
-      - {x: -0.48921943, y: 0.8417026}
-      - {x: -0.2456519, y: 0.28403538}
-      - {x: 0.18624714, y: 0.29761207}
+    - - {x: 0.7838745, y: 0.26309204}
+      - {x: 0.84691286, y: 0.55567896}
+      - {x: 0.64068604, y: 0.8614197}
+      - {x: 0.42844367, y: 0.9774902}
+      - {x: 0.12682319, y: 1.0881354}
+      - {x: -0.027511597, y: 0.86491394}
+      - {x: -0.37457275, y: 0.82089233}
+      - {x: -0.6811445, y: 0.39498627}
+      - {x: -0.26551884, y: 0.13512486}
+      - {x: 0.37597656, y: 0.09655762}
+      - {x: 0.61643815, y: 0.08582008}
 --- !u!114 &9210356173545002712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,13 +626,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.2711408, y: 0.6289649}
-      - {x: 0.26194263, y: 0.6229696}
-      - {x: 0.26065755, y: -0.06345455}
-      - {x: 0.27652693, y: -0.10410774}
-      - {x: 0.56448674, y: -0.16291112}
-      - {x: 0.80434775, y: 0.046437755}
-      - {x: 0.83100605, y: 0.46982062}
+    - - {x: 0.58724976, y: 0.6769409}
+      - {x: -0.13588738, y: 0.6984687}
+      - {x: -0.12854505, y: 0.57664394}
+      - {x: 0.12582397, y: 0.20022583}
+      - {x: -0.35814738, y: -0.01712887}
+      - {x: -0.33567095, y: -0.18352973}
+      - {x: 0.13406372, y: -0.38650513}
+      - {x: 0.495224, y: -0.37942505}
+      - {x: 0.61743474, y: -0.17284459}
+      - {x: 0.8308065, y: 0.05306007}
+      - {x: 0.8740206, y: 0.48636115}
 --- !u!114 &1987021321051761730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,13 +737,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.21192503, y: -0.011410236}
+    - - {x: 0.23587036, y: 0.2629261}
+      - {x: 0.21192503, y: -0.011410236}
       - {x: 0.07750487, y: 0.0008095503}
-      - {x: -0.26661086, y: 0.13752042}
-      - {x: -0.5634701, y: -0.03518051}
-      - {x: 0.051455498, y: -0.364532}
-      - {x: 0.55671597, y: -0.16976732}
-      - {x: 0.3241055, y: 0.14321552}
+      - {x: -0.40564132, y: 0.15837489}
+      - {x: -0.55304074, y: -0.13250154}
+      - {x: -0.52427673, y: -0.3492174}
+      - {x: -0.41583252, y: -0.48492908}
+      - {x: -0.21369934, y: -0.56953907}
+      - {x: 0.07230663, y: -0.5696025}
+      - {x: 0.3982315, y: -0.38323116}
+      - {x: 0.47264862, y: -0.24325657}
+      - {x: 0.5810461, y: -0.1280579}
+      - {x: 0.6830292, y: 0.39052343}
+      - {x: 0.5639355, y: 0.5707344}
 --- !u!114 &3068865671220987028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1423,7 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrailName: PlayerDash
-  m_CurrentTrailPreset: {fileID: 11400000, guid: b267638f7d1b7ca41bd6977b96b8348e,
+  m_CurrentTrailPreset: {fileID: 11400000, guid: 7866618821f7ffe448539c9e8e601636,
     type: 2}
   m_TrailParent: {fileID: 0}
   m_SpriteToDuplicate: {fileID: 0}
@@ -1435,7 +1455,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 50
+  m_VelocityNeededToStart: 30
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
@@ -1456,7 +1476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrailName: PlayerDash
-  m_CurrentTrailPreset: {fileID: 11400000, guid: b267638f7d1b7ca41bd6977b96b8348e,
+  m_CurrentTrailPreset: {fileID: 11400000, guid: 7866618821f7ffe448539c9e8e601636,
     type: 2}
   m_TrailParent: {fileID: 0}
   m_SpriteToDuplicate: {fileID: 0}
@@ -1468,7 +1488,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 50
+  m_VelocityNeededToStart: 30
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
@@ -1559,7 +1579,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 70b0949c07cd61c4d963206776db2f55, type: 3}
+  m_Sprite: {fileID: 21300202, guid: e2d3c1801318fc840bd6a77d5898ef8d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1598,7 +1618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrailName: PlayerDash
-  m_CurrentTrailPreset: {fileID: 11400000, guid: b267638f7d1b7ca41bd6977b96b8348e,
+  m_CurrentTrailPreset: {fileID: 11400000, guid: 7866618821f7ffe448539c9e8e601636,
     type: 2}
   m_TrailParent: {fileID: 0}
   m_SpriteToDuplicate: {fileID: 0}
@@ -1610,7 +1630,7 @@ MonoBehaviour:
   m_TrailDeactivationCondition: 2
   m_StartIfUnderVelocity: 0
   m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 50
+  m_VelocityNeededToStart: 30
   m_StopIfOverVelocity: 0
   m_VelocityStopIsLocalSpace: 0
   m_VelocityNeededToStop: 8
@@ -1899,7 +1919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1911,7 +1931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.03
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 4000010816533410, guid: 5494c1d4f0f0f0046aea6711aebf5f1e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1946,6 +1966,17 @@ PrefabInstance:
       propertyPath: newSprite
       value: 
       objectReference: {fileID: 2800000, guid: 4b86f21c5edd3a84b8b145ad5f0fba78, type: 3}
+    - target: {fileID: 212000011897336508, guid: 5494c1d4f0f0f0046aea6711aebf5f1e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 48180fae01a17144a9e585ef5e2146ab,
+        type: 3}
+    - target: {fileID: 212000011897336508, guid: 5494c1d4f0f0f0046aea6711aebf5f1e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 212000011897336508, guid: 5494c1d4f0f0f0046aea6711aebf5f1e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
