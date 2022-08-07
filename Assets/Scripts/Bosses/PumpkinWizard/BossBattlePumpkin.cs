@@ -59,7 +59,6 @@ public class BossBattlePumpkin : MonoBehaviour
 
     private void Awake()
     {
-        dialogue.npcName = "Sylandrel - The Pumpkin Wizard";
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {

@@ -47,7 +47,6 @@ public class RockGiantBattle : MonoBehaviour
 
     private void Awake()
     {
-        dialogue.npcName = "Alvarez - Heart of the Mountain";
         leaveBlock.SetActive(false);
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)

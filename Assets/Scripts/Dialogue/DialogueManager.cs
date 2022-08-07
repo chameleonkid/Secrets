@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             Time.timeScale = 0;
-            nameText.text = dialogue.npcName;
+
             sentences.Clear();
 
             foreach (string sentence in dialogue.sentences)
@@ -88,7 +88,7 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator EndFinalDialogue()
     {
-        if(dialoguePanel.activeInHierarchy)
+        if (dialoguePanel.activeInHierarchy)
         {
             animator.SetBool("isActive", false);
             yield return new WaitForSecondsRealtime(0.25f);

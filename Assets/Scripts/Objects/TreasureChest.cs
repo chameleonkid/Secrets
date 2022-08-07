@@ -18,7 +18,6 @@ public class TreasureChest : Interactable
 
     private void Start()
     {
-        dialogue.npcName = "Chest";
         anim = GetComponent<Animator>();
         if (isOpen)
         {
