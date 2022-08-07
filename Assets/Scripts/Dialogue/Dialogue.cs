@@ -6,8 +6,8 @@ public class Dialogue
     [SerializeField] private Speaker[] _speakers;
     public Speaker[] speakers => _speakers;
 
-    [TextArea(3, 10)]
-    public string[] sentences = new string[1];
+    [SerializeField] private Line[] _lines;
+    public Line[] lines => _lines;
 
     [System.Serializable]
     public class Speaker
@@ -16,5 +16,13 @@ public class Dialogue
         public string name => _name;
         [SerializeField] private Color _textboxColor;
         public Color textboxColor => _textboxColor;
+    }
+
+    public class Line
+    {
+        [SerializeField] private int _speakerIndex;
+        public int speakerIndex => _speakerIndex;
+        [TextArea(3, 10)]
+        public string text;
     }
 }
