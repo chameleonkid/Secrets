@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections;
 using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -16,9 +16,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText = default;
     [SerializeField] private TextMeshProUGUI dialogueText = default;
     [SerializeField] private GameObject dialoguePanel = default;
+    [SerializeField] private Image dialogueBox = default;
     [SerializeField] private Animator animator = default;
     [SerializeField] private GameObject nextButton = default;
 
+    private Color initialColor;
     private Dialogue dialogue;
     private int lineIndex;
 
@@ -32,6 +34,11 @@ public class DialogueManager : MonoBehaviour
     {
         OnDialogueRequested -= StartDialogue;
         OnEndDialogue -= EndDialogue;
+    }
+
+    private void Awake()
+    {
+        initialColor = dialogueBox.color;
     }
 
     private void SelectNextButton()
@@ -67,7 +74,9 @@ public class DialogueManager : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(TypeSentence(dialogue.lines[lineIndex].text));
-            nameText.text = dialogue.speakers[dialogue.lines[lineIndex].speakerIndex].name;
+            var speaker = dialogue.speakers[dialogue.lines[lineIndex].speakerIndex];
+            nameText.text = speaker.name;
+            dialogueBox.color = speaker.textboxColor;
         }
         else
         {
