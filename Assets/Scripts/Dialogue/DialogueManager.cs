@@ -19,7 +19,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Animator animator = default;
     [SerializeField] private GameObject nextButton = default;
 
-    private Queue<string> sentences = new Queue<string>();
+    private Dialogue dialogue;
+    private int lineIndex;
 
     private void OnEnable()
     {
@@ -50,26 +51,23 @@ public class DialogueManager : MonoBehaviour
             animator.SetBool("isActive", true);
             SelectNextButton();
             Time.timeScale = 0;
-            sentences.Clear();
 
-            foreach (string sentence in dialogue.sentences)
-            {
-                sentences.Enqueue(sentence);
-            }
+            this.dialogue = dialogue;
+            lineIndex = 0;
 
-            DisplayNextSentence();
+            DisplayNextLine();
         }
     }
 
     //Submits the sentences via FIFO if there are sentences available
-    public void DisplayNextSentence()
+    // Called from `ContinueButton` in `DialogueCanvas`
+    public void DisplayNextLine()
     {
-        if (sentences.Count != 0)
+        if (lineIndex < dialogue.lines.Length)
         {
-            string sentence = sentences.Dequeue();
             StopAllCoroutines();
-
-            StartCoroutine(TypeSentence(sentence));
+            StartCoroutine(TypeSentence(dialogue.lines[lineIndex].text));
+            nameText.text = dialogue.speakers[dialogue.lines[lineIndex].speakerIndex].name;
         }
         else
         {
