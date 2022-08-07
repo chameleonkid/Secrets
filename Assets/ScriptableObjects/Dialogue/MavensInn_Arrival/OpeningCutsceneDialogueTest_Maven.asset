@@ -13,6 +13,17 @@ MonoBehaviour:
   m_Name: OpeningCutsceneDialogueTest_Maven
   m_EditorClassIdentifier: 
   value:
-    npcName: Maven
-    sentences:
-    - Good evening! How may I help you?
+    _speakers:
+    - _name: Maven
+      _textboxColor: {r: 1, g: 0, b: 0, a: 1}
+    - _name: You
+      _textboxColor: {r: 0, g: 1, b: 0, a: 1}
+    _lines:
+    - _speakerIndex: 0
+      text: Good evening! How may I help you?
+    - _speakerIndex: 1
+      text: It's been a long day and this storm is getting worse and worse...
+    - _speakerIndex: 1
+      text: I wonder if you got a room for the night?
+    - _speakerIndex: 0
+      text: You're lucky! One room is left. It's in the upper hall.
