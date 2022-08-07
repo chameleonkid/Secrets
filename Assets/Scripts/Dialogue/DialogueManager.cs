@@ -88,9 +88,6 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         StartCoroutine(EndFinalDialogue());
-        dialogue = null;
-        lineIndex = 0;
-        dialogueBox.color = initialColor;
     }
 
     private IEnumerator TypeSentence(string sentence)
@@ -109,6 +106,9 @@ public class DialogueManager : MonoBehaviour
         {
             animator.SetBool("isActive", false);
             yield return new WaitForSecondsRealtime(0.25f);
+            dialogue = null;
+            lineIndex = 0;
+            dialogueBox.color = initialColor;
             Time.timeScale = 1;
             dialoguePanel.SetActive(false);
             CanvasManager.Instance.RegisterClosedCanvas(dialoguePanel);
