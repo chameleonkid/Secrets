@@ -12,6 +12,7 @@ public class InstantiationSpellbook : InventorySpellbook
     public float delayBetweenProjectiles = 0.1f;
     public float spreadAngle;
     public float radius;
+    public bool isRotating;
 
     public override string fullDescription
         => description + ("\n\n SPELL-DMG: ") + minSpellDamage + " - " + maxSpellDamage + ("\n\n Level: ") + level;
