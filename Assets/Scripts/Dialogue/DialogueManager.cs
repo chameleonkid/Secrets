@@ -33,27 +33,30 @@ public class DialogueManager : MonoBehaviour
         OnEndDialogue -= EndDialogue;
     }
 
+    private void SelectNextButton()
+    {
+        if (nextButton)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(nextButton);
+        }
+    }
+
     private void StartDialogue(Dialogue dialogue)
     {
         if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel))
         {
             dialoguePanel.SetActive(true);
             animator.SetBool("isActive", true);
-
-            if (nextButton)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(nextButton);
-            }
-
+            SelectNextButton();
             Time.timeScale = 0;
-
             sentences.Clear();
 
             foreach (string sentence in dialogue.sentences)
             {
                 sentences.Enqueue(sentence);
             }
+
             DisplayNextSentence();
         }
     }
@@ -61,14 +64,17 @@ public class DialogueManager : MonoBehaviour
     //Submits the sentences via FIFO if there are sentences available
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (sentences.Count != 0)
+        {
+            string sentence = sentences.Dequeue();
+            StopAllCoroutines();
+
+            StartCoroutine(TypeSentence(sentence));
+        }
+        else
         {
             EndDialogue();
-            return;
         }
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
     }
 
     private void EndDialogue()
