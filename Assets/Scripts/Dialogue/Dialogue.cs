@@ -14,13 +14,14 @@ public class Dialogue
     {
         [SerializeField] private string _name;
         public string name => _name;
-        [SerializeField] private Color _textboxColor;
+        [SerializeField] private Color _textboxColor = Color.white;
         public Color textboxColor => _textboxColor;
     }
 
+    [System.Serializable]
     public class Line
     {
-        [SerializeField] private int _speakerIndex;
+        [SerializeField][Min(0)] private int _speakerIndex;
         public int speakerIndex => _speakerIndex;
         [TextArea(3, 10)]
         public string text;

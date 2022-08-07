@@ -77,6 +77,7 @@ public class DialogueManager : MonoBehaviour
             var speaker = dialogue.speakers[dialogue.lines[lineIndex].speakerIndex];
             nameText.text = speaker.name;
             dialogueBox.color = speaker.textboxColor;
+            lineIndex++;
         }
         else
         {
@@ -87,6 +88,9 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         StartCoroutine(EndFinalDialogue());
+        dialogue = null;
+        lineIndex = 0;
+        dialogueBox.color = initialColor;
     }
 
     private IEnumerator TypeSentence(string sentence)
