@@ -37,14 +37,14 @@ public class Liftable : Interactable
         }
         else
         {
-            dialogue.sentences[0] = "You don't seem strong enaugh to lift this up...";
+            dialogue.lines[0].text = "You don't seem strong enaugh to lift this up...";
             DialogueManager.RequestDialogue(dialogue);
         }
     }
 
     public void NoInventorySpace()
     {
-        dialogue.sentences[0] = "There is no space left in your inventory";
+        dialogue.lines[0].text = "There is no space left in your inventory";
         TriggerDialogue();
     }
 

@@ -85,7 +85,7 @@ public class RockGiantBattle : MonoBehaviour
             case Stage.Stage_2:
                 if (boss.GetPercentHealth() <= 50)
                 {
-                    dialogue.sentences[0] = "You know nothing! Let the Mountain collapse!!! HAHAHA!";
+                    dialogue.lines[0].text = "You know nothing! Let the Mountain collapse!!! HAHAHA!";
                     DialogueManager.RequestDialogue(dialogue);
                     boulderThrowersObject.SetActive(true);
                     StartNextStage();

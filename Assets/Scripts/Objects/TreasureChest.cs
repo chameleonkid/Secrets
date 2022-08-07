@@ -49,7 +49,7 @@ public class TreasureChest : Interactable
 
     public void OpenChest()
     {
-        dialogue.sentences[0] = contents.description;
+        dialogue.lines[0].text = contents.description;
         TriggerDialogue();
         player.inventory.currentItem = contents;
         player.inventory.items[contents]++;
@@ -67,7 +67,7 @@ public class TreasureChest : Interactable
     public void NoInventorySpace()
     {
         SoundManager.RequestSound(noInventorySpace);
-        dialogue.sentences[0] = "There is no space left in your inventory";
+        dialogue.lines[0].text = "There is no space left in your inventory";
         TriggerDialogue();
     }
 

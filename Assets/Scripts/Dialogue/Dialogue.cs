@@ -3,10 +3,10 @@
 [System.Serializable]
 public class Dialogue
 {
-    [SerializeField] private Speaker[] _speakers;
+    [SerializeField] private Speaker[] _speakers = new Speaker[1];
     public Speaker[] speakers => _speakers;
 
-    [SerializeField] private Line[] _lines;
+    [SerializeField] private Line[] _lines = new Line[1];
     public Line[] lines => _lines;
 
     [System.Serializable]

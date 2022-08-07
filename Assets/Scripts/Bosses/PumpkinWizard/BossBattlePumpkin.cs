@@ -231,7 +231,7 @@ public class BossBattlePumpkin : MonoBehaviour
     }
     private IEnumerator SpawnMinionsCo()
     {
-        dialogue.sentences[0] = "My Skeleton Champions will show you where you are supposed to be! ATTACK!";
+        dialogue.lines[0].text = "My Skeleton Champions will show you where you are supposed to be! ATTACK!";
         DialogueManager.RequestDialogue(dialogue);
         yield return new WaitForSeconds(2f);
         Enemy minion;
