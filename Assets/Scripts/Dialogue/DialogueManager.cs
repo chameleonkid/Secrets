@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections;
 using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -16,10 +16,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText = default;
     [SerializeField] private TextMeshProUGUI dialogueText = default;
     [SerializeField] private GameObject dialoguePanel = default;
+    [SerializeField] private Image dialogueBox = default;
     [SerializeField] private Animator animator = default;
     [SerializeField] private GameObject nextButton = default;
 
-    private Queue<string> sentences = new Queue<string>();
+    private Color initialColor;
+    private Dialogue dialogue;
+    private int lineIndex;
 
     private void OnEnable()
     {
@@ -33,42 +36,53 @@ public class DialogueManager : MonoBehaviour
         OnEndDialogue -= EndDialogue;
     }
 
+    private void Awake()
+    {
+        initialColor = dialogueBox.color;
+    }
+
+    private void SelectNextButton()
+    {
+        if (nextButton)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(nextButton);
+        }
+    }
+
     private void StartDialogue(Dialogue dialogue)
     {
         if (CanvasManager.Instance.IsFreeOrActive(dialoguePanel))
         {
             dialoguePanel.SetActive(true);
             animator.SetBool("isActive", true);
-
-            if (nextButton)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(nextButton);
-            }
-
+            SelectNextButton();
             Time.timeScale = 0;
-            nameText.text = dialogue.npcName;
-            sentences.Clear();
 
-            foreach (string sentence in dialogue.sentences)
-            {
-                sentences.Enqueue(sentence);
-            }
-            DisplayNextSentence();
+            this.dialogue = dialogue;
+            lineIndex = 0;
+
+            DisplayNextLine();
         }
     }
 
     //Submits the sentences via FIFO if there are sentences available
-    public void DisplayNextSentence()
+    // Called from `ContinueButton` in `DialogueCanvas`
+    public void DisplayNextLine()
     {
-        if (sentences.Count == 0)
+        if (lineIndex < dialogue.lines.Length)
+        {
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(dialogue.lines[lineIndex].text));
+            var speaker = dialogue.speakers[dialogue.lines[lineIndex].speakerIndex];
+            nameText.text = speaker.name;
+            dialogueBox.color = speaker.textboxColor;
+            lineIndex++;
+        }
+        else
         {
             EndDialogue();
-            return;
         }
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
     }
 
     private void EndDialogue()
@@ -88,10 +102,13 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator EndFinalDialogue()
     {
-        if(dialoguePanel.activeInHierarchy)
+        if (dialoguePanel.activeInHierarchy)
         {
             animator.SetBool("isActive", false);
             yield return new WaitForSecondsRealtime(0.25f);
+            dialogue = null;
+            lineIndex = 0;
+            dialogueBox.color = initialColor;
             Time.timeScale = 1;
             dialoguePanel.SetActive(false);
             CanvasManager.Instance.RegisterClosedCanvas(dialoguePanel);
