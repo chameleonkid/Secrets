@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 1
+  force: 10
   duration: 0.5
 --- !u!114 &5902072325289802283
 MonoBehaviour:
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 15
+  _damage: 50
 --- !u!60 &736423272765129624
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -87,15 +87,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.9142928, y: 1.4390424}
-      - {x: -0.79299927, y: 0.51746595}
-      - {x: -0.4460554, y: -0.09400463}
-      - {x: -0.2861805, y: -0.07560015}
-      - {x: -0.2076273, y: 0.27500057}
-      - {x: -0.48765707, y: 0.5115377}
-      - {x: -0.5608959, y: 0.69138956}
-      - {x: -0.5972104, y: 1.4601252}
-      - {x: -0.72435427, y: 1.3245208}
+    - - {x: -1.357986, y: 2.3898134}
+      - {x: -1.2261281, y: 0.4752096}
+      - {x: -0.7870033, y: -0.1264205}
+      - {x: 0.21202922, y: -0.20449829}
+      - {x: 1.509857, y: 0.7625208}
 --- !u!1 &736423273288914359
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 1
+  force: 10
   duration: 0.5
 --- !u!114 &7428487597648449495
 MonoBehaviour:
@@ -157,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 15
+  _damage: 50
 --- !u!60 &736423273288914362
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -183,11 +179,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.25265503, y: 2.0675068}
-      - {x: 0.21462345, y: 1.4039445}
-      - {x: 0.20552778, y: 0.8424877}
-      - {x: 0.3541975, y: 0.68888044}
-      - {x: 0.6883564, y: 1.108427}
+    - - {x: 1.0757561, y: 2.3133655}
+      - {x: 0.2262497, y: 3.4218433}
+      - {x: -0.3729385, y: 2.6244721}
+      - {x: -0.4454391, y: 1.3406858}
+      - {x: 0.21506536, y: 0.9569386}
+      - {x: 1.050441, y: 1.1085343}
 --- !u!1 &736423273579929667
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,10 +200,7 @@ GameObject:
   - component: {fileID: 736423273579929665}
   - component: {fileID: 736423273579929664}
   - component: {fileID: 736423273579929674}
-  - component: {fileID: 4162646488310300265}
-  - component: {fileID: 2729568529287684624}
   - component: {fileID: 3579983218705779082}
-  - component: {fileID: 4709993217172681753}
   - component: {fileID: 538253124475896791}
   m_Layer: 8
   m_Name: BigGolem
@@ -300,7 +294,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 999999
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -326,7 +320,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.52, y: 0.065}
-    oldSize: {x: 3, y: 2.375}
+    oldSize: {x: 4.8, y: 3.8}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -352,7 +346,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.52, y: 0.065}
-    oldSize: {x: 3, y: 2.375}
+    oldSize: {x: 4.8, y: 3.8}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -414,17 +408,17 @@ MonoBehaviour:
   _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 5
-  maxHealth: {fileID: 11400000, guid: 9344a2a8907293e4d94da47470e21975, type: 2}
+  maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 3
   isMinion: 0
   enemyName: 
-  moveSpeed: 2
+  moveSpeed: 3.5
   homePosition: {x: 0, y: 0}
   roamingPosition: {x: 0, y: 0, z: 0}
-  chaseRadius: 5
-  attackRadius: 1
+  chaseRadius: 7
+  attackRadius: 0.85
   deathEffect: {fileID: 4464167541414145869, guid: 6a96677fad8892e4b96ca75c9e8a3e9e,
     type: 3}
   deathEffectDelay: 1
@@ -437,35 +431,6 @@ MonoBehaviour:
   seeker: {fileID: 0}
   leftChaseRadius: 1
   attackCoolDown: 0.5
---- !u!114 &4162646488310300265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736423273579929667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  force: 1
-  duration: 1
---- !u!114 &2729568529287684624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736423273579929667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  _damage: 5
 --- !u!114 &3579983218705779082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,21 +443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4709993217172681753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736423273579929667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d1820b480aa1db4d854263fd5fe0cd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newSprite: {fileID: 2800000, guid: ed0a8db8ff0aa564b82dba7f267c5a78, type: 3}
-  folderPath: Retro Pixel Monsters/Spritesheets/
-  useColorOutline: 1
 --- !u!114 &538253124475896791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 1
+  force: 10
   duration: 0.5
 --- !u!114 &152156325333955012
 MonoBehaviour:
@@ -582,7 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 15
+  _damage: 50
 --- !u!60 &736423273699847677
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -608,11 +558,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.0557091, y: 1.8917923}
-      - {x: -1.6063266, y: 0.22000015}
-      - {x: -1.3774576, y: 0.17174017}
-      - {x: -0.89388084, y: 0.51068735}
-      - {x: -1.0987539, y: 1.0603096}
+    - - {x: -1.8208296, y: 3.08057}
+      - {x: -2.6253002, y: 0.07938087}
+      - {x: -0.59840155, y: 0.06721842}
+      - {x: -0.82172966, y: 2.0850673}
+      - {x: -1.3918605, y: 2.861143}
 --- !u!1 &736423274020879352
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 1
+  force: 10
   duration: 0.5
 --- !u!114 &7668866000202136893
 MonoBehaviour:
@@ -674,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 15
+  _damage: 50
 --- !u!60 &736423274020879359
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -700,14 +650,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.25610733, y: 1.8943807}
-      - {x: 0.4599743, y: 1.2656264}
-      - {x: 0.4868374, y: 0.8848598}
-      - {x: 0.4322343, y: 0.6898835}
-      - {x: 0.2837844, y: 0.36931372}
-      - {x: 0.45587587, y: 0.056892753}
-      - {x: 0.8697417, y: -0.027199626}
-      - {x: 0.6803806, y: 1.0929523}
+    - - {x: 0.36102068, y: 3.0484285}
+      - {x: 1.0894547, y: 2.429212}
+      - {x: 1.2607591, y: 1.3684614}
+      - {x: 1.5076804, y: -0.03057623}
+      - {x: 0.051190138, y: -0.009175539}
 --- !u!1 &1946753177823256420
 GameObject:
   m_ObjectHideFlags: 0
