@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Camp_Cutscene
   m_EditorClassIdentifier: 
   value:
-    npcName: Warrior
-    sentences:
-    - ANOTHER WAVE! STAND STRONG!
+    _speakers:
+    - _name: Captain
+      _textboxColor: {r: 0.62588996, g: 0.67281365, b: 0.9150943, a: 1}
+    - _name: Monster
+      _textboxColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+    _lines:
+    - _speakerIndex: 0
+      text: Assamble! Another Ambush!
+    - _speakerIndex: 1
+      text: GRAAAA

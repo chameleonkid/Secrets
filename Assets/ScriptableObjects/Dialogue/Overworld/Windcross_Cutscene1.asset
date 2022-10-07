@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Windcross_Cutscene1
   m_EditorClassIdentifier: 
   value:
-    npcName: Warrior
-    sentences:
-    - Damn you beast! You won't get me alive!!!
+    _speakers:
+    - _name: Skeleton
+      _textboxColor: {r: 0.9150943, g: 0, b: 0.015959537, a: 1}
+    - _name: Warrior
+      _textboxColor: {r: 0.2857412, g: 0.27843142, b: 1, a: 1}
+    _lines:
+    - _speakerIndex: 0
+      text: Grrrrrrraaaaaaa
+    - _speakerIndex: 1
+      text: You wont get me alive you beast!

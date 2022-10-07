@@ -16,8 +16,6 @@ public class Jason_Evans_Quest : ComponentTrigger<PlayerMovement>
     protected override bool? needOtherIsTrigger => true;
     private PlayerMovement player;
 
-    [Header("The first time you talk to Jason enemies will spawn!")]
-    [SerializeField] private Dialogue dialogueWithAmbush = default;
     [Header("After the initial Talk he justs asks if you checked the castle yet")]
     [SerializeField] private Dialogue dialogueWithoutAmbush = default;
 
@@ -48,15 +46,8 @@ public class Jason_Evans_Quest : ComponentTrigger<PlayerMovement>
                 talkedToJasonEvansSave.RuntimeValue = hasTalkedToJason;
                 OnJasonEvansTriggered?.Invoke();
                 DisableObjects();
-                TriggerDialogue(dialogueWithAmbush);
-                StartCoroutine(SpawnObjectsCo());
-            }
-            else
-            {
-                Debug.Log("2nd time you talked to jason");
                 TriggerDialogue(dialogueWithoutAmbush);
             }
-
         }
     }
 
@@ -80,17 +71,5 @@ public class Jason_Evans_Quest : ComponentTrigger<PlayerMovement>
             objectsToBeDisabled[i].SetActive(false);
         }
     }
-
-    public IEnumerator SpawnObjectsCo()
-    {
-        yield return new WaitForSeconds(0.25f);
-        for (int i = 0; i < objectsToSpawn.Length; i++)
-        {
-            Vector2 homePos = this.transform.position;
-            var randomPosition = homePos + UnityEngine.Random.insideUnitCircle * spawnRadius;
-            var spawn = Instantiate(objectsToSpawn[i], randomPosition, Quaternion.identity);  //this.transform.position needs to vary slightly for iteration
-        }
-    }
-
 
 }
