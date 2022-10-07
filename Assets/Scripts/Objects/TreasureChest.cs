@@ -4,6 +4,7 @@ public class TreasureChest : Interactable
 {
     [Header("Contents")]
     [SerializeField] private Item contents = default;
+    [SerializeField] private int amount= 1;
     [SerializeField] private BoolValue storeOpen = default;
     private bool isOpen { get => storeOpen.RuntimeValue; set => storeOpen.RuntimeValue = value; }
 
@@ -52,8 +53,10 @@ public class TreasureChest : Interactable
         dialogue.lines[0].text = contents.description;
         TriggerDialogue();
         player.inventory.currentItem = contents;
-        player.inventory.items[contents]++;
-
+        for(int i=1;i<=amount;i++)
+        {
+            player.inventory.items[contents]++;
+        }
         // raise the signal to animate
         player?.RaiseItem();
         // set the chest to opened
