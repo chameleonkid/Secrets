@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7656530590476199203}
   - component: {fileID: 7656530590476199202}
   - component: {fileID: 7656530590476199201}
+  - component: {fileID: 1950453597}
+  - component: {fileID: 1957841429017658493}
   m_Layer: 0
   m_Name: DestrucatbleEntrance
   m_TagString: Untagged
@@ -97,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.034178734, y: 0.018774033}
+  m_Offset: {x: 0.034178734, y: 0.08231163}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -108,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7291508, y: 1.8231544}
+  m_Size: {x: 2.0468235, y: 1.8549232}
   m_EdgeRadius: 0
 --- !u!114 &7656530590476199201
 MonoBehaviour:
@@ -123,3 +125,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openSound: {fileID: 8300000, guid: 04e1e07668593fb4d9687261aca47c66, type: 3}
+--- !u!114 &1950453597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7656530590476199200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3d94af9b5e9044ba0b7da254ad3902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    _speakers:
+    - _name: Wall
+      _textboxColor: {r: 0.16078432, g: 0.1137255, b: 0.09019608, a: 1}
+    _lines:
+    - _speakerIndex: 0
+      text: This wall seems like it could be broken in some way.
+--- !u!61 &1957841429017658493
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7656530590476199200}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.055592537, y: -1.0085907}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 1, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5559292, y: 0.36402893}
+  m_EdgeRadius: 0
