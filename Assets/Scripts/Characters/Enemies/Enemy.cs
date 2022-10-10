@@ -98,6 +98,7 @@ public class Enemy : Character, ICanKnockback
         roamingPosition = GetRoamingPostion();
     }
 
+
     void UpdatePath()
     {
         if (seeker.IsDone() && IsInRange())
@@ -111,7 +112,7 @@ public class Enemy : Character, ICanKnockback
         if (!p.error)
         {
             path = p;
-            currentWaipoint = 0;
+            currentWaipoint = 1;  //If this is 0 the strange stuttering starts...
         }
     }
 
