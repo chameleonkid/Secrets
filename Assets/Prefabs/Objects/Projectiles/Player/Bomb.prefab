@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2667734139714125275}
   - component: {fileID: 644114998038881554}
   - component: {fileID: 7239366829983143950}
-  - component: {fileID: 6526845241052607990}
   - component: {fileID: 7396839682366442256}
   - component: {fileID: 6306176192323642201}
   m_Layer: 13
@@ -139,22 +138,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableWhenHit: 1
   _damage: 50
---- !u!114 &6526845241052607990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813981625093461865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 2.5
-  projectileSpeed: 0
-  _rotationNeeded: 0
-  destroyDelay: 0.5
 --- !u!50 &7396839682366442256
 Rigidbody2D:
   serializedVersion: 4
@@ -188,9 +171,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce237aaa6a17adc4ebcd8ca41033b90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 2.5
+  projectileSpeed: 0
+  _rotationNeeded: 0
+  destroyDelay: 0
   explosionSound: {fileID: 8300000, guid: def9b6adb512a7e4f90cd0c834da1534, type: 3}
   tickingSound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
-  bombDroppedSound: {fileID: 8300000, guid: 0f13cc91f4699e74e81cc0076678e9c4, type: 3}
+  bombDroppedSound: {fileID: 8300000, guid: 7a0ee84d44952c34f9551992717f7315, type: 3}
 --- !u!1 &6446096590452000109
 GameObject:
   m_ObjectHideFlags: 0
