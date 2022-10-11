@@ -49,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -148,14 +149,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bced85d4d6ab6c94db35e46090a844bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
   contextOn: {fileID: 11400000, guid: d408cca34ffd9194db3d7449ede01afd, type: 2}
   contextOff: {fileID: 11400000, guid: dfe0d71f4103451418993a94169a657a, type: 2}
   contents: {fileID: 11400000, guid: 75e4034ab1d762a4fb7a1e846d0b977f, type: 2}
   playerInventory: {fileID: 11400000, guid: 33d86f39d6e952b469a935e1a473c3dd, type: 2}
   neededStrenght: 3
-  liftingSound: {fileID: 8300000, guid: 34687e751469b6c43a115848fefcd0d3, type: 3}
+  liftingSound: {fileID: 8300000, guid: c92f1f9f30bb2d844a16e4bfdda7d51e, type: 3}
   dialogue:
-    npcName: Heavy Stone
-    sentences:
-    - 
+    _speakers:
+    - _name: 
+      _textboxColor: {r: 1, g: 1, b: 1, a: 1}
+    _lines:
+    - _speakerIndex: 0
+      text: 

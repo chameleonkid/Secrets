@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpellbookBomb
   m_EditorClassIdentifier: 
   _id: 1014
-  _name: Bomb Bag
-  _description: 'A Bag full of Bombs
+  _name: Magical Bomb Bag
+  _description: 'A Bag containing an endless amount of magical Bombs!
 
 '
   _sprite: {fileID: 21300000, guid: 8ddbe63b733f09647a8886148bec383c, type: 3}
@@ -27,16 +27,16 @@ MonoBehaviour:
       m_Calls: []
   _buyPrice: 100
   _sellPrice: 50
-  _manaCost: 0
-  coolDown: 3
+  _manaCost: 10
+  coolDown: 5
   onCooldown: 0
   glowColor: {r: 3.482202, g: 0, b: 0, a: 0}
-  minSpellDamage: 0
-  maxSpellDamage: 0
+  minSpellDamage: 1
+  maxSpellDamage: 1
   prefab: {fileID: 813981625093461865, guid: dd5fe7ea78236f94ab9113603c64f4a7, type: 3}
   speed: 0
-  amountOfProjectiles: 1
+  amountOfProjectiles: 5
   delayBetweenProjectiles: 0
-  spreadAngle: 0
-  radius: 0
+  spreadAngle: 360
+  radius: 0.25
   isRotating: 0
