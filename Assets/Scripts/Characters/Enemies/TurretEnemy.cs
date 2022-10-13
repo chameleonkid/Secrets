@@ -8,6 +8,8 @@ public class TurretEnemy : SimpleEnemy
     public bool canAttack = false;
     public float fireDelay;
     [SerializeField] protected int amountOfProjectiles = 1;
+    [SerializeField] protected int spreadAngle = 0;
+    [SerializeField] protected float radius = 0;
     [SerializeField] protected float timeBetweenProjectiles = 1f;
     [SerializeField] protected float fireDelaySeconds;
     [SerializeField] protected float projectileDestructionTimer=1f;
@@ -57,20 +59,30 @@ public class TurretEnemy : SimpleEnemy
     {
         var originalMovespeed = this.moveSpeed;
         //animator.Play("Attacking");
-        //SoundManager.RequestSound(attackSounds.GetRandomElement());
         animator.SetBool("Attacking", true);
         this.moveSpeed = 0;
-        yield return new WaitForSeconds(0.5f);              //This would equal the "CastTime"
+        yield return new WaitForSeconds(0.5f);              //This is the time the enemy stands still for casting
         this.moveSpeed = originalMovespeed;
 
-        
-        for(int i = 0; i <= amountOfProjectiles-1; i++)
+        if( timeBetweenProjectiles == 0)                    // Play Sound only once if there are many spells at the same time
         {
-            var difference = target.transform.position - transform.position;
-            Projectile.Instantiate(projectile, transform.position, difference, Quaternion.identity, "Player");
-            yield return new WaitForSeconds(timeBetweenProjectiles);
+            SoundManager.RequestSound(attackSounds.GetRandomElement());
         }
-        animator.SetBool("Attacking", false);
+        var offsets = RadialLayout.GetOffsets(amountOfProjectiles, MathfEx.Vector2ToAngle(GetAnimatorXY()), spreadAngle);
+        for (int i = 0; i < amountOfProjectiles; i++)
+        {
+            // Should probably not hard-code the offset.
+            var position = new Vector2(transform.position.x, transform.position.y + 0.25f);      // Set projectile higher since transform is at player's pivot point (feet).
+            CreateProjectile(projectile, position + (offsets[i] * radius), offsets[i].normalized);
+            
+            if (timeBetweenProjectiles > 0)
+            {
+                yield return new WaitForSeconds(timeBetweenProjectiles); // Play sound every time if there are many spells slightly off
+                SoundManager.RequestSound(attackSounds.GetRandomElement());
+            }
+
+        }
+         animator.SetBool("Attacking", false);
 
     }
 
@@ -93,4 +105,11 @@ public class TurretEnemy : SimpleEnemy
     {
         fireDelaySeconds = timeTillAttack;
     }
+
+    private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
+    {
+        var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "Player");
+        return projectile;
+    }
+
 }
