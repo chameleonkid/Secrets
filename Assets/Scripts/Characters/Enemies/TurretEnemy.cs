@@ -13,6 +13,7 @@ public class TurretEnemy : SimpleEnemy
     [SerializeField] protected float timeBetweenProjectiles = 1f;
     [SerializeField] protected float fireDelaySeconds;
     [SerializeField] protected float projectileDestructionTimer=1f;
+    [SerializeField] protected float projectileYOffset = 0.25f;
 
     protected virtual void Update()
     {
@@ -72,7 +73,7 @@ public class TurretEnemy : SimpleEnemy
         for (int i = 0; i < amountOfProjectiles; i++)
         {
             // Should probably not hard-code the offset.
-            var position = new Vector2(transform.position.x, transform.position.y + 0.25f);      // Set projectile higher since transform is at player's pivot point (feet).
+            var position = new Vector2(transform.position.x, transform.position.y + projectileYOffset);      // Set projectile higher since transform is at player's pivot point (feet).
             CreateProjectile(projectile, position + (offsets[i] * radius), offsets[i].normalized);
             
             if (timeBetweenProjectiles > 0)

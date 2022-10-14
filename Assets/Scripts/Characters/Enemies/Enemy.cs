@@ -90,7 +90,6 @@ public class Enemy : Character, ICanKnockback
         homePosition = transform.position;
         health = maxHealth.value;
         originalChaseRadius = chaseRadius;
-
         target = GameObject.FindWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
@@ -187,7 +186,6 @@ public class Enemy : Character, ICanKnockback
             rigidbody.MovePosition(temp);
             float distance = Vector2.Distance(rigidbody.position, path.vectorPath[currentWaipoint]);
             SetAnimatorXYSingleAxis(temp - transform.position);
-            // I think below here is the "look right" problem... Might need to save the facing direction
             if (distance < nextWaypointDistance)
             {
                 currentWaipoint++;
