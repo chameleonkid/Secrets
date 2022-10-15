@@ -12,19 +12,9 @@ public class AOESpell : MonoBehaviour
         collider = GetComponent<Collider2D>();
     }
 
-
-    public void OverrideDamage(float damage)
-    {
-        var hitbox = GetComponent<DamageOnTrigger>();
-        if (hitbox != null)
-        {
-            hitbox.damage = damage;
-        }
-    }
-
     public void OverrideDamage(float damage, bool isCritical)
     {
-        var hitbox = GetComponent<DamageOnTrigger>();
+        var hitbox = GetComponentInChildren<DamageOnTrigger>();
         if (hitbox != null)
         {
             hitbox.damage = damage;

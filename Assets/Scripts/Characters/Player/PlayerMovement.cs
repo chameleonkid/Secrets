@@ -373,6 +373,7 @@ public class PlayerMovement : Character, ICanMove
                 break;
             case AOESpellbook aoeSpell:
                 CreateAOESpell(aoeSpell);
+                animator.SetBool("isCasting", true);
                 break;
         }
 
