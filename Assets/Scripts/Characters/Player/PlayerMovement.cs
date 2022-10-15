@@ -481,7 +481,7 @@ public class PlayerMovement : Character, ICanMove
     {
         var position = this.transform;
         var spell = Instantiate(aoeSpellbook.prefab,position);
-        Destroy(spell, 0.25f);
+        Destroy(spell, 0.1f);
     }
 
 
