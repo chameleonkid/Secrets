@@ -371,6 +371,9 @@ public class PlayerMovement : Character, ICanMove
             case DashSpell dashSpell:
                 dashSpell.Dash(this);
                 break;
+            case AOESpellbook aoeSpell:
+                CreateAOESpell(aoeSpell);
+                break;
         }
 
         spellBook.onCooldown = true;
@@ -472,6 +475,16 @@ public class PlayerMovement : Character, ICanMove
             }
         }
     }
+
+
+    private void CreateAOESpell(AOESpellbook aoeSpellbook)
+    {
+        var position = this.transform;
+        var spell = Instantiate(aoeSpellbook.prefab,position);
+        Destroy(spell, 0.25f);
+    }
+
+
 
     public void NoClip()
     {

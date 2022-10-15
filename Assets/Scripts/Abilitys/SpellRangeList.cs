@@ -10,14 +10,14 @@ public class SpellRangeList : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if(other.GetComponent<Enemy>())
+       if(other.GetComponent<Enemy>() && other.isTrigger)
         {
             enemiesInRange.Add(other.GetComponent<Transform>());
         }
        foreach(Transform position in enemiesInRange)
         {
-           var spell = Instantiate(spellPrefab, position);
-            spell.transform.SetParent(position);
+            var spell = Instantiate(spellPrefab).GetComponent<PositionFollower>();
+            spell.target =position;
         }
         enemiesInRange.Clear();
     }
