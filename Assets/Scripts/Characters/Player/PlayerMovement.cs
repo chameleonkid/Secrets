@@ -480,8 +480,10 @@ public class PlayerMovement : Character, ICanMove
 
     private void CreateAOESpell(AOESpellbook aoeSpellbook)
     {
+        var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
         var position = this.transform;
         var spell = Instantiate(aoeSpellbook.prefab,position);
+        spell.GetComponent<SpellRangeList>().SetSpellDmgAndCrit(damage, IsCriticalHit());
         Destroy(spell, 0.1f);
     }
 
