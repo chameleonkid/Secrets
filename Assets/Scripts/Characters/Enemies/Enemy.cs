@@ -219,8 +219,6 @@ public class Enemy : Character, ICanKnockback
 
     protected virtual void Die()
     {
-        //   Debug.Log("Baseclass DIE wurde ausgeführt");
-
         DeathEffect();
         if(deathSounds.Length >= 0)
         {

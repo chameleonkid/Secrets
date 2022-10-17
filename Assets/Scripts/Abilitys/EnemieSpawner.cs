@@ -6,39 +6,74 @@ public class EnemieSpawner : TurretEnemy
 {
     [SerializeField] private GameObject enemyToSpawn;
     [SerializeField] private int amountOfEnemiesPerWave;
+    [SerializeField] float spawnOffsetY;
+    [SerializeField] float spawnOffsetX;
     [SerializeField] float timeBetweenEnemies;
     [SerializeField] float timeBetweenWaves;
     [SerializeField] float delayLeft;
     [SerializeField] bool canSpawn;
+    [SerializeField] bool isInSpawnRange;
+    [SerializeField] bool isDestroyed = false;
+    [SerializeField] Collider2D hurtBox;
+
+
 
 
     protected override void FixedUpdate()
     {
+        isInSpawnRange = IsInRange();
         delayLeft -= Time.deltaTime;
         if (delayLeft <= 0)
         {
             canSpawn = true;
             delayLeft = timeBetweenWaves;
         }
-        if (canSpawn == true)
+        if (canSpawn == true && isDestroyed == false)
         {
-            SpawnWave();
             canSpawn = false;
+            if(isInSpawnRange == true)
+            {
+                animator.SetTrigger("TriggerSpawn");
+            }
+
         }
     }
 
     void SpawnWave()
     {
-        StartCoroutine(SpawnWaveCo());
+        StartCoroutine(SpawnWaveCo());  //is called in the animation!
     }
 
     protected virtual IEnumerator SpawnWaveCo()
     {
-        for (int i = 0; i < amountOfEnemiesPerWave; i++)
-        {
-            Instantiate(enemyToSpawn, this.transform);
+       Vector3 spawnPos = transform.position;
+       spawnPos.x += spawnOffsetX;
+       spawnPos.y += spawnOffsetY;
+       for (int i = 0; i < amountOfEnemiesPerWave; i++)
+       {
+            Instantiate(enemyToSpawn, spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(timeBetweenEnemies);
+       }
+    }
+
+    protected override void Die()
+    {
+        if (deathSounds.Length >= 0)
+        {
+            SoundManager.RequestSound(deathSounds.GetRandomElement());
         }
+
+        levelSystem.AddExperience(enemyXp);
+
+        if (roomSignal != null)
+        {
+            roomSignal.Raise();
+        }
+
+        isDestroyed = true;
+        animator.SetTrigger("TriggerDestroy");
+        CheckForMinion();
+        hurtBox.enabled = false;
     }
 
 }
