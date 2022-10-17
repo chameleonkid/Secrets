@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aae797e2b429f04e8f6e2661e7dee72, type: 3}
+  m_Name: SpellbookOfTsunami
+  m_EditorClassIdentifier: 
+  _id: 1016
+  _name: Spellbook of Tsunami
+  _description: A giant Wave will wash away everything
+  _sprite: {fileID: 21300000, guid: 664ba48637835cc428f67f53e1f1af73, type: 3}
+  _sound: {fileID: 0}
+  _unique: 0
+  _usable: 1
+  _level: 0
+  OnUse:
+    m_PersistentCalls:
+      m_Calls: []
+  _buyPrice: 1
+  _sellPrice: 1
+  _manaCost: 0
+  coolDown: 2
+  onCooldown: 0
+  glowColor: {r: 0, g: 0, b: 0, a: 0}
+  minSpellDamage: 5
+  maxSpellDamage: 5
+  prefab: {fileID: 8463593274553051062, guid: 57b512a6d14486943885138b3d584830, type: 3}
+  radius: 1

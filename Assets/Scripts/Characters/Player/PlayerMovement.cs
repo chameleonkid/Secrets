@@ -372,7 +372,7 @@ public class PlayerMovement : Character, ICanMove
                 dashSpell.Dash(this);
                 break;
             case AOESpellbook aoeSpell:
-                CreateAOESpell(aoeSpell);
+                CreateSpell(aoeSpell);
                 animator.SetBool("isCasting", true);
                 break;
         }
@@ -478,13 +478,20 @@ public class PlayerMovement : Character, ICanMove
     }
 
 
-    private void CreateAOESpell(AOESpellbook aoeSpellbook)
+    private void CreateSpell(AOESpellbook aoeSpellbook)
     {
         var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
         var position = this.transform;
         var spell = Instantiate(aoeSpellbook.prefab,position);
-        spell.GetComponent<SpellRangeList>().SetSpellDmgAndCrit(damage, IsCriticalHit());
-        Destroy(spell, 0.1f);
+        if(spell.GetComponent<SpellRangeList>())
+        {
+            spell.GetComponent<SpellRangeList>().SetSpellDmgAndCrit(damage, IsCriticalHit());
+            Destroy(spell, 0.1f);
+        }
+        if(spell.GetComponent<AOESpell>())
+        {
+            spell.GetComponent<AOESpell>().OverrideDamage(damage, IsCriticalHit());
+        }
     }
 
 

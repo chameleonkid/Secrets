@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aae797e2b429f04e8f6e2661e7dee72, type: 3}
+  m_Name: SpellbookOfWaterBlast
+  m_EditorClassIdentifier: 
+  _id: 1015
+  _name: Spellbook of Waterblasts
+  _description: A Blast of water will hit every enemy in range
+  _sprite: {fileID: 21300000, guid: 346213fc5f9e4ba4b9ec74b87588bedf, type: 3}
+  _sound: {fileID: 0}
+  _unique: 0
+  _usable: 1
+  _level: 0
+  OnUse:
+    m_PersistentCalls:
+      m_Calls: []
+  _buyPrice: 1
+  _sellPrice: 1
+  _manaCost: 0
+  coolDown: 2
+  onCooldown: 0
+  glowColor: {r: 0, g: 0, b: 0, a: 0}
+  minSpellDamage: 5
+  maxSpellDamage: 5
+  prefab: {fileID: 9078123518483591676, guid: f3e8081bc536aa242a17353d9752d43f, type: 3}
+  radius: 1
