@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class FollowPlayer : Character
+public class FollowPlayer : BoundedNPC
 {
     //place this script on the player gameobject
     public override float health { get => 1; set { } }   //! Temp
@@ -21,6 +21,7 @@ public class FollowPlayer : Character
     void Awake()
     {
         base.Awake();
+        SetAnimatorXY(Vector2.down);
         storedPositions = new List<Vector3>(); //create a blank list
 
         if (!player)
@@ -54,16 +55,19 @@ public class FollowPlayer : Character
         else
         {
             animator.SetBool("isMoving", false);
+            SetAnimatorXY(directionVector);
         }
     }
 
     private IEnumerator FollowCO()
     {
         var followDelayInSeconds = Random.Range(FollowDelaySecondsMin, FollowDelaySecondsMax);
-        yield return new WaitForSeconds(followDelayInSeconds);
+        yield return new WaitForSeconds(0);
         Vector3 position = new Vector3(storedPositions[0].x + followOffSetX, storedPositions[0].y + followOffSetY, storedPositions[0].z);
         transform.position = position; //move
         animator.SetBool("isMoving", true);
+        SetAnimatorXY(directionVector);
         storedPositions.RemoveAt(0); //delete the position that player just moved to
     }
 }
+

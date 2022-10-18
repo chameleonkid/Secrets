@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 3708462015931930499}
   - component: {fileID: 2790293263364906772}
   - component: {fileID: 1468781798734474951}
-  - component: {fileID: 898907298}
   - component: {fileID: 1442859876}
   m_Layer: 8
   m_Name: Golem
@@ -60,6 +59,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -205,6 +205,8 @@ MonoBehaviour:
   gotHitSound:
   - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
   attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
   meeleCooldown: 0
   spellCooldown: 0
   spellTwoCooldown: 0
@@ -212,15 +214,20 @@ MonoBehaviour:
   _slow: {fileID: 2758721905469629301}
   _shrink: {fileID: 1482657668}
   _gigantism: {fileID: 1658706514}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 200
-  maxHealth: {fileID: 11400000, guid: f3635b7734110c04d85b6b654e9e02f9, type: 2}
+  enemyXp: 50
+  maxHealth: {fileID: 11400000, guid: 0459fc57e8370e84285c35ccb4509662, type: 2}
   _health: 0
   isWalking: 0
   walkingTimer: 3
   isMinion: 0
   enemyName: GollyTheGolem
-  moveSpeed: 2
+  moveSpeed: 1
   homePosition: {x: -25.5, y: 37}
   roamingPosition: {x: 0, y: 0, z: 0}
   chaseRadius: 5
@@ -235,6 +242,7 @@ MonoBehaviour:
   currentWaipoint: 0
   reachedEndOfPath: 0
   seeker: {fileID: 0}
+  leftChaseRadius: 1
 --- !u!114 &1978365613900135294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,9 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d3c83bcddcca643958bdb193ec1a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashColor: {r: 1, g: 0.7658209, b: 0.4386792, a: 0.1686275}
-  invulnerabilityDuration: 0.5
-  numberOfFlashes: 10
+  flashColor: {r: 1, g: 1, b: 1, a: 0.1686275}
+  invulnerabilityDuration: 0.25
+  numberOfFlashes: 5
   renderers:
   - {fileID: 8978087339683796162}
 --- !u!114 &3708462015931930499
@@ -265,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  force: 1
+  force: 4
   duration: 0.2
 --- !u!114 &2790293263364906772
 MonoBehaviour:
@@ -280,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 0
-  _damage: 1
+  _damage: 8
 --- !u!114 &1468781798734474951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,22 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9396e5c4a7c0f134c8f29f26bdcd2ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &898907298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978087339683796160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4ab939732abb584f87f015c5c1330a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableWhenHit: 0
-  charactersInAreaList: []
-  tickDuration: 1
-  tickDamage: 1
 --- !u!114 &1442859876
 MonoBehaviour:
   m_ObjectHideFlags: 0
