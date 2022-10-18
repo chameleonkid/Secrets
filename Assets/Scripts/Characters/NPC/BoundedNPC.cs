@@ -5,7 +5,7 @@ public class BoundedNPC : Character
 {
     public override float health { get => 1; set {} }   //! Temp
 
-    private Vector3 directionVector;
+    protected Vector3 directionVector;
     public float speed;
     public Collider2D bound;
     public float moveTime;
@@ -63,7 +63,7 @@ public class BoundedNPC : Character
         }
     }
 
-    private void ChangeDirection()
+    protected void ChangeDirection()
     {
         int direction = Random.Range(0, 4);
 

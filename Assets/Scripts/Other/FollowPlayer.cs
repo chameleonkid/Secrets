@@ -10,8 +10,7 @@ public class FollowPlayer : BoundedNPC
     public GameObject player; // in the inspector drag the gameobject the will be following the player to this field
     public int followDistance;
     private List<Vector3> storedPositions;
-    private Vector3 directionVector;
-    private Interactable interactable;
+
     [SerializeField] private float followOffSetX;
     [SerializeField] private float followOffSetY;
     [SerializeField] private float FollowDelaySecondsMin=0;
@@ -34,7 +33,7 @@ public class FollowPlayer : BoundedNPC
             Debug.Log("Please set distance higher then 0");
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         if (storedPositions.Count == 0)
         {
@@ -62,12 +61,13 @@ public class FollowPlayer : BoundedNPC
     private IEnumerator FollowCO()
     {
         var followDelayInSeconds = Random.Range(FollowDelaySecondsMin, FollowDelaySecondsMax);
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(followDelayInSeconds); //set to 0 maybe
         Vector3 position = new Vector3(storedPositions[0].x + followOffSetX, storedPositions[0].y + followOffSetY, storedPositions[0].z);
         transform.position = position; //move
         animator.SetBool("isMoving", true);
-        SetAnimatorXY(directionVector);
+        SetAnimatorXY(transform.position);
         storedPositions.RemoveAt(0); //delete the position that player just moved to
     }
+
 }
 
