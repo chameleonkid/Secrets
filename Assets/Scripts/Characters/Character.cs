@@ -7,6 +7,7 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     public StateEnum currentStateEnum { get; protected set; }
     public abstract float health { get; set; }
     public bool isInvulnerable { get; set; }
+    public BoolValue cantMove;
 
     [SerializeField] protected SpriteRenderer _renderer = default;
     public new SpriteRenderer renderer => _renderer;

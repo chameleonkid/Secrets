@@ -136,7 +136,7 @@ public class PlayerMovement : Character, ICanMove
 
     private void Update()
     {
-        if (Time.timeScale > 0)
+        if (Time.timeScale > 0 && cantMove.RuntimeValue == false)
         {
             HandleMenus();
             HandleInput();

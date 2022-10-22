@@ -19,12 +19,16 @@ public class TurretEnemy : SimpleEnemy
     {
         if (currentState is Schwer.States.Knockback) return;
 
-        fireDelaySeconds -= Time.deltaTime;
-        if (fireDelaySeconds <= 0)
+        if(cantMove == false)
         {
-            canAttack = true;
-            fireDelaySeconds = fireDelay;
+            fireDelaySeconds -= Time.deltaTime;
+            if (fireDelaySeconds <= 0)
+            {
+                canAttack = true;
+                fireDelaySeconds = fireDelay;
+            }
         }
+
     }
 
     protected override void InsideChaseRadiusUpdate()
