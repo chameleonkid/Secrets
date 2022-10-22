@@ -19,7 +19,7 @@ public class TurretEnemy : SimpleEnemy
     {
         if (currentState is Schwer.States.Knockback) return;
 
-        if(cantMove == false)
+        if(cantMove.RuntimeValue == false)
         {
             fireDelaySeconds -= Time.deltaTime;
             if (fireDelaySeconds <= 0)

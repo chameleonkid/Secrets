@@ -10,6 +10,7 @@ public class startCutscene : MonoBehaviour
     [SerializeField] private GameObject cutsceneVCam;
     [SerializeField] private float cutsceneDuration;
     [SerializeField] private BoolValue cutSceneBool;
+    [SerializeField] private BoolValue cantMove;
     public PlayableDirector playableDirector;
     public TimelineAsset timeLineToPlay;
 
@@ -34,17 +35,20 @@ public class startCutscene : MonoBehaviour
             playableDirector.Play(timeLineToPlay);
         }
         cutSceneBool.RuntimeValue = true;
+
     }
     private IEnumerator StartStopCutscene()
     {
         Debug.Log("Cutscene Started");
-     //   Time.timeScale = 0;
+        //   Time.timeScale = 0;
+        cantMove.RuntimeValue = true;
         currentVCam.SetActive(false);
         cutsceneVCam.SetActive(true);
         yield return new WaitForSecondsRealtime(cutsceneDuration);
 
         currentVCam.SetActive(true);
         cutsceneVCam.SetActive(false);
+        cantMove.RuntimeValue = false;
         Debug.Log("Cutscene Ended");
     }
 

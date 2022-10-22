@@ -152,13 +152,17 @@ public class PlayerMovement : Character, ICanMove
 
     private void FixedUpdate()
     {
-        currentState?.FixedUpdate();
-        uiInput.run = false;
-
-        if (!(currentState is Schwer.States.Knockback))
+        if(cantMove.RuntimeValue == false)
         {
-            rigidbody.velocity = Vector2.zero;
+            currentState?.FixedUpdate();
+            uiInput.run = false;
+
+            if (!(currentState is Schwer.States.Knockback))
+            {
+                rigidbody.velocity = Vector2.zero;
+            }
         }
+
     }
 
     private void HandleMenus()

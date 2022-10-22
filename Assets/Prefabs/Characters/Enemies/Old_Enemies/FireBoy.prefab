@@ -57,6 +57,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -225,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
   _renderer: {fileID: 6941909454593424337}
   isShrinked: 0
   gotHitSound: []
@@ -243,6 +245,7 @@ MonoBehaviour:
   _maxDashDistance: 4
   _dashDuration: 4
   _canDash: 1
+  healthbar: {fileID: 0}
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 10
   maxHealth: {fileID: 11400000, guid: 9344a2a8907293e4d94da47470e21975, type: 2}
@@ -270,7 +273,13 @@ MonoBehaviour:
   projectile: {fileID: 125730, guid: b9712cbab09e958498003c8a50aa18d7, type: 3}
   canAttack: 0
   fireDelay: 0.5
+  amountOfProjectiles: 1
+  spreadAngle: 0
+  radius: 0
+  timeBetweenProjectiles: 1
   fireDelaySeconds: 0
+  projectileDestructionTimer: 1
+  projectileYOffset: 0.25
   shootingRange: 3
   escapeRange: 1
 --- !u!114 &1566315858439696939

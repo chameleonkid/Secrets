@@ -144,7 +144,7 @@ public class Enemy : Character, ICanKnockback
 
     protected virtual void FixedUpdate()
     {
-        if(cantMove == false)
+        if(cantMove.RuntimeValue == false)
         {
             //! Temporary!
             if (currentState is Schwer.States.Knockback)

@@ -246,6 +246,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -376,6 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c76a0b163862b49926041d3632cb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
   _renderer: {fileID: 4020962567892434920}
   isShrinked: 0
   gotHitSound:
@@ -397,6 +399,7 @@ MonoBehaviour:
   _maxDashDistance: 4
   _dashDuration: 4
   _canDash: 1
+  healthbar: {fileID: 0}
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 5
   maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
@@ -421,6 +424,7 @@ MonoBehaviour:
   reachedEndOfPath: 0
   seeker: {fileID: 0}
   leftChaseRadius: 1
+  attackCoolDown: 0.5
 --- !u!114 &890515302566090278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,6 +715,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

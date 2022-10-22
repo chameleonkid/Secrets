@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43750952d48779d4ea55a003a8cc2a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
   _renderer: {fileID: 758360827943273166}
   isShrinked: 0
   gotHitSound:
@@ -248,6 +249,7 @@ MonoBehaviour:
   _maxDashDistance: 4
   _dashDuration: 4
   _canDash: 1
+  healthbar: {fileID: 0}
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 10
   maxHealth: {fileID: 11400000, guid: cc16e0ae272261148a84e9f893d13a29, type: 2}
@@ -276,9 +278,12 @@ MonoBehaviour:
   canAttack: 0
   fireDelay: 10
   amountOfProjectiles: 3
+  spreadAngle: 0
+  radius: 0
   timeBetweenProjectiles: 0.5
   fireDelaySeconds: 0
   projectileDestructionTimer: 5
+  projectileYOffset: 0.25
   shootingRange: 3
   escapeRange: 2
 --- !u!114 &9181725837925141300

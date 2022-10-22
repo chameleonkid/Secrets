@@ -743,6 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540e6557f6b727f4dab0cec473246bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
   _renderer: {fileID: 2509145761378040372}
   isShrinked: 0
   gotHitSound: []
@@ -761,6 +762,7 @@ MonoBehaviour:
   _maxDashDistance: 4
   _dashDuration: 4
   _canDash: 1
+  healthbar: {fileID: 0}
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 500
   maxHealth: {fileID: 11400000, guid: 08a183bc611295d45881b6748eda4ea7, type: 2}
@@ -790,9 +792,12 @@ MonoBehaviour:
   canAttack: 0
   fireDelay: 10
   amountOfProjectiles: 2
+  spreadAngle: 0
+  radius: 0
   timeBetweenProjectiles: 1
   fireDelaySeconds: 10
   projectileDestructionTimer: 2
+  projectileYOffset: 0.25
   canTeleport: 0
   canTeleportTimer: 19
   canTeleportCD: 19
@@ -899,7 +904,8 @@ MonoBehaviour:
   bossTwoHurtBox: {fileID: 2509145761378040370}
   bossKillCounter: 0
   leaveBlock: {fileID: 0}
-  portal: {fileID: 0}
+  FinalRoomBlock: {fileID: 0}
+  EndOfFightLights: {fileID: 0}
   stage: 0
   isDefeated: 0
   storeDefeated: {fileID: 11400000, guid: d3f66d1503b2ac84bb588d670c9a11dd, type: 2}
@@ -1111,6 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540e6557f6b727f4dab0cec473246bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
   _renderer: {fileID: 2509145761840492233}
   isShrinked: 0
   gotHitSound: []
@@ -1129,6 +1136,7 @@ MonoBehaviour:
   _maxDashDistance: 4
   _dashDuration: 4
   _canDash: 1
+  healthbar: {fileID: 0}
   levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
   enemyXp: 500
   maxHealth: {fileID: 11400000, guid: 08a183bc611295d45881b6748eda4ea7, type: 2}
@@ -1158,9 +1166,12 @@ MonoBehaviour:
   canAttack: 0
   fireDelay: 10
   amountOfProjectiles: 12
+  spreadAngle: 0
+  radius: 0
   timeBetweenProjectiles: 0.1
   fireDelaySeconds: 10
   projectileDestructionTimer: 6
+  projectileYOffset: 0.25
   canTeleport: 0
   canTeleportTimer: 19
   canTeleportCD: 19
