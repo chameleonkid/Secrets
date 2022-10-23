@@ -22,7 +22,10 @@ public class TreasureChest : Interactable
         anim = GetComponent<Animator>();
         if (isOpen)
         {
-            anim.SetBool("opened", true);
+            if(anim)
+            {
+                anim.SetBool("opened", true);
+            }
         }
     }
 
@@ -64,7 +67,11 @@ public class TreasureChest : Interactable
         SoundManager.RequestSound(chestSound);
         //raise the context clue to off
         contextOff.Raise();
-        anim.SetBool("opened", true);
+        if(anim)
+        {
+            anim.SetBool("opened", true);
+        }
+
     }
 
     public void NoInventorySpace()
