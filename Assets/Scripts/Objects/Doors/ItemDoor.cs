@@ -8,7 +8,7 @@ public class ItemDoor : Interactable
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
     public BoolValue storeOpen;
-    public Item item;
+    public Item itemToOpen;
     [SerializeField] private Dialogue dialogue = default;
 
     //########################## Doormemory ##################################
@@ -30,15 +30,15 @@ public class ItemDoor : Interactable
     {
         if (playerInRange && player.inputInteract && Time.timeScale > 0)
         {
-            if (playerInventory.Contains(item))
+            if (playerInventory.Contains(itemToOpen))
             {
-                dialogue.lines[0].text = "You hold up " + item.name + " and the door begins to open!";
+                dialogue.lines[0].text = "You hold up " + itemToOpen.name + " and the door begins to open!";
                 TriggerDialogue();
                 Open();
             }
             else
             {
-                dialogue.lines[0].text = "It seems like you need " + item.name + " to open this door.";
+                dialogue.lines[0].text = "It seems like you need " + itemToOpen.name + " to open this door.";
                 TriggerDialogue();
             }
         }
