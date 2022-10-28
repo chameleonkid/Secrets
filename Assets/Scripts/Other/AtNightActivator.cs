@@ -14,7 +14,7 @@ public class AtNightActivator : MonoBehaviour
     private void ActivateAtNight(float timeNormalized)
     {
        
-            if (timeNormalized <= 0.23f || timeNormalized >= 0.85f)
+            if (timeNormalized <= 0.25f || timeNormalized >= 0.96f)
             {
             foreach (Transform child in transform)
             {
