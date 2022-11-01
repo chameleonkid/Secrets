@@ -154,6 +154,7 @@ public class PlayerMovement : Character, ICanMove
     {
         if(cantMove.RuntimeValue == false)
         {
+            animator.enabled = true;
             currentState?.FixedUpdate();
             uiInput.run = false;
 
@@ -161,6 +162,10 @@ public class PlayerMovement : Character, ICanMove
             {
                 rigidbody.velocity = Vector2.zero;
             }
+        }
+        else
+        {
+            animator.enabled = false;
         }
 
     }
