@@ -38,7 +38,14 @@ public class SpriteSkinRPM : MonoBehaviour {
 			if (useColorOutline == false) {
 				frameIndex += newSpritesheet.Length / 2;
 			}
+
+			//	Debug.Log(newSpritesheet.Length);
+			//	Debug.Log(frameIndex);
 			//Finally, set the new sprite to render.
+			if (currentFrameName.Contains("cranky crab"))
+			{
+				Debug.Log($"{frameIndex}/{newSpritesheet.Length}");
+			}
 			parentRenderer.sprite = newSpritesheet[frameIndex];
 		}
 		else if (newSprite == null){
