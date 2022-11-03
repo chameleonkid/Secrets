@@ -20,7 +20,7 @@ public class RockGiantBattle : MonoBehaviour
     [SerializeField] private RockGiantBoss boss = default;
     [SerializeField] private GameObject bossGameObject = default;
     [SerializeField] private Collider2D bossHurtBox = default;
-    [Header("TriggerArea")]
+    [Header("LeaverBlock")]
     [SerializeField] private GameObject leaveBlock = default;
 
     [Header("Stages")]
@@ -39,7 +39,8 @@ public class RockGiantBattle : MonoBehaviour
     [SerializeField] private GameObject triggerArea;
 
     [Header("Object for Throwers")]
-    [SerializeField] private GameObject boulderThrowersObject;
+    [SerializeField] private GameObject[] boulderThrowersObjects;
+    [SerializeField] private int boulderThrowerNumber;
 
     [Header("Dialogues while fighting")]
     [SerializeField] private Dialogue dialogue = default;
@@ -47,6 +48,7 @@ public class RockGiantBattle : MonoBehaviour
 
     private void Awake()
     {
+        boulderThrowerNumber = boulderThrowersObjects.Length;
         leaveBlock.SetActive(false);
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
@@ -87,7 +89,8 @@ public class RockGiantBattle : MonoBehaviour
                 {
                     dialogue.lines[0].text = "You know nothing! Let the Mountain collapse!!! HAHAHA!";
                     DialogueManager.RequestDialogue(dialogue);
-                    boulderThrowersObject.SetActive(true);
+                    //boulderThrowersObject.SetActive(true);
+                    EnableBoulderThrowers();
                     StartNextStage();
                     Debug.Log("Stage 3 has started!");
                 }
@@ -100,7 +103,10 @@ public class RockGiantBattle : MonoBehaviour
         Debug.Log("Boss died!");
         SoundManager.RequestSound(bossDiedSound);
         leaveBlock.SetActive(false);
-        boulderThrowersObject.SetActive(false);
+        for (int i = 0; i < boulderThrowerNumber; i++)
+        {
+            boulderThrowersObjects[i].SetActive(false);
+        }
         MusicManager.RequestMusic(endBattleMusic);
         storeDefeated.RuntimeValue = true;
 
@@ -151,6 +157,20 @@ public class RockGiantBattle : MonoBehaviour
                 break;
         }
         Debug.Log("Next Stage has started " + stage);
+    }
+
+    private void EnableBoulderThrowers()
+    {
+        StartCoroutine(EnableBoulderThrowerCO());
+    }
+
+    private IEnumerator EnableBoulderThrowerCO()
+    {
+        for (int i = 0; i < boulderThrowerNumber; i++)
+        {
+            boulderThrowersObjects[i].SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
 

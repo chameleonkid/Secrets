@@ -9,6 +9,7 @@ public class BoulderThrower : MonoBehaviour
     public GameObject projectile;
     public bool canAttack = false;
     public float fireDelay;
+    [SerializeField] private Animator animator;
     [SerializeField] protected int amountOfProjectiles = 1;
     [SerializeField] protected float timeBetweenProjectiles = 1;
     [SerializeField] protected float fireDelaySeconds;
@@ -17,12 +18,13 @@ public class BoulderThrower : MonoBehaviour
     [SerializeField] private float boulderXCorrection;
     [SerializeField] private float boulderYCorrection;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Sound that is played while the thrower appears")]
+    [SerializeField] private AudioClip appearSound;
 
+    private void Awake()
+    {
+        animator = this.GetComponent<Animator>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -34,7 +36,8 @@ public class BoulderThrower : MonoBehaviour
         }
         if(canAttack == true)
         {
-            ThrowBoulder();
+            //ThrowBoulder(); This is done via Animation
+            animator.SetTrigger("ThrowBoulder");
             canAttack = false;
         }
     }
@@ -56,5 +59,10 @@ public class BoulderThrower : MonoBehaviour
         }
 
     }
+    void PlayAppearSound()
+        {
+        SoundManager.RequestSound(appearSound);
+        }
+
 
 }
