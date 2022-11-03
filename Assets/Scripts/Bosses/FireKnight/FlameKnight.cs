@@ -46,6 +46,9 @@ public class FlameKnight : MonoBehaviour
     [Header("Animator")]
     [SerializeField] private Animator anim;
 
+    [Header("Animator")]
+    [SerializeField] private GameObject startLighting;
+
     [Header("Sounds")]
     [SerializeField] private AudioClip fireKnightLaugh = default;
     [SerializeField] private AudioClip fireKnightCharge = default;
@@ -128,6 +131,7 @@ public class FlameKnight : MonoBehaviour
             closeEntrance.SetActive(true);
         }
         anim.SetTrigger("StartFight");
+        startLighting.SetActive(false);
         bossTrigger.SetActive(false);
         StartCoroutine(ActivateHurtBoxCo());
     }
