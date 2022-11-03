@@ -8,6 +8,7 @@ public class EnemieSpawner : TurretEnemy
     [SerializeField] private int amountOfEnemiesPerWave;
     [SerializeField] float spawnOffsetY;
     [SerializeField] float spawnOffsetX;
+    [SerializeField] float spawnRange;
     [SerializeField] float timeBetweenEnemies;
     [SerializeField] float timeBetweenWaves;
     [SerializeField] float delayLeft;
@@ -21,7 +22,7 @@ public class EnemieSpawner : TurretEnemy
 
     protected override void FixedUpdate()
     {
-        isInSpawnRange = IsInRange();
+        isInSpawnRange = IsInSpawnRange();
         delayLeft -= Time.deltaTime;
         if (delayLeft <= 0)
         {
@@ -36,6 +37,19 @@ public class EnemieSpawner : TurretEnemy
                 animator.SetTrigger("TriggerSpawn");
             }
 
+        }
+    }
+
+
+    protected bool IsInSpawnRange()
+    {
+        if (Vector2.Distance(transform.position, target.transform.position) <= spawnRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

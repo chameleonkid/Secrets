@@ -35,6 +35,9 @@ public class RockGiantBoss : TurretEnemy
     [SerializeField] private AudioClip[] attackSound;
     [SerializeField] private AudioClip earthQuakeSound;
 
+    [Header("Starting Dialog")]
+    [SerializeField] private Dialogue dialogue = default;
+
 
 
 
@@ -156,6 +159,12 @@ public class RockGiantBoss : TurretEnemy
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
       //      Destroy(effect, deathEffectDelay); keep the StoneStatue alive forever
         }
+    }
+
+    void RequestDialogue()
+    {
+        dialogue.lines[0].text = "WHO IS DISTURBING ALVAREZ! WHAT??? YOU? I WILL SMASH YOU LIKE AN ANT!";
+        DialogueManager.RequestDialogue(dialogue);
     }
 
 
