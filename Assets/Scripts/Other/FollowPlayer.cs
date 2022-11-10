@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class FollowPlayer : BoundedNPC
 {
-    //place this script on the player gameobject
-    public override float health { get => 1; set { } }   //! Temp
+    public override float health { get => 1; set {} }   //! Temp
 
+    [Header("Follow")]
     public GameObject player; // in the inspector drag the gameobject the will be following the player to this field
     public int followDistance;
     private List<Vector3> storedPositions;
@@ -16,10 +16,10 @@ public class FollowPlayer : BoundedNPC
     [SerializeField] private float FollowDelaySecondsMin=0;
     [SerializeField] private float FollowDelaySecondsMax=5;
 
-
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
+
         SetAnimatorXY(Vector2.down);
         storedPositions = new List<Vector3>(); //create a blank list
 
@@ -33,6 +33,7 @@ public class FollowPlayer : BoundedNPC
             Debug.Log("Please set distance higher then 0");
         }
     }
+
     void FixedUpdate()
     {
         if (storedPositions.Count == 0)
@@ -68,6 +69,4 @@ public class FollowPlayer : BoundedNPC
         SetAnimatorXY(transform.position);
         storedPositions.RemoveAt(0); //delete the position that player just moved to
     }
-
 }
-

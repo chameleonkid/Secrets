@@ -6,6 +6,8 @@ public class BoundedNPC : Character
     public override float health { get => 1; set {} }   //! Temp
 
     protected Vector3 directionVector;
+
+    [Header("Bounded NPC")]
     public float speed;
     public Collider2D bound;
     public float moveTime;
@@ -23,7 +25,7 @@ public class BoundedNPC : Character
         interactable = GetComponent<Interactable>();
     }
 
-    void Start()
+    private void Start()
     {
         moveTimeSeconds = Random.Range(1, moveTime);
         waitTimeSeconds = Random.Range(1, waitTime);
