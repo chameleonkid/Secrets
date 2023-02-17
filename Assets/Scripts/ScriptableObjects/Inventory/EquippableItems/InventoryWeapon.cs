@@ -21,7 +21,7 @@ public class InventoryWeapon : EquippableItem
     [ColorUsageAttribute(true, true)] public Color glowColor;
 
     public override string fullDescription
-        => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage + ("\n\n Level: ") + level;
+        => description + ("\n\n DMG: ") + minDamage + " - " + maxDamage + ("\n\n Level: ") + level + ("\n\n Attackspeed: ") + swingTime + (" Seconds");
 
     public Vector2[] leftHitboxPolygon {
         get {
@@ -299,7 +299,7 @@ public class InventoryWeapon : EquippableItem
         new Vector2(0.2f, 0.5f)
     };
     #endregion
-
+    /*
     private void OnValidate()
     {
         switch (weaponType)
@@ -322,4 +322,5 @@ public class InventoryWeapon : EquippableItem
                 break;
         }
     }
+    */
 }
