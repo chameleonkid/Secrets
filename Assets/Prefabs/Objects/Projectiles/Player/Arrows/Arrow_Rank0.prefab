@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5877249715732768611}
   - component: {fileID: 8877344846437935194}
   - component: {fileID: -3089408764058353687}
-  - component: {fileID: 1093875635409310378}
   - component: {fileID: 5563122086878900068}
   - component: {fileID: -8076933543729483304}
   - component: {fileID: 5379144640911285020}
+  - component: {fileID: 4485100772497454147}
   m_Layer: 13
   m_Name: Arrow_Rank0
   m_TagString: arrow
@@ -135,22 +135,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5082146, y: 0.1900903}
   m_EdgeRadius: 0
---- !u!114 &1093875635409310378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015206087574396294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifetime: 5
-  projectileSpeed: 10
-  _rotationNeeded: 1
-  destroyDelay: 1
 --- !u!114 &5563122086878900068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,3 +260,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4485100772497454147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015206087574396294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c04c3750263eb41a8c28066cf5a5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 5
+  projectileSpeed: 7
+  _rotationNeeded: 1
+  destroyDelay: 1

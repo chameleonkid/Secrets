@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float lifetime;
     protected float lifetimeCountdown;
     [SerializeField] public float projectileSpeed;
-    [SerializeField] private bool _rotationNeeded;
+    [SerializeField] protected bool _rotationNeeded;
     public bool rotationNeeded => _rotationNeeded;
 
     [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
