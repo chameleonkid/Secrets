@@ -20,13 +20,18 @@ public class SinusProjectile : Projectile
     protected override void Update()
     {
         base.Update();
-        var rb = projectile.rigidbody;
 
         time += Time.deltaTime;
-        float x = rb.velocity.x;
-        float y = Mathf.Sin(time * frequency + phase) * amplitude;
-        Vector2 position = rb.position + new Vector2(x, y) * Time.deltaTime;
-        rb.MovePosition(position);
+        float x = rigidbody.velocity.x;
+        float y = Mathf.Sin(time * frequency) * amplitude;
+
+        if (Mathf.Abs(rigidbody.velocity.y) > Mathf.Abs(rigidbody.velocity.x))
+        {
+            x = rigidbody.velocity.y * Mathf.Sign(rigidbody.velocity.x);
+        }
+
+        Vector2 position = rigidbody.position + new Vector2(x, y) * Time.deltaTime;
+        rigidbody.MovePosition(position);
     }
 
 
