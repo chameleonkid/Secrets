@@ -29,6 +29,7 @@ public class InteractRiddle : Interactable
         }
     }
 
+
     public void InteractWithObject(int index)
     {
         if (!isSolved)
