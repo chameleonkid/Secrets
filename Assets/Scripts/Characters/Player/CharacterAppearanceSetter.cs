@@ -11,9 +11,7 @@ public class CharacterAppearanceSetter : MonoBehaviour
     [SerializeField] private SpriteSkinRPC bodySkin = default;
     [SerializeField] private SpriteSkinRPC armorSkin = default;
 
-    private Color hairColor;
-
-    private void Start() => SetAppearance();
+    private void Awake() => SetAppearance();
 
     private void SetAppearance()
     {
