@@ -479,9 +479,15 @@ public class PlayerMovement : Character, ICanMove
             {
                 yield return new WaitForSeconds(instantiationSpellbook.delayBetweenProjectiles);
             }
-            if(instantiationSpellbook.isRotating == true)
+        
+            if (instantiationSpellbook.isRotating)
             {
                 projectile.transform.SetParent(this.transform);
+            }
+
+            if (instantiationSpellbook.groupDirection)
+            {
+                projectile.groupDirection = GetAnimatorXY().normalized;
             }
         }
     }

@@ -6,12 +6,14 @@ public class SinusProjectile : Projectile
     [SerializeField] private float frequency = 1f;
     // [SerializeField] private float phase = 45f;  //! Unused
 
+    private Vector2 initialVelocity;
     private Vector2 axis;
     private float time = 0f;
 
     private void Start()
     {
-        axis = rigidbody.velocity.normalized;
+        initialVelocity = rigidbody.velocity;
+        axis = groupDirection.HasValue ? groupDirection.Value : initialVelocity.normalized;
     }
 
     protected override void Update()
@@ -20,7 +22,15 @@ public class SinusProjectile : Projectile
 
         //! Should this be in FixedUpdate?
         time += Time.deltaTime;
-        if (rigidbody) rigidbody.velocity = GetProjectileVelocity(axis, projectileSpeed, time, frequency, amplitude);
+
+        var velocity = GetProjectileVelocity(axis, projectileSpeed, time, frequency, amplitude);
+        //! Workaround to spread projectiles out, projectile speed becomes inaccurate
+        if (groupDirection.HasValue)
+        {
+            velocity += initialVelocity * projectileSpeed * Time.deltaTime;
+        }
+
+        if (rigidbody) rigidbody.velocity = velocity;
     }
 
     // https://old.reddit.com/r/Unity2D/comments/7qdmyq/sine_wave_projectile_movement/dsvjgim/
