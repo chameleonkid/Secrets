@@ -11,6 +11,7 @@ public class InstantiationSpellbook : InventorySpellbook
     public int amountOfProjectiles = 1;
     public float delayBetweenProjectiles = 0.1f;
     public float spreadAngle;
+    public bool groupDirection = true;
     public float radius;
     public bool isRotating;
 

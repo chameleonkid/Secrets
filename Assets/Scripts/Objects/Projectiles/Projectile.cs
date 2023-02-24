@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected bool _rotationNeeded;
     public bool rotationNeeded => _rotationNeeded;
 
+    public Vector2? groupDirection { get; set; }
+
     [Tooltip("How long to delay calling `Destroy` after hitting a collider.")]
     [SerializeField] protected float destroyDelay;
 

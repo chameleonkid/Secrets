@@ -1,41 +1,42 @@
 using UnityEngine;
+
 public class SinusProjectile : Projectile
 {
-    private Projectile projectile;
     [SerializeField] private float amplitude = 1f;
     [SerializeField] private float frequency = 1f;
-    [SerializeField] private float phase = 45f;
+    // [SerializeField] private float phase = 45f;  //! Unused
+
+    private Vector2 initialVelocity;
+    private Vector2 axis;
     private float time = 0f;
 
-
-    protected virtual void Awake()
+    private void Start()
     {
-        projectile = GetComponent<SinusProjectile>();
-        rigidbody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
-
-        lifetimeCountdown = lifetime;
+        initialVelocity = rigidbody.velocity;
+        axis = groupDirection.HasValue ? groupDirection.Value : initialVelocity.normalized;
     }
 
     protected override void Update()
     {
         base.Update();
 
+        //! Should this be in FixedUpdate?
         time += Time.deltaTime;
-        float x = rigidbody.velocity.x;
-        float y = Mathf.Sin(time * frequency) * amplitude;
 
-        if (Mathf.Abs(rigidbody.velocity.y) > Mathf.Abs(rigidbody.velocity.x))
+        var velocity = GetProjectileVelocity(axis, projectileSpeed, time, frequency, amplitude);
+        //! Workaround to spread projectiles out, projectile speed becomes inaccurate
+        if (groupDirection.HasValue)
         {
-            x = rigidbody.velocity.y * Mathf.Sign(rigidbody.velocity.x);
+            velocity += initialVelocity * projectileSpeed * Time.deltaTime;
         }
 
-        Vector2 position = rigidbody.position + new Vector2(x, y) * Time.deltaTime;
-        rigidbody.MovePosition(position);
+        if (rigidbody) rigidbody.velocity = velocity;
     }
 
-
-
-
-
+    // https://old.reddit.com/r/Unity2D/comments/7qdmyq/sine_wave_projectile_movement/dsvjgim/
+    private Vector2 GetProjectileVelocity(Vector2 forward, float speed, float time, float frequency, float amplitude) {
+        var up = new Vector2(-forward.y, forward.x);
+        float velocity = Mathf.Cos(time * frequency) * amplitude * frequency;
+        return up * velocity + forward * speed;
+    }
 }
