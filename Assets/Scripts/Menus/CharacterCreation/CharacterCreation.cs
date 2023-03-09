@@ -25,7 +25,6 @@ public class CharacterCreation : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] creatorMusic = default;
-    [SerializeField] private AudioClip buttonClick = default;
 
     [Header("Name")]
     [SerializeField] private TextMeshProUGUI characterName = default;
@@ -48,7 +47,6 @@ public class CharacterCreation : MonoBehaviour
     public void NextBody()
     {
         IncrementCounter(ref bodyCounter, activeTextures.bodySkins);
-        SoundManager.RequestSound(buttonClick);
         bodyChanger.newSprite = activeTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
     }
@@ -56,7 +54,6 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousBody()
     {
         DecrementCounter(ref bodyCounter, activeTextures.bodySkins);
-        SoundManager.RequestSound(buttonClick);
         bodyChanger.newSprite = activeTextures.bodySkins[bodyCounter];
         bodyChanger.ResetRenderer();
     }
@@ -64,7 +61,6 @@ public class CharacterCreation : MonoBehaviour
     public void NextHair()
     {
         IncrementCounter(ref hairCounter, activeTextures.hairStyles);
-        SoundManager.RequestSound(buttonClick);
         hairChanger.newSprite = activeTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
     }
@@ -72,7 +68,6 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousHair()
     {
         DecrementCounter(ref hairCounter, activeTextures.hairStyles);
-        SoundManager.RequestSound(buttonClick);
         hairChanger.newSprite = activeTextures.hairStyles[hairCounter];
         hairChanger.ResetRenderer();
     }
@@ -80,7 +75,6 @@ public class CharacterCreation : MonoBehaviour
     public void NextArmor()
     {
         IncrementCounter(ref armorCounter, activeTextures.armorSkins);
-        SoundManager.RequestSound(buttonClick);
         armorChanger.newSprite = activeTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
     }
@@ -88,7 +82,6 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousArmor()
     {
         DecrementCounter(ref armorCounter, activeTextures.armorSkins);
-        SoundManager.RequestSound(buttonClick);
         armorChanger.newSprite = activeTextures.armorSkins[armorCounter];
         armorChanger.ResetRenderer();
     }
@@ -96,7 +89,6 @@ public class CharacterCreation : MonoBehaviour
     public void NextEyes()
     {
         IncrementCounter(ref eyeCounter, activeTextures.eyeSkins);
-        SoundManager.RequestSound(buttonClick);
         eyeChanger.newSprite = activeTextures.eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
@@ -104,7 +96,6 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousEyes()
     {
         DecrementCounter(ref eyeCounter, activeTextures.eyeSkins);
-        SoundManager.RequestSound(buttonClick);
         eyeChanger.newSprite = activeTextures.eyeSkins[eyeCounter];
         eyeChanger.ResetRenderer();
     }
@@ -112,7 +103,6 @@ public class CharacterCreation : MonoBehaviour
     public void NextHairColor()
     {
         IncrementCounter(ref hairColorCounter, hairColor);
-        SoundManager.RequestSound(buttonClick);
         hairColorRenderer.color = hairColor[hairColorCounter];
         hairChanger.ResetRenderer();
     }
@@ -120,21 +110,20 @@ public class CharacterCreation : MonoBehaviour
     public void PreviousHairColor()
     {
         DecrementCounter(ref hairColorCounter, hairColor);
-        SoundManager.RequestSound(buttonClick);
         hairColorRenderer.color = hairColor[hairColorCounter];
         hairChanger.ResetRenderer();
     }
 
     public void ToMale()
     {
-        SoundManager.RequestSound(buttonClick);
+
         texturesCounter = 1;
         RefreshTextures();
     }
 
     public void ToFemale()
     {
-        SoundManager.RequestSound(buttonClick);
+
         texturesCounter = 0;
         RefreshTextures();
     }
@@ -172,7 +161,6 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.eyeFolderPath = activeTextures.eyeFolderPath;
         characterAppearance.bodyFolderPath = activeTextures.bodyFolderPath;
 
-        SoundManager.RequestSound(buttonClick);
         SceneManager.LoadScene("Intro");
     }
 
