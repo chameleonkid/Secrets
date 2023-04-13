@@ -24,7 +24,7 @@ public class GlobalLightManager : MonoBehaviour
             float intensityMultiplier = 1;
             if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.75f)
             {
-                intensityMultiplier = 0.05f;         // 0 = absolute Darkness 
+                intensityMultiplier = 0.124f;         // 0 = absolute Darkness 
             }
             else if (normalizedTimeOfDay <= 0.3f)
             {
@@ -40,7 +40,7 @@ public class GlobalLightManager : MonoBehaviour
         else if (SceneManager.GetActiveScene().name.Contains("Dungeon") || SceneManager.GetActiveScene().name.Contains("Cave"))
         {
             globalLight.intensity = 0.03f;   //This is the case for Houses / Taverns and so on
-        }                                                                 
+        }
         else
         {
             globalLight.intensity = 1;
