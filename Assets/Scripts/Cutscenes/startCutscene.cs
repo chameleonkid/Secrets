@@ -6,6 +6,8 @@ using UnityEngine.Timeline;
 
 public class startCutscene : MonoBehaviour
 {
+    [Header("Do you want to use another camera for the cutscene?")]
+    [SerializeField] private bool swapCamera = true;
     [SerializeField] private GameObject currentVCam;
     [SerializeField] private GameObject cutsceneVCam;
     [SerializeField] private float cutsceneDuration;
@@ -46,13 +48,19 @@ public class startCutscene : MonoBehaviour
         {
             cantMove.RuntimeValue = true;
         }
+        if(swapCamera == true)
+        {
+            currentVCam.SetActive(false);
+            cutsceneVCam.SetActive(true);
+        }
 
-        currentVCam.SetActive(false);
-        cutsceneVCam.SetActive(true);
         yield return new WaitForSecondsRealtime(cutsceneDuration);
+        if(swapCamera == true)
+        {
+            currentVCam.SetActive(true);
+            cutsceneVCam.SetActive(false);
+        }
 
-        currentVCam.SetActive(true);
-        cutsceneVCam.SetActive(false);
         if(cantMove)
         {
             cantMove.RuntimeValue = false;

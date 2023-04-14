@@ -653,9 +653,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    npcName: Priestress
-    sentences:
-    - You seem exhausted... Let me heal your wounds.
+    _speakers:
+    - _name: Healer
+      _textboxColor: {r: 1, g: 1, b: 1, a: 1}
+    _lines:
+    - _speakerIndex: 0
+      text: I will heal your wounds.
 --- !u!61 &2965117081566637280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -884,6 +887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdb70184050f2a44abba797972dd29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cantMove: {fileID: 0}
   _renderer: {fileID: 2965117082369274126}
   isShrinked: 0
   gotHitSound: []
@@ -906,6 +910,7 @@ MonoBehaviour:
   lookDown: 0
   lookLeft: 1
   lookRight: 0
+  isDead: 0
 --- !u!61 &2965117082369274122
 BoxCollider2D:
   m_ObjectHideFlags: 0

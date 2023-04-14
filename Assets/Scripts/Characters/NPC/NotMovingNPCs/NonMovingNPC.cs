@@ -6,6 +6,7 @@ public class NonMovingNPC : Character
     public override float health { get => 1; set { } }   //! Temp
 
     private Interactable interactable;
+    [SerializeField] private bool sitting = false;
     [SerializeField] private bool lookUp;
     [SerializeField] private bool lookDown;
     [SerializeField] private bool lookLeft;
@@ -16,7 +17,11 @@ public class NonMovingNPC : Character
     {
         base.Awake();
         interactable = GetComponent<Interactable>();
-        if(lookUp)
+        if (sitting)
+        {
+            animator.SetBool("isSitting", true );
+        }
+        if (lookUp)
         {
             animator.SetFloat("moveY", 1);
         }
