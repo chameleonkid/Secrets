@@ -10,6 +10,7 @@ public class startCutscene : MonoBehaviour
     [SerializeField] private GameObject cutsceneVCam;
     [SerializeField] private float cutsceneDuration;
     [SerializeField] private BoolValue cutSceneBool;
+    [Header("Use this only when the player must not be moved or animated")]
     [SerializeField] private BoolValue cantMove;
     public PlayableDirector playableDirector;
     public TimelineAsset timeLineToPlay;
@@ -41,14 +42,21 @@ public class startCutscene : MonoBehaviour
     {
         Debug.Log("Cutscene Started");
         //   Time.timeScale = 0;
-        cantMove.RuntimeValue = true;
+        if(cantMove)
+        {
+            cantMove.RuntimeValue = true;
+        }
+
         currentVCam.SetActive(false);
         cutsceneVCam.SetActive(true);
         yield return new WaitForSecondsRealtime(cutsceneDuration);
 
         currentVCam.SetActive(true);
         cutsceneVCam.SetActive(false);
-        cantMove.RuntimeValue = false;
+        if(cantMove)
+        {
+            cantMove.RuntimeValue = false;
+        }
         Debug.Log("Cutscene Ended");
     }
 
