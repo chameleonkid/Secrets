@@ -30,7 +30,6 @@ public class WaypointNPC : Character
     private void Start()
     {
         waitTimeSeconds = waitTime;
-        ChangeDirection();
     }
 
     private void Update()
@@ -60,12 +59,6 @@ public class WaypointNPC : Character
         }
     }
 
-    protected void ChangeDirection()
-    {
-        Vector3 directionVector = (waypoints[currentWaypointIndex].transform.position - transform.position).normalized;
-        animator.SetBool("isMoving", true);
-        SetAnimatorXY(directionVector);
-    }
 
     private void Move()
     {
@@ -100,13 +93,16 @@ public class WaypointNPC : Character
             // Move the NPC towards the next waypoint along the path
             Vector3 directionVector = (path.vectorPath[1] - transform.position).normalized;
             Vector3 temp = transform.position + directionVector * speed * Time.deltaTime;
+
             rigidbody.MovePosition(temp);
+            animator.SetBool("isMoving", true);
+            SetAnimatorXY(directionVector);
+            // ChangeDirection();
 
             // Check if the NPC has reached the current waypoint
             if (Vector3.Distance(transform.position, path.vectorPath[1]) <= 0.15f)
             {
                 path.vectorPath.RemoveAt(0);
-              //  ChangeDirection();
             }
         }
         else
