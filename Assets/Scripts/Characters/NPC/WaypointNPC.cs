@@ -15,16 +15,16 @@ public class WaypointNPC : Character
     private bool isMoving;
     private int currentWaypointIndex = 0;
 
-    private List<Vector3> pathPoints = new List<Vector3>(); // Store the points along the path
-    private int currentPathIndex = 0; // Keep track of the current point in the path
-
     private Interactable interactable;
+    private Seeker seeker;
+    private Path path;
 
     protected override void Awake()
     {
         base.Awake();
 
         interactable = GetComponent<Interactable>();
+        seeker = GetComponent<Seeker>();
     }
 
     private void Start()
@@ -38,6 +38,9 @@ public class WaypointNPC : Character
         if (isMoving)
         {
             Move();
+
+            // Set isMoving parameter on animator only when NPC is moving
+            animator.SetBool("isMoving", true);
         }
         else
         {
@@ -52,7 +55,7 @@ public class WaypointNPC : Character
                 {
                     currentWaypointIndex = 0;
                 }
-                ChangeDirection();
+                
             }
         }
     }
@@ -66,27 +69,47 @@ public class WaypointNPC : Character
 
     private void Move()
     {
+        // Get the start position
+        Vector3 startPosition = transform.position;
+
+        // Get the target position
         Vector3 targetPosition = waypoints[currentWaypointIndex].transform.position;
 
-        // Get the start and target nodes
-        GraphNode startNode = AstarPath.active.GetNearest(transform.position).node;
-        GraphNode targetNode = AstarPath.active.GetNearest(targetPosition).node;
-        Vector3 startPoint = (Vector3)startNode.position;
-        Vector3 targetPoint = (Vector3)targetNode.position;
-        // Create a new ABPath and set its start and end points
-        ABPath path = ABPath.Construct(startPoint, targetPoint, null);
-        path.heuristic = Heuristic.Manhattan;
-
         // Start the pathfinding calculation
-        AstarPath.StartPath(path);
+        seeker.StartPath(startPosition, targetPosition, OnPathComplete);
+    }
 
-        // Move the NPC towards the next waypoint along the path
-        Vector3 directionVector = (targetPosition - transform.position).normalized;
-        Vector3 temp = transform.position + directionVector * speed * Time.deltaTime;
-        rigidbody.MovePosition(temp);
+    private void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            path = p;
+            path.Claim(this);
+            path.vectorPath.Insert(0, transform.position);
+        }
+        else
+        {
+            Debug.LogError("Pathfinding error: " + p.errorLog);
+        }
+    }
 
-        // Check if the NPC has reached the target position
-        if (Vector3.Distance(transform.position, targetPosition) <= 0.05f)
+    private void FixedUpdate()
+    {
+        if (path != null && path.vectorPath != null && path.vectorPath.Count > 1)
+        {
+            // Move the NPC towards the next waypoint along the path
+            Vector3 directionVector = (path.vectorPath[1] - transform.position).normalized;
+            Vector3 temp = transform.position + directionVector * speed * Time.deltaTime;
+            rigidbody.MovePosition(temp);
+
+            // Check if the NPC has reached the current waypoint
+            if (Vector3.Distance(transform.position, path.vectorPath[1]) <= 0.05f)
+            {
+                path.vectorPath.RemoveAt(0);
+                ChangeDirection();
+            }
+        }
+        else
         {
             isMoving = false;
         }
