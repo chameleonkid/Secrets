@@ -13,7 +13,7 @@ public class WaypointNPC : Character
     public float waitTime;
     private float waitTimeSeconds;
     private bool isMoving;
-    private int currentWaypointIndex = 0;
+    [SerializeField] private int currentWaypointIndex = 0;
 
     private Interactable interactable;
     private Seeker seeker;
@@ -103,10 +103,10 @@ public class WaypointNPC : Character
             rigidbody.MovePosition(temp);
 
             // Check if the NPC has reached the current waypoint
-            if (Vector3.Distance(transform.position, path.vectorPath[1]) <= 0.05f)
+            if (Vector3.Distance(transform.position, path.vectorPath[1]) <= 0.15f)
             {
                 path.vectorPath.RemoveAt(0);
-                ChangeDirection();
+              //  ChangeDirection();
             }
         }
         else
