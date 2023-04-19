@@ -12,15 +12,28 @@ public class NonMovingNPC : Character
     [SerializeField] private bool lookLeft;
     [SerializeField] private bool lookRight;
     [SerializeField] private bool isDead;
+    [SerializeField] private bool isHappy;
+    [SerializeField] private bool isNodding;
+    [SerializeField] private bool isCasting;
+
+    public enum CharacterAnimationState
+    {
+        Idle,
+        Sitting,
+        Dead,
+        Happy,
+        Nodding,
+        Casting
+    }
+
+    [SerializeField] private CharacterAnimationState animationState = CharacterAnimationState.Idle;
+
 
     protected override void Awake()
     {
         base.Awake();
         interactable = GetComponent<Interactable>();
-        if (sitting)
-        {
-            animator.SetBool("isSitting", true );
-        }
+ 
         if (lookUp)
         {
             animator.SetFloat("moveY", 1);
@@ -37,9 +50,25 @@ public class NonMovingNPC : Character
         {
             animator.SetFloat("moveX", 1);
         }
-        if (isDead)
+        switch (animationState)
         {
-            animator.Play("Dead");
+            case CharacterAnimationState.Sitting:
+                animator.SetBool("isSitting", true);
+                break;
+            case CharacterAnimationState.Dead:
+                animator.Play("Dead");
+                break;
+            case CharacterAnimationState.Happy:
+                animator.Play("Happy");
+                break;
+            case CharacterAnimationState.Nodding:
+                animator.Play("Nodding");
+                break;
+            case CharacterAnimationState.Casting:
+                animator.Play("Casting");
+                break;
+            default:
+                break;
         }
     }
 }
