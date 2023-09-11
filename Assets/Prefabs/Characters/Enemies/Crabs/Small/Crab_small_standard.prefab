@@ -148,10 +148,12 @@ GameObject:
   - component: {fileID: 8408525163490821888}
   - component: {fileID: 2215355715791544353}
   - component: {fileID: 5082105290223155650}
-  - component: {fileID: 4360647280505269696}
   - component: {fileID: 7903639051881027017}
   - component: {fileID: 3878551121055678182}
   - component: {fileID: 7125192012719025578}
+  - component: {fileID: 3820800842636301374}
+  - component: {fileID: 4506719721787810999}
+  - component: {fileID: 6643640162948915505}
   m_Layer: 8
   m_Name: Crab_small_standard
   m_TagString: enemy
@@ -166,7 +168,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573048260325834991}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -314,67 +316,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4360647280505269696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573048260325834991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42c76a0b163862b49926041d3632cb16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
-  _renderer: {fileID: 7382479373077017145}
-  isShrinked: 0
-  gotHitSound:
-  - {fileID: 8300000, guid: c13ec90dc381aa442bd3fa7ee66d89b0, type: 3}
-  attackSounds:
-  - {fileID: 8300000, guid: 393b532359ff7e946b98466ed0470b35, type: 3}
-  - {fileID: 8300000, guid: 5af0ffcd2bd8fb84d8dabecbc362b446, type: 3}
-  deathSounds: []
-  inRangeSounds:
-  - {fileID: 8300000, guid: 99a7404bb65be254395cd520b0ecb3f1, type: 3}
-  meeleCooldown: 0
-  spellCooldown: 0
-  spellTwoCooldown: 0
-  spellThreeCooldown: 0
-  _slow: {fileID: 2653010063542994852}
-  _shrink: {fileID: 8037119966998146604}
-  _gigantism: {fileID: 3737949894032950618}
-  _dashless: {fileID: 0}
-  _poison: {fileID: 0}
-  _maxDashDistance: 4
-  _dashDuration: 4
-  _canDash: 1
-  healthbar: {fileID: 0}
-  levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
-  enemyXp: 5
-  maxHealth: {fileID: 11400000, guid: c5ae587e9965ce04da8487d1214e773b, type: 2}
-  _health: 0
-  isWalking: 0
-  walkingTimer: 3
-  isMinion: 0
-  enemyName: 
-  moveSpeed: 0.75
-  homePosition: {x: 0, y: 0}
-  roamingPosition: {x: 0, y: 0, z: 0}
-  chaseRadius: 5
-  attackRadius: 0.8
-  deathEffect: {fileID: 3860901741780697628, guid: e40eec72114b0a94db628f00ec69c269,
-    type: 3}
-  deathEffectDelay: 1
-  roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
-  thisLoot: {fileID: 11400000, guid: 8dd99c450b9cddf448fa214f7b003792, type: 2}
-  target: {fileID: 0}
-  nextWaypointDistance: 0.5
-  currentWaipoint: 0
-  reachedEndOfPath: 0
-  seeker: {fileID: 0}
-  leftChaseRadius: 1
-  attackCoolDown: 0
 --- !u!114 &7903639051881027017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +371,93 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &3820800842636301374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573048260325834991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ddc1f9c2f110154aabebc0da6b9d2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
+  _renderer: {fileID: 7382479373077017145}
+  isShrinked: 0
+  gotHitSound: []
+  attackSounds: []
+  deathSounds: []
+  inRangeSounds: []
+  meeleCooldown: 0
+  spellCooldown: 0
+  spellTwoCooldown: 0
+  spellThreeCooldown: 0
+  _slow: {fileID: 2653010063542994852}
+  _shrink: {fileID: 8037119966998146604}
+  _gigantism: {fileID: 3737949894032950618}
+  _dashless: {fileID: 0}
+  _poison: {fileID: 0}
+  _maxDashDistance: 4
+  _dashDuration: 4
+  _canDash: 1
+  healthbar: {fileID: 0}
+  levelSystem: {fileID: 11400000, guid: 2c9225906cabd5942897167abfa07358, type: 2}
+  enemyXp: 3
+  maxHealth: {fileID: 11400000, guid: 5574c8f4f04003545b68b09e2dc70343, type: 2}
+  _health: 0
+  isWalking: 0
+  walkingTimer: 3
+  isMinion: 0
+  enemyName: 
+  moveSpeed: 2
+  homePosition: {x: 0, y: 0}
+  roamingPosition: {x: 0, y: 0, z: 0}
+  chaseRadius: 0
+  attackRadius: 0
+  deathEffect: {fileID: 3860901741780697628, guid: e40eec72114b0a94db628f00ec69c269,
+    type: 3}
+  deathEffectDelay: 1
+  roomSignal: {fileID: 11400000, guid: 7434348e64d56fb42987d433c8f4f9c7, type: 2}
+  thisLoot: {fileID: 11400000, guid: ff3a84c0c81f85f46afe78367c94c977, type: 2}
+  target: {fileID: 0}
+  nextWaypointDistance: 0.5
+  currentWaipoint: 0
+  reachedEndOfPath: 0
+  seeker: {fileID: 0}
+  leftChaseRadius: 1
+  homePoint: {x: 0, y: 0, z: 0}
+  roamAreaSize: {x: 3, y: 3}
+--- !u!114 &4506719721787810999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573048260325834991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 2
+--- !u!114 &6643640162948915505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573048260325834991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bf693d98374cc4fbbe702709475c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  force: 3
+  duration: 0.2
 --- !u!1 &2216911549825925743
 GameObject:
   m_ObjectHideFlags: 0
