@@ -5,19 +5,20 @@ using Pathfinding;
 
 public class WaypointNPC : Character
 {
-    public override float health { get => 1; set { } }   //! Temp
-
+    public override float health { get => 1; set { } } // Temporary
     [Header("Waypoint NPC")]
     public float speed;
     public GameObject[] waypoints;
     public float waitTime;
     private float waitTimeSeconds;
-    private bool isMoving;
-    [SerializeField] private int currentWaypointIndex = 0;
+    private int currentWaypointIndex = 0;
 
     private Interactable interactable;
     private Seeker seeker;
     private Path path;
+
+    private bool isMoving = false;
+    private bool isCalculatingPath = false;
 
     protected override void Awake()
     {
@@ -30,49 +31,61 @@ public class WaypointNPC : Character
     private void Start()
     {
         waitTimeSeconds = waitTime;
+        CalculatePath(); // Calculate the initial path
     }
 
     private void Update()
     {
-        if (isMoving)
+        // Only update isMoving here
+        if (path != null && path.vectorPath != null && path.vectorPath.Count > 1)
         {
-            Move();
-            // Set isMoving parameter on animator only when NPC is moving
-            animator.SetBool("isMoving", true);
+            isMoving = true; // Start moving if a valid path exists
         }
         else
         {
-            animator.SetBool("isMoving", false);
+            isMoving = false;
+            // Handle waitTime and waypoint switching here
             waitTimeSeconds -= Time.deltaTime;
-            if (waitTimeSeconds <= 0)
+            if (!isCalculatingPath && waitTimeSeconds <= 0)
             {
-                isMoving = true;
                 waitTimeSeconds = waitTime;
-                currentWaypointIndex++;
-                if (currentWaypointIndex >= waypoints.Length)
-                {
-                    currentWaypointIndex = 0;
-                }
-                
+                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+                CalculatePath(); // Calculate a new path when it's time to move
+            }
+        }
+
+        animator.SetBool("isMoving", isMoving);
+    }
+
+    private void FixedUpdate()
+    {
+        if (path != null && path.vectorPath != null && path.vectorPath.Count > 1)
+        {
+            Vector3 directionVector = (path.vectorPath[1] - transform.position).normalized;
+            Vector3 temp = transform.position + directionVector * speed * Time.fixedDeltaTime;
+            rigidbody.MovePosition(temp);
+            SetAnimatorXY(directionVector);
+
+            if (Vector3.Distance(transform.position, path.vectorPath[1]) <= 0.15f)
+            {
+                path.vectorPath.RemoveAt(0);
             }
         }
     }
 
-
-    private void Move()
+    private void CalculatePath()
     {
-        // Get the start position
         Vector3 startPosition = transform.position;
-
-        // Get the target position
         Vector3 targetPosition = waypoints[currentWaypointIndex].transform.position;
 
-        // Start the pathfinding calculation
+        isCalculatingPath = true;
         seeker.StartPath(startPosition, targetPosition, OnPathComplete);
     }
 
     private void OnPathComplete(Path p)
     {
+        isCalculatingPath = false;
+
         if (!p.error)
         {
             path = p;
@@ -82,30 +95,6 @@ public class WaypointNPC : Character
         else
         {
             Debug.LogError("Pathfinding error: " + p.errorLog);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (path != null && path.vectorPath != null && path.vectorPath.Count > 1 && isMoving==true)
-        {
-            // Move the NPC towards the next waypoint along the path
-            Vector3 directionVector = (path.vectorPath[1] - transform.position).normalized;
-            Vector3 temp = transform.position + directionVector * speed * Time.deltaTime;
-
-            rigidbody.MovePosition(temp);
-            animator.SetBool("isMoving", true);
-            SetAnimatorXY(directionVector);
-
-            // Check if the NPC has reached the current waypoint
-            if (Vector3.Distance(transform.position, path.vectorPath[1]) <= 0.15f)
-            {
-                path.vectorPath.RemoveAt(0);
-            }
-        }
-        else
-        {
-            isMoving = false;
         }
     }
 }
