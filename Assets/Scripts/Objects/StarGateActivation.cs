@@ -8,6 +8,9 @@ public class StarGateActivation : Interactable
     [SerializeField] private  Sprite activeSprite;
     [SerializeField] private Sprite inActiveSprite;
     [SerializeField] private GameObject starGatePanel;
+    [SerializeField] private StargateButtonMenu stargateMenu;
+
+
 
     // Collider2D reference for the Stargate
     private Collider2D stargateCollider;
@@ -27,11 +30,12 @@ public class StarGateActivation : Interactable
         stargateCollider = GetComponent<Collider2D>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (playerInRange && player.inputInteract && Time.timeScale > 0)
+        if (playerInRange == true && player.inputInteract && CanvasManager.Instance.IsFreeOrActive(starGatePanel) && Time.timeScale > 0)
         {
-            Debug.Log("Update: Player in range, input detected, and time scale > 0");
+            //refresh all Buttons in Startgate UI
+            stargateMenu.ActivateButtons();
 
             if (starGatePanel != null)
             {
@@ -40,6 +44,7 @@ public class StarGateActivation : Interactable
                 starGatePanel.SetActive(true);
                 Time.timeScale = 0f;
             }
+
         }
     }
 

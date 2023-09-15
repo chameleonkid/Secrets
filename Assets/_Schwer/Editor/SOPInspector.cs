@@ -63,6 +63,7 @@ public class SOPInspector : Editor {
         var manaCrystals = new List<BoolValue>();
         var cutscenes = new List<BoolValue>();
         var quests = new List<BoolValue>();
+        var stargates = new List<BoolValue>();
 
         for (int i = 0; i < bools.Length; i++) {
             var path = AssetDatabase.GetAssetPath(bools[i]);
@@ -96,6 +97,10 @@ public class SOPInspector : Editor {
             {
                 quests.Add(bools[i]);
             }
+            else if (path.Contains("Stargates"))
+            {
+                stargates.Add(bools[i]);
+            }
         }
 
         ReflectionUtility.SetPrivateField(sop, "_chests", chests.ToArray());
@@ -106,6 +111,7 @@ public class SOPInspector : Editor {
         ReflectionUtility.SetPrivateField(sop, "_manaCrystals", manaCrystals.ToArray());
         ReflectionUtility.SetPrivateField(sop, "_cutscenes", cutscenes.ToArray());
         ReflectionUtility.SetPrivateField(sop, "_quests", quests.ToArray());
+        ReflectionUtility.SetPrivateField(sop, "_stargates", stargates.ToArray());
 
         var inventories = AssetsUtility.FindAllAssets<Inventory>();
         var vendorInventories = new List<ScriptableObjectPersistence.VendorInventorySet>();

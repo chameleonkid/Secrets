@@ -27,14 +27,7 @@ public class StargateButtonMenu : MonoBehaviour
         InitializeStargatePostionMap();
 
         // Add listeners to each stargate button to handle button clicks
-        for (int i = 0; i < stargateButtons.Length; i++)
-        {
-            //check if Stargate is active
-            bool isActivated = starGateActivation[i].RuntimeValue;
-            stargateButtons[i].interactable = isActivated;
-            string stargateName = "Stargate" + (i + 1); // Stargate names start from "Stargate1"
-            stargateButtons[i].onClick.AddListener(() => TeleportToStargate(stargateName));
-        }
+        ActivateButtons();
 
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         if (playerMovement != null)
@@ -83,17 +76,30 @@ public class StargateButtonMenu : MonoBehaviour
         // Add mappings for all stargates...
     }
 
+    public void ActivateButtons()
+    {
+        for (int i = 0; i < stargateButtons.Length; i++)
+        {
+            //check if Stargate is active
+            bool isActivated = starGateActivation[i].RuntimeValue;
+            stargateButtons[i].interactable = isActivated;
+            string stargateName = "Stargate" + (i + 1); // Stargate names start from "Stargate1"
+            stargateButtons[i].onClick.AddListener(() => TeleportToStargate(stargateName));
+        }
+    }
+
+
     private void TeleportToStargate(string stargateName)
     {
+        Time.timeScale = 1f;
         // Check if the stargate name exists in the dictionary
         if (stargateSceneMap.ContainsKey(stargateName))
         {
-            if(stargatePositionMap.ContainsKey(stargateName))
+            if (stargatePositionMap.ContainsKey(stargateName))
             {
                 string sceneName = stargateSceneMap[stargateName];
                 Debug.Log("Loading scene: " + sceneName);
                 playerPosMemory.value = stargatePositionMap[stargateName];
-                Time.timeScale = 1f;
                 SceneManager.LoadScene(sceneName);
             }
             else
