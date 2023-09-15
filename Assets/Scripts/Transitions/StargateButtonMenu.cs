@@ -8,6 +8,8 @@ public class StargateButtonMenu : MonoBehaviour
     public VectorValue playerPosMemory;
     public BoolValue[] starGateActivation = new BoolValue[10];
 
+    [SerializeField] private Button currentlySelectedButton;
+
     // Public variables to reference the stargate buttons
     [SerializeField] private Button[] stargateButtons = new Button[10];
     [SerializeField] private Button startgateExitButton;
@@ -36,6 +38,25 @@ public class StargateButtonMenu : MonoBehaviour
         }
 
         startgateExitButton.onClick.AddListener(() => ClosePanel());
+
+        currentlySelectedButton = FindFirstActiveButton();
+        if (currentlySelectedButton != null)
+        {
+            currentlySelectedButton.Select();
+        }
+
+    }
+
+    private Button FindFirstActiveButton()
+    {
+        for (int i = 0; i < stargateButtons.Length; i++)
+        {
+            if (stargateButtons[i].interactable)
+            {
+                return stargateButtons[i];
+            }
+        }
+        return null;
     }
 
     private void ClosePanel()
