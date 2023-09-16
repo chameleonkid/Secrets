@@ -61,6 +61,7 @@ public class StargateButtonMenu : MonoBehaviour
 
     private void ClosePanel()
     {
+        CanvasManager.Instance.RegisterClosedCanvas(startgatePanel);
         Debug.Log("Closing StargatePanel");
         Time.timeScale = 1f;
         startgatePanel.SetActive(false);
@@ -118,6 +119,7 @@ public class StargateButtonMenu : MonoBehaviour
         {
             if (stargatePositionMap.ContainsKey(stargateName))
             {
+                CanvasManager.Instance.RegisterClosedCanvas(startgatePanel);
                 string sceneName = stargateSceneMap[stargateName];
                 Debug.Log("Loading scene: " + sceneName);
                 playerPosMemory.value = stargatePositionMap[stargateName];
