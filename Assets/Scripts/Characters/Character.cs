@@ -159,13 +159,13 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
         }
     }
 
-    public void Dash(Character character, Vector2 forceDirection) => StartCoroutine(DashCo(character, forceDirection));
+    public void Dash(Character character, Vector2 forceDirection, float dashForce) => StartCoroutine(DashCo(character, forceDirection, dashForce));
 
-    private IEnumerator DashCo(Character character, Vector2 forceDirection)
+    private IEnumerator DashCo(Character character, Vector2 forceDirection, float dashForce)
     {
         for (int i = 0; i <= dashDuration; i++)
         {
-            character.rigidbody.AddForce(forceDirection.normalized * 2000f);
+            character.rigidbody.AddForce(forceDirection.normalized * dashForce);
             character.rigidbody.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.01f);
         }

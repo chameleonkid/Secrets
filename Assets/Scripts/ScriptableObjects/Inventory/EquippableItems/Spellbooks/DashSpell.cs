@@ -4,21 +4,20 @@
 public class DashSpell : InventorySpellbook
 {
     private Collider2D characterCollider;
+    [SerializeField] private float dashForce;
 
     public void Dash(Character character)
     {
         characterCollider = character.GetComponent<Collider2D>();
-        Vector2 facingDirection = character.GetAnimatorXY();
-        Vector2 temp;
-        temp.x = facingDirection.x * character.maxDashDistance;
-        temp.y = facingDirection.y * character.maxDashDistance;
-        Vector2 dashTarget = (Vector2)character.transform.position + temp;
+        character.GetComponent<Animator>().SetTrigger("isDashing");
+        Vector2 facingDirection = character.GetAnimatorXY().normalized; // Normalize the direction vector
+        Vector2 dashTarget = (Vector2)character.transform.position + facingDirection * dashForce; // Scale by dash distance
         // Debug.Log("Player is at: " + character.transform.position);
         // Debug.Log("DashTarget it at: " + dashTarget);
         if (character.canDash)
         {
             // Debug.Log("Dashing to " + dashTarget);
-            character.Dash(character, temp);
+            character.Dash(character, facingDirection ,dashForce);
             // character.TeleportTowards(dashTarget, character.maxDashDistance * character.speedModifier);
         }
     }
