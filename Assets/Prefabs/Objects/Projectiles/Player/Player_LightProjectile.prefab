@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1243532829327675091}
   - component: {fileID: 1628679738}
   - component: {fileID: 5731063607526565812}
+  - component: {fileID: 3348914527755396887}
   m_Layer: 13
   m_Name: Player_LightProjectile
   m_TagString: spell
@@ -54,6 +55,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -75,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -509375507
-  m_SortingLayer: -1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: e157c77ce6a1c7c4fbc913ab937051c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -284,6 +286,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1000
   clockWise: 1
+  objectToDeactivate: {fileID: 0}
+  deactivationAngle: 0
+  deactivationAngle2: 0
 --- !u!114 &5731063607526565812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,3 +305,18 @@ MonoBehaviour:
   projectileSpeed: 10
   _rotationNeeded: 1
   destroyDelay: 0
+--- !u!114 &3348914527755396887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755954809695844891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffc54e3aeb720143a38ef67408e76aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialForceMagnitude: 10
+  homingDelay: 0.25
+  directionChangeSpeed: 6

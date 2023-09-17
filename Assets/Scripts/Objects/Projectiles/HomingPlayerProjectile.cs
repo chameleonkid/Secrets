@@ -7,7 +7,7 @@ public class HomingPlayerProjectile : MonoBehaviour
     private Projectile projectile;
     [SerializeField] private float initialForceMagnitude = 10;
     [SerializeField] private float homingDelay = 0.25f;
-    [SerializeField] private float directionChangeSpeed = 2.0f; // Adjust as needed
+    [SerializeField] private float directionChangeSpeed = 6.0f; // Adjust as needed
 
     private Rigidbody2D rb; // Rigidbody2D for arrow
 
