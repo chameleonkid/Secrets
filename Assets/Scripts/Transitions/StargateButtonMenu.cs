@@ -85,8 +85,8 @@ public class StargateButtonMenu : MonoBehaviour
     private void InitializeStargatePostionMap()
     {
         // Populate the dictionary with stargate names and their corresponding positions
-        stargatePositionMap.Add("Stargate1", new Vector2(0, 0));
-        stargatePositionMap.Add("Stargate2", new Vector2(1, 1));
+        stargatePositionMap.Add("Stargate1", new Vector2(0, -1.5f));
+        stargatePositionMap.Add("Stargate2", new Vector2(0, -1.5f));
         stargatePositionMap.Add("Stargate3", new Vector2(2, 2));
         stargatePositionMap.Add("Stargate4", new Vector2(3, 3));
         stargatePositionMap.Add("Stargate5", new Vector2(4, 4));
