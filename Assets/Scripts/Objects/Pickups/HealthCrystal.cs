@@ -23,6 +23,7 @@ public class HealthCrystal : PickUp
         player.healthMeter.max += amountToIncrease;
         player.health = player.healthMeter.max;
         isPickedUp = true;
+        SoundManager.RequestSound(pickUpSound);
         Destroy(this.gameObject);
     }
 }
