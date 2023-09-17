@@ -5,7 +5,6 @@ public class Harbor : ComponentTrigger<ShipMovement>
 {
     protected override bool? needOtherIsTrigger => true;
 
-    [SerializeField] private AudioClip harborInRangeSound;
     [SerializeField] private AudioClip enterHarborSound;
     [SerializeField] private VectorValue playerPos;
 
@@ -26,16 +25,6 @@ public class Harbor : ComponentTrigger<ShipMovement>
                 SoundManager.RequestSound(enterHarborSound);
             }
             SceneManager.LoadScene(sceneToLoad);
-        }
-    }
-
-    protected override void OnEnter(ShipMovement ship)
-    {
-        this.ship = ship;
-        Debug.Log("isInHarborRange");
-        if (harborInRangeSound)
-        {
-            SoundManager.RequestSound(harborInRangeSound);
         }
     }
 

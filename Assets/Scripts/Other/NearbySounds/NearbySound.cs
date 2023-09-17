@@ -6,13 +6,23 @@ public class NearbySound : MonoBehaviour
     public float maxVolume = 0.5f; // Adjust the maximum volume
     public float minVolume = 0.1f; // Adjust the minimum volume
     public AnimationCurve volumeCurve; // You can adjust this curve in the Inspector
-    private Transform player;
+    [SerializeField] private Transform player;
     private AudioSource audioSource;
     private bool hasPlayedAnimationEventSound = false; // Flag to track if animation event sound has been played
 
     private void Start()
     {
-        player = FindObjectOfType<PlayerMovement>().transform; // Adjust this to find your player object.
+        if(FindObjectOfType<PlayerMovement>())
+        {
+            Debug.Log("A Playerobject was found");
+            player = FindObjectOfType<PlayerMovement>().transform; // Adjust this to find your player object.
+        }
+        if (FindObjectOfType<ShipMovement>())
+        {
+            Debug.Log("A Shipobject was found");
+            player = FindObjectOfType<ShipMovement>().transform; // Adjust this to find your player object.
+        }
+
         audioSource = GetComponent<AudioSource>();
     }
 
