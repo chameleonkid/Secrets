@@ -516,6 +516,12 @@ public class PlayerMovement : Character, ICanMove
         clipCollider.enabled = !clipCollider.enabled;
     }
 
+    public Vector2 GetFacingDirection()
+    {
+        Vector2 facingDirection = this.GetAnimatorXY().normalized;
+        return facingDirection;
+    }
+
     #region UI Controls
     public void InputAttack() => uiInput.attack = true;
     public void InputSpell1() => uiInput.spellCast1 = true;
