@@ -12,7 +12,10 @@ public class ChargeEnemy : Enemy
     [SerializeField] private float chargeSpeed = 10;
     [SerializeField] private float chargeThreshhold = 0.25f;
     [SerializeField] private float chargeCastTime = 1f;
-    [SerializeField] private float chargeRecoverTime = 3f;
+    [SerializeField] private float chargeRecoverTime = 2f;
+    [SerializeField] private float chargeCoolDown = 5f;
+    [SerializeField] private float chargeCoolDownTimer = 5f;
+
 
     [SerializeField] private AudioClip chargeSound;
     protected override void FixedUpdate()
@@ -71,12 +74,21 @@ public class ChargeEnemy : Enemy
         }
         else if (distance <= chaseRadius && distance <= attackRadius)
         {
-            if ((currentStateEnum == StateEnum.idle || currentStateEnum == StateEnum.walk) && currentStateEnum != StateEnum.stagger)
-            {
-                AttackPlayer();
-            }
+
+                if(chargeCoolDownTimer > 0)
+                {
+                    randomMovement();             
+                }
+                else
+                {
+                    if(!isCharging)
+                    {
+                    AttackPlayer();
+                    }
+                }
+
         }
-        else if (distance >= chaseRadius && distance >= attackRadius)
+        else if (distance >= chaseRadius)
         {
             leftChaseRadius = true;
             randomMovement();
@@ -85,6 +97,7 @@ public class ChargeEnemy : Enemy
 
     public void Update()
     {
+        chargeCoolDownTimer = chargeCoolDownTimer - Time.deltaTime;
         if ((transform.position - chargeDestination).magnitude < chargeThreshhold)
         {
             rigidbody.velocity = Vector2.zero; //If reached Chargedestination stop NOT WORKING!?
@@ -92,8 +105,7 @@ public class ChargeEnemy : Enemy
     }
 
     public IEnumerator ChargeCo()
-    {
-        
+    {     
         animator.SetBool("isMoving", false);
         isCharging = true;
         currentStateEnum = StateEnum.attack;
@@ -106,10 +118,11 @@ public class ChargeEnemy : Enemy
         animator.SetTrigger("isCoolingDown");
         Debug.Log("I charged!");
         yield return new WaitForSeconds(chargeRecoverTime); // Stay at Chargedestination for a while and 
+        chargeCoolDownTimer = chargeCoolDown;
         animator.SetBool("isMoving", true);
         isCharging = false;
         hasPlayerPosition = false;
-        currentStateEnum = StateEnum.idle;
+      //  currentStateEnum = StateEnum.idle;
         Debug.Log("I waited X seconds and charge again!");
     }
     

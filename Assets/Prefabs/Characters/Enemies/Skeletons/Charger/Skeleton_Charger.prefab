@@ -201,7 +201,6 @@ GameObject:
   - component: {fileID: 3417232398068481724}
   - component: {fileID: 1511687850008860534}
   - component: {fileID: 7208431433269881573}
-  - component: {fileID: 6723765579556086443}
   - component: {fileID: 3417232398068481716}
   - component: {fileID: 3417232398068481717}
   - component: {fileID: 3417232398068481718}
@@ -404,34 +403,6 @@ MonoBehaviour:
   newSprite: {fileID: 2800000, guid: e5edf376a50c56a44a74608da58b6dde, type: 3}
   folderPath: Retro Pixel Monsters/Spritesheets/
   useColorOutline: 1
---- !u!114 &6723765579556086443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3417232398068481727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
 --- !u!114 &3417232398068481716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +468,8 @@ MonoBehaviour:
   chargeThreshhold: 0.25
   chargeCastTime: 1.5
   chargeRecoverTime: 3
+  chargeCoolDown: 5
+  chargeCoolDownTimer: 5
   chargeSound: {fileID: 8300000, guid: 487f6670089a55447b190751f6728e5c, type: 3}
 --- !u!114 &3417232398068481717
 MonoBehaviour:
