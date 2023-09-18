@@ -7,13 +7,14 @@ using Schwer.States;
 public class Enemy : Character, ICanKnockback
 {
     [Header("Enemy Stats")]
-    [SerializeField] private HealthbarBehaviour healthbar;
+  //  [SerializeField] private HealthbarBehaviour healthbar;
     [SerializeField] protected XPSystem levelSystem = default;
     [SerializeField] protected int enemyXp = default;
     [SerializeField] protected FloatValue maxHealth = default;
     [SerializeField] private float _health;
     [SerializeField] protected bool isWalking;
     [SerializeField] protected float walkingTimer = 3f;
+    [SerializeField] protected HealthbarBehaviour healthbar;
 
     public event Action OnEnemyTakeDamage;
     public event Action OnEnemyDied;
@@ -35,12 +36,14 @@ public class Enemy : Character, ICanKnockback
 
             if (value < _health)
             {
-                if (healthbar)
-                {
-                    healthbar.SetHealth(health, maxHealth.value);
-                }
                 chaseRadius = originalChaseRadius * 5;
                 OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )
+                //if a healthbar is attached - update it!
+                if(healthbar)
+                {
+                    healthbar.gameObject.SetActive(true);
+                    healthbar.UpdateHealthBar(value, maxHealth.value);
+                }
 
             }
 
@@ -92,15 +95,15 @@ public class Enemy : Character, ICanKnockback
     protected override void Awake()
     {
         base.Awake();
-        healthbar = this.GetComponentInChildren<HealthbarBehaviour>();
         homePosition = transform.position;
         health = maxHealth.value;
         originalChaseRadius = chaseRadius;
         target = GameObject.FindWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
-
         roamingPosition = GetRoamingPostion();
+        healthbar = GetComponentInChildren<HealthbarBehaviour>();
+        healthbar.gameObject.SetActive(false);
     }
 
 
@@ -352,4 +355,5 @@ public class Enemy : Character, ICanKnockback
     {
         return this.maxHealth.value;
     }
+
 }
