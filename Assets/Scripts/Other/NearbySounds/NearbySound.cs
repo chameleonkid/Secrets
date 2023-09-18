@@ -14,12 +14,12 @@ public class NearbySound : MonoBehaviour
     {
         if(FindObjectOfType<PlayerMovement>())
         {
-            Debug.Log("A Playerobject was found");
+         //   Debug.Log("A Playerobject was found");
             player = FindObjectOfType<PlayerMovement>().transform; // Adjust this to find your player object.
         }
         if (FindObjectOfType<ShipMovement>())
         {
-            Debug.Log("A Shipobject was found");
+        //    Debug.Log("A Shipobject was found");
             player = FindObjectOfType<ShipMovement>().transform; // Adjust this to find your player object.
         }
 

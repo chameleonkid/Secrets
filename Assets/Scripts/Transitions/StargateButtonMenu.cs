@@ -32,9 +32,9 @@ public class StargateButtonMenu : MonoBehaviour
         ActivateButtons();
 
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
-        if (playerMovement != null)
+        if (playerMovement == null)
         {
-           Debug.Log("Player for Stargate found");
+          Debug.Log("Np Player for Stargate found");
         }
 
         startgateExitButton.onClick.AddListener(() => ClosePanel());
