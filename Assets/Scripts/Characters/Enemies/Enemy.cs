@@ -28,6 +28,7 @@ public class Enemy : Character, ICanKnockback
             if (value > maxHealth.value)
             {
                 value = maxHealth.value;
+                healthbar.UpdateHealthBar(value, maxHealth.value);
             }
             else if (value < 0)
             {
