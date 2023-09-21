@@ -9,6 +9,7 @@ public class EnemyBoss : Character
     [SerializeField] protected FloatValue maxHealth = default;
     [SerializeField] private float _health;
     [SerializeField] private GameObject openEntrance;
+    [SerializeField] protected HealthbarBehaviour healthbar;
     public event Action OnEnemyTakeDamage;
     public event Action OnBossDied;
     [Header("BossFight-Values")]
@@ -23,6 +24,7 @@ public class EnemyBoss : Character
             if (value > maxHealth.value)
             {
                 value = maxHealth.value;
+                healthbar.UpdateHealthBar(value, maxHealth.value);
             }
             else if (value < 0)
             {
@@ -32,6 +34,11 @@ public class EnemyBoss : Character
             if (value < _health)
             {
                 OnEnemyTakeDamage?.Invoke();                                //Signal for when enemys take dmg (hopefully :) )                                                                            // Need to prevent the enemy from moving and set idle/moving Anim
+                if (healthbar)
+                {
+                    healthbar.gameObject.SetActive(true);
+                    healthbar.UpdateHealthBar(value, maxHealth.value);
+                }
             }
 
             _health = value;
@@ -69,6 +76,8 @@ public class EnemyBoss : Character
         {
             bossGameObject.SetActive(false);
         }
+        healthbar = GetComponentInChildren<HealthbarBehaviour>();
+        healthbar.gameObject.SetActive(false);
     }
 
     protected virtual void OnEnable()

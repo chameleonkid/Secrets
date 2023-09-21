@@ -7,6 +7,7 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     public StateEnum currentStateEnum { get; protected set; }
     public abstract float health { get; set; }
     public bool isInvulnerable { get; set; }
+    public bool isFreezeable = true;
     public BoolValue cantMove;
 
     [SerializeField] protected SpriteRenderer _renderer = default;
@@ -39,6 +40,7 @@ public abstract class Character : MonoBehaviour, ICanKnockback, ISlow, IShrink, 
     public Dashless dashless => _dashless;
     [SerializeField] private Poison _poison = default;
     public Poison poison => _poison;
+    [SerializeField] protected bool isFrozen = false;
 
     [Header("Dash Values")]
     [SerializeField] private float _maxDashDistance = 4;

@@ -148,8 +148,7 @@ public class Enemy : Character, ICanKnockback
 
     protected virtual void FixedUpdate()
     {
-        if(cantMove.RuntimeValue == false)
-        {
+
             //! Temporary!
             if (currentState is Schwer.States.Knockback)
             {
@@ -160,6 +159,9 @@ public class Enemy : Character, ICanKnockback
             {
                 rigidbody.velocity = Vector2.zero;
             }
+
+        if (cantMove.RuntimeValue == false && isFrozen == false)
+        {
 
             var percentHealh = maxHealth.value / 100f;
             var distance = Vector3.Distance(target.position, transform.position);
@@ -356,5 +358,24 @@ public class Enemy : Character, ICanKnockback
     {
         return this.maxHealth.value;
     }
+
+
+    public void SetFreeze(float freezeDuration)
+    {
+        if(isFreezeable)
+        {
+            StartCoroutine(FreezeCo(freezeDuration));
+        }
+    }
+
+    protected virtual IEnumerator FreezeCo(float freezeDuration)
+    {
+        isFrozen = true;
+        animator.enabled = false;
+        yield return new WaitForSeconds(freezeDuration);
+        animator.enabled = true;
+        isFrozen = false;
+    }
+
 
 }
