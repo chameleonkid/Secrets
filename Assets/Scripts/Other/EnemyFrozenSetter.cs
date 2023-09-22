@@ -17,13 +17,9 @@ public class EnemyFrozenSetter : MonoBehaviour
 
     }
 
-    protected void OnTriggerEnter2D(Collider2D other)
+    public void SetFreezeDuration(float duration)
     {
-        if (other.GetComponent<FreezerOnTrigger>())
-        {
-            freezeDuration = other.GetComponent<FreezerOnTrigger>().FreezeTimer;
-            SetFreeze();
-        }
+        freezeDuration = duration;
     }
 
     public void SetFreeze()
