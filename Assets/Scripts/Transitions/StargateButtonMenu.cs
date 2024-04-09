@@ -34,7 +34,7 @@ public class StargateButtonMenu : MonoBehaviour
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         if (playerMovement == null)
         {
-          Debug.Log("Np Player for Stargate found");
+          Debug.Log("No Player for Stargate found");
         }
 
         startgateExitButton.onClick.AddListener(() => ClosePanel());

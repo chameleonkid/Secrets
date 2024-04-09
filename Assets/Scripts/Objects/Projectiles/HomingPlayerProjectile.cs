@@ -54,7 +54,7 @@ public class HomingPlayerProjectile : MonoBehaviour
 
     private void MoveTowardsTarget()
     {
-        if (target != null)
+        if (target != null && rb)
         {
             // Gradually adjust the direction using Lerp
             Vector2 desiredDirection = ((Vector2)target.position - rb.position).normalized;
