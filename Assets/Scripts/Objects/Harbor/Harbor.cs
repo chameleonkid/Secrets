@@ -13,7 +13,7 @@ public class Harbor : ComponentTrigger<ShipMovement>
     [Header("This is the position the player will be")]
     [SerializeField] private Vector2 harborPlayerPos;
 
-    private ShipMovement ship;
+    [SerializeField] private ShipMovement ship;
 
     private void Update()
     {
@@ -31,5 +31,11 @@ public class Harbor : ComponentTrigger<ShipMovement>
     protected override void OnExit(ShipMovement ship)
     {
         this.ship = null;
+
+    }
+
+    protected override void OnEnter(ShipMovement triggerShip)
+    {
+        this.ship = triggerShip;
     }
 }
