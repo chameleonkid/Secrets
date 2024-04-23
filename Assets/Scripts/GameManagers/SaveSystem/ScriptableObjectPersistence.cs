@@ -70,7 +70,7 @@ public class ScriptableObjectPersistence : MonoBehaviour
         ResetVendorInventories();
         ResetBools();
         ResetXP();
-        timeOfDay.value = 0;
+        timeOfDay.value = 0.5f;
   
         Debug.Log("Reset scriptable object save data.");
     }

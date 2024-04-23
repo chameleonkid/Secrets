@@ -41,6 +41,10 @@ public class GlobalLightManager : MonoBehaviour
         {
             globalLight.intensity = 0.03f;   //This is the case for Houses / Taverns and so on
         }
+        else if (SceneManager.GetActiveScene().name.Contains("ShipIntro"))
+        {
+            globalLight.intensity = 0.05f;   //This is the case for the intro only
+        }
         else
         {
             globalLight.intensity = 1;

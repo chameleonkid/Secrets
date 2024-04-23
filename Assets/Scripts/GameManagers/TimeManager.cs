@@ -21,4 +21,13 @@ public class TimeManager : MonoBehaviourSingleton<TimeManager>
 
         OnTimeChanged?.Invoke(normalizedTimeOfDay);
     }
+
+    public void setTimeMidDay()
+    {
+        _normalizedTimeOfDay.value = 0.5f;
+    }
+    public void setTimeMidNight()
+    {
+        _normalizedTimeOfDay.value = 0.0f;
+    }
 }
