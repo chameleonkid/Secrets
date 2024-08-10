@@ -9,6 +9,7 @@ public class CharacterAppearance : ScriptableObject
     public Texture2D eyeColor;
     public Color hairColor;
     public string playerName;
+    public bool isMale;
 
     // Runtime only — not serialized (indexes and paths)
     public int skinIndex { get; set; }

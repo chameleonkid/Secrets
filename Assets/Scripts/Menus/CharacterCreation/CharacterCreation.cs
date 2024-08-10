@@ -116,14 +116,14 @@ public class CharacterCreation : MonoBehaviour
 
     public void ToMale()
     {
-
+        characterAppearance.isMale = true;
         texturesCounter = 1;
         RefreshTextures();
     }
 
     public void ToFemale()
     {
-
+        characterAppearance.isMale = false;
         texturesCounter = 0;
         RefreshTextures();
     }

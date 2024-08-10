@@ -19,7 +19,8 @@ public class CharacterAppearanceSetter : MonoBehaviour
 
     private void Awake()
     {
-
+        SetAppearance();
+        isMale = characterAppearance.isMale;
         if (inventory == null)
         {
             Debug.LogError("Inventory is not assigned in CharacterAppearanceSetter at Start.");
@@ -85,57 +86,64 @@ public class CharacterAppearanceSetter : MonoBehaviour
     // Method to update appearance based on equipped items
     public void UpdateCharacterAppearance()
     {
-        if (inventory.currentArmor != null)
+        if (inventory == null)
         {
-            if (armorSkin != null)
+            Debug.LogError("Inventory is not assigned in CharacterAppearanceSetter.");
+            return;
+        }
+
+        // Ensure character appearance and armor changer are assigned
+        if (characterAppearance == null || armorSkin == null)
+        {
+            Debug.LogError("CharacterAppearance or ArmorSkin is not assigned in CharacterAppearanceSetter.");
+            return;
+        }
+
+        // Get the current armor equipped by the player
+        InventoryArmor currentArmor = inventory.currentArmor;
+
+        if (currentArmor != null)
+        {
+            // Decide which texture to use based on the player's gender
+            if (characterAppearance.isMale)
             {
-                armorSkin.newSprite = inventory.currentArmor.texture;
-                armorSkin.ResetRenderer();
+                armorSkin.newSprite = currentArmor.textureMale;
             }
             else
             {
-                Debug.LogError("armorSkin is not assigned in CharacterAppearanceSetter.");
+                armorSkin.newSprite = currentArmor.textureFemale;
             }
+
+            armorSkin.ResetRenderer();
         }
         else
         {
+            // Apply a default armor texture or leave it empty
             Debug.LogWarning("No armor is currently equipped.");
             ApplyDefaultArmorTexture();
         }
+
+        // Update other character appearance features (hair, eyes, etc.) similarly if needed
     }
 
     private void ApplyDefaultArmorTexture()
     {
         if (armorSkin != null)
         {
-            if (isMale)
+            if (characterAppearance.isMale)
             {
-                if (defaultMaleArmorTexture != null)
-                {
-                    armorSkin.newSprite = defaultMaleArmorTexture;
-                    armorSkin.ResetRenderer();
-                }
-                else
-                {
-                    Debug.LogWarning("Default male armor texture is missing. Please assign it in the Inspector.");
-                }
+                armorSkin.newSprite = defaultMaleArmorTexture;
             }
             else
             {
-                if (defaultFemaleArmorTexture != null)
-                {
-                    armorSkin.newSprite = defaultFemaleArmorTexture;
-                    armorSkin.ResetRenderer();
-                }
-                else
-                {
-                    Debug.LogWarning("Default female armor texture is missing. Please assign it in the Inspector.");
-                }
+                armorSkin.newSprite = defaultFemaleArmorTexture;
             }
+
+            armorSkin.ResetRenderer();
         }
         else
         {
-            Debug.LogError("armorSkin is not assigned in CharacterAppearanceSetter.");
+            Debug.LogError("ArmorSkin is not assigned in CharacterAppearanceSetter.");
         }
     }
 }
