@@ -30,7 +30,7 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI characterName = default;
 
     [Header("Persistence")]
-    [SerializeField] private CharacterAppearance characterAppearance = default;
+    [SerializeField] public CharacterAppearance characterAppearance = default;
 
     [Header("Database")]
     [SerializeField] private int texturesCounter;
@@ -100,7 +100,7 @@ public class CharacterCreation : MonoBehaviour
         eyeChanger.ResetRenderer();
     }
 
-    public void NextHairColor()
+ /*   public void NextHairColor()
     {
         IncrementCounter(ref hairColorCounter, hairColor);
         hairColorRenderer.color = hairColor[hairColorCounter];
@@ -113,6 +113,7 @@ public class CharacterCreation : MonoBehaviour
         hairColorRenderer.color = hairColor[hairColorCounter];
         hairChanger.ResetRenderer();
     }
+ */
 
     public void ToMale()
     {
@@ -147,7 +148,7 @@ public class CharacterCreation : MonoBehaviour
         characterAppearance.armorStyle = activeTextures.armorSkins[armorCounter];
         characterAppearance.eyeColor = activeTextures.eyeSkins[eyeCounter];
         characterAppearance.hairStyle = activeTextures.hairStyles[hairCounter];
-        characterAppearance.hairColor = hairColor[hairColorCounter];
+        characterAppearance.hairColor = hairColorRenderer.color;
         characterAppearance.bodyStyle = activeTextures.bodySkins[bodyCounter];
         characterAppearance.playerName = characterName.text;
 
