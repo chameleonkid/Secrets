@@ -12,11 +12,13 @@ public class InventoryManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private PlayerMovement player = default;
+    [SerializeField] private CharacterAppearanceSetter characterAppearanceSetter = default; // Add a reference to CharacterAppearanceSetter
 
     [Header("Components")]
     [SerializeField] private GameObject inventoryPanel = default;
     [SerializeField] private TextMeshProUGUI descriptionText = default;
     [SerializeField] private GameObject closeButton = default;
+
     [Header("Stat Displays")]
     [SerializeField] private TextMeshProUGUI critDisplay = default;
     [SerializeField] private TextMeshProUGUI dmgDisplay = default;
@@ -35,9 +37,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private AudioClip selectItemSound = default;
     [SerializeField] private AudioClip unequipFailSound = default;
 
-
-
-    public Item currentItem;   //! What is the purpose of this?
+    public Item currentItem; // The currently selected item
 
     private InventoryDisplay inventoryDisplay;
 
@@ -45,12 +45,14 @@ public class InventoryManager : MonoBehaviour
     {
         OnInventoryMenuRequested += HandleMenuRequest;
         inventory.OnFailToUnequip += OnFailedUnequip;
+        inventory.OnEquipmentChanged += UpdateCharacterAppearance; // Subscribe to the equipment change event
     }
 
     private void OnDisable()
     {
         OnInventoryMenuRequested -= HandleMenuRequest;
         inventory.OnFailToUnequip -= OnFailedUnequip;
+        inventory.OnEquipmentChanged -= UpdateCharacterAppearance; // Unsubscribe to avoid memory leaks
     }
 
     private void Start()
@@ -128,10 +130,14 @@ public class InventoryManager : MonoBehaviour
         if (item is EquippableItem equippable)
         {
             inventory.Equip(equippable);
+
+            // Update the character's appearance after equipping
+            UpdateCharacterAppearance();
+
             if (inventory.currentWeapon)
             {
                 SetWeaponColor();
-                if(inventory.currentWeapon.projectile)
+                if (inventory.currentWeapon.projectile)
                 {
                     player.projectile = inventory.currentWeapon.projectile;
                 }
@@ -161,6 +167,10 @@ public class InventoryManager : MonoBehaviour
     private void Unequip(Item itemToUnequip)
     {
         inventory.Unequip(itemToUnequip as EquippableItem);
+
+        // Update the character's appearance after unequipping
+        UpdateCharacterAppearance();
+
         UpdateStatDisplays();
     }
 
@@ -205,4 +215,18 @@ public class InventoryManager : MonoBehaviour
 
     private void SetWeaponColor() => swordMaterial.SetColor("_GlowColor", inventory.currentWeapon.glowColor);
     private void SetLaserColor() => laserMaterial.SetColor("_GlowColor", inventory.currentSpellbook.glowColor);
+
+    // This method handles the appearance update
+    private void UpdateCharacterAppearance()
+    {
+        if (characterAppearanceSetter != null)
+        {
+            Debug.Log("CharacterAppearanceSetter is assigned.");
+            characterAppearanceSetter.UpdateCharacterAppearance();
+        }
+        else
+        {
+            Debug.LogError("CharacterAppearanceSetter is not assigned in InventoryManager.");
+        }
+    }
 }
