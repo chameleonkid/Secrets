@@ -18,6 +18,8 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private Button uiInventoryButton = default;
     [SerializeField] private Button uiLoadButton = default;
     [SerializeField] private Joystick joystick = default;
+    [SerializeField] public ShieldBlock shieldBlock = default;
+    
 
     [Header("Development Case: Collider to NoClip")]
     [SerializeField] private Collider2D clipCollider;
@@ -27,6 +29,8 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private XPSystem levelSystem = default;
     [SerializeField] private float _speed = default;
     [SerializeField] private float runSpeedModifier = 1.5f;
+    [SerializeField] public bool isBlocking = false; // Track if the player is blocking
+
     private float speed => inputRun ? _speed * runSpeedModifier : _speed;
     [SerializeField] private float originalSpeed;
 
@@ -139,12 +143,20 @@ public class PlayerMovement : Character, ICanMove
         if (Time.timeScale > 0 && cantMove.RuntimeValue == false)
         {
             HandleMenus();
-            HandleInput();
-            HandleState();
+
+            if (!isBlocking) // Only handle input and state when not blocking
+            {
+                HandleInput();
+                HandleState();
+            }
             // Debug.Log($"{name}: {currentState}");
             currentState?.Update();
+            HandleShieldBlock();
 
-            animator.SetBool("isRunning", inputRun && input.direction != Vector2.zero); //!
+            if (!isBlocking)
+            {
+                animator.SetBool("isRunning", inputRun && input.direction != Vector2.zero); //! I might remove running from the game...
+            }
         }
     }
 
@@ -167,6 +179,12 @@ public class PlayerMovement : Character, ICanMove
         {
             animator.enabled = false;
         }
+        if (isBlocking)
+        {
+            rigidbody.velocity = Vector2.zero;
+        }
+
+
 
     }
 
@@ -259,6 +277,20 @@ public class PlayerMovement : Character, ICanMove
         }
     }
 
+    private void HandleShieldBlock()
+    {
+        if (Input.GetButtonDown("Block") && inventory.currentShield)
+        {
+            currentState = new PlayerBlock(this); // Enter the block state
+        }
+
+        if (Input.GetButtonUp("Block"))
+        {
+            currentState?.Exit(); // Exit the block state when the button is released
+            currentState = null;
+        }
+    }
+
     private void SpellAttack(InventorySpellbook spellBook)
     {
         if (spellBook != null && mana.current >= spellBook.manaCost && !spellBook.onCooldown)
@@ -306,7 +338,7 @@ public class PlayerMovement : Character, ICanMove
 
         currentState = new PlayerMeleeAttack(this, 0.3f);
 
-        yield return new WaitForSeconds(0.3f + weapon.swingTime);
+        yield return new WaitForSeconds(weapon.swingTime); //stuck time?
         meeleCooldown = false;
         SoundManager.RequestSound(meleeCooldownSound);
     }
