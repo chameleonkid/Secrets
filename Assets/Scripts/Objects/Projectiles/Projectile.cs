@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     protected float lifetimeCountdown;
     [SerializeField] public float projectileSpeed;
     [SerializeField] protected bool _rotationNeeded;
+    [SerializeField] private AudioClip blockSound; // Reference to the block sound
     public bool rotationNeeded => _rotationNeeded;
 
     public Vector2? groupDirection { get; set; }
@@ -48,7 +49,12 @@ public class Projectile : MonoBehaviour
     protected void OnCollisionEnter2D(Collision2D other) => OnHitCollider(other.transform);
     protected void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(targetTag))
+        if (other.CompareTag("shield") || other.CompareTag("enemyShield"))
+        {
+            Debug.Log("Projectile hit a shield!");
+            OnHitShield(other.transform);
+        }
+        else if (other.CompareTag(targetTag))
         {
             OnHitCollider(other.transform);
         }
@@ -71,6 +77,13 @@ public class Projectile : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    protected void OnHitShield(Transform shieldTransform)
+    {
+        // Optionally, destroy or deflect the projectile
+        Destroy(this.gameObject);
+        SoundManager.RequestSound(blockSound);
     }
 
     public void OverrideSpeed(float speed)

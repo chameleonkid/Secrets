@@ -10,10 +10,17 @@ public class ShieldBlock : MonoBehaviour
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Inventory inventory;
+    [SerializeField] private AudioClip blockSound; // Reference to the block sound
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        // Optionally load the block sound from the Resources folder
+        if (blockSound == null)
+        {
+            blockSound = Resources.Load<AudioClip>("Sounds/BlockSound");
+        }
     }
 
     private void DeactivateAllColliders()
@@ -26,6 +33,7 @@ public class ShieldBlock : MonoBehaviour
 
     public void block(Vector2 direction)
     {
+        DeactivateAllColliders(); // Make sure all other colliders are disabled
 
         if (direction == Vector2.up)
         {
@@ -56,3 +64,4 @@ public class ShieldBlock : MonoBehaviour
         DeactivateAllColliders();
     }
 }
+

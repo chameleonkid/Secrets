@@ -266,6 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1000
   clockWise: 1
+  objectToDeactivate: {fileID: 0}
+  deactivationAngle: 0
+  deactivationAngle2: 0
 --- !u!114 &8654859084888931407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +284,7 @@ MonoBehaviour:
   lifetime: 5
   projectileSpeed: 6
   _rotationNeeded: 0
+  blockSound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
   destroyDelay: 0
 --- !u!114 &7337841895836419795
 MonoBehaviour:
