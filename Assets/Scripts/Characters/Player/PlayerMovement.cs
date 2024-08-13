@@ -30,6 +30,7 @@ public class PlayerMovement : Character, ICanMove
     [SerializeField] private float _speed = default;
     [SerializeField] private float runSpeedModifier = 1.5f;
     [SerializeField] public bool isBlocking = false; // Track if the player is blocking
+    [SerializeField] public Vector2 aimDirection;
 
     private float speed => inputRun ? _speed * runSpeedModifier : _speed;
     [SerializeField] private float originalSpeed;
@@ -71,6 +72,7 @@ public class PlayerMovement : Character, ICanMove
 
     public SpriteRenderer receivedItemSprite;
 
+    [Header("Hitboxes")]
     [Header("Hitboxes")]
     [SerializeField] private DamageOnTrigger[] directionalAttacks = default;
     [SerializeField] private DamageOnTrigger _roundAttack = default;
@@ -209,6 +211,9 @@ public class PlayerMovement : Character, ICanMove
             input.direction.x = Input.GetAxisRaw("Horizontal");
             input.direction.y = Input.GetAxisRaw("Vertical");
         }
+
+        aimDirection.x = Input.GetAxisRaw("RightStickHorizontal");
+        aimDirection.y = Input.GetAxisRaw("RightStickVertical");
 
         input.run = Input.GetButton("Run");
         input.interact = Input.GetButtonDown("Interact");
@@ -430,7 +435,8 @@ public class PlayerMovement : Character, ICanMove
     private Projectile CreateProjectile(GameObject prefab)
     {
         var position =  new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
-        var projectile = CreateProjectile(prefab, position, GetAnimatorXY());
+        var projectile = CreateProjectile(prefab, position, aimDirection); // shoot to the crosshair (Only bows)
+        SetAnimatorXY(aimDirection);
         return projectile;
     }
 

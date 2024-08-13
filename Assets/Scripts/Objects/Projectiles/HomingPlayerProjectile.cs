@@ -9,6 +9,7 @@ public class HomingPlayerProjectile : MonoBehaviour
     [SerializeField] private float homingDelay = 0.25f;
     [SerializeField] private float directionChangeSpeed = 6.0f; // Adjust as needed
 
+
     private Rigidbody2D rb; // Rigidbody2D for arrow
 
     private float homingTimer = 0.0f;
@@ -35,7 +36,15 @@ public class HomingPlayerProjectile : MonoBehaviour
         if (hasInitialForceApplied && homingTimer >= homingDelay)
         {
             target = FindClosestEnemy();
-            MoveTowardsTarget();
+            if (target)
+            {
+                MoveTowardsTarget();
+            }
+            else
+            {
+                // Continue moving in the original direction if no target is found
+                ContinueInOriginalDirection();
+            }
         }
         else
         {
@@ -71,6 +80,16 @@ public class HomingPlayerProjectile : MonoBehaviour
         }
     }
 
+    private void ContinueInOriginalDirection()
+    {
+        // Continue moving in the current direction
+        rb.velocity = currentDirection * projectile.projectileSpeed;
+
+        // Apply the rotation to match the movement direction
+        float angle = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
+        rb.rotation = angle;
+    }
+
     private Transform FindClosestEnemy()
     {
         float distanceToClosestEnemy = Mathf.Infinity;
@@ -86,7 +105,13 @@ public class HomingPlayerProjectile : MonoBehaviour
                 closestEnemy = currentEnemy;
             }
         }
-        Debug.DrawLine(transform.position, closestEnemy.transform.position);
-        return closestEnemy.transform;
+
+        if (closestEnemy != null)
+        {
+            Debug.DrawLine(transform.position, closestEnemy.transform.position);
+            return closestEnemy.transform;
+        }
+
+        return null;
     }
 }
