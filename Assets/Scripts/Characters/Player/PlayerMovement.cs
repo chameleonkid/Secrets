@@ -435,9 +435,18 @@ public class PlayerMovement : Character, ICanMove
     private Projectile CreateProjectile(GameObject prefab)
     {
         var position =  new Vector2(transform.position.x, transform.position.y + 0.5f);      // Set projectile higher since transform is at player's pivot point (feet).
-        var projectile = CreateProjectile(prefab, position, aimDirection); // shoot to the crosshair (Only bows)
-        SetAnimatorXY(aimDirection);
-        return projectile;
+        if(aimDirection!=Vector2.zero)
+        {
+            var projectile = CreateProjectile(prefab, position, aimDirection); // shoot to the crosshair (Only bows)
+            SetAnimatorXY(aimDirection);
+            return projectile;
+        }
+        else
+        {
+            var projectile = CreateProjectile(prefab, position, GetAnimatorXY()); // shoot to the crosshair (Only bows)
+            return projectile;
+        }
+
     }
 
     private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
