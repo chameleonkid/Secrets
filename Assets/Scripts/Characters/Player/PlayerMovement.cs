@@ -368,9 +368,9 @@ public class PlayerMovement : Character, ICanMove
 //        proj.OverrideSpeed(arrowSpeed);  Speed is set in the Projectile-Prefab now!
         proj.OverrideDamage(damage, IsCriticalHit());
 
-        currentState = new PlayerBowAttack(this, 0.3f);
+        currentState = new PlayerBowAttack(this, 0.3f); //0.3f = how long does the state last?
 
-        yield return new WaitForSeconds(0.3f + weapon.swingTime);
+        yield return new WaitForSeconds(0.3f + weapon.swingTime); //0.3f ???
         meeleCooldown = false;
         SoundManager.RequestSound(meleeCooldownSound);
     }

@@ -26,9 +26,12 @@ MonoBehaviour:
   _buyPrice: 0
   _sellPrice: 0
   _manaCost: 0
-  coolDown: 1
+  coolDown: 0.5
   onCooldown: 0
   glowColor: {r: 0, g: 0.9622642, b: 0.9257118, a: 0}
-  dashForce: 1250
-  dashDuration: 1
-  dashCooldown: 1
+  dashForce: 30000
+  dashDistance: 3
+  dashDuration: 0.15
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 54288
