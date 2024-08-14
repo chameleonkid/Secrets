@@ -505,11 +505,11 @@ public class PlayerMovement : Character, ICanMove
         var offsets = RadialLayout.GetOffsets(instantiationSpellbook.amountOfProjectiles, MathfEx.Vector2ToAngle(GetAnimatorXY()), instantiationSpellbook.spreadAngle);
         for (int i = 0; i < instantiationSpellbook.amountOfProjectiles; i++)
         {
-            // Should probably not hard-code the offset.
-            var position = new Vector2(transform.position.x, transform.position.y + 0.25f);      // Set projectile higher since transform is at player's pivot point (feet).
+            var position = new Vector2(transform.position.x, transform.position.y + 0.25f); // Set projectile higher since transform is at player's pivot point (feet).
+            Vector2 shootDirection = aimDirection.magnitude > 0.1f ? aimDirection : offsets[i].normalized; // Use aimDirection if it's significant, otherwise use the offsets
 
             var damage = Random.Range(inventory.totalMinSpellDamage, inventory.totalMaxSpellDamage + 1);
-            var projectile = CreateProjectile(instantiationSpellbook.prefab, position + (offsets[i] * instantiationSpellbook.radius), offsets[i].normalized);
+            var projectile = CreateProjectile(instantiationSpellbook.prefab, position + (offsets[i] * instantiationSpellbook.radius), shootDirection);
             projectile.OverrideDamage(damage, IsCriticalHit());
             projectile.OverrideSpeed(instantiationSpellbook.speed);
 
@@ -517,7 +517,7 @@ public class PlayerMovement : Character, ICanMove
             {
                 yield return new WaitForSeconds(instantiationSpellbook.delayBetweenProjectiles);
             }
-        
+
             if (instantiationSpellbook.isRotating)
             {
                 projectile.transform.SetParent(this.transform);
@@ -525,7 +525,7 @@ public class PlayerMovement : Character, ICanMove
 
             if (instantiationSpellbook.groupDirection)
             {
-                projectile.groupDirection = GetAnimatorXY().normalized;
+                projectile.groupDirection = shootDirection;
             }
         }
     }
