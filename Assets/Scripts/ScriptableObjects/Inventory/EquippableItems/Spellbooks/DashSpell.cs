@@ -8,6 +8,12 @@ public class DashSpell : InventorySpellbook
     [SerializeField] private float dashDistance = 3f; // Maximum distance for the dash
     [SerializeField] private float dashDuration = 0.2f; // Duration of the dash
     [SerializeField] private LayerMask obstacleLayer; // LayerMask for obstacles
+    [SerializeField] private GameObject player;
+
+    void Awake()
+    {
+        player = FindObjectOfType<PlayerMovement>().gameObject;
+    }
 
     public void Dash(Character character)
     {
@@ -27,8 +33,23 @@ public class DashSpell : InventorySpellbook
                 dashTarget = hit.point;
             }
 
+            // Enable trails for all child objects with SpriteRenderer
+            EnableAllChildTrails(character);
+
             // Start the dash movement
             character.StartCoroutine(DashMovement(character, dashTarget));
+        }
+    }
+
+    private void EnableAllChildTrails(Character character)
+    {
+        // Find all SpriteTrail components in the character and its children
+        var trails = character.GetComponentsInChildren<SpriteTrail.SpriteTrail>();
+
+        // Enable each trail
+        foreach (var trail in trails)
+        {
+            trail.EnableTrail();
         }
     }
 
@@ -51,7 +72,7 @@ public class DashSpell : InventorySpellbook
             {
                 // Stop the dash if an obstacle is detected
                 character.transform.position = hit.point;
-                yield break;
+                break;
             }
 
             // Move the character to the new position
@@ -63,5 +84,20 @@ public class DashSpell : InventorySpellbook
 
         // Ensure the character reaches the dash target at the end
         character.transform.position = dashTarget;
+
+        // Disable all trails once the dash is complete
+        DisableAllChildTrails(character);
+    }
+
+    private void DisableAllChildTrails(Character character)
+    {
+        // Find all SpriteTrail components in the character and its children
+        var trails = character.GetComponentsInChildren<SpriteTrail.SpriteTrail>();
+
+        // Disable each trail
+        foreach (var trail in trails)
+        {
+            trail.DisableTrail();
+        }
     }
 }

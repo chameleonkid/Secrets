@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 5563122086878900068}
   - component: {fileID: -8076933543729483304}
   - component: {fileID: 5379144640911285020}
+  - component: {fileID: 8449769681421692813}
   m_Layer: 13
-  m_Name: Arrow_Rank1
+  m_Name: Arrow2
   m_TagString: arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
-  projectileSpeed: 12
+  projectileSpeed: 15
   _rotationNeeded: 1
   blockSound: {fileID: 8300000, guid: 29a1ef72264bd74458dbea7e2442c6a5, type: 3}
   destroyDelay: 1
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhenHit: 1
-  force: 3
+  force: 5
   duration: 0.25
 --- !u!114 &-8076933543729483304
 MonoBehaviour:
@@ -277,3 +278,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8449769681421692813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015206087574396294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8edf2d55ca588547881b7472e926510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrailName: 
+  m_CurrentTrailPreset: {fileID: 11400000, guid: 7866618821f7ffe448539c9e8e601636,
+    type: 2}
+  m_TrailParent: {fileID: 0}
+  m_SpriteToDuplicate: {fileID: 0}
+  m_Layer: 0
+  m_ZMoveStep: 0.0001
+  m_ZMoveMax: 0.9999
+  m_HideTrailOnDisabled: 1
+  m_TrailActivationCondition: 0
+  m_TrailDeactivationCondition: 0
+  m_StartIfUnderVelocity: 0
+  m_VelocityStartIsLocalSpace: 0
+  m_VelocityNeededToStart: 0
+  m_StopIfOverVelocity: 0
+  m_VelocityStopIsLocalSpace: 0
+  m_VelocityNeededToStop: 0
+  m_TrailActivationDuration: 0
+  m_SortingLayerID: 0
+  m_OrderInSortingLayer: 0
+  m_DisabledElementsInTrail: []
