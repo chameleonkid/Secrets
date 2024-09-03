@@ -111,7 +111,7 @@ public class TurretEnemy : SimpleEnemy
         fireDelaySeconds = timeTillAttack;
     }
 
-    private Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
+    protected Projectile CreateProjectile(GameObject prefab, Vector2 position, Vector2 direction)
     {
         var projectile = Projectile.Instantiate(prefab, position, direction, Projectile.CalculateRotation(direction), "Player");
         return projectile;

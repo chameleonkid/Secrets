@@ -16,6 +16,11 @@ public class Enemy : Character, ICanKnockback
     [SerializeField] protected float walkingTimer = 3f;
     [SerializeField] protected HealthbarBehaviour healthbar;
 
+    [Header("Avoiding Config")]
+    [SerializeField] protected float directionChangeCooldown = 0.5f; // Time in seconds between direction changes
+    [SerializeField] protected float lastDirectionChangeTime;
+    [SerializeField] protected Vector3 currentAvoidDirection;
+
     public event Action OnEnemyTakeDamage;
     public event Action OnEnemyDied;
     public event Action OnMinionDied;
@@ -333,9 +338,17 @@ public class Enemy : Character, ICanKnockback
         animator.SetBool("isMoving", true);
     }
 
-    protected void AvoidPlayer()
+    protected virtual void AvoidPlayer()
     {
-        Vector3 temp = Vector3.MoveTowards(transform.position, target.position, -1f * moveSpeed * speedModifier * Time.deltaTime);
+        if (Time.time > lastDirectionChangeTime + directionChangeCooldown)
+        {
+            // Update the avoid direction after the cooldown
+            currentAvoidDirection = (transform.position - target.position).normalized + GetRandomDirection() * 0.5f;
+            lastDirectionChangeTime = Time.time;
+        }
+
+        // Move the enemy in the current avoid direction
+        Vector3 temp = Vector3.MoveTowards(transform.position, transform.position + currentAvoidDirection, moveSpeed * Time.deltaTime);
         SetAnimatorXYSingleAxis(temp - transform.position);
         rigidbody.MovePosition(temp);
         animator.SetBool("isMoving", true);

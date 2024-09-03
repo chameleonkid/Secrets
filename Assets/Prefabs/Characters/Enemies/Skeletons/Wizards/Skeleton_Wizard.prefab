@@ -514,6 +514,9 @@ MonoBehaviour:
   isWalking: 0
   walkingTimer: 3
   healthbar: {fileID: 0}
+  directionChangeCooldown: 0.5
+  lastDirectionChangeTime: 0
+  currentAvoidDirection: {x: 0, y: 0, z: 0}
   isMinion: 0
   enemyName: Skeleton Wizard
   moveSpeed: 3
@@ -535,16 +538,17 @@ MonoBehaviour:
   projectile: {fileID: 8755954809695844891, guid: 85d71a4ff224712428cec37480850e7b,
     type: 3}
   canAttack: 0
-  fireDelay: 7
-  amountOfProjectiles: 1
+  fireDelay: 3
+  amountOfProjectiles: 5
   spreadAngle: 0
   radius: 0
-  timeBetweenProjectiles: 1
+  timeBetweenProjectiles: 0.1
   fireDelaySeconds: 0
   projectileDestructionTimer: 1
   projectileYOffset: 0.25
-  shootingRange: 4
-  escapeRange: 3
+  shootingRange: 5
+  escapeRange: 2
+  facingUpdateCooldown: 0.5
 --- !u!114 &-420112373825999427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,7 +1014,7 @@ PrefabInstance:
     - target: {fileID: 4967715135758795752, guid: 388ffc5207b210e42902a625dda52eb7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.044
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4967715135758795752, guid: 388ffc5207b210e42902a625dda52eb7,
         type: 3}
