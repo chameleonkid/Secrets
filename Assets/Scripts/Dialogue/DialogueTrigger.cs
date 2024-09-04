@@ -5,6 +5,9 @@ public class DialogueTrigger : ComponentTrigger<PlayerMovement>
     protected override bool? needOtherIsTrigger => true;
 
     [SerializeField] private Dialogue dialogue = default;
+    [SerializeField] private QuestManager questManager;  // Reference to the QuestManager
+    [SerializeField] private Objective objective;        // The objective to complete when this dialogue is triggered (optional)
+
     private PlayerMovement player;
 
     private void LateUpdate()
@@ -16,7 +19,16 @@ public class DialogueTrigger : ComponentTrigger<PlayerMovement>
         }
     }
 
-    public void TriggerDialogue() => DialogueManager.RequestDialogue(dialogue);
+    public void TriggerDialogue()
+    {
+        DialogueManager.RequestDialogue(dialogue);
+
+        // Complete the objective if one is assigned
+        if (objective != null && questManager != null)
+        {
+            questManager.CompleteObjective(objective);
+        }
+    }
 
     protected override void OnEnter(PlayerMovement player)
     {

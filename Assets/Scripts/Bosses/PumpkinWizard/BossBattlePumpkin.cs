@@ -35,6 +35,10 @@ public class BossBattlePumpkin : MonoBehaviour
     [SerializeField] private GameObject bossGameObject = default;
     [SerializeField] private Collider2D bossHurtBox = default;
 
+    [Header("Questline")]
+    [SerializeField] private QuestManager questManager;  // Reference to the QuestManager
+    [SerializeField] private Objective killPumpkinObjective;  // Reference to the KillThePumpkin Objective
+
     [Header("Stages")]
     [SerializeField] private Stage stage = default;
 
@@ -59,6 +63,14 @@ public class BossBattlePumpkin : MonoBehaviour
 
     private void Awake()
     {
+
+        questManager = FindObjectOfType<QuestManager>();
+
+        if (questManager == null)
+        {
+            Debug.LogError("QuestManager not found in the scene. Please ensure there is a QuestManager in the scene.");
+        }
+
         isDefeated = storeDefeated.RuntimeValue;
         if (isDefeated)
         {
@@ -76,6 +88,7 @@ public class BossBattlePumpkin : MonoBehaviour
 
             stage = Stage.WaitingToStart;
         }
+
     }
 
     private void Start()
@@ -93,6 +106,11 @@ public class BossBattlePumpkin : MonoBehaviour
         DestroyAllEnemies();
         leaverBlock.SetActive(false);
         storeDefeated.RuntimeValue = true;                                                         // Stop spawning enemies
+
+        if (questManager != null && killPumpkinObjective != null)
+        {
+            questManager.CompleteObjective(killPumpkinObjective);
+        }
     }
 
     private void BossTakesDamage()
