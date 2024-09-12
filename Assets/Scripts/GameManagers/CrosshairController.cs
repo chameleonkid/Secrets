@@ -10,7 +10,7 @@ public class CrosshairController : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform; // Ensure the player has the "Player" tag
         crosshairSpriteRenderer = GetComponent<SpriteRenderer>();
-        Cursor.visible = false; // Hide the default cursor
+       // Cursor.visible = false; // Hide the default cursor
     }
 
     void Update()

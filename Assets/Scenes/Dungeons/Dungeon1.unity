@@ -1748,7 +1748,7 @@ PrefabInstance:
     - target: {fileID: 8715060515472395772, guid: 2956ff1a1900d87439a979197bbc4113,
         type: 3}
       propertyPath: sceneToLoad
-      value: Overworld
+      value: Overworld_Forest2
       objectReference: {fileID: 0}
     - target: {fileID: 8715060515472395772, guid: 2956ff1a1900d87439a979197bbc4113,
         type: 3}
@@ -1779,12 +1779,12 @@ PrefabInstance:
     - target: {fileID: 8715060515472395772, guid: 2956ff1a1900d87439a979197bbc4113,
         type: 3}
       propertyPath: playerPosition.x
-      value: -63
+      value: -17.5
       objectReference: {fileID: 0}
     - target: {fileID: 8715060515472395772, guid: 2956ff1a1900d87439a979197bbc4113,
         type: 3}
       propertyPath: playerPosition.y
-      value: -39.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8715060515472395775, guid: 2956ff1a1900d87439a979197bbc4113,
         type: 3}
@@ -4866,6 +4866,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7290780269828354137, guid: cdad374a17ee3d142a6a4a43791a3bd8,
     type: 3}
   m_PrefabInstance: {fileID: 863282919}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &567152382
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1540261526}
+    m_Modifications:
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 83
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978958, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Brazier (36)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 463c49413513a4c4b8241a5b9608b2e5, type: 3}
+--- !u!4 &567152383 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 567152382}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &567550827
 PrefabInstance:
@@ -9465,7 +9540,7 @@ PrefabInstance:
     - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
         type: 3}
       propertyPath: areaName
-      value: Mavens Cave
+      value: Wizards Dungeon
       objectReference: {fileID: 0}
     - target: {fileID: 1553582541190814885, guid: 8e65b5fc062875340895e683b5583ef1,
         type: 3}
@@ -13344,6 +13419,8 @@ Transform:
   - {fileID: 1364170880}
   - {fileID: 877375310}
   - {fileID: 511822847}
+  - {fileID: 1773874724}
+  - {fileID: 567152383}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15659,6 +15736,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7290780269828354137, guid: cdad374a17ee3d142a6a4a43791a3bd8,
     type: 3}
   m_PrefabInstance: {fileID: 16760220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1773874723
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1540261526}
+    m_Modifications:
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 82
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840283928995978958, guid: 463c49413513a4c4b8241a5b9608b2e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Brazier (32)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 463c49413513a4c4b8241a5b9608b2e5, type: 3}
+--- !u!4 &1773874724 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8840283928995978957, guid: 463c49413513a4c4b8241a5b9608b2e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1773874723}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1776335457 stripped
 Transform:
@@ -18535,6 +18687,8 @@ MonoBehaviour:
       text: Take care! This Dungeon is haunted by an old evil. The Monsters outside
         can not be compared! You should at least have a lamp and some armor to survive
         this!
+  questManager: {fileID: 0}
+  objective: {fileID: 0}
 --- !u!4 &2144970668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3492503705776306312, guid: 02fc4e9a1e96030418e0b9f90a066bb7,

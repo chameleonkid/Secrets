@@ -287,12 +287,13 @@ public class PlayerMovement : Character, ICanMove
         if (Input.GetButtonDown("Block") && inventory.currentShield)
         {
             currentState = new PlayerBlock(this); // Enter the block state
-            animator.SetBool("isCasting", true);
+            animator.SetBool("isBlocking", true);
         }
 
         if (Input.GetButtonUp("Block"))
         {
             currentState?.Exit(); // Exit the block state when the button is released
+            animator.SetBool("isBlocking", false);
             currentState = null;
         }
     }
