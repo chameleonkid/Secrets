@@ -10,6 +10,11 @@ public class DialogueTrigger : ComponentTrigger<PlayerMovement>
 
     private PlayerMovement player;
 
+    private void Awake()
+    {
+        questManager = FindObjectOfType<QuestManager>();
+    }
+
     private void LateUpdate()
     {
         if (player != null && player.inputInteract && Time.timeScale > 0)
