@@ -287,6 +287,7 @@ public class PlayerMovement : Character, ICanMove
         if (Input.GetButtonDown("Block") && inventory.currentShield)
         {
             currentState = new PlayerBlock(this); // Enter the block state
+            animator.SetBool("isCasting", true);
         }
 
         if (Input.GetButtonUp("Block"))

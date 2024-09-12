@@ -8,19 +8,25 @@ public class ShieldBlock : MonoBehaviour
     public PolygonCollider2D leftCollider;
     public PolygonCollider2D rightCollider;
 
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [Header("Sprite Renderers for Different Directions")]
+    public SpriteRenderer upSpriteRenderer;
+    public SpriteRenderer downSpriteRenderer;
+    public SpriteRenderer leftSpriteRenderer;
+    public SpriteRenderer rightSpriteRenderer;
+
     [SerializeField] private Inventory inventory;
     [SerializeField] private AudioClip blockSound; // Reference to the block sound
 
     private void Awake()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
         // Optionally load the block sound from the Resources folder
         if (blockSound == null)
         {
-            blockSound = Resources.Load<AudioClip>("Sounds/BlockSound");
+            Debug.Log("No Blocksound was set");
         }
+
+        // Ensure all sprite renderers are initially disabled
+        DeactivateAllSpriteRenderers();
     }
 
     private void DeactivateAllColliders()
@@ -31,37 +37,48 @@ public class ShieldBlock : MonoBehaviour
         rightCollider.enabled = false;
     }
 
+    private void DeactivateAllSpriteRenderers()
+    {
+        upSpriteRenderer.enabled = false;
+        downSpriteRenderer.enabled = false;
+        leftSpriteRenderer.enabled = false;
+        rightSpriteRenderer.enabled = false;
+    }
+
     public void block(Vector2 direction)
     {
-        DeactivateAllColliders(); // Make sure all other colliders are disabled
+        DeactivateAllColliders();  // Make sure all other colliders are disabled
+        DeactivateAllSpriteRenderers();  // Disable all sprite renderers
 
         if (direction == Vector2.up)
         {
-            spriteRenderer.sprite = inventory.currentShield.shieldSpriteUp;
+            upSpriteRenderer.sprite = inventory.currentShield.shieldSpriteUp;
+            upSpriteRenderer.enabled = true;
             upCollider.enabled = true;
         }
         else if (direction == Vector2.down)
         {
-            spriteRenderer.sprite = inventory.currentShield.shieldSpriteDown;
+            downSpriteRenderer.sprite = inventory.currentShield.shieldSpriteDown;
+            downSpriteRenderer.enabled = true;
             downCollider.enabled = true;
         }
         else if (direction == Vector2.left)
         {
-            spriteRenderer.sprite = inventory.currentShield.shieldSpriteLeft;
+            leftSpriteRenderer.sprite = inventory.currentShield.shieldSpriteLeft;
+            leftSpriteRenderer.enabled = true;
             leftCollider.enabled = true;
         }
         else if (direction == Vector2.right)
         {
-            spriteRenderer.sprite = inventory.currentShield.shieldSpriteRight;
+            rightSpriteRenderer.sprite = inventory.currentShield.shieldSpriteRight;
+            rightSpriteRenderer.enabled = true;
             rightCollider.enabled = true;
         }
-        spriteRenderer.enabled = true;
     }
 
     public void stopBlock()
     {
-        spriteRenderer.enabled = false;
+        DeactivateAllSpriteRenderers();
         DeactivateAllColliders();
     }
 }
-
