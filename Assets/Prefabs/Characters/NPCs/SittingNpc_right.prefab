@@ -5214,7 +5214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdb70184050f2a44abba797972dd29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantMove: {fileID: 0}
+  isFreezeable: 1
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
   _renderer: {fileID: 7334067044419387401}
   isShrinked: 0
   gotHitSound: []
@@ -5230,6 +5231,7 @@ MonoBehaviour:
   _gigantism: {fileID: 6293100341029162061}
   _dashless: {fileID: 0}
   _poison: {fileID: 0}
+  isFrozen: 0
   _maxDashDistance: 4
   _dashDuration: 4
   _canDash: 1
@@ -5239,6 +5241,10 @@ MonoBehaviour:
   lookLeft: 1
   lookRight: 0
   isDead: 0
+  isHappy: 0
+  isNodding: 0
+  isCasting: 0
+  animationState: 0
 --- !u!1001 &3033883747397311924
 PrefabInstance:
   m_ObjectHideFlags: 0

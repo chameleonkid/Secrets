@@ -5050,7 +5050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdb70184050f2a44abba797972dd29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantMove: {fileID: 0}
+  isFreezeable: 1
+  cantMove: {fileID: 11400000, guid: f72261ca964ad8a479a7aad373f7fcd3, type: 2}
   _renderer: {fileID: 7228244114958578535}
   isShrinked: 0
   gotHitSound: []
@@ -5066,6 +5067,7 @@ MonoBehaviour:
   _gigantism: {fileID: 7228244115233069528}
   _dashless: {fileID: 0}
   _poison: {fileID: 0}
+  isFrozen: 0
   _maxDashDistance: 4
   _dashDuration: 4
   _canDash: 1
@@ -5075,6 +5077,10 @@ MonoBehaviour:
   lookLeft: 0
   lookRight: 1
   isDead: 0
+  isHappy: 0
+  isNodding: 0
+  isCasting: 0
+  animationState: 0
 --- !u!1 &7228244115005813236
 GameObject:
   m_ObjectHideFlags: 0

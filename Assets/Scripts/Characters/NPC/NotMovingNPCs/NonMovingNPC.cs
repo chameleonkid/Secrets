@@ -32,6 +32,8 @@ public class NonMovingNPC : Character
     protected override void Awake()
     {
         base.Awake();
+
+        animator.speed = Random.Range(0.8f, 1.2f); //makes the idle npcs not blink at the same time
         interactable = GetComponent<Interactable>();
  
         if (lookUp)
