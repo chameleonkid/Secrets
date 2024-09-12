@@ -10,13 +10,21 @@
 
     protected override void OnEnter(PlayerMovement player)
     {
-        contextOn.Raise();
-        this.player = player;
+        if(contextOn)
+        {
+            contextOn.Raise();
+            this.player = player;
+        }
+
     }
 
     protected override void OnExit(PlayerMovement player)
     {
-        contextOff.Raise();
-        this.player = null;
+        if(contextOff)
+        {
+            contextOff.Raise();
+            this.player = null;
+        }
+
     }
 }

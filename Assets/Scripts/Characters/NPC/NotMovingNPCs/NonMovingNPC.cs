@@ -31,7 +31,9 @@ public class NonMovingNPC : Character
 
     protected override void Awake()
     {
+
         base.Awake();
+        animator.speed = Random.Range(0.8f, 1.2f);
         interactable = GetComponent<Interactable>();
  
         if (lookUp)
@@ -50,6 +52,7 @@ public class NonMovingNPC : Character
         {
             animator.SetFloat("moveX", 1);
         }
+
         switch (animationState)
         {
             case CharacterAnimationState.Sitting:
