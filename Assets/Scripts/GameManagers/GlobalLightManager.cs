@@ -8,6 +8,10 @@ public class GlobalLightManager : MonoBehaviour
     private Light2D globalLight = default;
     private float initialIntensity = default;
 
+    [Header("Scene Intensity Multipliers")]
+    [Range(0, 1)] public float shipIntroIntensity = 0.05f;
+    [Range(0, 1)] public float defaultIntensity = 0.3f;
+
     private void OnEnable() => TimeManager.OnTimeChanged += UpdateSun;
     private void OnDisable() => TimeManager.OnTimeChanged -= UpdateSun;
 
@@ -19,12 +23,21 @@ public class GlobalLightManager : MonoBehaviour
 
     private void UpdateSun(float normalizedTimeOfDay)
     {
-        if (SceneManager.GetActiveScene().name.Contains("Overworld") || SceneManager.GetActiveScene().name.Contains("Test"))
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName.Contains("ShipIntro"))
         {
+            // Fixed intensity for the Ship Intro scene
+            globalLight.intensity = shipIntroIntensity;
+        }
+        else if (sceneName.Contains("Overworld"))
+        {
+            // Dynamic intensity based on time of day for the Overworld scene
             float intensityMultiplier = 1;
+
             if (normalizedTimeOfDay <= 0.23f || normalizedTimeOfDay >= 0.75f)
             {
-                intensityMultiplier = 0.124f;         // 0 = absolute Darkness 
+                intensityMultiplier = 0.124f;  // Near darkness during night
             }
             else if (normalizedTimeOfDay <= 0.3f)
             {
@@ -37,21 +50,10 @@ public class GlobalLightManager : MonoBehaviour
 
             globalLight.intensity = initialIntensity * intensityMultiplier;
         }
-        else if (SceneManager.GetActiveScene().name.Contains("Dungeon") || SceneManager.GetActiveScene().name.Contains("Cave"))
-        {
-            globalLight.intensity = 0.03f;   // Low light for dungeons and caves
-        }
-        else if (SceneManager.GetActiveScene().name.Contains("ShipIntro"))
-        {
-            globalLight.intensity = 0.05f;   // Slightly dim light for the ship intro
-        }
-        else if (SceneManager.GetActiveScene().name.Contains("Indoor"))
-        {
-            globalLight.intensity = 0.3f;    // Medium dim light for indoor castle scenes
-        }
         else
         {
-            globalLight.intensity = 1;       // Full brightness for other scenes
+            // Adjustable intensity for all other scenes
+            globalLight.intensity = defaultIntensity;
         }
     }
 }
