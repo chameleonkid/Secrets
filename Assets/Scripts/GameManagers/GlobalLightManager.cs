@@ -39,15 +39,19 @@ public class GlobalLightManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name.Contains("Dungeon") || SceneManager.GetActiveScene().name.Contains("Cave"))
         {
-            globalLight.intensity = 0.03f;   //This is the case for Houses / Taverns and so on
+            globalLight.intensity = 0.03f;   // Low light for dungeons and caves
         }
         else if (SceneManager.GetActiveScene().name.Contains("ShipIntro"))
         {
-            globalLight.intensity = 0.05f;   //This is the case for the intro only
+            globalLight.intensity = 0.05f;   // Slightly dim light for the ship intro
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("Indoor"))
+        {
+            globalLight.intensity = 0.3f;    // Medium dim light for indoor castle scenes
         }
         else
         {
-            globalLight.intensity = 1;
+            globalLight.intensity = 1;       // Full brightness for other scenes
         }
     }
 }
