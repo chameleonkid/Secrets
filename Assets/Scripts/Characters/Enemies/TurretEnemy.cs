@@ -50,7 +50,6 @@ public class TurretEnemy : SimpleEnemy
     {
         currentStateEnum = StateEnum.idle;
         //animator.SetBool("isMoving", false);
-        animator.SetTrigger("isSleeping");
     }
 
     protected virtual void FireProjectile()
