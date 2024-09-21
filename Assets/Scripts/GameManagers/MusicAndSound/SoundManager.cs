@@ -3,8 +3,8 @@ using System;
 
 public class SoundManager : MonoBehaviour
 {
-    private static event Action<AudioClip> OnSoundRequested;
-    public static void RequestSound(AudioClip sound) => OnSoundRequested?.Invoke(sound);
+    private static event Action<AudioClip, bool> OnSoundRequested; // loop flag is now part of the event
+    public static void RequestSound(AudioClip sound, bool loop = false) => OnSoundRequested?.Invoke(sound, loop); // Optional loop parameter
 
     private AudioSource audioSource;
 
@@ -13,6 +13,24 @@ public class SoundManager : MonoBehaviour
 
     private void Awake() => audioSource = GetComponent<AudioSource>();
 
-    private void PlaySound(AudioClip sound) => audioSource.PlayOneShot(sound);
-  //  private void LoopSound(AudioClip sound) => audioSource.Play();
+    private void PlaySound(AudioClip sound, bool loop)
+    {
+        if (sound == null)
+        {
+            // Stop the sound if no clip is provided
+            audioSource.Stop();
+            return;
+        }
+
+        audioSource.loop = loop;  // Set loop
+        if (loop)
+        {
+            audioSource.clip = sound;
+            audioSource.Play();  // Play looped sound
+        }
+        else
+        {
+            audioSource.PlayOneShot(sound);  // Play one-shot sound
+        }
+    }
 }

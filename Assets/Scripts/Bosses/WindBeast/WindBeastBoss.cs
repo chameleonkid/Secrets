@@ -33,6 +33,8 @@ public class WindBeastBoss : TurretEnemy
     [Header("Boss Attack Sounds")]
     [SerializeField] private AudioClip[] attackSound;
     [SerializeField] private AudioClip earthQuakeSound;
+    [SerializeField] private AudioClip geyserSound;
+
 
     [Header("Starting Dialog")]
     [SerializeField] private Dialogue dialogue = default;
@@ -102,41 +104,44 @@ public class WindBeastBoss : TurretEnemy
 
     private IEnumerator LineAttackCoroutine()
     {
-        
-
-        // Calculate the vertical distance between start and end points
         float verticalDistanceLeft = lineEndPointLeft.position.y - lineStartPointLeft.position.y;
         float verticalDistanceRight = lineEndPointRight.position.y - lineStartPointRight.position.y;
 
-        // Calculate the vertical step size for evenly spacing the prefabs
         float stepLeft = verticalDistanceLeft / (wallCount - 1);
         float stepRight = verticalDistanceRight / (wallCount - 1);
 
-        // Arrays for attack objects on both walls
         GameObject[] attacksLeft = new GameObject[wallCount];
         GameObject[] attacksRight = new GameObject[wallCount];
 
-        // Lists to store initial spawn positions for both walls
         Vector2[] leftInitialPositions = new Vector2[wallCount];
         Vector2[] rightInitialPositions = new Vector2[wallCount];
 
-        // Instantiate attack objects on both walls, evenly spaced between start and end points
         for (int i = 0; i < wallCount; i++)
         {
-            // Left wall
             Vector2 positionLeft = new Vector2(lineStartPointLeft.position.x, lineStartPointLeft.position.y + (stepLeft * i));
             attacksLeft[i] = Instantiate(lineAttackPrefab, positionLeft, Quaternion.identity);
-            leftInitialPositions[i] = positionLeft; // Store initial position
+            leftInitialPositions[i] = positionLeft;
 
-            // Right wall
             Vector2 positionRight = new Vector2(lineStartPointRight.position.x, lineStartPointRight.position.y + (stepRight * i));
             attacksRight[i] = Instantiate(lineAttackPrefab, positionRight, Quaternion.identity);
-            rightInitialPositions[i] = positionRight; // Store initial position
+            rightInitialPositions[i] = positionRight;
+
+            Animator leftAnimator = attacksLeft[i].GetComponent<Animator>();
+            Animator rightAnimator = attacksRight[i].GetComponent<Animator>();
+
+            leftAnimator.SetTrigger("StartGeyser");
+            rightAnimator.SetTrigger("StartGeyser");
+
+            leftAnimator.SetBool("isMoving", true);
+            rightAnimator.SetBool("isMoving", true);
         }
+
+        // Start the looping splash sound while the geysers are moving
+        SoundManager.RequestSound(geyserSound, true);  // Looping sound
 
         float elapsedTime = 0f;
 
-        // Move the attacks to each other's initial positions over time
+        // Move the attacks towards each other
         while (elapsedTime < lineMoveDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -146,10 +151,8 @@ public class WindBeastBoss : TurretEnemy
             {
                 if (attacksLeft[i] != null && attacksRight[i] != null)
                 {
-                    // Move left attack to the right attack's initial position
+                    // Move towards the other side
                     attacksLeft[i].transform.position = Vector2.Lerp(leftInitialPositions[i], rightInitialPositions[i], t);
-
-                    // Move right attack to the left attack's initial position
                     attacksRight[i].transform.position = Vector2.Lerp(rightInitialPositions[i], leftInitialPositions[i], t);
                 }
             }
@@ -157,7 +160,31 @@ public class WindBeastBoss : TurretEnemy
             yield return null;
         }
 
-        // After the attacks reach each other's positions, destroy them or apply any special effects
+        // Stop the looping sound when the geysers reach the destination
+        SoundManager.RequestSound(null, false);  // Stop the sound
+
+        // Geysers have finished moving, trigger the end animation
+        for (int i = 0; i < wallCount; i++)
+        {
+            if (attacksLeft[i] != null && attacksRight[i] != null)
+            {
+                Animator leftAnimator = attacksLeft[i].GetComponent<Animator>();
+                Animator rightAnimator = attacksRight[i].GetComponent<Animator>();
+
+                // Set isMoving to false so it transitions out of the moving animation
+                leftAnimator.SetBool("isMoving", false);
+                rightAnimator.SetBool("isMoving", false);
+
+                // Optionally trigger the end animation if needed
+                leftAnimator.SetTrigger("EndGeyser");
+                rightAnimator.SetTrigger("EndGeyser");
+            }
+        }
+
+        // Optional delay to allow end animations to finish
+        yield return new WaitForSeconds(1f);
+
+        // Destroy geysers or handle cleanup after the end animation
         for (int i = 0; i < wallCount; i++)
         {
             if (attacksLeft[i] != null)
@@ -171,8 +198,6 @@ public class WindBeastBoss : TurretEnemy
             }
         }
     }
-
-    // This method is called from the animation event in the CircleAttack animation
     public void ExecuteCircleAttack()
     {
         StartCoroutine(CircleAttackCoroutine());
