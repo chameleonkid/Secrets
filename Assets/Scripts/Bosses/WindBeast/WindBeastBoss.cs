@@ -12,6 +12,7 @@ public class WindBeastBoss : TurretEnemy
     private float circleAttackTimer = 0f;   // Timer for circle attack cooldown
 
     [Header("Line Lightning Attack")]
+    [SerializeField] private int wallCount = 10;  // Number of prefabs per wall
     public GameObject lineAttackPrefab;
     public Transform lineStartPointLeft;
     public Transform lineEndPointLeft;
@@ -101,59 +102,63 @@ public class WindBeastBoss : TurretEnemy
 
     private IEnumerator LineAttackCoroutine()
     {
-        // Create two sets of attack objects, one from left and one from right
-        Vector2 directionLeftToRight = ((Vector2)lineEndPointLeft.position - (Vector2)lineStartPointLeft.position).normalized;
-        Vector2 directionRightToLeft = ((Vector2)lineEndPointRight.position - (Vector2)lineStartPointRight.position).normalized;
+        
 
-        float distanceLeft = Vector2.Distance(lineStartPointLeft.position, lineEndPointLeft.position);
-        float distanceRight = Vector2.Distance(lineStartPointRight.position, lineEndPointRight.position);
+        // Calculate the vertical distance between start and end points
+        float verticalDistanceLeft = lineEndPointLeft.position.y - lineStartPointLeft.position.y;
+        float verticalDistanceRight = lineEndPointRight.position.y - lineStartPointRight.position.y;
 
-        float stepLeft = distanceLeft / (lineIndicatorCount - 1);
-        float stepRight = distanceRight / (lineIndicatorCount - 1);
+        // Calculate the vertical step size for evenly spacing the prefabs
+        float stepLeft = verticalDistanceLeft / (wallCount - 1);
+        float stepRight = verticalDistanceRight / (wallCount - 1);
 
-        // Arrays for attack objects on both sides
-        GameObject[] attacksLeft = new GameObject[lineIndicatorCount];
-        GameObject[] attacksRight = new GameObject[lineIndicatorCount];
+        // Arrays for attack objects on both walls
+        GameObject[] attacksLeft = new GameObject[wallCount];
+        GameObject[] attacksRight = new GameObject[wallCount];
 
-        // Instantiate attack objects on both sides
-        for (int i = 0; i < lineIndicatorCount; i++)
+        // Lists to store initial spawn positions for both walls
+        Vector2[] leftInitialPositions = new Vector2[wallCount];
+        Vector2[] rightInitialPositions = new Vector2[wallCount];
+
+        // Instantiate attack objects on both walls, evenly spaced between start and end points
+        for (int i = 0; i < wallCount; i++)
         {
-            Vector2 positionLeft = (Vector2)lineStartPointLeft.position + directionLeftToRight * stepLeft * i;
+            // Left wall
+            Vector2 positionLeft = new Vector2(lineStartPointLeft.position.x, lineStartPointLeft.position.y + (stepLeft * i));
             attacksLeft[i] = Instantiate(lineAttackPrefab, positionLeft, Quaternion.identity);
+            leftInitialPositions[i] = positionLeft; // Store initial position
 
-            Vector2 positionRight = (Vector2)lineStartPointRight.position + directionRightToLeft * stepRight * i;
+            // Right wall
+            Vector2 positionRight = new Vector2(lineStartPointRight.position.x, lineStartPointRight.position.y + (stepRight * i));
             attacksRight[i] = Instantiate(lineAttackPrefab, positionRight, Quaternion.identity);
+            rightInitialPositions[i] = positionRight; // Store initial position
         }
 
         float elapsedTime = 0f;
 
-        // Move the attacks towards each other over time
+        // Move the attacks to each other's initial positions over time
         while (elapsedTime < lineMoveDuration)
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / lineMoveDuration;
 
-            for (int i = 0; i < lineIndicatorCount; i++)
+            for (int i = 0; i < wallCount; i++)
             {
                 if (attacksLeft[i] != null && attacksRight[i] != null)
                 {
-                    // Move attacks from the left side towards the center
-                    Vector2 startPositionLeft = (Vector2)lineStartPointLeft.position + directionLeftToRight * stepLeft * i;
-                    Vector2 endPositionLeft = (Vector2)lineEndPointLeft.position;
-                    attacksLeft[i].transform.position = Vector2.Lerp(startPositionLeft, endPositionLeft, t);
+                    // Move left attack to the right attack's initial position
+                    attacksLeft[i].transform.position = Vector2.Lerp(leftInitialPositions[i], rightInitialPositions[i], t);
 
-                    // Move attacks from the right side towards the center
-                    Vector2 startPositionRight = (Vector2)lineStartPointRight.position + directionRightToLeft * stepRight * i;
-                    Vector2 endPositionRight = (Vector2)lineEndPointRight.position;
-                    attacksRight[i].transform.position = Vector2.Lerp(startPositionRight, endPositionRight, t);
+                    // Move right attack to the left attack's initial position
+                    attacksRight[i].transform.position = Vector2.Lerp(rightInitialPositions[i], leftInitialPositions[i], t);
                 }
             }
 
             yield return null;
         }
 
-        // After the attacks reach the center, handle destruction or any special effects
-        for (int i = 0; i < lineIndicatorCount; i++)
+        // After the attacks reach each other's positions, destroy them or apply any special effects
+        for (int i = 0; i < wallCount; i++)
         {
             if (attacksLeft[i] != null)
             {

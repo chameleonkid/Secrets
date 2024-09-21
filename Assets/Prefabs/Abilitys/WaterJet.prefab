@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6525062502234849671}
   - component: {fileID: 6525062502234849669}
   - component: {fileID: 360999197140647150}
+  - component: {fileID: -1723913910971240056}
+  - component: {fileID: 7739862819083090022}
   m_Layer: 0
   m_Name: WaterJet
   m_TagString: enemy
@@ -131,3 +133,36 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.14499998}
       - {x: 0.40625, y: -0.17624998}
       - {x: 0.4375, y: -0.17624998}
+--- !u!114 &-1723913910971240056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525062502234849668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf34bd5ac9dd745bd409789b61bcf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableWhenHit: 0
+  _damage: 15
+--- !u!95 &7739862819083090022
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525062502234849668}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 45f94ed4e7223134d98217fe6e2ad595, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

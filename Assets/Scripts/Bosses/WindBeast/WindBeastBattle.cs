@@ -32,6 +32,7 @@ public class WindBeastBattle : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private AudioClip startBattleSound;
+    [SerializeField] private AudioClip[] startBattleMusic;
     [SerializeField] private AudioClip[] endBattleMusic;
     [SerializeField] private AudioClip bossDiedSound;
 
@@ -119,6 +120,7 @@ public class WindBeastBattle : MonoBehaviour
         Debug.Log("BossBattle has started!");
         boss.animator.SetTrigger("StartBattle");
         SoundManager.RequestSound(startBattleSound);
+        MusicManager.RequestMusic(endBattleMusic);
         StartCoroutine(ActivateBossCo());
         StartNextStage();
     }
